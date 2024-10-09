@@ -34475,9 +34475,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-dynamic-programming" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Dynamic Programming
     </span>
   </a>
   
@@ -79461,7 +79461,11 @@
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
+<p>We define $f[i][j]$ to represent the maximum score from the starting point $(n - 1, n - 1)$ to $(i, j)$, and $g[i][j]$ to represent the number of ways to achieve the maximum score from the starting point $(n - 1, n - 1)$ to $(i, j)$. Initially, $f[n - 1][n - 1] = 0$ and $g[n - 1][n - 1] = 1$. The other positions of $f[i][j]$ are all $-1$, and $g[i][j]$ are all $0$.</p>
+<p>For the current position $(i, j)$, it can be transferred from three positions: $(i + 1, j)$, $(i, j + 1)$, and $(i + 1, j + 1)$. Therefore, we can enumerate these three positions to update the values of $f[i][j]$ and $g[i][j]$. If the current position $(i, j)$ has an obstacle, or the current position is the starting point, or other positions are out of bounds, no update is performed. Otherwise, if another position $(x, y)$ satisfies $f[x][y] \gt f[i][j]$, then we update $f[i][j] = f[x][y]$ and $g[i][j] = g[x][y]$. If $f[x][y] = f[i][j]$, then we update $g[i][j] = g[i][j] + g[x][y]$. Finally, if the current position $(i, j)$ is reachable and is a number, we update $f[i][j] = f[i][j] + board[i][j]$.</p>
+<p>Finally, if $f[0][0] \lt 0$, it means there is no path to reach the endpoint, return $[0, 0]$. Otherwise, return $[f[0][0], g[0][0]]$. Note that the result needs to be taken modulo $10^9 + 7$.</p>
+<p>Time complexity $O(n^2)$, space complexity $O(n^2)$. Where $n$ is the side length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

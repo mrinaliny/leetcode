@@ -34454,9 +34454,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-sorting-prefix-sum-binary-search-enumeration" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Sorting + Prefix Sum + Binary Search + Enumeration
     </span>
   </a>
   
@@ -79456,7 +79456,11 @@
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-sorting-prefix-sum-binary-search-enumeration">Solution 1: Sorting + Prefix Sum + Binary Search + Enumeration</h3>
+<p>We notice that the problem requires changing all values greater than <code>value</code> to <code>value</code> and then summing them up. Therefore, we can consider sorting the array <code>arr</code> first, and then calculating the prefix sum array $s$, where $s[i]$ represents the sum of the first $i$ elements of the array.</p>
+<p>Next, we can enumerate all <code>value</code> values from smallest to largest. For each <code>value</code>, we can use binary search to find the index $i$ of the first element in the array that is greater than <code>value</code>. At this point, the number of elements in the array greater than <code>value</code> is $n - i$, so the number of elements in the array less than or equal to <code>value</code> is $i$. The sum of the elements in the array less than or equal to <code>value</code> is $s[i]$, and the sum of the elements in the array greater than <code>value</code> is $(n - i) \times value$. Therefore, the sum of all elements in the array is $s[i] + (n - i) \times \textit{value}$. If the absolute difference between $s[i] + (n - i) \times \textit{value}$ and <code>target</code> is less than the current minimum difference <code>diff</code>, update <code>diff</code> and <code>ans</code>.</p>
+<p>After enumerating all <code>value</code> values, we can get the final answer <code>ans</code>.</p>
+<p>Time complexity $O(n \times \log n)$, space complexity $O(n)$. Where $n$ is the length of the array <code>arr</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
