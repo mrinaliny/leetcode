@@ -38276,9 +38276,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-binary-search" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Binary Search
     </span>
   </a>
   
@@ -79466,8 +79466,15 @@ It is obvious that we can make two bouquets in different ways.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
+<h3 id="solution-1-binary-search">Solution 1: Binary Search</h3>
+<p>According to the problem description, if a day $t$ can satisfy making $m$ bouquets, then for any $t' &gt; t$, it can also satisfy making $m$ bouquets. Therefore, we can use binary search to find the minimum day that satisfies making $m$ bouquets.</p>
+<p>Let $mx$ be the maximum blooming day in the garden. Next, we define the left boundary of the binary search as $l = 1$ and the right boundary as $r = mx + 1$.</p>
+<p>Then, we perform binary search. For each middle value $\textit{mid} = \frac{l + r}{2}$, we check if it is possible to make $m$ bouquets. If it is possible, we update the right boundary $r$ to $\textit{mid}$; otherwise, we update the left boundary $l$ to $\textit{mid} + 1$.</p>
+<p>Finally, when $l = r$, the binary search ends. At this point, if $l &gt; mx$, it means it is not possible to make $m$ bouquets, and we return $-1$; otherwise, we return $l$.</p>
+<p>Therefore, the problem is reduced to checking if a day $\textit{days}$ can make $m$ bouquets.</p>
+<p>We can use a function $\text{check}(\textit{days})$ to determine if it is possible to make $m$ bouquets. Specifically, we traverse each flower in the garden from left to right. If the blooming day of the current flower is less than or equal to $\textit{days}$, we add the current flower to the current bouquet; otherwise, we clear the current bouquet. When the number of flowers in the current bouquet equals $k$, we increment the bouquet count and clear the current bouquet. Finally, we check if the bouquet count is greater than or equal to $m$. If it is, it means it is possible to make $m$ bouquets; otherwise, it is not possible.</p>
+<p>The time complexity is $O(n \times \log M)$, where $n$ and $M$ are the number of flowers in the garden and the maximum blooming day, respectively. In this problem, $M \leq 10^9$. The space complexity is $O(1)$.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -79483,36 +79490,20 @@ It is obvious that we can make two bouquets in different ways.
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">minDays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bloomDay</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">m</span> <span class="o">*</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">):</span>
-            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-        <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">day</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">days</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
             <span class="n">cnt</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">bd</span> <span class="ow">in</span> <span class="n">bloomDay</span><span class="p">:</span>
-                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">bd</span> <span class="o">&lt;=</span> <span class="n">day</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bloomDay</span><span class="p">:</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">days</span> <span class="k">else</span> <span class="mi">0</span>
                 <span class="k">if</span> <span class="n">cur</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
                     <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">return</span> <span class="n">cnt</span> <span class="o">&gt;=</span> <span class="n">m</span>
 
-        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">:</span>
-            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">check</span><span class="p">(</span><span class="n">mid</span><span class="p">):</span>
-                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="n">left</span>
+        <span class="n">mx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">bisect_left</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">mx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">check</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">mx</span> <span class="k">else</span> <span class="n">l</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -79548,35 +79539,33 @@ It is obvious that we can make two bouquets in different ways.
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">minDays</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">bd</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">bd</span><span class="p">);</span>
-<span class="w">            </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">max</span><span class="p">,</span><span class="w"> </span><span class="n">bd</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">;</span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">mid</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">bloomDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mf">1e9</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">l</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">days</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">bd</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bd</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">days</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+<span class="w">                </span><span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
 <span class="w">                </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
@@ -79612,47 +79601,31 @@ It is obvious that we can make two bouquets in different ways.
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">minDays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">mi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MIN</span><span class="p">,</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bd</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">mi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">mi</span><span class="p">,</span><span class="w"> </span><span class="n">bd</span><span class="p">);</span>
-<span class="w">            </span><span class="n">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="w"> </span><span class="n">bd</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mi</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mx</span><span class="p">;</span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">mid</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ranges</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">bloomDay</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">check</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">days</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">days</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">left</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">check</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bd</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bd</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
-<span class="w">                </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">mx</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">l</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div></td></tr></table></div>
@@ -79679,55 +79652,77 @@ It is obvious that we can make two bouquets in different ways.
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">minDays</span><span class="p">(</span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slices</span><span class="p">.</span><span class="nx">Max</span><span class="p">(</span><span class="nx">bloomDay</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">l</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sort</span><span class="p">.</span><span class="nx">Search</span><span class="p">(</span><span class="nx">mx</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">days</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cnt</span><span class="p">,</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">days</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">cur</span><span class="o">++</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">cnt</span><span class="o">++</span>
+<span class="w">                    </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">cnt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">m</span>
+<span class="w">    </span><span class="p">});</span><span class="w"> </span><span class="nx">l</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">mx</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">l</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">minDays</span><span class="p">(</span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">m</span><span class="o">*</span><span class="nx">k</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">mi</span><span class="p">,</span><span class="w"> </span><span class="nx">mx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000000</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">bd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">mi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="nx">mi</span><span class="p">,</span><span class="w"> </span><span class="nx">bd</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">mx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nx">mx</span><span class="p">,</span><span class="w"> </span><span class="nx">bd</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">left</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mi</span><span class="p">,</span><span class="w"> </span><span class="nx">mx</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">left</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">right</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">mid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="nx">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">right</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">check</span><span class="p">(</span><span class="nx">bloomDay</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">mid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">right</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">mid</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">minDays</span><span class="p">(</span><span class="nx">bloomDay</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[],</span><span class="w"> </span><span class="nx">m</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">k</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">bloomDay</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">mx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">days</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">cnt</span><span class="p">,</span><span class="w"> </span><span class="nx">cur</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">bloomDay</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">days</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">cnt</span><span class="o">++</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">cnt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">m</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">l</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">l</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">check</span><span class="p">(</span><span class="nx">mid</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mid</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">left</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="nx">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">left</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">check</span><span class="p">(</span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">day</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">cnt</span><span class="p">,</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">bd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">bloomDay</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">bd</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">day</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">cur</span><span class="o">++</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">cnt</span><span class="o">++</span>
-<span class="w">            </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">cnt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">m</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">l</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">mx</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="nx">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">l</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
