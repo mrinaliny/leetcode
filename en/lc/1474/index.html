@@ -38108,9 +38108,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-simulation" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Simulation
     </span>
   </a>
   
@@ -79452,8 +79452,10 @@ Head of the linked list after removing nodes is returned.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
+<h3 id="solution-1-simulation">Solution 1: Simulation</h3>
+<p>We can simulate the entire deletion process. First, use a pointer $\textit{pre}$ to point to the head of the linked list, then traverse the linked list, moving $m - 1$ steps. If $\textit{pre}$ is null, it means the number of nodes from the current node is less than $m$, so we directly return the head. Otherwise, use a pointer $\textit{cur}$ to point to $\textit{pre}$, then move $n$ steps. If $\textit{cur}$ is null, it means the number of nodes from $\textit{pre}$ is less than $m + n$, so we directly set the $\textit{next}$ of $\textit{pre}$ to null. Otherwise, set the $\textit{next}$ of $\textit{pre}$ to the $\textit{next}$ of $\textit{cur}$, then move $\textit{pre}$ to its $\textit{next}$. Continue traversing the linked list until $\textit{pre}$ is null, then return the head.</p>
+<p>The time complexity is $O(n)$, where $n$ is the number of nodes in the linked list. The space complexity is $O(1)$.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -79680,6 +79682,68 @@ Head of the linked list after removing nodes is returned.
 <span class="w">        </span><span class="nx">pre</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">head</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for singly-linked list.</span>
+<span class="cm"> * class ListNode {</span>
+<span class="cm"> *     val: number</span>
+<span class="cm"> *     next: ListNode | null</span>
+<span class="cm"> *     constructor(val?: number, next?: ListNode | null) {</span>
+<span class="cm"> *         this.val = (val===undefined ? 0 : val)</span>
+<span class="cm"> *         this.next = (next===undefined ? null : next)</span>
+<span class="cm"> *     }</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">deleteNodes</span><span class="p">(</span><span class="nx">head</span><span class="o">:</span><span class="w"> </span><span class="kt">ListNode</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">ListNode</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">pre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">pre</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pre</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">pre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pre</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">pre</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="o">?</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">pre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pre</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>

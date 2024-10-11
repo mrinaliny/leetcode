@@ -84078,18 +84078,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j][k]$ 表示将下标 $[0,..i]$ 的房子涂上颜色，最后一个房子的颜色为 $j$，且恰好形成 $k$ 个街区的最小花费。那么答案就是 $f[m-1][j][target]$，其中 $j$ 的取值范围为 $[1,..n]$。初始时，我们判断下标为 $0$ 的房子是否已经涂色，如果未涂色，那么 $f[0][j][1] = cost[0][j - 1]$，其中 $j \in [1,..n]$。如果已经涂色，那么 $f[0][houses[0]][1] = 0$。其他的 $f[i][j][k]$ 的值都初始化为 $\infty$。</p>
+<p>我们定义 $f[i][j][k]$ 表示将下标 $[0,..i]$ 的房子涂上颜色，最后一个房子的颜色为 $j$，且恰好形成 $k$ 个街区的最小花费。那么答案就是 $f[m-1][j][\textit{target}]$，其中 $j$ 的取值范围为 $[1,..n]$。初始时，我们判断下标为 $0$ 的房子是否已经涂色，如果未涂色，那么 $f[0][j][1] = \textit{cost}[0][j - 1]$，其中 $j \in [1,..n]$。如果已经涂色，那么 $f[0][\textit{houses}[0]][1] = 0$。其他的 $f[i][j][k]$ 的值都初始化为 $\infty$。</p>
 <p>接下来，我们从下标 $i=1$ 开始遍历，对于每个 $i$，我们判断下标为 $i$ 的房子是否已经涂色：</p>
-<p>如果未涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..min(target, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：</p>
+<p>如果未涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..\min(\textit{target}, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：</p>
 <p>$$
-f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] + cost[i][j - 1] }
+f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] + \textit{cost}[i][j - 1] }
 $$</p>
-<p>如果已经涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..min(target, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：</p>
+<p>如果已经涂色，那么我们可以将下标为 $i$ 的房子涂成颜色 $j$，我们枚举街区的数量 $k$，其中 $k \in [1,..\min(\textit{target}, i + 1)]$，并且枚举下标为 $i$ 的房子的前一个房子的颜色 $j_0$，其中 $j_0 \in [1,..n]$，那么我们可以得到状态转移方程：</p>
 <p>$$
 f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] }
 $$</p>
-<p>最后，我们返回 $f[m - 1][j][target]$，其中 $j \in [1,..n]$，如果所有的 $f[m - 1][j][target]$ 的值都为 $\infty$，那么返回 $-1$。</p>
-<p>时间复杂度 $O(m \times n^2 \times target)$，空间复杂度 $O(m \times n \times target)$。其中 $m$, $n$, $target$ 分别为房子的数量，颜色的数量，街区的数量。</p>
+<p>最后，我们返回 $f[m - 1][j][\textit{target}]$，其中 $j \in [1,..n]$，如果所有的 $f[m - 1][j][\textit{target}]$ 的值都为 $\infty$，那么返回 $-1$。</p>
+<p>时间复杂度 $O(m \times n^2 \times \textit{target})$，空间复杂度 $O(m \times n \times \textit{target})$。其中 $m$, $n$, $\textit{target}$ 分别为房子的数量，颜色的数量，街区的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

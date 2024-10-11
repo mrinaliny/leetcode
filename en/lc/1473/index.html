@@ -38087,9 +38087,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-dynamic-programming" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Dynamic Programming
     </span>
   </a>
   
@@ -79442,7 +79442,7 @@ Cost of paint all houses (1 + 1 + 1 + 1 + 5) = 9.
 <strong>Input:</strong> houses = [0,2,1,2,0], cost = [[1,10],[10,1],[10,1],[1,10],[5,1]], m = 5, n = 2, target = 3
 <strong>Output:</strong> 11
 <strong>Explanation:</strong> Some houses are already painted, Paint the houses of this way [2,2,1,2,2]
-This array contains target = 3 neighborhoods, [{2,2}, {1}, {2,2}]. 
+This array contains target = 3 neighborhoods, [{2,2}, {1}, {2,2}].
 Cost of paint the first and last house (10 + 1) = 11.
 </pre>
 
@@ -79472,7 +79472,19 @@ Cost of paint the first and last house (10 + 1) = 11.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
+<p>We define $f[i][j][k]$ to represent the minimum cost to paint houses from index $0$ to $i$, with the last house painted in color $j$, and exactly forming $k$ blocks. The answer is $f[m-1][j][\textit{target}]$, where $j$ ranges from $1$ to $n$. Initially, we check if the house at index $0$ is already painted. If it is not painted, then $f[0][j][1] = \textit{cost}[0][j - 1]$, where $j \in [1,..n]$. If it is already painted, then $f[0][\textit{houses}[0]][1] = 0$. All other values of $f[i][j][k]$ are initialized to $\infty$.</p>
+<p>Next, we start iterating from index $i=1$. For each $i$, we check if the house at index $i$ is already painted:</p>
+<p>If it is not painted, we can paint the house at index $i$ with color $j$. We enumerate the number of blocks $k$, where $k \in [1,..\min(\textit{target}, i + 1)]$, and enumerate the color of the previous house $j_0$, where $j_0 \in [1,..n]$. Then we can derive the state transition equation:</p>
+<p>$$
+f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] + \textit{cost}[i][j - 1] }
+$$</p>
+<p>If it is already painted, we can paint the house at index $i$ with color $j$. We enumerate the number of blocks $k$, where $k \in [1,..\min(\textit{target}, i + 1)]$, and enumerate the color of the previous house $j_0$, where $j_0 \in [1,..n]$. Then we can derive the state transition equation:</p>
+<p>$$
+f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] }
+$$</p>
+<p>Finally, we return $f[m - 1][j][\textit{target}]$, where $j \in [1,..n]$. If all values of $f[m - 1][j][\textit{target}]$ are $\infty$, then return $-1$.</p>
+<p>The time complexity is $O(m \times n^2 \times \textit{target})$, and the space complexity is $O(m \times n \times \textit{target})$. Here, $m$, $n$, and $\textit{target}$ represent the number of houses, the number of colors, and the number of blocks, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
