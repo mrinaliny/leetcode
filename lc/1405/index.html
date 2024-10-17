@@ -36727,6 +36727,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      方法二：贪心 + 优先队列（另一种写法）
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -84677,6 +84686,123 @@
 </div>
 <!-- solution:end -->
 
+<!-- solution:start -->
+
+<h3 id="_4">方法二：贪心 + 优先队列（另一种写法）</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TypeScript</label><label for="__tabbed_2_2">JavaScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">longestDiverseString</span><span class="p">(</span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">pq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MaxPriorityQueue</span><span class="p">({</span><span class="w"> </span><span class="nx">priority</span><span class="o">:</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">({</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="kt">a</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">({</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="kt">b</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">({</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">pq</span><span class="p">.</span><span class="nx">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pq</span><span class="p">.</span><span class="nx">dequeue</span><span class="p">().</span><span class="nx">element</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">2</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">prev</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">(</span><span class="nx">prev</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">last</span><span class="p">.</span><span class="nx">ch</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">ch</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="nx">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="o">--</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">last</span><span class="p">.</span><span class="nx">c</span><span class="o">++</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="o">--</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">res</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">ch</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">longestDiverseString</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">pq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MaxPriorityQueue</span><span class="p">({</span><span class="w"> </span><span class="nx">priority</span><span class="o">:</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">({</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">({</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">({</span><span class="w"> </span><span class="nx">ch</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">pq</span><span class="p">.</span><span class="nx">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pq</span><span class="p">.</span><span class="nx">dequeue</span><span class="p">().</span><span class="nx">element</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">prev</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="nx">pq</span><span class="p">.</span><span class="nx">enqueue</span><span class="p">(</span><span class="nx">prev</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">last</span><span class="p">.</span><span class="nx">ch</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">ch</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span><span class="w"> </span><span class="nx">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="nx">item</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="o">--</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">last</span><span class="p">.</span><span class="nx">c</span><span class="o">++</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">item</span><span class="p">.</span><span class="nx">c</span><span class="o">--</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">res</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">ch</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">item</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<!-- solution:end -->
+
 <!-- problem:end -->
 
 
@@ -84705,6 +84831,11 @@
 
     
     <nav>
+      
+        <a href="https://github.com/rain84" class="md-author" title="@rain84">
+          
+          <img src="https://avatars.githubusercontent.com/u/1732547?v=4&size=72" alt="rain84">
+        </a>
       
         <a href="https://github.com/yanglbme" class="md-author" title="@yanglbme">
           
