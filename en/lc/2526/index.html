@@ -60260,9 +60260,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-counting" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Counting
     </span>
   </a>
   
@@ -80136,11 +80136,11 @@
 [null, false, false, true, false]
 
 <strong>Explanation</strong>
-DataStream dataStream = new DataStream(4, 3); //value = 4, k = 3 
-dataStream.consec(4); // Only 1 integer is parsed, so returns False. 
+DataStream dataStream = new DataStream(4, 3); //value = 4, k = 3
+dataStream.consec(4); // Only 1 integer is parsed, so returns False.
 dataStream.consec(4); // Only 2 integers are parsed.
-                      // Since 2 is less than k, returns False. 
-dataStream.consec(4); // The 3 integers parsed are all equal to value, so returns True. 
+                      // Since 2 is less than k, returns False.
+dataStream.consec(4); // The 3 integers parsed are all equal to value, so returns True.
 dataStream.consec(3); // The last k integers parsed in the stream are [4,4,3].
                       // Since 3 is not equal to value, it returns False.
 </pre>
@@ -80159,7 +80159,10 @@ dataStream.consec(3); // The last k integers parsed in the stream are [4,4,3].
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-counting">Solution 1: Counting</h3>
+<p>We can maintain a counter $\textit{cnt}$ to record the current number of consecutive integers equal to $\textit{value}$.</p>
+<p>When calling the <code>consec</code> method, if $\textit{num}$ is equal to $\textit{value}$, we increment $\textit{cnt}$ by 1; otherwise, we reset $\textit{cnt}$ to 0. Then we check whether $\textit{cnt}$ is greater than or equal to $\textit{k}$.</p>
+<p>The time complexity is $O(1)$, and the space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
