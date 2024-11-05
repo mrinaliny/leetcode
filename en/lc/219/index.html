@@ -80147,7 +80147,7 @@
 <p>We traverse the array <code>nums</code>. For the current element $nums[i]$, if it exists in the hash table, and the difference between its index and the current index is no larger than $k$, then return <code>true</code>. Otherwise, we add the current element into the hash table.</p>
 <p>After the traversal, return <code>false</code>.</p>
 <p>The time complexity is $O(n)$ and the space complexity is $O(n)$. Here $n$ is the length of array <code>nums</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label><label for="__tabbed_1_7">PHP</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label><label for="__tabbed_1_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -80263,6 +80263,38 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {number[]} nums</span>
+<span class="cm"> * @param {number} k</span>
+<span class="cm"> * @return {boolean}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">containsNearbyDuplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span><span class="w"> </span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">d</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
