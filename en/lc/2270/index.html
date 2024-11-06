@@ -54884,9 +54884,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-prefix-sum" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Prefix Sum
     </span>
   </a>
   
@@ -80115,7 +80115,7 @@
 <pre>
 <strong>Input:</strong> nums = [10,4,-8,7]
 <strong>Output:</strong> 2
-<strong>Explanation:</strong> 
+<strong>Explanation:</strong>
 There are three ways of splitting nums into two non-empty parts:
 - Split nums at index 0. Then, the first part is [10], and its sum is 10. The second part is [4,-8,7], and its sum is 3. Since 10 &gt;= 3, i = 0 is a valid split.
 - Split nums at index 1. Then, the first part is [10,4], and its sum is 14. The second part is [-8,7], and its sum is -1. Since 14 &gt;= -1, i = 1 is a valid split.
@@ -80128,9 +80128,9 @@ Thus, the number of valid splits in nums is 2.
 <pre>
 <strong>Input:</strong> nums = [2,3,1,0]
 <strong>Output:</strong> 2
-<strong>Explanation:</strong> 
+<strong>Explanation:</strong>
 There are two valid splits in nums:
-- Split nums at index 1. Then, the first part is [2,3], and its sum is 5. The second part is [1,0], and its sum is 1. Since 5 &gt;= 1, i = 1 is a valid split. 
+- Split nums at index 1. Then, the first part is [2,3], and its sum is 5. The second part is [1,0], and its sum is 1. Since 5 &gt;= 1, i = 1 is a valid split.
 - Split nums at index 2. Then, the first part is [2,3,1], and its sum is 6. The second part is [0], and its sum is 0. Since 6 &gt;= 0, i = 2 is a valid split.
 </pre>
 
@@ -80147,8 +80147,11 @@ There are two valid splits in nums:
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
+<h3 id="solution-1-prefix-sum">Solution 1: Prefix Sum</h3>
+<p>First, we calculate the total sum $s$ of the array $\textit{nums}$. Then, we traverse the first $n-1$ elements of the array $\textit{nums}$, using the variable $t$ to record the prefix sum. If $t \geq s - t$, we increment the answer by one.</p>
+<p>After the traversal, we return the answer.</p>
+<p>The time complexity is $O(n)$, where $n$ is the length of the array $\textit{nums}$. The space complexity is $O(1)$.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -80158,15 +80161,13 @@ There are two valid splits in nums:
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">waysToSplitArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
         <span class="n">ans</span> <span class="o">=</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="n">t</span> <span class="o">+=</span> <span class="n">v</span>
-            <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">s</span> <span class="o">-</span> <span class="n">t</span><span class="p">:</span>
-                <span class="n">ans</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">x</span>
+            <span class="n">ans</span> <span class="o">+=</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">s</span> <span class="o">-</span> <span class="n">t</span>
         <span class="k">return</span> <span class="n">ans</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -80185,21 +80186,17 @@ There are two valid splits in nums:
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">waysToSplitArray</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="o">++</span><span class="n">ans</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">ans</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -80222,10 +80219,10 @@ There are two valid splits in nums:
 <span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">waysToSplitArray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mf">0l</span><span class="n">l</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumulate</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mf">0L</span><span class="n">L</span><span class="p">);</span>
 <span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="w">            </span><span class="n">ans</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
@@ -80247,20 +80244,42 @@ There are two valid splits in nums:
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">waysToSplitArray</span><span class="p">(</span><span class="nx">nums</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">nums</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">v</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">waysToSplitArray</span><span class="p">(</span><span class="nx">nums</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">ans</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">nums</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">x</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">nums</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">v</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">nums</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">x</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">s</span><span class="o">-</span><span class="nx">t</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">ans</span><span class="o">++</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">waysToSplitArray</span><span class="p">(</span><span class="nx">nums</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span><span class="w"> </span><span class="nx">cur</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">t</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">++</span><span class="nx">ans</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
