@@ -60386,9 +60386,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-priority-queue-max-heap-and-min-heap-simulation" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Priority Queue (Max-Heap and Min-Heap) + Simulation
     </span>
   </a>
   
@@ -80190,7 +80190,22 @@ From 49 to 50: worker 0 crosses the bridge to the left.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-priority-queue-max-heap-and-min-heap-simulation">Solution 1: Priority Queue (Max-Heap and Min-Heap) + Simulation</h3>
+<p>First, we sort the workers by efficiency in descending order, so the worker with the highest index has the lowest efficiency.</p>
+<p>Next, we use four priority queues to simulate the state of the workers:</p>
+<ul>
+<li><code>wait_in_left</code>: Max-heap, storing the indices of workers currently waiting on the left bank;</li>
+<li><code>wait_in_right</code>: Max-heap, storing the indices of workers currently waiting on the right bank;</li>
+<li><code>work_in_left</code>: Min-heap, storing the time when workers currently working on the left bank finish placing boxes and the indices of the workers;</li>
+<li><code>work_in_right</code>: Min-heap, storing the time when workers currently working on the right bank finish picking up boxes and the indices of the workers.</li>
+</ul>
+<p>Initially, all workers are on the left bank, so <code>wait_in_left</code> stores the indices of all workers. We use the variable <code>cur</code> to record the current time.</p>
+<p>Then, we simulate the entire process. First, we check if any worker in <code>work_in_left</code> has finished placing boxes at the current time. If so, we move the worker to <code>wait_in_left</code> and remove the worker from <code>work_in_left</code>. Similarly, we check if any worker in <code>work_in_right</code> has finished picking up boxes. If so, we move the worker to <code>wait_in_right</code> and remove the worker from <code>work_in_right</code>.</p>
+<p>Next, we check if there are any workers waiting on the left bank at the current time, denoted as <code>left_to_go</code>. At the same time, we check if there are any workers waiting on the right bank, denoted as <code>right_to_go</code>. If there are no workers waiting to cross the river, we directly update <code>cur</code> to the next time when a worker finishes placing boxes and continue the simulation.</p>
+<p>If <code>right_to_go</code> is <code>true</code>, we take a worker from <code>wait_in_right</code>, update <code>cur</code> to the current time plus the time it takes for the worker to cross from the right bank to the left bank. If all workers have crossed to the right bank at this point, we directly return <code>cur</code> as the answer; otherwise, we move the worker to <code>work_in_left</code>.</p>
+<p>If <code>left_to_go</code> is <code>true</code>, we take a worker from <code>wait_in_left</code>, update <code>cur</code> to the current time plus the time it takes for the worker to cross from the left bank to the right bank, then move the worker to <code>work_in_right</code> and decrement the number of boxes.</p>
+<p>Repeat the above process until the number of boxes is zero. At this point, <code>cur</code> is the answer.</p>
+<p>The time complexity is $O(n \times \log k)$, and the space complexity is $O(k)$. Here, $n$ and $k$ are the number of workers and the number of boxes, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
