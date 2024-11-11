@@ -80364,17 +80364,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i]$ to represent the maximum sum of the continuous subarray ending with the element $nums[i]$. Initially, $f[0] = nums[0]$. The final answer we are looking for is $\max_{0 \leq i &lt; n} f[i]$.</p>
-<p>Consider $f[i]$, where $i \geq 1$, its state transition equation is:</p>
+<p>We define $f[i]$ to represent the maximum sum of a contiguous subarray ending at element $\textit{nums}[i]$. Initially, $f[0] = \textit{nums}[0]$. The final answer we seek is $\max_{0 \leq i &lt; n} f[i]$.</p>
+<p>Consider $f[i]$ for $i \geq 1$. Its state transition equation is:</p>
 <p>$$
-f[i] = \max { f[i - 1] + nums[i], nums[i] }
+f[i] = \max(f[i - 1] + \textit{nums}[i], \textit{nums}[i])
 $$</p>
-<p>Which is also:</p>
+<p>That is:</p>
 <p>$$
-f[i] = \max { f[i - 1], 0 } + nums[i]
+f[i] = \max(f[i - 1], 0) + \textit{nums}[i]
 $$</p>
-<p>Since $f[i]$ is only related to $f[i - 1]$, we can use a single variable $f$ to maintain the current value of $f[i]$, and then perform state transition. The answer is $\max_{0 \leq i &lt; n} f$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array $nums$. We only need to traverse the array once to get the answer. The space complexity is $O(1)$, we only need constant space to store several variables.</p>
+<p>Since $f[i]$ is only related to $f[i - 1]$, we can use a single variable $f$ to maintain the current value of $f[i]$ and perform the state transition. The answer is $\max_{0 \leq i &lt; n} f$.</p>
+<p>The time complexity is $O(n)$, where $n$ is the length of the array $\textit{nums}$. The space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
