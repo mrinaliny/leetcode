@@ -84993,7 +84993,7 @@ i = 5，将 [1,1,1,2,3,4] 操作成 [-1,0,1,2,3,4]，最少 3 次操作；
 <p>添加元素时，先放入小根堆，然后将小根堆对顶元素弹出并放入大根堆（使得大根堆个数多 $1$）；若大小根堆元素个数差超过 $1$，则将大根堆元素弹出放入小根堆。过程中，用两个变量 $s1, s2$ 分别记录两个堆的元素和。</p>
 <p>取中位数时，若大根堆元素较多，取大根堆堆顶，否则取两堆顶元素和的平均值。求出中位数 $x$ 后，当前最小操作次数为 $s1 - x \times |q1| + x \times |q2| - s2$。注意，我们需要对最小操作次数取模。</p>
 <p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组长度。</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -85406,6 +85406,148 @@ i = 5，将 [1,1,1,2,3,4] 操作成 [-1,0,1,2,3,4]，最少 3 次操作；
 <span class="w">    </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">    </span><span class="nx">h</span><span class="p">.</span><span class="nx">IntSlice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">v</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">class</span> <span class="nc">MedianFinder</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">lowerHeap</span><span class="p">:</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]</span> <span class="p">=</span> <span class="p">[]</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">upperHeap</span><span class="p">:</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]</span> <span class="p">=</span> <span class="p">[]</span>
+    <span class="kd">private</span> <span class="kd">let</span> <span class="nv">mod</span> <span class="p">=</span> <span class="mi">1_000_000_007</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">sumLower</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">sumUpper</span> <span class="p">=</span> <span class="mi">0</span>
+
+    <span class="kd">init</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="kd">func</span> <span class="nf">addNum</span><span class="p">(</span><span class="kc">_</span> <span class="n">num</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">upperHeap</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="n">sumUpper</span> <span class="o">+=</span> <span class="n">num</span>
+        <span class="n">upperHeap</span><span class="p">.</span><span class="bp">sort</span><span class="p">()</span>
+
+
+        <span class="k">if</span> <span class="kd">let</span> <span class="nv">minUpper</span> <span class="p">=</span> <span class="n">upperHeap</span><span class="p">.</span><span class="bp">first</span> <span class="p">{</span>
+            <span class="n">upperHeap</span><span class="p">.</span><span class="n">removeFirst</span><span class="p">()</span>
+            <span class="n">lowerHeap</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">minUpper</span><span class="p">)</span>
+            <span class="n">sumUpper</span> <span class="o">-=</span> <span class="n">minUpper</span>
+            <span class="n">sumLower</span> <span class="o">+=</span> <span class="n">minUpper</span>
+            <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">sort</span><span class="p">(</span><span class="n">by</span><span class="p">:</span> <span class="o">&gt;</span><span class="p">)</span>
+        <span class="p">}</span>
+
+
+        <span class="k">if</span> <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">count</span> <span class="o">&gt;</span> <span class="n">upperHeap</span><span class="p">.</span><span class="bp">count</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="kd">let</span> <span class="nv">maxLower</span> <span class="p">=</span> <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">first</span> <span class="p">{</span>
+                <span class="n">lowerHeap</span><span class="p">.</span><span class="n">removeFirst</span><span class="p">()</span>
+                <span class="n">upperHeap</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxLower</span><span class="p">)</span>
+                <span class="n">sumLower</span> <span class="o">-=</span> <span class="n">maxLower</span>
+                <span class="n">sumUpper</span> <span class="o">+=</span> <span class="n">maxLower</span>
+                <span class="n">upperHeap</span><span class="p">.</span><span class="bp">sort</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">findMedian</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">count</span> <span class="o">&gt;</span> <span class="n">upperHeap</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">first</span> <span class="p">??</span> <span class="mi">0</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="kd">let</span> <span class="nv">minUpper</span> <span class="p">=</span> <span class="n">upperHeap</span><span class="p">.</span><span class="bp">first</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">maxLower</span> <span class="p">=</span> <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">first</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">minUpper</span> <span class="o">+</span> <span class="n">maxLower</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">cal</span><span class="p">()</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">median</span> <span class="p">=</span> <span class="n">findMedian</span><span class="p">()</span>
+        <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="p">(</span><span class="n">sumUpper</span> <span class="o">-</span> <span class="n">median</span> <span class="o">*</span> <span class="n">upperHeap</span><span class="p">.</span><span class="bp">count</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">median</span> <span class="o">*</span> <span class="n">lowerHeap</span><span class="p">.</span><span class="bp">count</span> <span class="o">-</span> <span class="n">sumLower</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">%=</span> <span class="n">mod</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="n">mod</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">Int</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">numsGame</span><span class="p">(</span><span class="kc">_</span> <span class="n">nums</span><span class="p">:</span> <span class="p">[</span><span class="nb">Int</span><span class="p">])</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">n</span> <span class="p">=</span> <span class="n">nums</span><span class="p">.</span><span class="bp">count</span>
+        <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="p">[</span><span class="nb">Int</span><span class="p">]()</span>
+        <span class="kd">let</span> <span class="nv">finder</span> <span class="p">=</span> <span class="n">MedianFinder</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span> <span class="p">{</span>
+            <span class="n">finder</span><span class="p">.</span><span class="n">addNum</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">finder</span><span class="p">.</span><span class="n">cal</span><span class="p">())</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -87016,6 +87158,11 @@ i = 5，将 [1,1,1,2,3,4] 操作成 [-1,0,1,2,3,4]，最少 3 次操作；
 
     
     <nav>
+      
+        <a href="https://github.com/klever34" class="md-author" title="@klever34">
+          
+          <img src="https://avatars.githubusercontent.com/u/12745225?v=4&size=72" alt="klever34">
+        </a>
       
         <a href="https://github.com/yanglbme" class="md-author" title="@yanglbme">
           
