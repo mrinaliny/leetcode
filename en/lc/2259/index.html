@@ -54683,18 +54683,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-brute-force-enumeration" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Brute Force Enumeration
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solution-2" class="md-nav__link">
+  <a href="#solution-2-greedy" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 2
+      Solution 2: Greedy
     </span>
   </a>
   
@@ -80504,7 +80504,9 @@ Both result in the string &quot;51&quot;.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-brute-force-enumeration">Solution 1: Brute Force Enumeration</h3>
+<p>We can enumerate all positions $\textit{i}$ in the string $\textit{number}$. If $\textit{number}[i] = \textit{digit}$, we take the prefix $\textit{number}[0:i]$ and the suffix $\textit{number}[i+1:]$ of $\textit{number}$ and concatenate them. This gives the result after removing $\textit{number}[i]$. We then take the maximum of all possible results.</p>
+<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of the string $\textit{number}$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -80685,7 +80687,9 @@ Both result in the string &quot;51&quot;.
 
 <!-- solution:start -->
 
-<h3 id="solution-2">Solution 2</h3>
+<h3 id="solution-2-greedy">Solution 2: Greedy</h3>
+<p>We can enumerate all positions $\textit{i}$ in the string $\textit{number}$. If $\textit{number}[i] = \textit{digit}$, we record the last occurrence position of $\textit{digit}$ as $\textit{last}$. If $\textit{i} + 1 &lt; \textit{n}$ and $\textit{number}[i] &lt; \textit{number}[i + 1]$, then we can directly return $\textit{number}[0:i] + \textit{number}[i+1:]$ as the result after removing $\textit{number}[i]$. This is because if $\textit{number}[i] &lt; \textit{number}[i + 1]$, removing $\textit{number}[i]$ will result in a larger number.</p>
+<p>After the traversal, we return $\textit{number}[0:\textit{last}] + \textit{number}[\textit{last}+1:]$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
