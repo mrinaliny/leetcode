@@ -85060,11 +85060,11 @@
 
 <h3 id="_3">方法一：记忆化搜索</h3>
 <p>我们先将数字 <code>num</code> 转为字符串 $s$，字符串 $s$ 的长度记为 $n$。</p>
-<p>然后我们设计一个函数 $dfs(i)$，表示从第 $i$ 个数字开始的不同翻译的数目。那么答案就是 $dfs(0)$。</p>
+<p>然后我们设计一个函数 $dfs(i)$，表示从索引为 $i$ 的数字开始的不同翻译的数目。那么答案就是 $dfs(0)$。</p>
 <p>函数 $dfs(i)$ 的计算如下：</p>
 <ul>
-<li>如果 $i \ge n - 1$，说明已经翻译到最后一个数字，只有一种翻译方法，返回 $1$；</li>
-<li>否则，我们可以选择翻译第 $i$ 个数字，此时翻译方法数目为 $dfs(i + 1)$；如果第 $i$ 个数字和第 $i + 1$ 个数字可以组成一个有效的字符（即 $s[i] == 1$ 或者 $s[i] == 2$ 且 $s[i + 1] \lt 6$），那么我们还可以选择翻译第 $i$ 和第 $i + 1$ 个数字，此时翻译方法数目为 $dfs(i + 2)$。因此 $dfs(i) = dfs(i+1) + dfs(i+2)$。</li>
+<li>如果 $i \ge n - 1$，说明已经翻译到最后一个数字或者越过最后一个字符，均只有一种翻译方法，返回 $1$；</li>
+<li>否则，我们可以选择翻译索引为 $i$ 的数字，此时翻译方法数目为 $dfs(i + 1)$；如果索引为 $i$ 的数字和索引为 $i + 1$ 的数字可以组成一个有效的字符（即 $s[i] == 1$ 或者 $s[i] == 2$ 且 $s[i + 1] \lt 6$），那么我们还可以选择翻译索引为 $i$ 和索引为 $i + 1$ 的数字，此时翻译方法数目为 $dfs(i + 2)$。因此 $dfs(i) = dfs(i+1) + dfs(i+2)$。</li>
 </ul>
 <p>过程中我们可以使用记忆化搜索，将已经计算过的 $dfs(i)$ 的值存储起来，避免重复计算。</p>
 <p>时间复杂度 $O(\log num)$，空间复杂度 $O(\log num)$。其中 $num$ 为给定的数字。</p>
@@ -85743,6 +85743,11 @@
     
     <nav>
       
+        <a href="https://github.com/lingxier" class="md-author" title="@lingxier">
+          
+          <img src="https://avatars.githubusercontent.com/u/50407509?v=4&size=72" alt="lingxier">
+        </a>
+      
         <a href="https://github.com/klever34" class="md-author" title="@klever34">
           
           <img src="https://avatars.githubusercontent.com/u/12745225?v=4&size=72" alt="klever34">
@@ -85758,16 +85763,11 @@
           <img src="https://avatars.githubusercontent.com/u/85606371?v=4&size=72" alt="xiongbinzou">
         </a>
       
-        <a href="https://github.com/YangFong" class="md-author" title="@YangFong">
-          
-          <img src="https://avatars.githubusercontent.com/u/70502828?v=4&size=72" alt="YangFong">
-        </a>
-      
       
       
         
           <a href="https://github.com/doocs/leetcode/blob/main/lcof/%E9%9D%A2%E8%AF%95%E9%A2%9846.%20%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/README.md" class="md-author md-author--more">
-            +2
+            +3
           </a>
         
       
