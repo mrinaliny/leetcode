@@ -40318,18 +40318,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-two-pointers-binary-search" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Two Pointers + Binary Search
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#solution-2" class="md-nav__link">
+  <a href="#solution-2-two-pointers" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 2
+      Solution 2: Two Pointers
     </span>
   </a>
   
@@ -80745,7 +80745,12 @@ Another correct solution is to remove the subarray [3,10,4].
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-two-pointers-binary-search">Solution 1: Two Pointers + Binary Search</h3>
+<p>First, we find the longest non-decreasing prefix and the longest non-decreasing suffix of the array, denoted as $\textit{nums}[0..i]$ and $\textit{nums}[j..n-1]$, respectively.</p>
+<p>If $i \geq j$, it means the array is already non-decreasing, so we return $0$.</p>
+<p>Otherwise, we can choose to delete the right suffix or the left prefix. Therefore, initially, the answer is $\min(n - i - 1, j)$.</p>
+<p>Next, we enumerate the right endpoint $l$ of the left prefix. For each $l$, we can use binary search to find the first position greater than or equal to $\textit{nums}[l]$ in $\textit{nums}[j..n-1]$, denoted as $r$. At this point, we can delete $\textit{nums}[l+1..r-1]$ and update the answer $\textit{ans} = \min(\textit{ans}, r - l - 1)$. Continue enumerating $l$ to get the final answer.</p>
+<p>The time complexity is $O(n \times \log n)$, where $n$ is the length of the array. The space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -80942,7 +80947,12 @@ Another correct solution is to remove the subarray [3,10,4].
 
 <!-- solution:start -->
 
-<h3 id="solution-2">Solution 2</h3>
+<h3 id="solution-2-two-pointers">Solution 2: Two Pointers</h3>
+<p>Similar to Solution 1, we first find the longest non-decreasing prefix and the longest non-decreasing suffix of the array, denoted as $\textit{nums}[0..i]$ and $\textit{nums}[j..n-1]$, respectively.</p>
+<p>If $i \geq j$, it means the array is already non-decreasing, so we return $0$.</p>
+<p>Otherwise, we can choose to delete the right suffix or the left prefix. Therefore, initially, the answer is $\min(n - i - 1, j)$.</p>
+<p>Next, we enumerate the right endpoint $l$ of the left prefix. For each $l$, we directly use two pointers to find the first position greater than or equal to $\textit{nums}[l]$ in $\textit{nums}[j..n-1]$, denoted as $r$. At this point, we can delete $\textit{nums}[l+1..r-1]$ and update the answer $\textit{ans} = \min(\textit{ans}, r - l - 1)$. Continue enumerating $l$ to get the final answer.</p>
+<p>The time complexity is $O(n)$, where $n$ is the length of the array. The space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -81222,14 +81232,14 @@ Another correct solution is to remove the subarray [3,10,4].
     
     <nav>
       
-        <a href="https://github.com/rain84" class="md-author" title="@rain84">
-          
-          <img src="https://avatars.githubusercontent.com/u/1732547?v=4&size=72" alt="rain84">
-        </a>
-      
         <a href="https://github.com/yanglbme" class="md-author" title="@yanglbme">
           
           <img src="https://avatars.githubusercontent.com/u/21008209?v=4&size=72" alt="yanglbme">
+        </a>
+      
+        <a href="https://github.com/rain84" class="md-author" title="@rain84">
+          
+          <img src="https://avatars.githubusercontent.com/u/1732547?v=4&size=72" alt="rain84">
         </a>
       
         <a href="https://github.com/LjyYano" class="md-author" title="@LjyYano">

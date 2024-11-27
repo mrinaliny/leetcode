@@ -85354,11 +85354,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：双指针 + 二分查找</h3>
-<p>我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $nums[0..i]$ 和 $nums[j..n-1]$。</p>
+<p>我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $\textit{nums}[0..i]$ 和 $\textit{nums}[j..n-1]$。</p>
 <p>如果 $i \geq j$，说明数组本身就是非递减的，返回 $0$。</p>
-<p>否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $min(n - i - 1, j)$。</p>
-<p>接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们可以通过二分查找，在 $nums[j..n-1]$ 中找到第一个大于等于 $nums[l]$ 的位置，记为 $r$，此时我们可以删除 $nums[l+1..r-1]$，并且更新答案 $ans = min(ans, r - l - 1)$。继续枚举 $l$，最终得到答案。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(1)$。其中 $n$ 为数组长度。</p>
+<p>否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $\min(n - i - 1, j)$。</p>
+<p>接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们可以通过二分查找，在 $\textit{nums}[j..n-1]$ 中找到第一个大于等于 $\textit{nums}[l]$ 的位置，记为 $r$，此时我们可以删除 $\textit{nums}[l+1..r-1]$，并且更新答案 $\textit{ans} = \min(\textit{ans}, r - l - 1)$。继续枚举 $l$，最终得到答案。</p>
+<p>时间复杂度 $O(n \times \log n)$，其中 $n$ 为数组长度。空间复杂度 $O(1)$。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -85556,11 +85556,11 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：双指针</h3>
-<p>与方法一类似，我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $nums[0..i]$ 和 $nums[j..n-1]$。</p>
+<p>与方法一类似，我们先找出数组的最长非递减前缀和最长非递减后缀，分别记为 $\textit{nums}[0..i]$ 和 $\textit{nums}[j..n-1]$。</p>
 <p>如果 $i \geq j$，说明数组本身就是非递减的，返回 $0$。</p>
-<p>否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $min(n - i - 1, j)$。</p>
-<p>接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们直接利用双指针找到第一个大于等于 $nums[l]$ 的位置，记为 $r$，此时我们可以删除 $nums[l+1..r-1]$，并且更新答案 $ans = min(ans, r - l - 1)$。继续枚举 $l$，最终得到答案。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为数组长度。</p>
+<p>否则，我们可以选择删除右侧后缀，也可以选择删除左侧前缀，因此初始时答案为 $\min(n - i - 1, j)$。</p>
+<p>接下来，我们枚举左侧前缀的最右端点 $l$，对于每个 $l$，我们直接利用双指针找到第一个大于等于 $\textit{nums}[l]$ 的位置，记为 $r$，此时我们可以删除 $\textit{nums}[l+1..r-1]$，并且更新答案 $\textit{ans} = \min(\textit{ans}, r - l - 1)$。继续枚举 $l$，最终得到答案。</p>
+<p>时间复杂度 $O(n)$，其中 $n$ 为数组长度。空间复杂度 $O(1)$。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -85840,14 +85840,14 @@
     
     <nav>
       
-        <a href="https://github.com/rain84" class="md-author" title="@rain84">
-          
-          <img src="https://avatars.githubusercontent.com/u/1732547?v=4&size=72" alt="rain84">
-        </a>
-      
         <a href="https://github.com/yanglbme" class="md-author" title="@yanglbme">
           
           <img src="https://avatars.githubusercontent.com/u/21008209?v=4&size=72" alt="yanglbme">
+        </a>
+      
+        <a href="https://github.com/rain84" class="md-author" title="@rain84">
+          
+          <img src="https://avatars.githubusercontent.com/u/1732547?v=4&size=72" alt="rain84">
         </a>
       
         <a href="https://github.com/LjyYano" class="md-author" title="@LjyYano">
