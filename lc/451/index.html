@@ -85345,7 +85345,7 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 排序</h3>
-<p>我们用哈希表 $cnt$ 统计字符串 $s$ 中每个字符出现的次数，然后将 $cnt$ 中的键值对按照出现次数降序排序，最后按照排序后的顺序拼接字符串即可。</p>
+<p>我们用哈希表 $\textit{cnt}$ 统计字符串 $s$ 中每个字符出现的次数，然后将 $\textit{cnt}$ 中的键值对按照出现次数降序排序，最后按照排序后的顺序拼接字符串即可。</p>
 <p>时间复杂度 $O(n + k \times \log k)$，空间复杂度 $O(n + k)$，其中 $n$ 为字符串 $s$ 的长度，而 $k$ 为不同字符的个数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">PHP</label></div>
 <div class="tabbed-content">
@@ -85546,21 +85546,23 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="x">class Solution {</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="x">class Solution {</span>
 <span class="x">    /**</span>
 <span class="x">     * @param String $s</span>
 <span class="x">     * @return String</span>
 <span class="x">     */</span>
 <span class="x">    function frequencySort($s) {</span>
-<span class="x">        for ($i = 0; $i &lt; strlen($s); $i++) {</span>
-<span class="x">            $hashtable[$s[$i]] += 1;</span>
+<span class="x">        $cnt = array_count_values(str_split($s));</span>
+<span class="x">        $cs = array_keys($cnt);</span>
+<span class="x">        usort($cs, function ($a, $b) use ($cnt) {</span>
+<span class="x">            return $cnt[$b] &lt;=&gt; $cnt[$a];</span>
+<span class="x">        });</span>
+<span class="x">        $ans = &#39;&#39;;</span>
+<span class="x">        foreach ($cs as $c) {</span>
+<span class="x">            $ans .= str_repeat($c, $cnt[$c]);</span>
 <span class="x">        }</span>
-<span class="x">        arsort($hashtable);</span>
-<span class="x">        $keys = array_keys($hashtable);</span>
-<span class="x">        for ($j = 0; $j &lt; count($keys); $j++) {</span>
-<span class="x">            $rs = $rs . str_repeat($keys[$j], $hashtable[$keys[$j]]);</span>
-<span class="x">        }</span>
-<span class="x">        return $rs;</span>
+<span class="x">        return $ans;</span>
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div></td></tr></table></div>
