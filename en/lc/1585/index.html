@@ -40611,9 +40611,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-bubble-sort" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Bubble Sort
     </span>
   </a>
   
@@ -81450,7 +81450,12 @@
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-bubble-sort">Solution 1: Bubble Sort</h3>
+<p>The problem is essentially equivalent to determining whether any substring of length 2 in string $s$ can be swapped using bubble sort to obtain $t$.</p>
+<p>Therefore, we use an array $pos$ of length 10 to record the indices of each digit in string $s$, where $pos[i]$ represents the list of indices where digit $i$ appears, sorted in ascending order.</p>
+<p>Next, we iterate through string $t$. For each character $t[i]$ in $t$, we convert it to the digit $x$. We check if $pos[x]$ is empty. If it is, it means that the digit in $t$ does not exist in $s$, so we return <code>false</code>. Otherwise, to swap the character at the first index of $pos[x]$ to index $i$, all indices of digits less than $x$ must be greater than or equal to the first index of $pos[x]. If this condition is not met, we return <code>false</code>. Otherwise, we pop the first index from $pos[x]$ and continue iterating through string $t$.</p>
+<p>After the iteration, we return <code>true</code>.</p>
+<p>The time complexity is $O(n \times C)$, and the space complexity is $O(n)$. Here, $n$ is the length of string $s$, and $C$ is the size of the digit set, which is 10 in this problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
