@@ -12334,15 +12334,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#solution-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Solution 2
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -81451,11 +81442,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-two-passes">Solution 1: Two Passes</h3>
-<p>We define two variables $left$ and $right$, which represent the product of all elements to the left and right of the current element respectively. Initially, $left=1$, $right=1$. Define an answer array $ans$ of length $n$.</p>
-<p>We first traverse the array from left to right, for the $i$th element we update $ans[i]$ with $left$, then $left$ multiplied by $nums[i]$.</p>
-<p>Then, we traverse the array from right to left, for the $i$th element, we update $ans[i]$ to $ans[i] \times right$, then $right$ multiplied by $nums[i]$.</p>
-<p>After the traversal, the array <code>ans</code> is the answer.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array <code>nums</code>. Ignore the space consumption of the answer array, the space complexity is $O(1)$.</p>
+<p>We define two variables $\textit{left}$ and $\textit{right}$ to represent the product of all elements to the left and right of the current element, respectively. Initially, $\textit{left} = 1$ and $\textit{right} = 1$. We define an answer array $\textit{ans}$ of length $n$.</p>
+<p>First, we traverse the array from left to right. For the $i$-th element, we update $\textit{ans}[i]$ with $\textit{left}$, then multiply $\textit{left}$ by $\textit{nums}[i]$.</p>
+<p>Next, we traverse the array from right to left. For the $i$-th element, we update $\textit{ans}[i]$ to $\textit{ans}[i] \times \textit{right}$, then multiply $\textit{right}$ by $\textit{nums}[i]$.</p>
+<p>After the traversal, we return the answer array $\textit{ans}$.</p>
+<p>The time complexity is $O(n)$, where $n$ is the length of the array $\textit{nums}$. Ignoring the space consumption of the answer array, the space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label><label for="__tabbed_1_9">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -81746,23 +81737,6 @@
 <span class="x">        return $ans;</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></td></tr></table></div>
-</div>
-</div>
-</div>
-<!-- solution:end -->
-
-<!-- solution:start -->
-
-<h3 id="solution-2">Solution 2</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TypeScript</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">productExceptSelf</span><span class="p">(</span><span class="nx">nums</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">pre</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">j</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">pre</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">val</span><span class="p">),</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
-<span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
