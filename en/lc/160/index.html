@@ -81488,10 +81488,10 @@ Explanation: The two lists do not intersect, so return null.
 <!-- solution:start -->
 
 <h3 id="solution-1-two-pointers">Solution 1: Two Pointers</h3>
-<p>We use two pointers $a$ and $b$ to point to two linked lists $headA$ and $headB$ respectively.</p>
-<p>We traverse the linked lists simultaneously. When $a$ reaches the end of the linked list $headA$, it is repositioned to the head node of the linked list $headB$. When $b$ reaches the end of the linked list $headB$, it is repositioned to the head node of the linked list $headA$.</p>
-<p>If the two pointers meet, the node they point to is the first common node. If they don't meet, it means that the two linked lists have no common nodes. At this time, both pointers point to <code>null</code>, and we can return either one.</p>
-<p>The time complexity is $O(m+n)$, where $m$ and $n$ are the lengths of the linked lists $headA$ and $headB$ respectively. The space complexity is $O(1)$.</p>
+<p>We use two pointers $a$ and $b$ to point to the heads of the two linked lists $\textit{headA}$ and $\textit{headB}$, respectively.</p>
+<p>Traverse the linked lists simultaneously. When $a$ reaches the end of $\textit{headA}$, redirect it to the head of $\textit{headB}$. Similarly, when $b$ reaches the end of $\textit{headB}$, redirect it to the head of $\textit{headA}$.</p>
+<p>If the two pointers meet, the node they point to is the first common node. If they do not meet, it means the two linked lists have no common nodes, and both pointers will point to <code>null</code>. Return either pointer.</p>
+<p>The time complexity is $O(m + n)$, where $m$ and $n$ are the lengths of the linked lists $\textit{headA}$ and $\textit{headB}$, respectively. The space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -81676,8 +81676,7 @@ Explanation: The two lists do not intersect, so return null.
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * Definition for singly-linked list.</span>
 <span class="cm"> * class ListNode {</span>
 <span class="cm"> *     val: number</span>
@@ -81690,9 +81689,8 @@ Explanation: The two lists do not intersect, so return null.
 <span class="cm"> */</span>
 
 <span class="kd">function</span><span class="w"> </span><span class="nx">getIntersectionNode</span><span class="p">(</span><span class="nx">headA</span><span class="o">:</span><span class="w"> </span><span class="kt">ListNode</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">headB</span><span class="o">:</span><span class="w"> </span><span class="kt">ListNode</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">ListNode</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">headA</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">headB</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">headA</span><span class="p">,</span><span class="w"> </span><span class="nx">headB</span><span class="p">];</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">a.next</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">headB</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">b.next</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">headA</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -81721,8 +81719,7 @@ Explanation: The two lists do not intersect, so return null.
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * Definition for singly-linked list.</span>
 <span class="cm"> * function ListNode(val) {</span>
 <span class="cm"> *     this.val = val;</span>
@@ -81736,9 +81733,8 @@ Explanation: The two lists do not intersect, so return null.
 <span class="cm"> * @return {ListNode}</span>
 <span class="cm"> */</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">getIntersectionNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">headA</span><span class="p">,</span><span class="w"> </span><span class="nx">headB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">headA</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">headB</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="nx">headA</span><span class="p">,</span><span class="w"> </span><span class="nx">headB</span><span class="p">];</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">headB</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">b</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">headA</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
