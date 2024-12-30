@@ -10278,7 +10278,7 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      方法一：哈希表
+      方法一：哈希表 + 模拟
     </span>
   </a>
   
@@ -10287,7 +10287,7 @@
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      方法二：拼接 + 拆分
+      方法二：模拟（空间优化）
     </span>
   </a>
   
@@ -86196,10 +86196,10 @@
 <h2 id="_2">解法</h2>
 <!-- solution:start -->
 
-<h3 id="_3">方法一：哈希表</h3>
-<p>遍历链表，将链表中的每个节点都复制一份，然后将原节点和复制节点的对应关系存储在哈希表中，同时连接好复制节点的 $next$ 指针。</p>
-<p>接下来再遍历链表，根据哈希表中存储的对应关系，将复制节点的 $random$ 指针连接好。</p>
-<p>时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。其中 $n$ 为链表的长度。</p>
+<h3 id="_3">方法一：哈希表 + 模拟</h3>
+<p>我们可以定义一个虚拟头节点 $\textit{dummy}$，用一个指针 $\textit{tail}$ 指向虚拟头节点，然后遍历链表，将链表中的每个节点都复制一份，并将每个节点及其复制节点的对应关系存储在哈希表 $\textit{d}$ 中，同时连接好复制节点的 $\textit{next}$ 指针。</p>
+<p>接下来再遍历链表，根据哈希表中存储的对应关系，将复制节点的 $\textit{random}$ 指针连接好。</p>
+<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为链表的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86228,8 +86228,7 @@
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd"># Definition for a Node.</span>
 <span class="sd">class Node:</span>
 <span class="sd">    def __init__(self, x: int, next: &#39;Node&#39; = None, random: &#39;Node&#39; = None):</span>
@@ -86240,20 +86239,19 @@
 
 
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">copyRandomList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="s2">&quot;Node&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Node&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">copyRandomList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="s2">&quot;Optional[Node]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Optional[Node]&quot;</span><span class="p">:</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">dummy</span> <span class="o">=</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
         <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
-            <span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
             <span class="n">tail</span> <span class="o">=</span> <span class="n">tail</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="n">tail</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
         <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
-            <span class="n">tail</span><span class="o">.</span><span class="n">random</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="n">tail</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="o">.</span><span class="n">random</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="o">.</span><span class="n">random</span><span class="p">]</span> <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">random</span> <span class="k">else</span> <span class="kc">None</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
         <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="n">next</span>
 </code></pre></div></td></tr></table></div>
@@ -86304,20 +86302,20 @@
 <span class="cm">    }</span>
 <span class="cm">}</span>
 <span class="cm">*/</span>
+
 <span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="nf">copyRandomList</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Node</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">dummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dummy</span><span class="p">;</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">tail</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
-<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-<span class="w">            </span><span class="n">d</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span><span class="w"> </span><span class="n">tail</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
+<span class="w">            </span><span class="n">tail</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">            </span><span class="n">d</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dummy</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">tail</span><span class="p">.</span><span class="na">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="p">);</span>
-<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">d</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">cur</span><span class="p">).</span><span class="na">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dummy</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -86373,21 +86371,21 @@
 <span class="cm">    }</span>
 <span class="cm">};</span>
 <span class="cm">*/</span>
+
 <span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">copyRandomList</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">dummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="w">        </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dummy</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
-<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="p">;</span>
+<span class="w">        </span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="o">*&gt;</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+<span class="w">            </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">            </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="p">];</span>
-<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dummy</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -86419,7 +86417,8 @@
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * Definition for a Node.</span>
 <span class="cm"> * type Node struct {</span>
 <span class="cm"> *     Val int</span>
@@ -86429,18 +86428,19 @@
 <span class="cm"> */</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">copyRandomList</span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">*</span><span class="nx">Node</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Node</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">d</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="o">*</span><span class="nx">Node</span><span class="p">]</span><span class="o">*</span><span class="nx">Node</span><span class="p">{}</span>
 <span class="w">    </span><span class="nx">dummy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Node</span><span class="p">{}</span>
 <span class="w">    </span><span class="nx">tail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dummy</span>
+<span class="w">    </span><span class="nx">d</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="o">*</span><span class="nx">Node</span><span class="p">]</span><span class="o">*</span><span class="nx">Node</span><span class="p">{}</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Node</span><span class="p">{</span><span class="nx">Val</span><span class="p">:</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Val</span><span class="p">}</span>
-<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tail</span><span class="p">.</span><span class="nx">Next</span>
-<span class="w">        </span><span class="nx">d</span><span class="p">[</span><span class="nx">cur</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tail</span>
+<span class="w">        </span><span class="nx">node</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Node</span><span class="p">{</span><span class="nx">Val</span><span class="p">:</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Val</span><span class="p">}</span>
+<span class="w">        </span><span class="nx">d</span><span class="p">[</span><span class="nx">cur</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">node</span>
+<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">node</span>
+<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">node</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">tail</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">dummy</span><span class="p">.</span><span class="nx">Next</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">Random</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">d</span><span class="p">[</span><span class="nx">cur</span><span class="p">.</span><span class="nx">Random</span><span class="p">]</span>
-<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tail</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Random</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">d</span><span class="p">[</span><span class="nx">cur</span><span class="p">].</span><span class="nx">Random</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">d</span><span class="p">[</span><span class="nx">cur</span><span class="p">.</span><span class="nx">Random</span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">dummy</span><span class="p">.</span><span class="nx">Next</span>
 <span class="p">}</span>
@@ -86475,13 +86475,15 @@
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * Definition for Node.</span>
-<span class="cm"> * class Node {</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for _Node.</span>
+<span class="cm"> * class _Node {</span>
 <span class="cm"> *     val: number</span>
-<span class="cm"> *     next: Node | null</span>
-<span class="cm"> *     random: Node | null</span>
-<span class="cm"> *     constructor(val?: number, next?: Node, random?: Node) {</span>
+<span class="cm"> *     next: _Node | null</span>
+<span class="cm"> *     random: _Node | null</span>
+<span class="cm"> *</span>
+<span class="cm"> *     constructor(val?: number, next?: _Node, random?: _Node) {</span>
 <span class="cm"> *         this.val = (val===undefined ? 0 : val)</span>
 <span class="cm"> *         this.next = (next===undefined ? null : next)</span>
 <span class="cm"> *         this.random = (random===undefined ? null : random)</span>
@@ -86489,20 +86491,20 @@
 <span class="cm"> * }</span>
 <span class="cm"> */</span>
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">copyRandomList</span><span class="p">(</span><span class="nx">head</span><span class="o">:</span><span class="w"> </span><span class="kt">Node</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">Node</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="o">&lt;</span><span class="nx">Node</span><span class="p">,</span><span class="w"> </span><span class="nx">Node</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">map</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">));</span>
-<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">copyRandomList</span><span class="p">(</span><span class="nx">head</span><span class="o">:</span><span class="w"> </span><span class="kt">_Node</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">_Node</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">d</span><span class="o">:</span><span class="w"> </span><span class="kt">Map</span><span class="o">&lt;</span><span class="nx">_Node</span><span class="p">,</span><span class="w"> </span><span class="nx">_Node</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">dummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">_Node</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dummy</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">_Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">d</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="nx">node</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">).</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">).</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">)</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">d</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">)</span><span class="o">!</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">)</span><span class="o">!</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">head</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">dummy</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -86534,10 +86536,9 @@
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * // Definition for a Node.</span>
-<span class="cm"> * function Node(val, next, random) {</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * // Definition for a _Node.</span>
+<span class="cm"> * function _Node(val, next, random) {</span>
 <span class="cm"> *    this.val = val;</span>
 <span class="cm"> *    this.next = next;</span>
 <span class="cm"> *    this.random = random;</span>
@@ -86545,22 +86546,21 @@
 <span class="cm"> */</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * @param {Node} head</span>
-<span class="cm"> * @return {Node}</span>
+<span class="cm"> * @param {_Node} head</span>
+<span class="cm"> * @return {_Node}</span>
 <span class="cm"> */</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">copyRandomList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">dummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Node</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">dummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">_Node</span><span class="p">();</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dummy</span><span class="p">;</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tail</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">d</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="nx">tail</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">_Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">d</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="nx">node</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dummy</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">tail</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tail</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">d</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">).</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">dummy</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="p">};</span>
@@ -86599,7 +86599,11 @@
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
 <span class="cm">// Definition for a Node.</span>
 <span class="cm">public class Node {</span>
 <span class="cm">    public int val;</span>
@@ -86619,16 +86623,20 @@
 <span class="w">        </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">Node</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">Node</span><span class="p">,</span><span class="w"> </span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">dummy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
 <span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dummy</span><span class="p">;</span>
+
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">tail</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
-<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="p">;</span>
+<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+<span class="w">            </span><span class="n">tail</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="w">            </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dummy</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
+
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">tail</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="p">];</span>
-<span class="w">            </span><span class="n">tail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tail</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">].</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="p">];</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
+
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dummy</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -86640,12 +86648,15 @@
 
 <!-- solution:start -->
 
-<h3 id="_4">方法二：拼接 + 拆分</h3>
-<p>遍历链表，将链表中的每个节点都复制一份，然后将复制节点插入到原节点的后面。</p>
-<p>接下来再遍历链表，根据原节点的 $random$ 指针，将复制节点的 $random$ 指针连接好。</p>
-<p>最后再遍历链表，将链表拆分成原链表和复制链表。</p>
-<p>时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。其中 $n$ 为链表的长度。</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">JavaScript</label><label for="__tabbed_2_6">C#</label></div>
+<h3 id="_4">方法二：模拟（空间优化）</h3>
+<p>在方法一中，我们使用了额外的哈希表来存储原节点和复制节点的对应关系，我们也可以不使用额外的空间，具体做法如下：</p>
+<ol>
+<li>遍历原链表，对于每个节点，复制一个新节点并将其插入到原节点和原节点的下一个节点之间。</li>
+<li>再次遍历链表，根据原节点的 $\textit{random}$ 指针，设置新节点的 $\textit{random}$ 指针。</li>
+<li>最后将链表拆分为原链表和复制链表。</li>
+</ol>
+<p>时间复杂度 $O(n)$，其中 $n$ 为链表的长度。忽略答案链表的空间占用，空间复杂度 $O(1)$。</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -86677,11 +86688,7 @@
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd"># Definition for a Node.</span>
 <span class="sd">class Node:</span>
 <span class="sd">    def __init__(self, x: int, next: &#39;Node&#39; = None, random: &#39;Node&#39; = None):</span>
@@ -86692,7 +86699,7 @@
 
 
 <span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">copyRandomList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="s2">&quot;Node&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Node&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">copyRandomList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="s2">&quot;Optional[Node]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Optional[Node]&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
@@ -86700,20 +86707,16 @@
             <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
             <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
-
         <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
         <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">random</span><span class="p">:</span>
-                <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">random</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">random</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">next</span> <span class="k">if</span> <span class="n">cur</span><span class="o">.</span><span class="n">random</span> <span class="k">else</span> <span class="kc">None</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
-
-        <span class="n">ans</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span>
         <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span>
-        <span class="k">while</span> <span class="n">cur</span><span class="p">:</span>
-            <span class="n">nxt</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
-            <span class="k">if</span> <span class="n">nxt</span><span class="p">:</span>
-                <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nxt</span><span class="o">.</span><span class="n">next</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">nxt</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">while</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">node</span>
         <span class="k">return</span> <span class="n">ans</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -86757,7 +86760,9 @@
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
 <span class="cm">// Definition for a Node.</span>
 <span class="cm">class Node {</span>
 <span class="cm">    int val;</span>
@@ -86771,28 +86776,30 @@
 <span class="cm">    }</span>
 <span class="cm">}</span>
 <span class="cm">*/</span>
-<span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="nf">copyRandomList</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">head</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">val</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
+<span class="w">            </span><span class="n">node</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
 <span class="w">            </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">random</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nxt</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nxt</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nxt</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -86842,7 +86849,8 @@
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
 <span class="cm">// Definition for a Node.</span>
 <span class="cm">class Node {</span>
 <span class="cm">public:</span>
@@ -86857,30 +86865,31 @@
 <span class="cm">    }</span>
 <span class="cm">};</span>
 <span class="cm">*/</span>
+
 <span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">copyRandomList</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
 <span class="w">            </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 <span class="w">            </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">nullptr</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">random</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="p">;)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nxt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nxt</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nxt</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -86918,9 +86927,7 @@
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * Definition for a Node.</span>
 <span class="cm"> * type Node struct {</span>
 <span class="cm"> *     Val int</span>
@@ -86944,12 +86951,10 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">ans</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">nxt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">nxt</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">nxt</span><span class="p">.</span><span class="nx">Next</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">nxt</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">node</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">node</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span>
 <span class="p">}</span>
@@ -86992,9 +86997,92 @@
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * // Definition for a Node.</span>
-<span class="cm"> * function Node(val, next, random) {</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for _Node.</span>
+<span class="cm"> * class _Node {</span>
+<span class="cm"> *     val: number</span>
+<span class="cm"> *     next: _Node | null</span>
+<span class="cm"> *     random: _Node | null</span>
+<span class="cm"> *</span>
+<span class="cm"> *     constructor(val?: number, next?: _Node, random?: _Node) {</span>
+<span class="cm"> *         this.val = (val===undefined ? 0 : val)</span>
+<span class="cm"> *         this.next = (next===undefined ? null : next)</span>
+<span class="cm"> *         this.random = (random===undefined ? null : random)</span>
+<span class="cm"> *     }</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">copyRandomList</span><span class="p">(</span><span class="nx">head</span><span class="o">:</span><span class="w"> </span><span class="kt">_Node</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">_Node</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">_Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">null</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">cur.random.next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * // Definition for a _Node.</span>
+<span class="cm"> * function _Node(val, next, random) {</span>
 <span class="cm"> *    this.val = val;</span>
 <span class="cm"> *    this.next = next;</span>
 <span class="cm"> *    this.random = random;</span>
@@ -87002,30 +87090,31 @@
 <span class="cm"> */</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * @param {Node} head</span>
-<span class="cm"> * @return {Node}</span>
+<span class="cm"> * @param {_Node} head</span>
+<span class="cm"> * @return {_Node}</span>
 <span class="cm"> */</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">copyRandomList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">_Node</span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">random</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">head</span><span class="p">;</span><span class="w"> </span><span class="nx">cur</span><span class="p">;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">nxt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nxt</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nxt</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">node</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="p">;</span>
 <span class="p">};</span>
@@ -87072,7 +87161,8 @@
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*</span>
 <span class="cm">// Definition for a Node.</span>
 <span class="cm">public class Node {</span>
 <span class="cm">    public int val;</span>
@@ -87092,23 +87182,24 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">head</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">val</span><span class="p">);</span>
+<span class="w">            </span><span class="n">node</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
 <span class="w">            </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">.</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Node</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nxt</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nxt</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nxt</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Node</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="p">.</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
