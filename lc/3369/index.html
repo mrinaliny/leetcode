@@ -7309,6 +7309,8 @@
       
         
       
+        
+      
     
     
       
@@ -79112,6 +79114,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3415/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3415. Find Products with Three Consecutive Digits 🔒
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -86502,19 +86525,19 @@ statisticsTracker.getMode(); // return 5</div>
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
-<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedList</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sortedcontainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SortedList</span>
 
 
-<span class="k">class</span> <span class="nc">StatisticsTracker</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StatisticsTracker</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl</span> <span class="o">=</span> <span class="n">SortedList</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl2</span> <span class="o">=</span> <span class="n">SortedList</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="nf">addNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">addNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl2</span><span class="o">.</span><span class="n">discard</span><span class="p">((</span><span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[</span><span class="n">number</span><span class="p">]))</span>
@@ -86522,7 +86545,7 @@ statisticsTracker.getMode(); // return 5</div>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl2</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[</span><span class="n">number</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">+=</span> <span class="n">number</span>
 
-    <span class="k">def</span> <span class="nf">removeFirstAddedNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">removeFirstAddedNumber</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl2</span><span class="o">.</span><span class="n">discard</span><span class="p">((</span><span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[</span><span class="n">number</span><span class="p">]))</span>
@@ -86530,13 +86553,13 @@ statisticsTracker.getMode(); // return 5</div>
         <span class="bp">self</span><span class="o">.</span><span class="n">sl2</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">number</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cnt</span><span class="p">[</span><span class="n">number</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">-=</span> <span class="n">number</span>
 
-    <span class="k">def</span> <span class="nf">getMean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getMean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">getMedian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getMedian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">getMode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getMode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 

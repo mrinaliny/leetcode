@@ -7309,6 +7309,8 @@
       
         
       
+        
+      
     
     
       
@@ -79112,6 +79114,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3415/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3415. Find Products with Three Consecutive Digits 🔒
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -86451,11 +86474,11 @@ movieRentingSystem.search(2);  // 返回 [0, 1] 。商店 0 和 1 有未借出�
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
-<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedList</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sortedcontainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SortedList</span>
 
 
-<span class="k">class</span> <span class="nc">MovieRentingSystem</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MovieRentingSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unrented</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">SortedList</span><span class="p">)</span>  <span class="c1"># {movie: (price, shop)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shopAndMovieToPrice</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {(shop, movie): price}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rented</span> <span class="o">=</span> <span class="n">SortedList</span><span class="p">()</span>  <span class="c1"># (price, shop, movie)</span>
@@ -86463,20 +86486,20 @@ movieRentingSystem.search(2);  // 返回 [0, 1] 。商店 0 和 1 有未借出�
             <span class="bp">self</span><span class="o">.</span><span class="n">unrented</span><span class="p">[</span><span class="n">movie</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">price</span><span class="p">,</span> <span class="n">shop</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shopAndMovieToPrice</span><span class="p">[(</span><span class="n">shop</span><span class="p">,</span> <span class="n">movie</span><span class="p">)]</span> <span class="o">=</span> <span class="n">price</span>
 
-    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">shop</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">shop</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">unrented</span><span class="p">[</span><span class="n">movie</span><span class="p">][:</span><span class="mi">5</span><span class="p">]]</span>
 
-    <span class="k">def</span> <span class="nf">rent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shop</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shop</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shopAndMovieToPrice</span><span class="p">[(</span><span class="n">shop</span><span class="p">,</span> <span class="n">movie</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unrented</span><span class="p">[</span><span class="n">movie</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="n">price</span><span class="p">,</span> <span class="n">shop</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rented</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">price</span><span class="p">,</span> <span class="n">shop</span><span class="p">,</span> <span class="n">movie</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shop</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shop</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">movie</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shopAndMovieToPrice</span><span class="p">[(</span><span class="n">shop</span><span class="p">,</span> <span class="n">movie</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">unrented</span><span class="p">[</span><span class="n">movie</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">price</span><span class="p">,</span> <span class="n">shop</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rented</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="n">price</span><span class="p">,</span> <span class="n">shop</span><span class="p">,</span> <span class="n">movie</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
         <span class="k">return</span> <span class="p">[[</span><span class="n">shop</span><span class="p">,</span> <span class="n">movie</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">shop</span><span class="p">,</span> <span class="n">movie</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rented</span><span class="p">[:</span><span class="mi">5</span><span class="p">]]</span>
 
 

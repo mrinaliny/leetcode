@@ -7267,6 +7267,8 @@
       
         
       
+        
+      
     
     
       
@@ -78994,6 +78996,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lc/3415/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3415. Find Products with Three Consecutive Digits 🔒
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -81794,42 +81817,42 @@ Given the following tree:</p>
 <span class="cm">* }</span>
 <span class="cm">*/</span>
 
-<span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">BSTSequences</span><span class="p">(</span><span class="kc">_</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">?)</span> <span class="p">-&gt;</span> <span class="p">[[</span><span class="nb">Int</span><span class="p">]]</span> <span class="p">{</span>
-        <span class="k">guard</span> <span class="kd">let</span> <span class="nv">root</span> <span class="p">=</span> <span class="n">root</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">[[]]</span> <span class="p">}</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">BSTSequences</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="n">root</span><span class="p">:</span><span class="w"> </span><span class="n">TreeNode</span><span class="p">?)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">[[</span><span class="nb">Int</span><span class="p">]]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">guard</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">[[]]</span><span class="w"> </span><span class="p">}</span>
 
-        <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="p">[[</span><span class="nb">Int</span><span class="p">]]()</span>
-        <span class="kd">let</span> <span class="nv">prefix</span> <span class="p">=</span> <span class="p">[</span><span class="n">root</span><span class="p">.</span><span class="n">val</span><span class="p">]</span>
-        <span class="kd">let</span> <span class="nv">leftSeq</span> <span class="p">=</span> <span class="n">BSTSequences</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="kr">left</span><span class="p">)</span>
-        <span class="kd">let</span> <span class="nv">rightSeq</span> <span class="p">=</span> <span class="n">BSTSequences</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="kr">right</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[[</span><span class="nb">Int</span><span class="p">]]()</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">prefix</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">root</span><span class="p">.</span><span class="n">val</span><span class="p">]</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">leftSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">BSTSequences</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="kr">left</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">rightSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">BSTSequences</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="kr">right</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="kr">left</span> <span class="k">in</span> <span class="n">leftSeq</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="kr">right</span> <span class="k">in</span> <span class="n">rightSeq</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nv">weaved</span> <span class="p">=</span> <span class="p">[[</span><span class="nb">Int</span><span class="p">]]()</span>
-                <span class="n">weaveLists</span><span class="p">(</span><span class="kr">left</span><span class="p">,</span> <span class="kr">right</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">weaved</span><span class="p">,</span> <span class="kr">prefix</span><span class="p">)</span>
-                <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">weaved</span><span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">result</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="kr">left</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">leftSeq</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="kr">right</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">rightSeq</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nv">weaved</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[[</span><span class="nb">Int</span><span class="p">]]()</span>
+<span class="w">                </span><span class="n">weaveLists</span><span class="p">(</span><span class="kr">left</span><span class="p">,</span><span class="w"> </span><span class="kr">right</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="n">weaved</span><span class="p">,</span><span class="w"> </span><span class="kr">prefix</span><span class="p">)</span>
+<span class="w">                </span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="n">weaved</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">weaveLists</span><span class="p">(</span><span class="kc">_</span> <span class="bp">first</span><span class="p">:</span> <span class="p">[</span><span class="nb">Int</span><span class="p">],</span> <span class="kc">_</span> <span class="n">second</span><span class="p">:</span> <span class="p">[</span><span class="nb">Int</span><span class="p">],</span> <span class="kc">_</span> <span class="n">results</span><span class="p">:</span> <span class="kr">inout</span> <span class="p">[[</span><span class="nb">Int</span><span class="p">]],</span> <span class="kc">_</span> <span class="kr">prefix</span><span class="p">:</span> <span class="p">[</span><span class="nb">Int</span><span class="p">])</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="bp">first</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="o">||</span> <span class="n">second</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nv">result</span> <span class="p">=</span> <span class="kr">prefix</span>
-            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="bp">first</span><span class="p">)</span>
-            <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span> <span class="n">second</span><span class="p">)</span>
-            <span class="n">results</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">func</span><span class="w"> </span><span class="nf">weaveLists</span><span class="p">(</span><span class="kc">_</span><span class="w"> </span><span class="bp">first</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">],</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">second</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">],</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="n">results</span><span class="p">:</span><span class="w"> </span><span class="kr">inout</span><span class="w"> </span><span class="p">[[</span><span class="nb">Int</span><span class="p">]],</span><span class="w"> </span><span class="kc">_</span><span class="w"> </span><span class="kr">prefix</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="nb">Int</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">first</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">second</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kr">prefix</span>
+<span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="bp">first</span><span class="p">)</span>
+<span class="w">            </span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">contentsOf</span><span class="p">:</span><span class="w"> </span><span class="n">second</span><span class="p">)</span>
+<span class="w">            </span><span class="n">results</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="kd">var</span> <span class="nv">prefixWithFirst</span> <span class="p">=</span> <span class="kr">prefix</span>
-        <span class="n">prefixWithFirst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">first</span><span class="p">.</span><span class="bp">first</span><span class="p">!)</span>
-        <span class="n">weaveLists</span><span class="p">(</span><span class="nb">Array</span><span class="p">(</span><span class="bp">first</span><span class="p">.</span><span class="bp">dropFirst</span><span class="p">()),</span> <span class="n">second</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">results</span><span class="p">,</span> <span class="n">prefixWithFirst</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">prefixWithFirst</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kr">prefix</span>
+<span class="w">        </span><span class="n">prefixWithFirst</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">first</span><span class="p">.</span><span class="bp">first</span><span class="p">!)</span>
+<span class="w">        </span><span class="n">weaveLists</span><span class="p">(</span><span class="nb">Array</span><span class="p">(</span><span class="bp">first</span><span class="p">.</span><span class="bp">dropFirst</span><span class="p">()),</span><span class="w"> </span><span class="n">second</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">prefixWithFirst</span><span class="p">)</span>
 
-        <span class="kd">var</span> <span class="nv">prefixWithSecond</span> <span class="p">=</span> <span class="kr">prefix</span>
-        <span class="n">prefixWithSecond</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">second</span><span class="p">.</span><span class="bp">first</span><span class="p">!)</span>
-        <span class="n">weaveLists</span><span class="p">(</span><span class="bp">first</span><span class="p">,</span> <span class="nb">Array</span><span class="p">(</span><span class="n">second</span><span class="p">.</span><span class="bp">dropFirst</span><span class="p">()),</span> <span class="p">&amp;</span><span class="n">results</span><span class="p">,</span> <span class="n">prefixWithSecond</span><span class="p">)</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">prefixWithSecond</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kr">prefix</span>
+<span class="w">        </span><span class="n">prefixWithSecond</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">second</span><span class="p">.</span><span class="bp">first</span><span class="p">!)</span>
+<span class="w">        </span><span class="n">weaveLists</span><span class="p">(</span><span class="bp">first</span><span class="p">,</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="n">second</span><span class="p">.</span><span class="bp">dropFirst</span><span class="p">()),</span><span class="w"> </span><span class="p">&amp;</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">prefixWithSecond</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>

@@ -7309,6 +7309,8 @@
       
         
       
+        
+      
     
     
       
@@ -79112,6 +79114,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3415/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3415. Find Products with Three Consecutive Digits 🔒
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -86421,33 +86444,33 @@ taskManager.execTop(); // 返回 5 。执行用户 5 的任务 105 。</div>
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">sortedcontainers</span> <span class="kn">import</span> <span class="n">SortedList</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sortedcontainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SortedList</span>
 
 
-<span class="k">class</span> <span class="nc">TaskManager</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskManager</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">st</span> <span class="o">=</span> <span class="n">SortedList</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="n">task</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">taskId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">userId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">taskId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">taskId</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">userId</span><span class="p">,</span> <span class="n">priority</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="o">-</span><span class="n">priority</span><span class="p">,</span> <span class="o">-</span><span class="n">taskId</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">newPriority</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskId</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">newPriority</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">userId</span><span class="p">,</span> <span class="n">priority</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">taskId</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">discard</span><span class="p">((</span><span class="o">-</span><span class="n">priority</span><span class="p">,</span> <span class="o">-</span><span class="n">taskId</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">taskId</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">userId</span><span class="p">,</span> <span class="n">newPriority</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="o">-</span><span class="n">newPriority</span><span class="p">,</span> <span class="o">-</span><span class="n">taskId</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">rmv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskId</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rmv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskId</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">priority</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">taskId</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">taskId</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="o">-</span><span class="n">priority</span><span class="p">,</span> <span class="o">-</span><span class="n">taskId</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">execTop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execTop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">st</span><span class="p">:</span>
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
         <span class="n">taskId</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">st</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
