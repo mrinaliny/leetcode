@@ -7311,6 +7311,8 @@
       
         
       
+        
+      
     
     
       
@@ -79135,6 +79137,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3416/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3416. Subsequences with a Unique Middle Mode II 🔒
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -86400,17 +86423,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：判断不重叠的情况</h3>
-<p>我们记矩形 $rec1$ 的坐标点为 $(x_1, y_1, x_2, y_2)$，矩形 $rec2$ 的坐标点为 $(x_3, y_3, x_4, y_4)$。</p>
-<p>那么当满足以下任一条件时，矩形 $rec1$ 和 $rec2$ 不重叠：</p>
+<p>我们记矩形 $\text{rec1}$ 的坐标点为 $(x_1, y_1, x_2, y_2)$，矩形 $\text{rec2}$ 的坐标点为 $(x_3, y_3, x_4, y_4)$。</p>
+<p>那么当满足以下任一条件时，矩形 $\text{rec1}$ 和 $\text{rec2}$ 不重叠：</p>
 <ul>
-<li>满足 $y_3 \geq y_2$，即 $rec2$ 在 $rec1$ 的上方；</li>
-<li>满足 $y_4 \leq y_1$，即 $rec2$ 在 $rec1$ 的下方；</li>
-<li>满足 $x_3 \geq x_2$，即 $rec2$ 在 $rec1$ 的右方；</li>
-<li>满足 $x_4 \leq x_1$，即 $rec2$ 在 $rec1$ 的左方。</li>
+<li>满足 $y_3 \geq y_2$，即 $\text{rec2}$ 在 $\text{rec1}$ 的上方；</li>
+<li>满足 $y_4 \leq y_1$，即 $\text{rec2}$ 在 $\text{rec1}$ 的下方；</li>
+<li>满足 $x_3 \geq x_2$，即 $\text{rec2}$ 在 $\text{rec1}$ 的右方；</li>
+<li>满足 $x_4 \leq x_1$，即 $\text{rec2}$ 在 $\text{rec1}$ 的左方。</li>
 </ul>
-<p>当以上条件都不满足时，矩形 $rec1$ 和 $rec2$ 重叠。</p>
+<p>当以上条件都不满足时，矩形 $\text{rec1}$ 和 $\text{rec2}$ 重叠。</p>
 <p>时间复杂度 $O(1)$，空间复杂度 $O(1)$。</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -86467,6 +86490,18 @@
 <span class="w">    </span><span class="nx">x1</span><span class="p">,</span><span class="w"> </span><span class="nx">y1</span><span class="p">,</span><span class="w"> </span><span class="nx">x2</span><span class="p">,</span><span class="w"> </span><span class="nx">y2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rec1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">rec1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="nx">rec1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="nx">rec1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="w">    </span><span class="nx">x3</span><span class="p">,</span><span class="w"> </span><span class="nx">y3</span><span class="p">,</span><span class="w"> </span><span class="nx">x4</span><span class="p">,</span><span class="w"> </span><span class="nx">y4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rec2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">rec2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="nx">rec2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="nx">rec2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">!(</span><span class="nx">y3</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">y2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">y4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">y1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">x3</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">x2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">x4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">x1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">isRectangleOverlap</span><span class="p">(</span><span class="nx">rec1</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[],</span><span class="w"> </span><span class="nx">rec2</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">x1</span><span class="p">,</span><span class="w"> </span><span class="nx">y1</span><span class="p">,</span><span class="w"> </span><span class="nx">x2</span><span class="p">,</span><span class="w"> </span><span class="nx">y2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rec1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">x3</span><span class="p">,</span><span class="w"> </span><span class="nx">y3</span><span class="p">,</span><span class="w"> </span><span class="nx">x4</span><span class="p">,</span><span class="w"> </span><span class="nx">y4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">rec2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="nx">y3</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">y2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">y4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">y1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">x3</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">x2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">x4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">x1</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
