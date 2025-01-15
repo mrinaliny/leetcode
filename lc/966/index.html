@@ -86563,10 +86563,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表</h3>
-<p>遍历 <code>wordlist</code>，将单词按照大小写不敏感、元音不敏感的规则分别存入哈希表 <code>low</code> 和 <code>pat</code> 中，其中 <code>low</code> 的键为单词的小写形式，<code>pat</code> 的键为将单词的元音字母替换为 <code>*</code> 后的字符串，值为单词本身。用哈希表 <code>s</code> 存储 <code>wordlist</code> 中的单词。</p>
-<p>遍历 <code>queries</code>，对于每个单词 <code>q</code>，如果 <code>q</code> 在 <code>s</code> 中，说明 <code>q</code> 在 <code>wordlist</code> 中，直接将 <code>q</code> 加入答案数组 <code>ans</code> 中；否则，如果 <code>q</code> 的小写形式在 <code>low</code> 中，说明 <code>q</code> 在 <code>wordlist</code> 中，且大小写不敏感，将 <code>low[q.lower()]</code> 加入答案数组 <code>ans</code> 中；否则，如果将 <code>q</code> 的元音字母替换为 <code>*</code> 后的字符串在 <code>pat</code> 中，说明 <code>q</code> 在 <code>wordlist</code> 中，且元音不敏感，将 <code>pat[f(q)]</code> 加入答案数组 <code>ans</code> 中；否则，说明 <code>q</code> 在 <code>wordlist</code> 中，且大小写和元音都不敏感，将空字符串加入答案数组 <code>ans</code> 中。</p>
-<p>最后返回答案数组 <code>ans</code> 即可。</p>
-<p>时间复杂度 $O(n+m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为 <code>wordlist</code> 和 <code>queries</code> 的长度。</p>
+<p>我们遍历 $\textit{wordlist}$，将单词按照大小写不敏感、元音不敏感的规则分别存入哈希表 $\textit{low}$ 和 $\textit{pat}$ 中，其中 $\textit{low}$ 的键为单词的小写形式，$\textit{pat}$ 的键为将单词的元音字母替换为 <code>*</code> 后的字符串，值为单词本身。用哈希表 $\textit{s}$ 存储 $\textit{wordlist}$ 中的单词。</p>
+<p>遍历 $\textit{queries}$，对于每个单词 $\textit{q}$，如果 $\textit{q}$ 在 $\textit{s}$ 中，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，直接将 $\textit{q}$ 加入答案数组 $\textit{ans}$ 中；否则，如果 $\textit{q}$ 的小写形式在 $\textit{low}$ 中，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，且大小写不敏感，将 $\textit{low}[q.\text{lower}()]$ 加入答案数组 $\textit{ans}$ 中；否则，如果将 $\textit{q}$ 的元音字母替换为 <code>*</code> 后的字符串在 $\textit{pat}$ 中，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，且元音不敏感，将 $\textit{pat}[f(q)]$ 加入答案数组 $\textit{ans}$ 中；否则，说明 $\textit{q}$ 在 $\textit{wordlist}$ 中，且大小写和元音都不敏感，将空字符串加入答案数组 $\textit{ans}$ 中。</p>
+<p>最后返回答案数组 $\textit{ans}$ 即可。</p>
+<p>时间复杂度 $O(n + m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为 $\textit{wordlist}$ 和 $\textit{queries}$ 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

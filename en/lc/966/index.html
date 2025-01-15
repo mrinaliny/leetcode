@@ -27656,9 +27656,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-hash-table" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Hash Table
     </span>
   </a>
   
@@ -81955,7 +81955,11 @@
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-hash-table">Solution 1: Hash Table</h3>
+<p>We traverse the $\textit{wordlist}$ and store the words in hash tables $\textit{low}$ and $\textit{pat}$ according to case-insensitive and vowel-insensitive rules, respectively. The key of $\textit{low}$ is the lowercase form of the word, and the key of $\textit{pat}$ is the string obtained by replacing the vowels of the word with <code>*</code>, with the value being the word itself. We use the hash table $\textit{s}$ to store the words in $\textit{wordlist}$.</p>
+<p>We traverse $\textit{queries}$, for each word $\textit{q}$, if $\textit{q}$ is in $\textit{s}$, it means $\textit{q}$ is in $\textit{wordlist}$, and we directly add $\textit{q}$ to the answer array $\textit{ans}$; otherwise, if the lowercase form of $\textit{q}$ is in $\textit{low}$, it means $\textit{q}$ is in $\textit{wordlist}$ and is case-insensitive, and we add $\textit{low}[q.\text{lower}()]$ to the answer array $\textit{ans}$; otherwise, if the string obtained by replacing the vowels of $\textit{q}$ with <code>*</code> is in $\textit{pat}$, it means $\textit{q}$ is in $\textit{wordlist}$ and is vowel-insensitive, and we add $\textit{pat}[f(q)]$ to the answer array $\textit{ans}$; otherwise, it means $\textit{q}$ is not in $\textit{wordlist}$, and we add an empty string to the answer array $\textit{ans}$.</p>
+<p>Finally, we return the answer array $\textit{ans}$.</p>
+<p>The time complexity is $O(n + m)$, and the space complexity is $O(n)$, where $n$ and $m$ are the lengths of $\textit{wordlist}$ and $\textit{queries}$, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

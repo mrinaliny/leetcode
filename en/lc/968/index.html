@@ -27698,9 +27698,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-dynamic-programming-tree-dp" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Dynamic Programming (Tree DP)
     </span>
   </a>
   
@@ -81938,7 +81938,24 @@
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-dynamic-programming-tree-dp">Solution 1: Dynamic Programming (Tree DP)</h3>
+<p>For each node, we define three states:</p>
+<ul>
+<li><code>a</code>: The current node has a camera</li>
+<li><code>b</code>: The current node does not have a camera, but is monitored by its children</li>
+<li><code>c</code>: The current node does not have a camera and is not monitored by its children</li>
+</ul>
+<p>Next, we design a function $dfs(root)$, which will return an array of length 3, representing the minimum number of cameras in the subtree rooted at <code>root</code> for the three states. The answer is $\min(dfs(root)[0], dfs(root)[1])$.</p>
+<p>The calculation process of the function $dfs(root)$ is as follows:</p>
+<p>If <code>root</code> is null, return $[inf, 0, 0]$, where <code>inf</code> represents a very large number, used to indicate an impossible situation.</p>
+<p>Otherwise, we recursively calculate the left and right subtrees of <code>root</code>, obtaining $[la, lb, lc]$ and $[ra, rb, rc]$ respectively.</p>
+<ul>
+<li>If the current node has a camera, then its left and right children must be in a monitored state, i.e., $a = \min(la, lb, lc) + \min(ra, rb, rc) + 1$.</li>
+<li>If the current node does not have a camera but is monitored by its children, then one or both of the children must have a camera, i.e., $b = \min(la + rb, lb + ra, la + ra)$.</li>
+<li>If the current node does not have a camera and is not monitored by its children, then the children must be monitored by their children, i.e., $c = lb + rb$.</li>
+</ul>
+<p>Finally, we return $[a, b, c]$.</p>
+<p>The time complexity is $O(n)$, and the space complexity is $O(n)$, where $n$ is the number of nodes in the binary tree.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
