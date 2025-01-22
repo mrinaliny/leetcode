@@ -53378,9 +53378,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-traversal-and-counting" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Traversal and Counting
     </span>
   </a>
   
@@ -82151,8 +82151,12 @@ target = 2 has the maximum number of occurrences following an occurrence of key,
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">PHP</label></div>
+<h3 id="solution-1-traversal-and-counting">Solution 1: Traversal and Counting</h3>
+<p>We use a hash table or an array $\textit{cnt}$ to record the number of occurrences of each $\textit{target}$, and use a variable $\textit{mx}$ to maintain the maximum number of occurrences of $\textit{target}$. Initially, $\textit{mx} = 0$.</p>
+<p>Traverse the array $\textit{nums}$. If $\textit{nums}[i] = \textit{key}$, increment the count of $\textit{nums}[i + 1]$ in $\textit{cnt}[\textit{nums}[i + 1]]$. If $\textit{mx} \lt \textit{cnt}[\textit{nums}[i + 1]]$, update $\textit{mx} = \textit{cnt}[\textit{nums}[i + 1]]$ and update the answer $\textit{ans} = \textit{nums}[i + 1]$.</p>
+<p>After the traversal, return the answer $\textit{ans}$.</p>
+<p>The time complexity is $O(n)$, and the space complexity is $O(M)$. Here, $n$ and $M$ are the length of the array $\textit{nums}$ and the maximum value of the elements in the array $\textit{nums}$, respectively.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -82287,11 +82291,9 @@ target = 2 has the maximum number of occurrences following an occurrence of key,
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">mostFrequent</span><span class="p">(</span><span class="nx">nums</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[],</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">cnt</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="mf">1001</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">mostFrequent</span><span class="p">(</span><span class="nx">nums</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[],</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">cnt</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">mx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">];</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">mx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">++</span><span class="nx">cnt</span><span class="p">[</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">]])</span><span class="w"> </span><span class="p">{</span>
@@ -82322,28 +82324,58 @@ target = 2 has the maximum number of occurrences following an occurrence of key,
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="x">class Solution {</span>
-<span class="x">    /**</span>
-<span class="x">     * @param Integer[] $nums</span>
-<span class="x">     * @param Integer $key</span>
-<span class="x">     * @return Integer</span>
-<span class="x">     */</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {number[]} nums</span>
+<span class="cm"> * @param {number} key</span>
+<span class="cm"> * @return {number}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">mostFrequent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(...</span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">[</span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">mx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">mx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">++</span><span class="nx">cnt</span><span class="p">[</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">]])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">cnt</span><span class="p">[</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">]];</span>
+<span class="w">                </span><span class="nx">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">];</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="x">class Solution {</span>
 <span class="x">    function mostFrequent($nums, $key) {</span>
-<span class="x">        $max = $maxNum = 0;</span>
-<span class="x">        for ($i = 0; $i &lt; count($nums) - 1; $i++) {</span>
-<span class="x">            if ($nums[$i] == $key) {</span>
-<span class="x">                $hashtable[$nums[$i + 1]] += 1;</span>
-<span class="x">                $tmp = $hashtable[$nums[$i + 1]];</span>
-<span class="x">                if ($tmp &gt; $max) {</span>
-<span class="x">                    $max = $tmp;</span>
-<span class="x">                    $maxNum = $nums[$i + 1];</span>
+<span class="x">        $cnt = array_fill(0, max($nums) + 1, 0);</span>
+<span class="x">        $ans = 0;</span>
+<span class="x">        $mx = 0;</span>
+<span class="x">        for ($i = 0; $i &lt; count($nums) - 1; ++$i) {</span>
+<span class="x">            if ($nums[$i] === $key) {</span>
+<span class="x">                $cnt[$nums[$i + 1]]++;</span>
+<span class="x">                if ($mx &lt; $cnt[$nums[$i + 1]]) {</span>
+<span class="x">                    $mx = $cnt[$nums[$i + 1]];</span>
+<span class="x">                    $ans = $nums[$i + 1];</span>
 <span class="x">                }</span>
 <span class="x">            }</span>
 <span class="x">        }</span>
-<span class="x">        return $maxNum;</span>
+<span class="x">        return $ans;</span>
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div></td></tr></table></div>
