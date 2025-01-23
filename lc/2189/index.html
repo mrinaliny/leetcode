@@ -86754,12 +86754,12 @@
 
 <h3 id="_3">方法一：记忆化搜索</h3>
 <p>我们注意到，每一层的卡片数量为 $3 \times k + 2$，并且每一层的卡片数量都不相同。因此，问题可以转化为：整数 $n$ 可以由多少种 $3 \times k + 2$ 的数相加得到。这是一个经典的背包问题，可以使用记忆化搜索解决。</p>
-<p>我们设计一个函数 $dfs(n, k)$，表示当前剩余卡片数量为 $n$，且当前层为 $k$ 时，可以构建多少不同的纸牌屋。那么答案就是 $dfs(n, 0)$。</p>
-<p>函数 $dfs(n, k)$ 的执行逻辑如下：</p>
+<p>我们设计一个函数 $\text{dfs}(n, k)$，表示当前剩余卡片数量为 $n$，且当前层为 $k$ 时，可以构建多少不同的纸牌屋。那么答案就是 $\text{dfs}(n, 0)$。</p>
+<p>函数 $\text{dfs}(n, k)$ 的执行逻辑如下：</p>
 <ul>
 <li>如果 $3 \times k + 2 \gt n$，那么当前层无法放置任何卡片，返回 $0$；</li>
 <li>如果 $3 \times k + 2 = n$，那么当前层可以放置卡片，放置完毕后，整个纸牌屋已经构建完毕，返回 $1$；</li>
-<li>否则，我们可以选择不放置卡片，或者放置卡片。如果选择不放置卡片，那么剩余卡片数量不变，层数增加 $1$，即 $dfs(n, k + 1)$；如果选择放置卡片，那么剩余卡片数量减少 $3 \times k + 2$，层数增加 $1$，即 $dfs(n - (3 \times k + 2), k + 1)$。两者相加即为答案。</li>
+<li>否则，我们可以选择不放置卡片，或者放置卡片。如果选择不放置卡片，那么剩余卡片数量不变，层数增加 $1$，即 $\text{dfs}(n, k + 1)$；如果选择放置卡片，那么剩余卡片数量减少 $3 \times k + 2$，层数增加 $1$，即 $\text{dfs}(n - (3 \times k + 2), k + 1)$。两者相加即为答案。</li>
 </ul>
 <p>过程中，我们可以使用记忆化搜索，避免重复计算。</p>
 <p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 为卡片数量。</p>
@@ -86863,7 +86863,7 @@
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">houseOfCards</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">        </span><span class="n">memset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
-<span class="w">        </span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">dfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">this</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dfs</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>

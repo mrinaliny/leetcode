@@ -53357,9 +53357,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-memoization-search" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Memoization Search
     </span>
   </a>
   
@@ -82152,7 +82152,17 @@ The third house of cards uses 2 cards.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
+<p>We notice that the number of cards in each layer is $3 \times k + 2$, and the number of cards in each layer is different. Therefore, the problem can be transformed into: how many ways can the integer $n$ be expressed as the sum of numbers of the form $3 \times k + 2$. This is a classic knapsack problem that can be solved using memoization search.</p>
+<p>We design a function $\text{dfs}(n, k)$, which represents the number of ways to build different houses of cards when the remaining number of cards is $n$ and the current layer is $k$. The answer is $\text{dfs}(n, 0)$.</p>
+<p>The execution logic of the function $\text{dfs}(n, k)$ is as follows:</p>
+<ul>
+<li>If $3 \times k + 2 \gt n$, then the current layer cannot place any cards, return $0$;</li>
+<li>If $3 \times k + 2 = n$, then the current layer can place cards, and after placing them, the entire house of cards is completed, return $1$;</li>
+<li>Otherwise, we can choose not to place cards or to place cards. If we choose not to place cards, the remaining number of cards does not change, and the number of layers increases by $1$, i.e., $\text{dfs}(n, k + 1)$. If we choose to place cards, the remaining number of cards decreases by $3 \times k + 2$, and the number of layers increases by $1$, i.e., $\text{dfs}(n - (3 \times k + 2), k + 1)$. The sum of these two cases is the answer.</li>
+</ul>
+<p>During the process, we can use memoization to avoid repeated calculations.</p>
+<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the number of cards.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -82253,7 +82263,7 @@ The third house of cards uses 2 cards.
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">houseOfCards</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">        </span><span class="n">memset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
-<span class="w">        </span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">dfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">this</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dfs</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
