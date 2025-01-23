@@ -53126,9 +53126,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-greedy" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Greedy
     </span>
   </a>
   
@@ -82138,7 +82138,7 @@ Thus, we return an empty array.
 <pre>
 <strong>Input:</strong> finalSum = 28
 <strong>Output:</strong> [6,8,2,12]
-<strong>Explanation:</strong> The following are valid splits: (2 + 26), (6 + 8 + 2 + 12), and (4 + 24). 
+<strong>Explanation:</strong> The following are valid splits: (2 + 26), (6 + 8 + 2 + 12), and (4 + 24).
 (6 + 8 + 2 + 12) has the maximum number of integers, which is 4. Thus, we return [6,8,2,12].
 Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
 </pre>
@@ -82155,8 +82155,11 @@ Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
+<h3 id="solution-1-greedy">Solution 1: Greedy</h3>
+<p>If $\textit{finalSum}$ is odd, it cannot be split into the sum of several distinct positive even integers, so we directly return an empty array.</p>
+<p>Otherwise, we can greedily split $\textit{finalSum}$ in the order of $2, 4, 6, \cdots$, until $\textit{finalSum}$ can no longer be split into a different positive even integer. At this point, we add the remaining $\textit{finalSum}$ to the last positive even integer.</p>
+<p>The time complexity is $O(\sqrt{\textit{finalSum}})$, and ignoring the space consumption of the answer array, the space complexity is $O(1)$.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -82172,13 +82175,13 @@ Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
 <span class="normal">11</span>
 <span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximumEvenSplit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">finalSum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">finalSum</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">finalSum</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">finalSum</span><span class="p">:</span>
-            <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="n">finalSum</span> <span class="o">-=</span> <span class="n">i</span>
+            <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
         <span class="n">ans</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">finalSum</span>
         <span class="k">return</span> <span class="n">ans</span>
@@ -82227,11 +82230,15 @@ Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">maximumEvenSplit</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">finalSum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">finalSum</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">finalSum</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">finalSum</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <span class="w">            </span><span class="n">finalSum</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
@@ -82289,6 +82296,44 @@ Note that [10,2,4,12], [6,2,4,16], etc. are also accepted.
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">ans</span><span class="p">[</span><span class="nx">ans</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">finalSum</span><span class="p">;</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">impl</span><span class="w"> </span><span class="n">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">maximum_even_split</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">final_sum</span><span class="p">:</span><span class="w"> </span><span class="kt">i64</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">i64</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Vec</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">final_sum</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">final_sum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ans</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">final_sum</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">            </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">last</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ans</span><span class="p">.</span><span class="n">last_mut</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">*</span><span class="n">last</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">final_sum</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">ans</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
