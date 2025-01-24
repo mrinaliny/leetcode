@@ -47857,9 +47857,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#solution-1" class="md-nav__link">
+  <a href="#solution-1-case-analysis" class="md-nav__link">
     <span class="md-ellipsis">
-      Solution 1
+      Solution 1: Case Analysis
     </span>
   </a>
   
@@ -82198,7 +82198,18 @@ Bob wins because 9 + 3 + 2 + 9 = 5 + 9 + 2 + 7.
 <h2 id="solutions">Solutions</h2>
 <!-- solution:start -->
 
-<h3 id="solution-1">Solution 1</h3>
+<h3 id="solution-1-case-analysis">Solution 1: Case Analysis</h3>
+<p>If the number of <code>'?'</code> is odd, Alice will definitely win because she can choose to replace the last <code>'?'</code> with any digit, making the sum of the first half different from the sum of the second half.</p>
+<p>If the number of <code>'?'</code> is even, Alice will try to make the sums of the two halves different by placing $9$ in the half with the larger current sum and $0$ in the half with the smaller current sum. Bob, on the other hand, will try to make the sums equal by placing a digit in the other half that matches the digit Alice placed.</p>
+<p>As a result, all remaining even-numbered <code>'?'</code> will be concentrated in one half. Suppose the current difference between the sums of the two halves is $d$.</p>
+<p>Let's consider the case where there are two remaining <code>'?'</code> and the difference is $x$:</p>
+<ul>
+<li>If $x \lt 9$, Alice will definitely win because she can replace one of the <code>'?'</code> with $9$, making the sums of the two halves different.</li>
+<li>If $x \gt 9$, Alice will definitely win because she can replace one of the <code>'?'</code> with $0$, making the sums of the two halves different.</li>
+<li>If $x = 9$, Bob will definitely win. Suppose Alice replaces a digit with $a$, then Bob can replace the other <code>'?'</code> with $9 - a$, making the sums of the two halves equal.</li>
+</ul>
+<p>Therefore, if the difference between the sums of the two halves is $d = \frac{9 \times \textit{cnt}}{2}$, where $\textit{cnt}$ is the number of remaining <code>'?'</code>, Bob will definitely win; otherwise, Alice will definitely win.</p>
+<p>The time complexity is $O(n)$, where $n$ is the length of the string. The space complexity is $O(1)$.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
