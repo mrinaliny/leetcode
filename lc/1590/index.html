@@ -86786,13 +86786,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：前缀和 + 哈希表</h3>
-<p>我们可以先求出数组 $nums$ 所有元素之和模 $p$ 的值，记为 $k$。如果 $k$ 为 $0$，说明数组 $nums$ 所有元素之和就是 $p$ 的倍数，直接返回 $0$ 即可。</p>
+<p>我们可以先求出数组 $\textit{nums}$ 所有元素之和模 $p$ 的值，记为 $k$。如果 $k$ 为 $0$，说明数组 $\textit{nums}$ 所有元素之和就是 $p$ 的倍数，直接返回 $0$ 即可。</p>
 <p>如果 $k$ 不为 $0$，我们需要找到一个最短的子数组，使得删除该子数组后，剩余元素之和模 $p$ 的值为 $0$。</p>
-<p>我们可以遍历数组 $nums$，维护当前的前缀和模 $p$ 的值，记为 $cur$。用哈希表 $last$ 记录每个前缀和模 $p$ 的值最后一次出现的位置。</p>
-<p>如果当前存在一个以 $nums[i]$ 结尾的子数组，使得删除该子数组后，剩余元素之和模 $p$ 的值为 $0$。也就是说，我们需要找到此前的一个前缀和模 $p$ 的值为 $target$ 的位置 $j$，使得 $(target + k - cur) \bmod p = 0$。如果找到，我们就可以将 $j + 1$ 到 $i$ 这一段闭区间子数组 $nums[j+1,..i]$ 删除，使得剩余元素之和模 $p$ 的值为 $0$。</p>
-<p>因此，如果存在一个 $target = (cur - k + p) \bmod p$，那么我们可以更新答案为 $\min(ans, i - j)$。接下来，我们更新 $last[cur]$ 的值为 $i$。继续遍历数组 $nums$，直到遍历结束，即可得到答案。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
+<p>我们可以遍历数组 $\textit{nums}$，维护当前的前缀和模 $p$ 的值，记为 $cur$。用哈希表 $last$ 记录每个前缀和模 $p$ 的值最后一次出现的位置。</p>
+<p>如果当前存在一个以 $\textit{nums}[i]$ 结尾的子数组，使得删除该子数组后，剩余元素之和模 $p$ 的值为 $0$。也就是说，我们需要找到此前的一个前缀和模 $p$ 的值为 $target$ 的位置 $j$，使得 $(target + k - cur) \bmod p = 0$。如果找到，我们就可以将 $j + 1$ 到 $i$ 这一段闭区间子数组 $\textit{nums}[j+1,..i]$ 删除，使得剩余元素之和模 $p$ 的值为 $0$。</p>
+<p>因此，如果存在一个 $target = (cur - k + p) \bmod p$，那么我们可以更新答案为 $\min(ans, i - j)$。接下来，我们更新 $last[cur]$ 的值为 $i$。继续遍历数组 $\textit{nums}$，直到遍历结束，即可得到答案。</p>
+<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
@@ -87032,6 +87032,136 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="nx">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">ans</span><span class="p">;</span>
 <span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">std</span><span class="p">::</span><span class="n">collections</span><span class="p">::</span><span class="n">HashMap</span><span class="p">;</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">min_subarray</span><span class="p">(</span><span class="n">nums</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nums</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HashMap</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
+<span class="w">        </span><span class="n">last</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="n">len</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="n">n</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">cur</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">prev_idx</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">last</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ans</span><span class="p">.</span><span class="n">min</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">prev_idx</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">last</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">ans</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ans</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @param {number[]} nums</span>
+<span class="cm"> * @param {number} p</span>
+<span class="cm"> * @return {number}</span>
+<span class="cm"> */</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">minSubarray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">p</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">k</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">last</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">nums</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">p</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">cur</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">p</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">last</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">target</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">last</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">ans</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">j</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">last</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ans</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">ans</span><span class="p">;</span>
+<span class="p">};</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
