@@ -86860,10 +86860,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表</h3>
-<p>我们用哈希表 $d$ 存放最近遍历到的数以及对应的下标。</p>
-<p>遍历数组 <code>nums</code>，对于当前遍历到的元素 $nums[i]$，如果在哈希表中存在，并且下标与当前元素的下标之差不超过 $k$，则返回 <code>true</code>，否则将当前元素加入哈希表中。</p>
-<p>遍历结束后，返回 <code>false</code>。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 <code>nums</code> 的长度。</p>
+<p>我们用一个哈希表 $\textit{d}$ 存放最近遍历到的数以及对应的下标。</p>
+<p>遍历数组 $\textit{nums}$，对于当前遍历到的元素 $\textit{nums}[i]$，如果在哈希表中存在，并且下标与当前元素的下标之差不超过 $k$，则返回 $\text{true}$，否则将当前元素加入哈希表中。</p>
+<p>遍历结束后，返回 $\text{false}$。</p>
+<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label><label for="__tabbed_1_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87057,21 +87057,19 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="x">class Solution {</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="x">class Solution {</span>
 <span class="x">    /**</span>
 <span class="x">     * @param Integer[] $nums</span>
 <span class="x">     * @param Integer $k</span>
 <span class="x">     * @return Boolean</span>
 <span class="x">     */</span>
 <span class="x">    function containsNearbyDuplicate($nums, $k) {</span>
-<span class="x">        $hashtable = [];</span>
-<span class="x">        for ($i = 0; $i &lt; count($nums); $i++) {</span>
-<span class="x">            $tmp = $nums[$i];</span>
-<span class="x">            if (array_key_exists($tmp, $hashtable) &amp;&amp; $k &gt;= $i - $hashtable[$tmp]) {</span>
+<span class="x">        $d = [];</span>
+<span class="x">        for ($i = 0; $i &lt; count($nums); ++$i) {</span>
+<span class="x">            if (array_key_exists($nums[$i], $d) &amp;&amp; $i - $d[$nums[$i]] &lt;= $k) {</span>
 <span class="x">                return true;</span>
 <span class="x">            }</span>
-<span class="x">            $hashtable[$tmp] = $i;</span>
+<span class="x">            $d[$nums[$i]] = $i;</span>
 <span class="x">        }</span>
 <span class="x">        return false;</span>
 <span class="x">    }</span>
