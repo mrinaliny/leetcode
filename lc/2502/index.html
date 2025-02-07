@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90886,10 +90884,10 @@ loc.freeMemory(7); // 释放 mID 为 7 的所有内存单元。内存数组保�
 
 <h3 id="_3">方法一：暴力模拟</h3>
 <p>题目数据范围不大，可以直接用数组模拟内存空间。</p>
-<p>初始化时，将数组中的每个元素置为 $0$，表示空闲。</p>
+<p>初始化时，将数组中的每个元素置为 <span class="arithmatex">\(0\)</span>，表示空闲。</p>
 <p>当调用 <code>allocate</code> 方法时，遍历数组，找到连续的 <code>size</code> 个空闲内存单元，将其置为 <code>mID</code>，并返回第一个下标。</p>
-<p>当调用 <code>free</code> 方法时，遍历数组，将所有等于 <code>mID</code> 的内存单元置为 $0$，表示空闲。</p>
-<p>时间复杂度 $O(n \times q)$，空间复杂度 $O(n)$，其中 $n$ 和 $q$ 分别为内存空间的大小和方法调用的次数。</p>
+<p>当调用 <code>free</code> 方法时，遍历数组，将所有等于 <code>mID</code> 的内存单元置为 <span class="arithmatex">\(0\)</span>，表示空闲。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times q)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(q\)</span> 分别为内存空间的大小和方法调用的次数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91220,7 +91218,7 @@ loc.freeMemory(7); // 释放 mID 为 7 的所有内存单元。内存数组保�
 <p>我们可以用有序集合维护所有已分配的内存单元的起始下标和结束下标，其中起始下标为键，结束下标为值；另外用哈希表维护 <code>mID</code> 和其对应的内存单元的起始下标。</p>
 <p>当调用 <code>allocate</code> 方法时，遍历有序集合，找到第一个长度大于等于 <code>size</code> 的空闲区间，将其分配给 <code>mID</code>，并更新有序集合。然后将 <code>mID</code> 和其对应的内存单元的起始下标加入哈希表。</p>
 <p>当调用 <code>free</code> 方法时，从哈希表中找到 <code>mID</code> 对应的内存单元的起始下标，然后将其从有序集合中删除，再将 <code>mID</code> 从哈希表中删除。</p>
-<p>时间复杂度 $O(q \log n)$，空间复杂度 $O(n)$，其中 $n$ 和 $q$ 分别为内存空间的大小和方法调用的次数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(q \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(q\)</span> 分别为内存空间的大小和方法调用的次数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91788,11 +91786,9 @@ loc.freeMemory(7); // 释放 mID 为 7 的所有内存单元。内存数组保�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

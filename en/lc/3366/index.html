@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86067,17 +86065,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>For convenience, we denote the given $k$ as $d$.</p>
-<p>Next, we define $f[i][j][k]$ to represent the minimum sum of the first $i$ numbers using $j$ operations of type 1 and $k$ operations of type 2. Initially, $f[0][0][0] = 0$, and the rest $f[i][j][k] = +\infty$.</p>
-<p>Consider how to transition the state for $f[i][j][k]$. We can enumerate the $i$-th number $x$ and then consider the impact of $x$ on $f[i][j][k]$:</p>
+<p>For convenience, we denote the given <span class="arithmatex">\(k\)</span> as <span class="arithmatex">\(d\)</span>.</p>
+<p>Next, we define <span class="arithmatex">\(f[i][j][k]\)</span> to represent the minimum sum of the first <span class="arithmatex">\(i\)</span> numbers using <span class="arithmatex">\(j\)</span> operations of type 1 and <span class="arithmatex">\(k\)</span> operations of type 2. Initially, <span class="arithmatex">\(f[0][0][0] = 0\)</span>, and the rest <span class="arithmatex">\(f[i][j][k] = +\infty\)</span>.</p>
+<p>Consider how to transition the state for <span class="arithmatex">\(f[i][j][k]\)</span>. We can enumerate the <span class="arithmatex">\(i\)</span>-th number <span class="arithmatex">\(x\)</span> and then consider the impact of <span class="arithmatex">\(x\)</span> on <span class="arithmatex">\(f[i][j][k]\)</span>:</p>
 <ul>
-<li>If $x$ does not use operation 1 or operation 2, then $f[i][j][k] = f[i-1][j][k] + x$;</li>
-<li>If $j \gt 0$, then we can use operation 1. In this case, $f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k] + \lceil \frac{x+1}{2} \rceil)$;</li>
-<li>If $k \gt 0$ and $x \geq d$, then we can use operation 2. In this case, $f[i][j][k] = \min(f[i][j][k], f[i-1][j][k-1] + (x - d))$;</li>
-<li>If $j \gt 0$ and $k \gt 0$, then we can use both operation 1 and operation 2. If we use operation 1 first, then $x$ becomes $\lceil \frac{x+1}{2} \rceil$. If $x \geq d$, then we can use operation 2. In this case, $f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x+1}{2} \rceil - d)$. If we use operation 2 first, then $x$ becomes $x - d$. If $x \geq d$, then we can use operation 1. In this case, $f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x-d+1}{2} \rceil)$.</li>
+<li>If <span class="arithmatex">\(x\)</span> does not use operation 1 or operation 2, then <span class="arithmatex">\(f[i][j][k] = f[i-1][j][k] + x\)</span>;</li>
+<li>If <span class="arithmatex">\(j \gt 0\)</span>, then we can use operation 1. In this case, <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k] + \lceil \frac{x+1}{2} \rceil)\)</span>;</li>
+<li>If <span class="arithmatex">\(k \gt 0\)</span> and <span class="arithmatex">\(x \geq d\)</span>, then we can use operation 2. In this case, <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j][k-1] + (x - d))\)</span>;</li>
+<li>If <span class="arithmatex">\(j \gt 0\)</span> and <span class="arithmatex">\(k \gt 0\)</span>, then we can use both operation 1 and operation 2. If we use operation 1 first, then <span class="arithmatex">\(x\)</span> becomes <span class="arithmatex">\(\lceil \frac{x+1}{2} \rceil\)</span>. If <span class="arithmatex">\(x \geq d\)</span>, then we can use operation 2. In this case, <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x+1}{2} \rceil - d)\)</span>. If we use operation 2 first, then <span class="arithmatex">\(x\)</span> becomes <span class="arithmatex">\(x - d\)</span>. If <span class="arithmatex">\(x \geq d\)</span>, then we can use operation 1. In this case, <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x-d+1}{2} \rceil)\)</span>.</li>
 </ul>
-<p>The final answer is $\min_{j=0}^{op1} \min_{k=0}^{op2} f[n][j][k]$. If it is $+\infty$, then output $-1$.</p>
-<p>The time complexity is $O(n \times \textit{op1} \times \textit{op2})$, and the space complexity is $O(n \times \textit{op1} \times \textit{op2})$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>The final answer is <span class="arithmatex">\(\min_{j=0}^{op1} \min_{k=0}^{op2} f[n][j][k]\)</span>. If it is <span class="arithmatex">\(+\infty\)</span>, then output <span class="arithmatex">\(-1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \textit{op1} \times \textit{op2})\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times \textit{op1} \times \textit{op2})\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86717,11 +86715,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

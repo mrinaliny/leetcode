@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86054,69 +86052,69 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-mathematics">Solution 1: Mathematics</h3>
-<p>Let $f(n)$ represent the probability that the $n$th passenger will sit in their own seat when there are $n$ passengers boarding. Consider from the simplest case:</p>
-<p>When $n=1$, there is only 1 passenger and 1 seat, so the first passenger can only sit in the first seat, $f(1)=1$;</p>
-<p>When $n=2$, there are 2 seats, each seat has a probability of 0.5 to be chosen by the first passenger. After the first passenger chooses a seat, the second passenger can only choose the remaining seat, so the second passenger has a probability of 0.5 to sit in their own seat, $f(2)=0.5$.</p>
-<p>When $n&gt;2$, how to calculate the value of $f(n)$? Consider the seat chosen by the first passenger, there are three cases.</p>
+<p>Let <span class="arithmatex">\(f(n)\)</span> represent the probability that the <span class="arithmatex">\(n\)</span>th passenger will sit in their own seat when there are <span class="arithmatex">\(n\)</span> passengers boarding. Consider from the simplest case:</p>
+<p>When <span class="arithmatex">\(n=1\)</span>, there is only 1 passenger and 1 seat, so the first passenger can only sit in the first seat, <span class="arithmatex">\(f(1)=1\)</span>;</p>
+<p>When <span class="arithmatex">\(n=2\)</span>, there are 2 seats, each seat has a probability of 0.5 to be chosen by the first passenger. After the first passenger chooses a seat, the second passenger can only choose the remaining seat, so the second passenger has a probability of 0.5 to sit in their own seat, <span class="arithmatex">\(f(2)=0.5\)</span>.</p>
+<p>When <span class="arithmatex">\(n&gt;2\)</span>, how to calculate the value of <span class="arithmatex">\(f(n)\)</span>? Consider the seat chosen by the first passenger, there are three cases.</p>
 <ul>
 <li>
-<p>The first passenger has a probability of $\frac{1}{n}$ to choose the first seat, then all passengers can sit in their own seats, so the probability of the $n$th passenger sitting in their own seat is 1.0.</p>
+<p>The first passenger has a probability of <span class="arithmatex">\(\frac{1}{n}\)</span> to choose the first seat, then all passengers can sit in their own seats, so the probability of the <span class="arithmatex">\(n\)</span>th passenger sitting in their own seat is 1.0.</p>
 </li>
 <li>
-<p>The first passenger has a probability of $\frac{1}{n}$ to choose the $n$th seat, then the second to the $(n-1)$th passengers can sit in their own seats, the $n$th passenger can only sit in the first seat, so the probability of the $n$th passenger sitting in their own seat is 0.0.</p>
+<p>The first passenger has a probability of <span class="arithmatex">\(\frac{1}{n}\)</span> to choose the <span class="arithmatex">\(n\)</span>th seat, then the second to the <span class="arithmatex">\((n-1)\)</span>th passengers can sit in their own seats, the <span class="arithmatex">\(n\)</span>th passenger can only sit in the first seat, so the probability of the <span class="arithmatex">\(n\)</span>th passenger sitting in their own seat is 0.0.</p>
 </li>
 <li>
-<p>The first passenger has a probability of $\frac{n-2}{n}$ to choose the remaining seats, each seat has a probability of $\frac{1}{n}$ to be chosen.
-    Suppose the first passenger chooses the $i$th seat, where $2 \le i \le n-1$, then the second to the $(i-1)$th passengers can sit in their own seats, the seats of the $i$th to the $n$th passengers are uncertain, the $i$th passenger will randomly choose from the remaining $n-(i-1)=n-i+1$ seats (including the first seat and the $(i+1)$th to the $n$th seats). Since the number of remaining passengers and seats is $n-i+1$, and 1 passenger will randomly choose a seat, the problem size is reduced from $n$ to $n-i+1$.</p>
+<p>The first passenger has a probability of <span class="arithmatex">\(\frac{n-2}{n}\)</span> to choose the remaining seats, each seat has a probability of <span class="arithmatex">\(\frac{1}{n}\)</span> to be chosen.
+    Suppose the first passenger chooses the <span class="arithmatex">\(i\)</span>th seat, where <span class="arithmatex">\(2 \le i \le n-1\)</span>, then the second to the <span class="arithmatex">\((i-1)\)</span>th passengers can sit in their own seats, the seats of the <span class="arithmatex">\(i\)</span>th to the <span class="arithmatex">\(n\)</span>th passengers are uncertain, the <span class="arithmatex">\(i\)</span>th passenger will randomly choose from the remaining <span class="arithmatex">\(n-(i-1)=n-i+1\)</span> seats (including the first seat and the <span class="arithmatex">\((i+1)\)</span>th to the <span class="arithmatex">\(n\)</span>th seats). Since the number of remaining passengers and seats is <span class="arithmatex">\(n-i+1\)</span>, and 1 passenger will randomly choose a seat, the problem size is reduced from <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(n-i+1\)</span>.</p>
 </li>
 </ul>
-<p>Combining the above three cases, we can get the recursive formula of $f(n)$:</p>
-<p>$$
+<p>Combining the above three cases, we can get the recursive formula of <span class="arithmatex">\(f(n)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
-f(n) &amp;= \frac{1}{n} \times 1.0 + \frac{1}{n} \times 0.0 + \frac{1}{n} \times \sum_{i=2}^{n-1} f(n-i+1) \
+f(n) &amp;= \frac{1}{n} \times 1.0 + \frac{1}{n} \times 0.0 + \frac{1}{n} \times \sum_{i=2}^{n-1} f(n-i+1) \\
 &amp;= \frac{1}{n}(1.0+\sum_{i=2}^{n-1} f(n-i+1))
 \end{aligned}
-$$</p>
-<p>In the above recursive formula, there are $n-2$ values of $i$, since the number of values of $i$ must be a non-negative integer, so the above recursive formula only holds when $n-2 \ge 0$ i.e., $n \ge 2$.</p>
-<p>If you directly use the above recursive formula to calculate the value of $f(n)$, the time complexity is $O(n^2)$, which cannot pass all test cases, so it needs to be optimized.</p>
-<p>Replace $n$ with $n-1$ in the above recursive formula, you can get the recursive formula:</p>
-<p>$$
+\]</div>
+<p>In the above recursive formula, there are <span class="arithmatex">\(n-2\)</span> values of <span class="arithmatex">\(i\)</span>, since the number of values of <span class="arithmatex">\(i\)</span> must be a non-negative integer, so the above recursive formula only holds when <span class="arithmatex">\(n-2 \ge 0\)</span> i.e., <span class="arithmatex">\(n \ge 2\)</span>.</p>
+<p>If you directly use the above recursive formula to calculate the value of <span class="arithmatex">\(f(n)\)</span>, the time complexity is <span class="arithmatex">\(O(n^2)\)</span>, which cannot pass all test cases, so it needs to be optimized.</p>
+<p>Replace <span class="arithmatex">\(n\)</span> with <span class="arithmatex">\(n-1\)</span> in the above recursive formula, you can get the recursive formula:</p>
+<div class="arithmatex">\[
 f(n-1) = \frac{1}{n-1}(1.0+\sum_{i=2}^{n-2} f(n-i))
-$$</p>
-<p>In the above recursive formula, there are $n-3$ values of $i$, and the above recursive formula only holds when $n-3 \ge 0$ i.e., $n \ge 3$.</p>
-<p>When $n \ge 3$, the above two recursive formulas can be written as follows:</p>
-<p>$$
+\]</div>
+<p>In the above recursive formula, there are <span class="arithmatex">\(n-3\)</span> values of <span class="arithmatex">\(i\)</span>, and the above recursive formula only holds when <span class="arithmatex">\(n-3 \ge 0\)</span> i.e., <span class="arithmatex">\(n \ge 3\)</span>.</p>
+<p>When <span class="arithmatex">\(n \ge 3\)</span>, the above two recursive formulas can be written as follows:</p>
+<div class="arithmatex">\[
 \begin{aligned}
-n \times f(n) &amp;= 1.0+\sum_{i=2}^{n-1} f(n-i+1) \
+n \times f(n) &amp;= 1.0+\sum_{i=2}^{n-1} f(n-i+1) \\
 (n-1) \times f(n-1) &amp;= 1.0+\sum_{i=2}^{n-2} f(n-i)
 \end{aligned}
-$$</p>
+\]</div>
 <p>Subtract the above two formulas:</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
-&amp;<sub>~</sub>~~ n \times f(n) - (n-1) \times f(n-1) \
-&amp;= (1.0+\sum_{i=2}^{n-1} f(n-i+1)) - (1.0+\sum_{i=2}^{n-2} f(n-i)) \
-&amp;= \sum_{i=2}^{n-1} f(n-i+1) - \sum_{i=2}^{n-2} f(n-i) \
-&amp;= f(2)+f(3)+...+f(n-1) - (f(2)+f(3)+...+f(n-2)) \
+&amp;~~~~~ n \times f(n) - (n-1) \times f(n-1) \\
+&amp;= (1.0+\sum_{i=2}^{n-1} f(n-i+1)) - (1.0+\sum_{i=2}^{n-2} f(n-i)) \\
+&amp;= \sum_{i=2}^{n-1} f(n-i+1) - \sum_{i=2}^{n-2} f(n-i) \\
+&amp;= f(2)+f(3)+...+f(n-1) - (f(2)+f(3)+...+f(n-2)) \\
 &amp;= f(n-1)
 \end{aligned}
-$$</p>
+\]</div>
 <p>After simplification, we get the simplified recursive formula:</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
-n \times f(n) &amp;= n \times f(n-1) \
+n \times f(n) &amp;= n \times f(n-1) \\
 f(n) &amp;= f(n-1)
 \end{aligned}
-$$</p>
-<p>Since we know that $f(1)=1$ and $f(2)=0.5$, therefore when $n \ge 3$, according to $f(n) = f(n-1)$, we know that for any positive integer $n$, $f(n)=0.5$. And since $f(2)=0.5$, therefore when $n \ge 2$, for any positive integer $n$, $f(n)=0.5$.</p>
-<p>From this, we can get the result of $f(n)$:</p>
-<p>$$
+\]</div>
+<p>Since we know that <span class="arithmatex">\(f(1)=1\)</span> and <span class="arithmatex">\(f(2)=0.5\)</span>, therefore when <span class="arithmatex">\(n \ge 3\)</span>, according to <span class="arithmatex">\(f(n) = f(n-1)\)</span>, we know that for any positive integer <span class="arithmatex">\(n\)</span>, <span class="arithmatex">\(f(n)=0.5\)</span>. And since <span class="arithmatex">\(f(2)=0.5\)</span>, therefore when <span class="arithmatex">\(n \ge 2\)</span>, for any positive integer <span class="arithmatex">\(n\)</span>, <span class="arithmatex">\(f(n)=0.5\)</span>.</p>
+<p>From this, we can get the result of <span class="arithmatex">\(f(n)\)</span>:</p>
+<div class="arithmatex">\[
 f(n) = \begin{cases}
-1.0, &amp; n = 1 \
+1.0, &amp; n = 1 \\
 0.5, &amp; n \ge 2
 \end{cases}
-$$</p>
-<p>The time complexity of this solution is $O(1)$, and the space complexity is $O(1)$.</p>
+\]</div>
+<p>The time complexity of this solution is <span class="arithmatex">\(O(1)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86418,11 +86416,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,35 +86058,35 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search-binary-enumeration">Solution 1: Binary Search + Binary Enumeration</h3>
-<p>According to the problem requirements, we need to determine if the array $\textit{nums}$ can be divided into two subarrays $A$ and $B$ such that the average values of the two subarrays are equal.</p>
-<p>Let the sum of the array $\textit{nums}$ be $s$, and the number of elements be $n$. The sum and number of elements of subarray $A$ are $s_1$ and $k$, respectively. Then the sum of subarray $B$ is $s_2 = s - s_1$, and the number of elements is $n - k$. Thus:</p>
-<p>$$
+<p>According to the problem requirements, we need to determine if the array <span class="arithmatex">\(\textit{nums}\)</span> can be divided into two subarrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> such that the average values of the two subarrays are equal.</p>
+<p>Let the sum of the array <span class="arithmatex">\(\textit{nums}\)</span> be <span class="arithmatex">\(s\)</span>, and the number of elements be <span class="arithmatex">\(n\)</span>. The sum and number of elements of subarray <span class="arithmatex">\(A\)</span> are <span class="arithmatex">\(s_1\)</span> and <span class="arithmatex">\(k\)</span>, respectively. Then the sum of subarray <span class="arithmatex">\(B\)</span> is <span class="arithmatex">\(s_2 = s - s_1\)</span>, and the number of elements is <span class="arithmatex">\(n - k\)</span>. Thus:</p>
+<div class="arithmatex">\[
 \frac{s_1}{k} = \frac{s_2}{n - k} = \frac{s-s_1}{n-k}
-$$</p>
+\]</div>
 <p>Rearranging, we get:</p>
-<p>$$
+<div class="arithmatex">\[
 s_1 \times (n-k) = (s-s_1) \times k
-$$</p>
+\]</div>
 <p>Simplifying, we get:</p>
-<p>$$
+<div class="arithmatex">\[
 \frac{s_1}{k} = \frac{s}{n}
-$$</p>
-<p>This means we need to find a subarray $A$ such that its average value equals the average value of the array $\textit{nums}$. We consider subtracting the average value of the array $\textit{nums}$ from each element of the array $\textit{nums}$, transforming the problem into finding a subarray in the array $\textit{nums}$ whose sum is $0$.</p>
-<p>However, the average value of the array $\textit{nums}$ may not be an integer, and floating-point calculations may have precision issues. We can multiply each element of the array $\textit{nums}$ by $n$, i.e., $nums[i] \leftarrow nums[i] \times n$. The above equation becomes:</p>
-<p>$$
+\]</div>
+<p>This means we need to find a subarray <span class="arithmatex">\(A\)</span> such that its average value equals the average value of the array <span class="arithmatex">\(\textit{nums}\)</span>. We consider subtracting the average value of the array <span class="arithmatex">\(\textit{nums}\)</span> from each element of the array <span class="arithmatex">\(\textit{nums}\)</span>, transforming the problem into finding a subarray in the array <span class="arithmatex">\(\textit{nums}\)</span> whose sum is <span class="arithmatex">\(0\)</span>.</p>
+<p>However, the average value of the array <span class="arithmatex">\(\textit{nums}\)</span> may not be an integer, and floating-point calculations may have precision issues. We can multiply each element of the array <span class="arithmatex">\(\textit{nums}\)</span> by <span class="arithmatex">\(n\)</span>, i.e., <span class="arithmatex">\(nums[i] \leftarrow nums[i] \times n\)</span>. The above equation becomes:</p>
+<div class="arithmatex">\[
 \frac{s_1\times n}{k} = s
-$$</p>
-<p>Now, we subtract the integer $s$ from each element of the array $\textit{nums}$, transforming the problem into finding a subarray $A$ in the array $nums$ whose sum is $0$.</p>
-<p>The length of the array $\textit{nums}$ ranges from $[1, 30]$. If we use brute force to enumerate subarrays, the time complexity is $O(2^n)$, which will time out. We can use binary search to reduce the time complexity to $O(2^{n/2})$.</p>
-<p>We divide the array $\textit{nums}$ into left and right parts. The subarray $A$ can exist in three cases:</p>
+\]</div>
+<p>Now, we subtract the integer <span class="arithmatex">\(s\)</span> from each element of the array <span class="arithmatex">\(\textit{nums}\)</span>, transforming the problem into finding a subarray <span class="arithmatex">\(A\)</span> in the array <span class="arithmatex">\(nums\)</span> whose sum is <span class="arithmatex">\(0\)</span>.</p>
+<p>The length of the array <span class="arithmatex">\(\textit{nums}\)</span> ranges from <span class="arithmatex">\([1, 30]\)</span>. If we use brute force to enumerate subarrays, the time complexity is <span class="arithmatex">\(O(2^n)\)</span>, which will time out. We can use binary search to reduce the time complexity to <span class="arithmatex">\(O(2^{n/2})\)</span>.</p>
+<p>We divide the array <span class="arithmatex">\(\textit{nums}\)</span> into left and right parts. The subarray <span class="arithmatex">\(A\)</span> can exist in three cases:</p>
 <ol>
-<li>Subarray $A$ is entirely in the left part of the array $\textit{nums}$;</li>
-<li>Subarray $A$ is entirely in the right part of the array $\textit{nums}$;</li>
-<li>Subarray $A$ is partially in the left part and partially in the right part of the array $\textit{nums}$.</li>
+<li>Subarray <span class="arithmatex">\(A\)</span> is entirely in the left part of the array <span class="arithmatex">\(\textit{nums}\)</span>;</li>
+<li>Subarray <span class="arithmatex">\(A\)</span> is entirely in the right part of the array <span class="arithmatex">\(\textit{nums}\)</span>;</li>
+<li>Subarray <span class="arithmatex">\(A\)</span> is partially in the left part and partially in the right part of the array <span class="arithmatex">\(\textit{nums}\)</span>.</li>
 </ol>
-<p>We can use binary enumeration to first enumerate the sums of all subarrays in the left part. If there is a subarray with a sum of $0$, we return <code>true</code> immediately. Otherwise, we store the sums in a hash table $\textit{vis}$. Then we enumerate the sums of all subarrays in the right part. If there is a subarray with a sum of $0$, we return <code>true</code> immediately. Otherwise, we check if the hash table $\textit{vis}$ contains the opposite of the current sum. If it does, we return <code>true</code>.</p>
-<p>Note that we cannot select all elements from both the left and right parts simultaneously, as this would leave subarray $B$ empty, which does not meet the problem requirements. In implementation, we only need to consider $n-1$ elements of the array.</p>
-<p>The time complexity is $O(n \times 2^{\frac{n}{2}})$, and the space complexity is $O(2^{\frac{n}{2}})$.</p>
+<p>We can use binary enumeration to first enumerate the sums of all subarrays in the left part. If there is a subarray with a sum of <span class="arithmatex">\(0\)</span>, we return <code>true</code> immediately. Otherwise, we store the sums in a hash table <span class="arithmatex">\(\textit{vis}\)</span>. Then we enumerate the sums of all subarrays in the right part. If there is a subarray with a sum of <span class="arithmatex">\(0\)</span>, we return <code>true</code> immediately. Otherwise, we check if the hash table <span class="arithmatex">\(\textit{vis}\)</span> contains the opposite of the current sum. If it does, we return <code>true</code>.</p>
+<p>Note that we cannot select all elements from both the left and right parts simultaneously, as this would leave subarray <span class="arithmatex">\(B\)</span> empty, which does not meet the problem requirements. In implementation, we only need to consider <span class="arithmatex">\(n-1\)</span> elements of the array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^{\frac{n}{2}})\)</span>, and the space complexity is <span class="arithmatex">\(O(2^{\frac{n}{2}})\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86574,11 +86572,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

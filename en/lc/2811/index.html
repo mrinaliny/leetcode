@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86099,18 +86097,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>First, we preprocess to get the prefix sum array $s$, where $s[i]$ represents the sum of the first $i$ elements of the array $nums$.</p>
-<p>Next, we design a function $dfs(i, j)$, which represents whether there is a way to split the index range $[i, j]$ of the array $nums$ that meets the conditions. If it exists, return <code>true</code>, otherwise return <code>false</code>.</p>
-<p>The calculation process of the function $dfs(i, j)$ is as follows:</p>
-<p>If $i = j$, then there is only one element, no need to split, return <code>true</code>;</p>
-<p>Otherwise, we enumerate the split point $k$, where $k \in [i, j]$, if the following conditions are met, then it can be split into two subarrays $nums[i,.. k]$ and $nums[k + 1,.. j]$:</p>
+<p>First, we preprocess to get the prefix sum array <span class="arithmatex">\(s\)</span>, where <span class="arithmatex">\(s[i]\)</span> represents the sum of the first <span class="arithmatex">\(i\)</span> elements of the array <span class="arithmatex">\(nums\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents whether there is a way to split the index range <span class="arithmatex">\([i, j]\)</span> of the array <span class="arithmatex">\(nums\)</span> that meets the conditions. If it exists, return <code>true</code>, otherwise return <code>false</code>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i = j\)</span>, then there is only one element, no need to split, return <code>true</code>;</p>
+<p>Otherwise, we enumerate the split point <span class="arithmatex">\(k\)</span>, where <span class="arithmatex">\(k \in [i, j]\)</span>, if the following conditions are met, then it can be split into two subarrays <span class="arithmatex">\(nums[i,.. k]\)</span> and <span class="arithmatex">\(nums[k + 1,.. j]\)</span>:</p>
 <ul>
-<li>The subarray $nums[i,..k]$ has only one element, or the sum of the elements of the subarray $nums[i,..k]$ is greater than or equal to $m$;</li>
-<li>The subarray $nums[k + 1,..j]$ has only one element, or the sum of the elements of the subarray $nums[k + 1,..j]$ is greater than or equal to $m$;</li>
-<li>Both $dfs(i, k)$ and $dfs(k + 1, j)$ are <code>true</code>.</li>
+<li>The subarray <span class="arithmatex">\(nums[i,..k]\)</span> has only one element, or the sum of the elements of the subarray <span class="arithmatex">\(nums[i,..k]\)</span> is greater than or equal to <span class="arithmatex">\(m\)</span>;</li>
+<li>The subarray <span class="arithmatex">\(nums[k + 1,..j]\)</span> has only one element, or the sum of the elements of the subarray <span class="arithmatex">\(nums[k + 1,..j]\)</span> is greater than or equal to <span class="arithmatex">\(m\)</span>;</li>
+<li>Both <span class="arithmatex">\(dfs(i, k)\)</span> and <span class="arithmatex">\(dfs(k + 1, j)\)</span> are <code>true</code>.</li>
 </ul>
-<p>To avoid repeated calculations, we use the method of memoization search, and use a two-dimensional array $f$ to record all the return values of $dfs(i, j)$, where $f[i][j]$ represents the return value of $dfs(i, j)$.</p>
-<p>The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$, where $n$ is the length of the array $nums$.</p>
+<p>To avoid repeated calculations, we use the method of memoization search, and use a two-dimensional array <span class="arithmatex">\(f\)</span> to record all the return values of <span class="arithmatex">\(dfs(i, j)\)</span>, where <span class="arithmatex">\(f[i][j]\)</span> represents the return value of <span class="arithmatex">\(dfs(i, j)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86442,7 +86440,7 @@
 <blockquote>
 <p>📢 Note that when <code>nums.length &lt;= 2</code>, no operation is needed.</p>
 </blockquote>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array $nums$. The space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86707,11 +86705,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

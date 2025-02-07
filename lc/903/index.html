@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90861,12 +90859,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示字符串的前 $i$ 个字符中，以数字 $j$ 结尾的满足题目要求的排列的数量。初始时 $f[0][0]=1$，其余 $f[0][j]=0$。答案为 $\sum_{j=0}^n f[n][j]$。</p>
-<p>考虑 $f[i][j]$，其中 $j \in [0, i]$。</p>
-<p>如果第 $i$ 个字符 $s[i-1]$ 是 <code>'D'</code>，那么 $f[i][j]$ 可以从 $f[i-1][k]$ 转移而来，其中 $k \in [j+1, i]$，而由于 $k-1$ 最大只能为 $i-1$，我们将 $k$ 向左移动一位，那么 $k \in [j, i-1]$，因此有 $f[i][j] = \sum_{k=j}^{i-1} f[i-1][k]$。</p>
-<p>如果第 $i$ 个字符 $s[i-1]$ 是 <code>'I'</code>，那么 $f[i][j]$ 可以从 $f[i-1][k]$ 转移而来，其中 $k \in [0, j-1]$，因此有 $f[i][j] = \sum_{k=0}^{j-1} f[i-1][k]$。</p>
-<p>最终的答案即为 $\sum_{j=0}^n f[n][j]$。</p>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n^2)$。其中 $n$ 是字符串的长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示字符串的前 <span class="arithmatex">\(i\)</span> 个字符中，以数字 <span class="arithmatex">\(j\)</span> 结尾的满足题目要求的排列的数量。初始时 <span class="arithmatex">\(f[0][0]=1\)</span>，其余 <span class="arithmatex">\(f[0][j]=0\)</span>。答案为 <span class="arithmatex">\(\sum_{j=0}^n f[n][j]\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span>，其中 <span class="arithmatex">\(j \in [0, i]\)</span>。</p>
+<p>如果第 <span class="arithmatex">\(i\)</span> 个字符 <span class="arithmatex">\(s[i-1]\)</span> 是 <code>'D'</code>，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i-1][k]\)</span> 转移而来，其中 <span class="arithmatex">\(k \in [j+1, i]\)</span>，而由于 <span class="arithmatex">\(k-1\)</span> 最大只能为 <span class="arithmatex">\(i-1\)</span>，我们将 <span class="arithmatex">\(k\)</span> 向左移动一位，那么 <span class="arithmatex">\(k \in [j, i-1]\)</span>，因此有 <span class="arithmatex">\(f[i][j] = \sum_{k=j}^{i-1} f[i-1][k]\)</span>。</p>
+<p>如果第 <span class="arithmatex">\(i\)</span> 个字符 <span class="arithmatex">\(s[i-1]\)</span> 是 <code>'I'</code>，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i-1][k]\)</span> 转移而来，其中 <span class="arithmatex">\(k \in [0, j-1]\)</span>，因此有 <span class="arithmatex">\(f[i][j] = \sum_{k=0}^{j-1} f[i-1][k]\)</span>。</p>
+<p>最终的答案即为 <span class="arithmatex">\(\sum_{j=0}^n f[n][j]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91141,7 +91139,7 @@
 </div>
 </div>
 </div>
-<p>我们可以用前缀和优化时间复杂度，使得时间复杂度降低到 $O(n^2)$。</p>
+<p>我们可以用前缀和优化时间复杂度，使得时间复杂度降低到 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91410,7 +91408,7 @@
 </div>
 </div>
 </div>
-<p>另外，我们也可以用滚动数组优化空间复杂度，使得空间复杂度降低到 $O(n)$。</p>
+<p>另外，我们也可以用滚动数组优化空间复杂度，使得空间复杂度降低到 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91914,11 +91912,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

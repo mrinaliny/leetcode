@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86082,8 +86080,8 @@ The answer would be sum of their profits which is 5 + 4 + 6 = 15.</pre>
 <!-- solution:start -->
 
 <h3 id="solution-1-enumerate-the-middle-element">Solution 1: Enumerate the Middle Element</h3>
-<p>We can enumerate the middle element $profits[j]$, and then enumerate the left element $profits[i]$ and the right element $profits[k]$. For each $profits[j]$, we need to find the maximum $profits[i]$ and the maximum $profits[k]$ such that $prices[i] &lt; prices[j] &lt; prices[k]$. We define $left$ as the maximum value on the left of $profits[j]$, and $right$ as the maximum value on the right of $profits[j]$. If they exist, we update the answer as $ans = \max(ans, left + profits[j] + right)$.</p>
-<p>The time complexity is $O(n^2)$, where $n$ is the length of the array. The space complexity is $O(1)$.</p>
+<p>We can enumerate the middle element <span class="arithmatex">\(profits[j]\)</span>, and then enumerate the left element <span class="arithmatex">\(profits[i]\)</span> and the right element <span class="arithmatex">\(profits[k]\)</span>. For each <span class="arithmatex">\(profits[j]\)</span>, we need to find the maximum <span class="arithmatex">\(profits[i]\)</span> and the maximum <span class="arithmatex">\(profits[k]\)</span> such that <span class="arithmatex">\(prices[i] &lt; prices[j] &lt; prices[k]\)</span>. We define <span class="arithmatex">\(left\)</span> as the maximum value on the left of <span class="arithmatex">\(profits[j]\)</span>, and <span class="arithmatex">\(right\)</span> as the maximum value on the right of <span class="arithmatex">\(profits[j]\)</span>. If they exist, we update the answer as <span class="arithmatex">\(ans = \max(ans, left + profits[j] + right)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86372,8 +86370,8 @@ The answer would be sum of their profits which is 5 + 4 + 6 = 15.</pre>
 
 <h3 id="solution-2-binary-indexed-tree">Solution 2: Binary Indexed Tree</h3>
 <p>We can use two Binary Indexed Trees (BITs) to maintain the maximum profit on the left and right of each price, respectively. Then, we enumerate the middle price, query the maximum profit on both sides through the BIT, and finally take the maximum value.</p>
-<p>The time complexity is $O(n \times \log M)$, and the space complexity is $O(M)$. Here, $n$ is the length of the array $prices$, and $M$ is the maximum value in the array $prices$. In this problem, $M \le 10^6$.</p>
-<p>Since the length of $prices$ does not exceed $2000$, and the value of $prices[i]$ reaches $10^6$, we can discretize $prices$, which can reduce the space complexity to $O(n)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(M)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(prices\)</span>, and <span class="arithmatex">\(M\)</span> is the maximum value in the array <span class="arithmatex">\(prices\)</span>. In this problem, <span class="arithmatex">\(M \le 10^6\)</span>.</p>
+<p>Since the length of <span class="arithmatex">\(prices\)</span> does not exceed <span class="arithmatex">\(2000\)</span>, and the value of <span class="arithmatex">\(prices[i]\)</span> reaches <span class="arithmatex">\(10^6\)</span>, we can discretize <span class="arithmatex">\(prices\)</span>, which can reduce the space complexity to <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87928,11 +87926,9 @@ The answer would be sum of their profits which is 5 + 4 + 6 = 15.</pre>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

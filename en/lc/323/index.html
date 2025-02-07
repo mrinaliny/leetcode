@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,9 +86069,9 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs">Solution 1: DFS</h3>
-<p>First, we construct an adjacency list $g$ based on the given edges, where $g[i]$ represents all neighbor nodes of node $i$.</p>
+<p>First, we construct an adjacency list <span class="arithmatex">\(g\)</span> based on the given edges, where <span class="arithmatex">\(g[i]\)</span> represents all neighbor nodes of node <span class="arithmatex">\(i\)</span>.</p>
 <p>Then we traverse all nodes. For each node, we use DFS to traverse all its adjacent nodes and mark them as visited until all its adjacent nodes have been visited. In this way, we have found a connected component, and the answer is incremented by one. Then we continue to traverse the next unvisited node until all nodes have been visited.</p>
-<p>The time complexity is $O(n + m)$, and the space complexity is $O(n + m)$. Where $n$ and $m$ are the number of nodes and edges, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + m)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the number of nodes and edges, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86378,9 +86376,9 @@
 
 <h3 id="solution-2-union-find">Solution 2: Union-Find</h3>
 <p>We can use a union-find set to maintain the connected components in the graph.</p>
-<p>First, we initialize a union-find set, then traverse all the edges. For each edge $(a, b)$, we merge nodes $a$ and $b$ into the same connected component. If the merge is successful, it means that nodes $a$ and $b$ were not in the same connected component before, and the number of connected components decreases by one.</p>
+<p>First, we initialize a union-find set, then traverse all the edges. For each edge <span class="arithmatex">\((a, b)\)</span>, we merge nodes <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> into the same connected component. If the merge is successful, it means that nodes <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> were not in the same connected component before, and the number of connected components decreases by one.</p>
 <p>Finally, we return the number of connected components.</p>
-<p>The time complexity is $O(n + m \times \alpha(n))$, and the space complexity is $O(n)$. Where $n$ and $m$ are the number of nodes and edges, respectively, and $\alpha(n)$ is the inverse of the Ackermann function, which can be regarded as a very small constant.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + m \times \alpha(n))\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the number of nodes and edges, respectively, and <span class="arithmatex">\(\alpha(n)\)</span> is the inverse of the Ackermann function, which can be regarded as a very small constant.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86807,9 +86805,9 @@
 
 <h3 id="solution-3-bfs">Solution 3: BFS</h3>
 <p>We can also use BFS (Breadth-First Search) to count the number of connected components in the graph.</p>
-<p>Similar to Solution 1, we first construct an adjacency list $g$ based on the given edges. Then we traverse all nodes. For each node, if it has not been visited, we start BFS traversal from this node, marking all its adjacent nodes as visited, until all its adjacent nodes have been visited. In this way, we have found a connected component, and the answer is incremented by one.</p>
+<p>Similar to Solution 1, we first construct an adjacency list <span class="arithmatex">\(g\)</span> based on the given edges. Then we traverse all nodes. For each node, if it has not been visited, we start BFS traversal from this node, marking all its adjacent nodes as visited, until all its adjacent nodes have been visited. In this way, we have found a connected component, and the answer is incremented by one.</p>
 <p>After traversing all nodes, we get the number of connected components in the graph.</p>
-<p>The time complexity is $O(n + m)$, and the space complexity is $O(n + m)$. Where $n$ and $m$ are the number of nodes and edges, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + m)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the number of nodes and edges, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87339,11 +87337,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

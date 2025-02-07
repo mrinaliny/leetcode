@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86082,11 +86080,11 @@ That costs 3, so the maximum length is 3.
 <!-- solution:start -->
 
 <h3 id="solution-1-prefix-sum-binary-search">Solution 1: Prefix Sum + Binary Search</h3>
-<p>We can create an array $f$ of length $n + 1$, where $f[i]$ represents the sum of the absolute differences of ASCII values between the first $i$ characters of string $s$ and the first $i$ characters of string $t$. Thus, we can calculate the sum of the absolute differences of ASCII values from the $i$-th character to the $j$-th character of string $s$ by $f[j + 1] - f[i]$, where $0 \leq i \leq j &lt; n$.</p>
-<p>Note that the length has monotonicity, i.e., if there exists a substring of length $x$ that satisfies the condition, then a substring of length $x - 1$ must also satisfy the condition. Therefore, we can use binary search to find the maximum length.</p>
-<p>We define a function $check(x)$, which indicates whether there exists a substring of length $x$ that satisfies the condition. In this function, we only need to enumerate all substrings of length $x$ and check whether they satisfy the condition. If there exists a substring that satisfies the condition, the function returns <code>true</code>, otherwise it returns <code>false</code>.</p>
-<p>Next, we define the left boundary $l$ of binary search as $0$ and the right boundary $r$ as $n$. In each step, we let $mid = \lfloor \frac{l + r + 1}{2} \rfloor$. If the return value of $check(mid)$ is <code>true</code>, we update the left boundary to $mid$, otherwise we update the right boundary to $mid - 1$. After the binary search, the left boundary we get is the answer.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of string $s$.</p>
+<p>We can create an array <span class="arithmatex">\(f\)</span> of length <span class="arithmatex">\(n + 1\)</span>, where <span class="arithmatex">\(f[i]\)</span> represents the sum of the absolute differences of ASCII values between the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s\)</span> and the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(t\)</span>. Thus, we can calculate the sum of the absolute differences of ASCII values from the <span class="arithmatex">\(i\)</span>-th character to the <span class="arithmatex">\(j\)</span>-th character of string <span class="arithmatex">\(s\)</span> by <span class="arithmatex">\(f[j + 1] - f[i]\)</span>, where <span class="arithmatex">\(0 \leq i \leq j &lt; n\)</span>.</p>
+<p>Note that the length has monotonicity, i.e., if there exists a substring of length <span class="arithmatex">\(x\)</span> that satisfies the condition, then a substring of length <span class="arithmatex">\(x - 1\)</span> must also satisfy the condition. Therefore, we can use binary search to find the maximum length.</p>
+<p>We define a function <span class="arithmatex">\(check(x)\)</span>, which indicates whether there exists a substring of length <span class="arithmatex">\(x\)</span> that satisfies the condition. In this function, we only need to enumerate all substrings of length <span class="arithmatex">\(x\)</span> and check whether they satisfy the condition. If there exists a substring that satisfies the condition, the function returns <code>true</code>, otherwise it returns <code>false</code>.</p>
+<p>Next, we define the left boundary <span class="arithmatex">\(l\)</span> of binary search as <span class="arithmatex">\(0\)</span> and the right boundary <span class="arithmatex">\(r\)</span> as <span class="arithmatex">\(n\)</span>. In each step, we let <span class="arithmatex">\(mid = \lfloor \frac{l + r + 1}{2} \rfloor\)</span>. If the return value of <span class="arithmatex">\(check(mid)\)</span> is <code>true</code>, we update the left boundary to <span class="arithmatex">\(mid\)</span>, otherwise we update the right boundary to <span class="arithmatex">\(mid - 1\)</span>. After the binary search, the left boundary we get is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86398,9 +86396,9 @@ That costs 3, so the maximum length is 3.
 <!-- solution:start -->
 
 <h3 id="solution-2-two-pointers">Solution 2: Two Pointers</h3>
-<p>We can maintain two pointers $l$ and $r$, initially $l = r = 0$; maintain a variable $\textit{cost}$, which represents the sum of the absolute values of the ASCII code differences in the index interval $[l,..r]$. In each step, we move $r$ to the right by one position, then update $\textit{cost} = \textit{cost} + |s[r] - t[r]|$. If $\textit{cost} \gt \textit{maxCost}$, then we loop to move $l$ to the right by one position, and decrease the value of $\textit{cost}$, until $\textit{cost} \leq \textit{maxCost}$. Then we update the answer, that is, $\textit{ans} = \max(\textit{ans}, r - l + 1)$.</p>
+<p>We can maintain two pointers <span class="arithmatex">\(l\)</span> and <span class="arithmatex">\(r\)</span>, initially <span class="arithmatex">\(l = r = 0\)</span>; maintain a variable <span class="arithmatex">\(\textit{cost}\)</span>, which represents the sum of the absolute values of the ASCII code differences in the index interval <span class="arithmatex">\([l,..r]\)</span>. In each step, we move <span class="arithmatex">\(r\)</span> to the right by one position, then update <span class="arithmatex">\(\textit{cost} = \textit{cost} + |s[r] - t[r]|\)</span>. If <span class="arithmatex">\(\textit{cost} \gt \textit{maxCost}\)</span>, then we loop to move <span class="arithmatex">\(l\)</span> to the right by one position, and decrease the value of <span class="arithmatex">\(\textit{cost}\)</span>, until <span class="arithmatex">\(\textit{cost} \leq \textit{maxCost}\)</span>. Then we update the answer, that is, <span class="arithmatex">\(\textit{ans} = \max(\textit{ans}, r - l + 1)\)</span>.</p>
 <p>Finally, return the answer.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the string $s$. The space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86569,9 +86567,9 @@ That costs 3, so the maximum length is 3.
 
 <h3 id="solution-3-another-way-of-using-two-pointers">Solution 3: Another Way of Using Two Pointers</h3>
 <p>In Solution 2, the interval maintained by the two pointers may become shorter or longer. Since the problem only requires the maximum length, we can maintain a monotonically increasing interval.</p>
-<p>Specifically, we use two pointers $l$ and $r$ to point to the left and right endpoints of the interval, initially $l = r = 0$. In each step, we move $r$ to the right by one position, then update $\textit{cost} = \textit{cost} + |s[r] - t[r]|$. If $\textit{cost} \gt \textit{maxCost}$, then we move $l$ to the right by one position, and decrease the value of $\textit{cost}$.</p>
-<p>Finally, return $n - l$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(1)$. Where $n$ is the length of the string $s$.</p>
+<p>Specifically, we use two pointers <span class="arithmatex">\(l\)</span> and <span class="arithmatex">\(r\)</span> to point to the left and right endpoints of the interval, initially <span class="arithmatex">\(l = r = 0\)</span>. In each step, we move <span class="arithmatex">\(r\)</span> to the right by one position, then update <span class="arithmatex">\(\textit{cost} = \textit{cost} + |s[r] - t[r]|\)</span>. If <span class="arithmatex">\(\textit{cost} \gt \textit{maxCost}\)</span>, then we move <span class="arithmatex">\(l\)</span> to the right by one position, and decrease the value of <span class="arithmatex">\(\textit{cost}\)</span>.</p>
+<p>Finally, return <span class="arithmatex">\(n - l\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86960,11 +86958,9 @@ That costs 3, so the maximum length is 3.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

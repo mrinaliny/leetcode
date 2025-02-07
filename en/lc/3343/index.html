@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,13 +86081,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search-combinatorial-mathematics">Solution 1: Memoization Search + Combinatorial Mathematics</h3>
-<p>First, we count the occurrences of each digit in the string $\textit{num}$ and record them in the array $\textit{cnt}$, then calculate the total sum $\textit{s}$ of the string $\textit{num}$.</p>
-<p>If $\textit{s}$ is odd, then $\textit{num}$ cannot be balanced, so we directly return $0$.</p>
-<p>Next, we define a memoization search function $\text{dfs}(i, j, a, b)$, where $i$ represents the current digit to be filled, $j$ represents the remaining sum of digits to be filled in odd positions, and $a$ and $b$ represent the remaining number of digits to be filled in odd and even positions, respectively. Let $n$ be the length of the string $\textit{num}$, then the answer is $\text{dfs}(0, s / 2, n / 2, (n + 1) / 2)$.</p>
-<p>In the function $\text{dfs}(i, j, a, b)$, we first check if all digits have been filled. If so, we need to ensure that $j = 0$, $a = 0$, and $b = 0$. If these conditions are met, it means the current arrangement is balanced, so we return $1$; otherwise, we return $0$.</p>
-<p>Next, we check if the remaining number of digits to be filled in odd positions $a$ is $0$ and $j &gt; 0$. If so, it means the current arrangement is not balanced, so we return $0$ early.</p>
-<p>Otherwise, we can enumerate the number of current digits assigned to odd positions $l$, and the number of digits assigned to even positions is $r = \textit{cnt}[i] - l$. We need to ensure $0 \leq r \leq b$ and $l \times i \leq j$. Then we calculate the number of current arrangements $t = C_a^l \times C_b^r \times \text{dfs}(i + 1, j - l \times i, a - l, b - r)$. Finally, the answer is the sum of all arrangement counts.</p>
-<p>The time complexity is $O(|\Sigma| \times n^2 \times (n + |\Sigma|))$, where $|\Sigma|$ represents the number of different digits, and in this problem $|\Sigma| = 10$. The space complexity is $O(n^2 \times |\Sigma|^2)$.</p>
+<p>First, we count the occurrences of each digit in the string <span class="arithmatex">\(\textit{num}\)</span> and record them in the array <span class="arithmatex">\(\textit{cnt}\)</span>, then calculate the total sum <span class="arithmatex">\(\textit{s}\)</span> of the string <span class="arithmatex">\(\textit{num}\)</span>.</p>
+<p>If <span class="arithmatex">\(\textit{s}\)</span> is odd, then <span class="arithmatex">\(\textit{num}\)</span> cannot be balanced, so we directly return <span class="arithmatex">\(0\)</span>.</p>
+<p>Next, we define a memoization search function <span class="arithmatex">\(\text{dfs}(i, j, a, b)\)</span>, where <span class="arithmatex">\(i\)</span> represents the current digit to be filled, <span class="arithmatex">\(j\)</span> represents the remaining sum of digits to be filled in odd positions, and <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> represent the remaining number of digits to be filled in odd and even positions, respectively. Let <span class="arithmatex">\(n\)</span> be the length of the string <span class="arithmatex">\(\textit{num}\)</span>, then the answer is <span class="arithmatex">\(\text{dfs}(0, s / 2, n / 2, (n + 1) / 2)\)</span>.</p>
+<p>In the function <span class="arithmatex">\(\text{dfs}(i, j, a, b)\)</span>, we first check if all digits have been filled. If so, we need to ensure that <span class="arithmatex">\(j = 0\)</span>, <span class="arithmatex">\(a = 0\)</span>, and <span class="arithmatex">\(b = 0\)</span>. If these conditions are met, it means the current arrangement is balanced, so we return <span class="arithmatex">\(1\)</span>; otherwise, we return <span class="arithmatex">\(0\)</span>.</p>
+<p>Next, we check if the remaining number of digits to be filled in odd positions <span class="arithmatex">\(a\)</span> is <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(j &gt; 0\)</span>. If so, it means the current arrangement is not balanced, so we return <span class="arithmatex">\(0\)</span> early.</p>
+<p>Otherwise, we can enumerate the number of current digits assigned to odd positions <span class="arithmatex">\(l\)</span>, and the number of digits assigned to even positions is <span class="arithmatex">\(r = \textit{cnt}[i] - l\)</span>. We need to ensure <span class="arithmatex">\(0 \leq r \leq b\)</span> and <span class="arithmatex">\(l \times i \leq j\)</span>. Then we calculate the number of current arrangements <span class="arithmatex">\(t = C_a^l \times C_b^r \times \text{dfs}(i + 1, j - l \times i, a - l, b - r)\)</span>. Finally, the answer is the sum of all arrangement counts.</p>
+<p>The time complexity is <span class="arithmatex">\(O(|\Sigma| \times n^2 \times (n + |\Sigma|))\)</span>, where <span class="arithmatex">\(|\Sigma|\)</span> represents the number of different digits, and in this problem <span class="arithmatex">\(|\Sigma| = 10\)</span>. The space complexity is <span class="arithmatex">\(O(n^2 \times |\Sigma|^2)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86857,11 +86855,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

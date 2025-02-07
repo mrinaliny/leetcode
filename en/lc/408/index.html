@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86063,13 +86061,13 @@
 
 <h3 id="solution-1-simulation">Solution 1: Simulation</h3>
 <p>We can directly simulate character matching and replacement.</p>
-<p>Assume the lengths of the string $word$ and the string $abbr$ are $m$ and $n$ respectively. We use two pointers $i$ and $j$ to point to the initial positions of the string $word$ and the string $abbr$ respectively, and use an integer variable $x$ to record the current matched number in $abbr$.</p>
-<p>Loop to match each character of the string $word$ and the string $abbr$:</p>
-<p>If the character $abbr[j]$ pointed by the pointer $j$ is a number, if $abbr[j]$ is <code>'0'</code> and $x$ is $0$, it means that the number in $abbr$ has leading zeros, so it is not a valid abbreviation, return <code>false</code>; otherwise, update $x$ to $x \times 10 + abbr[j] - '0'$.</p>
-<p>If the character $abbr[j]$ pointed by the pointer $j$ is not a number, then we move the pointer $i$ forward by $x$ positions at this time, and then reset $x$ to $0$. If $i \geq m$ or $word[i] \neq abbr[j]$ at this time, it means that the two strings cannot match, return <code>false</code>; otherwise, move the pointer $i$ forward by $1$ position.</p>
-<p>Then we move the pointer $j$ forward by $1$ position, repeat the above process, until $i$ exceeds the length of the string $word$ or $j$ exceeds the length of the string $abbr$.</p>
-<p>Finally, if $i + x$ equals $m$ and $j$ equals $n$, it means that the string $word$ can be abbreviated as the string $abbr$, return <code>true</code>; otherwise return <code>false</code>.</p>
-<p>The time complexity is $O(m + n)$, where $m$ and $n$ are the lengths of the string $word$ and the string $abbr$ respectively. The space complexity is $O(1)$.</p>
+<p>Assume the lengths of the string <span class="arithmatex">\(word\)</span> and the string <span class="arithmatex">\(abbr\)</span> are <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> respectively. We use two pointers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> to point to the initial positions of the string <span class="arithmatex">\(word\)</span> and the string <span class="arithmatex">\(abbr\)</span> respectively, and use an integer variable <span class="arithmatex">\(x\)</span> to record the current matched number in <span class="arithmatex">\(abbr\)</span>.</p>
+<p>Loop to match each character of the string <span class="arithmatex">\(word\)</span> and the string <span class="arithmatex">\(abbr\)</span>:</p>
+<p>If the character <span class="arithmatex">\(abbr[j]\)</span> pointed by the pointer <span class="arithmatex">\(j\)</span> is a number, if <span class="arithmatex">\(abbr[j]\)</span> is <code>'0'</code> and <span class="arithmatex">\(x\)</span> is <span class="arithmatex">\(0\)</span>, it means that the number in <span class="arithmatex">\(abbr\)</span> has leading zeros, so it is not a valid abbreviation, return <code>false</code>; otherwise, update <span class="arithmatex">\(x\)</span> to <span class="arithmatex">\(x \times 10 + abbr[j] - '0'\)</span>.</p>
+<p>If the character <span class="arithmatex">\(abbr[j]\)</span> pointed by the pointer <span class="arithmatex">\(j\)</span> is not a number, then we move the pointer <span class="arithmatex">\(i\)</span> forward by <span class="arithmatex">\(x\)</span> positions at this time, and then reset <span class="arithmatex">\(x\)</span> to <span class="arithmatex">\(0\)</span>. If <span class="arithmatex">\(i \geq m\)</span> or <span class="arithmatex">\(word[i] \neq abbr[j]\)</span> at this time, it means that the two strings cannot match, return <code>false</code>; otherwise, move the pointer <span class="arithmatex">\(i\)</span> forward by <span class="arithmatex">\(1\)</span> position.</p>
+<p>Then we move the pointer <span class="arithmatex">\(j\)</span> forward by <span class="arithmatex">\(1\)</span> position, repeat the above process, until <span class="arithmatex">\(i\)</span> exceeds the length of the string <span class="arithmatex">\(word\)</span> or <span class="arithmatex">\(j\)</span> exceeds the length of the string <span class="arithmatex">\(abbr\)</span>.</p>
+<p>Finally, if <span class="arithmatex">\(i + x\)</span> equals <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(j\)</span> equals <span class="arithmatex">\(n\)</span>, it means that the string <span class="arithmatex">\(word\)</span> can be abbreviated as the string <span class="arithmatex">\(abbr\)</span>, return <code>true</code>; otherwise return <code>false</code>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m + n)\)</span>, where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of the string <span class="arithmatex">\(word\)</span> and the string <span class="arithmatex">\(abbr\)</span> respectively. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86522,11 +86520,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

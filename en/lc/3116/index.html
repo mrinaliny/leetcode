@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86108,20 +86106,20 @@ All of the coins combined produce: 2, 4, 5, 6, 8, 10, <u><strong>12</strong></u>
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search-inclusion-exclusion-principle">Solution 1: Binary Search + Inclusion-Exclusion Principle</h3>
-<p>We can transform the problem into: find the smallest positive integer $x$ such that the number of numbers less than or equal to $x$ and satisfying the condition is exactly $k$. If $x$ satisfies the condition, then for any $x' &gt; x$, $x'$ also satisfies the condition. This shows monotonicity, so we can use binary search to find the smallest $x$ that satisfies the condition.</p>
-<p>We define a function <code>check(x)</code> to determine whether the number of numbers less than or equal to $x$ and satisfying the condition is greater than or equal to $k$. We need to calculate how many numbers can be obtained from the array $coins$.</p>
-<p>Suppose $coins = [a, b]$, according to the inclusion-exclusion principle, the number of numbers less than or equal to $x$ and satisfying the condition is:</p>
-<p>$$
+<p>We can transform the problem into: find the smallest positive integer <span class="arithmatex">\(x\)</span> such that the number of numbers less than or equal to <span class="arithmatex">\(x\)</span> and satisfying the condition is exactly <span class="arithmatex">\(k\)</span>. If <span class="arithmatex">\(x\)</span> satisfies the condition, then for any <span class="arithmatex">\(x' &gt; x\)</span>, <span class="arithmatex">\(x'\)</span> also satisfies the condition. This shows monotonicity, so we can use binary search to find the smallest <span class="arithmatex">\(x\)</span> that satisfies the condition.</p>
+<p>We define a function <code>check(x)</code> to determine whether the number of numbers less than or equal to <span class="arithmatex">\(x\)</span> and satisfying the condition is greater than or equal to <span class="arithmatex">\(k\)</span>. We need to calculate how many numbers can be obtained from the array <span class="arithmatex">\(coins\)</span>.</p>
+<p>Suppose <span class="arithmatex">\(coins = [a, b]\)</span>, according to the inclusion-exclusion principle, the number of numbers less than or equal to <span class="arithmatex">\(x\)</span> and satisfying the condition is:</p>
+<div class="arithmatex">\[
 \left\lfloor \frac{x}{a} \right\rfloor + \left\lfloor \frac{x}{b} \right\rfloor - \left\lfloor \frac{x}{lcm(a, b)} \right\rfloor
-$$</p>
-<p>If $coins = [a, b, c]$, the number of numbers less than or equal to $x$ and satisfying the condition is:</p>
-<p>$$
+\]</div>
+<p>If <span class="arithmatex">\(coins = [a, b, c]\)</span>, the number of numbers less than or equal to <span class="arithmatex">\(x\)</span> and satisfying the condition is:</p>
+<div class="arithmatex">\[
 \left\lfloor \frac{x}{a} \right\rfloor + \left\lfloor \frac{x}{b} \right\rfloor + \left\lfloor \frac{x}{c} \right\rfloor - \left\lfloor \frac{x}{lcm(a, b)} \right\rfloor - \left\lfloor \frac{x}{lcm(a, c)} \right\rfloor - \left\lfloor \frac{x}{lcm(b, c)} \right\rfloor + \left\lfloor \frac{x}{lcm(a, b, c)} \right\rfloor
-$$</p>
+\]</div>
 <p>As you can see, we need to add all cases with an odd number of elements and subtract all cases with an even number of elements.</p>
-<p>Since $n \leq 15$, we can use binary enumeration to enumerate all subsets and calculate the number of numbers that satisfy the condition, denoted as $cnt$. If $cnt \geq k$, then we need to find the smallest $x$ such that <code>check(x)</code> is true.</p>
-<p>At the start of the binary search, we define the left boundary $l=1$ and the right boundary $r={10}^{11}$. Then we continuously substitute the middle value $mid$ into the <code>check</code> function. If <code>check(mid)</code> is true, then we update the right boundary $r$ to $mid$, otherwise we update the left boundary $l$ to $mid+1$. Finally, we return $l$.</p>
-<p>The time complexity is $O(n \times 2^n \times \log (k \times M))$, where $n$ is the length of the array $coins$, and $M$ is the maximum value in the array.</p>
+<p>Since <span class="arithmatex">\(n \leq 15\)</span>, we can use binary enumeration to enumerate all subsets and calculate the number of numbers that satisfy the condition, denoted as <span class="arithmatex">\(cnt\)</span>. If <span class="arithmatex">\(cnt \geq k\)</span>, then we need to find the smallest <span class="arithmatex">\(x\)</span> such that <code>check(x)</code> is true.</p>
+<p>At the start of the binary search, we define the left boundary <span class="arithmatex">\(l=1\)</span> and the right boundary <span class="arithmatex">\(r={10}^{11}\)</span>. Then we continuously substitute the middle value <span class="arithmatex">\(mid\)</span> into the <code>check</code> function. If <code>check(mid)</code> is true, then we update the right boundary <span class="arithmatex">\(r\)</span> to <span class="arithmatex">\(mid\)</span>, otherwise we update the left boundary <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(mid+1\)</span>. Finally, we return <span class="arithmatex">\(l\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n \times \log (k \times M))\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(coins\)</span>, and <span class="arithmatex">\(M\)</span> is the maximum value in the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86759,11 +86757,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

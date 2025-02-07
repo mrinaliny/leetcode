@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,15 +90864,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示从 $s$ 的第 $i$ 个字符开始，和 $p$ 的第 $j$ 个字符开始是否匹配。那么答案就是 $dfs(0, 0)$。</p>
-<p>函数 $dfs(i, j)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示从 <span class="arithmatex">\(s\)</span> 的第 <span class="arithmatex">\(i\)</span> 个字符开始，和 <span class="arithmatex">\(p\)</span> 的第 <span class="arithmatex">\(j\)</span> 个字符开始是否匹配。那么答案就是 <span class="arithmatex">\(dfs(0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $j$ 已经到达 $p$ 的末尾，那么如果 $i$ 也到达了 $s$ 的末尾，那么匹配成功，否则匹配失败。</li>
-<li>如果 $j$ 的下一个字符是 <code>'*'</code>，我们可以选择匹配 $0$ 个 $s[i]$ 字符，那么就是 $dfs(i, j + 2)$。如果此时 $i \lt m$ 并且 $s[i]$ 和 $p[j]$ 匹配，那么我们可以选择匹配 $1$ 个 $s[i]$ 字符，那么就是 $dfs(i + 1, j)$。</li>
-<li>如果 $j$ 的下一个字符不是 <code>'*'</code>，那么如果 $i \lt m$ 并且 $s[i]$ 和 $p[j]$ 匹配，那么就是 $dfs(i + 1, j + 1)$。否则匹配失败。</li>
+<li>如果 <span class="arithmatex">\(j\)</span> 已经到达 <span class="arithmatex">\(p\)</span> 的末尾，那么如果 <span class="arithmatex">\(i\)</span> 也到达了 <span class="arithmatex">\(s\)</span> 的末尾，那么匹配成功，否则匹配失败。</li>
+<li>如果 <span class="arithmatex">\(j\)</span> 的下一个字符是 <code>'*'</code>，我们可以选择匹配 <span class="arithmatex">\(0\)</span> 个 <span class="arithmatex">\(s[i]\)</span> 字符，那么就是 <span class="arithmatex">\(dfs(i, j + 2)\)</span>。如果此时 <span class="arithmatex">\(i \lt m\)</span> 并且 <span class="arithmatex">\(s[i]\)</span> 和 <span class="arithmatex">\(p[j]\)</span> 匹配，那么我们可以选择匹配 <span class="arithmatex">\(1\)</span> 个 <span class="arithmatex">\(s[i]\)</span> 字符，那么就是 <span class="arithmatex">\(dfs(i + 1, j)\)</span>。</li>
+<li>如果 <span class="arithmatex">\(j\)</span> 的下一个字符不是 <code>'*'</code>，那么如果 <span class="arithmatex">\(i \lt m\)</span> 并且 <span class="arithmatex">\(s[i]\)</span> 和 <span class="arithmatex">\(p[j]\)</span> 匹配，那么就是 <span class="arithmatex">\(dfs(i + 1, j + 1)\)</span>。否则匹配失败。</li>
 </ul>
 <p>过程中，我们可以使用记忆化搜索，避免重复计算。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是 $s$ 和 $p$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(p\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91319,13 +91317,13 @@
 
 <h3 id="_4">方法二：动态规划</h3>
 <p>我们可以将方法一中的记忆化搜索转换为动态规划。</p>
-<p>定义 $f[i][j]$ 表示字符串 $s$ 的前 $i$ 个字符和字符串 $p$ 的前 $j$ 个字符是否匹配。那么答案就是 $f[m][n]$。初始化 $f[0][0] = true$，表示空字符串和空正则表达式是匹配的。</p>
+<p>定义 <span class="arithmatex">\(f[i][j]\)</span> 表示字符串 <span class="arithmatex">\(s\)</span> 的前 <span class="arithmatex">\(i\)</span> 个字符和字符串 <span class="arithmatex">\(p\)</span> 的前 <span class="arithmatex">\(j\)</span> 个字符是否匹配。那么答案就是 <span class="arithmatex">\(f[m][n]\)</span>。初始化 <span class="arithmatex">\(f[0][0] = true\)</span>，表示空字符串和空正则表达式是匹配的。</p>
 <p>与方法一类似，我们可以分情况来讨论。</p>
 <ul>
-<li>如果 $p[j - 1]$ 是 <code>'*'</code>，那么我们可以选择匹配 $0$ 个 $s[i - 1]$ 字符，那么就是 $f[i][j] = f[i][j - 2]$。如果此时 $s[i - 1]$ 和 $p[j - 2]$ 匹配，那么我们可以选择匹配 $1$ 个 $s[i - 1]$ 字符，那么就是 $f[i][j] = f[i][j] \lor f[i - 1][j]$。</li>
-<li>如果 $p[j - 1]$ 不是 <code>'*'</code>，那么如果 $s[i - 1]$ 和 $p[j - 1]$ 匹配，那么就是 $f[i][j] = f[i - 1][j - 1]$。否则匹配失败。</li>
+<li>如果 <span class="arithmatex">\(p[j - 1]\)</span> 是 <code>'*'</code>，那么我们可以选择匹配 <span class="arithmatex">\(0\)</span> 个 <span class="arithmatex">\(s[i - 1]\)</span> 字符，那么就是 <span class="arithmatex">\(f[i][j] = f[i][j - 2]\)</span>。如果此时 <span class="arithmatex">\(s[i - 1]\)</span> 和 <span class="arithmatex">\(p[j - 2]\)</span> 匹配，那么我们可以选择匹配 <span class="arithmatex">\(1\)</span> 个 <span class="arithmatex">\(s[i - 1]\)</span> 字符，那么就是 <span class="arithmatex">\(f[i][j] = f[i][j] \lor f[i - 1][j]\)</span>。</li>
+<li>如果 <span class="arithmatex">\(p[j - 1]\)</span> 不是 <code>'*'</code>，那么如果 <span class="arithmatex">\(s[i - 1]\)</span> 和 <span class="arithmatex">\(p[j - 1]\)</span> 匹配，那么就是 <span class="arithmatex">\(f[i][j] = f[i - 1][j - 1]\)</span>。否则匹配失败。</li>
 </ul>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是 $s$ 和 $p$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(p\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:8"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><input id="__tabbed_2_8" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">Rust</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">C#</label><label for="__tabbed_2_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91970,11 +91968,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

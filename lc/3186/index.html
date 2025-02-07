@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90881,12 +90879,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找 + 记忆化搜索</h3>
-<p>我们可以先对数组 $\textit{power}$ 进行排序，用一个哈希表 $\textit{cnt}$ 来记录每个伤害值的出现次数，然后遍历数组 $\textit{power}$，对于每个伤害值 $x$，我们可以得出使用伤害值为 $x$ 的咒语时，可以使用的下一个伤害值的索引，即第一个大于 $x + 2$ 的伤害值的索引，我们可以使用二分查找来找到这个索引，记录在数组 $\textit{nxt}$ 中。</p>
-<p>接下来，我们定义一个函数 $\textit{dfs}$，用来计算从第 $i$ 个伤害值开始，可以获得的最大伤害值。</p>
-<p>在 $\textit{dfs}$ 函数中，我们可以选择跳过当前伤害值，那么我们可以跳过当前伤害值的所有相同伤害值，直接跳到 $i + \textit{cnt}[x]$，可以获得的伤害值为 $\textit{dfs}(i + \textit{cnt}[x])$；或者我们可以选择使用当前伤害值，那么我们可以使用当前伤害值的所有相同伤害值，然后跳到下一个伤害值的索引，可以获得的伤害值为 $x \times \textit{cnt}[x] + \textit{dfs}(\textit{nxt}[i])$，其中 $\textit{nxt}[i]$ 表示第一个大于 $x + 2$ 的伤害值的索引。我们取这两种情况的最大值作为函数的返回值。</p>
-<p>为了避免重复计算，我们可以使用记忆化搜索，将已经计算过的结果保存在数组 $\textit{f}$ 中，这样在计算 $\textit{dfs}(i)$ 时，如果 $\textit{f}[i]$ 不为 $0$，则直接返回 $\textit{f}[i]$。</p>
-<p>答案即为 $\textit{dfs}(0)$。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{power}$ 的长度。</p>
+<p>我们可以先对数组 <span class="arithmatex">\(\textit{power}\)</span> 进行排序，用一个哈希表 <span class="arithmatex">\(\textit{cnt}\)</span> 来记录每个伤害值的出现次数，然后遍历数组 <span class="arithmatex">\(\textit{power}\)</span>，对于每个伤害值 <span class="arithmatex">\(x\)</span>，我们可以得出使用伤害值为 <span class="arithmatex">\(x\)</span> 的咒语时，可以使用的下一个伤害值的索引，即第一个大于 <span class="arithmatex">\(x + 2\)</span> 的伤害值的索引，我们可以使用二分查找来找到这个索引，记录在数组 <span class="arithmatex">\(\textit{nxt}\)</span> 中。</p>
+<p>接下来，我们定义一个函数 <span class="arithmatex">\(\textit{dfs}\)</span>，用来计算从第 <span class="arithmatex">\(i\)</span> 个伤害值开始，可以获得的最大伤害值。</p>
+<p>在 <span class="arithmatex">\(\textit{dfs}\)</span> 函数中，我们可以选择跳过当前伤害值，那么我们可以跳过当前伤害值的所有相同伤害值，直接跳到 <span class="arithmatex">\(i + \textit{cnt}[x]\)</span>，可以获得的伤害值为 <span class="arithmatex">\(\textit{dfs}(i + \textit{cnt}[x])\)</span>；或者我们可以选择使用当前伤害值，那么我们可以使用当前伤害值的所有相同伤害值，然后跳到下一个伤害值的索引，可以获得的伤害值为 <span class="arithmatex">\(x \times \textit{cnt}[x] + \textit{dfs}(\textit{nxt}[i])\)</span>，其中 <span class="arithmatex">\(\textit{nxt}[i]\)</span> 表示第一个大于 <span class="arithmatex">\(x + 2\)</span> 的伤害值的索引。我们取这两种情况的最大值作为函数的返回值。</p>
+<p>为了避免重复计算，我们可以使用记忆化搜索，将已经计算过的结果保存在数组 <span class="arithmatex">\(\textit{f}\)</span> 中，这样在计算 <span class="arithmatex">\(\textit{dfs}(i)\)</span> 时，如果 <span class="arithmatex">\(\textit{f}[i]\)</span> 不为 <span class="arithmatex">\(0\)</span>，则直接返回 <span class="arithmatex">\(\textit{f}[i]\)</span>。</p>
+<p>答案即为 <span class="arithmatex">\(\textit{dfs}(0)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{power}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91412,11 +91410,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

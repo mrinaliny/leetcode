@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90886,14 +90884,14 @@
 
 <h3 id="_3">方法一：树状数组</h3>
 <p>本题属于二维偏序问题。</p>
-<p>二维偏序是这样一类问题：给定若干个点对 $(a_1, b_1)$, $(a_2, b_2)$, $\cdots$, $(a_n, b_n)$，并定义某种偏序关系，现在给定点 $(a_i, b_i)$，求满足偏序关系的点对 $(a_j, b_j)$ 中的数量/最值。即：</p>
-<p>$$
+<p>二维偏序是这样一类问题：给定若干个点对 <span class="arithmatex">\((a_1, b_1)\)</span>, <span class="arithmatex">\((a_2, b_2)\)</span>, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\((a_n, b_n)\)</span>，并定义某种偏序关系，现在给定点 <span class="arithmatex">\((a_i, b_i)\)</span>，求满足偏序关系的点对 <span class="arithmatex">\((a_j, b_j)\)</span> 中的数量/最值。即：</p>
+<div class="arithmatex">\[
 \left(a_{j}, b_{j}\right) \prec\left(a_{i}, b_{i}\right) \stackrel{\text { def }}{=} a_{j} \lesseqgtr a_{i} \text { and } b_{j} \lesseqgtr b_{i}
-$$</p>
+\]</div>
 <p>二维偏序的一般解决方法是排序一维，用数据结构处理第二维（这种数据结构一般是树状数组）。</p>
-<p>对于本题，我们可以创建一个数组 $nums$，其中 $nums[i]=(nums_1[i], nums_2[i])$，然后对 $nums$ 按照 $nums_1$ 从大到小的顺序排序，将查询 $queries$ 也按照 $x$ 从大到小的顺序排序。</p>
-<p>接下来，遍历每个查询 $queries[i] = (x, y)$，对于当前查询，我们循环将 $nums$ 中所有大于等于 $x$ 的元素的 $nums_2$ 的值插入到树状数组中，树状数组维护的是离散化后的 $nums_2$ 的区间中 $nums_1 + nums_2$ 的最大值。那么我们只需要在树状数组中查询大于等于离散化后的 $y$ 区间对应的最大值即可。注意，由于树状数组维护的是前缀最大值，所以我们在实现上，可以将 $nums_2$ 反序插入到树状数组中。</p>
-<p>时间复杂度 $O((n + m) \times \log n + m \times \log m)$，空间复杂度 $O(n + m)$。其中 $n$ 是数组 $nums$ 的长度，而 $m$ 是数组 $queries$ 的长度。</p>
+<p>对于本题，我们可以创建一个数组 <span class="arithmatex">\(nums\)</span>，其中 <span class="arithmatex">\(nums[i]=(nums_1[i], nums_2[i])\)</span>，然后对 <span class="arithmatex">\(nums\)</span> 按照 <span class="arithmatex">\(nums_1\)</span> 从大到小的顺序排序，将查询 <span class="arithmatex">\(queries\)</span> 也按照 <span class="arithmatex">\(x\)</span> 从大到小的顺序排序。</p>
+<p>接下来，遍历每个查询 <span class="arithmatex">\(queries[i] = (x, y)\)</span>，对于当前查询，我们循环将 <span class="arithmatex">\(nums\)</span> 中所有大于等于 <span class="arithmatex">\(x\)</span> 的元素的 <span class="arithmatex">\(nums_2\)</span> 的值插入到树状数组中，树状数组维护的是离散化后的 <span class="arithmatex">\(nums_2\)</span> 的区间中 <span class="arithmatex">\(nums_1 + nums_2\)</span> 的最大值。那么我们只需要在树状数组中查询大于等于离散化后的 <span class="arithmatex">\(y\)</span> 区间对应的最大值即可。注意，由于树状数组维护的是前缀最大值，所以我们在实现上，可以将 <span class="arithmatex">\(nums_2\)</span> 反序插入到树状数组中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + m) \times \log n + m \times \log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度，而 <span class="arithmatex">\(m\)</span> 是数组 <span class="arithmatex">\(queries\)</span> 的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2900-2999/2940.Find%20Building%20Where%20Alice%20and%20Bob%20Can%20Meet/README.md">2940. 找到 Alice 和 Bob 可以相遇的建筑</a></li>
@@ -91694,11 +91692,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

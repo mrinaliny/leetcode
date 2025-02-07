@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86067,14 +86065,14 @@ You can skip the first and third rest to arrive in ((7/2 + <u>0</u>) + (3/2 + 0)
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the shortest time considering the first $i$ roads and exactly skipping $j$ rest times. Initially, $f[0][0]=0$, and the rest $f[i][j]=\infty$.</p>
-<p>Since we can choose to skip or not skip the rest time of the $i$-th road, we can list the state transition equation:</p>
-<p>$$
-f[i][j]=\min\left{\begin{aligned} \lceil f[i-1][j]+\frac{d_i}{s}\rceil &amp; \textit{Do not skip the rest time of the $i$-th road} \ f[i-1][j-1]+\frac{d_i}{s} &amp; \textit{Skip the rest time of the $i$-th road} \end{aligned}\right.
-$$</p>
-<p>Where $\lceil x\rceil$ represents rounding $x$ up. It should be noted that since we need to ensure that exactly $j$ rest times are skipped, we must have $j\le i$; moreover, if $j=0$, no rest time can be skipped.</p>
-<p>Due to the possible precision error brought by floating-point operations and rounding up, we introduce a constant $eps = 10^{-8}$ to represent a very small positive real number. We subtract $eps$ before rounding the floating-point number, and finally, when comparing $f[n][j]$ and $hoursBefore$, we need to add $eps$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$, where $n$ is the number of roads.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the shortest time considering the first <span class="arithmatex">\(i\)</span> roads and exactly skipping <span class="arithmatex">\(j\)</span> rest times. Initially, <span class="arithmatex">\(f[0][0]=0\)</span>, and the rest <span class="arithmatex">\(f[i][j]=\infty\)</span>.</p>
+<p>Since we can choose to skip or not skip the rest time of the <span class="arithmatex">\(i\)</span>-th road, we can list the state transition equation:</p>
+<div class="arithmatex">\[
+f[i][j]=\min\left\{\begin{aligned} \lceil f[i-1][j]+\frac{d_i}{s}\rceil &amp; \textit{Do not skip the rest time of the $i$-th road} \\ f[i-1][j-1]+\frac{d_i}{s} &amp; \textit{Skip the rest time of the $i$-th road} \end{aligned}\right.
+\]</div>
+<p>Where <span class="arithmatex">\(\lceil x\rceil\)</span> represents rounding <span class="arithmatex">\(x\)</span> up. It should be noted that since we need to ensure that exactly <span class="arithmatex">\(j\)</span> rest times are skipped, we must have <span class="arithmatex">\(j\le i\)</span>; moreover, if <span class="arithmatex">\(j=0\)</span>, no rest time can be skipped.</p>
+<p>Due to the possible precision error brought by floating-point operations and rounding up, we introduce a constant <span class="arithmatex">\(eps = 10^{-8}\)</span> to represent a very small positive real number. We subtract <span class="arithmatex">\(eps\)</span> before rounding the floating-point number, and finally, when comparing <span class="arithmatex">\(f[n][j]\)</span> and <span class="arithmatex">\(hoursBefore\)</span>, we need to add <span class="arithmatex">\(eps\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of roads.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Python3</label><label for="__tabbed_1_3">Java</label><label for="__tabbed_1_4">C++</label><label for="__tabbed_1_5">Go</label><label for="__tabbed_1_6">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86588,11 +86586,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

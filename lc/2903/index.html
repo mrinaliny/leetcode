@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,11 +90861,11 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
 <!-- solution:start -->
 
 <h3 id="_3">方法一：双指针 + 维护最大最小值</h3>
-<p>我们用两个指针 $i$ 和 $j$ 来维护一个间隔为 $indexDifference$ 的滑动窗口，其中指针 $j$ 和 $i$ 分别指向窗口的左右边界。初始时 $i$ 指向 $indexDifference$，而 $j$ 指向 $0$。</p>
-<p>我们用 $mi$ 和 $mx$ 来维护指针 $j$ 左侧区间的最小值下标和最大值下标。</p>
-<p>当指针 $i$ 向右移动时，我们需要更新 $mi$ 和 $mx$。如果 $nums[j] &lt; nums[mi]$，则 $mi$ 更新为 $j$；如果 $nums[j] &gt; nums[mx]$，则 $mx$ 更新为 $j$。更新完 $mi$ 和 $mx$ 后，我们就可以判断是否找到了满足条件的下标对。如果 $nums[i] - nums[mi] \geq valueDifference$，则找到了满足条件的下标对 $[mi, i]$；如果 $nums[mx] - nums[i] \geq valueDifference$，则找到了满足条件的下标对 $[mx, i]$。</p>
-<p>如果指针 $i$ 移动到了数组的末尾，说明没有找到满足条件的下标对，返回 $[-1, -1]$。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是数组的长度。空间复杂度 $O(1)$。</p>
+<p>我们用两个指针 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 来维护一个间隔为 <span class="arithmatex">\(indexDifference\)</span> 的滑动窗口，其中指针 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(i\)</span> 分别指向窗口的左右边界。初始时 <span class="arithmatex">\(i\)</span> 指向 <span class="arithmatex">\(indexDifference\)</span>，而 <span class="arithmatex">\(j\)</span> 指向 <span class="arithmatex">\(0\)</span>。</p>
+<p>我们用 <span class="arithmatex">\(mi\)</span> 和 <span class="arithmatex">\(mx\)</span> 来维护指针 <span class="arithmatex">\(j\)</span> 左侧区间的最小值下标和最大值下标。</p>
+<p>当指针 <span class="arithmatex">\(i\)</span> 向右移动时，我们需要更新 <span class="arithmatex">\(mi\)</span> 和 <span class="arithmatex">\(mx\)</span>。如果 <span class="arithmatex">\(nums[j] &lt; nums[mi]\)</span>，则 <span class="arithmatex">\(mi\)</span> 更新为 <span class="arithmatex">\(j\)</span>；如果 <span class="arithmatex">\(nums[j] &gt; nums[mx]\)</span>，则 <span class="arithmatex">\(mx\)</span> 更新为 <span class="arithmatex">\(j\)</span>。更新完 <span class="arithmatex">\(mi\)</span> 和 <span class="arithmatex">\(mx\)</span> 后，我们就可以判断是否找到了满足条件的下标对。如果 <span class="arithmatex">\(nums[i] - nums[mi] \geq valueDifference\)</span>，则找到了满足条件的下标对 <span class="arithmatex">\([mi, i]\)</span>；如果 <span class="arithmatex">\(nums[mx] - nums[i] \geq valueDifference\)</span>，则找到了满足条件的下标对 <span class="arithmatex">\([mx, i]\)</span>。</p>
+<p>如果指针 <span class="arithmatex">\(i\)</span> 移动到了数组的末尾，说明没有找到满足条件的下标对，返回 <span class="arithmatex">\([-1, -1]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91367,11 +91365,9 @@ abs(0 - 0) &gt;= 0 且 abs(nums[0] - nums[0]) &gt;= 0 。
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

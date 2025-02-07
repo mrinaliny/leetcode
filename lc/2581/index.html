@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90890,12 +90888,12 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：树形 DP（换根）</h3>
-<p>我们先遍历题目给定的边集合 $edges$，将其转换为邻接表 $g$，其中 $g[i]$ 表示节点 $i$ 的所有邻接节点。用哈希表 $gs$ 记录题目给定的猜测集合 $guesses$。</p>
-<p>接下来，我们先从节点 $0$ 开始，进行一次 DFS，统计从节点 $0$ 出发，能够到达的所有节点中，有多少条边在 $guesses$ 中。我们用变量 $cnt$ 记录这个数量。</p>
-<p>然后，我们再从节点 $0$ 开始，进行一次 DFS，统计以每个点为根的树中，有多少条边在 $guesses$ 中。如果这个数量大于等于 $k$，则说明该节点是一个可能的根节点，我们将答案加 $1$。</p>
-<p>因此，问题就转化为了求以每个点为根的树中，有多少条边在 $guesses$ 中。我们已经知道了从节点 $0$ 出发，能够到达的所有节点中，有多少条边在 $guesses$ 中，即 $cnt$。我们可以通过在 DFS 中，将 $cnt$ 的值加上或减去当前边是否在 $guesses$ 中，来维护这个值。</p>
-<p>假设我们当前遍历到节点 $i$，此时 $cnt$ 表示以 $i$ 为根节点，有多少条边在 $guesses$ 中。那么对于 $i$ 的每个邻接节点 $j$，我们要计算以 $j$ 为根节点，有多少条边在 $guesses$ 中。如果 $(i, j)$ 在 $guesses$ 中，那么以 $j$ 为根节点的，就不存在 $(i, j)$ 这条边，因此 $cnt$ 的值要减去 $1$。如果 $(j, i)$ 在 $guesses$ 中，那么以 $j$ 为根节点的，要多出一条 $(i, j)$ 这条边，因此 $cnt$ 的值要加上 $1$。即 $f[j] = f[i] + (j, i) \in guesses - (i, j) \in guesses$。其中 $f[i]$ 表示以 $i$ 为根节点，有多少条边在 $guesses$ 中。</p>
-<p>时间复杂度 $O(n + m)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别为 $edges$ 和 $guesses$ 的长度。</p>
+<p>我们先遍历题目给定的边集合 <span class="arithmatex">\(edges\)</span>，将其转换为邻接表 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[i]\)</span> 表示节点 <span class="arithmatex">\(i\)</span> 的所有邻接节点。用哈希表 <span class="arithmatex">\(gs\)</span> 记录题目给定的猜测集合 <span class="arithmatex">\(guesses\)</span>。</p>
+<p>接下来，我们先从节点 <span class="arithmatex">\(0\)</span> 开始，进行一次 DFS，统计从节点 <span class="arithmatex">\(0\)</span> 出发，能够到达的所有节点中，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中。我们用变量 <span class="arithmatex">\(cnt\)</span> 记录这个数量。</p>
+<p>然后，我们再从节点 <span class="arithmatex">\(0\)</span> 开始，进行一次 DFS，统计以每个点为根的树中，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中。如果这个数量大于等于 <span class="arithmatex">\(k\)</span>，则说明该节点是一个可能的根节点，我们将答案加 <span class="arithmatex">\(1\)</span>。</p>
+<p>因此，问题就转化为了求以每个点为根的树中，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中。我们已经知道了从节点 <span class="arithmatex">\(0\)</span> 出发，能够到达的所有节点中，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中，即 <span class="arithmatex">\(cnt\)</span>。我们可以通过在 DFS 中，将 <span class="arithmatex">\(cnt\)</span> 的值加上或减去当前边是否在 <span class="arithmatex">\(guesses\)</span> 中，来维护这个值。</p>
+<p>假设我们当前遍历到节点 <span class="arithmatex">\(i\)</span>，此时 <span class="arithmatex">\(cnt\)</span> 表示以 <span class="arithmatex">\(i\)</span> 为根节点，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中。那么对于 <span class="arithmatex">\(i\)</span> 的每个邻接节点 <span class="arithmatex">\(j\)</span>，我们要计算以 <span class="arithmatex">\(j\)</span> 为根节点，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中。如果 <span class="arithmatex">\((i, j)\)</span> 在 <span class="arithmatex">\(guesses\)</span> 中，那么以 <span class="arithmatex">\(j\)</span> 为根节点的，就不存在 <span class="arithmatex">\((i, j)\)</span> 这条边，因此 <span class="arithmatex">\(cnt\)</span> 的值要减去 <span class="arithmatex">\(1\)</span>。如果 <span class="arithmatex">\((j, i)\)</span> 在 <span class="arithmatex">\(guesses\)</span> 中，那么以 <span class="arithmatex">\(j\)</span> 为根节点的，要多出一条 <span class="arithmatex">\((i, j)\)</span> 这条边，因此 <span class="arithmatex">\(cnt\)</span> 的值要加上 <span class="arithmatex">\(1\)</span>。即 <span class="arithmatex">\(f[j] = f[i] + (j, i) \in guesses - (i, j) \in guesses\)</span>。其中 <span class="arithmatex">\(f[i]\)</span> 表示以 <span class="arithmatex">\(i\)</span> 为根节点，有多少条边在 <span class="arithmatex">\(guesses\)</span> 中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n + m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为 <span class="arithmatex">\(edges\)</span> 和 <span class="arithmatex">\(guesses\)</span> 的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0800-0899/0834.Sum%20of%20Distances%20in%20Tree/README.md">834. 树中距离之和</a></li>
@@ -91591,11 +91589,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

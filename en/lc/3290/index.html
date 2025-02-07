@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86048,15 +86046,15 @@ We can choose the indices 0, 1, 3, and 4. The score will be <code>(-1) * (-5) + 
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization">Solution 1: Memoization</h3>
-<p>We design a function $\textit{dfs}(i, j)$, which represents the maximum score that can be obtained starting from the $i$-th element of array $a$ and the $j$-th element of array $b$. Then the answer is $\textit{dfs}(0, 0)$.</p>
-<p>The function $\textit{dfs}(i, j)$ is calculated as follows:</p>
+<p>We design a function <span class="arithmatex">\(\textit{dfs}(i, j)\)</span>, which represents the maximum score that can be obtained starting from the <span class="arithmatex">\(i\)</span>-th element of array <span class="arithmatex">\(a\)</span> and the <span class="arithmatex">\(j\)</span>-th element of array <span class="arithmatex">\(b\)</span>. Then the answer is <span class="arithmatex">\(\textit{dfs}(0, 0)\)</span>.</p>
+<p>The function <span class="arithmatex">\(\textit{dfs}(i, j)\)</span> is calculated as follows:</p>
 <ul>
-<li>If $j \geq \text{len}(b)$, it means array $b$ has been completely traversed. At this point, if array $a$ has also been completely traversed, return $0$; otherwise, return negative infinity.</li>
-<li>If $i \geq \text{len}(a)$, it means array $a$ has been completely traversed. Return $0$.</li>
-<li>Otherwise, we can either skip the $j$-th element of array $b$ and move to the next element, i.e., $\textit{dfs}(i, j + 1)$; or we can choose the $j$-th element of array $b$, in which case the score is $a[i] \times b[j]$ plus $\textit{dfs}(i + 1, j + 1)$. We take the maximum of these two values as the return value of $\textit{dfs}(i, j)$.</li>
+<li>If <span class="arithmatex">\(j \geq \text{len}(b)\)</span>, it means array <span class="arithmatex">\(b\)</span> has been completely traversed. At this point, if array <span class="arithmatex">\(a\)</span> has also been completely traversed, return <span class="arithmatex">\(0\)</span>; otherwise, return negative infinity.</li>
+<li>If <span class="arithmatex">\(i \geq \text{len}(a)\)</span>, it means array <span class="arithmatex">\(a\)</span> has been completely traversed. Return <span class="arithmatex">\(0\)</span>.</li>
+<li>Otherwise, we can either skip the <span class="arithmatex">\(j\)</span>-th element of array <span class="arithmatex">\(b\)</span> and move to the next element, i.e., <span class="arithmatex">\(\textit{dfs}(i, j + 1)\)</span>; or we can choose the <span class="arithmatex">\(j\)</span>-th element of array <span class="arithmatex">\(b\)</span>, in which case the score is <span class="arithmatex">\(a[i] \times b[j]\)</span> plus <span class="arithmatex">\(\textit{dfs}(i + 1, j + 1)\)</span>. We take the maximum of these two values as the return value of <span class="arithmatex">\(\textit{dfs}(i, j)\)</span>.</li>
 </ul>
 <p>We can use memoization to avoid redundant calculations.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the lengths of arrays $a$ and $b$, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of arrays <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86504,11 +86502,9 @@ We can choose the indices 0, 1, 3, and 4. The score will be <code>(-1) * (-5) + 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

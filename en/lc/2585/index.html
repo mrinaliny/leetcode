@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,14 +86068,14 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ to represent the number of methods to get $j$ points exactly from the first $i$ types of questions. Initially, $f[0][0] = 1$, and the rest $f[i][j] = 0$. The answer is $f[n][target]$.</p>
-<p>We can enumerate the $i$th type of questions, suppose the number of questions of this type is $count$, and the score is $marks$. Then we can get the following state transition equation:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> to represent the number of methods to get <span class="arithmatex">\(j\)</span> points exactly from the first <span class="arithmatex">\(i\)</span> types of questions. Initially, <span class="arithmatex">\(f[0][0] = 1\)</span>, and the rest <span class="arithmatex">\(f[i][j] = 0\)</span>. The answer is <span class="arithmatex">\(f[n][target]\)</span>.</p>
+<p>We can enumerate the <span class="arithmatex">\(i\)</span>th type of questions, suppose the number of questions of this type is <span class="arithmatex">\(count\)</span>, and the score is <span class="arithmatex">\(marks\)</span>. Then we can get the following state transition equation:</p>
+<div class="arithmatex">\[
 f[i][j] = \sum_{k=0}^{count} f[i-1][j-k \times marks]
-$$</p>
-<p>where $k$ represents the number of questions of the $i$th type.</p>
-<p>The final answer is $f[n][target]$. Note that the answer may be very large and needs to be modulo $10^9 + 7$.</p>
-<p>The time complexity is $O(n \times target \times count)$ and the space complexity is $O(n \times target)$. $n$ is the number of types of questions, and $target$ and $count$ are the target score and the number of questions of each type, respectively.</p>
+\]</div>
+<p>where <span class="arithmatex">\(k\)</span> represents the number of questions of the <span class="arithmatex">\(i\)</span>th type.</p>
+<p>The final answer is <span class="arithmatex">\(f[n][target]\)</span>. Note that the answer may be very large and needs to be modulo <span class="arithmatex">\(10^9 + 7\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times target \times count)\)</span> and the space complexity is <span class="arithmatex">\(O(n \times target)\)</span>. <span class="arithmatex">\(n\)</span> is the number of types of questions, and <span class="arithmatex">\(target\)</span> and <span class="arithmatex">\(count\)</span> are the target score and the number of questions of each type, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86506,11 +86504,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

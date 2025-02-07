@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90850,21 +90848,21 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>注意到数组 <code>nums</code> 在修改之后，任意长度为 $k$ 的区间异或结果都等于 $0$，那么对于任意的 $i$，都有：</p>
-<p>$$
+<p>注意到数组 <code>nums</code> 在修改之后，任意长度为 <span class="arithmatex">\(k\)</span> 的区间异或结果都等于 <span class="arithmatex">\(0\)</span>，那么对于任意的 <span class="arithmatex">\(i\)</span>，都有：</p>
+<div class="arithmatex">\[
 nums[i] \oplus nums[i+1] \oplus ... \oplus nums[i+k-1] = 0
-$$</p>
+\]</div>
 <p>以及</p>
-<p>$$
+<div class="arithmatex">\[
 nums[i+1] \oplus nums[i+2] \oplus ... \oplus nums[i+k] = 0
-$$</p>
-<p>结合上面两个等式以及异或运算的性质，可以得到 $nums[i] \oplus nums[i+k] = 0$，即 $nums[i]=nums[i+k]$，我们发现，修改后的数组 <code>nums</code> 中的元素是以周期为 $k$ 的循环，对模 $k$ 同余的一组数必然只能取固定值，同时需要满足前 $k$ 个数异或结果为 $0$。</p>
-<p>我们先对每一组 $i$ 进行计数，每一组的元素个数为 $size[i]$，每一组值为 $v$ 的元素个数为 $cnt[i][v]$。</p>
-<p>接下来，我们可以用动态规划来求解。设 $f[i][j]$ 表示前 $i+1$ 组异或和为 $j$ 的最小修改次数。由于每一组的值只与前一组的值有关，因此我们可以用滚动数组优化空间复杂度。</p>
-<p>重新定义 $f[j]$ 表示处理到当前组，且异或和为 $j$ 的最小修改次数。</p>
-<p>状态转移时，有两种选择：一是将当前组的数全部都修改为同一个值，那么我们可以选择上一个代价最小的那个，加上这一组的元素个数 $size[i]$，此时的代价为 $\min{f[0..n]} + size[i]$；二是将当前组的数全部修改为当前组的某个值 $j$，枚举 $j$ 以及当前组的元素 $v$，那么前面的代价为 $f[j \oplus v]$，此时的代价为 $f[j \oplus v] + size[i] - cnt[i][v]$。取最小值即可。</p>
-<p>最终答案为 $f[0]$。</p>
-<p>时间复杂度 $O(2^{C}\times k + n)$。其中 $n$ 是数组 <code>nums</code> 的长度，而 $C$ 为 <code>nums</code> 中元素二进制表示的最大位数，本题中 $C=10$。</p>
+\]</div>
+<p>结合上面两个等式以及异或运算的性质，可以得到 <span class="arithmatex">\(nums[i] \oplus nums[i+k] = 0\)</span>，即 <span class="arithmatex">\(nums[i]=nums[i+k]\)</span>，我们发现，修改后的数组 <code>nums</code> 中的元素是以周期为 <span class="arithmatex">\(k\)</span> 的循环，对模 <span class="arithmatex">\(k\)</span> 同余的一组数必然只能取固定值，同时需要满足前 <span class="arithmatex">\(k\)</span> 个数异或结果为 <span class="arithmatex">\(0\)</span>。</p>
+<p>我们先对每一组 <span class="arithmatex">\(i\)</span> 进行计数，每一组的元素个数为 <span class="arithmatex">\(size[i]\)</span>，每一组值为 <span class="arithmatex">\(v\)</span> 的元素个数为 <span class="arithmatex">\(cnt[i][v]\)</span>。</p>
+<p>接下来，我们可以用动态规划来求解。设 <span class="arithmatex">\(f[i][j]\)</span> 表示前 <span class="arithmatex">\(i+1\)</span> 组异或和为 <span class="arithmatex">\(j\)</span> 的最小修改次数。由于每一组的值只与前一组的值有关，因此我们可以用滚动数组优化空间复杂度。</p>
+<p>重新定义 <span class="arithmatex">\(f[j]\)</span> 表示处理到当前组，且异或和为 <span class="arithmatex">\(j\)</span> 的最小修改次数。</p>
+<p>状态转移时，有两种选择：一是将当前组的数全部都修改为同一个值，那么我们可以选择上一个代价最小的那个，加上这一组的元素个数 <span class="arithmatex">\(size[i]\)</span>，此时的代价为 <span class="arithmatex">\(\min{f[0..n]} + size[i]\)</span>；二是将当前组的数全部修改为当前组的某个值 <span class="arithmatex">\(j\)</span>，枚举 <span class="arithmatex">\(j\)</span> 以及当前组的元素 <span class="arithmatex">\(v\)</span>，那么前面的代价为 <span class="arithmatex">\(f[j \oplus v]\)</span>，此时的代价为 <span class="arithmatex">\(f[j \oplus v] + size[i] - cnt[i][v]\)</span>。取最小值即可。</p>
+<p>最终答案为 <span class="arithmatex">\(f[0]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(2^{C}\times k + n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <code>nums</code> 的长度，而 <span class="arithmatex">\(C\)</span> 为 <code>nums</code> 中元素二进制表示的最大位数，本题中 <span class="arithmatex">\(C=10\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91324,11 +91322,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

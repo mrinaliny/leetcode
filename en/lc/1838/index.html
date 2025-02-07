@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86087,14 +86085,14 @@ Explanation:</strong> Increment the first element three times and the second ele
 <h3 id="solution-1-sorting-prefix-sum-binary-search">Solution 1: Sorting + Prefix Sum + Binary Search</h3>
 <p>According to the problem description, we can draw three conclusions:</p>
 <ol>
-<li>After several operations, the element with the highest frequency in the array must be an element in the original array. Why? Suppose the elements operated are $a_1, a_2, \cdots, a_m$, where the maximum is $a_m$. These elements have all been changed to the same value $x$, where $x \geq a_m$. Then we can also change these elements all to $a_m$, and the number of operations will not increase.</li>
+<li>After several operations, the element with the highest frequency in the array must be an element in the original array. Why? Suppose the elements operated are <span class="arithmatex">\(a_1, a_2, \cdots, a_m\)</span>, where the maximum is <span class="arithmatex">\(a_m\)</span>. These elements have all been changed to the same value <span class="arithmatex">\(x\)</span>, where <span class="arithmatex">\(x \geq a_m\)</span>. Then we can also change these elements all to <span class="arithmatex">\(a_m\)</span>, and the number of operations will not increase.</li>
 <li>The elements operated must be a continuous subarray in the sorted array.</li>
-<li>If a frequency $m$ satisfies the condition, then all $m' &lt; m$ also satisfy the condition. This inspires us to consider using binary search to find the maximum frequency that satisfies the condition.</li>
+<li>If a frequency <span class="arithmatex">\(m\)</span> satisfies the condition, then all <span class="arithmatex">\(m' &lt; m\)</span> also satisfy the condition. This inspires us to consider using binary search to find the maximum frequency that satisfies the condition.</li>
 </ol>
-<p>Therefore, we can sort the array $nums$ and then calculate the prefix sum array $s$ of the sorted array, where $s[i]$ represents the sum of the first $i$ elements.</p>
-<p>Next, we define the left boundary of the binary search as $l = 1$, and the right boundary as $r = n$. For each binary search, we take the middle value $m = (l + r + 1) / 2$, and then check whether there exists a continuous subarray of length $m$ such that all elements in the subarray can be changed to an element in the array, and the number of operations does not exceed $k$. If such a subarray exists, we can update the left boundary $l$ to $m$, otherwise update the right boundary $r$ to $m - 1$.</p>
-<p>Finally, return the left boundary $l$.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Where $n$ is the length of the array $nums$.</p>
+<p>Therefore, we can sort the array <span class="arithmatex">\(nums\)</span> and then calculate the prefix sum array <span class="arithmatex">\(s\)</span> of the sorted array, where <span class="arithmatex">\(s[i]\)</span> represents the sum of the first <span class="arithmatex">\(i\)</span> elements.</p>
+<p>Next, we define the left boundary of the binary search as <span class="arithmatex">\(l = 1\)</span>, and the right boundary as <span class="arithmatex">\(r = n\)</span>. For each binary search, we take the middle value <span class="arithmatex">\(m = (l + r + 1) / 2\)</span>, and then check whether there exists a continuous subarray of length <span class="arithmatex">\(m\)</span> such that all elements in the subarray can be changed to an element in the array, and the number of operations does not exceed <span class="arithmatex">\(k\)</span>. If such a subarray exists, we can update the left boundary <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(m\)</span>, otherwise update the right boundary <span class="arithmatex">\(r\)</span> to <span class="arithmatex">\(m - 1\)</span>.</p>
+<p>Finally, return the left boundary <span class="arithmatex">\(l\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86386,9 +86384,9 @@ Explanation:</strong> Increment the first element three times and the second ele
 <!-- solution:start -->
 
 <h3 id="solution-2-sorting-two-pointers">Solution 2: Sorting + Two Pointers</h3>
-<p>We can also use two pointers to maintain a sliding window, where all elements in the window can be changed to the maximum value in the window. The number of operations for the elements in the window is $s$, and $s \leq k$.</p>
-<p>Initially, we set the left pointer $j$ to point to the first element of the array, and the right pointer $i$ also points to the first element of the array. Next, we move the right pointer $i$ each time, changing all elements in the window to $nums[i]$. At this time, the number of operations to be increased is $(nums[i] - nums[i - 1]) \times (i - j)$. If this number of operations exceeds $k$, then we need to move the left pointer $j$ until the number of operations for the elements in the window does not exceed $k$. Then, we update the answer to the maximum length of the window.</p>
-<p>The time complexity is $O(n \log n)$, and the space complexity is $O(\log n)$. Where $n$ is the length of the array $nums$.</p>
+<p>We can also use two pointers to maintain a sliding window, where all elements in the window can be changed to the maximum value in the window. The number of operations for the elements in the window is <span class="arithmatex">\(s\)</span>, and <span class="arithmatex">\(s \leq k\)</span>.</p>
+<p>Initially, we set the left pointer <span class="arithmatex">\(j\)</span> to point to the first element of the array, and the right pointer <span class="arithmatex">\(i\)</span> also points to the first element of the array. Next, we move the right pointer <span class="arithmatex">\(i\)</span> each time, changing all elements in the window to <span class="arithmatex">\(nums[i]\)</span>. At this time, the number of operations to be increased is <span class="arithmatex">\((nums[i] - nums[i - 1]) \times (i - j)\)</span>. If this number of operations exceeds <span class="arithmatex">\(k\)</span>, then we need to move the left pointer <span class="arithmatex">\(j\)</span> until the number of operations for the elements in the window does not exceed <span class="arithmatex">\(k\)</span>. Then, we update the answer to the maximum length of the window.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86775,11 +86773,9 @@ Explanation:</strong> Increment the first element three times and the second ele
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

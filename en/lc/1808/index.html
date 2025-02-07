@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,17 +86066,17 @@ There is not other value of n that has at most 5 prime factors and more nice div
 <!-- solution:start -->
 
 <h3 id="solution-1-problem-transformation-fast-power">Solution 1: Problem Transformation + Fast Power</h3>
-<p>We can factorize $n$ into prime factors, i.e., $n = a_1^{k_1} \times a_2^{k_2} \times\cdots \times a_m^{k_m}$, where $a_i$ is a prime factor and $k_i$ is the exponent of the prime factor $a_i$. Since the number of prime factors of $n$ does not exceed <code>primeFactors</code>, we have $k_1 + k_2 + \cdots + k_m \leq primeFactors$.</p>
-<p>According to the problem description, we know that a good factor of $n$ must be divisible by all prime factors, which means that a good factor of $n$ needs to include $a_1 \times a_2 \times \cdots \times a_m$ as a factor. Then the number of good factors $k= k_1 \times k_2 \times \cdots \times k_m$, i.e., $k$ is the product of $k_1, k_2, \cdots, k_m$. To maximize the number of good factors, we need to split <code>primeFactors</code> into $k_1, k_2, \cdots, k_m$ to make $k_1 \times k_2 \times \cdots \times k_m$ the largest. Therefore, the problem is transformed into: split the integer <code>primeFactors</code> into the product of several integers to maximize the product.</p>
+<p>We can factorize <span class="arithmatex">\(n\)</span> into prime factors, i.e., <span class="arithmatex">\(n = a_1^{k_1} \times a_2^{k_2} \times\cdots \times a_m^{k_m}\)</span>, where <span class="arithmatex">\(a_i\)</span> is a prime factor and <span class="arithmatex">\(k_i\)</span> is the exponent of the prime factor <span class="arithmatex">\(a_i\)</span>. Since the number of prime factors of <span class="arithmatex">\(n\)</span> does not exceed <code>primeFactors</code>, we have <span class="arithmatex">\(k_1 + k_2 + \cdots + k_m \leq primeFactors\)</span>.</p>
+<p>According to the problem description, we know that a good factor of <span class="arithmatex">\(n\)</span> must be divisible by all prime factors, which means that a good factor of <span class="arithmatex">\(n\)</span> needs to include <span class="arithmatex">\(a_1 \times a_2 \times \cdots \times a_m\)</span> as a factor. Then the number of good factors <span class="arithmatex">\(k= k_1 \times k_2 \times \cdots \times k_m\)</span>, i.e., <span class="arithmatex">\(k\)</span> is the product of <span class="arithmatex">\(k_1, k_2, \cdots, k_m\)</span>. To maximize the number of good factors, we need to split <code>primeFactors</code> into <span class="arithmatex">\(k_1, k_2, \cdots, k_m\)</span> to make <span class="arithmatex">\(k_1 \times k_2 \times \cdots \times k_m\)</span> the largest. Therefore, the problem is transformed into: split the integer <code>primeFactors</code> into the product of several integers to maximize the product.</p>
 <p>Next, we just need to discuss different cases.</p>
 <ul>
-<li>If $primeFactors \lt 4$, then directly return <code>primeFactors</code>.</li>
-<li>If $primeFactors$ is a multiple of $3$, then we split <code>primeFactors</code> into multiples of $3$, i.e., $3^{\frac{primeFactors}{3}}$.</li>
-<li>If $primeFactors$ modulo $3$ equals $1$, then we split <code>primeFactors</code> into $\frac{primeFactors}{3} - 1$ multiples of $3$, and then multiply by $4$, i.e., $3^{\frac{primeFactors}{3} - 1} \times 4$.</li>
-<li>If $primeFactors$ modulo $3$ equals $2$, then we split <code>primeFactors</code> into $\frac{primeFactors}{3}$ multiples of $3$, and then multiply by $2$, i.e., $3^{\frac{primeFactors}{3}} \times 2$.</li>
+<li>If <span class="arithmatex">\(primeFactors \lt 4\)</span>, then directly return <code>primeFactors</code>.</li>
+<li>If <span class="arithmatex">\(primeFactors\)</span> is a multiple of <span class="arithmatex">\(3\)</span>, then we split <code>primeFactors</code> into multiples of <span class="arithmatex">\(3\)</span>, i.e., <span class="arithmatex">\(3^{\frac{primeFactors}{3}}\)</span>.</li>
+<li>If <span class="arithmatex">\(primeFactors\)</span> modulo <span class="arithmatex">\(3\)</span> equals <span class="arithmatex">\(1\)</span>, then we split <code>primeFactors</code> into <span class="arithmatex">\(\frac{primeFactors}{3} - 1\)</span> multiples of <span class="arithmatex">\(3\)</span>, and then multiply by <span class="arithmatex">\(4\)</span>, i.e., <span class="arithmatex">\(3^{\frac{primeFactors}{3} - 1} \times 4\)</span>.</li>
+<li>If <span class="arithmatex">\(primeFactors\)</span> modulo <span class="arithmatex">\(3\)</span> equals <span class="arithmatex">\(2\)</span>, then we split <code>primeFactors</code> into <span class="arithmatex">\(\frac{primeFactors}{3}\)</span> multiples of <span class="arithmatex">\(3\)</span>, and then multiply by <span class="arithmatex">\(2\)</span>, i.e., <span class="arithmatex">\(3^{\frac{primeFactors}{3}} \times 2\)</span>.</li>
 </ul>
 <p>In the above process, we use fast power to calculate the modulus.</p>
-<p>The time complexity is $O(\log n)$, and the space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86550,11 +86548,9 @@ There is not other value of n that has at most 5 prime factors and more nice div
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

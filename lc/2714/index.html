@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,14 +90863,14 @@
 <!-- solution:start -->
 
 <h3 id="dijkstra">方法一：Dijkstra 算法</h3>
-<p>我们先根据给定的边构造出图 $g$，其中 $g[u]$ 表示节点 $u$ 的所有邻居节点以及对应的边权重。</p>
-<p>然后我们使用 Dijkstra 算法求出从节点 $s$ 到节点 $d$ 的最短路径，但是在这里我们需要对 Dijkstra 算法进行一些修改：</p>
+<p>我们先根据给定的边构造出图 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[u]\)</span> 表示节点 <span class="arithmatex">\(u\)</span> 的所有邻居节点以及对应的边权重。</p>
+<p>然后我们使用 Dijkstra 算法求出从节点 <span class="arithmatex">\(s\)</span> 到节点 <span class="arithmatex">\(d\)</span> 的最短路径，但是在这里我们需要对 Dijkstra 算法进行一些修改：</p>
 <ul>
-<li>我们需要记录每个节点 $u$ 到节点 $d$ 的最短路径长度，但是由于我们可以最多跨越 $k$ 条边，所以我们需要记录每个节点 $u$ 到节点 $d$ 的最短路径长度，以及跨越的边数 $t$，即 $dist[u][t]$ 表示从节点 $u$ 到节点 $d$ 的最短路径长度，且跨越的边数为 $t$。</li>
-<li>我们需要使用优先队列来维护当前的最短路径，但是由于我们需要记录跨越的边数，所以我们需要使用三元组 $(dis, u, t)$ 来表示当前的最短路径，其中 $dis$ 表示当前的最短路径长度，而 $u$ 和 $t$ 分别表示当前的节点和跨越的边数。</li>
+<li>我们需要记录每个节点 <span class="arithmatex">\(u\)</span> 到节点 <span class="arithmatex">\(d\)</span> 的最短路径长度，但是由于我们可以最多跨越 <span class="arithmatex">\(k\)</span> 条边，所以我们需要记录每个节点 <span class="arithmatex">\(u\)</span> 到节点 <span class="arithmatex">\(d\)</span> 的最短路径长度，以及跨越的边数 <span class="arithmatex">\(t\)</span>，即 <span class="arithmatex">\(dist[u][t]\)</span> 表示从节点 <span class="arithmatex">\(u\)</span> 到节点 <span class="arithmatex">\(d\)</span> 的最短路径长度，且跨越的边数为 <span class="arithmatex">\(t\)</span>。</li>
+<li>我们需要使用优先队列来维护当前的最短路径，但是由于我们需要记录跨越的边数，所以我们需要使用三元组 <span class="arithmatex">\((dis, u, t)\)</span> 来表示当前的最短路径，其中 <span class="arithmatex">\(dis\)</span> 表示当前的最短路径长度，而 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(t\)</span> 分别表示当前的节点和跨越的边数。</li>
 </ul>
-<p>最后我们只需要返回 $dist[d][0..k]$ 中的最小值即可。</p>
-<p>时间复杂度 $O(n^2 \times \log n)$，空间复杂度 $O(n \times k)$。其中 $n$ 表示节点数，而 $k$ 表示最多跨越的边数。</p>
+<p>最后我们只需要返回 <span class="arithmatex">\(dist[d][0..k]\)</span> 中的最小值即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2 \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示节点数，而 <span class="arithmatex">\(k\)</span> 表示最多跨越的边数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91385,11 +91383,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

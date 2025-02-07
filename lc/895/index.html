@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90874,9 +90872,9 @@ freqStack.pop ();//返回 4 ，因为 4, 5 和 7 出现频率最高，但 4 是�
 
 <h3 id="_3">方法一：哈希表 + 优先队列（大根堆）</h3>
 <p>根据题目描述，我们需要设计一个支持弹出“出现频率最高”的元素的数据结构。如果存在多个元素出现频率相同，那么弹出最接近栈顶的元素。</p>
-<p>我们可以使用哈希表 $cnt$ 记录每个元素出现的频率，用一个优先队列（大根堆） $q$ 维护元素频率以及对应的压栈时间戳。</p>
-<p>执行压栈操作时，我们先将当前时间戳加一，即 $ts \gets ts + 1$；然后将元素 $val$ 的频率加一，即 $cnt[val] \gets cnt[val] + 1$，最后将三元组 $(cnt[val], ts, val)$ 加入优先队列 $q$ 中。压栈操作的时间复杂度为 $O(\log n)$。</p>
-<p>执行弹栈操作时，我们直接从优先队列 $q$ 中弹出一个元素即可。由于优先队列 $q$ 中的元素按照频率降序排序，因此弹出的元素一定是出现频率最高的元素。如果存在多个元素出现频率相同，那么弹出最接近栈顶的元素，即弹出时间戳最大的元素。弹出后，我们将弹出元素的频率减一，即 $cnt[val] \gets cnt[val] - 1$。弹栈操作的时间复杂度为 $O(\log n)$。</p>
+<p>我们可以使用哈希表 <span class="arithmatex">\(cnt\)</span> 记录每个元素出现的频率，用一个优先队列（大根堆） <span class="arithmatex">\(q\)</span> 维护元素频率以及对应的压栈时间戳。</p>
+<p>执行压栈操作时，我们先将当前时间戳加一，即 <span class="arithmatex">\(ts \gets ts + 1\)</span>；然后将元素 <span class="arithmatex">\(val\)</span> 的频率加一，即 <span class="arithmatex">\(cnt[val] \gets cnt[val] + 1\)</span>，最后将三元组 <span class="arithmatex">\((cnt[val], ts, val)\)</span> 加入优先队列 <span class="arithmatex">\(q\)</span> 中。压栈操作的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span>。</p>
+<p>执行弹栈操作时，我们直接从优先队列 <span class="arithmatex">\(q\)</span> 中弹出一个元素即可。由于优先队列 <span class="arithmatex">\(q\)</span> 中的元素按照频率降序排序，因此弹出的元素一定是出现频率最高的元素。如果存在多个元素出现频率相同，那么弹出最接近栈顶的元素，即弹出时间戳最大的元素。弹出后，我们将弹出元素的频率减一，即 <span class="arithmatex">\(cnt[val] \gets cnt[val] - 1\)</span>。弹栈操作的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91126,10 +91124,10 @@ freqStack.pop ();//返回 4 ，因为 4, 5 和 7 出现频率最高，但 4 是�
 <!-- solution:start -->
 
 <h3 id="_4">方法二：双哈希表</h3>
-<p>在方法一中，为了能弹出符合要求的元素，我们维护了一个优先队列，每次都需要对优先队列进行操作，时间复杂度为 $O(\log n)$。如果我们能够在 $O(1)$ 的时间内找到符合要求的元素，那么整个数据结构每次操作的时间复杂度就可以降低到 $O(1)$。</p>
-<p>实际上，我们可以用一个变量 $mx$ 记录当前出现频率的最大值，用一个哈希表 $d$ 记录每个出现频率对应的元素列表，与方法一相同，用一个哈希表 $cnt$ 记录每个元素出现的频率。</p>
-<p>执行压栈操作时，我们将元素的频率加一，即 $cnt[val] \gets cnt[val] + 1$，然后将元素 $val$ 加入哈希表 $d$ 中对应的频率列表中，即 $d[cnt[val]].push(val)$。如果当前元素的频率大于 $mx$，则更新 $mx$，即 $mx \gets cnt[val]$。压栈操作的时间复杂度为 $O(1)$。</p>
-<p>执行弹栈操作时，我们从哈希表 $d$ 中取出频率为 $mx$ 的元素列表，弹出列表中的最后一个元素 $val$，然后将 $val$ 从哈希表 $d$ 中移除，即 $d[mx].pop()$。最后将 $val$ 的频率减一，即 $cnt[val] \gets cnt[val] - 1$。如果 $d[mx]$ 列表为空，说明当前出现频率最大的元素已经全部弹出，我们需要将 $mx$ 减一，即 $mx \gets mx - 1$。弹栈操作的时间复杂度为 $O(1)$。</p>
+<p>在方法一中，为了能弹出符合要求的元素，我们维护了一个优先队列，每次都需要对优先队列进行操作，时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span>。如果我们能够在 <span class="arithmatex">\(O(1)\)</span> 的时间内找到符合要求的元素，那么整个数据结构每次操作的时间复杂度就可以降低到 <span class="arithmatex">\(O(1)\)</span>。</p>
+<p>实际上，我们可以用一个变量 <span class="arithmatex">\(mx\)</span> 记录当前出现频率的最大值，用一个哈希表 <span class="arithmatex">\(d\)</span> 记录每个出现频率对应的元素列表，与方法一相同，用一个哈希表 <span class="arithmatex">\(cnt\)</span> 记录每个元素出现的频率。</p>
+<p>执行压栈操作时，我们将元素的频率加一，即 <span class="arithmatex">\(cnt[val] \gets cnt[val] + 1\)</span>，然后将元素 <span class="arithmatex">\(val\)</span> 加入哈希表 <span class="arithmatex">\(d\)</span> 中对应的频率列表中，即 <span class="arithmatex">\(d[cnt[val]].push(val)\)</span>。如果当前元素的频率大于 <span class="arithmatex">\(mx\)</span>，则更新 <span class="arithmatex">\(mx\)</span>，即 <span class="arithmatex">\(mx \gets cnt[val]\)</span>。压栈操作的时间复杂度为 <span class="arithmatex">\(O(1)\)</span>。</p>
+<p>执行弹栈操作时，我们从哈希表 <span class="arithmatex">\(d\)</span> 中取出频率为 <span class="arithmatex">\(mx\)</span> 的元素列表，弹出列表中的最后一个元素 <span class="arithmatex">\(val\)</span>，然后将 <span class="arithmatex">\(val\)</span> 从哈希表 <span class="arithmatex">\(d\)</span> 中移除，即 <span class="arithmatex">\(d[mx].pop()\)</span>。最后将 <span class="arithmatex">\(val\)</span> 的频率减一，即 <span class="arithmatex">\(cnt[val] \gets cnt[val] - 1\)</span>。如果 <span class="arithmatex">\(d[mx]\)</span> 列表为空，说明当前出现频率最大的元素已经全部弹出，我们需要将 <span class="arithmatex">\(mx\)</span> 减一，即 <span class="arithmatex">\(mx \gets mx - 1\)</span>。弹栈操作的时间复杂度为 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91605,11 +91603,9 @@ freqStack.pop ();//返回 4 ，因为 4, 5 和 7 出现频率最高，但 4 是�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

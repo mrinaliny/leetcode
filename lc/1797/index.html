@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,14 +90866,14 @@ authenticationManager.countUnexpiredTokens(15); // tokenId 为 "bbb" 的验证�
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表</h3>
-<p>我们可以简单维护一个哈希表 $d$，键为 <code>tokenId</code>，值为过期时间。</p>
+<p>我们可以简单维护一个哈希表 <span class="arithmatex">\(d\)</span>，键为 <code>tokenId</code>，值为过期时间。</p>
 <ul>
-<li><code>generate</code> 操作时，将 <code>tokenId</code> 作为键，<code>currentTime + timeToLive</code> 作为值存入哈希表 $d$ 中。</li>
-<li><code>renew</code> 操作时，如果 <code>tokenId</code> 不在哈希表 $d$ 中，或者 <code>currentTime &gt;= d[tokenId]</code>，则忽略该操作；否则，更新 <code>d[tokenId]</code> 为 <code>currentTime + timeToLive</code>。</li>
-<li><code>countUnexpiredTokens</code> 操作时，遍历哈希表 $d$，统计未过期的 <code>tokenId</code> 个数。</li>
+<li><code>generate</code> 操作时，将 <code>tokenId</code> 作为键，<code>currentTime + timeToLive</code> 作为值存入哈希表 <span class="arithmatex">\(d\)</span> 中。</li>
+<li><code>renew</code> 操作时，如果 <code>tokenId</code> 不在哈希表 <span class="arithmatex">\(d\)</span> 中，或者 <code>currentTime &gt;= d[tokenId]</code>，则忽略该操作；否则，更新 <code>d[tokenId]</code> 为 <code>currentTime + timeToLive</code>。</li>
+<li><code>countUnexpiredTokens</code> 操作时，遍历哈希表 <span class="arithmatex">\(d\)</span>，统计未过期的 <code>tokenId</code> 个数。</li>
 </ul>
-<p>时间复杂度方面，<code>generate</code> 和 <code>renew</code> 操作的时间复杂度均为 $O(1)$，<code>countUnexpiredTokens</code> 操作的时间复杂度为 $O(n)$，其中 $n$ 为哈希表 $d$ 的键值对个数。</p>
-<p>空间复杂度为 $O(n)$，其中 $n$ 为哈希表 $d$ 的键值对个数。</p>
+<p>时间复杂度方面，<code>generate</code> 和 <code>renew</code> 操作的时间复杂度均为 <span class="arithmatex">\(O(1)\)</span>，<code>countUnexpiredTokens</code> 操作的时间复杂度为 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为哈希表 <span class="arithmatex">\(d\)</span> 的键值对个数。</p>
+<p>空间复杂度为 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为哈希表 <span class="arithmatex">\(d\)</span> 的键值对个数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91537,11 +91535,9 @@ authenticationManager.countUnexpiredTokens(15); // tokenId 为 "bbb" 的验证�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

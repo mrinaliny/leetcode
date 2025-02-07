@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86058,14 +86056,14 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-recursion">Solution 1: Recursion</h3>
-<p>We define $f[i]$ to represent the number of ways to climb to the $i$-th step, then $f[i]$ can be transferred from $f[i - 1]$ and $f[i - 2]$, that is:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i]\)</span> to represent the number of ways to climb to the <span class="arithmatex">\(i\)</span>-th step, then <span class="arithmatex">\(f[i]\)</span> can be transferred from <span class="arithmatex">\(f[i - 1]\)</span> and <span class="arithmatex">\(f[i - 2]\)</span>, that is:</p>
+<div class="arithmatex">\[
 f[i] = f[i - 1] + f[i - 2]
-$$</p>
-<p>The initial conditions are $f[0] = 1$ and $f[1] = 1$, that is, the number of ways to climb to the 0th step is 1, and the number of ways to climb to the 1st step is also 1.</p>
-<p>The answer is $f[n]$.</p>
-<p>Since $f[i]$ is only related to $f[i - 1]$ and $f[i - 2]$, we can use two variables $a$ and $b$ to maintain the current number of ways, reducing the space complexity to $O(1)$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(1)$.</p>
+\]</div>
+<p>The initial conditions are <span class="arithmatex">\(f[0] = 1\)</span> and <span class="arithmatex">\(f[1] = 1\)</span>, that is, the number of ways to climb to the 0th step is 1, and the number of ways to climb to the 1st step is also 1.</p>
+<p>The answer is <span class="arithmatex">\(f[n]\)</span>.</p>
+<p>Since <span class="arithmatex">\(f[i]\)</span> is only related to <span class="arithmatex">\(f[i - 1]\)</span> and <span class="arithmatex">\(f[i - 2]\)</span>, we can use two variables <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> to maintain the current number of ways, reducing the space complexity to <span class="arithmatex">\(O(1)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86261,33 +86259,33 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-2-matrix-quick-power-to-accelerate-recursion">Solution 2: Matrix Quick Power to Accelerate Recursion</h3>
-<p>We set $Fib(n)$ to represent a $1 \times 2$ matrix $\begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}$, where $F_n$ and $F_{n - 1}$ are the $n$-th and $(n - 1)$-th Fibonacci numbers respectively.</p>
-<p>We hope to derive $Fib(n)$ based on $Fib(n-1) = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix}$. That is to say, we need a matrix $base$, so that $Fib(n - 1) \times base = Fib(n)$, that is:</p>
-<p>$$
+<p>We set <span class="arithmatex">\(Fib(n)\)</span> to represent a <span class="arithmatex">\(1 \times 2\)</span> matrix <span class="arithmatex">\(\begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}\)</span>, where <span class="arithmatex">\(F_n\)</span> and <span class="arithmatex">\(F_{n - 1}\)</span> are the <span class="arithmatex">\(n\)</span>-th and <span class="arithmatex">\((n - 1)\)</span>-th Fibonacci numbers respectively.</p>
+<p>We hope to derive <span class="arithmatex">\(Fib(n)\)</span> based on <span class="arithmatex">\(Fib(n-1) = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix}\)</span>. That is to say, we need a matrix <span class="arithmatex">\(base\)</span>, so that <span class="arithmatex">\(Fib(n - 1) \times base = Fib(n)\)</span>, that is:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
 F_{n - 1} &amp; F_{n - 2}
 \end{bmatrix} \times base = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
-$$</p>
-<p>Since $F_n = F_{n - 1} + F_{n - 2}$, the first column of the matrix $base$ is:</p>
-<p>$$
+\]</div>
+<p>Since <span class="arithmatex">\(F_n = F_{n - 1} + F_{n - 2}\)</span>, the first column of the matrix <span class="arithmatex">\(base\)</span> is:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 \
+1 \\
 1
 \end{bmatrix}
-$$</p>
+\]</div>
 <p>The second column is:</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 \
+1 \\
 0
 \end{bmatrix}
-$$</p>
+\]</div>
 <p>Therefore:</p>
-<p>$$
-\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix} \times \begin{bmatrix}1 &amp; 1 \ 1 &amp; 0\end{bmatrix} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
-$$</p>
-<p>We define the initial matrix $res = \begin{bmatrix} 1 &amp; 1 \end{bmatrix}$, then $F_n$ is equal to the first element of the first row of the result matrix of $res$ multiplied by $base^{n - 1}$. We can solve it using matrix quick power.</p>
-<p>The time complexity is $O(\log n)$, and the space complexity is $O(1)$.</p>
+<div class="arithmatex">\[
+\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix} \times \begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
+\]</div>
+<p>We define the initial matrix <span class="arithmatex">\(res = \begin{bmatrix} 1 &amp; 1 \end{bmatrix}\)</span>, then <span class="arithmatex">\(F_n\)</span> is equal to the first element of the first row of the result matrix of <span class="arithmatex">\(res\)</span> multiplied by <span class="arithmatex">\(base^{n - 1}\)</span>. We can solve it using matrix quick power.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86917,11 +86915,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,17 +90863,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序 + 动态规划</h3>
-<p>根据题目描述，长方体 $j$ 能够放在长方体 $i$ 上，当且仅当长方体 $j$ 的“长、宽、高”分别小于等于长方体 $i$ 的“长、宽、高”。</p>
+<p>根据题目描述，长方体 <span class="arithmatex">\(j\)</span> 能够放在长方体 <span class="arithmatex">\(i\)</span> 上，当且仅当长方体 <span class="arithmatex">\(j\)</span> 的“长、宽、高”分别小于等于长方体 <span class="arithmatex">\(i\)</span> 的“长、宽、高”。</p>
 <p>本题允许我们旋转长方体，意味着我们可以选择长方体的任意一边作为长方体的“高”。对于任意一种合法的堆叠，如果我们把里面每个长方体都旋转至“长 &lt;= 宽 &lt;= 高”，堆叠仍然是合法的，并且能够保证堆叠的高度最大化。</p>
 <p>因此，我们可以把所有长方体的边长进行排序，使得每个长方体满足“长 &lt;= 宽 &lt;= 高”。然后将每个长方体升序排列。</p>
 <p>接下来，我们可以使用动态规划的方法求解本题。</p>
-<p>我们定义 $f[i]$ 表示以长方体 $i$ 为最底部长方体时的最大高度。我们可以枚举每个长方体 $i$ 的上方的长方体 $j$，其中 $0 \leq j &lt; i$。如果 $j$ 可以放在 $i$ 的上方，那么我们可以得到状态转移方程：</p>
-<p>$$
-f[i] = \max_{0 \leq j &lt; i} {f[j] + h[i]}
-$$</p>
-<p>其中 $h[i]$ 表示长方体 $i$ 的高度。</p>
-<p>最终的答案即为 $f[i]$ 的最大值。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为长方体的数量。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示以长方体 <span class="arithmatex">\(i\)</span> 为最底部长方体时的最大高度。我们可以枚举每个长方体 <span class="arithmatex">\(i\)</span> 的上方的长方体 <span class="arithmatex">\(j\)</span>，其中 <span class="arithmatex">\(0 \leq j &lt; i\)</span>。如果 <span class="arithmatex">\(j\)</span> 可以放在 <span class="arithmatex">\(i\)</span> 的上方，那么我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
+f[i] = \max_{0 \leq j &lt; i} \{f[j] + h[i]\}
+\]</div>
+<p>其中 <span class="arithmatex">\(h[i]\)</span> 表示长方体 <span class="arithmatex">\(i\)</span> 的高度。</p>
+<p>最终的答案即为 <span class="arithmatex">\(f[i]\)</span> 的最大值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为长方体的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91376,11 +91374,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

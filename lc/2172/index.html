@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,16 +90856,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩 + 动态规划</h3>
-<p>由于每个篮子最多只能放两个数，我们不妨将篮子数乘以 $2$，这样每个篮子最多只能放一个数。</p>
-<p>接下来，我们定义 $f[i]$ 表示篮子状态为 $i$ 时的最大与和，其中 $i$ 是一个二进制数，表示每个篮子是否放了数。初始时 $f[0]=0$。</p>
-<p>接下来，我们考虑 $f[i]$ 如何进行状态转移。</p>
-<p>我们可以枚举 $i$，记 $i$ 的二进制表示中 $1$ 的个数为 $cnt$。如果 $cnt \gt n$，那么 $i$ 不是一个合法的状态，我们可以直接跳过。否则，我们可以枚举 $i$ 的二进制表示中的每一位 $j$，如果 $i$ 的第 $j$ 位为 $1$，那么我们可以将第 $(cnt-1)$ 个数 $nums[cnt-1]$ 放入第 $j$ 个篮子中，此时有：</p>
-<p>$$
-f[i] = \max{f[i], f[i \oplus (1 &lt;&lt; j)] + (nums[cnt-1] \wedge  (j / 2 + 1))}
-$$</p>
-<p>其中 $\oplus$ 表示异或运算，而 $\wedge$ 表示按位与运算。</p>
-<p>答案为 $\max{f[i]}$。</p>
-<p>时间复杂度 $O(4^k \times k \times 2)$，空间复杂度 $O(4^k)$。其中 $k$ 表示篮子的数量，即题目中的 $numSlots$。</p>
+<p>由于每个篮子最多只能放两个数，我们不妨将篮子数乘以 <span class="arithmatex">\(2\)</span>，这样每个篮子最多只能放一个数。</p>
+<p>接下来，我们定义 <span class="arithmatex">\(f[i]\)</span> 表示篮子状态为 <span class="arithmatex">\(i\)</span> 时的最大与和，其中 <span class="arithmatex">\(i\)</span> 是一个二进制数，表示每个篮子是否放了数。初始时 <span class="arithmatex">\(f[0]=0\)</span>。</p>
+<p>接下来，我们考虑 <span class="arithmatex">\(f[i]\)</span> 如何进行状态转移。</p>
+<p>我们可以枚举 <span class="arithmatex">\(i\)</span>，记 <span class="arithmatex">\(i\)</span> 的二进制表示中 <span class="arithmatex">\(1\)</span> 的个数为 <span class="arithmatex">\(cnt\)</span>。如果 <span class="arithmatex">\(cnt \gt n\)</span>，那么 <span class="arithmatex">\(i\)</span> 不是一个合法的状态，我们可以直接跳过。否则，我们可以枚举 <span class="arithmatex">\(i\)</span> 的二进制表示中的每一位 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(j\)</span> 位为 <span class="arithmatex">\(1\)</span>，那么我们可以将第 <span class="arithmatex">\((cnt-1)\)</span> 个数 <span class="arithmatex">\(nums[cnt-1]\)</span> 放入第 <span class="arithmatex">\(j\)</span> 个篮子中，此时有：</p>
+<div class="arithmatex">\[
+f[i] = \max\{f[i], f[i \oplus (1 &lt;&lt; j)] + (nums[cnt-1] \wedge  (j / 2 + 1))\}
+\]</div>
+<p>其中 <span class="arithmatex">\(\oplus\)</span> 表示异或运算，而 <span class="arithmatex">\(\wedge\)</span> 表示按位与运算。</p>
+<p>答案为 <span class="arithmatex">\(\max\{f[i]\}\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(4^k \times k \times 2)\)</span>，空间复杂度 <span class="arithmatex">\(O(4^k)\)</span>。其中 <span class="arithmatex">\(k\)</span> 表示篮子的数量，即题目中的 <span class="arithmatex">\(numSlots\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91300,11 +91298,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

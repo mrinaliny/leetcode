@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86059,15 +86057,15 @@ That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
 <!-- solution:start -->
 
 <h3 id="solution-1-prefix-sum-memoized-search">Solution 1: Prefix Sum + Memoized Search</h3>
-<p>We can preprocess to obtain the prefix sum array $s$, which allows us to quickly get the sum of subarrays.</p>
-<p>Next, we design a function $\textit{dfs}(i, k)$, which represents the maximum sum of averages when dividing the array starting from index $i$ into at most $k$ groups. The answer is $\textit{dfs}(0, k)$.</p>
-<p>The execution logic of the function $\textit{dfs}(i, k)$ is as follows:</p>
+<p>We can preprocess to obtain the prefix sum array <span class="arithmatex">\(s\)</span>, which allows us to quickly get the sum of subarrays.</p>
+<p>Next, we design a function <span class="arithmatex">\(\textit{dfs}(i, k)\)</span>, which represents the maximum sum of averages when dividing the array starting from index <span class="arithmatex">\(i\)</span> into at most <span class="arithmatex">\(k\)</span> groups. The answer is <span class="arithmatex">\(\textit{dfs}(0, k)\)</span>.</p>
+<p>The execution logic of the function <span class="arithmatex">\(\textit{dfs}(i, k)\)</span> is as follows:</p>
 <ul>
-<li>When $i = n$, it means we have traversed to the end of the array, and we return $0$.</li>
-<li>When $k = 1$, it means there is only one group left, and we return the average value from index $i$ to the end of the array.</li>
-<li>Otherwise, we enumerate the starting position $j$ of the next group in the interval $[i + 1, n)$, calculate the average value from $i$ to $j - 1$ as $\frac{s[j] - s[i]}{j - i}$, add the result of $\textit{dfs}(j, k - 1)$, and take the maximum value of all results.</li>
+<li>When <span class="arithmatex">\(i = n\)</span>, it means we have traversed to the end of the array, and we return <span class="arithmatex">\(0\)</span>.</li>
+<li>When <span class="arithmatex">\(k = 1\)</span>, it means there is only one group left, and we return the average value from index <span class="arithmatex">\(i\)</span> to the end of the array.</li>
+<li>Otherwise, we enumerate the starting position <span class="arithmatex">\(j\)</span> of the next group in the interval <span class="arithmatex">\([i + 1, n)\)</span>, calculate the average value from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j - 1\)</span> as <span class="arithmatex">\(\frac{s[j] - s[i]}{j - i}\)</span>, add the result of <span class="arithmatex">\(\textit{dfs}(j, k - 1)\)</span>, and take the maximum value of all results.</li>
 </ul>
-<p>The time complexity is $O(n^2 \times k)$, and the space complexity is $O(n \times k)$. Here, $n$ represents the length of the array $\textit{nums}$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Here, <span class="arithmatex">\(n\)</span> represents the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86352,9 +86350,9 @@ That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can transform the memoized search from Solution 1 into dynamic programming.</p>
-<p>Define $f[i][j]$ to represent the maximum sum of averages when dividing the first $i$ elements of the array $\textit{nums}$ into at most $j$ groups. The answer is $f[n][k]$.</p>
-<p>For $f[i][j]$, we can enumerate the end position $h$ of the previous group, calculate $f[h][j-1]$, add the result of $\frac{s[i] - s[h]}{i - h}$, and take the maximum value of all results.</p>
-<p>The time complexity is $O(n^2 \times k)$, and the space complexity is $O(n \times k)$. Here, $n$ represents the length of the array $\textit{nums}$.</p>
+<p>Define <span class="arithmatex">\(f[i][j]\)</span> to represent the maximum sum of averages when dividing the first <span class="arithmatex">\(i\)</span> elements of the array <span class="arithmatex">\(\textit{nums}\)</span> into at most <span class="arithmatex">\(j\)</span> groups. The answer is <span class="arithmatex">\(f[n][k]\)</span>.</p>
+<p>For <span class="arithmatex">\(f[i][j]\)</span>, we can enumerate the end position <span class="arithmatex">\(h\)</span> of the previous group, calculate <span class="arithmatex">\(f[h][j-1]\)</span>, add the result of <span class="arithmatex">\(\frac{s[i] - s[h]}{i - h}\)</span>, and take the maximum value of all results.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Here, <span class="arithmatex">\(n\)</span> represents the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86776,11 +86774,9 @@ That partition would lead to a score of 5 + 2 + 6 = 13, which is worse.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90871,15 +90869,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j, k)$，表示字符串 $s_1$ 从 $i$ 开始长度为 $k$ 的子串是否能变换为字符串 $s_2$ 从 $j$ 开始长度为 $k$ 的子串。如果能变换，返回 <code>true</code>，否则返回 <code>false</code>。那么答案就是 $dfs(0, 0, n)$，其中 $n$ 是字符串的长度。</p>
-<p>函数 $dfs(i, j, k)$ 的计算方式如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j, k)\)</span>，表示字符串 <span class="arithmatex">\(s_1\)</span> 从 <span class="arithmatex">\(i\)</span> 开始长度为 <span class="arithmatex">\(k\)</span> 的子串是否能变换为字符串 <span class="arithmatex">\(s_2\)</span> 从 <span class="arithmatex">\(j\)</span> 开始长度为 <span class="arithmatex">\(k\)</span> 的子串。如果能变换，返回 <code>true</code>，否则返回 <code>false</code>。那么答案就是 <span class="arithmatex">\(dfs(0, 0, n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的计算方式如下：</p>
 <ul>
-<li>如果 $k=1$，那么只需要判断 $s_1[i]$ 和 $s_2[j]$ 是否相等，如果相等返回 <code>true</code>，否则返回 <code>false</code>；</li>
-<li>如果 $k \gt 1$，我们枚举分割部分的长度 $h$，那么有两种情况：如果不交换分割的两个子字符串，那么就是 $dfs(i, j, h) \land dfs(i+h, j+h, k-h)$；如果交换了分割的两个子字符串，那么就是 $dfs(i, j+k-h, h) \land dfs(i+h, j, k-h)$。如果两种情况中有一种情况成立，那么就说明 $dfs(i, j, k)$ 成立，返回 <code>true</code>，否则返回 <code>false</code>。</li>
+<li>如果 <span class="arithmatex">\(k=1\)</span>，那么只需要判断 <span class="arithmatex">\(s_1[i]\)</span> 和 <span class="arithmatex">\(s_2[j]\)</span> 是否相等，如果相等返回 <code>true</code>，否则返回 <code>false</code>；</li>
+<li>如果 <span class="arithmatex">\(k \gt 1\)</span>，我们枚举分割部分的长度 <span class="arithmatex">\(h\)</span>，那么有两种情况：如果不交换分割的两个子字符串，那么就是 <span class="arithmatex">\(dfs(i, j, h) \land dfs(i+h, j+h, k-h)\)</span>；如果交换了分割的两个子字符串，那么就是 <span class="arithmatex">\(dfs(i, j+k-h, h) \land dfs(i+h, j, k-h)\)</span>。如果两种情况中有一种情况成立，那么就说明 <span class="arithmatex">\(dfs(i, j, k)\)</span> 成立，返回 <code>true</code>，否则返回 <code>false</code>。</li>
 </ul>
-<p>最后，我们返回 $dfs(0, 0, n)$。</p>
+<p>最后，我们返回 <span class="arithmatex">\(dfs(0, 0, n)\)</span>。</p>
 <p>为了避免重复计算，我们可以使用记忆化搜索的方式。</p>
-<p>时间复杂度 $O(n^4)$，空间复杂度 $O(n^3)$。其中 $n$ 是字符串的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^4)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^3)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91215,11 +91213,11 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法二：动态规划（区间 DP）</h3>
-<p>我们定义 $f[i][j][k]$ 表示字符串 $s_1$ 从 $i$ 开始长度为 $k$ 的子串是否能变换为字符串 $s_2$ 从 $j$ 开始长度为 $k$ 的子串。那么答案就是 $f[0][0][n]$，其中 $n$ 是字符串的长度。</p>
-<p>对于长度为 $1$ 的子串，如果 $s_1[i] = s_2[j]$，那么 $f[i][j][1] = true$，否则 $f[i][j][1] = false$。</p>
-<p>接下来，我们从小到大枚举子串的长度 $k$，从 $0$ 开始枚举 $i$，从 $0$ 开始枚举 $j$，如果 $f[i][j][h] \land f[i + h][j + h][k - h]$ 或者 $f[i][j + k - h][h] \land f[i + h][j][k - h]$ 成立，那么 $f[i][j][k]$ 也成立。</p>
-<p>最后，我们返回 $f[0][0][n]$。</p>
-<p>时间复杂度 $O(n^4)$，空间复杂度 $O(n^3)$。其中 $n$ 是字符串的长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示字符串 <span class="arithmatex">\(s_1\)</span> 从 <span class="arithmatex">\(i\)</span> 开始长度为 <span class="arithmatex">\(k\)</span> 的子串是否能变换为字符串 <span class="arithmatex">\(s_2\)</span> 从 <span class="arithmatex">\(j\)</span> 开始长度为 <span class="arithmatex">\(k\)</span> 的子串。那么答案就是 <span class="arithmatex">\(f[0][0][n]\)</span>，其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。</p>
+<p>对于长度为 <span class="arithmatex">\(1\)</span> 的子串，如果 <span class="arithmatex">\(s_1[i] = s_2[j]\)</span>，那么 <span class="arithmatex">\(f[i][j][1] = true\)</span>，否则 <span class="arithmatex">\(f[i][j][1] = false\)</span>。</p>
+<p>接下来，我们从小到大枚举子串的长度 <span class="arithmatex">\(k\)</span>，从 <span class="arithmatex">\(0\)</span> 开始枚举 <span class="arithmatex">\(i\)</span>，从 <span class="arithmatex">\(0\)</span> 开始枚举 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(f[i][j][h] \land f[i + h][j + h][k - h]\)</span> 或者 <span class="arithmatex">\(f[i][j + k - h][h] \land f[i + h][j][k - h]\)</span> 成立，那么 <span class="arithmatex">\(f[i][j][k]\)</span> 也成立。</p>
+<p>最后，我们返回 <span class="arithmatex">\(f[0][0][n]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^4)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^3)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91787,11 +91785,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

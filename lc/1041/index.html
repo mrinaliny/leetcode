@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90889,18 +90887,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：模拟</h3>
-<p>我们可以模拟机器人的行走过程，用一个变量 $k$ 表示机器人的方向，初始值为 $0$，表示机器人面向北方。变量 $k$ 的取值范围为 $[0, 3]$，分别表示机器人面向北、西、南、东。另外，我们用一个长度为 $4$ 的数组 $dist$ 记录机器人在四个方向上行走的距离，初始值为 $[0, 0, 0, 0]$。</p>
-<p>遍历指令字符串 <code>instructions</code>，如果当前指令为 <code>'L'</code>，那么机器人转向西方，即 $k = (k + 1) \bmod 4$；如果当前指令为 <code>'R'</code>，那么机器人转向东方，即 $k = (k + 3) \bmod 4$；否则，机器人在当前方向上行走一步，即 $dist[k]++$。</p>
-<p>如果给定的指令字符串 <code>instructions</code> 执行一遍后，使得机器人最终回到原点，即 $dist[0] = dist[2]$ 且 $dist[1] = dist[3]$，那么机器人一定会进入循环。因为无论重复多少次指令，机器人都回到了原点，所以机器人一定会进入循环。</p>
-<p>如果给定的指令字符串 <code>instructions</code> 执行一遍后，机器人没回到原点，不妨假设此时机器人位于 $(x, y)$，且方向为 $k$。</p>
+<p>我们可以模拟机器人的行走过程，用一个变量 <span class="arithmatex">\(k\)</span> 表示机器人的方向，初始值为 <span class="arithmatex">\(0\)</span>，表示机器人面向北方。变量 <span class="arithmatex">\(k\)</span> 的取值范围为 <span class="arithmatex">\([0, 3]\)</span>，分别表示机器人面向北、西、南、东。另外，我们用一个长度为 <span class="arithmatex">\(4\)</span> 的数组 <span class="arithmatex">\(dist\)</span> 记录机器人在四个方向上行走的距离，初始值为 <span class="arithmatex">\([0, 0, 0, 0]\)</span>。</p>
+<p>遍历指令字符串 <code>instructions</code>，如果当前指令为 <code>'L'</code>，那么机器人转向西方，即 <span class="arithmatex">\(k = (k + 1) \bmod 4\)</span>；如果当前指令为 <code>'R'</code>，那么机器人转向东方，即 <span class="arithmatex">\(k = (k + 3) \bmod 4\)</span>；否则，机器人在当前方向上行走一步，即 <span class="arithmatex">\(dist[k]++\)</span>。</p>
+<p>如果给定的指令字符串 <code>instructions</code> 执行一遍后，使得机器人最终回到原点，即 <span class="arithmatex">\(dist[0] = dist[2]\)</span> 且 <span class="arithmatex">\(dist[1] = dist[3]\)</span>，那么机器人一定会进入循环。因为无论重复多少次指令，机器人都回到了原点，所以机器人一定会进入循环。</p>
+<p>如果给定的指令字符串 <code>instructions</code> 执行一遍后，机器人没回到原点，不妨假设此时机器人位于 <span class="arithmatex">\((x, y)\)</span>，且方向为 <span class="arithmatex">\(k\)</span>。</p>
 <ul>
-<li>若 $k=0$，即机器人面向北方，那么执行第二遍指令后，坐标变化量是 $(x, y)$；继续执行第三遍指令后，坐标变化量还是 $(x, y)$...累加这些变化量，机器人最终会到 $(n \times x, n \times y)$，其中 $n$ 是一个正整数。由于机器人最终没有回到原点，即 $x \neq 0$ 或 $y \neq 0$，所以 $n \times x \neq 0$ 或 $n \times y \neq 0$，因此机器人不会进入循环；</li>
-<li>若 $k=1$，即机器人面向西方，那么机器人执行第二遍指令后，坐标变化量是 $(-y, x)$；继续执行第三遍执行后，坐标变化量是 $(-x, -y)$；继续执行第四遍指令后，坐标变化量是 $(y, -x)$。累加这些坐标变化量，我们可以发现，机器人最终会回到原点 $(0, 0)$；</li>
-<li>若 $k=2$，即机器人面向南方，那么执行第二遍指令后，坐标变化量是 $(-x, -y)$，累加这两次坐标变化量，我们可以发现，机器人最终会回到原点 $(0, 0)$；</li>
-<li>若 $k=3$，即机器人面向东方，那么执行第二遍指令后，坐标变化量是 $(y, -x)$；继续执行第三遍指令后，坐标变化量是 $(-x, -y)$；继续执行第四遍指令后，坐标变化量是 $(-y, x)$。累加这些坐标变化量，我们可以发现，机器人最终会回到原点 $(0, 0)$。</li>
+<li>若 <span class="arithmatex">\(k=0\)</span>，即机器人面向北方，那么执行第二遍指令后，坐标变化量是 <span class="arithmatex">\((x, y)\)</span>；继续执行第三遍指令后，坐标变化量还是 <span class="arithmatex">\((x, y)\)</span>...累加这些变化量，机器人最终会到 <span class="arithmatex">\((n \times x, n \times y)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是一个正整数。由于机器人最终没有回到原点，即 <span class="arithmatex">\(x \neq 0\)</span> 或 <span class="arithmatex">\(y \neq 0\)</span>，所以 <span class="arithmatex">\(n \times x \neq 0\)</span> 或 <span class="arithmatex">\(n \times y \neq 0\)</span>，因此机器人不会进入循环；</li>
+<li>若 <span class="arithmatex">\(k=1\)</span>，即机器人面向西方，那么机器人执行第二遍指令后，坐标变化量是 <span class="arithmatex">\((-y, x)\)</span>；继续执行第三遍执行后，坐标变化量是 <span class="arithmatex">\((-x, -y)\)</span>；继续执行第四遍指令后，坐标变化量是 <span class="arithmatex">\((y, -x)\)</span>。累加这些坐标变化量，我们可以发现，机器人最终会回到原点 <span class="arithmatex">\((0, 0)\)</span>；</li>
+<li>若 <span class="arithmatex">\(k=2\)</span>，即机器人面向南方，那么执行第二遍指令后，坐标变化量是 <span class="arithmatex">\((-x, -y)\)</span>，累加这两次坐标变化量，我们可以发现，机器人最终会回到原点 <span class="arithmatex">\((0, 0)\)</span>；</li>
+<li>若 <span class="arithmatex">\(k=3\)</span>，即机器人面向东方，那么执行第二遍指令后，坐标变化量是 <span class="arithmatex">\((y, -x)\)</span>；继续执行第三遍指令后，坐标变化量是 <span class="arithmatex">\((-x, -y)\)</span>；继续执行第四遍指令后，坐标变化量是 <span class="arithmatex">\((-y, x)\)</span>。累加这些坐标变化量，我们可以发现，机器人最终会回到原点 <span class="arithmatex">\((0, 0)\)</span>。</li>
 </ul>
 <p>综上所述，如果给定的指令字符串 <code>instructions</code> 执行一遍后，机器人回到了原点，或者机器人的方向与初始方向不同，那么机器人一定会进入循环。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为指令字符串 <code>instructions</code> 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为指令字符串 <code>instructions</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91302,11 +91300,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

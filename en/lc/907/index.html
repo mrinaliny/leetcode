@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86051,22 +86049,22 @@ Sum is 17.
 <!-- solution:start -->
 
 <h3 id="solution-1-monotonic-stack">Solution 1: Monotonic Stack</h3>
-<p>The problem asks for the sum of the minimum values of each subarray, which is equivalent to finding the number of subarrays for which each element $arr[i]$ is the minimum, then multiplying by $arr[i]$, and finally summing these up.</p>
-<p>Therefore, the focus of the problem is to find the number of subarrays for which $arr[i]$ is the minimum. For $arr[i]$, we find the first position $left[i]$ to its left that is less than $arr[i]$, and the first position $right[i]$ to its right that is less than or equal to $arr[i]$. The number of subarrays for which $arr[i]$ is the minimum is $(i - left[i]) \times (right[i] - i)$.</p>
-<p>Note, why do we find the first position $right[i]$ to the right that is less than or equal to $arr[i]$, rather than less than $arr[i]$? This is because if we find the first position $right[i]$ to the right that is less than $arr[i]$, it will lead to duplicate calculations.</p>
+<p>The problem asks for the sum of the minimum values of each subarray, which is equivalent to finding the number of subarrays for which each element <span class="arithmatex">\(arr[i]\)</span> is the minimum, then multiplying by <span class="arithmatex">\(arr[i]\)</span>, and finally summing these up.</p>
+<p>Therefore, the focus of the problem is to find the number of subarrays for which <span class="arithmatex">\(arr[i]\)</span> is the minimum. For <span class="arithmatex">\(arr[i]\)</span>, we find the first position <span class="arithmatex">\(left[i]\)</span> to its left that is less than <span class="arithmatex">\(arr[i]\)</span>, and the first position <span class="arithmatex">\(right[i]\)</span> to its right that is less than or equal to <span class="arithmatex">\(arr[i]\)</span>. The number of subarrays for which <span class="arithmatex">\(arr[i]\)</span> is the minimum is <span class="arithmatex">\((i - left[i]) \times (right[i] - i)\)</span>.</p>
+<p>Note, why do we find the first position <span class="arithmatex">\(right[i]\)</span> to the right that is less than or equal to <span class="arithmatex">\(arr[i]\)</span>, rather than less than <span class="arithmatex">\(arr[i]\)</span>? This is because if we find the first position <span class="arithmatex">\(right[i]\)</span> to the right that is less than <span class="arithmatex">\(arr[i]\)</span>, it will lead to duplicate calculations.</p>
 <p>Let's take an example to illustrate. For the following array:</p>
-<p>The element at index $3$ is $2$, the first element to its left that is less than $2$ is at index $0$. If we find the first element to its right that is less than $2$, we get index $7$. That is, the subarray interval is $(0, 7)$. Note that this is an open interval.</p>
+<p>The element at index <span class="arithmatex">\(3\)</span> is <span class="arithmatex">\(2\)</span>, the first element to its left that is less than <span class="arithmatex">\(2\)</span> is at index <span class="arithmatex">\(0\)</span>. If we find the first element to its right that is less than <span class="arithmatex">\(2\)</span>, we get index <span class="arithmatex">\(7\)</span>. That is, the subarray interval is <span class="arithmatex">\((0, 7)\)</span>. Note that this is an open interval.</p>
 <div class="highlight"><pre><span></span><code>0 4 3 2 5 3 2 1
 *     ^       *
 </code></pre></div>
-<p>In the same way, we can find the subarray interval for the element at index $6$, and find that its subarray interval is also $(0, 7)$. That is, the subarray intervals for the elements at index $3$ and index $6$ are the same. This leads to duplicate calculations.</p>
+<p>In the same way, we can find the subarray interval for the element at index <span class="arithmatex">\(6\)</span>, and find that its subarray interval is also <span class="arithmatex">\((0, 7)\)</span>. That is, the subarray intervals for the elements at index <span class="arithmatex">\(3\)</span> and index <span class="arithmatex">\(6\)</span> are the same. This leads to duplicate calculations.</p>
 <div class="highlight"><pre><span></span><code>0 4 3 2 5 3 2 1
 *           ^ *
 </code></pre></div>
-<p>If we find the first element to its right that is less than or equal to its value, there will be no duplication, because the subarray interval for the element at index $3$ becomes $(0, 6)$, and the subarray interval for the element at index $6$ is $(0, 7)$, which are not the same.</p>
-<p>Back to this problem, we just need to traverse the array, for each element $arr[i]$, use a monotonic stack to find the first position $left[i]$ to its left that is less than $arr[i]$, and the first position $right[i]$ to its right that is less than or equal to $arr[i]$. The number of subarrays for which $arr[i]$ is the minimum is $(i - left[i]) \times (right[i] - i)$, then multiply by $arr[i]$, and finally sum these up.</p>
+<p>If we find the first element to its right that is less than or equal to its value, there will be no duplication, because the subarray interval for the element at index <span class="arithmatex">\(3\)</span> becomes <span class="arithmatex">\((0, 6)\)</span>, and the subarray interval for the element at index <span class="arithmatex">\(6\)</span> is <span class="arithmatex">\((0, 7)\)</span>, which are not the same.</p>
+<p>Back to this problem, we just need to traverse the array, for each element <span class="arithmatex">\(arr[i]\)</span>, use a monotonic stack to find the first position <span class="arithmatex">\(left[i]\)</span> to its left that is less than <span class="arithmatex">\(arr[i]\)</span>, and the first position <span class="arithmatex">\(right[i]\)</span> to its right that is less than or equal to <span class="arithmatex">\(arr[i]\)</span>. The number of subarrays for which <span class="arithmatex">\(arr[i]\)</span> is the minimum is <span class="arithmatex">\((i - left[i]) \times (right[i] - i)\)</span>, then multiply by <span class="arithmatex">\(arr[i]\)</span>, and finally sum these up.</p>
 <p>Be aware of data overflow and modulo operations.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$, where $n$ is the length of the array $arr$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(arr\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86726,11 +86724,9 @@ Sum is 17.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

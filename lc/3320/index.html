@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90864,15 +90862,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $\textit{dfs}(i, j, k)$，其中 $i$ 表示从字符串 $s$ 的第 $i$ 个字符开始，目前 $\textit{Alice}$ 与 $\textit{Bob}$ 的分数差为 $j$，并且 $\textit{Bob}$ 上一次召唤的生物是 $k$，一共有多少种 $\textit{Bob}$ 的出招序列可以战胜 $\textit{Alice}$。</p>
-<p>那么答案就是 $\textit{dfs}(0, 0, -1)$。其中 $-1$ 表示 $\textit{Bob}$ 还没有召唤过生物。在除了 $\textit{Python}$ 之外的语言中，由于分数差可能为负数，我们可以将分数差加上 $n$，这样就可以保证分数差为非负数。</p>
-<p>函数 $\textit{dfs}(i, j, k)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span>，其中 <span class="arithmatex">\(i\)</span> 表示从字符串 <span class="arithmatex">\(s\)</span> 的第 <span class="arithmatex">\(i\)</span> 个字符开始，目前 <span class="arithmatex">\(\textit{Alice}\)</span> 与 <span class="arithmatex">\(\textit{Bob}\)</span> 的分数差为 <span class="arithmatex">\(j\)</span>，并且 <span class="arithmatex">\(\textit{Bob}\)</span> 上一次召唤的生物是 <span class="arithmatex">\(k\)</span>，一共有多少种 <span class="arithmatex">\(\textit{Bob}\)</span> 的出招序列可以战胜 <span class="arithmatex">\(\textit{Alice}\)</span>。</p>
+<p>那么答案就是 <span class="arithmatex">\(\textit{dfs}(0, 0, -1)\)</span>。其中 <span class="arithmatex">\(-1\)</span> 表示 <span class="arithmatex">\(\textit{Bob}\)</span> 还没有召唤过生物。在除了 <span class="arithmatex">\(\textit{Python}\)</span> 之外的语言中，由于分数差可能为负数，我们可以将分数差加上 <span class="arithmatex">\(n\)</span>，这样就可以保证分数差为非负数。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $n - i \leq j$，那么剩余的回合数不足以使 $\textit{Bob}$ 的分数超过 $\textit{Alice}$ 的分数，此时返回 $0$。</li>
-<li>如果 $i \geq n$，那么所有回合已经结束，如果 $\textit{Bob}$ 的分数小于 $0$，那么返回 $1$，否则返回 $0$。</li>
-<li>否则，我们枚举 $\textit{Bob}$ 这一回合召唤的生物，如果这一回合召唤的生物与上一回合召唤的生物相同，那么这一回合 $\textit{Bob}$ 无法获胜，直接跳过。否则，我们递归计算 $\textit{dfs}(i + 1, j + \textit{calc}(d[s[i]], l), l)$，其中 $\textit{calc}(x, y)$ 表示 $x$ 与 $y$ 之间的胜负关系，而 $d$ 是一个映射，将字符映射到 $\textit{012}$。我们将所有的结果相加并对 $10^9 + 7$ 取模。</li>
+<li>如果 <span class="arithmatex">\(n - i \leq j\)</span>，那么剩余的回合数不足以使 <span class="arithmatex">\(\textit{Bob}\)</span> 的分数超过 <span class="arithmatex">\(\textit{Alice}\)</span> 的分数，此时返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>如果 <span class="arithmatex">\(i \geq n\)</span>，那么所有回合已经结束，如果 <span class="arithmatex">\(\textit{Bob}\)</span> 的分数小于 <span class="arithmatex">\(0\)</span>，那么返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>否则，我们枚举 <span class="arithmatex">\(\textit{Bob}\)</span> 这一回合召唤的生物，如果这一回合召唤的生物与上一回合召唤的生物相同，那么这一回合 <span class="arithmatex">\(\textit{Bob}\)</span> 无法获胜，直接跳过。否则，我们递归计算 <span class="arithmatex">\(\textit{dfs}(i + 1, j + \textit{calc}(d[s[i]], l), l)\)</span>，其中 <span class="arithmatex">\(\textit{calc}(x, y)\)</span> 表示 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(y\)</span> 之间的胜负关系，而 <span class="arithmatex">\(d\)</span> 是一个映射，将字符映射到 <span class="arithmatex">\(\textit{012}\)</span>。我们将所有的结果相加并对 <span class="arithmatex">\(10^9 + 7\)</span> 取模。</li>
 </ul>
-<p>时间复杂度 $O(n^2 \times k^2)$，其中 $n$ 是字符串 $s$ 的长度，而 $k$ 表示字符集的大小。空间复杂度 $O(n^2 \times k)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2 \times k^2)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度，而 <span class="arithmatex">\(k\)</span> 表示字符集的大小。空间复杂度 <span class="arithmatex">\(O(n^2 \times k)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91456,11 +91454,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

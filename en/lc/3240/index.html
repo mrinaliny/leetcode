@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,22 +86069,22 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-case-analysis">Solution 1: Case Analysis</h3>
-<p>If both rows and columns are palindromic, then for any $i \in [0, m / 2)$ and $j \in [0, n / 2)$, it must satisfy $\text{grid}[i][j] = \text{grid}[m - i - 1][j] = \text{grid}[i][n - j - 1] = \text{grid}[m - i - 1][n - j - 1]$. They must either all become $0$ or all become $1$. The number of changes to $0$ is $c_0 = \text{grid}[i][j] + \text{grid}[m - i - 1][j] + \text{grid}[i][n - j - 1] + \text{grid}[m - i - 1][n - j - 1]$, and the number of changes to $1$ is $c_1 = 4 - c_0$. We take the minimum of the two and add it to the answer.</p>
-<p>Next, we discuss the parity of $m$ and $n$:</p>
+<p>If both rows and columns are palindromic, then for any <span class="arithmatex">\(i \in [0, m / 2)\)</span> and <span class="arithmatex">\(j \in [0, n / 2)\)</span>, it must satisfy <span class="arithmatex">\(\text{grid}[i][j] = \text{grid}[m - i - 1][j] = \text{grid}[i][n - j - 1] = \text{grid}[m - i - 1][n - j - 1]\)</span>. They must either all become <span class="arithmatex">\(0\)</span> or all become <span class="arithmatex">\(1\)</span>. The number of changes to <span class="arithmatex">\(0\)</span> is <span class="arithmatex">\(c_0 = \text{grid}[i][j] + \text{grid}[m - i - 1][j] + \text{grid}[i][n - j - 1] + \text{grid}[m - i - 1][n - j - 1]\)</span>, and the number of changes to <span class="arithmatex">\(1\)</span> is <span class="arithmatex">\(c_1 = 4 - c_0\)</span>. We take the minimum of the two and add it to the answer.</p>
+<p>Next, we discuss the parity of <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>:</p>
 <ul>
-<li>If both $m$ and $n$ are even, we directly return the answer.</li>
-<li>If both $m$ and $n$ are odd, the center cell must be $0$ because the number of $1$s must be divisible by $4$.</li>
-<li>If $m$ is odd and $n$ is even, we need to consider the middle row.</li>
-<li>If $m$ is even and $n$ is odd, we need to consider the middle column.</li>
+<li>If both <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are even, we directly return the answer.</li>
+<li>If both <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are odd, the center cell must be <span class="arithmatex">\(0\)</span> because the number of <span class="arithmatex">\(1\)</span>s must be divisible by <span class="arithmatex">\(4\)</span>.</li>
+<li>If <span class="arithmatex">\(m\)</span> is odd and <span class="arithmatex">\(n\)</span> is even, we need to consider the middle row.</li>
+<li>If <span class="arithmatex">\(m\)</span> is even and <span class="arithmatex">\(n\)</span> is odd, we need to consider the middle column.</li>
 </ul>
-<p>For the latter two cases, we need to count the number of differing pairs of cells $\text{diff}$ in the middle row or column, and the number of cells that are the same and equal to $1$ $\text{cnt1}$. Then we discuss the following cases:</p>
+<p>For the latter two cases, we need to count the number of differing pairs of cells <span class="arithmatex">\(\text{diff}\)</span> in the middle row or column, and the number of cells that are the same and equal to <span class="arithmatex">\(1\)</span> <span class="arithmatex">\(\text{cnt1}\)</span>. Then we discuss the following cases:</p>
 <ul>
-<li>If $\text{cnt1} \bmod 4 = 0$, we only need to change the $\text{diff}$ cells to $0$, and the number of operations is $\text{diff                }$.</li>
-<li>Otherwise, if $\text{cnt1} = 2$, if $\text{diff} \gt 0$, we can change one of the cells to $1$ to make $\text{cnt1} = 4$, and then change the remaining $\text{diff} - 1$ cells to $0$. The total number of operations is $\text{diff}$.</li>
-<li>Otherwise, if $\text{diff} = 0$, we change the $2$ cells to $0$ to make $\text{cnt1} \bmod 4 = 0$, and the number of operations is $2$.</li>
+<li>If <span class="arithmatex">\(\text{cnt1} \bmod 4 = 0\)</span>, we only need to change the <span class="arithmatex">\(\text{diff}\)</span> cells to <span class="arithmatex">\(0\)</span>, and the number of operations is <span class="arithmatex">\(\text{diff                }\)</span>.</li>
+<li>Otherwise, if <span class="arithmatex">\(\text{cnt1} = 2\)</span>, if <span class="arithmatex">\(\text{diff} \gt 0\)</span>, we can change one of the cells to <span class="arithmatex">\(1\)</span> to make <span class="arithmatex">\(\text{cnt1} = 4\)</span>, and then change the remaining <span class="arithmatex">\(\text{diff} - 1\)</span> cells to <span class="arithmatex">\(0\)</span>. The total number of operations is <span class="arithmatex">\(\text{diff}\)</span>.</li>
+<li>Otherwise, if <span class="arithmatex">\(\text{diff} = 0\)</span>, we change the <span class="arithmatex">\(2\)</span> cells to <span class="arithmatex">\(0\)</span> to make <span class="arithmatex">\(\text{cnt1} \bmod 4 = 0\)</span>, and the number of operations is <span class="arithmatex">\(2\)</span>.</li>
 </ul>
 <p>We add the number of operations to the answer and finally return the answer.</p>
-<p>The time complexity is $O(m \times n)$, where $m$ and $n$ are the number of rows and columns of the matrix, respectively. The space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, respectively. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86716,11 +86714,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

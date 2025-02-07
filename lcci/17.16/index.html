@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90817,17 +90815,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义状态 $f[i]$ 表示考虑前 $i$ 个预约，且第 $i$ 个预约被接受的情况下，最长的预约时长；定义状态 $g[i]$ 表示考虑前 $i$ 个预约，且第 $i$ 个预约被拒绝的情况下，最长的预约时长。</p>
-<p>考虑第 $i$ 个预约，如果第 $i$ 个预约被接受，那么第 $i-1$ 个预约一定不能被接受，即 $f[i]=g[i-1]+nums[i]$；如果第 $i$ 个预约被拒绝，那么第 $i-1$ 个预约可以被接受，也可以被拒绝，即 $g[i]=max(f[i-1],g[i-1])$。</p>
+<p>我们定义状态 <span class="arithmatex">\(f[i]\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个预约，且第 <span class="arithmatex">\(i\)</span> 个预约被接受的情况下，最长的预约时长；定义状态 <span class="arithmatex">\(g[i]\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 个预约，且第 <span class="arithmatex">\(i\)</span> 个预约被拒绝的情况下，最长的预约时长。</p>
+<p>考虑第 <span class="arithmatex">\(i\)</span> 个预约，如果第 <span class="arithmatex">\(i\)</span> 个预约被接受，那么第 <span class="arithmatex">\(i-1\)</span> 个预约一定不能被接受，即 <span class="arithmatex">\(f[i]=g[i-1]+nums[i]\)</span>；如果第 <span class="arithmatex">\(i\)</span> 个预约被拒绝，那么第 <span class="arithmatex">\(i-1\)</span> 个预约可以被接受，也可以被拒绝，即 <span class="arithmatex">\(g[i]=max(f[i-1],g[i-1])\)</span>。</p>
 <p>所以，我们可以写出状态转移方程：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
-f[i] &amp;= g[i-1]+nums[i] \
+f[i] &amp;= g[i-1]+nums[i] \\
 g[i] &amp;= max(f[i-1],g[i-1])
 \end{aligned}
-$$</p>
-<p>最终的答案即为 $max(f[n-1],g[n-1])$，其中 $n$ 为预约的数量。</p>
-<p>我们可以将空间复杂度优化至 $O(1)$，即使用两个变量 $f$ 和 $g$ 来代替数组 $f$ 和 $g$。</p>
+\]</div>
+<p>最终的答案即为 <span class="arithmatex">\(max(f[n-1],g[n-1])\)</span>，其中 <span class="arithmatex">\(n\)</span> 为预约的数量。</p>
+<p>我们可以将空间复杂度优化至 <span class="arithmatex">\(O(1)\)</span>，即使用两个变量 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(g\)</span> 来代替数组 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(g\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91211,11 +91209,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

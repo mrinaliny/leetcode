@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,14 +90861,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索 + 二分查找</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示有 $i$ 层楼以及 $j$ 个鸡蛋时，确定 $f$ 值的最小操作次数，那么答案就是 $dfs(n, k)$。</p>
-<p>函数 $dfs(i, j)$ 的执行逻辑如下：</p>
-<p>如果 $i \lt 1$，说明楼层已经小于等于 $0$，此时返回 $0$；</p>
-<p>如果 $j = 1$，说明只有一个鸡蛋，那么只能从第一层开始一层一层试，最坏情况下需要试 $i$ 次，此时返回 $i$；</p>
-<p>否则，我们考虑枚举第一个鸡蛋从第 $x$ 层扔下的情况，其中 $1 \le x \le i$。如果鸡蛋在第 $x$ 层扔下时碎了，说明 $f \lt x$，此时我们接下来需要在 $x - 1$ 层下方以及剩下的 $j - 1$ 个鸡蛋确定 $f$ 值，总共需要的最小操作次数为 $dfs(x - 1, j - 1) + 1$ 次；如果鸡蛋在第 $x$ 层扔下时没碎，说明 $f \gt x$，此时我们需要在第 $x + 1$ 层及以上以及剩下的 $j$ 个鸡蛋确定 $f$ 值，总共需要的最小操作次数为 $dfs(i - x, j) + 1$ 次。由于我们要保证最坏情况下操作次数最少，因此 $dfs(i, j) = \min_{1 \le x \le i} \max(dfs(x - 1, j - 1), dfs(i - x, j)) + 1$。</p>
-<p>如果按照这样的方式枚举，由于状态数有 $n \times k$，每个状态需要枚举 $n$ 次，那么总时间复杂度达到 $O(n^2 \times k)$，这会超出时间限制，我们考虑如何进行优化。</p>
-<p>我们注意到函数 $dfs(x - 1, j - 1)$ 随着 $x$ 的增大而单调递增，而函数 $dfs(i - x, j)$ 随着 $x$ 的增大而单调递减，因此存在一个最优的 $x$ 值使得 $\max(dfs(x - 1, j - 1), dfs(i - x, j))$ 达到最小值。我们可以对 $x$ 进行二分查找，找出这个最优的 $x$ 值。其中 $x$ 是满足 $dfs(x - 1, j - 1) \le dfs(i - x, j)$ 的最大整数。这样我们可以将时间复杂度降低到 $O(n \times k \log n)$。</p>
-<p>时间复杂度 $O(n \times k \log n)$，空间复杂度 $O(n \times k)$。其中 $n$ 和 $k$ 分别是楼层数和鸡蛋数。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示有 <span class="arithmatex">\(i\)</span> 层楼以及 <span class="arithmatex">\(j\)</span> 个鸡蛋时，确定 <span class="arithmatex">\(f\)</span> 值的最小操作次数，那么答案就是 <span class="arithmatex">\(dfs(n, k)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(i \lt 1\)</span>，说明楼层已经小于等于 <span class="arithmatex">\(0\)</span>，此时返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>如果 <span class="arithmatex">\(j = 1\)</span>，说明只有一个鸡蛋，那么只能从第一层开始一层一层试，最坏情况下需要试 <span class="arithmatex">\(i\)</span> 次，此时返回 <span class="arithmatex">\(i\)</span>；</p>
+<p>否则，我们考虑枚举第一个鸡蛋从第 <span class="arithmatex">\(x\)</span> 层扔下的情况，其中 <span class="arithmatex">\(1 \le x \le i\)</span>。如果鸡蛋在第 <span class="arithmatex">\(x\)</span> 层扔下时碎了，说明 <span class="arithmatex">\(f \lt x\)</span>，此时我们接下来需要在 <span class="arithmatex">\(x - 1\)</span> 层下方以及剩下的 <span class="arithmatex">\(j - 1\)</span> 个鸡蛋确定 <span class="arithmatex">\(f\)</span> 值，总共需要的最小操作次数为 <span class="arithmatex">\(dfs(x - 1, j - 1) + 1\)</span> 次；如果鸡蛋在第 <span class="arithmatex">\(x\)</span> 层扔下时没碎，说明 <span class="arithmatex">\(f \gt x\)</span>，此时我们需要在第 <span class="arithmatex">\(x + 1\)</span> 层及以上以及剩下的 <span class="arithmatex">\(j\)</span> 个鸡蛋确定 <span class="arithmatex">\(f\)</span> 值，总共需要的最小操作次数为 <span class="arithmatex">\(dfs(i - x, j) + 1\)</span> 次。由于我们要保证最坏情况下操作次数最少，因此 <span class="arithmatex">\(dfs(i, j) = \min_{1 \le x \le i} \max(dfs(x - 1, j - 1), dfs(i - x, j)) + 1\)</span>。</p>
+<p>如果按照这样的方式枚举，由于状态数有 <span class="arithmatex">\(n \times k\)</span>，每个状态需要枚举 <span class="arithmatex">\(n\)</span> 次，那么总时间复杂度达到 <span class="arithmatex">\(O(n^2 \times k)\)</span>，这会超出时间限制，我们考虑如何进行优化。</p>
+<p>我们注意到函数 <span class="arithmatex">\(dfs(x - 1, j - 1)\)</span> 随着 <span class="arithmatex">\(x\)</span> 的增大而单调递增，而函数 <span class="arithmatex">\(dfs(i - x, j)\)</span> 随着 <span class="arithmatex">\(x\)</span> 的增大而单调递减，因此存在一个最优的 <span class="arithmatex">\(x\)</span> 值使得 <span class="arithmatex">\(\max(dfs(x - 1, j - 1), dfs(i - x, j))\)</span> 达到最小值。我们可以对 <span class="arithmatex">\(x\)</span> 进行二分查找，找出这个最优的 <span class="arithmatex">\(x\)</span> 值。其中 <span class="arithmatex">\(x\)</span> 是满足 <span class="arithmatex">\(dfs(x - 1, j - 1) \le dfs(i - x, j)\)</span> 的最大整数。这样我们可以将时间复杂度降低到 <span class="arithmatex">\(O(n \times k \log n)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(k\)</span> 分别是楼层数和鸡蛋数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91175,10 +91173,10 @@
 
 <h3 id="_4">方法二：动态规划 + 二分查找</h3>
 <p>我们也可以使用动态规划的方法解决这个问题。</p>
-<p>我们定义 $f[i][j]$ 表示有 $i$ 层楼以及 $j$ 个鸡蛋时，确定 $f$ 值的最小操作次数，那么答案就是 $f[n][k]$。</p>
-<p>状态转移方程为 $f[i][j] = \min_{1 \le x \le i} \max(f[x - 1][j - 1], f[i - x][j]) + 1$。</p>
-<p>与方法一类似，我们可以使用二分查找来优化 $x$ 的枚举过程。</p>
-<p>时间复杂度 $O(n \times k \log n)$，空间复杂度 $O(n \times k)$。其中 $n$ 和 $k$ 分别是楼层数和鸡蛋数。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示有 <span class="arithmatex">\(i\)</span> 层楼以及 <span class="arithmatex">\(j\)</span> 个鸡蛋时，确定 <span class="arithmatex">\(f\)</span> 值的最小操作次数，那么答案就是 <span class="arithmatex">\(f[n][k]\)</span>。</p>
+<p>状态转移方程为 <span class="arithmatex">\(f[i][j] = \min_{1 \le x \le i} \max(f[x - 1][j - 1], f[i - x][j]) + 1\)</span>。</p>
+<p>与方法一类似，我们可以使用二分查找来优化 <span class="arithmatex">\(x\)</span> 的枚举过程。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(k\)</span> 分别是楼层数和鸡蛋数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91663,11 +91661,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

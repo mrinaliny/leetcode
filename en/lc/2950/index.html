@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86158,10 +86156,10 @@ It can be shown that there are no other substrings of word that are divisible.
 <!-- solution:start -->
 
 <h3 id="solution-1-enumeration">Solution 1: Enumeration</h3>
-<p>First, we use a hash table or array $mp$ to record the number corresponding to each letter.</p>
-<p>Then, we enumerate the starting position $i$ of the substring, and then enumerate the ending position $j$ of the substring, calculate the numerical sum $s$ of the substring $s[i..j]$. If $s$ can be divided by $j-i+1$, then a divisible substring is found, and the answer is increased by one.</p>
+<p>First, we use a hash table or array <span class="arithmatex">\(mp\)</span> to record the number corresponding to each letter.</p>
+<p>Then, we enumerate the starting position <span class="arithmatex">\(i\)</span> of the substring, and then enumerate the ending position <span class="arithmatex">\(j\)</span> of the substring, calculate the numerical sum <span class="arithmatex">\(s\)</span> of the substring <span class="arithmatex">\(s[i..j]\)</span>. If <span class="arithmatex">\(s\)</span> can be divided by <span class="arithmatex">\(j-i+1\)</span>, then a divisible substring is found, and the answer is increased by one.</p>
 <p>After the enumeration is over, return the answer.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(C)$. Where $n$ is the length of the string $word$, and $C$ is the size of the character set, in this question $C=26$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(C)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(word\)</span>, and <span class="arithmatex">\(C\)</span> is the size of the character set, in this question <span class="arithmatex">\(C=26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86433,10 +86431,10 @@ It can be shown that there are no other substrings of word that are divisible.
 <!-- solution:start -->
 
 <h3 id="solution-2-hash-table-prefix-sum-enumeration">Solution 2: Hash Table + Prefix Sum + Enumeration</h3>
-<p>Similar to Solution 1, we first use a hash table or array $mp$ to record the number corresponding to each letter.</p>
-<p>If the sum of the numbers in an integer subarray can be divided by its length, then the average value of this subarray must be an integer. And because the number of each element in the subarray is in the range of $[1, 9]$, the average value of the subarray can only be one of $1, 2, \cdots, 9$.</p>
-<p>We can enumerate the average value $i$ of the subarray. If the sum of the elements in a subarray can be divided by $i$, suppose the subarray is $a_1, a_2, \cdots, a_k$, then $a_1 + a_2 + \cdots + a_k = i \times k$, that is, $(a_1 - i) + (a_2 - i) + \cdots + (a_k - i) = 0$. If we regard $a_k - i$ as a new element $b_k$, then the original subarray becomes $b_1, b_2, \cdots, b_k$, where $b_1 + b_2 + \cdots + b_k = 0$. We only need to find out how many subarrays in the new array have an element sum of $0$, which can be implemented with "hash table" combined with "prefix sum".</p>
-<p>The time complexity is $O(10 \times n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the string $word$.</p>
+<p>Similar to Solution 1, we first use a hash table or array <span class="arithmatex">\(mp\)</span> to record the number corresponding to each letter.</p>
+<p>If the sum of the numbers in an integer subarray can be divided by its length, then the average value of this subarray must be an integer. And because the number of each element in the subarray is in the range of <span class="arithmatex">\([1, 9]\)</span>, the average value of the subarray can only be one of <span class="arithmatex">\(1, 2, \cdots, 9\)</span>.</p>
+<p>We can enumerate the average value <span class="arithmatex">\(i\)</span> of the subarray. If the sum of the elements in a subarray can be divided by <span class="arithmatex">\(i\)</span>, suppose the subarray is <span class="arithmatex">\(a_1, a_2, \cdots, a_k\)</span>, then <span class="arithmatex">\(a_1 + a_2 + \cdots + a_k = i \times k\)</span>, that is, <span class="arithmatex">\((a_1 - i) + (a_2 - i) + \cdots + (a_k - i) = 0\)</span>. If we regard <span class="arithmatex">\(a_k - i\)</span> as a new element <span class="arithmatex">\(b_k\)</span>, then the original subarray becomes <span class="arithmatex">\(b_1, b_2, \cdots, b_k\)</span>, where <span class="arithmatex">\(b_1 + b_2 + \cdots + b_k = 0\)</span>. We only need to find out how many subarrays in the new array have an element sum of <span class="arithmatex">\(0\)</span>, which can be implemented with "hash table" combined with "prefix sum".</p>
+<p>The time complexity is <span class="arithmatex">\(O(10 \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(word\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86945,11 +86943,9 @@ It can be shown that there are no other substrings of word that are divisible.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

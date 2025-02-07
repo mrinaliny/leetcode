@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86056,16 +86054,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search">Solution 1: Binary Search</h3>
-<p>Let $m$ and $n$ be the number of rows and columns of the matrix, respectively.</p>
-<p>The problem asks us to find a peak, and the time complexity should be $O(m \times \log n)$ or $O(n \times \log m)$. Therefore, we can consider using binary search.</p>
-<p>We consider the maximum value of the $i$-th row, and denote its index as $j$.</p>
-<p>If $mat[i][j] &gt; mat[i + 1][j]$, then there must be a peak in the rows $[0,..i]$. We only need to find the maximum value in these rows. Similarly, if $mat[i][j] &lt; mat[i + 1][j]$, then there must be a peak in the rows $[i + 1,..m - 1]$. We only need to find the maximum value in these rows.</p>
+<p>Let <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> be the number of rows and columns of the matrix, respectively.</p>
+<p>The problem asks us to find a peak, and the time complexity should be <span class="arithmatex">\(O(m \times \log n)\)</span> or <span class="arithmatex">\(O(n \times \log m)\)</span>. Therefore, we can consider using binary search.</p>
+<p>We consider the maximum value of the <span class="arithmatex">\(i\)</span>-th row, and denote its index as <span class="arithmatex">\(j\)</span>.</p>
+<p>If <span class="arithmatex">\(mat[i][j] &gt; mat[i + 1][j]\)</span>, then there must be a peak in the rows <span class="arithmatex">\([0,..i]\)</span>. We only need to find the maximum value in these rows. Similarly, if <span class="arithmatex">\(mat[i][j] &lt; mat[i + 1][j]\)</span>, then there must be a peak in the rows <span class="arithmatex">\([i + 1,..m - 1]\)</span>. We only need to find the maximum value in these rows.</p>
 <p>Why is the above method correct? We can prove it by contradiction.</p>
-<p>If $mat[i][j] &gt; mat[i + 1][j]$, suppose there is no peak in the rows $[0,..i]$. Then $mat[i][j]$ is not a peak. Since $mat[i][j]$ is the maximum value of the $i$-th row, and $mat[i][j] &gt; mat[i + 1][j]$, then $mat[i][j] &lt; mat[i - 1][j]$. We continue to consider from the $(i - 1)$-th row upwards, and the maximum value of each row is less than the maximum value of the previous row. When we traverse to $i = 0$, since all elements in the matrix are positive integers, and the values of the cells around the matrix are $-1$. Therefore, at the 0-th row, its maximum value is greater than all its adjacent elements, so the maximum value of the 0-th row is a peak, which contradicts the assumption. Therefore, there must be a peak in the rows $[0,..i]$.</p>
-<p>For the case where $mat[i][j] &lt; mat[i + 1][j]$, we can prove in a similar way that there must be a peak in the rows $[i + 1,..m - 1]$.</p>
+<p>If <span class="arithmatex">\(mat[i][j] &gt; mat[i + 1][j]\)</span>, suppose there is no peak in the rows <span class="arithmatex">\([0,..i]\)</span>. Then <span class="arithmatex">\(mat[i][j]\)</span> is not a peak. Since <span class="arithmatex">\(mat[i][j]\)</span> is the maximum value of the <span class="arithmatex">\(i\)</span>-th row, and <span class="arithmatex">\(mat[i][j] &gt; mat[i + 1][j]\)</span>, then <span class="arithmatex">\(mat[i][j] &lt; mat[i - 1][j]\)</span>. We continue to consider from the <span class="arithmatex">\((i - 1)\)</span>-th row upwards, and the maximum value of each row is less than the maximum value of the previous row. When we traverse to <span class="arithmatex">\(i = 0\)</span>, since all elements in the matrix are positive integers, and the values of the cells around the matrix are <span class="arithmatex">\(-1\)</span>. Therefore, at the 0-th row, its maximum value is greater than all its adjacent elements, so the maximum value of the 0-th row is a peak, which contradicts the assumption. Therefore, there must be a peak in the rows <span class="arithmatex">\([0,..i]\)</span>.</p>
+<p>For the case where <span class="arithmatex">\(mat[i][j] &lt; mat[i + 1][j]\)</span>, we can prove in a similar way that there must be a peak in the rows <span class="arithmatex">\([i + 1,..m - 1]\)</span>.</p>
 <p>Therefore, we can use binary search to find the peak.</p>
-<p>We perform binary search on the rows of the matrix, initially with the search boundaries $l = 0$, $r = m - 1$. Each time, we find the middle row $mid$ and find the index $j$ of the maximum value of this row. If $mat[mid][j] &gt; mat[mid + 1][j]$, then we search for the peak in the rows $[0,..mid]$, i.e., update $r = mid$. Otherwise, we search for the peak in the rows $[mid + 1,..m - 1]$, i.e., update $l = mid + 1$. When $l = r$, we find the position $[l, j_l]$ of the peak, where $j_l$ is the index of the maximum value of the $l$-th row.</p>
-<p>The time complexity is $O(n \times \log m)$, where $m$ and $n$ are the number of rows and columns of the matrix, respectively. The time complexity of binary search is $O(\log m)$, and each time we perform binary search, we need to traverse all elements of the $mid$-th row, with a time complexity of $O(n)$. The space complexity is $O(1)$.</p>
+<p>We perform binary search on the rows of the matrix, initially with the search boundaries <span class="arithmatex">\(l = 0\)</span>, <span class="arithmatex">\(r = m - 1\)</span>. Each time, we find the middle row <span class="arithmatex">\(mid\)</span> and find the index <span class="arithmatex">\(j\)</span> of the maximum value of this row. If <span class="arithmatex">\(mat[mid][j] &gt; mat[mid + 1][j]\)</span>, then we search for the peak in the rows <span class="arithmatex">\([0,..mid]\)</span>, i.e., update <span class="arithmatex">\(r = mid\)</span>. Otherwise, we search for the peak in the rows <span class="arithmatex">\([mid + 1,..m - 1]\)</span>, i.e., update <span class="arithmatex">\(l = mid + 1\)</span>. When <span class="arithmatex">\(l = r\)</span>, we find the position <span class="arithmatex">\([l, j_l]\)</span> of the peak, where <span class="arithmatex">\(j_l\)</span> is the index of the maximum value of the <span class="arithmatex">\(l\)</span>-th row.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log m)\)</span>, where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, respectively. The time complexity of binary search is <span class="arithmatex">\(O(\log m)\)</span>, and each time we perform binary search, we need to traverse all elements of the <span class="arithmatex">\(mid\)</span>-th row, with a time complexity of <span class="arithmatex">\(O(n)\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86535,11 +86533,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

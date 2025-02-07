@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90841,18 +90839,18 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：数位 DP</h3>
-<p>我们注意到，题目求的是区间 $[low, high]$ 内的步进数的个数，对于这种区间 $[l,..r]$ 的问题，我们通常可以考虑转化为求 $[1, r]$ 和 $[1, l-1]$ 的答案，然后相减即可。另外，题目中只涉及到不同数位之间的关系，而不涉及具体的数值，因此我们可以考虑使用数位 DP 来解决。</p>
-<p>我们设计一个函数 $dfs(pos, pre, lead, limit)$，表示当前处理到第 $pos$ 位，前一位数字是 $pre$，当前数字是否只包含前导零 $lead$，当前数字是否达到上界 $limit$ 的方案数。其中，而 $pos$ 的范围是 $[0, len(num))$。</p>
-<p>函数 $dfs(pos, pre, lead, limit)$ 的执行逻辑如下：</p>
-<p>如果 $pos$ 超出了 $num$ 的长度，说明我们已经处理完了所有数位，如果此时 $lead$ 为真，说明当前数字只包含前导零，不是一个合法的数字，我们可以返回 $0$ 表示方案数为 $0$；否则我们返回 $1$ 表示方案数为 $1$。</p>
-<p>否则，我们计算得到当前数位的上界 $up$，然后在 $[0,..up]$ 范围内枚举当前数位的数字 $i$：</p>
+<p>我们注意到，题目求的是区间 <span class="arithmatex">\([low, high]\)</span> 内的步进数的个数，对于这种区间 <span class="arithmatex">\([l,..r]\)</span> 的问题，我们通常可以考虑转化为求 <span class="arithmatex">\([1, r]\)</span> 和 <span class="arithmatex">\([1, l-1]\)</span> 的答案，然后相减即可。另外，题目中只涉及到不同数位之间的关系，而不涉及具体的数值，因此我们可以考虑使用数位 DP 来解决。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(pos, pre, lead, limit)\)</span>，表示当前处理到第 <span class="arithmatex">\(pos\)</span> 位，前一位数字是 <span class="arithmatex">\(pre\)</span>，当前数字是否只包含前导零 <span class="arithmatex">\(lead\)</span>，当前数字是否达到上界 <span class="arithmatex">\(limit\)</span> 的方案数。其中，而 <span class="arithmatex">\(pos\)</span> 的范围是 <span class="arithmatex">\([0, len(num))\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(pos, pre, lead, limit)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(pos\)</span> 超出了 <span class="arithmatex">\(num\)</span> 的长度，说明我们已经处理完了所有数位，如果此时 <span class="arithmatex">\(lead\)</span> 为真，说明当前数字只包含前导零，不是一个合法的数字，我们可以返回 <span class="arithmatex">\(0\)</span> 表示方案数为 <span class="arithmatex">\(0\)</span>；否则我们返回 <span class="arithmatex">\(1\)</span> 表示方案数为 <span class="arithmatex">\(1\)</span>。</p>
+<p>否则，我们计算得到当前数位的上界 <span class="arithmatex">\(up\)</span>，然后在 <span class="arithmatex">\([0,..up]\)</span> 范围内枚举当前数位的数字 <span class="arithmatex">\(i\)</span>：</p>
 <ul>
-<li>如果 $i=0$ 且 $lead$ 为真，说明当前数字只包含前导零，我们递归计算 $dfs(pos+1,pre, true, limit and i=up)$ 的值并累加到答案中；</li>
-<li>否则，如果 $pre$ 为 $-1$，或者 $i$ 和 $pre$ 之间的差的绝对值为 $1$，说明当前数字是一个合法的步进数，我们递归计算 $dfs(pos+1,i, false, limit and i=up)$ 的值并累加到答案中。</li>
+<li>如果 <span class="arithmatex">\(i=0\)</span> 且 <span class="arithmatex">\(lead\)</span> 为真，说明当前数字只包含前导零，我们递归计算 <span class="arithmatex">\(dfs(pos+1,pre, true, limit\ and\ i=up)\)</span> 的值并累加到答案中；</li>
+<li>否则，如果 <span class="arithmatex">\(pre\)</span> 为 <span class="arithmatex">\(-1\)</span>，或者 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(pre\)</span> 之间的差的绝对值为 <span class="arithmatex">\(1\)</span>，说明当前数字是一个合法的步进数，我们递归计算 <span class="arithmatex">\(dfs(pos+1,i, false, limit\ and\ i=up)\)</span> 的值并累加到答案中。</li>
 </ul>
 <p>最终我们返回答案。</p>
-<p>在主函数中，我们分别计算 $[1, high]$ 和 $[1, low-1]$ 的答案 $a$ 和 $b$，最终答案为 $a-b$。注意答案的取模运算。</p>
-<p>时间复杂度 $O(\log M \times |\Sigma|^2)$，空间复杂度 $O(\log M \times |\Sigma|)$，其中 $M$ 表示 $high$ 数字的大小，而 $|\Sigma|$ 表示数字集合。</p>
+<p>在主函数中，我们分别计算 <span class="arithmatex">\([1, high]\)</span> 和 <span class="arithmatex">\([1, low-1]\)</span> 的答案 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span>，最终答案为 <span class="arithmatex">\(a-b\)</span>。注意答案的取模运算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log M \times |\Sigma|^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log M \times |\Sigma|)\)</span>，其中 <span class="arithmatex">\(M\)</span> 表示 <span class="arithmatex">\(high\)</span> 数字的大小，而 <span class="arithmatex">\(|\Sigma|\)</span> 表示数字集合。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2700-2799/2719.Count%20of%20Integers/README.md">2719. 统计整数数目</a></li>
@@ -91525,11 +91523,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90890,8 +90888,8 @@ x=5, y=1 -> f(5, 1) = 5 * 1 = 5</pre>
 <!-- solution:start -->
 
 <h3 id="_3">方法一：枚举 + 二分查找</h3>
-<p>根据题目我们可以知道，函数 $f(x, y)$ 是单调递增函数，因此，我们可以枚举 $x$，然后在 $[1,...z]$ 中二分查找 $y$，使得 $f(x, y) = z$。如果找到了，就将 $(x, y)$ 加入答案中。</p>
-<p>时间复杂度 $(n \log n)$，其中 $n$ 是 $z$ 的值，空间复杂度 $O(1)$。</p>
+<p>根据题目我们可以知道，函数 <span class="arithmatex">\(f(x, y)\)</span> 是单调递增函数，因此，我们可以枚举 <span class="arithmatex">\(x\)</span>，然后在 <span class="arithmatex">\([1,...z]\)</span> 中二分查找 <span class="arithmatex">\(y\)</span>，使得 <span class="arithmatex">\(f(x, y) = z\)</span>。如果找到了，就将 <span class="arithmatex">\((x, y)\)</span> 加入答案中。</p>
+<p>时间复杂度 <span class="arithmatex">\((n \log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是 <span class="arithmatex">\(z\)</span> 的值，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91173,14 +91171,14 @@ x=5, y=1 -> f(5, 1) = 5 * 1 = 5</pre>
 <!-- solution:start -->
 
 <h3 id="_4">方法二：双指针</h3>
-<p>我们可以定义两个指针 $x$ 和 $y$，初始时 $x = 1$, $y = z$。</p>
+<p>我们可以定义两个指针 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>，初始时 <span class="arithmatex">\(x = 1\)</span>, <span class="arithmatex">\(y = z\)</span>。</p>
 <ul>
-<li>如果 $f(x, y) = z$，我们将 $(x, y)$ 加入答案中，然后 $x \leftarrow x + 1$, $y \leftarrow y - 1$；</li>
-<li>如果 $f(x, y) \lt z$，此时对任意的 $y' \lt y$，都有 $f(x, y') \lt f(x, y) \lt z$，因此我们不能将 $y$ 减小，只能将 $x$ 增大，所以 $x \leftarrow x + 1$；</li>
-<li>如果 $f(x, y) \gt z$，此时对任意的 $x' \gt x$，都有 $f(x', y) \gt f(x, y) \gt z$，因此我们不能将 $x$ 增大，只能将 $y$ 减小，所以 $y \leftarrow y - 1$。</li>
+<li>如果 <span class="arithmatex">\(f(x, y) = z\)</span>，我们将 <span class="arithmatex">\((x, y)\)</span> 加入答案中，然后 <span class="arithmatex">\(x \leftarrow x + 1\)</span>, <span class="arithmatex">\(y \leftarrow y - 1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(f(x, y) \lt z\)</span>，此时对任意的 <span class="arithmatex">\(y' \lt y\)</span>，都有 <span class="arithmatex">\(f(x, y') \lt f(x, y) \lt z\)</span>，因此我们不能将 <span class="arithmatex">\(y\)</span> 减小，只能将 <span class="arithmatex">\(x\)</span> 增大，所以 <span class="arithmatex">\(x \leftarrow x + 1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(f(x, y) \gt z\)</span>，此时对任意的 <span class="arithmatex">\(x' \gt x\)</span>，都有 <span class="arithmatex">\(f(x', y) \gt f(x, y) \gt z\)</span>，因此我们不能将 <span class="arithmatex">\(x\)</span> 增大，只能将 <span class="arithmatex">\(y\)</span> 减小，所以 <span class="arithmatex">\(y \leftarrow y - 1\)</span>。</li>
 </ul>
 <p>循环结束后，返回答案。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是 $z$ 的值，空间复杂度 $O(1)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是 <span class="arithmatex">\(z\)</span> 的值，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91693,11 +91691,9 @@ x=5, y=1 -> f(5, 1) = 5 * 1 = 5</pre>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

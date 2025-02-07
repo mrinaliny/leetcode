@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86009,26 +86007,26 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-digit-dp">Solution 1: Digit DP</h3>
-<p>This problem is essentially about finding the number of occurrences of the digit $2$ in the given interval $[l,..r]$. The count is related to the number of digits and the digit at each position. We can use the idea of Digit DP to solve this problem. In Digit DP, the size of the number has little impact on the complexity.</p>
-<p>For the interval $[l,..r]$, we usually transform it into $[1,..r]$ and then subtract $[1,..l - 1]$, i.e.,</p>
-<p>$$
+<p>This problem is essentially about finding the number of occurrences of the digit <span class="arithmatex">\(2\)</span> in the given interval <span class="arithmatex">\([l,..r]\)</span>. The count is related to the number of digits and the digit at each position. We can use the idea of Digit DP to solve this problem. In Digit DP, the size of the number has little impact on the complexity.</p>
+<p>For the interval <span class="arithmatex">\([l,..r]\)</span>, we usually transform it into <span class="arithmatex">\([1,..r]\)</span> and then subtract <span class="arithmatex">\([1,..l - 1]\)</span>, i.e.,</p>
+<div class="arithmatex">\[
 ans = \sum_{i=1}^{r} ans_i -  \sum_{i=1}^{l-1} ans_i
-$$</p>
-<p>However, for this problem, we only need to find the value in the interval $[1,..r]$.</p>
+\]</div>
+<p>However, for this problem, we only need to find the value in the interval <span class="arithmatex">\([1,..r]\)</span>.</p>
 <p>Here, we use memoization to implement Digit DP. We start from the top and search down to the bottom to get the number of schemes, then return the answer layer by layer and accumulate it, finally getting the final answer from the starting point of the search.</p>
 <p>The basic steps are as follows:</p>
 <ol>
-<li>Convert the number $n$ into an int array $a$, where $a[1]$ is the least significant digit, and $a[len]$ is the most significant digit.</li>
-<li>Design the function $dfs()$ based on the problem information. For this problem, we define $dfs(pos, cnt, limit)$, and the answer is $dfs(len, 0, true)$.</li>
+<li>Convert the number <span class="arithmatex">\(n\)</span> into an int array <span class="arithmatex">\(a\)</span>, where <span class="arithmatex">\(a[1]\)</span> is the least significant digit, and <span class="arithmatex">\(a[len]\)</span> is the most significant digit.</li>
+<li>Design the function <span class="arithmatex">\(dfs()\)</span> based on the problem information. For this problem, we define <span class="arithmatex">\(dfs(pos, cnt, limit)\)</span>, and the answer is <span class="arithmatex">\(dfs(len, 0, true)\)</span>.</li>
 </ol>
 <p>Where:</p>
 <ul>
 <li><code>pos</code> represents the number of digits, starting from the least significant digit or the first digit, usually depending on the digit construction property of the problem. For this problem, we choose to start from the most significant digit, so the initial value of <code>pos</code> is <code>len</code>.</li>
-<li><code>cnt</code> represents the number of $2$s in the current number.</li>
-<li><code>limit</code> represents the restriction on the digits that can be filled. If there is no restriction, you can choose $[0,1,..9]$, otherwise, you can only choose $[0,..a[pos]]$. If <code>limit</code> is <code>true</code> and the maximum value has been reached, then the next <code>limit</code> is also <code>true</code>. If <code>limit</code> is <code>true</code> but the maximum value has not been reached, or if <code>limit</code> is <code>false</code>, then the next <code>limit</code> is <code>false</code>.</li>
+<li><code>cnt</code> represents the number of <span class="arithmatex">\(2\)</span>s in the current number.</li>
+<li><code>limit</code> represents the restriction on the digits that can be filled. If there is no restriction, you can choose <span class="arithmatex">\([0,1,..9]\)</span>, otherwise, you can only choose <span class="arithmatex">\([0,..a[pos]]\)</span>. If <code>limit</code> is <code>true</code> and the maximum value has been reached, then the next <code>limit</code> is also <code>true</code>. If <code>limit</code> is <code>true</code> but the maximum value has not been reached, or if <code>limit</code> is <code>false</code>, then the next <code>limit</code> is <code>false</code>.</li>
 </ul>
 <p>For details on the implementation of the function, please refer to the code below.</p>
-<p>The time complexity is $O(\log n)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README_EN.md">233. Number of Digit One</a></li>
@@ -86609,11 +86607,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

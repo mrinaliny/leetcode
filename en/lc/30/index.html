@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86076,10 +86074,10 @@ The substring starting at 12 is <code>&quot;thefoobar&quot;</code>. It is the co
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-sliding-window">Solution 1: Hash Table + Sliding Window</h3>
-<p>We use a hash table $cnt$ to count the number of times each word appears in $words$, and use a hash table $cnt1$ to count the number of times each word appears in the current sliding window. We denote the length of the string $s$ as $m$, the number of words in the string array $words$ as $n$, and the length of each word as $k$.</p>
-<p>We can enumerate the starting point $i$ of the sliding window, where $0 \lt i &lt; k$. For each starting point, we maintain a sliding window with the left boundary as $l$, the right boundary as $r$, and the number of words in the sliding window as $t$. Additionally, we use a hash table $cnt1$ to count the number of times each word appears in the sliding window.</p>
-<p>Each time, we extract the string $s[r:r+k]$. If $s[r:r+k]$ is not in the hash table $cnt$, it means that the words in the current sliding window are not valid. We update the left boundary $l$ to $r$, clear the hash table $cnt1$, and reset the word count $t$ to 0. If $s[r:r+k]$ is in the hash table $cnt$, it means that the words in the current sliding window are valid. We increase the word count $t$ by 1, and increase the count of $s[r:r+k]$ in the hash table $cnt1$ by 1. If $cnt1[s[r:r+k]]$ is greater than $cnt[s[r:r+k]]$, it means that $s[r:r+k]$ appears too many times in the current sliding window. We need to move the left boundary $l$ to the right until $cnt1[s[r:r+k]] = cnt[s[r:r+k]]$. If $t = n$, it means that the words in the current sliding window are exactly valid, and we add the left boundary $l$ to the answer array.</p>
-<p>The time complexity is $O(m \times k)$, and the space complexity is $O(n \times k)$. Here, $m$ and $n$ are the lengths of the string $s$ and the string array $words$ respectively, and $k$ is the length of the words in the string array $words$.</p>
+<p>We use a hash table <span class="arithmatex">\(cnt\)</span> to count the number of times each word appears in <span class="arithmatex">\(words\)</span>, and use a hash table <span class="arithmatex">\(cnt1\)</span> to count the number of times each word appears in the current sliding window. We denote the length of the string <span class="arithmatex">\(s\)</span> as <span class="arithmatex">\(m\)</span>, the number of words in the string array <span class="arithmatex">\(words\)</span> as <span class="arithmatex">\(n\)</span>, and the length of each word as <span class="arithmatex">\(k\)</span>.</p>
+<p>We can enumerate the starting point <span class="arithmatex">\(i\)</span> of the sliding window, where <span class="arithmatex">\(0 \lt i &lt; k\)</span>. For each starting point, we maintain a sliding window with the left boundary as <span class="arithmatex">\(l\)</span>, the right boundary as <span class="arithmatex">\(r\)</span>, and the number of words in the sliding window as <span class="arithmatex">\(t\)</span>. Additionally, we use a hash table <span class="arithmatex">\(cnt1\)</span> to count the number of times each word appears in the sliding window.</p>
+<p>Each time, we extract the string <span class="arithmatex">\(s[r:r+k]\)</span>. If <span class="arithmatex">\(s[r:r+k]\)</span> is not in the hash table <span class="arithmatex">\(cnt\)</span>, it means that the words in the current sliding window are not valid. We update the left boundary <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(r\)</span>, clear the hash table <span class="arithmatex">\(cnt1\)</span>, and reset the word count <span class="arithmatex">\(t\)</span> to 0. If <span class="arithmatex">\(s[r:r+k]\)</span> is in the hash table <span class="arithmatex">\(cnt\)</span>, it means that the words in the current sliding window are valid. We increase the word count <span class="arithmatex">\(t\)</span> by 1, and increase the count of <span class="arithmatex">\(s[r:r+k]\)</span> in the hash table <span class="arithmatex">\(cnt1\)</span> by 1. If <span class="arithmatex">\(cnt1[s[r:r+k]]\)</span> is greater than <span class="arithmatex">\(cnt[s[r:r+k]]\)</span>, it means that <span class="arithmatex">\(s[r:r+k]\)</span> appears too many times in the current sliding window. We need to move the left boundary <span class="arithmatex">\(l\)</span> to the right until <span class="arithmatex">\(cnt1[s[r:r+k]] = cnt[s[r:r+k]]\)</span>. If <span class="arithmatex">\(t = n\)</span>, it means that the words in the current sliding window are exactly valid, and we add the left boundary <span class="arithmatex">\(l\)</span> to the answer array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of the string <span class="arithmatex">\(s\)</span> and the string array <span class="arithmatex">\(words\)</span> respectively, and <span class="arithmatex">\(k\)</span> is the length of the words in the string array <span class="arithmatex">\(words\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label><label for="__tabbed_1_7">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86892,11 +86890,9 @@ The substring starting at 12 is <code>&quot;thefoobar&quot;</code>. It is the co
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

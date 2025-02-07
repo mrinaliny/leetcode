@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90857,9 +90855,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：暴力枚举</h3>
-<p>我们直接枚举所有的数位 $(x, y)$，判断是否满足 $x \bmod (y \times k) = 0$，如果满足则答案加一。</p>
+<p>我们直接枚举所有的数位 <span class="arithmatex">\((x, y)\)</span>，判断是否满足 <span class="arithmatex">\(x \bmod (y \times k) = 0\)</span>，如果满足则答案加一。</p>
 <p>枚举结束后，返回答案即可。</p>
-<p>时间复杂度 $O(m \times n)$，其中 $m$ 和 $n$ 分别是数组 $\textit{nums1}$ 和 $\textit{nums2}$ 的长度。空间复杂度 $O(1)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是数组 <span class="arithmatex">\(\textit{nums1}\)</span> 和 <span class="arithmatex">\(\textit{nums2}\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -90981,9 +90979,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：哈希表 + 枚举倍数</h3>
-<p>我们用一个哈希表 $\textit{cnt1}$ 记录数组 $\textit{nums1}$ 中每个数除以 $k$ 的商的出现次数，用一个哈希表 $\textit{cnt2}$ 记录数组 $\textit{nums2}$ 中每个数的出现次数。</p>
-<p>接下来，我们枚举数组 $\textit{nums2}$ 中的每个数 $x$，对于每个数 $x$，我们枚举 $x$ 的倍数 $y$，其中 $y$ 的范围是 $[x, \textit{mx}]$，其中 $\textit{mx}$ 是 $\textit{cnt1}$ 中的最大键值，然后我们统计 $\textit{cnt1}[y]$ 的和，记为 $s$，最后我们将 $s \times v$ 累加到答案中，其中 $v$ 是 $\textit{cnt2}[x]$。</p>
-<p>时间复杂度 $O(n + m + (M / k) \times \log m)$，空间复杂度 $O(n + m)$，其中 $n$ 和 $m$ 分别是数组 $\textit{nums1}$ 和 $\textit{nums2}$ 的长度，而 $M$ 是数组 $\textit{nums1}$ 中的最大值。</p>
+<p>我们用一个哈希表 <span class="arithmatex">\(\textit{cnt1}\)</span> 记录数组 <span class="arithmatex">\(\textit{nums1}\)</span> 中每个数除以 <span class="arithmatex">\(k\)</span> 的商的出现次数，用一个哈希表 <span class="arithmatex">\(\textit{cnt2}\)</span> 记录数组 <span class="arithmatex">\(\textit{nums2}\)</span> 中每个数的出现次数。</p>
+<p>接下来，我们枚举数组 <span class="arithmatex">\(\textit{nums2}\)</span> 中的每个数 <span class="arithmatex">\(x\)</span>，对于每个数 <span class="arithmatex">\(x\)</span>，我们枚举 <span class="arithmatex">\(x\)</span> 的倍数 <span class="arithmatex">\(y\)</span>，其中 <span class="arithmatex">\(y\)</span> 的范围是 <span class="arithmatex">\([x, \textit{mx}]\)</span>，其中 <span class="arithmatex">\(\textit{mx}\)</span> 是 <span class="arithmatex">\(\textit{cnt1}\)</span> 中的最大键值，然后我们统计 <span class="arithmatex">\(\textit{cnt1}[y]\)</span> 的和，记为 <span class="arithmatex">\(s\)</span>，最后我们将 <span class="arithmatex">\(s \times v\)</span> 累加到答案中，其中 <span class="arithmatex">\(v\)</span> 是 <span class="arithmatex">\(\textit{cnt2}[x]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n + m + (M / k) \times \log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是数组 <span class="arithmatex">\(\textit{nums1}\)</span> 和 <span class="arithmatex">\(\textit{nums2}\)</span> 的长度，而 <span class="arithmatex">\(M\)</span> 是数组 <span class="arithmatex">\(\textit{nums1}\)</span> 中的最大值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91473,11 +91471,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90856,10 +90854,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划 + 前缀和</h3>
-<p>定义 $dp[i][j]$ 表示字符串 <code>num</code> 的前 $i$ 个字符，且最后一个数字的长度为 $j$ 时的方案数。显然答案为 $\sum_{j=0}^{n} dp[n][j]$。初始值 $dp[0][0] = 1$。</p>
-<p>对于 $dp[i][j]$，对应的上一个数的结尾应该是 $i-j$，我们可以枚举 $dp[i-j][k]$，其中 $k\le j$。对于 $k \lt j$ 的部分，即长度小于 $j$ 的方案数可以直接加给 $dp[i][j]$，即 $dp[i][j] = \sum_{k=0}^{j-1} dp[i-j][k]$。因为前一个数字更短，也就意味着它比当前数更小。这里可以用前缀和优化。</p>
-<p>但是当 $k=j$ 时，我们需要判断同样长度的两个数字的大小关系。如果前一个数字比当前数字大，那么这种情况是不合法的，我们不应该将其加给 $dp[i][j]$。否则，我们可以将其加给 $dp[i][j]$。这里我们可以先用 $O(n^2)$ 的时间预处理得到“最长公共前缀”，然后用 $O(1)$ 的时间判断两个同样长度的数字的大小关系。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 为字符串 <code>num</code> 的长度。</p>
+<p>定义 <span class="arithmatex">\(dp[i][j]\)</span> 表示字符串 <code>num</code> 的前 <span class="arithmatex">\(i\)</span> 个字符，且最后一个数字的长度为 <span class="arithmatex">\(j\)</span> 时的方案数。显然答案为 <span class="arithmatex">\(\sum_{j=0}^{n} dp[n][j]\)</span>。初始值 <span class="arithmatex">\(dp[0][0] = 1\)</span>。</p>
+<p>对于 <span class="arithmatex">\(dp[i][j]\)</span>，对应的上一个数的结尾应该是 <span class="arithmatex">\(i-j\)</span>，我们可以枚举 <span class="arithmatex">\(dp[i-j][k]\)</span>，其中 <span class="arithmatex">\(k\le j\)</span>。对于 <span class="arithmatex">\(k \lt j\)</span> 的部分，即长度小于 <span class="arithmatex">\(j\)</span> 的方案数可以直接加给 <span class="arithmatex">\(dp[i][j]\)</span>，即 <span class="arithmatex">\(dp[i][j] = \sum_{k=0}^{j-1} dp[i-j][k]\)</span>。因为前一个数字更短，也就意味着它比当前数更小。这里可以用前缀和优化。</p>
+<p>但是当 <span class="arithmatex">\(k=j\)</span> 时，我们需要判断同样长度的两个数字的大小关系。如果前一个数字比当前数字大，那么这种情况是不合法的，我们不应该将其加给 <span class="arithmatex">\(dp[i][j]\)</span>。否则，我们可以将其加给 <span class="arithmatex">\(dp[i][j]\)</span>。这里我们可以先用 <span class="arithmatex">\(O(n^2)\)</span> 的时间预处理得到“最长公共前缀”，然后用 <span class="arithmatex">\(O(1)\)</span> 的时间判断两个同样长度的数字的大小关系。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <code>num</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91367,11 +91365,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

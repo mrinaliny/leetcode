@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,12 +90865,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序 + 前缀和 + 二分查找</h3>
-<p>我们先将数组 $nums$ 进行排序，并计算出长度为 $n+1$ 的前缀和数组 $s$，其中 $s[i]$ 表示数组 $nums$ 中前 $i$ 个元素的和。</p>
-<p>接下来，遍历每个查询 $queries[i]$，我们需要将所有大于 $queries[i]$ 的元素减小到 $queries[i]$，将所有小于 $queries[i]$ 的元素增大到 $queries[i]$。</p>
-<p>我们可以通过二分查找找到数组 $nums$ 中第一个大于 $queries[i]$ 的元素的下标 $i$，则有 $n-i$ 个元素需要减小到 $queries[i]$，这些元素的和为 $s[n]-s[i]$，这些元素的和需要减去 $n-i$ 个 $queries[i]$，因此，这些元素减小到 $queries[i]$ 的总操作次数为 $s[n]-s[i]-(n-i)\times queries[i]$。</p>
-<p>同理，我们可以找到数组 $nums$ 中第一个大于等于 $queries[i]$ 的元素的下标 $i$，则有 $i$ 个元素需要增大到 $queries[i]$，这些元素的和为 $s[i]$，因此，这些元素增大到 $queries[i]$ 的总操作次数为 $queries[i]\times i-s[i]$。</p>
-<p>最后，将这两个总操作次数相加，即为将数组 $nums$ 中所有元素变成 $queries[i]$ 的最少操作次数，即 $ans[i]=s[n]-s[i]-(n-i)\times queries[i]+queries[i]\times i-s[i]$。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+<p>我们先将数组 <span class="arithmatex">\(nums\)</span> 进行排序，并计算出长度为 <span class="arithmatex">\(n+1\)</span> 的前缀和数组 <span class="arithmatex">\(s\)</span>，其中 <span class="arithmatex">\(s[i]\)</span> 表示数组 <span class="arithmatex">\(nums\)</span> 中前 <span class="arithmatex">\(i\)</span> 个元素的和。</p>
+<p>接下来，遍历每个查询 <span class="arithmatex">\(queries[i]\)</span>，我们需要将所有大于 <span class="arithmatex">\(queries[i]\)</span> 的元素减小到 <span class="arithmatex">\(queries[i]\)</span>，将所有小于 <span class="arithmatex">\(queries[i]\)</span> 的元素增大到 <span class="arithmatex">\(queries[i]\)</span>。</p>
+<p>我们可以通过二分查找找到数组 <span class="arithmatex">\(nums\)</span> 中第一个大于 <span class="arithmatex">\(queries[i]\)</span> 的元素的下标 <span class="arithmatex">\(i\)</span>，则有 <span class="arithmatex">\(n-i\)</span> 个元素需要减小到 <span class="arithmatex">\(queries[i]\)</span>，这些元素的和为 <span class="arithmatex">\(s[n]-s[i]\)</span>，这些元素的和需要减去 <span class="arithmatex">\(n-i\)</span> 个 <span class="arithmatex">\(queries[i]\)</span>，因此，这些元素减小到 <span class="arithmatex">\(queries[i]\)</span> 的总操作次数为 <span class="arithmatex">\(s[n]-s[i]-(n-i)\times queries[i]\)</span>。</p>
+<p>同理，我们可以找到数组 <span class="arithmatex">\(nums\)</span> 中第一个大于等于 <span class="arithmatex">\(queries[i]\)</span> 的元素的下标 <span class="arithmatex">\(i\)</span>，则有 <span class="arithmatex">\(i\)</span> 个元素需要增大到 <span class="arithmatex">\(queries[i]\)</span>，这些元素的和为 <span class="arithmatex">\(s[i]\)</span>，因此，这些元素增大到 <span class="arithmatex">\(queries[i]\)</span> 的总操作次数为 <span class="arithmatex">\(queries[i]\times i-s[i]\)</span>。</p>
+<p>最后，将这两个总操作次数相加，即为将数组 <span class="arithmatex">\(nums\)</span> 中所有元素变成 <span class="arithmatex">\(queries[i]\)</span> 的最少操作次数，即 <span class="arithmatex">\(ans[i]=s[n]-s[i]-(n-i)\times queries[i]+queries[i]\times i-s[i]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91336,11 +91334,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

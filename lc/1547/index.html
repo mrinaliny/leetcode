@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,12 +90864,12 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：动态规划（区间 DP）</h3>
-<p>我们可以往切割点数组 $\textit{cuts}$ 中添加两个元素，分别是 $0$ 和 $n$，表示棍子的两端。然后我们对 $\textit{cuts}$ 数组进行排序，这样我们就可以将整个棍子切割为若干个区间，每个区间都有两个切割点。不妨设此时 $\textit{cuts}$ 数组的长度为 $m$。</p>
-<p>接下来，我们定义 $\textit{f}[i][j]$ 表示切割区间 $[\textit{cuts}[i],..\textit{cuts}[j]]$ 的最小成本。</p>
-<p>如果一个区间只有两个切割点，也就是说，我们无需切割这个区间，那么 $\textit{f}[i][j] = 0$。</p>
-<p>否则，我们枚举区间的长度 $l$，其中 $l$ 等于切割点的数量减去 $1$。然后我们枚举区间的左端点 $i$，右端点 $j$ 可以由 $i + l$ 得到。对于每个区间，我们枚举它的切割点 $k$，其中 $i \lt k \lt j$，那么我们可以将区间 $[i, j]$ 切割为 $[i, k]$ 和 $[k, j]$，此时的成本为 $\textit{f}[i][k] + \textit{f}[k][j] + \textit{cuts}[j] - \textit{cuts}[i]$，我们取所有可能的 $k$ 中的最小值，即为 $\textit{f}[i][j]$ 的值。</p>
-<p>最后，我们返回 $\textit{f}[0][m - 1]$。</p>
-<p>时间复杂度 $O(m^3)$，空间复杂度 $O(m^2)$。其中 $m$ 为修改后的 $\textit{cuts}$ 数组的长度。</p>
+<p>我们可以往切割点数组 <span class="arithmatex">\(\textit{cuts}\)</span> 中添加两个元素，分别是 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(n\)</span>，表示棍子的两端。然后我们对 <span class="arithmatex">\(\textit{cuts}\)</span> 数组进行排序，这样我们就可以将整个棍子切割为若干个区间，每个区间都有两个切割点。不妨设此时 <span class="arithmatex">\(\textit{cuts}\)</span> 数组的长度为 <span class="arithmatex">\(m\)</span>。</p>
+<p>接下来，我们定义 <span class="arithmatex">\(\textit{f}[i][j]\)</span> 表示切割区间 <span class="arithmatex">\([\textit{cuts}[i],..\textit{cuts}[j]]\)</span> 的最小成本。</p>
+<p>如果一个区间只有两个切割点，也就是说，我们无需切割这个区间，那么 <span class="arithmatex">\(\textit{f}[i][j] = 0\)</span>。</p>
+<p>否则，我们枚举区间的长度 <span class="arithmatex">\(l\)</span>，其中 <span class="arithmatex">\(l\)</span> 等于切割点的数量减去 <span class="arithmatex">\(1\)</span>。然后我们枚举区间的左端点 <span class="arithmatex">\(i\)</span>，右端点 <span class="arithmatex">\(j\)</span> 可以由 <span class="arithmatex">\(i + l\)</span> 得到。对于每个区间，我们枚举它的切割点 <span class="arithmatex">\(k\)</span>，其中 <span class="arithmatex">\(i \lt k \lt j\)</span>，那么我们可以将区间 <span class="arithmatex">\([i, j]\)</span> 切割为 <span class="arithmatex">\([i, k]\)</span> 和 <span class="arithmatex">\([k, j]\)</span>，此时的成本为 <span class="arithmatex">\(\textit{f}[i][k] + \textit{f}[k][j] + \textit{cuts}[j] - \textit{cuts}[i]\)</span>，我们取所有可能的 <span class="arithmatex">\(k\)</span> 中的最小值，即为 <span class="arithmatex">\(\textit{f}[i][j]\)</span> 的值。</p>
+<p>最后，我们返回 <span class="arithmatex">\(\textit{f}[0][m - 1]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(m^2)\)</span>。其中 <span class="arithmatex">\(m\)</span> 为修改后的 <span class="arithmatex">\(\textit{cuts}\)</span> 数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91073,8 +91071,8 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法二：动态规划（另一种枚举方式）</h3>
-<p>我们也可以从大到小枚举 $i$，从小到大枚举 $j$，这样可以保证在计算 $f[i][j]$ 时，状态 $f[i][k]$ 和 $f[k][j]$ 都已经被计算过了，其中 $i \lt k \lt j$。</p>
-<p>时间复杂度 $O(m^3)$，空间复杂度 $O(m^2)$。其中 $m$ 为修改后的 $\textit{cuts}$ 数组的长度。</p>
+<p>我们也可以从大到小枚举 <span class="arithmatex">\(i\)</span>，从小到大枚举 <span class="arithmatex">\(j\)</span>，这样可以保证在计算 <span class="arithmatex">\(f[i][j]\)</span> 时，状态 <span class="arithmatex">\(f[i][k]\)</span> 和 <span class="arithmatex">\(f[k][j]\)</span> 都已经被计算过了，其中 <span class="arithmatex">\(i \lt k \lt j\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(m^2)\)</span>。其中 <span class="arithmatex">\(m\)</span> 为修改后的 <span class="arithmatex">\(\textit{cuts}\)</span> 数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91497,11 +91495,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

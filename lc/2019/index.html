@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90894,20 +90892,20 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：动态规划（区间 DP）</h3>
-<p>我们先设计一个函数 $cal(s)$，用于计算一个合法的只含有个位数数字的数学表达式的结果。那么正确答案就是 $x = cal(s)$。</p>
-<p>我们记字符串 $s$ 的长度为 $n$，那么 $s$ 中的数字个数为 $m = \frac{n+1}{2}$。</p>
-<p>我们定义 $f[i][j]$ 表示选择 $s$ 中的第 $i$ 个数字到第 $j$ 个数字（下标从 $0$ 开始）这一段数字，计算出的结果可能的取值。初始时 $f[i][i]$ 表示选择第 $i$ 个数字，结果只能是这个数字本身，即 $f[i][i] = {s[i \times 2]}$（即第 $i$ 个数字映射到字符串 $s$ 中的下标为 $i \times 2$ 的字符）。</p>
-<p>接下来，我们从大到小枚举 $i$，然后从小到大枚举 $j$，我们需要求出区间 $[i, j]$ 所有数字运算的结果可能的取值。我们在区间 $[i, j]$ 中枚举分界点 $k$，那么 $f[i][j]$ 可以由 $f[i][k]$ 和 $f[k+1][j]$ 通过运算符 $s[k \times 2 + 1]$ 得到。因此我们可以得到如下状态转移方程：</p>
-<p>$$
+<p>我们先设计一个函数 <span class="arithmatex">\(cal(s)\)</span>，用于计算一个合法的只含有个位数数字的数学表达式的结果。那么正确答案就是 <span class="arithmatex">\(x = cal(s)\)</span>。</p>
+<p>我们记字符串 <span class="arithmatex">\(s\)</span> 的长度为 <span class="arithmatex">\(n\)</span>，那么 <span class="arithmatex">\(s\)</span> 中的数字个数为 <span class="arithmatex">\(m = \frac{n+1}{2}\)</span>。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示选择 <span class="arithmatex">\(s\)</span> 中的第 <span class="arithmatex">\(i\)</span> 个数字到第 <span class="arithmatex">\(j\)</span> 个数字（下标从 <span class="arithmatex">\(0\)</span> 开始）这一段数字，计算出的结果可能的取值。初始时 <span class="arithmatex">\(f[i][i]\)</span> 表示选择第 <span class="arithmatex">\(i\)</span> 个数字，结果只能是这个数字本身，即 <span class="arithmatex">\(f[i][i] = \{s[i \times 2]\}\)</span>（即第 <span class="arithmatex">\(i\)</span> 个数字映射到字符串 <span class="arithmatex">\(s\)</span> 中的下标为 <span class="arithmatex">\(i \times 2\)</span> 的字符）。</p>
+<p>接下来，我们从大到小枚举 <span class="arithmatex">\(i\)</span>，然后从小到大枚举 <span class="arithmatex">\(j\)</span>，我们需要求出区间 <span class="arithmatex">\([i, j]\)</span> 所有数字运算的结果可能的取值。我们在区间 <span class="arithmatex">\([i, j]\)</span> 中枚举分界点 <span class="arithmatex">\(k\)</span>，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以由 <span class="arithmatex">\(f[i][k]\)</span> 和 <span class="arithmatex">\(f[k+1][j]\)</span> 通过运算符 <span class="arithmatex">\(s[k \times 2 + 1]\)</span> 得到。因此我们可以得到如下状态转移方程：</p>
+<div class="arithmatex">\[
 f[i][j] = \begin{cases}
-{s[i \times 2]}, &amp; i = j \
-\bigcup\limits_{k=i}^{j-1} {f[i][k] \otimes f[k+1][j]}, &amp; i &lt; j
+\{s[i \times 2]\}, &amp; i = j \\
+\bigcup\limits_{k=i}^{j-1} \{f[i][k] \otimes f[k+1][j]\}, &amp; i &lt; j
 \end{cases}
-$$</p>
-<p>其中 $\otimes$ 表示运算符，即 $s[k \times 2 + 1]$。</p>
-<p>那么字符串 $s$ 所有数字运算的结果可能的取值就是 $f[0][m-1]$。</p>
-<p>最后，我们统计答案。我们用一个数组 $cnt$ 统计答案数组 $answers$ 中每个答案出现的次数。如果答案等于 $x$，那么这个学生得到 $5$ 分，否则如果答案在 $f[0][m-1]$ 中，那么这个学生得到 $2$ 分。遍历 $cnt$，统计答案即可。</p>
-<p>时间复杂度 $O(n^3 \times M^2)$，空间复杂度 $O(n^2 \times M^2)$。其中 $M$ 是答案可能的最大值，而 $n$ 是字符串 $s$ 的长度中数字的个数。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(\otimes\)</span> 表示运算符，即 <span class="arithmatex">\(s[k \times 2 + 1]\)</span>。</p>
+<p>那么字符串 <span class="arithmatex">\(s\)</span> 所有数字运算的结果可能的取值就是 <span class="arithmatex">\(f[0][m-1]\)</span>。</p>
+<p>最后，我们统计答案。我们用一个数组 <span class="arithmatex">\(cnt\)</span> 统计答案数组 <span class="arithmatex">\(answers\)</span> 中每个答案出现的次数。如果答案等于 <span class="arithmatex">\(x\)</span>，那么这个学生得到 <span class="arithmatex">\(5\)</span> 分，否则如果答案在 <span class="arithmatex">\(f[0][m-1]\)</span> 中，那么这个学生得到 <span class="arithmatex">\(2\)</span> 分。遍历 <span class="arithmatex">\(cnt\)</span>，统计答案即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3 \times M^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2 \times M^2)\)</span>。其中 <span class="arithmatex">\(M\)</span> 是答案可能的最大值，而 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度中数字的个数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91667,11 +91665,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

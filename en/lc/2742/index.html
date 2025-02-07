@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86046,15 +86044,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memorization">Solution 1: Memorization</h3>
-<p>We can consider whether each wall is painted by a paid painter or a free painter. Design a function $dfs(i, j)$, which means that from the $i$th wall, and the current remaining free painter working time is $j$, the minimum cost of painting all the remaining walls. Then the answer is $dfs(0, 0)$.</p>
-<p>The calculation process of function $dfs(i, j)$ is as follows:</p>
+<p>We can consider whether each wall is painted by a paid painter or a free painter. Design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which means that from the <span class="arithmatex">\(i\)</span>th wall, and the current remaining free painter working time is <span class="arithmatex">\(j\)</span>, the minimum cost of painting all the remaining walls. Then the answer is <span class="arithmatex">\(dfs(0, 0)\)</span>.</p>
+<p>The calculation process of function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $n - i \le j$, it means that there are no more walls than the free painter's working time, so the remaining walls are painted by the free painter, and the cost is $0$;</li>
-<li>If $i \ge n$, return $+\infty$;</li>
-<li>Otherwise, if the $i$th wall is painted by a paid painter, the cost is $cost[i]$, then $dfs(i, j) = dfs(i + 1, j + time[i]) + cost[i]$; if the $i$th wall is painted by a free painter, the cost is $0$, then $dfs(i, j) = dfs(i + 1, j - 1)$.</li>
+<li>If <span class="arithmatex">\(n - i \le j\)</span>, it means that there are no more walls than the free painter's working time, so the remaining walls are painted by the free painter, and the cost is <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(i \ge n\)</span>, return <span class="arithmatex">\(+\infty\)</span>;</li>
+<li>Otherwise, if the <span class="arithmatex">\(i\)</span>th wall is painted by a paid painter, the cost is <span class="arithmatex">\(cost[i]\)</span>, then <span class="arithmatex">\(dfs(i, j) = dfs(i + 1, j + time[i]) + cost[i]\)</span>; if the <span class="arithmatex">\(i\)</span>th wall is painted by a free painter, the cost is <span class="arithmatex">\(0\)</span>, then <span class="arithmatex">\(dfs(i, j) = dfs(i + 1, j - 1)\)</span>.</li>
 </ul>
-<p>Note that the parameter $j$ may be less than $0$. Therefore, in the actual coding process, except for the $Python$ language, we add an offset $n$ to $j$ so that the range of $j$ is $[0, 2n]$.</p>
-<p>Time complexity $O(n^2)$, space complexity $O(n^2)$. Where $n$ is the length of the array.</p>
+<p>Note that the parameter <span class="arithmatex">\(j\)</span> may be less than <span class="arithmatex">\(0\)</span>. Therefore, in the actual coding process, except for the <span class="arithmatex">\(Python\)</span> language, we add an offset <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(j\)</span> so that the range of <span class="arithmatex">\(j\)</span> is <span class="arithmatex">\([0, 2n]\)</span>.</p>
+<p>Time complexity <span class="arithmatex">\(O(n^2)\)</span>, space complexity <span class="arithmatex">\(O(n^2)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86552,11 +86550,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

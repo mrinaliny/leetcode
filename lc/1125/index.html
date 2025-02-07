@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90862,18 +90860,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩动态规划</h3>
-<p>我们注意到，技能清单 <code>req_skills</code> 的长度不超过 $16$，因此，我们可以用一个长度不超过 $16$ 的二进制数来表示每一种技能是否被掌握。不妨记数组 <code>req_skills</code> 的长度为 $m$，数组 <code>people</code> 的长度为 $n$。</p>
-<p>我们先将 <code>req_skills</code> 中的每个技能映射到一个编号，即 $d[s]$ 表示技能 $s$ 的编号。然后，我们遍历 <code>people</code> 中的每个人，将其掌握的技能用二进制数表示，即 $p[i]$ 表示编号为 $i$ 的人掌握的技能。</p>
+<p>我们注意到，技能清单 <code>req_skills</code> 的长度不超过 <span class="arithmatex">\(16\)</span>，因此，我们可以用一个长度不超过 <span class="arithmatex">\(16\)</span> 的二进制数来表示每一种技能是否被掌握。不妨记数组 <code>req_skills</code> 的长度为 <span class="arithmatex">\(m\)</span>，数组 <code>people</code> 的长度为 <span class="arithmatex">\(n\)</span>。</p>
+<p>我们先将 <code>req_skills</code> 中的每个技能映射到一个编号，即 <span class="arithmatex">\(d[s]\)</span> 表示技能 <span class="arithmatex">\(s\)</span> 的编号。然后，我们遍历 <code>people</code> 中的每个人，将其掌握的技能用二进制数表示，即 <span class="arithmatex">\(p[i]\)</span> 表示编号为 <span class="arithmatex">\(i\)</span> 的人掌握的技能。</p>
 <p>接下来，我们定义以下三个数组，其中：</p>
 <ul>
-<li>数组 $f[i]$ 表示掌握技能集合为 $i$ 的最少人数，其中 $i$ 的二进制表示中的每一位为 $1$ 的位置，表示对应的技能被掌握。初始时 $f[0] = 0$，其余位置均为无穷大。</li>
-<li>数组 $g[i]$ 表示掌握技能集合为 $i$ 的最少人数时，最后一个人的编号。</li>
-<li>数组 $h[i]$ 表示掌握技能集合为 $i$ 的最少人数时，上一个技能集合状态。</li>
+<li>数组 <span class="arithmatex">\(f[i]\)</span> 表示掌握技能集合为 <span class="arithmatex">\(i\)</span> 的最少人数，其中 <span class="arithmatex">\(i\)</span> 的二进制表示中的每一位为 <span class="arithmatex">\(1\)</span> 的位置，表示对应的技能被掌握。初始时 <span class="arithmatex">\(f[0] = 0\)</span>，其余位置均为无穷大。</li>
+<li>数组 <span class="arithmatex">\(g[i]\)</span> 表示掌握技能集合为 <span class="arithmatex">\(i\)</span> 的最少人数时，最后一个人的编号。</li>
+<li>数组 <span class="arithmatex">\(h[i]\)</span> 表示掌握技能集合为 <span class="arithmatex">\(i\)</span> 的最少人数时，上一个技能集合状态。</li>
 </ul>
-<p>我们在 $[0,..2^m-1]$ 的范围内枚举每个技能集合，对于每个技能集合 $i$：</p>
-<p>我们枚举 <code>people</code> 中的每个人 $j$，如果 $f[i] + 1 \lt f[i | p[j]]$，说明 $f[i | p[j]]$ 可以通过 $f[i]$ 转移得到，此时，我们更新 $f[i | p[j]]$ 为 $f[i] + 1$，并将 $g[i | p[j]]$ 更新为 $j$，同时将 $h[i | p[j]]$ 更新为 $i$。即当前技能集合状态为 $i | p[j]$ 时，最后一个人的编号为 $j$，上一个技能集合状态为 $i$。这里符号 $|$ 表示按位或运算。</p>
-<p>最后，我们从技能集合 $i=2^m-1$ 开始，找到此时最后一个人的编号 $g[i]$，将其加入答案中，然后将 $i$ 更新为 $h[i]$，不断地向前回溯，直到 $i=0$，即可得到最小的必要团队中的人员编号。</p>
-<p>时间复杂度 $O(2^m \times n)$，空间复杂度 $O(2^m)$。其中 $m$ 和 $n$ 分别为 <code>req_skills</code> 和 <code>people</code> 的长度。</p>
+<p>我们在 <span class="arithmatex">\([0,..2^m-1]\)</span> 的范围内枚举每个技能集合，对于每个技能集合 <span class="arithmatex">\(i\)</span>：</p>
+<p>我们枚举 <code>people</code> 中的每个人 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(f[i] + 1 \lt f[i | p[j]]\)</span>，说明 <span class="arithmatex">\(f[i | p[j]]\)</span> 可以通过 <span class="arithmatex">\(f[i]\)</span> 转移得到，此时，我们更新 <span class="arithmatex">\(f[i | p[j]]\)</span> 为 <span class="arithmatex">\(f[i] + 1\)</span>，并将 <span class="arithmatex">\(g[i | p[j]]\)</span> 更新为 <span class="arithmatex">\(j\)</span>，同时将 <span class="arithmatex">\(h[i | p[j]]\)</span> 更新为 <span class="arithmatex">\(i\)</span>。即当前技能集合状态为 <span class="arithmatex">\(i | p[j]\)</span> 时，最后一个人的编号为 <span class="arithmatex">\(j\)</span>，上一个技能集合状态为 <span class="arithmatex">\(i\)</span>。这里符号 <span class="arithmatex">\(|\)</span> 表示按位或运算。</p>
+<p>最后，我们从技能集合 <span class="arithmatex">\(i=2^m-1\)</span> 开始，找到此时最后一个人的编号 <span class="arithmatex">\(g[i]\)</span>，将其加入答案中，然后将 <span class="arithmatex">\(i\)</span> 更新为 <span class="arithmatex">\(h[i]\)</span>，不断地向前回溯，直到 <span class="arithmatex">\(i=0\)</span>，即可得到最小的必要团队中的人员编号。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(2^m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^m)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为 <code>req_skills</code> 和 <code>people</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91480,11 +91478,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

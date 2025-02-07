@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90879,14 +90877,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $\textit{dfs}(i, j, k)$，表示机器人从 $(i, j)$ 出发，还剩下 $k$ 次感化机会时，能够获得的最大金币数。机器人只能向右或向下移动，因此 $\textit{dfs}(i, j, k)$ 的值只与 $\textit{dfs}(i + 1, j, k)$ 和 $\textit{dfs}(i, j + 1, k)$ 有关。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span>，表示机器人从 <span class="arithmatex">\((i, j)\)</span> 出发，还剩下 <span class="arithmatex">\(k\)</span> 次感化机会时，能够获得的最大金币数。机器人只能向右或向下移动，因此 <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span> 的值只与 <span class="arithmatex">\(\textit{dfs}(i + 1, j, k)\)</span> 和 <span class="arithmatex">\(\textit{dfs}(i, j + 1, k)\)</span> 有关。</p>
 <ul>
-<li>如果 $i \geq m$ 或 $j \geq n$，表示机器人走出了网格，此时返回一个极小值。</li>
-<li>如果 $i = m - 1$ 且 $j = n - 1$，表示机器人到达了网格的右下角，此时如果 $k &gt; 0$，则机器人可以选择感化当前位置的强盗，因此返回 $\max(0, \textit{coins}[i][j])$；如果 $k = 0$，则机器人不能感化当前位置的强盗，因此返回 $\textit{coins}[i][j]$。</li>
-<li>如果 $\textit{coins}[i][j] &lt; 0$，表示当前位置有强盗，此时如果 $k &gt; 0$，则机器人可以选择感化当前位置的强盗，因此返回 $\textit{coins}[i][j] + \max(\textit{dfs}(i + 1, j, k), \textit{dfs}(i, j + 1, k))$；如果 $k = 0$，则机器人不能感化当前位置的强盗，因此返回 $\textit{coins}[i][j] + \max(\textit{dfs}(i + 1, j, k), \textit{dfs}(i, j + 1, k))$。</li>
+<li>如果 <span class="arithmatex">\(i \geq m\)</span> 或 <span class="arithmatex">\(j \geq n\)</span>，表示机器人走出了网格，此时返回一个极小值。</li>
+<li>如果 <span class="arithmatex">\(i = m - 1\)</span> 且 <span class="arithmatex">\(j = n - 1\)</span>，表示机器人到达了网格的右下角，此时如果 <span class="arithmatex">\(k &gt; 0\)</span>，则机器人可以选择感化当前位置的强盗，因此返回 <span class="arithmatex">\(\max(0, \textit{coins}[i][j])\)</span>；如果 <span class="arithmatex">\(k = 0\)</span>，则机器人不能感化当前位置的强盗，因此返回 <span class="arithmatex">\(\textit{coins}[i][j]\)</span>。</li>
+<li>如果 <span class="arithmatex">\(\textit{coins}[i][j] &lt; 0\)</span>，表示当前位置有强盗，此时如果 <span class="arithmatex">\(k &gt; 0\)</span>，则机器人可以选择感化当前位置的强盗，因此返回 <span class="arithmatex">\(\textit{coins}[i][j] + \max(\textit{dfs}(i + 1, j, k), \textit{dfs}(i, j + 1, k))\)</span>；如果 <span class="arithmatex">\(k = 0\)</span>，则机器人不能感化当前位置的强盗，因此返回 <span class="arithmatex">\(\textit{coins}[i][j] + \max(\textit{dfs}(i + 1, j, k), \textit{dfs}(i, j + 1, k))\)</span>。</li>
 </ul>
 <p>根据上述分析，我们可以编写出记忆化搜索的代码。</p>
-<p>时间复杂度 $O(m \times n \times k)$，空间复杂度 $O(m \times n \times k)$。其中 $m$ 和 $n$ 分别是二维数组 $\textit{coins}$ 的行数和列数，而 $k$ 是感化机会的状态数，本题中 $k = 3$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是二维数组 <span class="arithmatex">\(\textit{coins}\)</span> 的行数和列数，而 <span class="arithmatex">\(k\)</span> 是感化机会的状态数，本题中 <span class="arithmatex">\(k = 3\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91386,11 +91384,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

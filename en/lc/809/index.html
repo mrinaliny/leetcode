@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,12 +86058,12 @@ We can&#39;t extend &quot;helo&quot; to get &quot;heeellooo&quot; because the gr
 <!-- solution:start -->
 
 <h3 id="solution-1-traversal-counting-two-pointers">Solution 1: Traversal Counting + Two Pointers</h3>
-<p>We can traverse the array $\textit{words}$, and for each word $t$ in the array, check if $t$ can be expanded to obtain $s$. If it can, increment the answer by one.</p>
-<p>Therefore, the key problem is to determine if the word $t$ can be expanded to obtain $s$. We use a function $\textit{check}(s, t)$ to determine this. The implementation logic of the function is as follows:</p>
-<p>First, check the length relationship between $s$ and $t$. If the length of $t$ is greater than $s$, return $\textit{false}$ directly. Otherwise, use two pointers $i$ and $j$ to point to $s$ and $t$, respectively, both initially set to $0$.</p>
-<p>If the characters pointed to by $i$ and $j$ are different, then $t$ cannot be expanded to obtain $s$, and we return $\textit{false}$. Otherwise, we need to check the relationship between the consecutive occurrence counts of the characters pointed to by $i$ and $j$, denoted as $c_1$ and $c_2$. If $c_1 \lt c_2$ or $c_1 \lt 3$ and $c_1 \neq c_2$, then $t$ cannot be expanded to obtain $s$, and we return $\textit{false}$. Otherwise, move $i$ and $j$ to the right by $c_1$ and $c_2$ times, respectively, and continue checking.</p>
-<p>If both $i$ and $j$ reach the end of the strings, then $t$ can be expanded to obtain $s$, and we return $\textit{true}$. Otherwise, we return $\textit{false}$.</p>
-<p>The time complexity is $O(n \times m + \sum_{i=0}^{m-1} w_i)$, where $n$ and $m$ are the lengths of the string $s$ and the array $\textit{words}$, respectively, and $w_i$ is the length of the $i$-th word in the array $\textit{words}$.</p>
+<p>We can traverse the array <span class="arithmatex">\(\textit{words}\)</span>, and for each word <span class="arithmatex">\(t\)</span> in the array, check if <span class="arithmatex">\(t\)</span> can be expanded to obtain <span class="arithmatex">\(s\)</span>. If it can, increment the answer by one.</p>
+<p>Therefore, the key problem is to determine if the word <span class="arithmatex">\(t\)</span> can be expanded to obtain <span class="arithmatex">\(s\)</span>. We use a function <span class="arithmatex">\(\textit{check}(s, t)\)</span> to determine this. The implementation logic of the function is as follows:</p>
+<p>First, check the length relationship between <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span>. If the length of <span class="arithmatex">\(t\)</span> is greater than <span class="arithmatex">\(s\)</span>, return <span class="arithmatex">\(\textit{false}\)</span> directly. Otherwise, use two pointers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> to point to <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span>, respectively, both initially set to <span class="arithmatex">\(0\)</span>.</p>
+<p>If the characters pointed to by <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> are different, then <span class="arithmatex">\(t\)</span> cannot be expanded to obtain <span class="arithmatex">\(s\)</span>, and we return <span class="arithmatex">\(\textit{false}\)</span>. Otherwise, we need to check the relationship between the consecutive occurrence counts of the characters pointed to by <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>, denoted as <span class="arithmatex">\(c_1\)</span> and <span class="arithmatex">\(c_2\)</span>. If <span class="arithmatex">\(c_1 \lt c_2\)</span> or <span class="arithmatex">\(c_1 \lt 3\)</span> and <span class="arithmatex">\(c_1 \neq c_2\)</span>, then <span class="arithmatex">\(t\)</span> cannot be expanded to obtain <span class="arithmatex">\(s\)</span>, and we return <span class="arithmatex">\(\textit{false}\)</span>. Otherwise, move <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> to the right by <span class="arithmatex">\(c_1\)</span> and <span class="arithmatex">\(c_2\)</span> times, respectively, and continue checking.</p>
+<p>If both <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> reach the end of the strings, then <span class="arithmatex">\(t\)</span> can be expanded to obtain <span class="arithmatex">\(s\)</span>, and we return <span class="arithmatex">\(\textit{true}\)</span>. Otherwise, we return <span class="arithmatex">\(\textit{false}\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times m + \sum_{i=0}^{m-1} w_i)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the string <span class="arithmatex">\(s\)</span> and the array <span class="arithmatex">\(\textit{words}\)</span>, respectively, and <span class="arithmatex">\(w_i\)</span> is the length of the <span class="arithmatex">\(i\)</span>-th word in the array <span class="arithmatex">\(\textit{words}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86557,11 +86555,9 @@ We can&#39;t extend &quot;helo&quot; to get &quot;heeellooo&quot; because the gr
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

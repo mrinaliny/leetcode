@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,17 +86081,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-enumerate-diamond-center-prefix-sum-ordered-set">Solution 1: Enumerate Diamond Center + Prefix Sum + Ordered Set</h3>
-<p>We can preprocess to get two prefix sum arrays $s_1$ and $s_2$, where $s_1[i][j]$ represents the sum of the elements on the upper left diagonal ending at $(i, j)$, and $s_2[i][j]$ represents the sum of the elements on the upper right diagonal ending at $(i, j)$.</p>
-<p>Next, we enumerate each position $(i, j)$, first add $grid[i][j]$ to the ordered set $ss$, and then enumerate the length $k$ of the diamond. The sum of the diamond with $(i, j)$ as the center and a side length of $k$ is:</p>
-<p>$$
+<p>We can preprocess to get two prefix sum arrays <span class="arithmatex">\(s_1\)</span> and <span class="arithmatex">\(s_2\)</span>, where <span class="arithmatex">\(s_1[i][j]\)</span> represents the sum of the elements on the upper left diagonal ending at <span class="arithmatex">\((i, j)\)</span>, and <span class="arithmatex">\(s_2[i][j]\)</span> represents the sum of the elements on the upper right diagonal ending at <span class="arithmatex">\((i, j)\)</span>.</p>
+<p>Next, we enumerate each position <span class="arithmatex">\((i, j)\)</span>, first add <span class="arithmatex">\(grid[i][j]\)</span> to the ordered set <span class="arithmatex">\(ss\)</span>, and then enumerate the length <span class="arithmatex">\(k\)</span> of the diamond. The sum of the diamond with <span class="arithmatex">\((i, j)\)</span> as the center and a side length of <span class="arithmatex">\(k\)</span> is:</p>
+<div class="arithmatex">\[
 \begin{aligned}
-&amp;\quad s_1[i + k][j] - s_1[i][j - k] + s_1[i][j + k] - s_1[i - k][j] \
-&amp;+ s_2[i][j - k] - s_2[i - k][j] + s_2[i + k][j] - s_2[i][j + k] \
+&amp;\quad s_1[i + k][j] - s_1[i][j - k] + s_1[i][j + k] - s_1[i - k][j] \\
+&amp;+ s_2[i][j - k] - s_2[i - k][j] + s_2[i + k][j] - s_2[i][j + k] \\
 &amp;- grid[i + k - 1][j - 1] + grid[i - k - 1][j - 1]
 \end{aligned}
-$$</p>
-<p>We add this value to the ordered set $ss$, while ensuring that the size of the ordered set $ss$ does not exceed $3$. Finally, we output the elements in the ordered set $ss$ in reverse order.</p>
-<p>The time complexity is $O(m \times n \times \min(m, n))$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, respectively.</p>
+\]</div>
+<p>We add this value to the ordered set <span class="arithmatex">\(ss\)</span>, while ensuring that the size of the ordered set <span class="arithmatex">\(ss\)</span> does not exceed <span class="arithmatex">\(3\)</span>. Finally, we output the elements in the ordered set <span class="arithmatex">\(ss\)</span> in reverse order.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times \min(m, n))\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87939,11 +87937,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

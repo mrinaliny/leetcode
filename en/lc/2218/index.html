@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86061,14 +86059,14 @@ The maximum total we can obtain is 101.
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-grouped-knapsack">Solution 1: Dynamic Programming (Grouped Knapsack)</h3>
-<p>We define $f[i][j]$ as the maximum value sum of taking $j$ coins from the first $i$ piles. The answer is $f[n][k]$, where $n$ is the number of piles.</p>
-<p>For the $i$-th pile, we can choose to take the first $0$, $1$, $2$, $\cdots$, $k$ coins. We can use a prefix sum array $s$ to quickly calculate the value sum of taking the first $h$ coins.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the maximum value sum of taking <span class="arithmatex">\(j\)</span> coins from the first <span class="arithmatex">\(i\)</span> piles. The answer is <span class="arithmatex">\(f[n][k]\)</span>, where <span class="arithmatex">\(n\)</span> is the number of piles.</p>
+<p>For the <span class="arithmatex">\(i\)</span>-th pile, we can choose to take the first <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span>, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\(k\)</span> coins. We can use a prefix sum array <span class="arithmatex">\(s\)</span> to quickly calculate the value sum of taking the first <span class="arithmatex">\(h\)</span> coins.</p>
 <p>The state transition equation is:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \max(f[i][j], f[i - 1][j - h] + s[h])
-$$</p>
-<p>where $0 \leq h \leq j$, and $s[h]$ represents the value sum of taking the first $h$ coins from the $i$-th pile.</p>
-<p>The time complexity is $O(k \times L)$, and the space complexity is $O(n \times k)$. Here, $L$ is the total number of coins, and $n$ is the number of piles.</p>
+\]</div>
+<p>where <span class="arithmatex">\(0 \leq h \leq j\)</span>, and <span class="arithmatex">\(s[h]\)</span> represents the value sum of taking the first <span class="arithmatex">\(h\)</span> coins from the <span class="arithmatex">\(i\)</span>-th pile.</p>
+<p>The time complexity is <span class="arithmatex">\(O(k \times L)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Here, <span class="arithmatex">\(L\)</span> is the total number of coins, and <span class="arithmatex">\(n\)</span> is the number of piles.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86274,8 +86272,8 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming-space-optimization">Solution 2: Dynamic Programming (Space Optimization)</h3>
-<p>We can observe that for the $i$-th pile, we only need to use $f[i - 1][j]$ and $f[i][j - h]$, so we can optimize the two-dimensional array to a one-dimensional array.</p>
-<p>The time complexity is $O(k \times L)$, and the space complexity is $O(k)$.</p>
+<p>We can observe that for the <span class="arithmatex">\(i\)</span>-th pile, we only need to use <span class="arithmatex">\(f[i - 1][j]\)</span> and <span class="arithmatex">\(f[i][j - h]\)</span>, so we can optimize the two-dimensional array to a one-dimensional array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(k \times L)\)</span>, and the space complexity is <span class="arithmatex">\(O(k)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86671,11 +86669,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

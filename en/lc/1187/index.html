@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,11 +86060,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i]$ as the minimum number of operations to convert $arr1[0,..,i]$ into a strictly increasing array, and $arr1[i]$ is not replaced. Therefore, we set two sentinels $-\infty$ and $\infty$ at the beginning and end of $arr1$. The last number is definitely not replaced, so $f[n-1]$ is the answer. We initialize $f[0]=0$, and the rest $f[i]=\infty$.</p>
-<p>Next, we sort the array $arr2$ and remove duplicates for easy binary search.</p>
-<p>For $i=1,..,n-1$, we consider whether $arr1[i-1]$ is replaced. If $arr1[i-1] \lt arr1[i]$, then $f[i]$ can be transferred from $f[i-1]$, that is, $f[i] = f[i-1]$. Then, we consider the case where $arr[i-1]$ is replaced. Obviously, $arr[i-1]$ should be replaced with a number as large as possible and less than $arr[i]$. We perform a binary search in the array $arr2$ and find the first index $j$ that is greater than or equal to $arr[i]$. Then we enumerate the number of replacements in the range $k \in [1, min(i-1, j)]$. If $arr[i-k-1] \lt arr2[j-k]$, then $f[i]$ can be transferred from $f[i-k-1]$, that is, $f[i] = \min(f[i], f[i-k-1] + k)$.</p>
-<p>Finally, if $f[n-1] \geq \infty$, it means that it cannot be converted into a strictly increasing array, return $-1$, otherwise return $f[n-1]$.</p>
-<p>The time complexity is $(n \times (\log m + \min(m, n)))$, and the space complexity is $O(n)$. Here, $n$ is the length of $arr1$.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the minimum number of operations to convert <span class="arithmatex">\(arr1[0,..,i]\)</span> into a strictly increasing array, and <span class="arithmatex">\(arr1[i]\)</span> is not replaced. Therefore, we set two sentinels <span class="arithmatex">\(-\infty\)</span> and <span class="arithmatex">\(\infty\)</span> at the beginning and end of <span class="arithmatex">\(arr1\)</span>. The last number is definitely not replaced, so <span class="arithmatex">\(f[n-1]\)</span> is the answer. We initialize <span class="arithmatex">\(f[0]=0\)</span>, and the rest <span class="arithmatex">\(f[i]=\infty\)</span>.</p>
+<p>Next, we sort the array <span class="arithmatex">\(arr2\)</span> and remove duplicates for easy binary search.</p>
+<p>For <span class="arithmatex">\(i=1,..,n-1\)</span>, we consider whether <span class="arithmatex">\(arr1[i-1]\)</span> is replaced. If <span class="arithmatex">\(arr1[i-1] \lt arr1[i]\)</span>, then <span class="arithmatex">\(f[i]\)</span> can be transferred from <span class="arithmatex">\(f[i-1]\)</span>, that is, <span class="arithmatex">\(f[i] = f[i-1]\)</span>. Then, we consider the case where <span class="arithmatex">\(arr[i-1]\)</span> is replaced. Obviously, <span class="arithmatex">\(arr[i-1]\)</span> should be replaced with a number as large as possible and less than <span class="arithmatex">\(arr[i]\)</span>. We perform a binary search in the array <span class="arithmatex">\(arr2\)</span> and find the first index <span class="arithmatex">\(j\)</span> that is greater than or equal to <span class="arithmatex">\(arr[i]\)</span>. Then we enumerate the number of replacements in the range <span class="arithmatex">\(k \in [1, min(i-1, j)]\)</span>. If <span class="arithmatex">\(arr[i-k-1] \lt arr2[j-k]\)</span>, then <span class="arithmatex">\(f[i]\)</span> can be transferred from <span class="arithmatex">\(f[i-k-1]\)</span>, that is, <span class="arithmatex">\(f[i] = \min(f[i], f[i-k-1] + k)\)</span>.</p>
+<p>Finally, if <span class="arithmatex">\(f[n-1] \geq \infty\)</span>, it means that it cannot be converted into a strictly increasing array, return <span class="arithmatex">\(-1\)</span>, otherwise return <span class="arithmatex">\(f[n-1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\((n \times (\log m + \min(m, n)))\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of <span class="arithmatex">\(arr1\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86734,11 +86732,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

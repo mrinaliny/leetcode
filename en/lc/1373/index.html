@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86082,20 +86080,20 @@
 <li>The maximum value of the left subtree is less than the value of the root node;</li>
 <li>The minimum value of the right subtree is greater than the value of the root node.</li>
 </ul>
-<p>Therefore, we design a function $dfs(root)$, the return value of the function is a quadruple $(bst, mi, mx, s)$, where:</p>
+<p>Therefore, we design a function <span class="arithmatex">\(dfs(root)\)</span>, the return value of the function is a quadruple <span class="arithmatex">\((bst, mi, mx, s)\)</span>, where:</p>
 <ul>
-<li>The number $bst$ indicates whether the tree with $root$ as the root is a binary search tree. If it is a binary search tree, then $bst = 1$; otherwise $bst = 0$;</li>
-<li>The number $mi$ represents the minimum value of the tree with $root$ as the root;</li>
-<li>The number $mx$ represents the maximum value of the tree with $root$ as the root;</li>
-<li>The number $s$ represents the sum of all nodes of the tree with $root$ as the root.</li>
+<li>The number <span class="arithmatex">\(bst\)</span> indicates whether the tree with <span class="arithmatex">\(root\)</span> as the root is a binary search tree. If it is a binary search tree, then <span class="arithmatex">\(bst = 1\)</span>; otherwise <span class="arithmatex">\(bst = 0\)</span>;</li>
+<li>The number <span class="arithmatex">\(mi\)</span> represents the minimum value of the tree with <span class="arithmatex">\(root\)</span> as the root;</li>
+<li>The number <span class="arithmatex">\(mx\)</span> represents the maximum value of the tree with <span class="arithmatex">\(root\)</span> as the root;</li>
+<li>The number <span class="arithmatex">\(s\)</span> represents the sum of all nodes of the tree with <span class="arithmatex">\(root\)</span> as the root.</li>
 </ul>
-<p>The execution logic of the function $dfs(root)$ is as follows:</p>
-<p>If $root$ is an empty node, return $(1, +\infty, -\infty, 0)$, indicating that the empty tree is a binary search tree, the minimum value and maximum value are positive infinity and negative infinity respectively, and the sum of nodes is $0$.</p>
-<p>Otherwise, recursively calculate the left subtree and right subtree of $root$, and get $(lbst, lmi, lmx, ls)$ and $(rbst, rmi, rmx, rs)$ respectively, then judge whether the $root$ node meets the conditions of the binary search tree.</p>
-<p>If $lbst = 1$ and $rbst = 1$ and $lmx &lt; root.val &lt; rmi$, then the tree with $root$ as the root is a binary search tree, and the sum of nodes $s= ls + rs + root.val$. We update the answer $ans = \max(ans, s)$, and return $(1, \min(lmi, root.val), \max(rmx, root.val), s)$.</p>
-<p>Otherwise, the tree with $root$ as the root is not a binary search tree, we return $(0, 0, 0, 0)$.</p>
-<p>We call $dfs(root)$ in the main function. After execution, the answer is $ans$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Where $n$ is the number of nodes in the binary tree.</p>
+<p>The execution logic of the function <span class="arithmatex">\(dfs(root)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(root\)</span> is an empty node, return <span class="arithmatex">\((1, +\infty, -\infty, 0)\)</span>, indicating that the empty tree is a binary search tree, the minimum value and maximum value are positive infinity and negative infinity respectively, and the sum of nodes is <span class="arithmatex">\(0\)</span>.</p>
+<p>Otherwise, recursively calculate the left subtree and right subtree of <span class="arithmatex">\(root\)</span>, and get <span class="arithmatex">\((lbst, lmi, lmx, ls)\)</span> and <span class="arithmatex">\((rbst, rmi, rmx, rs)\)</span> respectively, then judge whether the <span class="arithmatex">\(root\)</span> node meets the conditions of the binary search tree.</p>
+<p>If <span class="arithmatex">\(lbst = 1\)</span> and <span class="arithmatex">\(rbst = 1\)</span> and <span class="arithmatex">\(lmx &lt; root.val &lt; rmi\)</span>, then the tree with <span class="arithmatex">\(root\)</span> as the root is a binary search tree, and the sum of nodes <span class="arithmatex">\(s= ls + rs + root.val\)</span>. We update the answer <span class="arithmatex">\(ans = \max(ans, s)\)</span>, and return <span class="arithmatex">\((1, \min(lmi, root.val), \max(rmx, root.val), s)\)</span>.</p>
+<p>Otherwise, the tree with <span class="arithmatex">\(root\)</span> as the root is not a binary search tree, we return <span class="arithmatex">\((0, 0, 0, 0)\)</span>.</p>
+<p>We call <span class="arithmatex">\(dfs(root)\)</span> in the main function. After execution, the answer is <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86649,11 +86647,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

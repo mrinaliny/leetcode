@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86092,11 +86090,11 @@ matrix3D.largestMatrix(); // Returns 3. All indices from 0 to 3 tie with the sam
 <!-- solution:start -->
 
 <h3 id="solution-1-counting-ordered-set">Solution 1: Counting + Ordered Set</h3>
-<p>We use a three-dimensional array $\textit{g}$ to represent the matrix, where $\textit{g}[x][y][z]$ represents the value at coordinate $(x, y, z)$ in the matrix. We use an array $\textit{cnt}$ of length $n$ to record the number of 1s in each layer. We use an ordered set $\textit{sl}$ to maintain the number of 1s and the layer number for each layer. The elements in $\textit{sl}$ are $(\textit{cnt}[x], x)$, so $\textit{sl}$ can be sorted in descending order by the number of 1s, and in descending order by layer number if the number of 1s is the same.</p>
-<p>When calling the <code>setCell</code> method, we first check if $(x, y, z)$ has already been set to 1. If it has, we return directly. Otherwise, we set $\textit{g}[x][y][z]$ to 1, remove $(\textit{cnt}[x], x)$ from $\textit{sl}$, increment $\textit{cnt}[x]$ by 1, and add $(\textit{cnt}[x], x)$ to $\textit{sl}$.</p>
-<p>When calling the <code>unsetCell</code> method, we first check if $(x, y, z)$ has already been set to 0. If it has, we return directly. Otherwise, we set $\textit{g}[x][y][z]$ to 0, remove $(\textit{cnt}[x], x)$ from $\textit{sl}$, decrement $\textit{cnt}[x]$ by 1, and if $\textit{cnt}[x]$ is greater than 0, add $(\textit{cnt}[x], x)$ to $\textit{sl}$.</p>
-<p>When calling the <code>largestMatrix</code> method, we return the second value of the first element in $\textit{sl}$. If $\textit{sl}$ is empty, we return $n - 1$.</p>
-<p>In terms of time complexity, the <code>setCell</code> and <code>unsetCell</code> methods both have a time complexity of $O(\log n)$, and the <code>largestMatrix</code> method has a time complexity of $O(1)$. The space complexity is $O(n^3)$.</p>
+<p>We use a three-dimensional array <span class="arithmatex">\(\textit{g}\)</span> to represent the matrix, where <span class="arithmatex">\(\textit{g}[x][y][z]\)</span> represents the value at coordinate <span class="arithmatex">\((x, y, z)\)</span> in the matrix. We use an array <span class="arithmatex">\(\textit{cnt}\)</span> of length <span class="arithmatex">\(n\)</span> to record the number of 1s in each layer. We use an ordered set <span class="arithmatex">\(\textit{sl}\)</span> to maintain the number of 1s and the layer number for each layer. The elements in <span class="arithmatex">\(\textit{sl}\)</span> are <span class="arithmatex">\((\textit{cnt}[x], x)\)</span>, so <span class="arithmatex">\(\textit{sl}\)</span> can be sorted in descending order by the number of 1s, and in descending order by layer number if the number of 1s is the same.</p>
+<p>When calling the <code>setCell</code> method, we first check if <span class="arithmatex">\((x, y, z)\)</span> has already been set to 1. If it has, we return directly. Otherwise, we set <span class="arithmatex">\(\textit{g}[x][y][z]\)</span> to 1, remove <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> from <span class="arithmatex">\(\textit{sl}\)</span>, increment <span class="arithmatex">\(\textit{cnt}[x]\)</span> by 1, and add <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> to <span class="arithmatex">\(\textit{sl}\)</span>.</p>
+<p>When calling the <code>unsetCell</code> method, we first check if <span class="arithmatex">\((x, y, z)\)</span> has already been set to 0. If it has, we return directly. Otherwise, we set <span class="arithmatex">\(\textit{g}[x][y][z]\)</span> to 0, remove <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> from <span class="arithmatex">\(\textit{sl}\)</span>, decrement <span class="arithmatex">\(\textit{cnt}[x]\)</span> by 1, and if <span class="arithmatex">\(\textit{cnt}[x]\)</span> is greater than 0, add <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> to <span class="arithmatex">\(\textit{sl}\)</span>.</p>
+<p>When calling the <code>largestMatrix</code> method, we return the second value of the first element in <span class="arithmatex">\(\textit{sl}\)</span>. If <span class="arithmatex">\(\textit{sl}\)</span> is empty, we return <span class="arithmatex">\(n - 1\)</span>.</p>
+<p>In terms of time complexity, the <code>setCell</code> and <code>unsetCell</code> methods both have a time complexity of <span class="arithmatex">\(O(\log n)\)</span>, and the <code>largestMatrix</code> method has a time complexity of <span class="arithmatex">\(O(1)\)</span>. The space complexity is <span class="arithmatex">\(O(n^3)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86588,11 +86586,9 @@ matrix3D.largestMatrix(); // Returns 3. All indices from 0 to 3 tie with the sam
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

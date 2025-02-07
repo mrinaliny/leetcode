@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90909,15 +90907,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：组合计数 + 递归</h3>
-<p>我们设计一个函数 $dfs(nums)$，它的功能是计算以 $nums$ 为节点构成的二叉搜索树的方案数。那么答案就是 $dfs(nums)-1$，因为 $dfs(nums)$ 计算的是以 $nums$ 为节点构成的二叉搜索树的方案数，而题目要求的是重排后与原数组 $nums$ 得到相同二叉搜索树的方案数，因此答案需要减去一。</p>
-<p>接下来，我们来看一下 $dfs(nums)$ 的计算方法。</p>
-<p>对于一个数组 $nums$，它的第一个元素是根节点，那么它的左子树的元素都小于它，右子树的元素都大于它。因此，我们可以将数组分为三部分，第一部分是根节点，第二部分是左子树的元素，记为 $left$，第三部分是右子树的元素，记为 $right$。那么，左子树的元素个数为 $m$，右子树的元素个数为 $n$，那么 $left$ 和 $right$ 的方案数分别为 $dfs(left)$ 和 $dfs(right)$。我们可以在数组 $nums$ 的 $m + n$ 个位置中选择 $m$ 个位置放置左子树的元素，剩下的 $n$ 个位置放置右子树的元素，这样就能保证重排后与原数组 $nums$ 得到相同二叉搜索树。因此，$dfs(nums)$ 的计算方法为：</p>
-<p>$$
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(nums)\)</span>，它的功能是计算以 <span class="arithmatex">\(nums\)</span> 为节点构成的二叉搜索树的方案数。那么答案就是 <span class="arithmatex">\(dfs(nums)-1\)</span>，因为 <span class="arithmatex">\(dfs(nums)\)</span> 计算的是以 <span class="arithmatex">\(nums\)</span> 为节点构成的二叉搜索树的方案数，而题目要求的是重排后与原数组 <span class="arithmatex">\(nums\)</span> 得到相同二叉搜索树的方案数，因此答案需要减去一。</p>
+<p>接下来，我们来看一下 <span class="arithmatex">\(dfs(nums)\)</span> 的计算方法。</p>
+<p>对于一个数组 <span class="arithmatex">\(nums\)</span>，它的第一个元素是根节点，那么它的左子树的元素都小于它，右子树的元素都大于它。因此，我们可以将数组分为三部分，第一部分是根节点，第二部分是左子树的元素，记为 <span class="arithmatex">\(left\)</span>，第三部分是右子树的元素，记为 <span class="arithmatex">\(right\)</span>。那么，左子树的元素个数为 <span class="arithmatex">\(m\)</span>，右子树的元素个数为 <span class="arithmatex">\(n\)</span>，那么 <span class="arithmatex">\(left\)</span> 和 <span class="arithmatex">\(right\)</span> 的方案数分别为 <span class="arithmatex">\(dfs(left)\)</span> 和 <span class="arithmatex">\(dfs(right)\)</span>。我们可以在数组 <span class="arithmatex">\(nums\)</span> 的 <span class="arithmatex">\(m + n\)</span> 个位置中选择 <span class="arithmatex">\(m\)</span> 个位置放置左子树的元素，剩下的 <span class="arithmatex">\(n\)</span> 个位置放置右子树的元素，这样就能保证重排后与原数组 <span class="arithmatex">\(nums\)</span> 得到相同二叉搜索树。因此，<span class="arithmatex">\(dfs(nums)\)</span> 的计算方法为：</p>
+<div class="arithmatex">\[
 dfs(nums) = C_{m+n}^m \times dfs(left) \times dfs(right)
-$$</p>
-<p>其中 $C_{m+n}^m$ 表示从 $m + n$ 个位置中选择 $m$ 个位置的方案数，我们可以通过预处理得到。</p>
-<p>注意答案的取模运算，因为 $dfs(nums)$ 的值可能会很大，所以我们需要在计算过程中对每一步的结果取模，最后再对整个结果取模。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是数组 $nums$ 的长度。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(C_{m+n}^m\)</span> 表示从 <span class="arithmatex">\(m + n\)</span> 个位置中选择 <span class="arithmatex">\(m\)</span> 个位置的方案数，我们可以通过预处理得到。</p>
+<p>注意答案的取模运算，因为 <span class="arithmatex">\(dfs(nums)\)</span> 的值可能会很大，所以我们需要在计算过程中对每一步的结果取模，最后再对整个结果取模。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91485,11 +91483,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

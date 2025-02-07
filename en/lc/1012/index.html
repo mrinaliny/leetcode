@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86043,23 +86041,23 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-digit-dp">Solution 1: State Compression + Digit DP</h3>
-<p>The problem requires counting the number of integers in the range $[1, .., n]$ that have at least one repeated digit. We can approach this by defining a function $f(n)$ that counts the number of integers in the range $[1, .., n]$ with no repeated digits. Then, the answer is $n - f(n)$.</p>
-<p>Additionally, we can use a binary number to record the digits that have appeared in the number. For example, if the digits $1$, $2$, and $4$ have appeared, the corresponding binary number is $\underline{1}0\underline{1}\underline{1}0$.</p>
+<p>The problem requires counting the number of integers in the range <span class="arithmatex">\([1, .., n]\)</span> that have at least one repeated digit. We can approach this by defining a function <span class="arithmatex">\(f(n)\)</span> that counts the number of integers in the range <span class="arithmatex">\([1, .., n]\)</span> with no repeated digits. Then, the answer is <span class="arithmatex">\(n - f(n)\)</span>.</p>
+<p>Additionally, we can use a binary number to record the digits that have appeared in the number. For example, if the digits <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span>, and <span class="arithmatex">\(4\)</span> have appeared, the corresponding binary number is <span class="arithmatex">\(\underline{1}0\underline{1}\underline{1}0\)</span>.</p>
 <p>Next, we use memoization to implement digit DP. We start searching from the top, get the number of solutions at the bottom, and return the answers layer by layer until we get the final answer from the starting point.</p>
 <p>The basic steps are as follows:</p>
-<p>We convert the number $n$ into a string $s$. Next, we design a function $\textit{dfs}(i, \textit{mask}, \textit{lead}, \textit{limit})$, where:</p>
+<p>We convert the number <span class="arithmatex">\(n\)</span> into a string <span class="arithmatex">\(s\)</span>. Next, we design a function <span class="arithmatex">\(\textit{dfs}(i, \textit{mask}, \textit{lead}, \textit{limit})\)</span>, where:</p>
 <ul>
-<li>The integer $i$ represents the current digit index, starting from $0$.</li>
-<li>The integer $\textit{mask}$ represents the digits that have appeared so far, using a binary number. The $j$-th bit of $\textit{mask}$ being $1$ indicates that digit $j$ has appeared, while $0$ indicates it has not.</li>
-<li>The boolean $\textit{lead}$ indicates whether the current number contains only leading zeros.</li>
-<li>The boolean $\textit{limit}$ indicates whether the current position is restricted by the upper bound.</li>
+<li>The integer <span class="arithmatex">\(i\)</span> represents the current digit index, starting from <span class="arithmatex">\(0\)</span>.</li>
+<li>The integer <span class="arithmatex">\(\textit{mask}\)</span> represents the digits that have appeared so far, using a binary number. The <span class="arithmatex">\(j\)</span>-th bit of <span class="arithmatex">\(\textit{mask}\)</span> being <span class="arithmatex">\(1\)</span> indicates that digit <span class="arithmatex">\(j\)</span> has appeared, while <span class="arithmatex">\(0\)</span> indicates it has not.</li>
+<li>The boolean <span class="arithmatex">\(\textit{lead}\)</span> indicates whether the current number contains only leading zeros.</li>
+<li>The boolean <span class="arithmatex">\(\textit{limit}\)</span> indicates whether the current position is restricted by the upper bound.</li>
 </ul>
 <p>The function executes as follows:</p>
-<p>If $i$ is greater than or equal to $m$, it means we have processed all digits. If $\textit{lead}$ is true, it means the current number is a leading zero, and we should return $0$. Otherwise, we should return $1$.</p>
-<p>Otherwise, we calculate the upper bound $\textit{up}$. If $\textit{limit}$ is true, then $\textit{up}$ is the digit corresponding to $s[i]$. Otherwise, $\textit{up}$ is $9$.</p>
-<p>Then, we enumerate the current digit $j$ in the range $[0, \textit{up}]$. If $j$ is $0$ and $\textit{lead}$ is true, we recursively calculate $\textit{dfs}(i + 1, \textit{mask}, \text{true}, \textit{limit} \wedge j = \textit{up})$. Otherwise, if the $j$-th bit of $\textit{mask}$ is $0$, we recursively calculate $\textit{dfs}(i + 1, \textit{mask} \,|\, 2^j, \text{false}, \textit{limit} \wedge j = \textit{up})$. We accumulate all the results as the answer.</p>
-<p>The answer is $n - \textit{dfs}(0, 0, \text{true}, \text{true})$.</p>
-<p>The time complexity is $O(\log n \times 2^D \times D)$, and the space complexity is $O(\log n \times 2^D)$. Here, $D = 10$.</p>
+<p>If <span class="arithmatex">\(i\)</span> is greater than or equal to <span class="arithmatex">\(m\)</span>, it means we have processed all digits. If <span class="arithmatex">\(\textit{lead}\)</span> is true, it means the current number is a leading zero, and we should return <span class="arithmatex">\(0\)</span>. Otherwise, we should return <span class="arithmatex">\(1\)</span>.</p>
+<p>Otherwise, we calculate the upper bound <span class="arithmatex">\(\textit{up}\)</span>. If <span class="arithmatex">\(\textit{limit}\)</span> is true, then <span class="arithmatex">\(\textit{up}\)</span> is the digit corresponding to <span class="arithmatex">\(s[i]\)</span>. Otherwise, <span class="arithmatex">\(\textit{up}\)</span> is <span class="arithmatex">\(9\)</span>.</p>
+<p>Then, we enumerate the current digit <span class="arithmatex">\(j\)</span> in the range <span class="arithmatex">\([0, \textit{up}]\)</span>. If <span class="arithmatex">\(j\)</span> is <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(\textit{lead}\)</span> is true, we recursively calculate <span class="arithmatex">\(\textit{dfs}(i + 1, \textit{mask}, \text{true}, \textit{limit} \wedge j = \textit{up})\)</span>. Otherwise, if the <span class="arithmatex">\(j\)</span>-th bit of <span class="arithmatex">\(\textit{mask}\)</span> is <span class="arithmatex">\(0\)</span>, we recursively calculate <span class="arithmatex">\(\textit{dfs}(i + 1, \textit{mask} \,|\, 2^j, \text{false}, \textit{limit} \wedge j = \textit{up})\)</span>. We accumulate all the results as the answer.</p>
+<p>The answer is <span class="arithmatex">\(n - \textit{dfs}(0, 0, \text{true}, \text{true})\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n \times 2^D \times D)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log n \times 2^D)\)</span>. Here, <span class="arithmatex">\(D = 10\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README_EN.md">233. Number of Digit One</a></li>
@@ -86617,11 +86615,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

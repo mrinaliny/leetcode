@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90822,10 +90820,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：递推</h3>
-<p>我们定义 $f[i]$ 表示上第 $i$ 阶台阶的方法数，初始时 $f[1]=1$, $f[2]=2$, $f[3]=4$。答案为 $f[n]$。</p>
-<p>递推公式为 $f[i] = f[i-1] + f[i-2] + f[i-3]$。</p>
-<p>由于 $f[i]$ 只与 $f[i-1]$, $f[i-2]$, $f[i-3]$ 有关，因此我们可以使用三个变量 $a$, $b$, $c$ 来存储 $f[i-1]$, $f[i-2]$, $f[i-3]$ 的值，使得空间复杂度降低到 $O(1)$。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为给定的整数。空间复杂度 $O(1)$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示上第 <span class="arithmatex">\(i\)</span> 阶台阶的方法数，初始时 <span class="arithmatex">\(f[1]=1\)</span>, <span class="arithmatex">\(f[2]=2\)</span>, <span class="arithmatex">\(f[3]=4\)</span>。答案为 <span class="arithmatex">\(f[n]\)</span>。</p>
+<p>递推公式为 <span class="arithmatex">\(f[i] = f[i-1] + f[i-2] + f[i-3]\)</span>。</p>
+<p>由于 <span class="arithmatex">\(f[i]\)</span> 只与 <span class="arithmatex">\(f[i-1]\)</span>, <span class="arithmatex">\(f[i-2]\)</span>, <span class="arithmatex">\(f[i-3]\)</span> 有关，因此我们可以使用三个变量 <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(c\)</span> 来存储 <span class="arithmatex">\(f[i-1]\)</span>, <span class="arithmatex">\(f[i-2]\)</span>, <span class="arithmatex">\(f[i-3]\)</span> 的值，使得空间复杂度降低到 <span class="arithmatex">\(O(1)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为给定的整数。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C</label><label for="__tabbed_1_8">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91041,23 +91039,23 @@
 <!-- solution:start-->
 
 <h3 id="_4">方法二：矩阵快速幂加速递推</h3>
-<p>我们设 $F(n)$ 表示一个 $1 \times 3$ 的矩阵 $\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} &amp; F_{n - 3} \end{bmatrix}$，其中 $F_{n - 1}$, $F_{n - 2}$ 和 $F_{n - 3}$ 分别表示上第 $n - 1$ 阶、第 $n - 2$ 阶和第 $n - 3$ 阶台阶的方法数。</p>
-<p>我们希望根据 $F(n-1) = \begin{bmatrix} F_{n - 2} &amp; F_{n - 3} &amp; F_{n - 4} \end{bmatrix}$ 推出 $F(n)$。也即是说，我们需要一个矩阵 $base$，使得 $F(n - 1) \times base = F(n)$，即：</p>
-<p>$$
+<p>我们设 <span class="arithmatex">\(F(n)\)</span> 表示一个 <span class="arithmatex">\(1 \times 3\)</span> 的矩阵 <span class="arithmatex">\(\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} &amp; F_{n - 3} \end{bmatrix}\)</span>，其中 <span class="arithmatex">\(F_{n - 1}\)</span>, <span class="arithmatex">\(F_{n - 2}\)</span> 和 <span class="arithmatex">\(F_{n - 3}\)</span> 分别表示上第 <span class="arithmatex">\(n - 1\)</span> 阶、第 <span class="arithmatex">\(n - 2\)</span> 阶和第 <span class="arithmatex">\(n - 3\)</span> 阶台阶的方法数。</p>
+<p>我们希望根据 <span class="arithmatex">\(F(n-1) = \begin{bmatrix} F_{n - 2} &amp; F_{n - 3} &amp; F_{n - 4} \end{bmatrix}\)</span> 推出 <span class="arithmatex">\(F(n)\)</span>。也即是说，我们需要一个矩阵 <span class="arithmatex">\(base\)</span>，使得 <span class="arithmatex">\(F(n - 1) \times base = F(n)\)</span>，即：</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
 F_{n - 2} &amp; T_{n - 3} &amp; T_{n - 4}
 \end{bmatrix} \times base = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} &amp; F_{n - 3} \end{bmatrix}
-$$</p>
-<p>由于 $F_n = F_{n - 1} + F_{n - 2} + F_{n - 3}$，所以矩阵 $base$ 为：</p>
-<p>$$
+\]</div>
+<p>由于 <span class="arithmatex">\(F_n = F_{n - 1} + F_{n - 2} + F_{n - 3}\)</span>，所以矩阵 <span class="arithmatex">\(base\)</span> 为：</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
- 1 &amp; 1 &amp; 0 \
- 1 &amp; 0 &amp; 1 \
+ 1 &amp; 1 &amp; 0 \\
+ 1 &amp; 0 &amp; 1 \\
  1 &amp; 0 &amp; 0
 \end{bmatrix}
-$$</p>
-<p>我们定义初始矩阵 $res = \begin{bmatrix} 1 &amp; 1  &amp; 0 \end{bmatrix}$，那么 $F_n$ 等于 $res$ 乘以 $base^{n - 4}$ 的结果矩阵中所有元素之和。使用矩阵快速幂求解即可。</p>
-<p>时间复杂度 $O(\log n)$，空间复杂度 $O(1)$。</p>
+\]</div>
+<p>我们定义初始矩阵 <span class="arithmatex">\(res = \begin{bmatrix} 1 &amp; 1  &amp; 0 \end{bmatrix}\)</span>，那么 <span class="arithmatex">\(F_n\)</span> 等于 <span class="arithmatex">\(res\)</span> 乘以 <span class="arithmatex">\(base^{n - 4}\)</span> 的结果矩阵中所有元素之和。使用矩阵快速幂求解即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91698,11 +91696,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

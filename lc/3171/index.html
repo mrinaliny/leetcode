@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90881,9 +90879,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：双指针 + 位运算</h3>
-<p>根据题目描述，我们需要求出数组 $\textit{nums}$ 下标 $l$ 到 $r$ 的元素的按位或运算的结果，即 $\textit{nums}[l] \lor \textit{nums}[l + 1] \lor \cdots \lor \textit{nums}[r]$。其中 $\lor$ 表示按位或运算。</p>
-<p>如果我们每次固定右端点 $r$，那么左端点 $l$ 的范围是 $[0, r]$。每次移动右端点 $r$，按位或的结果只会变大，我们用一个变量 $s$ 记录当前的按位或的结果，如果 $s$ 大于 $k$，我们就将左端点 $l$ 向右移动，直到 $s$ 小于等于 $k$。在移动左端点 $l$ 的过程中，我们需要维护一个数组 $cnt$，记录当前区间内每个二进制位上 $0$ 的个数，当 $cnt[h]$ 为 $0$ 时，说明当前区间内的元素在第 $h$ 位上都为 $0$，我们就可以将 $s$ 的第 $h$ 位设置为 $0$。</p>
-<p>时间复杂度 $O(n \times \log M)$，空间复杂度 $O(\log M)$。其中 $n$ 和 $M$ 分别是数组 $\textit{nums}$ 的长度和数组 $\textit{nums}$ 中元素的最大值。</p>
+<p>根据题目描述，我们需要求出数组 <span class="arithmatex">\(\textit{nums}\)</span> 下标 <span class="arithmatex">\(l\)</span> 到 <span class="arithmatex">\(r\)</span> 的元素的按位或运算的结果，即 <span class="arithmatex">\(\textit{nums}[l] \lor \textit{nums}[l + 1] \lor \cdots \lor \textit{nums}[r]\)</span>。其中 <span class="arithmatex">\(\lor\)</span> 表示按位或运算。</p>
+<p>如果我们每次固定右端点 <span class="arithmatex">\(r\)</span>，那么左端点 <span class="arithmatex">\(l\)</span> 的范围是 <span class="arithmatex">\([0, r]\)</span>。每次移动右端点 <span class="arithmatex">\(r\)</span>，按位或的结果只会变大，我们用一个变量 <span class="arithmatex">\(s\)</span> 记录当前的按位或的结果，如果 <span class="arithmatex">\(s\)</span> 大于 <span class="arithmatex">\(k\)</span>，我们就将左端点 <span class="arithmatex">\(l\)</span> 向右移动，直到 <span class="arithmatex">\(s\)</span> 小于等于 <span class="arithmatex">\(k\)</span>。在移动左端点 <span class="arithmatex">\(l\)</span> 的过程中，我们需要维护一个数组 <span class="arithmatex">\(cnt\)</span>，记录当前区间内每个二进制位上 <span class="arithmatex">\(0\)</span> 的个数，当 <span class="arithmatex">\(cnt[h]\)</span> 为 <span class="arithmatex">\(0\)</span> 时，说明当前区间内的元素在第 <span class="arithmatex">\(h\)</span> 位上都为 <span class="arithmatex">\(0\)</span>，我们就可以将 <span class="arithmatex">\(s\)</span> 的第 <span class="arithmatex">\(h\)</span> 位设置为 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log M)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别是数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度和数组 <span class="arithmatex">\(\textit{nums}\)</span> 中元素的最大值。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/3000-3099/3097.Shortest%20Subarray%20With%20OR%20at%20Least%20K%20II/README.md">3097. 或值至少为 K 的最短子数组 II</a></li>
@@ -91193,9 +91191,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：哈希表 + 枚举</h3>
-<p>根据题目描述，我们需要求出数组 $nums$ 下标 $l$ 到 $r$ 的元素的按位或运算的结果，即 $nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]$。其中 $\lor$ 表示按位或运算。</p>
-<p>如果我们每次固定右端点 $r$，那么左端点 $l$ 的范围是 $[0, r]$。由于按位或之和随着 $l$ 的减小而单调递增，并且 $\textit{nums}[i]$ 的值不超过 $10^9$，因此区间 $[0, r]$ 最多只有 $30$ 种不同的值。因此，我们可以用一个集合来维护所有的 $nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]$ 的值。当我们从 $r$ 遍历到 $r+1$ 时，以 $r+1$ 为右端点的值，就是集合中每个值与 $nums[r + 1]$ 进行按位或运算得到的值，再加上 $nums[r + 1]$ 本身。因此，我们只需要枚举集合中的每个值，与 $nums[r]$ 进行按位或运算，就可以得到以 $r$ 为右端点的所有值，将每个值与 $k$ 相减后取绝对值，就可以得到以 $r$ 为右端点的所有值与 $k$ 的差的绝对值，其中的最小值就是答案。</p>
-<p>时间复杂度 $O(n \times \log M)$，空间复杂度 $O(\log M)$。其中 $n$ 和 $M$ 分别是数组 $nums$ 的长度和数组 $nums$ 中的最大值。</p>
+<p>根据题目描述，我们需要求出数组 <span class="arithmatex">\(nums\)</span> 下标 <span class="arithmatex">\(l\)</span> 到 <span class="arithmatex">\(r\)</span> 的元素的按位或运算的结果，即 <span class="arithmatex">\(nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]\)</span>。其中 <span class="arithmatex">\(\lor\)</span> 表示按位或运算。</p>
+<p>如果我们每次固定右端点 <span class="arithmatex">\(r\)</span>，那么左端点 <span class="arithmatex">\(l\)</span> 的范围是 <span class="arithmatex">\([0, r]\)</span>。由于按位或之和随着 <span class="arithmatex">\(l\)</span> 的减小而单调递增，并且 <span class="arithmatex">\(\textit{nums}[i]\)</span> 的值不超过 <span class="arithmatex">\(10^9\)</span>，因此区间 <span class="arithmatex">\([0, r]\)</span> 最多只有 <span class="arithmatex">\(30\)</span> 种不同的值。因此，我们可以用一个集合来维护所有的 <span class="arithmatex">\(nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]\)</span> 的值。当我们从 <span class="arithmatex">\(r\)</span> 遍历到 <span class="arithmatex">\(r+1\)</span> 时，以 <span class="arithmatex">\(r+1\)</span> 为右端点的值，就是集合中每个值与 <span class="arithmatex">\(nums[r + 1]\)</span> 进行按位或运算得到的值，再加上 <span class="arithmatex">\(nums[r + 1]\)</span> 本身。因此，我们只需要枚举集合中的每个值，与 <span class="arithmatex">\(nums[r]\)</span> 进行按位或运算，就可以得到以 <span class="arithmatex">\(r\)</span> 为右端点的所有值，将每个值与 <span class="arithmatex">\(k\)</span> 相减后取绝对值，就可以得到以 <span class="arithmatex">\(r\)</span> 为右端点的所有值与 <span class="arithmatex">\(k\)</span> 的差的绝对值，其中的最小值就是答案。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log M)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别是数组 <span class="arithmatex">\(nums\)</span> 的长度和数组 <span class="arithmatex">\(nums\)</span> 中的最大值。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1500-1599/1521.Find%20a%20Value%20of%20a%20Mysterious%20Function%20Closest%20to%20Target/README.md">1521. 找到最接近目标值的函数值</a></li>
@@ -91595,11 +91593,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

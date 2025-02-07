@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90897,17 +90895,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 模拟</h3>
-<p>我们定义一个长度为 $5$ 的方向数组 $dirs=[0, 1, 0, -1, 0]$，数组中的相邻两个元素表示一个方向。即 $(dirs[0], dirs[1])$ 表示向北，而 $(dirs[1], dirs[2])$ 表示向东，以此类推。</p>
-<p>我们使用一个哈希表 $s$ 来存储所有障碍物的坐标，这样可以在 $O(1)$ 的时间内判断下一步是否会遇到障碍物。</p>
-<p>另外，使用两个变量 $x$ 和 $y$ 来表示机器人当前所在的坐标，初始时 $x = y = 0$。变量 $k$ 表示机器人当前的方向，答案变量 $ans$ 表示机器人距离原点的最大欧式距离的平方。</p>
-<p>接下来，我们遍历数组 $commands$ 中的每个元素 $c$：</p>
+<p>我们定义一个长度为 <span class="arithmatex">\(5\)</span> 的方向数组 <span class="arithmatex">\(dirs=[0, 1, 0, -1, 0]\)</span>，数组中的相邻两个元素表示一个方向。即 <span class="arithmatex">\((dirs[0], dirs[1])\)</span> 表示向北，而 <span class="arithmatex">\((dirs[1], dirs[2])\)</span> 表示向东，以此类推。</p>
+<p>我们使用一个哈希表 <span class="arithmatex">\(s\)</span> 来存储所有障碍物的坐标，这样可以在 <span class="arithmatex">\(O(1)\)</span> 的时间内判断下一步是否会遇到障碍物。</p>
+<p>另外，使用两个变量 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 来表示机器人当前所在的坐标，初始时 <span class="arithmatex">\(x = y = 0\)</span>。变量 <span class="arithmatex">\(k\)</span> 表示机器人当前的方向，答案变量 <span class="arithmatex">\(ans\)</span> 表示机器人距离原点的最大欧式距离的平方。</p>
+<p>接下来，我们遍历数组 <span class="arithmatex">\(commands\)</span> 中的每个元素 <span class="arithmatex">\(c\)</span>：</p>
 <ul>
-<li>如果 $c = -2$，表示机器人向左转 $90$ 度，即 $k = (k + 3) \bmod 4$；</li>
-<li>如果 $c = -1$，表示机器人向右转 $90$ 度，即 $k = (k + 1) \bmod 4$；</li>
-<li>否则，表示机器人向前移动 $c$ 个单位长度。我们将机器人当前的方向 $k$ 与方向数组 $dirs$ 结合，即可得到机器人在 $x$ 轴和 $y$ 轴上的增量。我们将 $c$ 个单位长度的增量分别累加到 $x$ 和 $y$ 上，并判断每次移动后的新坐标 $(nx, ny)$ 是否在障碍物的坐标中，如果不在，则更新答案 $ans$，否则停止模拟，进行下一条指令的模拟。</li>
+<li>如果 <span class="arithmatex">\(c = -2\)</span>，表示机器人向左转 <span class="arithmatex">\(90\)</span> 度，即 <span class="arithmatex">\(k = (k + 3) \bmod 4\)</span>；</li>
+<li>如果 <span class="arithmatex">\(c = -1\)</span>，表示机器人向右转 <span class="arithmatex">\(90\)</span> 度，即 <span class="arithmatex">\(k = (k + 1) \bmod 4\)</span>；</li>
+<li>否则，表示机器人向前移动 <span class="arithmatex">\(c\)</span> 个单位长度。我们将机器人当前的方向 <span class="arithmatex">\(k\)</span> 与方向数组 <span class="arithmatex">\(dirs\)</span> 结合，即可得到机器人在 <span class="arithmatex">\(x\)</span> 轴和 <span class="arithmatex">\(y\)</span> 轴上的增量。我们将 <span class="arithmatex">\(c\)</span> 个单位长度的增量分别累加到 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 上，并判断每次移动后的新坐标 <span class="arithmatex">\((nx, ny)\)</span> 是否在障碍物的坐标中，如果不在，则更新答案 <span class="arithmatex">\(ans\)</span>，否则停止模拟，进行下一条指令的模拟。</li>
 </ul>
-<p>最后返回答案 $ans$ 即可。</p>
-<p>时间复杂度 $O(C \times n + m)$，空间复杂度 $O(m)$。其中 $C$ 表示每次可以移动的最大步数，而 $n$ 和 $m$ 分别表示数组 $commands$ 和数组 $obstacles$ 的长度。</p>
+<p>最后返回答案 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(C \times n + m)\)</span>，空间复杂度 <span class="arithmatex">\(O(m)\)</span>。其中 <span class="arithmatex">\(C\)</span> 表示每次可以移动的最大步数，而 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别表示数组 <span class="arithmatex">\(commands\)</span> 和数组 <span class="arithmatex">\(obstacles\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91419,11 +91417,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

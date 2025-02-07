@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90887,10 +90885,10 @@
 <!-- solution:start -->
 
 <h3 id="dijkstra">方法一：Dijkstra 算法</h3>
-<p>我们定义一个二维数组 $\textit{dist}$，其中 $\textit{dist}[i][j]$ 表示从起点到达房间 $(i, j)$ 所需的最少时间。初始时，我们将 $\textit{dist}$ 数组中的所有元素设为无穷大，然后将起点 $(0, 0)$ 的 $\textit{dist}$ 值设为 $0$。</p>
-<p>我们使用优先队列 $\textit{pq}$ 存储每一个状态，其中每个状态由三个值 $(d, i, j)$ 组成，表示从起点到达房间 $(i, j)$ 所需的时间为 $d$。初始时，我们将起点 $(0, 0, 0)$ 加入到 $\textit{pq}$ 中。</p>
-<p>在每一次迭代中，我们取出 $\textit{pq}$ 中的队首元素 $(d, i, j)$，如果 $(i, j)$ 是终点，那么我们返回 $d$。如果 $d$ 大于 $\textit{dist}[i][j]$，那么我们跳过这个状态。否则，我们枚举 $(i, j)$ 的四个相邻位置 $(x, y)$，如果 $(x, y)$ 在地图内，那么我们计算从 $(i, j)$ 到 $(x, y)$ 的最终时间 $t = \max(\textit{moveTime}[x][y], \textit{dist}[i][j]) + 1$，如果 $t$ 小于 $\textit{dist}[x][y]$，那么我们更新 $\textit{dist}[x][y]$ 的值，并将 $(t, x, y)$ 加入到 $\textit{pq}$ 中。</p>
-<p>时间复杂度 $O(n \times m \times \log (n \times m))$，空间复杂度 $O(n \times m)$。其中 $n$ 和 $m$ 分别是地图的行数和列数。</p>
+<p>我们定义一个二维数组 <span class="arithmatex">\(\textit{dist}\)</span>，其中 <span class="arithmatex">\(\textit{dist}[i][j]\)</span> 表示从起点到达房间 <span class="arithmatex">\((i, j)\)</span> 所需的最少时间。初始时，我们将 <span class="arithmatex">\(\textit{dist}\)</span> 数组中的所有元素设为无穷大，然后将起点 <span class="arithmatex">\((0, 0)\)</span> 的 <span class="arithmatex">\(\textit{dist}\)</span> 值设为 <span class="arithmatex">\(0\)</span>。</p>
+<p>我们使用优先队列 <span class="arithmatex">\(\textit{pq}\)</span> 存储每一个状态，其中每个状态由三个值 <span class="arithmatex">\((d, i, j)\)</span> 组成，表示从起点到达房间 <span class="arithmatex">\((i, j)\)</span> 所需的时间为 <span class="arithmatex">\(d\)</span>。初始时，我们将起点 <span class="arithmatex">\((0, 0, 0)\)</span> 加入到 <span class="arithmatex">\(\textit{pq}\)</span> 中。</p>
+<p>在每一次迭代中，我们取出 <span class="arithmatex">\(\textit{pq}\)</span> 中的队首元素 <span class="arithmatex">\((d, i, j)\)</span>，如果 <span class="arithmatex">\((i, j)\)</span> 是终点，那么我们返回 <span class="arithmatex">\(d\)</span>。如果 <span class="arithmatex">\(d\)</span> 大于 <span class="arithmatex">\(\textit{dist}[i][j]\)</span>，那么我们跳过这个状态。否则，我们枚举 <span class="arithmatex">\((i, j)\)</span> 的四个相邻位置 <span class="arithmatex">\((x, y)\)</span>，如果 <span class="arithmatex">\((x, y)\)</span> 在地图内，那么我们计算从 <span class="arithmatex">\((i, j)\)</span> 到 <span class="arithmatex">\((x, y)\)</span> 的最终时间 <span class="arithmatex">\(t = \max(\textit{moveTime}[x][y], \textit{dist}[i][j]) + 1\)</span>，如果 <span class="arithmatex">\(t\)</span> 小于 <span class="arithmatex">\(\textit{dist}[x][y]\)</span>，那么我们更新 <span class="arithmatex">\(\textit{dist}[x][y]\)</span> 的值，并将 <span class="arithmatex">\((t, x, y)\)</span> 加入到 <span class="arithmatex">\(\textit{pq}\)</span> 中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m \times \log (n \times m))\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是地图的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91474,11 +91472,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

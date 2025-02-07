@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90875,10 +90873,10 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：DFS + 剪枝</h3>
-<p>根据题意，我们需要将数组 $\textit{nums}$ 划分为 $k$ 个子集，且每个子集的和相等。因此，先累加 $\textit{nums}$ 中所有元素的和，如果不能被 $k$ 整除，说明无法划分为 $k$ 个子集，提前返回 $\textit{false}$。</p>
-<p>如果能被 $k$ 整除，不妨将每个子集期望的和记为 $s$，然后创建一个长度为 $k$ 的数组 $\textit{cur}$，表示当前每个子集的和。</p>
-<p>对数组 $\textit{nums}$ 进行降序排序（减少搜索次数），然后从第一个元素开始，依次尝试将其加入到 $\textit{cur}$ 的每个子集中。这里如果将 $\textit{nums}[i]$ 加入某个子集 $\textit{cur}[j]$ 后，子集的和超过 $s$，说明无法放入，可以直接跳过；另外，如果 $\textit{cur}[j]$ 与 $\textit{cur}[j - 1]$ 相等，意味着我们在 $\textit{cur}[j - 1]$ 的时候已经完成了搜索，也可以跳过当前的搜索。</p>
-<p>如果能将所有元素都加入到 $\textit{cur}$ 中，说明可以划分为 $k$ 个子集，返回 $\textit{true}$。</p>
+<p>根据题意，我们需要将数组 <span class="arithmatex">\(\textit{nums}\)</span> 划分为 <span class="arithmatex">\(k\)</span> 个子集，且每个子集的和相等。因此，先累加 <span class="arithmatex">\(\textit{nums}\)</span> 中所有元素的和，如果不能被 <span class="arithmatex">\(k\)</span> 整除，说明无法划分为 <span class="arithmatex">\(k\)</span> 个子集，提前返回 <span class="arithmatex">\(\textit{false}\)</span>。</p>
+<p>如果能被 <span class="arithmatex">\(k\)</span> 整除，不妨将每个子集期望的和记为 <span class="arithmatex">\(s\)</span>，然后创建一个长度为 <span class="arithmatex">\(k\)</span> 的数组 <span class="arithmatex">\(\textit{cur}\)</span>，表示当前每个子集的和。</p>
+<p>对数组 <span class="arithmatex">\(\textit{nums}\)</span> 进行降序排序（减少搜索次数），然后从第一个元素开始，依次尝试将其加入到 <span class="arithmatex">\(\textit{cur}\)</span> 的每个子集中。这里如果将 <span class="arithmatex">\(\textit{nums}[i]\)</span> 加入某个子集 <span class="arithmatex">\(\textit{cur}[j]\)</span> 后，子集的和超过 <span class="arithmatex">\(s\)</span>，说明无法放入，可以直接跳过；另外，如果 <span class="arithmatex">\(\textit{cur}[j]\)</span> 与 <span class="arithmatex">\(\textit{cur}[j - 1]\)</span> 相等，意味着我们在 <span class="arithmatex">\(\textit{cur}[j - 1]\)</span> 的时候已经完成了搜索，也可以跳过当前的搜索。</p>
+<p>如果能将所有元素都加入到 <span class="arithmatex">\(\textit{cur}\)</span> 中，说明可以划分为 <span class="arithmatex">\(k\)</span> 个子集，返回 <span class="arithmatex">\(\textit{true}\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91192,20 +91190,20 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法二：状态压缩 + 记忆化搜索</h3>
-<p>与方法一相同，我们依然先判断数组 $\textit{nums}$ 是否有可能被划分为 $k$ 个子集。如果不能被 $k$ 整除，直接返回 $\textit{false}$。</p>
-<p>我们记 $s$ 为每个子集期望的和，当前元素被划分的情况为 $\textit{state}$。对于第 $i$ 个数，若 $\textit{state}$ 的第 $i$ 位为 $0$，说明第 $i$ 个元素未被划分。</p>
-<p>我们的目标是从全部元素中凑出 $k$ 个和为 $s$ 的子集。记当前子集的和为 $t$。在未划分第 $i$ 个元素时：</p>
+<p>与方法一相同，我们依然先判断数组 <span class="arithmatex">\(\textit{nums}\)</span> 是否有可能被划分为 <span class="arithmatex">\(k\)</span> 个子集。如果不能被 <span class="arithmatex">\(k\)</span> 整除，直接返回 <span class="arithmatex">\(\textit{false}\)</span>。</p>
+<p>我们记 <span class="arithmatex">\(s\)</span> 为每个子集期望的和，当前元素被划分的情况为 <span class="arithmatex">\(\textit{state}\)</span>。对于第 <span class="arithmatex">\(i\)</span> 个数，若 <span class="arithmatex">\(\textit{state}\)</span> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(0\)</span>，说明第 <span class="arithmatex">\(i\)</span> 个元素未被划分。</p>
+<p>我们的目标是从全部元素中凑出 <span class="arithmatex">\(k\)</span> 个和为 <span class="arithmatex">\(s\)</span> 的子集。记当前子集的和为 <span class="arithmatex">\(t\)</span>。在未划分第 <span class="arithmatex">\(i\)</span> 个元素时：</p>
 <ul>
-<li>若 $t + \textit{nums}[i] \gt s$，说明第 $i$ 个元素不能被添加到当前子集中，由于我们对 $\textit{nums}$ 数组进行升序排列，因此数组 $\textit{nums}$ 从位置 $i$ 开始的所有元素都不能被添加到当前子集，直接返回 $\textit{false}$。</li>
-<li>否则，将第 $i$ 个元素添加到当前子集中，状态变为 $\textit{state} | 2^i$，然后继续对未划分的元素进行搜索。需要注意的是，若 $t + \textit{nums}[i] = s$，说明恰好可以得到一个和为 $s$ 的子集，下一步将 $t$ 归零（可以通过 $(t + \textit{nums}[i]) \bmod s$ 实现），并继续划分下一个子集。</li>
+<li>若 <span class="arithmatex">\(t + \textit{nums}[i] \gt s\)</span>，说明第 <span class="arithmatex">\(i\)</span> 个元素不能被添加到当前子集中，由于我们对 <span class="arithmatex">\(\textit{nums}\)</span> 数组进行升序排列，因此数组 <span class="arithmatex">\(\textit{nums}\)</span> 从位置 <span class="arithmatex">\(i\)</span> 开始的所有元素都不能被添加到当前子集，直接返回 <span class="arithmatex">\(\textit{false}\)</span>。</li>
+<li>否则，将第 <span class="arithmatex">\(i\)</span> 个元素添加到当前子集中，状态变为 <span class="arithmatex">\(\textit{state} | 2^i\)</span>，然后继续对未划分的元素进行搜索。需要注意的是，若 <span class="arithmatex">\(t + \textit{nums}[i] = s\)</span>，说明恰好可以得到一个和为 <span class="arithmatex">\(s\)</span> 的子集，下一步将 <span class="arithmatex">\(t\)</span> 归零（可以通过 <span class="arithmatex">\((t + \textit{nums}[i]) \bmod s\)</span> 实现），并继续划分下一个子集。</li>
 </ul>
-<p>为了避免重复搜索，我们使用一个长度为 $2^n$ 的数组 $\textit{f}$ 记录每个状态下的搜索结果。数组 $\textit{f}$ 有三个可能的值：</p>
+<p>为了避免重复搜索，我们使用一个长度为 <span class="arithmatex">\(2^n\)</span> 的数组 <span class="arithmatex">\(\textit{f}\)</span> 记录每个状态下的搜索结果。数组 <span class="arithmatex">\(\textit{f}\)</span> 有三个可能的值：</p>
 <ul>
 <li><code>0</code>：表示当前状态还未搜索过；</li>
-<li><code>-1</code>：表示当前状态下无法划分为 $k$ 个子集；</li>
-<li><code>1</code>：表示当前状态下可以划分为 $k$ 个子集。</li>
+<li><code>-1</code>：表示当前状态下无法划分为 <span class="arithmatex">\(k\)</span> 个子集；</li>
+<li><code>1</code>：表示当前状态下可以划分为 <span class="arithmatex">\(k\)</span> 个子集。</li>
 </ul>
-<p>时间复杂度 $O(n \times 2^n)$，空间复杂度 $O(2^n)$。其中 $n$ 表示数组 $\textit{nums}$ 的长度。对于每个状态，我们需要遍历数组 $\textit{nums}$，时间复杂度为 $O(n)$；状态总数为 $2^n$，因此总的时间复杂度为 $O(n\times 2^n)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times 2^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。对于每个状态，我们需要遍历数组 <span class="arithmatex">\(\textit{nums}\)</span>，时间复杂度为 <span class="arithmatex">\(O(n)\)</span>；状态总数为 <span class="arithmatex">\(2^n\)</span>，因此总的时间复杂度为 <span class="arithmatex">\(O(n\times 2^n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91582,10 +91580,10 @@
 
 <h3 id="_4">方法三：动态规划</h3>
 <p>我们可以使用动态规划的方法求解本题。</p>
-<p>我们定义 $f[i]$ 表示当前选取的数字的状态为 $i$ 时，是否存在 $k$ 个子集满足题目要求。初始时 $f[0]= true$，答案为 $f[2^n-1]$。其中 $n$ 表示数组 $nums$ 的长度。另外，我们定义 $cur[i]$ 表示当前选取的数字的状态为 $i$ 时，最后一个子集的和。</p>
-<p>我们在 $[0, 2^n]$ 的范围内枚举状态 $i$，对于每个状态 $i$，如果 $f[i]$ 为 $\textit{false}$，我们直接跳过即可。否则，我们枚举 $\textit{nums}$ 数组中的任意一个数 $\textit{nums}[j]$，如果 $\textit{cur}[i] + \textit{nums}[j] &gt; s$，我们直接跳出枚举循环，因为后面的数更大，无法放入当前子集；否则，如果 $i$ 的二进制表示的第 $j$ 位为 $0$，说明当前 $\textit{nums}[j]$ 还没有被选取，我们可以将其放入当前子集中，此时状态变为 $i | 2^j$，并更新 $\textit{cur}[i | 2^j] = (\textit{cur}[i] + \textit{nums}[j]) \bmod s$，并且 $f[i | 2^j] = \textit{true}$。</p>
-<p>最后，我们返回 $f[2^n - 1]$ 即可。</p>
-<p>时间复杂度 $O(n \times 2^n)$，空间复杂度 $O(2^n)$。其中 $n$ 表示数组 $\textit{nums}$ 的长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示当前选取的数字的状态为 <span class="arithmatex">\(i\)</span> 时，是否存在 <span class="arithmatex">\(k\)</span> 个子集满足题目要求。初始时 <span class="arithmatex">\(f[0]= true\)</span>，答案为 <span class="arithmatex">\(f[2^n-1]\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示数组 <span class="arithmatex">\(nums\)</span> 的长度。另外，我们定义 <span class="arithmatex">\(cur[i]\)</span> 表示当前选取的数字的状态为 <span class="arithmatex">\(i\)</span> 时，最后一个子集的和。</p>
+<p>我们在 <span class="arithmatex">\([0, 2^n]\)</span> 的范围内枚举状态 <span class="arithmatex">\(i\)</span>，对于每个状态 <span class="arithmatex">\(i\)</span>，如果 <span class="arithmatex">\(f[i]\)</span> 为 <span class="arithmatex">\(\textit{false}\)</span>，我们直接跳过即可。否则，我们枚举 <span class="arithmatex">\(\textit{nums}\)</span> 数组中的任意一个数 <span class="arithmatex">\(\textit{nums}[j]\)</span>，如果 <span class="arithmatex">\(\textit{cur}[i] + \textit{nums}[j] &gt; s\)</span>，我们直接跳出枚举循环，因为后面的数更大，无法放入当前子集；否则，如果 <span class="arithmatex">\(i\)</span> 的二进制表示的第 <span class="arithmatex">\(j\)</span> 位为 <span class="arithmatex">\(0\)</span>，说明当前 <span class="arithmatex">\(\textit{nums}[j]\)</span> 还没有被选取，我们可以将其放入当前子集中，此时状态变为 <span class="arithmatex">\(i | 2^j\)</span>，并更新 <span class="arithmatex">\(\textit{cur}[i | 2^j] = (\textit{cur}[i] + \textit{nums}[j]) \bmod s\)</span>，并且 <span class="arithmatex">\(f[i | 2^j] = \textit{true}\)</span>。</p>
+<p>最后，我们返回 <span class="arithmatex">\(f[2^n - 1]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times 2^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92120,11 +92118,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

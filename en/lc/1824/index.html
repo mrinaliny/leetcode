@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,11 +86068,11 @@ Note that the frog can jump over obstacles only when making side jumps (as shown
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the minimum number of sidesteps for the frog to reach the $i$-th point and be on the $j$-th lane (index starts from $0$).</p>
-<p>Note that the frog starts on the second lane (the problem index starts from $1$), so the value of $f[0][1]$ is $0$, and the values of $f[0][0]$ and $f[0][2]$ are both $1$. The answer is $min(f[n][0], f[n][1], f[n][2])$.</p>
-<p>For each position $i$ from $1$ to $n$, we can enumerate the current lane $j$ of the frog. If $obstacles[i] = j + 1$, it means that there is an obstacle on the $j$-th lane, and the value of $f[i][j]$ is infinity. Otherwise, the frog can choose not to jump, in which case the value of $f[i][j]$ is $f[i - 1][j]$, or the frog can sidestep from other lanes, in which case $f[i][j] = min(f[i][j], min(f[i][0], f[i][1], f[i][2]) + 1)$.</p>
-<p>In the code implementation, we can optimize the first dimension of space and only use an array $f$ of length $3$ for maintenance.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array $obstacles$. The space complexity is $O(1)$.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the minimum number of sidesteps for the frog to reach the <span class="arithmatex">\(i\)</span>-th point and be on the <span class="arithmatex">\(j\)</span>-th lane (index starts from <span class="arithmatex">\(0\)</span>).</p>
+<p>Note that the frog starts on the second lane (the problem index starts from <span class="arithmatex">\(1\)</span>), so the value of <span class="arithmatex">\(f[0][1]\)</span> is <span class="arithmatex">\(0\)</span>, and the values of <span class="arithmatex">\(f[0][0]\)</span> and <span class="arithmatex">\(f[0][2]\)</span> are both <span class="arithmatex">\(1\)</span>. The answer is <span class="arithmatex">\(min(f[n][0], f[n][1], f[n][2])\)</span>.</p>
+<p>For each position <span class="arithmatex">\(i\)</span> from <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(n\)</span>, we can enumerate the current lane <span class="arithmatex">\(j\)</span> of the frog. If <span class="arithmatex">\(obstacles[i] = j + 1\)</span>, it means that there is an obstacle on the <span class="arithmatex">\(j\)</span>-th lane, and the value of <span class="arithmatex">\(f[i][j]\)</span> is infinity. Otherwise, the frog can choose not to jump, in which case the value of <span class="arithmatex">\(f[i][j]\)</span> is <span class="arithmatex">\(f[i - 1][j]\)</span>, or the frog can sidestep from other lanes, in which case <span class="arithmatex">\(f[i][j] = min(f[i][j], min(f[i][0], f[i][1], f[i][2]) + 1)\)</span>.</p>
+<p>In the code implementation, we can optimize the first dimension of space and only use an array <span class="arithmatex">\(f\)</span> of length <span class="arithmatex">\(3\)</span> for maintenance.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(obstacles\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86506,11 +86504,9 @@ Note that the frog can jump over obstacles only when making side jumps (as shown
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

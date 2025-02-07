@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90873,17 +90871,17 @@
 <p>因此，二叉树的根节点一定是前序遍历的第一个节点，也是后序遍历的最后一个节点。</p>
 <p>接下来，我们需要确定二叉树的左子树范围和右子树范围。</p>
 <p>如果二叉树有左子树，那么左子树的根节点一定是前序遍历的第二个节点；如果二叉树没有左子树，那么前序遍历的第二个节点一定是右子树的根节点。由于这两种情况下，后序遍历的结果是一样的，因此，我们可以把前序遍历的第二个节点作为左子树的根节点，然后找到它在后序遍历中的位置，这样就确定了左子树的范围。</p>
-<p>具体地，我们设计一个递归函数 $dfs(a, b, c, d)$，其中 $[a, b]$ 表示前序遍历的范围，而 $[c, d]$ 表示后序遍历的范围。这个函数的功能是根据前序遍历 $[a, b]$ 和后序遍历 $[c, d]$ 构造出二叉树的根节点。那么答案就是 $dfs(0, n - 1, 0, n - 1)$，其中 $n$ 是前序遍历的长度。</p>
-<p>函数 $dfs(a, b, c, d)$ 的执行步骤如下：</p>
+<p>具体地，我们设计一个递归函数 <span class="arithmatex">\(dfs(a, b, c, d)\)</span>，其中 <span class="arithmatex">\([a, b]\)</span> 表示前序遍历的范围，而 <span class="arithmatex">\([c, d]\)</span> 表示后序遍历的范围。这个函数的功能是根据前序遍历 <span class="arithmatex">\([a, b]\)</span> 和后序遍历 <span class="arithmatex">\([c, d]\)</span> 构造出二叉树的根节点。那么答案就是 <span class="arithmatex">\(dfs(0, n - 1, 0, n - 1)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是前序遍历的长度。</p>
+<p>函数 <span class="arithmatex">\(dfs(a, b, c, d)\)</span> 的执行步骤如下：</p>
 <ol>
-<li>如果 $a &gt; b$，说明范围为空，直接返回空节点。</li>
-<li>否则，我们构造一个新的节点 $root$，它的值为前序遍历中的第一个节点的值，也就是 $preorder[a]$。</li>
-<li>如果 $a$ 等于 $b$，说明 $root$ 没有左子树也没有右子树，直接返回 $root$。</li>
-<li>否则，左子树的根节点的值为 $preorder[a + 1]$，我们在后序遍历中找到 $preorder[a + 1]$ 的位置，记为 $i$。那么左子树的节点个数 $m = i - c + 1$，由此可知左子树在前序遍历中的范围是 $[a + 1, a + m]$，后序遍历中的范围是 $[c, i]$，右子树在前序遍历中的范围是 $[a + m + 1, b]$，后序遍历中的范围是 $[i + 1, d - 1]$。</li>
-<li>知道了左右子树的范围，我们就可以递归地重建左右子树，然后将左右子树的根节点分别作为 $root$ 的左右子节点。最后返回 $root$。</li>
+<li>如果 <span class="arithmatex">\(a &gt; b\)</span>，说明范围为空，直接返回空节点。</li>
+<li>否则，我们构造一个新的节点 <span class="arithmatex">\(root\)</span>，它的值为前序遍历中的第一个节点的值，也就是 <span class="arithmatex">\(preorder[a]\)</span>。</li>
+<li>如果 <span class="arithmatex">\(a\)</span> 等于 <span class="arithmatex">\(b\)</span>，说明 <span class="arithmatex">\(root\)</span> 没有左子树也没有右子树，直接返回 <span class="arithmatex">\(root\)</span>。</li>
+<li>否则，左子树的根节点的值为 <span class="arithmatex">\(preorder[a + 1]\)</span>，我们在后序遍历中找到 <span class="arithmatex">\(preorder[a + 1]\)</span> 的位置，记为 <span class="arithmatex">\(i\)</span>。那么左子树的节点个数 <span class="arithmatex">\(m = i - c + 1\)</span>，由此可知左子树在前序遍历中的范围是 <span class="arithmatex">\([a + 1, a + m]\)</span>，后序遍历中的范围是 <span class="arithmatex">\([c, i]\)</span>，右子树在前序遍历中的范围是 <span class="arithmatex">\([a + m + 1, b]\)</span>，后序遍历中的范围是 <span class="arithmatex">\([i + 1, d - 1]\)</span>。</li>
+<li>知道了左右子树的范围，我们就可以递归地重建左右子树，然后将左右子树的根节点分别作为 <span class="arithmatex">\(root\)</span> 的左右子节点。最后返回 <span class="arithmatex">\(root\)</span>。</li>
 </ol>
-<p>在函数 $dfs(a, b, c, d)$ 中，我们需要用到一个哈希表 $pos$，它存储了后序遍历中每个节点的位置。在函数的开头，我们可以先计算出这个哈希表，这样就可以在 $O(1)$ 的时间内找到任意节点在后序遍历中的位置。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是节点数。</p>
+<p>在函数 <span class="arithmatex">\(dfs(a, b, c, d)\)</span> 中，我们需要用到一个哈希表 <span class="arithmatex">\(pos\)</span>，它存储了后序遍历中每个节点的位置。在函数的开头，我们可以先计算出这个哈希表，这样就可以在 <span class="arithmatex">\(O(1)\)</span> 的时间内找到任意节点在后序遍历中的位置。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91239,15 +91237,15 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：递归的另一种写法</h3>
-<p>我们也可以设计一个递归函数 $dfs(i, j, n)$，其中 $i$ 和 $j$ 表示前序遍历和后序遍历的起点，而 $n$ 表示节点个数。这个函数的功能是根据前序遍历 $[i, i + n - 1]$ 和后序遍历 $[j, j + n - 1]$ 构造出二叉树的根节点。那么答案就是 $dfs(0, 0, n)$，其中 $n$ 是前序遍历的长度。</p>
-<p>函数 $dfs(i, j, n)$ 的执行步骤如下：</p>
+<p>我们也可以设计一个递归函数 <span class="arithmatex">\(dfs(i, j, n)\)</span>，其中 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 表示前序遍历和后序遍历的起点，而 <span class="arithmatex">\(n\)</span> 表示节点个数。这个函数的功能是根据前序遍历 <span class="arithmatex">\([i, i + n - 1]\)</span> 和后序遍历 <span class="arithmatex">\([j, j + n - 1]\)</span> 构造出二叉树的根节点。那么答案就是 <span class="arithmatex">\(dfs(0, 0, n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是前序遍历的长度。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j, n)\)</span> 的执行步骤如下：</p>
 <ol>
-<li>如果 $n = 0$，说明范围为空，直接返回空节点。</li>
-<li>否则，我们构造一个新的节点 $root$，它的值为前序遍历中的第一个节点的值，也就是 $preorder[i]$。</li>
-<li>如果 $n = 1$，说明 $root$ 没有左子树也没有右子树，直接返回 $root$。</li>
-<li>否则，左子树的根节点的值为 $preorder[i + 1]$，我们在后序遍历中找到 $preorder[i + 1]$ 的位置，记为 $k$。那么左子树的节点个数 $m = k - j + 1$，右子树的节点数为 $n - m - 1$。我们递归地重建左右子树，然后将左右子树的根节点分别作为 $root$ 的左右子节点。最后返回 $root$。</li>
+<li>如果 <span class="arithmatex">\(n = 0\)</span>，说明范围为空，直接返回空节点。</li>
+<li>否则，我们构造一个新的节点 <span class="arithmatex">\(root\)</span>，它的值为前序遍历中的第一个节点的值，也就是 <span class="arithmatex">\(preorder[i]\)</span>。</li>
+<li>如果 <span class="arithmatex">\(n = 1\)</span>，说明 <span class="arithmatex">\(root\)</span> 没有左子树也没有右子树，直接返回 <span class="arithmatex">\(root\)</span>。</li>
+<li>否则，左子树的根节点的值为 <span class="arithmatex">\(preorder[i + 1]\)</span>，我们在后序遍历中找到 <span class="arithmatex">\(preorder[i + 1]\)</span> 的位置，记为 <span class="arithmatex">\(k\)</span>。那么左子树的节点个数 <span class="arithmatex">\(m = k - j + 1\)</span>，右子树的节点数为 <span class="arithmatex">\(n - m - 1\)</span>。我们递归地重建左右子树，然后将左右子树的根节点分别作为 <span class="arithmatex">\(root\)</span> 的左右子节点。最后返回 <span class="arithmatex">\(root\)</span>。</li>
 </ol>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是节点数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91832,11 +91830,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

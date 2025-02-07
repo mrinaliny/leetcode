@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86061,10 +86059,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i]$ as the length of the longest increasing subsequence ending with $nums[i]$, and $cnt[i]$ as the number of longest increasing subsequences ending with $nums[i]$. Initially, $f[i]=1$, $cnt[i]=1$. Also, we define $mx$ as the length of the longest increasing subsequence, and $ans$ as the number of longest increasing subsequences.</p>
-<p>For each $nums[i]$, we enumerate all elements $nums[j]$ in $nums[0:i-1]$. If $nums[j] &lt; nums[i]$, then $nums[i]$ can be appended after $nums[j]$ to form a longer increasing subsequence. If $f[i] &lt; f[j] + 1$, it means the length of the longest increasing subsequence ending with $nums[i]$ has increased, so we need to update $f[i]=f[j]+1$ and $cnt[i]=cnt[j]$. If $f[i]=f[j]+1$, it means we have found a longest increasing subsequence with the same length as before, so we need to increase $cnt[i]$ by $cnt[j]$. Then, if $mx &lt; f[i]$, it means the length of the longest increasing subsequence has increased, so we need to update $mx=f[i]$ and $ans=cnt[i]$. If $mx=f[i]$, it means we have found a longest increasing subsequence with the same length as before, so we need to increase $ans$ by $cnt[i]$.</p>
-<p>Finally, we return $ans$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $nums$.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the length of the longest increasing subsequence ending with <span class="arithmatex">\(nums[i]\)</span>, and <span class="arithmatex">\(cnt[i]\)</span> as the number of longest increasing subsequences ending with <span class="arithmatex">\(nums[i]\)</span>. Initially, <span class="arithmatex">\(f[i]=1\)</span>, <span class="arithmatex">\(cnt[i]=1\)</span>. Also, we define <span class="arithmatex">\(mx\)</span> as the length of the longest increasing subsequence, and <span class="arithmatex">\(ans\)</span> as the number of longest increasing subsequences.</p>
+<p>For each <span class="arithmatex">\(nums[i]\)</span>, we enumerate all elements <span class="arithmatex">\(nums[j]\)</span> in <span class="arithmatex">\(nums[0:i-1]\)</span>. If <span class="arithmatex">\(nums[j] &lt; nums[i]\)</span>, then <span class="arithmatex">\(nums[i]\)</span> can be appended after <span class="arithmatex">\(nums[j]\)</span> to form a longer increasing subsequence. If <span class="arithmatex">\(f[i] &lt; f[j] + 1\)</span>, it means the length of the longest increasing subsequence ending with <span class="arithmatex">\(nums[i]\)</span> has increased, so we need to update <span class="arithmatex">\(f[i]=f[j]+1\)</span> and <span class="arithmatex">\(cnt[i]=cnt[j]\)</span>. If <span class="arithmatex">\(f[i]=f[j]+1\)</span>, it means we have found a longest increasing subsequence with the same length as before, so we need to increase <span class="arithmatex">\(cnt[i]\)</span> by <span class="arithmatex">\(cnt[j]\)</span>. Then, if <span class="arithmatex">\(mx &lt; f[i]\)</span>, it means the length of the longest increasing subsequence has increased, so we need to update <span class="arithmatex">\(mx=f[i]\)</span> and <span class="arithmatex">\(ans=cnt[i]\)</span>. If <span class="arithmatex">\(mx=f[i]\)</span>, it means we have found a longest increasing subsequence with the same length as before, so we need to increase <span class="arithmatex">\(ans\)</span> by <span class="arithmatex">\(cnt[i]\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86394,8 +86392,8 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-binary-indexed-tree">Solution 2: Binary Indexed Tree</h3>
-<p>We can use a binary indexed tree to maintain the length and count of the longest increasing subsequence in the prefix interval. We remove duplicates from the array $nums$ and sort it to get the array $arr$. Then we enumerate each element $x$ in $nums$, find the position $i$ of $x$ in the array $arr$ by binary search, then query the length and count of the longest increasing subsequence in $[1,i-1]$, denoted as $v$ and $cnt$, then update the length and count of the longest increasing subsequence in $[i]$ to $v+1$ and $\max(cnt,1)$. Finally, we query the length and count of the longest increasing subsequence in $[1,m]$, where $m$ is the length of the array $arr$, which is the answer.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $nums$.</p>
+<p>We can use a binary indexed tree to maintain the length and count of the longest increasing subsequence in the prefix interval. We remove duplicates from the array <span class="arithmatex">\(nums\)</span> and sort it to get the array <span class="arithmatex">\(arr\)</span>. Then we enumerate each element <span class="arithmatex">\(x\)</span> in <span class="arithmatex">\(nums\)</span>, find the position <span class="arithmatex">\(i\)</span> of <span class="arithmatex">\(x\)</span> in the array <span class="arithmatex">\(arr\)</span> by binary search, then query the length and count of the longest increasing subsequence in <span class="arithmatex">\([1,i-1]\)</span>, denoted as <span class="arithmatex">\(v\)</span> and <span class="arithmatex">\(cnt\)</span>, then update the length and count of the longest increasing subsequence in <span class="arithmatex">\([i]\)</span> to <span class="arithmatex">\(v+1\)</span> and <span class="arithmatex">\(\max(cnt,1)\)</span>. Finally, we query the length and count of the longest increasing subsequence in <span class="arithmatex">\([1,m]\)</span>, where <span class="arithmatex">\(m\)</span> is the length of the array <span class="arithmatex">\(arr\)</span>, which is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87298,11 +87296,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

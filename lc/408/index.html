@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,13 +90857,13 @@
 
 <h3 id="_3">方法一：模拟</h3>
 <p>我们可以直接模拟字符匹配替换。</p>
-<p>假设字符串 $word$ 和字符串 $abbr$ 的长度分别为 $m$ 和 $n$，我们使用两个指针 $i$ 和 $j$ 分别指向字符串 $word$ 和字符串 $abbr$ 的初始位置，用一个整型变量 $x$ 记录当前匹配到的 $abbr$ 的数字。</p>
-<p>循环匹配字符串 $word$ 和字符串 $abbr$ 的每个字符：</p>
-<p>如果指针 $j$ 指向的字符 $abbr[j]$ 是数字，如果 $abbr[j]$ 是 <code>'0'</code>，并且 $x$ 为 $0$，说明 $abbr$ 中的数字含有前导零，因此不是合法的缩写，返回 <code>false</code>；否则将 $x$ 更新为 $x \times 10 + abbr[j] - '0'$。</p>
-<p>如果指针 $j$ 指向的字符 $abbr[j]$ 不是数字，那么我们此时将指针 $i$ 往前移动 $x$ 个位置，然后将 $x$ 重置为 $0$。如果此时 $i \geq m$ 或者 $word[i] \neq abbr[j]$，说明两个字符串无法匹配，返回 <code>false</code>；否则将指针 $i$ 往前移动 $1$ 个位置。</p>
-<p>然后我们将指针 $j$ 往前移动 $1$ 个位置，重复上述过程，直到 $i$ 超出字符串 $word$ 的长度或者 $j$ 超出字符串 $abbr$ 的长度。</p>
-<p>最后，如果 $i + x$ 等于 $m$ 且 $j$ 等于 $n$，说明字符串 $word$ 可以缩写成字符串 $abbr$，返回 <code>true</code>；否则返回 <code>false</code>。</p>
-<p>时间复杂度 $O(m + n)$，其中 $m$ 和 $n$ 分别是字符串 $word$ 和字符串 $abbr$ 的长度。空间复杂度 $O(1)$。</p>
+<p>假设字符串 <span class="arithmatex">\(word\)</span> 和字符串 <span class="arithmatex">\(abbr\)</span> 的长度分别为 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span>，我们使用两个指针 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 分别指向字符串 <span class="arithmatex">\(word\)</span> 和字符串 <span class="arithmatex">\(abbr\)</span> 的初始位置，用一个整型变量 <span class="arithmatex">\(x\)</span> 记录当前匹配到的 <span class="arithmatex">\(abbr\)</span> 的数字。</p>
+<p>循环匹配字符串 <span class="arithmatex">\(word\)</span> 和字符串 <span class="arithmatex">\(abbr\)</span> 的每个字符：</p>
+<p>如果指针 <span class="arithmatex">\(j\)</span> 指向的字符 <span class="arithmatex">\(abbr[j]\)</span> 是数字，如果 <span class="arithmatex">\(abbr[j]\)</span> 是 <code>'0'</code>，并且 <span class="arithmatex">\(x\)</span> 为 <span class="arithmatex">\(0\)</span>，说明 <span class="arithmatex">\(abbr\)</span> 中的数字含有前导零，因此不是合法的缩写，返回 <code>false</code>；否则将 <span class="arithmatex">\(x\)</span> 更新为 <span class="arithmatex">\(x \times 10 + abbr[j] - '0'\)</span>。</p>
+<p>如果指针 <span class="arithmatex">\(j\)</span> 指向的字符 <span class="arithmatex">\(abbr[j]\)</span> 不是数字，那么我们此时将指针 <span class="arithmatex">\(i\)</span> 往前移动 <span class="arithmatex">\(x\)</span> 个位置，然后将 <span class="arithmatex">\(x\)</span> 重置为 <span class="arithmatex">\(0\)</span>。如果此时 <span class="arithmatex">\(i \geq m\)</span> 或者 <span class="arithmatex">\(word[i] \neq abbr[j]\)</span>，说明两个字符串无法匹配，返回 <code>false</code>；否则将指针 <span class="arithmatex">\(i\)</span> 往前移动 <span class="arithmatex">\(1\)</span> 个位置。</p>
+<p>然后我们将指针 <span class="arithmatex">\(j\)</span> 往前移动 <span class="arithmatex">\(1\)</span> 个位置，重复上述过程，直到 <span class="arithmatex">\(i\)</span> 超出字符串 <span class="arithmatex">\(word\)</span> 的长度或者 <span class="arithmatex">\(j\)</span> 超出字符串 <span class="arithmatex">\(abbr\)</span> 的长度。</p>
+<p>最后，如果 <span class="arithmatex">\(i + x\)</span> 等于 <span class="arithmatex">\(m\)</span> 且 <span class="arithmatex">\(j\)</span> 等于 <span class="arithmatex">\(n\)</span>，说明字符串 <span class="arithmatex">\(word\)</span> 可以缩写成字符串 <span class="arithmatex">\(abbr\)</span>，返回 <code>true</code>；否则返回 <code>false</code>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m + n)\)</span>，其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是字符串 <span class="arithmatex">\(word\)</span> 和字符串 <span class="arithmatex">\(abbr\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91318,11 +91316,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

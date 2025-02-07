@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86073,17 +86071,17 @@ It can be shown that 3 is the minimum number of beautiful substrings that s can 
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>Since the problem requires us to judge whether a string is the binary representation of a power of $5$, we might as well first preprocess all the powers of $5$ and record them in a hash table $ss$.</p>
-<p>Next, we design a function $dfs(i)$, which indicates the minimum number of cuts from the $i$-th character of the string $s$ to the end of the string. Then the answer is $dfs(0)$.</p>
-<p>The calculation method of function $dfs(i)$ is as follows:</p>
+<p>Since the problem requires us to judge whether a string is the binary representation of a power of <span class="arithmatex">\(5\)</span>, we might as well first preprocess all the powers of <span class="arithmatex">\(5\)</span> and record them in a hash table <span class="arithmatex">\(ss\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i)\)</span>, which indicates the minimum number of cuts from the <span class="arithmatex">\(i\)</span>-th character of the string <span class="arithmatex">\(s\)</span> to the end of the string. Then the answer is <span class="arithmatex">\(dfs(0)\)</span>.</p>
+<p>The calculation method of function <span class="arithmatex">\(dfs(i)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq n$, it means that all the characters have been processed, and the answer is $0$;</li>
-<li>If $s[i] = 0$, it means that the current string contains leading $0$, which does not conform to the definition of a beautiful string, so the answer is infinite;</li>
-<li>Otherwise, we enumerate the end position $j$ of the substring from $i$, and use $x$ to represent the decimal value of the substring $s[i..j]$. If $x$ is in the hash table $ss$, then we can take $s[i..j]$ as a beautiful substring, and the answer is $1 + dfs(j + 1)$. We need to enumerate all possible $j$ and take the minimum value of all answers.</li>
+<li>If <span class="arithmatex">\(i \geq n\)</span>, it means that all the characters have been processed, and the answer is <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(s[i] = 0\)</span>, it means that the current string contains leading <span class="arithmatex">\(0\)</span>, which does not conform to the definition of a beautiful string, so the answer is infinite;</li>
+<li>Otherwise, we enumerate the end position <span class="arithmatex">\(j\)</span> of the substring from <span class="arithmatex">\(i\)</span>, and use <span class="arithmatex">\(x\)</span> to represent the decimal value of the substring <span class="arithmatex">\(s[i..j]\)</span>. If <span class="arithmatex">\(x\)</span> is in the hash table <span class="arithmatex">\(ss\)</span>, then we can take <span class="arithmatex">\(s[i..j]\)</span> as a beautiful substring, and the answer is <span class="arithmatex">\(1 + dfs(j + 1)\)</span>. We need to enumerate all possible <span class="arithmatex">\(j\)</span> and take the minimum value of all answers.</li>
 </ul>
 <p>In order to avoid repeated calculation, we can use the method of memory search.</p>
-<p>In the main function, we first preprocess all the powers of $5$, and then call $dfs(0)$. If the return value is infinite, it means that the string $s$ cannot be divided into beautiful substrings, and the answer returns $-1$, otherwise, return the value of $dfs(0)$.</p>
-<p>Time complexity $O(n^2)$, space complexity $O(n)$. Where $n$ is the length of string $s$.</p>
+<p>In the main function, we first preprocess all the powers of <span class="arithmatex">\(5\)</span>, and then call <span class="arithmatex">\(dfs(0)\)</span>. If the return value is infinite, it means that the string <span class="arithmatex">\(s\)</span> cannot be divided into beautiful substrings, and the answer returns <span class="arithmatex">\(-1\)</span>, otherwise, return the value of <span class="arithmatex">\(dfs(0)\)</span>.</p>
+<p>Time complexity <span class="arithmatex">\(O(n^2)\)</span>, space complexity <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86661,11 +86659,9 @@ It can be shown that 3 is the minimum number of beautiful substrings that s can 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

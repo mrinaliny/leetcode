@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86072,16 +86070,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs">Solution 1: DFS</h3>
-<p>First, according to the edge information given in the problem, we construct an adjacency list $g$, where $g[a]$ represents all adjacent nodes of node $a$. Then we create an array $size$ of length $n$, where $size[a]$ represents the number of nodes in the subtree with node $a$ as the root.</p>
-<p>Next, we design a function $dfs(a, fa)$, which will return whether the subtree with node $a$ as the root meets the requirements of the problem. The execution process of the function $dfs(a, fa)$ is as follows:</p>
+<p>First, according to the edge information given in the problem, we construct an adjacency list <span class="arithmatex">\(g\)</span>, where <span class="arithmatex">\(g[a]\)</span> represents all adjacent nodes of node <span class="arithmatex">\(a\)</span>. Then we create an array <span class="arithmatex">\(size\)</span> of length <span class="arithmatex">\(n\)</span>, where <span class="arithmatex">\(size[a]\)</span> represents the number of nodes in the subtree with node <span class="arithmatex">\(a\)</span> as the root.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(a, fa)\)</span>, which will return whether the subtree with node <span class="arithmatex">\(a\)</span> as the root meets the requirements of the problem. The execution process of the function <span class="arithmatex">\(dfs(a, fa)\)</span> is as follows:</p>
 <ul>
-<li>First, we use a variable $ok$ to record whether the subtree with node $a$ as the root meets the requirements of the problem, and initially $ok$ is $true$.</li>
-<li>Then, we traverse all adjacent nodes $b$ of node $a$. If $b$ is not the parent node $fa$ of $a$, then we recursively call $dfs(b, a)$, save the return value into the variable $t$, and update $ok$ to the value of $ok$ and $colors[a] = colors[b] \land t$, where $\land$ represents logical AND operation. Then, we update $size[a] = size[a] + size[b]$.</li>
-<li>After that, we judge the value of $ok$. If $ok$ is $true$, then we update the answer $ans = \max(ans, size[a])$.</li>
-<li>Finally, we return the value of $ok$.</li>
+<li>First, we use a variable <span class="arithmatex">\(ok\)</span> to record whether the subtree with node <span class="arithmatex">\(a\)</span> as the root meets the requirements of the problem, and initially <span class="arithmatex">\(ok\)</span> is <span class="arithmatex">\(true\)</span>.</li>
+<li>Then, we traverse all adjacent nodes <span class="arithmatex">\(b\)</span> of node <span class="arithmatex">\(a\)</span>. If <span class="arithmatex">\(b\)</span> is not the parent node <span class="arithmatex">\(fa\)</span> of <span class="arithmatex">\(a\)</span>, then we recursively call <span class="arithmatex">\(dfs(b, a)\)</span>, save the return value into the variable <span class="arithmatex">\(t\)</span>, and update <span class="arithmatex">\(ok\)</span> to the value of <span class="arithmatex">\(ok\)</span> and <span class="arithmatex">\(colors[a] = colors[b] \land t\)</span>, where <span class="arithmatex">\(\land\)</span> represents logical AND operation. Then, we update <span class="arithmatex">\(size[a] = size[a] + size[b]\)</span>.</li>
+<li>After that, we judge the value of <span class="arithmatex">\(ok\)</span>. If <span class="arithmatex">\(ok\)</span> is <span class="arithmatex">\(true\)</span>, then we update the answer <span class="arithmatex">\(ans = \max(ans, size[a])\)</span>.</li>
+<li>Finally, we return the value of <span class="arithmatex">\(ok\)</span>.</li>
 </ul>
-<p>We call $dfs(0, -1)$, where $0$ represents the root node number, and $-1$ represents that the root node has no parent node. The final answer is $ans$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Where $n$ is the number of nodes.</p>
+<p>We call <span class="arithmatex">\(dfs(0, -1)\)</span>, where <span class="arithmatex">\(0\)</span> represents the root node number, and <span class="arithmatex">\(-1\)</span> represents that the root node has no parent node. The final answer is <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the number of nodes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86618,11 +86616,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

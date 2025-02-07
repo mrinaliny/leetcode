@@ -50,8 +50,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90739,11 +90737,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找</h3>
-<p>我们注意到，如果一个膨胀值 $x$ 满足条件，那么所有小于 $x$ 的值也都满足条件，这存在着单调性。因此我们可以使用二分查找的方法，找到最大的满足条件的膨胀值。</p>
-<p>我们定义二分查找的左边界 $left=0$, $right=rampart[1][0]-rampart[0][1]+rampart[2][0]-rampart[1][1]$，其中 $rampart[i][0]$ 表示第 $i$ 段城墙的左端点，$rampart[i][1]$ 表示第 $i$ 段城墙的右端点。</p>
-<p>接下来，我们开始进行二分查找。每一次，我们求出当前的中间值 $mid$，并判断其是否满足条件。如果满足条件，那么我们就将左边界 $left$ 更新为 $mid$，否则将右边界 $right$ 更新为 $mid-1$。在二分查找结束后，我们返回左边界 $left$ 即可。</p>
-<p>那么问题的关键在于如何判断一个值 $w$ 是否满足条件。显然，我们可以用贪心的策略，每次先尽可能往左膨胀，如果还有剩余的膨胀值，再往右膨胀，如果在向右膨胀的过程中，发生了重叠，那么说明当前的膨胀值 $w$ 不满足条件，直接返回 <code>false</code> 即可。否则，遍历结束，返回 <code>true</code>。</p>
-<p>时间复杂度 $O(n \times \log M)$，其中 $n$ 和 $M$ 分别是数组 $rampart$ 的长度和二分查找的右边界，本题中右边界最大为 $range=rampart[1][0]-rampart[0][1]+rampart[2][0]-rampart[1][1]$。空间复杂度 $O(1)$。</p>
+<p>我们注意到，如果一个膨胀值 <span class="arithmatex">\(x\)</span> 满足条件，那么所有小于 <span class="arithmatex">\(x\)</span> 的值也都满足条件，这存在着单调性。因此我们可以使用二分查找的方法，找到最大的满足条件的膨胀值。</p>
+<p>我们定义二分查找的左边界 <span class="arithmatex">\(left=0\)</span>, <span class="arithmatex">\(right=rampart[1][0]-rampart[0][1]+rampart[2][0]-rampart[1][1]\)</span>，其中 <span class="arithmatex">\(rampart[i][0]\)</span> 表示第 <span class="arithmatex">\(i\)</span> 段城墙的左端点，<span class="arithmatex">\(rampart[i][1]\)</span> 表示第 <span class="arithmatex">\(i\)</span> 段城墙的右端点。</p>
+<p>接下来，我们开始进行二分查找。每一次，我们求出当前的中间值 <span class="arithmatex">\(mid\)</span>，并判断其是否满足条件。如果满足条件，那么我们就将左边界 <span class="arithmatex">\(left\)</span> 更新为 <span class="arithmatex">\(mid\)</span>，否则将右边界 <span class="arithmatex">\(right\)</span> 更新为 <span class="arithmatex">\(mid-1\)</span>。在二分查找结束后，我们返回左边界 <span class="arithmatex">\(left\)</span> 即可。</p>
+<p>那么问题的关键在于如何判断一个值 <span class="arithmatex">\(w\)</span> 是否满足条件。显然，我们可以用贪心的策略，每次先尽可能往左膨胀，如果还有剩余的膨胀值，再往右膨胀，如果在向右膨胀的过程中，发生了重叠，那么说明当前的膨胀值 <span class="arithmatex">\(w\)</span> 不满足条件，直接返回 <code>false</code> 即可。否则，遍历结束，返回 <code>true</code>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别是数组 <span class="arithmatex">\(rampart\)</span> 的长度和二分查找的右边界，本题中右边界最大为 <span class="arithmatex">\(range=rampart[1][0]-rampart[0][1]+rampart[2][0]-rampart[1][1]\)</span>。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91215,11 +91213,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

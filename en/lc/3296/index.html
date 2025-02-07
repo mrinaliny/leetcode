@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86108,18 +86106,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search">Solution 1: Binary Search</h3>
-<p>We notice that if all workers can reduce the mountain height to $0$ in $t$ seconds, then for any $t' &gt; t$, the workers can also reduce the mountain height to $0$ in $t'$ seconds. Therefore, we can use binary search to find the minimum $t$ such that the workers can reduce the mountain height to $0$ in $t$ seconds.</p>
-<p>We define a function $\textit{check}(t)$, which indicates whether the workers can reduce the mountain height to $0$ in $t$ seconds. Specifically, we iterate through each worker. For the current worker $\textit{workerTimes}[i]$, assuming they reduce the height by $h'$ in $t$ seconds, we can derive the inequality:</p>
-<p>$$
+<p>We notice that if all workers can reduce the mountain height to <span class="arithmatex">\(0\)</span> in <span class="arithmatex">\(t\)</span> seconds, then for any <span class="arithmatex">\(t' &gt; t\)</span>, the workers can also reduce the mountain height to <span class="arithmatex">\(0\)</span> in <span class="arithmatex">\(t'\)</span> seconds. Therefore, we can use binary search to find the minimum <span class="arithmatex">\(t\)</span> such that the workers can reduce the mountain height to <span class="arithmatex">\(0\)</span> in <span class="arithmatex">\(t\)</span> seconds.</p>
+<p>We define a function <span class="arithmatex">\(\textit{check}(t)\)</span>, which indicates whether the workers can reduce the mountain height to <span class="arithmatex">\(0\)</span> in <span class="arithmatex">\(t\)</span> seconds. Specifically, we iterate through each worker. For the current worker <span class="arithmatex">\(\textit{workerTimes}[i]\)</span>, assuming they reduce the height by <span class="arithmatex">\(h'\)</span> in <span class="arithmatex">\(t\)</span> seconds, we can derive the inequality:</p>
+<div class="arithmatex">\[
 \left(1 + h'\right) \cdot \frac{h'}{2} \cdot \textit{workerTimes}[i] \leq t
-$$</p>
+\]</div>
 <p>Solving the inequality, we get:</p>
-<p>$$
+<div class="arithmatex">\[
 h' \leq \left\lfloor \sqrt{\frac{2t}{\textit{workerTimes}[i]} + \frac{1}{4}} - \frac{1}{2} \right\rfloor
-$$</p>
-<p>We can sum up all the $h'$ values for the workers to get the total reduced height $h$. If $h \geq \textit{mountainHeight}$, it means the workers can reduce the mountain height to $0$ in $t$ seconds.</p>
-<p>Next, we determine the left boundary of the binary search $l = 1$. Since there is at least one worker, and each worker's working time does not exceed $10^6$, to reduce the mountain height to $0$, it takes at least $(1 + \textit{mountainHeight}) \cdot \textit{mountainHeight} / 2 \cdot \textit{workerTimes}[i] \leq 10^{16}$ seconds. Therefore, we can set the right boundary of the binary search to $r = 10^{16}$. Then, we continuously halve the interval $[l, r]$ until $l = r$. At this point, $l$ is the answer.</p>
-<p>The time complexity is $O(n \times \log M)$, where $n$ is the number of workers, and $M$ is the right boundary of the binary search, which is $10^{16}$ in this problem.</p>
+\]</div>
+<p>We can sum up all the <span class="arithmatex">\(h'\)</span> values for the workers to get the total reduced height <span class="arithmatex">\(h\)</span>. If <span class="arithmatex">\(h \geq \textit{mountainHeight}\)</span>, it means the workers can reduce the mountain height to <span class="arithmatex">\(0\)</span> in <span class="arithmatex">\(t\)</span> seconds.</p>
+<p>Next, we determine the left boundary of the binary search <span class="arithmatex">\(l = 1\)</span>. Since there is at least one worker, and each worker's working time does not exceed <span class="arithmatex">\(10^6\)</span>, to reduce the mountain height to <span class="arithmatex">\(0\)</span>, it takes at least <span class="arithmatex">\((1 + \textit{mountainHeight}) \cdot \textit{mountainHeight} / 2 \cdot \textit{workerTimes}[i] \leq 10^{16}\)</span> seconds. Therefore, we can set the right boundary of the binary search to <span class="arithmatex">\(r = 10^{16}\)</span>. Then, we continuously halve the interval <span class="arithmatex">\([l, r]\)</span> until <span class="arithmatex">\(l = r\)</span>. At this point, <span class="arithmatex">\(l\)</span> is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of workers, and <span class="arithmatex">\(M\)</span> is the right boundary of the binary search, which is <span class="arithmatex">\(10^{16}\)</span> in this problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86545,11 +86543,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

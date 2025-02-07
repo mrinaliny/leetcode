@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90874,15 +90872,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索 + 二分查找</h3>
-<p>我们先将会议按照开始时间从小到大排序，然后设计一个函数 $dfs(i, k)$ 表示从第 $i$ 个会议开始，最多参加 $k$ 个会议的最大价值和。答案即为 $dfs(0, k)$。</p>
-<p>函数 $dfs(i, k)$ 的计算过程如下：</p>
-<p>对于第 $i$ 个会议，我们可以选择参加或者不参加。如果不参加，那么最大价值和就是 $dfs(i + 1, k)$，如果参加，我们可以通过二分查找，找到第一个开始时间大于第 $i$ 个会议结束时间的会议，记为 $j$，那么最大价值和就是 $dfs(j, k - 1) + value[i]$。取二者的较大值即可。即：</p>
-<p>$$
+<p>我们先将会议按照开始时间从小到大排序，然后设计一个函数 <span class="arithmatex">\(dfs(i, k)\)</span> 表示从第 <span class="arithmatex">\(i\)</span> 个会议开始，最多参加 <span class="arithmatex">\(k\)</span> 个会议的最大价值和。答案即为 <span class="arithmatex">\(dfs(0, k)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, k)\)</span> 的计算过程如下：</p>
+<p>对于第 <span class="arithmatex">\(i\)</span> 个会议，我们可以选择参加或者不参加。如果不参加，那么最大价值和就是 <span class="arithmatex">\(dfs(i + 1, k)\)</span>，如果参加，我们可以通过二分查找，找到第一个开始时间大于第 <span class="arithmatex">\(i\)</span> 个会议结束时间的会议，记为 <span class="arithmatex">\(j\)</span>，那么最大价值和就是 <span class="arithmatex">\(dfs(j, k - 1) + value[i]\)</span>。取二者的较大值即可。即：</p>
+<div class="arithmatex">\[
 dfs(i, k) = \max(dfs(i + 1, k), dfs(j, k - 1) + value[i])
-$$</p>
-<p>其中 $j$ 为第一个开始时间大于第 $i$ 个会议结束时间的会议，可以通过二分查找得到。</p>
-<p>由于函数 $dfs(i, k)$ 的计算过程中，会调用 $dfs(i + 1, k)$ 和 $dfs(j, k - 1)$，因此我们可以使用记忆化搜索，将计算过的值保存下来，避免重复计算。</p>
-<p>时间复杂度 $O(n\times \log n + n\times k)$，其中 $n$ 为会议数量。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(j\)</span> 为第一个开始时间大于第 <span class="arithmatex">\(i\)</span> 个会议结束时间的会议，可以通过二分查找得到。</p>
+<p>由于函数 <span class="arithmatex">\(dfs(i, k)\)</span> 的计算过程中，会调用 <span class="arithmatex">\(dfs(i + 1, k)\)</span> 和 <span class="arithmatex">\(dfs(j, k - 1)\)</span>，因此我们可以使用记忆化搜索，将计算过的值保存下来，避免重复计算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\times \log n + n\times k)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为会议数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91151,13 +91149,13 @@ $$</p>
 
 <h3 id="_4">方法二：动态规划 + 二分查找</h3>
 <p>我们可以将方法一中的记忆化搜索改为动态规划。</p>
-<p>先将会议排序，这次我们按照结束时间从小到大排序。然后定义 $f[i][j]$ 表示前 $i$ 个会议中，最多参加 $j$ 个会议的最大价值和。答案即为 $f[n][k]$。</p>
-<p>对于第 $i$ 个会议，我们可以选择参加或者不参加。如果不参加，那么最大价值和就是 $f[i][j]$，如果参加，我们可以通过二分查找，找到最后一个结束时间小于第 $i$ 个会议开始时间的会议，记为 $h$，那么最大价值和就是 $f[h+1][j - 1] + value[i]$。取二者的较大值即可。即：</p>
-<p>$$
+<p>先将会议排序，这次我们按照结束时间从小到大排序。然后定义 <span class="arithmatex">\(f[i][j]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个会议中，最多参加 <span class="arithmatex">\(j\)</span> 个会议的最大价值和。答案即为 <span class="arithmatex">\(f[n][k]\)</span>。</p>
+<p>对于第 <span class="arithmatex">\(i\)</span> 个会议，我们可以选择参加或者不参加。如果不参加，那么最大价值和就是 <span class="arithmatex">\(f[i][j]\)</span>，如果参加，我们可以通过二分查找，找到最后一个结束时间小于第 <span class="arithmatex">\(i\)</span> 个会议开始时间的会议，记为 <span class="arithmatex">\(h\)</span>，那么最大价值和就是 <span class="arithmatex">\(f[h+1][j - 1] + value[i]\)</span>。取二者的较大值即可。即：</p>
+<div class="arithmatex">\[
 f[i+1][j] = \max(f[i][j], f[h+1][j - 1] + value[i])
-$$</p>
-<p>其中 $h$ 为最后一个结束时间小于第 $i$ 个会议开始时间的会议，可以通过二分查找得到。</p>
-<p>时间复杂度 $O(n\times \log n + n\times k)$，其中 $n$ 为会议数量。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(h\)</span> 为最后一个结束时间小于第 <span class="arithmatex">\(i\)</span> 个会议开始时间的会议，可以通过二分查找得到。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\times \log n + n\times k)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为会议数量。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1200-1299/1235.Maximum%20Profit%20in%20Job%20Scheduling/README.md">1235. 规划兼职工作</a></li>
@@ -91558,11 +91556,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

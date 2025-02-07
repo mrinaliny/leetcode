@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86037,19 +86035,19 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-mathematics">Solution 1: Mathematics</h3>
-<p>Let's denote $mi$ and $mx$ as $-2^{31}$ and $2^{31} - 1$ respectively, then the reverse result of $x$, $ans$, needs to satisfy $mi \le ans \le mx$.</p>
-<p>We can continuously take the remainder of $x$ to get the last digit $y$ of $x$, and add $y$ to the end of $ans$. Before adding $y$, we need to check if $ans$ overflows. That is, check whether $ans \times 10 + y$ is within the range $[mi, mx]$.</p>
-<p>If $x \gt 0$, it needs to satisfy $ans \times 10 + y \leq mx$, that is, $ans \times 10 + y \leq \left \lfloor \frac{mx}{10} \right \rfloor \times 10 + 7$. Rearranging gives $(ans - \left \lfloor \frac{mx}{10} \right \rfloor) \times 10 \leq 7 - y$.</p>
+<p>Let's denote <span class="arithmatex">\(mi\)</span> and <span class="arithmatex">\(mx\)</span> as <span class="arithmatex">\(-2^{31}\)</span> and <span class="arithmatex">\(2^{31} - 1\)</span> respectively, then the reverse result of <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(ans\)</span>, needs to satisfy <span class="arithmatex">\(mi \le ans \le mx\)</span>.</p>
+<p>We can continuously take the remainder of <span class="arithmatex">\(x\)</span> to get the last digit <span class="arithmatex">\(y\)</span> of <span class="arithmatex">\(x\)</span>, and add <span class="arithmatex">\(y\)</span> to the end of <span class="arithmatex">\(ans\)</span>. Before adding <span class="arithmatex">\(y\)</span>, we need to check if <span class="arithmatex">\(ans\)</span> overflows. That is, check whether <span class="arithmatex">\(ans \times 10 + y\)</span> is within the range <span class="arithmatex">\([mi, mx]\)</span>.</p>
+<p>If <span class="arithmatex">\(x \gt 0\)</span>, it needs to satisfy <span class="arithmatex">\(ans \times 10 + y \leq mx\)</span>, that is, <span class="arithmatex">\(ans \times 10 + y \leq \left \lfloor \frac{mx}{10} \right \rfloor \times 10 + 7\)</span>. Rearranging gives <span class="arithmatex">\((ans - \left \lfloor \frac{mx}{10} \right \rfloor) \times 10 \leq 7 - y\)</span>.</p>
 <p>Next, we discuss the conditions for the inequality to hold:</p>
 <ul>
-<li>When $ans \lt \left \lfloor \frac{mx}{10} \right \rfloor$, the inequality obviously holds;</li>
-<li>When $ans = \left \lfloor \frac{mx}{10} \right \rfloor$, the necessary and sufficient condition for the inequality to hold is $y \leq 7$. If $ans = \left \lfloor \frac{mx}{10} \right \rfloor$ and we can still add numbers, it means that the number is at the highest digit, that is, $y$ must not exceed $2$, therefore, the inequality must hold;</li>
-<li>When $ans \gt \left \lfloor \frac{mx}{10} \right \rfloor$, the inequality obviously does not hold.</li>
+<li>When <span class="arithmatex">\(ans \lt \left \lfloor \frac{mx}{10} \right \rfloor\)</span>, the inequality obviously holds;</li>
+<li>When <span class="arithmatex">\(ans = \left \lfloor \frac{mx}{10} \right \rfloor\)</span>, the necessary and sufficient condition for the inequality to hold is <span class="arithmatex">\(y \leq 7\)</span>. If <span class="arithmatex">\(ans = \left \lfloor \frac{mx}{10} \right \rfloor\)</span> and we can still add numbers, it means that the number is at the highest digit, that is, <span class="arithmatex">\(y\)</span> must not exceed <span class="arithmatex">\(2\)</span>, therefore, the inequality must hold;</li>
+<li>When <span class="arithmatex">\(ans \gt \left \lfloor \frac{mx}{10} \right \rfloor\)</span>, the inequality obviously does not hold.</li>
 </ul>
-<p>In summary, when $x \gt 0$, the necessary and sufficient condition for the inequality to hold is $ans \leq \left \lfloor \frac{mx}{10} \right \rfloor$.</p>
-<p>Similarly, when $x \lt 0$, the necessary and sufficient condition for the inequality to hold is $ans \geq \left \lfloor \frac{mi}{10} \right \rfloor$.</p>
-<p>Therefore, we can check whether $ans$ overflows by checking whether $ans$ is within the range $[\left \lfloor \frac{mi}{10} \right \rfloor, \left \lfloor \frac{mx}{10} \right \rfloor]$. If it overflows, return $0$. Otherwise, add $y$ to the end of $ans$, and then remove the last digit of $x$, that is, $x \gets \left \lfloor \frac{x}{10} \right \rfloor$.</p>
-<p>The time complexity is $O(\log |x|)$, where $|x|$ is the absolute value of $x$. The space complexity is $O(1)$.</p>
+<p>In summary, when <span class="arithmatex">\(x \gt 0\)</span>, the necessary and sufficient condition for the inequality to hold is <span class="arithmatex">\(ans \leq \left \lfloor \frac{mx}{10} \right \rfloor\)</span>.</p>
+<p>Similarly, when <span class="arithmatex">\(x \lt 0\)</span>, the necessary and sufficient condition for the inequality to hold is <span class="arithmatex">\(ans \geq \left \lfloor \frac{mi}{10} \right \rfloor\)</span>.</p>
+<p>Therefore, we can check whether <span class="arithmatex">\(ans\)</span> overflows by checking whether <span class="arithmatex">\(ans\)</span> is within the range <span class="arithmatex">\([\left \lfloor \frac{mi}{10} \right \rfloor, \left \lfloor \frac{mx}{10} \right \rfloor]\)</span>. If it overflows, return <span class="arithmatex">\(0\)</span>. Otherwise, add <span class="arithmatex">\(y\)</span> to the end of <span class="arithmatex">\(ans\)</span>, and then remove the last digit of <span class="arithmatex">\(x\)</span>, that is, <span class="arithmatex">\(x \gets \left \lfloor \frac{x}{10} \right \rfloor\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log |x|)\)</span>, where <span class="arithmatex">\(|x|\)</span> is the absolute value of <span class="arithmatex">\(x\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label><label for="__tabbed_1_8">C</label><label for="__tabbed_1_9">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86578,11 +86576,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

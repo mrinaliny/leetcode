@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,9 +86081,9 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-two-pointers-bitwise-operations">Solution 1: Two Pointers + Bitwise Operations</h3>
-<p>According to the problem description, we need to calculate the result of the bitwise OR operation of elements from index $l$ to $r$ in the array $\textit{nums}$, that is, $\textit{nums}[l] \lor \textit{nums}[l + 1] \lor \cdots \lor \textit{nums}[r]$, where $\lor$ represents the bitwise OR operation.</p>
-<p>If we fix the right endpoint $r$, then the range of the left endpoint $l$ is $[0, r]$. Each time we move the right endpoint $r$, the result of the bitwise OR operation will only increase. We use a variable $s$ to record the current result of the bitwise OR operation. If $s$ is greater than $k$, we move the left endpoint $l$ to the right until $s$ is less than or equal to $k$. During the process of moving the left endpoint $l$, we need to maintain an array $cnt$ to record the number of $0$s on each binary digit in the current interval. When $cnt[h] = 0$, it means that all elements in the current interval have a $0$ on the $h^{th}$ bit, and we can set the $h^{th}$ bit of $s$ to $0$.</p>
-<p>The time complexity is $O(n \times \log M)$, and the space complexity is $O(\log M)$. Here, $n$ and $M$ respectively represent the length of the array $\textit{nums}$ and the maximum value in the array $\textit{nums}$.</p>
+<p>According to the problem description, we need to calculate the result of the bitwise OR operation of elements from index <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(r\)</span> in the array <span class="arithmatex">\(\textit{nums}\)</span>, that is, <span class="arithmatex">\(\textit{nums}[l] \lor \textit{nums}[l + 1] \lor \cdots \lor \textit{nums}[r]\)</span>, where <span class="arithmatex">\(\lor\)</span> represents the bitwise OR operation.</p>
+<p>If we fix the right endpoint <span class="arithmatex">\(r\)</span>, then the range of the left endpoint <span class="arithmatex">\(l\)</span> is <span class="arithmatex">\([0, r]\)</span>. Each time we move the right endpoint <span class="arithmatex">\(r\)</span>, the result of the bitwise OR operation will only increase. We use a variable <span class="arithmatex">\(s\)</span> to record the current result of the bitwise OR operation. If <span class="arithmatex">\(s\)</span> is greater than <span class="arithmatex">\(k\)</span>, we move the left endpoint <span class="arithmatex">\(l\)</span> to the right until <span class="arithmatex">\(s\)</span> is less than or equal to <span class="arithmatex">\(k\)</span>. During the process of moving the left endpoint <span class="arithmatex">\(l\)</span>, we need to maintain an array <span class="arithmatex">\(cnt\)</span> to record the number of <span class="arithmatex">\(0\)</span>s on each binary digit in the current interval. When <span class="arithmatex">\(cnt[h] = 0\)</span>, it means that all elements in the current interval have a <span class="arithmatex">\(0\)</span> on the <span class="arithmatex">\(h^{th}\)</span> bit, and we can set the <span class="arithmatex">\(h^{th}\)</span> bit of <span class="arithmatex">\(s\)</span> to <span class="arithmatex">\(0\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log M)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(M\)</span> respectively represent the length of the array <span class="arithmatex">\(\textit{nums}\)</span> and the maximum value in the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <p>Similar Problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/3000-3099/3097.Shortest%20Subarray%20With%20OR%20at%20Least%20K%20II/README_EN.md">3097. Shortest Subarray With OR at Least K II</a></li>
@@ -86395,9 +86393,9 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-hash-table-enumeration">Solution 2: Hash Table + Enumeration</h3>
-<p>According to the problem description, we need to calculate the result of the bitwise OR operation of elements from index $l$ to $r$ in the array $nums$, that is, $nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]$. Here, $\lor$ represents the bitwise OR operation.</p>
-<p>If we fix the right endpoint $r$, then the range of the left endpoint $l$ is $[0, r]$. Since the sum of bitwise OR increases monotonically as $l$ decreases, and the value of $\textit{nums}[i]$ does not exceed $10^9$, the interval $[0, r]$ can have at most $30$ different values. Therefore, we can use a set to maintain all the values of $nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]$. When we traverse from $r$ to $r+1$, the values with $r+1$ as the right endpoint are the values obtained by performing the bitwise OR operation of each value in the set with $nums[r + 1]$, plus $nums[r + 1]$ itself. Therefore, we only need to enumerate each value in the set and perform the bitwise OR operation with $nums[r]$, to get all the values for $r$ as the right endpoint. Then, we take the absolute difference of each value with $k$, and the minimum of these differences is the answer.</p>
-<p>The time complexity is $O(n \times \log M)$, and the space complexity is $O(\log M)$. Here, $n$ and $M$ respectively represent the length of the array $nums$ and the maximum value in the array $nums$.</p>
+<p>According to the problem description, we need to calculate the result of the bitwise OR operation of elements from index <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(r\)</span> in the array <span class="arithmatex">\(nums\)</span>, that is, <span class="arithmatex">\(nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]\)</span>. Here, <span class="arithmatex">\(\lor\)</span> represents the bitwise OR operation.</p>
+<p>If we fix the right endpoint <span class="arithmatex">\(r\)</span>, then the range of the left endpoint <span class="arithmatex">\(l\)</span> is <span class="arithmatex">\([0, r]\)</span>. Since the sum of bitwise OR increases monotonically as <span class="arithmatex">\(l\)</span> decreases, and the value of <span class="arithmatex">\(\textit{nums}[i]\)</span> does not exceed <span class="arithmatex">\(10^9\)</span>, the interval <span class="arithmatex">\([0, r]\)</span> can have at most <span class="arithmatex">\(30\)</span> different values. Therefore, we can use a set to maintain all the values of <span class="arithmatex">\(nums[l] \lor nums[l + 1] \lor \cdots \lor nums[r]\)</span>. When we traverse from <span class="arithmatex">\(r\)</span> to <span class="arithmatex">\(r+1\)</span>, the values with <span class="arithmatex">\(r+1\)</span> as the right endpoint are the values obtained by performing the bitwise OR operation of each value in the set with <span class="arithmatex">\(nums[r + 1]\)</span>, plus <span class="arithmatex">\(nums[r + 1]\)</span> itself. Therefore, we only need to enumerate each value in the set and perform the bitwise OR operation with <span class="arithmatex">\(nums[r]\)</span>, to get all the values for <span class="arithmatex">\(r\)</span> as the right endpoint. Then, we take the absolute difference of each value with <span class="arithmatex">\(k\)</span>, and the minimum of these differences is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log M)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(M\)</span> respectively represent the length of the array <span class="arithmatex">\(nums\)</span> and the maximum value in the array <span class="arithmatex">\(nums\)</span>.</p>
 <p>Similar Problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1500-1599/1521.Find%20a%20Value%20of%20a%20Mysterious%20Function%20Closest%20to%20Target/README_EN.md">1521. Find a Value of a Mysterious Function Closest to Target</a></li>
@@ -86797,11 +86795,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

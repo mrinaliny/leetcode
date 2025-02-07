@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,15 +86066,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs-bit-manipulation">Solution 1: DFS + Bit Manipulation</h3>
-<p>A path is a pseudo-palindromic path if and only if the number of nodes with odd occurrences in the path is $0$ or $1$.</p>
-<p>Since the range of the binary tree node values is from $1$ to $9$, for each path from root to leaf, we can use a $10$-bit binary number $mask$ to represent the occurrence status of the node values in the current path. The $i$th bit of $mask$ is $1$ if the node value $i$ appears an odd number of times in the current path, and $0$ if it appears an even number of times. Therefore, a path is a pseudo-palindromic path if and only if $mask \&amp;(mask - 1) = 0$, where $\&amp;$ represents the bitwise AND operation.</p>
-<p>Based on the above analysis, we can use the depth-first search method to calculate the number of paths. We define a function $dfs(root, mask)$, which represents the number of pseudo-palindromic paths starting from the current $root$ node and with the current state $mask$. The answer is $dfs(root, 0)$.</p>
-<p>The execution logic of the function $dfs(root, mask)$ is as follows:</p>
-<p>If $root$ is null, return $0$;</p>
-<p>Otherwise, let $mask = mask \oplus 2^{root.val}$, where $\oplus$ represents the bitwise XOR operation.</p>
-<p>If $root$ is a leaf node, return $1$ if $mask \&amp;(mask - 1) = 0$, otherwise return $0$;</p>
-<p>If $root$ is not a leaf node, return $dfs(root.left, mask) + dfs(root.right, mask)$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree.</p>
+<p>A path is a pseudo-palindromic path if and only if the number of nodes with odd occurrences in the path is <span class="arithmatex">\(0\)</span> or <span class="arithmatex">\(1\)</span>.</p>
+<p>Since the range of the binary tree node values is from <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(9\)</span>, for each path from root to leaf, we can use a <span class="arithmatex">\(10\)</span>-bit binary number <span class="arithmatex">\(mask\)</span> to represent the occurrence status of the node values in the current path. The <span class="arithmatex">\(i\)</span>th bit of <span class="arithmatex">\(mask\)</span> is <span class="arithmatex">\(1\)</span> if the node value <span class="arithmatex">\(i\)</span> appears an odd number of times in the current path, and <span class="arithmatex">\(0\)</span> if it appears an even number of times. Therefore, a path is a pseudo-palindromic path if and only if <span class="arithmatex">\(mask \&amp;(mask - 1) = 0\)</span>, where <span class="arithmatex">\(\&amp;\)</span> represents the bitwise AND operation.</p>
+<p>Based on the above analysis, we can use the depth-first search method to calculate the number of paths. We define a function <span class="arithmatex">\(dfs(root, mask)\)</span>, which represents the number of pseudo-palindromic paths starting from the current <span class="arithmatex">\(root\)</span> node and with the current state <span class="arithmatex">\(mask\)</span>. The answer is <span class="arithmatex">\(dfs(root, 0)\)</span>.</p>
+<p>The execution logic of the function <span class="arithmatex">\(dfs(root, mask)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(root\)</span> is null, return <span class="arithmatex">\(0\)</span>;</p>
+<p>Otherwise, let <span class="arithmatex">\(mask = mask \oplus 2^{root.val}\)</span>, where <span class="arithmatex">\(\oplus\)</span> represents the bitwise XOR operation.</p>
+<p>If <span class="arithmatex">\(root\)</span> is a leaf node, return <span class="arithmatex">\(1\)</span> if <span class="arithmatex">\(mask \&amp;(mask - 1) = 0\)</span>, otherwise return <span class="arithmatex">\(0\)</span>;</p>
+<p>If <span class="arithmatex">\(root\)</span> is not a leaf node, return <span class="arithmatex">\(dfs(root.left, mask) + dfs(root.right, mask)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86660,11 +86658,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

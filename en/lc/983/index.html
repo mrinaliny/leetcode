@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86072,14 +86070,14 @@ In total, you spent $17 and covered all the days of your travel.
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search-binary-search">Solution 1: Memoization Search + Binary Search</h3>
-<p>We define a function $\textit{dfs(i)}$, which represents the minimum cost required from the $i$-th trip to the last trip. Thus, the answer is $\textit{dfs(0)}$.</p>
-<p>The execution process of the function $\textit{dfs(i)}$ is as follows:</p>
+<p>We define a function <span class="arithmatex">\(\textit{dfs(i)}\)</span>, which represents the minimum cost required from the <span class="arithmatex">\(i\)</span>-th trip to the last trip. Thus, the answer is <span class="arithmatex">\(\textit{dfs(0)}\)</span>.</p>
+<p>The execution process of the function <span class="arithmatex">\(\textit{dfs(i)}\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq n$, it means all trips have ended, return $0$;</li>
-<li>Otherwise, we need to consider three types of purchases: buying a 1-day pass, buying a 7-day pass, and buying a 30-day pass. We calculate the cost for these three purchasing methods separately and use binary search to find the index $j$ of the next trip, then recursively call $\textit{dfs(j)}$, and finally return the minimum cost among these three purchasing methods.</li>
+<li>If <span class="arithmatex">\(i \geq n\)</span>, it means all trips have ended, return <span class="arithmatex">\(0\)</span>;</li>
+<li>Otherwise, we need to consider three types of purchases: buying a 1-day pass, buying a 7-day pass, and buying a 30-day pass. We calculate the cost for these three purchasing methods separately and use binary search to find the index <span class="arithmatex">\(j\)</span> of the next trip, then recursively call <span class="arithmatex">\(\textit{dfs(j)}\)</span>, and finally return the minimum cost among these three purchasing methods.</li>
 </ul>
 <p>To avoid repeated calculations, we use memoization search to save the results that have already been calculated.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ represents the number of trips.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> represents the number of trips.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86345,10 +86343,10 @@ In total, you spent $17 and covered all the days of your travel.
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
-<p>Let's denote the last day in the $\textit{days}$ array as $m$. We can define an array $f$ of length $m + 1$, where $f[i]$ represents the minimum cost from day $1$ to day $i$.</p>
-<p>We can calculate the value of $f[i]$ in increasing order of the dates in the $\textit{days}$ array, starting from day $1$. If day $i$ is a travel day, we can consider three purchasing options: buying a 1-day pass, buying a 7-day pass, and buying a 30-day pass. We calculate the cost for these three purchasing methods separately and take the minimum cost among these three as the value of $f[i]$. If day $i$ is not a travel day, then $f[i] = f[i - 1]$.</p>
-<p>The final answer is $f[m]$.</p>
-<p>The time complexity is $O(m)$, and the space complexity is $O(m)$. Here, $m$ represents the last day of travel.</p>
+<p>Let's denote the last day in the <span class="arithmatex">\(\textit{days}\)</span> array as <span class="arithmatex">\(m\)</span>. We can define an array <span class="arithmatex">\(f\)</span> of length <span class="arithmatex">\(m + 1\)</span>, where <span class="arithmatex">\(f[i]\)</span> represents the minimum cost from day <span class="arithmatex">\(1\)</span> to day <span class="arithmatex">\(i\)</span>.</p>
+<p>We can calculate the value of <span class="arithmatex">\(f[i]\)</span> in increasing order of the dates in the <span class="arithmatex">\(\textit{days}\)</span> array, starting from day <span class="arithmatex">\(1\)</span>. If day <span class="arithmatex">\(i\)</span> is a travel day, we can consider three purchasing options: buying a 1-day pass, buying a 7-day pass, and buying a 30-day pass. We calculate the cost for these three purchasing methods separately and take the minimum cost among these three as the value of <span class="arithmatex">\(f[i]\)</span>. If day <span class="arithmatex">\(i\)</span> is not a travel day, then <span class="arithmatex">\(f[i] = f[i - 1]\)</span>.</p>
+<p>The final answer is <span class="arithmatex">\(f[m]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m)\)</span>, and the space complexity is <span class="arithmatex">\(O(m)\)</span>. Here, <span class="arithmatex">\(m\)</span> represents the last day of travel.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86783,11 +86781,9 @@ In total, you spent $17 and covered all the days of your travel.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

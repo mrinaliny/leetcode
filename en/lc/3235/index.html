@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86108,7 +86106,7 @@
 <p>According to the problem description, we discuss the following cases:</p>
 <p>When there is only one circle in <code>circles</code>:</p>
 <ol>
-<li>If the starting point $(0, 0)$ is inside the circle (including the boundary), or the ending point $(\textit{xCorner}, \textit{yCorner})$ is inside the circle, then it is impossible to satisfy the condition of "not touching the circle".</li>
+<li>If the starting point <span class="arithmatex">\((0, 0)\)</span> is inside the circle (including the boundary), or the ending point <span class="arithmatex">\((\textit{xCorner}, \textit{yCorner})\)</span> is inside the circle, then it is impossible to satisfy the condition of "not touching the circle".</li>
 <li>If the circle intersects with the left or top side of the rectangle and also intersects with the right or bottom side of the rectangle, then the circle will block the path from the bottom-left corner to the top-right corner of the rectangle, making it impossible to satisfy the condition of "not touching the circle".</li>
 </ol>
 <p>When there are multiple circles in <code>circles</code>:</p>
@@ -86117,23 +86115,23 @@
 <li>If there are multiple circles, they may intersect within the rectangle, forming a larger obstacle area. As long as this obstacle area intersects with the left or top side of the rectangle and also intersects with the right or bottom side of the rectangle, it is impossible to satisfy the condition of "not touching the circle". If the intersecting area is not inside the rectangle, it cannot be merged because the intersecting area cannot block the path inside the rectangle. Additionally, if part of the intersecting area is inside the rectangle and part is outside, these circles can be used as starting or ending points and can be merged or not. We only need to choose one of the intersecting points. If this point is inside the rectangle, we can merge these circles.</li>
 </ol>
 <p>Based on the above analysis, we traverse all circles. For the current circle, if the starting point or ending point is inside the circle, we directly return <code>false</code>. Otherwise, if this point has not been visited and the circle intersects with the left or top side of the rectangle, we start a depth-first search (DFS) from this circle. During the search, if we find a circle that intersects with the right or bottom side of the rectangle, it means the obstacle area formed by the circles blocks the path from the bottom-left corner to the top-right corner of the rectangle, and we return <code>false</code>.</p>
-<p>We define $\textit{dfs}(i)$ to represent starting a DFS from the $i$-th circle. If we find a circle that intersects with the right or bottom side of the rectangle, we return <code>true</code>; otherwise, we return <code>false</code>.</p>
-<p>The execution process of the function $\textit{dfs}(i)$ is as follows:</p>
+<p>We define <span class="arithmatex">\(\textit{dfs}(i)\)</span> to represent starting a DFS from the <span class="arithmatex">\(i\)</span>-th circle. If we find a circle that intersects with the right or bottom side of the rectangle, we return <code>true</code>; otherwise, we return <code>false</code>.</p>
+<p>The execution process of the function <span class="arithmatex">\(\textit{dfs}(i)\)</span> is as follows:</p>
 <ol>
 <li>If the current circle intersects with the right or bottom side of the rectangle, return <code>true</code>;</li>
 <li>Otherwise, mark the current circle as visited;</li>
-<li>Next, traverse all other circles. If circle $j$ has not been visited, and circle $i$ intersects with circle $j$, and one of the intersection points of these two circles is inside the rectangle, continue the DFS from circle $j$. If we find a circle that intersects with the right or bottom side of the rectangle, return <code>true</code>;</li>
+<li>Next, traverse all other circles. If circle <span class="arithmatex">\(j\)</span> has not been visited, and circle <span class="arithmatex">\(i\)</span> intersects with circle <span class="arithmatex">\(j\)</span>, and one of the intersection points of these two circles is inside the rectangle, continue the DFS from circle <span class="arithmatex">\(j\)</span>. If we find a circle that intersects with the right or bottom side of the rectangle, return <code>true</code>;</li>
 <li>If no such circle is found, return <code>false</code>.</li>
 </ol>
-<p>In the above process, we need to determine whether two circles $O_1 = (x_1, y_1, r_1)$ and $O_2 = (x_2, y_2, r_2)$ intersect. If the distance between the centers of the two circles does not exceed the sum of their radii, i.e., $(x_1 - x_2)^2 + (y_1 - y_2)^2 \le (r_1 + r_2)^2$, then they intersect.</p>
-<p>We also need to find an intersection point of the two circles. We take a point $A = (x, y)$ such that $\frac{O_1 A}{O_1 O_2} = \frac{r_1}{r_1 + r_2}$. If the two circles intersect, point $A$ must be in the intersection. In this case, $\frac{x - x_1}{x_2 - x_1} = \frac{r_1}{r_1 + r_2}$, solving for $x = \frac{x_1 r_2 + x_2 r_1}{r_1 + r_2}$. Similarly, $y = \frac{y_1 r_2 + y_2 r_1}{r_1 + r_2}$. As long as this point is inside the rectangle, we can continue the DFS, satisfying:</p>
-<p>$$
+<p>In the above process, we need to determine whether two circles <span class="arithmatex">\(O_1 = (x_1, y_1, r_1)\)</span> and <span class="arithmatex">\(O_2 = (x_2, y_2, r_2)\)</span> intersect. If the distance between the centers of the two circles does not exceed the sum of their radii, i.e., <span class="arithmatex">\((x_1 - x_2)^2 + (y_1 - y_2)^2 \le (r_1 + r_2)^2\)</span>, then they intersect.</p>
+<p>We also need to find an intersection point of the two circles. We take a point <span class="arithmatex">\(A = (x, y)\)</span> such that <span class="arithmatex">\(\frac{O_1 A}{O_1 O_2} = \frac{r_1}{r_1 + r_2}\)</span>. If the two circles intersect, point <span class="arithmatex">\(A\)</span> must be in the intersection. In this case, <span class="arithmatex">\(\frac{x - x_1}{x_2 - x_1} = \frac{r_1}{r_1 + r_2}\)</span>, solving for <span class="arithmatex">\(x = \frac{x_1 r_2 + x_2 r_1}{r_1 + r_2}\)</span>. Similarly, <span class="arithmatex">\(y = \frac{y_1 r_2 + y_2 r_1}{r_1 + r_2}\)</span>. As long as this point is inside the rectangle, we can continue the DFS, satisfying:</p>
+<div class="arithmatex">\[
 \begin{cases}
-x_1 r_2 + x_2 r_1 &lt; (r_1 + r_2) \times \textit{xCorner} \
+x_1 r_2 + x_2 r_1 &lt; (r_1 + r_2) \times \textit{xCorner} \\
 y_1 r_2 + y_2 r_1 &lt; (r_1 + r_2) \times \textit{yCorner}
 \end{cases}
-$$</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the number of circles.</p>
+\]</div>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of circles.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87119,11 +87117,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

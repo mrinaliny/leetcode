@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90900,11 +90898,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>根据题目描述，我们可以得知，对于子序列 $a_1, a_2, a_3, \cdots, a_x$，如果满足 $(a_1 + a_2) \bmod k = (a_2 + a_3) \bmod k$。那么 $a_1 \bmod k = a_3 \bmod k$。也即是说，所有奇数项元素对 $k$ 取模的结果相同，所有偶数项元素对 $k$ 取模的结果相同。</p>
-<p>我们可以使用动态规划的方法解决这个问题。定义状态 $f[x][y]$ 表示最后一项对 $k$ 取模为 $x$，倒数第二项对 $k$ 取模为 $y$ 的最长有效子序列的长度。初始时 $f[x][y] = 0$。</p>
-<p>遍历数组 $nums$，对于每一个数 $x$，我们得到 $x = x \bmod k$。然后我们可以枚举序列连续两个数对 $j$ 取模结果相同，其中 $j \in [0, k)$。那么 $x$ 的前一个数对 $k$ 取模结果为 $y = (j - x + k) \bmod k$。此时 $f[x][y] = f[y][x] + 1$。</p>
-<p>答案为所有 $f[x][y]$ 中的最大值。</p>
-<p>时间复杂度 $O(n \times k)$，空间复杂度 $O(k^2)$。其中 $n$ 为数组 $\textit{nums}$ 的长度，而 $k$ 为给定的正整数。</p>
+<p>根据题目描述，我们可以得知，对于子序列 <span class="arithmatex">\(a_1, a_2, a_3, \cdots, a_x\)</span>，如果满足 <span class="arithmatex">\((a_1 + a_2) \bmod k = (a_2 + a_3) \bmod k\)</span>。那么 <span class="arithmatex">\(a_1 \bmod k = a_3 \bmod k\)</span>。也即是说，所有奇数项元素对 <span class="arithmatex">\(k\)</span> 取模的结果相同，所有偶数项元素对 <span class="arithmatex">\(k\)</span> 取模的结果相同。</p>
+<p>我们可以使用动态规划的方法解决这个问题。定义状态 <span class="arithmatex">\(f[x][y]\)</span> 表示最后一项对 <span class="arithmatex">\(k\)</span> 取模为 <span class="arithmatex">\(x\)</span>，倒数第二项对 <span class="arithmatex">\(k\)</span> 取模为 <span class="arithmatex">\(y\)</span> 的最长有效子序列的长度。初始时 <span class="arithmatex">\(f[x][y] = 0\)</span>。</p>
+<p>遍历数组 <span class="arithmatex">\(nums\)</span>，对于每一个数 <span class="arithmatex">\(x\)</span>，我们得到 <span class="arithmatex">\(x = x \bmod k\)</span>。然后我们可以枚举序列连续两个数对 <span class="arithmatex">\(j\)</span> 取模结果相同，其中 <span class="arithmatex">\(j \in [0, k)\)</span>。那么 <span class="arithmatex">\(x\)</span> 的前一个数对 <span class="arithmatex">\(k\)</span> 取模结果为 <span class="arithmatex">\(y = (j - x + k) \bmod k\)</span>。此时 <span class="arithmatex">\(f[x][y] = f[y][x] + 1\)</span>。</p>
+<p>答案为所有 <span class="arithmatex">\(f[x][y]\)</span> 中的最大值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(k^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度，而 <span class="arithmatex">\(k\)</span> 为给定的正整数。</p>
 <h4 id="python3">Python3</h4>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximumLength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -91217,11 +91215,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

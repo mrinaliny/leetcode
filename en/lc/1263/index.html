@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86088,23 +86086,23 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-double-ended-queue-bfs">Solution 1: Double-ended Queue + BFS</h3>
-<p>We consider the player's position and the box's position as a state, i.e., $(s_i, s_j, b_i, b_j)$, where $(s_i, s_j)$ is the player's position, and $(b_i, b_j)$ is the box's position. In the code implementation, we define a function $f(i, j)$, which maps the two-dimensional coordinates $(i, j)$ to a one-dimensional state number, i.e., $f(i, j) = i \times n + j$, where $n$ is the number of columns in the grid. So the player and the box's state is $(f(s_i, s_j), f(b_i, b_j))$.</p>
-<p>First, we traverse the grid to find the initial positions of the player and the box, denoted as $(s_i, s_j)$ and $(b_i, b_j)$.</p>
-<p>Then, we define a double-ended queue $q$, where each element is a triplet $(f(s_i, s_j), f(b_i, b_j), d)$, indicating that the player is at $(s_i, s_j)$, the box is at $(b_i, b_j)$, and $d$ pushes have been made. Initially, we add $(f(s_i, s_j), f(b_i, b_j), 0)$ to the queue $q$.</p>
-<p>Additionally, we use a two-dimensional array $vis$ to record whether each state has been visited. Initially, $vis[f(s_i, s_j), f(b_i, b_j)]$ is marked as visited.</p>
+<p>We consider the player's position and the box's position as a state, i.e., <span class="arithmatex">\((s_i, s_j, b_i, b_j)\)</span>, where <span class="arithmatex">\((s_i, s_j)\)</span> is the player's position, and <span class="arithmatex">\((b_i, b_j)\)</span> is the box's position. In the code implementation, we define a function <span class="arithmatex">\(f(i, j)\)</span>, which maps the two-dimensional coordinates <span class="arithmatex">\((i, j)\)</span> to a one-dimensional state number, i.e., <span class="arithmatex">\(f(i, j) = i \times n + j\)</span>, where <span class="arithmatex">\(n\)</span> is the number of columns in the grid. So the player and the box's state is <span class="arithmatex">\((f(s_i, s_j), f(b_i, b_j))\)</span>.</p>
+<p>First, we traverse the grid to find the initial positions of the player and the box, denoted as <span class="arithmatex">\((s_i, s_j)\)</span> and <span class="arithmatex">\((b_i, b_j)\)</span>.</p>
+<p>Then, we define a double-ended queue <span class="arithmatex">\(q\)</span>, where each element is a triplet <span class="arithmatex">\((f(s_i, s_j), f(b_i, b_j), d)\)</span>, indicating that the player is at <span class="arithmatex">\((s_i, s_j)\)</span>, the box is at <span class="arithmatex">\((b_i, b_j)\)</span>, and <span class="arithmatex">\(d\)</span> pushes have been made. Initially, we add <span class="arithmatex">\((f(s_i, s_j), f(b_i, b_j), 0)\)</span> to the queue <span class="arithmatex">\(q\)</span>.</p>
+<p>Additionally, we use a two-dimensional array <span class="arithmatex">\(vis\)</span> to record whether each state has been visited. Initially, <span class="arithmatex">\(vis[f(s_i, s_j), f(b_i, b_j)]\)</span> is marked as visited.</p>
 <p>Next, we start the breadth-first search.</p>
-<p>In each step of the search, we take out the queue head element $(f(s_i, s_j), f(b_i, b_j), d)$, and check whether $grid[b_i][b_j] = 'T'$ is satisfied. If it is, it means the box has been pushed to the target position, and now $d$ can be returned as the answer.</p>
-<p>Otherwise, we enumerate the player's next move direction. The player's new position is denoted as $(s_x, s_y)$. If $(s_x, s_y)$ is a valid position, we judge whether $(s_x, s_y)$ is the same as the box's position $(b_i, b_j)$:</p>
+<p>In each step of the search, we take out the queue head element <span class="arithmatex">\((f(s_i, s_j), f(b_i, b_j), d)\)</span>, and check whether <span class="arithmatex">\(grid[b_i][b_j] = 'T'\)</span> is satisfied. If it is, it means the box has been pushed to the target position, and now <span class="arithmatex">\(d\)</span> can be returned as the answer.</p>
+<p>Otherwise, we enumerate the player's next move direction. The player's new position is denoted as <span class="arithmatex">\((s_x, s_y)\)</span>. If <span class="arithmatex">\((s_x, s_y)\)</span> is a valid position, we judge whether <span class="arithmatex">\((s_x, s_y)\)</span> is the same as the box's position <span class="arithmatex">\((b_i, b_j)\)</span>:</p>
 <ul>
-<li>If they are the same, it means the player has reached the box's position and pushed the box forward by one step. The box's new position is $(b_x, b_y)$. If $(b_x, b_y)$ is a valid position, and the state $(f(s_x, s_y), f(b_x, b_y))$ has not been visited, then we add $(f(s_x, s_y), f(b_x, b_y), d + 1)$ to the end of the queue $q$, and mark $vis[f(s_x, s_y), f(b_x, b_y)]$ as visited.</li>
-<li>If they are different, it means the player has not pushed the box. Then we only need to judge whether the state $(f(s_x, s_y), f(b_i, b_j))$ has been visited. If it has not been visited, then we add $(f(s_x, s_y), f(b_i, b_j), d)$ to the head of the queue $q$, and mark $vis[f(s_x, s_y), f(b_i, b_j)]$ as visited.</li>
+<li>If they are the same, it means the player has reached the box's position and pushed the box forward by one step. The box's new position is <span class="arithmatex">\((b_x, b_y)\)</span>. If <span class="arithmatex">\((b_x, b_y)\)</span> is a valid position, and the state <span class="arithmatex">\((f(s_x, s_y), f(b_x, b_y))\)</span> has not been visited, then we add <span class="arithmatex">\((f(s_x, s_y), f(b_x, b_y), d + 1)\)</span> to the end of the queue <span class="arithmatex">\(q\)</span>, and mark <span class="arithmatex">\(vis[f(s_x, s_y), f(b_x, b_y)]\)</span> as visited.</li>
+<li>If they are different, it means the player has not pushed the box. Then we only need to judge whether the state <span class="arithmatex">\((f(s_x, s_y), f(b_i, b_j))\)</span> has been visited. If it has not been visited, then we add <span class="arithmatex">\((f(s_x, s_y), f(b_i, b_j), d)\)</span> to the head of the queue <span class="arithmatex">\(q\)</span>, and mark <span class="arithmatex">\(vis[f(s_x, s_y), f(b_i, b_j)]\)</span> as visited.</li>
 </ul>
 <p>We continue the breadth-first search until the queue is empty.</p>
 <blockquote>
-<p>Note, if the box is pushed, the push count $d$ needs to be incremented by $1$, and the new state is added to the end of the queue $q$. If the box is not pushed, the push count $d$ remains unchanged, and the new state is added to the head of the queue $q$.</p>
+<p>Note, if the box is pushed, the push count <span class="arithmatex">\(d\)</span> needs to be incremented by <span class="arithmatex">\(1\)</span>, and the new state is added to the end of the queue <span class="arithmatex">\(q\)</span>. If the box is not pushed, the push count <span class="arithmatex">\(d\)</span> remains unchanged, and the new state is added to the head of the queue <span class="arithmatex">\(q\)</span>.</p>
 </blockquote>
-<p>Finally, if no valid push scheme is found, then return $-1$.</p>
-<p>The time complexity is $O(m^2 \times n^2)$, and the space complexity is $O(m^2 \times n^2)$. Where $m$ and $n$ are the number of rows and columns in the grid, respectively.</p>
+<p>Finally, if no valid push scheme is found, then return <span class="arithmatex">\(-1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m^2 \times n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(m^2 \times n^2)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns in the grid, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87213,11 +87211,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

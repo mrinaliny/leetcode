@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86077,22 +86075,22 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-bfs">Solution 1: State Compression + BFS</h3>
-<p>According to the problem description, we need to start from the initial position, move in four directions (up, down, left, right), collect all keys, and finally return the minimum number of moves required to collect all keys. If it is not possible to collect all keys, return $-1$.</p>
-<p>First, we traverse the 2D grid to find the starting position $(si, sj)$ and count the number of keys $k$.</p>
-<p>Then, we can use Breadth-First Search (BFS) to solve this problem. Since the number of keys ranges from $1$ to $6$, we can use a binary number to represent the state of the keys, where the $i$-th bit being $1$ indicates that the $i$-th key has been collected, and $0$ indicates that the $i$-th key has not been collected.</p>
-<p>For example, in the following case, there are $4$ bits set to $1$, indicating that keys <code>'b', 'c', 'd', 'f'</code> have been collected.</p>
+<p>According to the problem description, we need to start from the initial position, move in four directions (up, down, left, right), collect all keys, and finally return the minimum number of moves required to collect all keys. If it is not possible to collect all keys, return <span class="arithmatex">\(-1\)</span>.</p>
+<p>First, we traverse the 2D grid to find the starting position <span class="arithmatex">\((si, sj)\)</span> and count the number of keys <span class="arithmatex">\(k\)</span>.</p>
+<p>Then, we can use Breadth-First Search (BFS) to solve this problem. Since the number of keys ranges from <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(6\)</span>, we can use a binary number to represent the state of the keys, where the <span class="arithmatex">\(i\)</span>-th bit being <span class="arithmatex">\(1\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th key has been collected, and <span class="arithmatex">\(0\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th key has not been collected.</p>
+<p>For example, in the following case, there are <span class="arithmatex">\(4\)</span> bits set to <span class="arithmatex">\(1\)</span>, indicating that keys <code>'b', 'c', 'd', 'f'</code> have been collected.</p>
 <div class="highlight"><pre><span></span><code>1 0 1 1 1 0
 ^   ^ ^ ^
 f   d c b
 </code></pre></div>
-<p>We define a queue $q$ to store the current position and the state of the collected keys, i.e., $(i, j, \textit{state})$, where $(i, j)$ represents the current position, and $\textit{state}$ represents the state of the collected keys. The $i$-th bit of $\textit{state}$ being $1$ indicates that the $i$-th key has been collected; otherwise, it indicates that the $i$-th key has not been collected.</p>
-<p>Additionally, we define a hash table or array $vis$ to record whether the current position and the state of the collected keys have been visited. If visited, there is no need to visit again. $vis[i][j][\textit{state}]$ indicates whether the position $(i, j)$ and the state of the collected keys $state$ have been visited.</p>
-<p>We start from the initial position $(si, sj)$, add it to the queue $q$, and set $vis[si][sj][0]$ to $true$, indicating that the initial position and the state of the collected keys $0$ have been visited.</p>
-<p>During the BFS process, we take out a position $(i, j, \textit{state})$ from the front of the queue and check whether the current position is the endpoint, i.e., whether the current position has collected all keys, which means the number of $1$s in the binary representation of $state$ is $k$. If so, we return the current number of steps as the answer.</p>
-<p>Otherwise, we move from the current position in four directions (up, down, left, right). If we can move to the next position $(x, y)$, we add $(x, y, nxt)$ to the queue $q$, where $nxt$ represents the state of the keys at the next position.</p>
-<p>Here, $(x, y)$ must first be within the grid range, i.e., $0 \leq x &lt; m$ and $0 \leq y &lt; n$. Secondly, if the position $(x, y)$ is a wall, i.e., <code>grid[x][y] == '#'</code>, or the position $(x, y)$ is a lock but we do not have the corresponding key, i.e., <code>grid[x][y] &gt;= 'A' &amp;&amp; grid[x][y] &lt;= 'F' &amp;&amp; (state &gt;&gt; (grid[x][y] - 'A') &amp; 1) == 0)</code>, then we cannot move to the position $(x, y)<code>. Otherwise, we can move to the position $(x, y)</code>.</p>
-<p>If the search ends and we have not collected all keys, return $-1$.</p>
-<p>The time complexity is $O(m \times n \times 2^k)$, and the space complexity is $O(m \times n \times 2^k)$. Here, $m$ and $n$ are the number of rows and columns of the grid, respectively, and $k$ is the number of keys.</p>
+<p>We define a queue <span class="arithmatex">\(q\)</span> to store the current position and the state of the collected keys, i.e., <span class="arithmatex">\((i, j, \textit{state})\)</span>, where <span class="arithmatex">\((i, j)\)</span> represents the current position, and <span class="arithmatex">\(\textit{state}\)</span> represents the state of the collected keys. The <span class="arithmatex">\(i\)</span>-th bit of <span class="arithmatex">\(\textit{state}\)</span> being <span class="arithmatex">\(1\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th key has been collected; otherwise, it indicates that the <span class="arithmatex">\(i\)</span>-th key has not been collected.</p>
+<p>Additionally, we define a hash table or array <span class="arithmatex">\(vis\)</span> to record whether the current position and the state of the collected keys have been visited. If visited, there is no need to visit again. <span class="arithmatex">\(vis[i][j][\textit{state}]\)</span> indicates whether the position <span class="arithmatex">\((i, j)\)</span> and the state of the collected keys <span class="arithmatex">\(state\)</span> have been visited.</p>
+<p>We start from the initial position <span class="arithmatex">\((si, sj)\)</span>, add it to the queue <span class="arithmatex">\(q\)</span>, and set <span class="arithmatex">\(vis[si][sj][0]\)</span> to <span class="arithmatex">\(true\)</span>, indicating that the initial position and the state of the collected keys <span class="arithmatex">\(0\)</span> have been visited.</p>
+<p>During the BFS process, we take out a position <span class="arithmatex">\((i, j, \textit{state})\)</span> from the front of the queue and check whether the current position is the endpoint, i.e., whether the current position has collected all keys, which means the number of <span class="arithmatex">\(1\)</span>s in the binary representation of <span class="arithmatex">\(state\)</span> is <span class="arithmatex">\(k\)</span>. If so, we return the current number of steps as the answer.</p>
+<p>Otherwise, we move from the current position in four directions (up, down, left, right). If we can move to the next position <span class="arithmatex">\((x, y)\)</span>, we add <span class="arithmatex">\((x, y, nxt)\)</span> to the queue <span class="arithmatex">\(q\)</span>, where <span class="arithmatex">\(nxt\)</span> represents the state of the keys at the next position.</p>
+<p>Here, <span class="arithmatex">\((x, y)\)</span> must first be within the grid range, i.e., <span class="arithmatex">\(0 \leq x &lt; m\)</span> and <span class="arithmatex">\(0 \leq y &lt; n\)</span>. Secondly, if the position <span class="arithmatex">\((x, y)\)</span> is a wall, i.e., <code>grid[x][y] == '#'</code>, or the position <span class="arithmatex">\((x, y)\)</span> is a lock but we do not have the corresponding key, i.e., <code>grid[x][y] &gt;= 'A' &amp;&amp; grid[x][y] &lt;= 'F' &amp;&amp; (state &gt;&gt; (grid[x][y] - 'A') &amp; 1) == 0)</code>, then we cannot move to the position $(x, y)<code>. Otherwise, we can move to the position $(x, y)</code>.</p>
+<p>If the search ends and we have not collected all keys, return <span class="arithmatex">\(-1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times 2^k)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n \times 2^k)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively, and <span class="arithmatex">\(k\)</span> is the number of keys.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86766,11 +86764,9 @@ f   d c b
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

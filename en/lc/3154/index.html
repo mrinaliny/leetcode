@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86113,16 +86111,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function <code>dfs(i, j, jump)</code>, which represents the number of ways to reach the $k$th step when currently at the $i$th step, having performed $j$ operation 1's and <code>jump</code> operation 2's. The answer is <code>dfs(1, 0, 0)</code>.</p>
+<p>We design a function <code>dfs(i, j, jump)</code>, which represents the number of ways to reach the <span class="arithmatex">\(k\)</span>th step when currently at the <span class="arithmatex">\(i\)</span>th step, having performed <span class="arithmatex">\(j\)</span> operation 1's and <code>jump</code> operation 2's. The answer is <code>dfs(1, 0, 0)</code>.</p>
 <p>The calculation process of the function <code>dfs(i, j, jump)</code> is as follows:</p>
 <ul>
-<li>If $i &gt; k + 1$, since we cannot go down twice in a row, we cannot reach the $k$th step again, so return $0$;</li>
-<li>If $i = k$, it means that we have reached the $k$th step. The answer is initialized to $1$, and then continue to calculate;</li>
-<li>If $i &gt; 0$ and $j = 0$, it means that we can go down, recursively calculate <code>dfs(i - 1, 1, jump)</code>;</li>
+<li>If <span class="arithmatex">\(i &gt; k + 1\)</span>, since we cannot go down twice in a row, we cannot reach the <span class="arithmatex">\(k\)</span>th step again, so return <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(i = k\)</span>, it means that we have reached the <span class="arithmatex">\(k\)</span>th step. The answer is initialized to <span class="arithmatex">\(1\)</span>, and then continue to calculate;</li>
+<li>If <span class="arithmatex">\(i &gt; 0\)</span> and <span class="arithmatex">\(j = 0\)</span>, it means that we can go down, recursively calculate <code>dfs(i - 1, 1, jump)</code>;</li>
 <li>Recursively calculate <code>dfs(i + 2^{jump}, 0, jump + 1)</code>, and add it to the answer.</li>
 </ul>
 <p>To avoid repeated calculations, we use memoization search to save the calculated states.</p>
-<p>The time complexity is $O(\log^2 k)$, and the space complexity is $O(\log^2 k)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log^2 k)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log^2 k)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86596,11 +86594,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

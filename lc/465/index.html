@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,20 +90863,20 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩动态规划 + 子集枚举</h3>
-<p>我们先遍历数组 <code>transactions</code>，统计每个人的收支情况，然后将所有收支不为零的人的收支情况存入数组 $nums$ 中。如果我们可以找到一个子集，子集中共有 $k$ 个人，且这 $k$ 个人的收支情况之和为零，那么我们最多通过 $k-1$ 次交易，就能够使得这 $k$ 个人的收支情况全部清零。这样，我们就能将原问题转化成一个子集枚举的问题。</p>
-<p>我们定义 $f[i]$ 表示将集合 $i$ 的所有元素的收支情况全部清零，所需的最少交易次数，初始时 $f[0]=0$，其余 $f[i]=+\infty$。</p>
-<p>考虑 $f[i]$，其中 $i \in [1,2^m)$, $m$ 是数组 $nums$ 的长度。我们可以统计集合 $i$ 中所有元素的收支情况之和 $s$，如果 $s=0$，那么 $f[i]$ 的取值不超过 $|i|-1$，其中 $|i|$ 表示集合 $i$ 中的元素个数。然后我们可以枚举 $i$ 的所有非空子集 $j$，计算 $f[j]+f[i-j]$，其中 $f[j]$ 和 $f[i-j]$ 分别表示将集合 $j$ 和 $i-j$ 的所有元素的收支情况全部清零，所需的最少交易次数。我们可以得到状态转移方程：</p>
-<p>$$
+<p>我们先遍历数组 <code>transactions</code>，统计每个人的收支情况，然后将所有收支不为零的人的收支情况存入数组 <span class="arithmatex">\(nums\)</span> 中。如果我们可以找到一个子集，子集中共有 <span class="arithmatex">\(k\)</span> 个人，且这 <span class="arithmatex">\(k\)</span> 个人的收支情况之和为零，那么我们最多通过 <span class="arithmatex">\(k-1\)</span> 次交易，就能够使得这 <span class="arithmatex">\(k\)</span> 个人的收支情况全部清零。这样，我们就能将原问题转化成一个子集枚举的问题。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示将集合 <span class="arithmatex">\(i\)</span> 的所有元素的收支情况全部清零，所需的最少交易次数，初始时 <span class="arithmatex">\(f[0]=0\)</span>，其余 <span class="arithmatex">\(f[i]=+\infty\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i]\)</span>，其中 <span class="arithmatex">\(i \in [1,2^m)\)</span>, <span class="arithmatex">\(m\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。我们可以统计集合 <span class="arithmatex">\(i\)</span> 中所有元素的收支情况之和 <span class="arithmatex">\(s\)</span>，如果 <span class="arithmatex">\(s=0\)</span>，那么 <span class="arithmatex">\(f[i]\)</span> 的取值不超过 <span class="arithmatex">\(|i|-1\)</span>，其中 <span class="arithmatex">\(|i|\)</span> 表示集合 <span class="arithmatex">\(i\)</span> 中的元素个数。然后我们可以枚举 <span class="arithmatex">\(i\)</span> 的所有非空子集 <span class="arithmatex">\(j\)</span>，计算 <span class="arithmatex">\(f[j]+f[i-j]\)</span>，其中 <span class="arithmatex">\(f[j]\)</span> 和 <span class="arithmatex">\(f[i-j]\)</span> 分别表示将集合 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(i-j\)</span> 的所有元素的收支情况全部清零，所需的最少交易次数。我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 f[i]=
 \begin{cases}
-0, &amp; i=0 \
-+\infty, &amp; i \neq 0, s \neq 0 \
-\min(|i|-1, \min_{j \subset i, j \neq \emptyset} {f[j]+f[i-j]}), &amp; i \neq 0, s = 0
+0, &amp; i=0 \\
++\infty, &amp; i \neq 0, s \neq 0 \\
+\min(|i|-1, \min_{j \subset i, j \neq \emptyset} \{f[j]+f[i-j]\}), &amp; i \neq 0, s = 0
 \end{cases}
-$$</p>
-<p>其中 $j \subset i$ 表示 $j$ 是 $i$ 的子集，且 $j \neq \emptyset$。</p>
-<p>最终答案即为 $f[2^m-1]$。</p>
-<p>时间复杂度 $O(3^n)$，空间复杂度 $O(2^n)$。其中 $n$ 是人的数量，本题中 $n \leq 12$。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(j \subset i\)</span> 表示 <span class="arithmatex">\(j\)</span> 是 <span class="arithmatex">\(i\)</span> 的子集，且 <span class="arithmatex">\(j \neq \emptyset\)</span>。</p>
+<p>最终答案即为 <span class="arithmatex">\(f[2^m-1]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(3^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是人的数量，本题中 <span class="arithmatex">\(n \leq 12\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91441,11 +91439,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

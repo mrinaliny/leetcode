@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,14 +90863,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们注意到，整数 $x$ 要能被 $25$ 整除，即 $x \bmod 25 = 0$。因此，我们可以设计一个函数 $dfs(i, k)$，表示从字符串 $num$ 的第 $i$ 位开始，且当前数字模 $25$ 的结果为 $k$ 的情况下，要使得数字变成特殊数字，最少需要删除多少位数字。那么答案为 $dfs(0, 0)$。</p>
-<p>函数 $dfs(i, k)$ 的执行逻辑如下：</p>
+<p>我们注意到，整数 <span class="arithmatex">\(x\)</span> 要能被 <span class="arithmatex">\(25\)</span> 整除，即 <span class="arithmatex">\(x \bmod 25 = 0\)</span>。因此，我们可以设计一个函数 <span class="arithmatex">\(dfs(i, k)\)</span>，表示从字符串 <span class="arithmatex">\(num\)</span> 的第 <span class="arithmatex">\(i\)</span> 位开始，且当前数字模 <span class="arithmatex">\(25\)</span> 的结果为 <span class="arithmatex">\(k\)</span> 的情况下，要使得数字变成特殊数字，最少需要删除多少位数字。那么答案为 <span class="arithmatex">\(dfs(0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, k)\)</span> 的执行逻辑如下：</p>
 <ul>
-<li>如果 $i = n$，即已经处理完字符串 $num$ 的所有位，那么如果 $k = 0$，则当前数字可以被 $25$ 整除，返回 $0$，否则返回 $n$；</li>
-<li>否则，第 $i$ 位可以被删除，此时需要删除一位，即 $dfs(i + 1, k) + 1$；第 $i$ 位不删除，那么 $k$ 的值变为 $(k \times 10 + \textit{num}[i]) \bmod 25$，即 $dfs(i + 1, (k \times 10 + \textit{num}[i]) \bmod 25)$。取这两者的最小值即可。</li>
+<li>如果 <span class="arithmatex">\(i = n\)</span>，即已经处理完字符串 <span class="arithmatex">\(num\)</span> 的所有位，那么如果 <span class="arithmatex">\(k = 0\)</span>，则当前数字可以被 <span class="arithmatex">\(25\)</span> 整除，返回 <span class="arithmatex">\(0\)</span>，否则返回 <span class="arithmatex">\(n\)</span>；</li>
+<li>否则，第 <span class="arithmatex">\(i\)</span> 位可以被删除，此时需要删除一位，即 <span class="arithmatex">\(dfs(i + 1, k) + 1\)</span>；第 <span class="arithmatex">\(i\)</span> 位不删除，那么 <span class="arithmatex">\(k\)</span> 的值变为 <span class="arithmatex">\((k \times 10 + \textit{num}[i]) \bmod 25\)</span>，即 <span class="arithmatex">\(dfs(i + 1, (k \times 10 + \textit{num}[i]) \bmod 25)\)</span>。取这两者的最小值即可。</li>
 </ul>
 <p>为了防止重复计算，我们可以使用记忆化的方法优化时间复杂度。</p>
-<p>时间复杂度 $O(n \times 25)$，空间复杂度 $O(n \times 25)$。其中 $n$ 是字符串 $num$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times 25)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times 25)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(num\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91310,11 +91308,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

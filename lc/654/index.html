@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90894,8 +90892,8 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：递归</h3>
-<p>先找到数组 $nums$ 的最大元素所在的位置 $i$，将 $nums[i]$ 作为根节点，然后递归左右两侧的子数组，构建左右子树。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$，其中 $n$ 是数组的长度。</p>
+<p>先找到数组 <span class="arithmatex">\(nums\)</span> 的最大元素所在的位置 <span class="arithmatex">\(i\)</span>，将 <span class="arithmatex">\(nums[i]\)</span> 作为根节点，然后递归左右两侧的子数组，构建左右子树。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91353,8 +91351,8 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：线段树</h3>
-<p>方法一中，每次查找区间最大值，需要 $O(n)$ 的时间，我们可以借助线段树，将每次查询区间最大值的时间降至 $O(\log n)$。</p>
-<p>最多需要查询 $n$ 次，因此，总的时间复杂度为 $O(n \times \log n)$，空间复杂度 $O(n)$，其中 $n$ 是数组的长度。</p>
+<p>方法一中，每次查找区间最大值，需要 <span class="arithmatex">\(O(n)\)</span> 的时间，我们可以借助线段树，将每次查询区间最大值的时间降至 <span class="arithmatex">\(O(\log n)\)</span>。</p>
+<p>最多需要查询 <span class="arithmatex">\(n\)</span> 次，因此，总的时间复杂度为 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92004,12 +92002,12 @@
 <!-- solution:start -->
 
 <h3 id="_5">方法三：单调栈</h3>
-<p>题目表达了一个意思：如果 $nums$ 中间有一个数字 $v$，找出它左右两侧最大的数，这两个最大的数应该比 $v$ 小。</p>
+<p>题目表达了一个意思：如果 <span class="arithmatex">\(nums\)</span> 中间有一个数字 <span class="arithmatex">\(v\)</span>，找出它左右两侧最大的数，这两个最大的数应该比 <span class="arithmatex">\(v\)</span> 小。</p>
 <p>了解单调栈的朋友，或许会注意到：</p>
-<p>当我们尝试向栈中压入一个数字 $v$ 时，如果栈顶元素比 $v$ 小，则循环弹出栈顶元素，并记录最后一个弹出的元素 $last$。那么循环结束，$last$ 必须位于 $v$ 的左侧，因为 $last$ 是 $v$ 的左侧最大的数。令 $node(val=v).left$ 指向 $last$。</p>
-<p>如果此时存在栈顶元素，栈顶元素一定大于 $v$。$v$ 成为栈顶元素的候选右子树节点。令 $stk.top().right$ 指向 $v$。然后 $v$ 入栈。</p>
+<p>当我们尝试向栈中压入一个数字 <span class="arithmatex">\(v\)</span> 时，如果栈顶元素比 <span class="arithmatex">\(v\)</span> 小，则循环弹出栈顶元素，并记录最后一个弹出的元素 <span class="arithmatex">\(last\)</span>。那么循环结束，<span class="arithmatex">\(last\)</span> 必须位于 <span class="arithmatex">\(v\)</span> 的左侧，因为 <span class="arithmatex">\(last\)</span> 是 <span class="arithmatex">\(v\)</span> 的左侧最大的数。令 <span class="arithmatex">\(node(val=v).left\)</span> 指向 <span class="arithmatex">\(last\)</span>。</p>
+<p>如果此时存在栈顶元素，栈顶元素一定大于 <span class="arithmatex">\(v\)</span>。<span class="arithmatex">\(v\)</span> 成为栈顶元素的候选右子树节点。令 <span class="arithmatex">\(stk.top().right\)</span> 指向 <span class="arithmatex">\(v\)</span>。然后 <span class="arithmatex">\(v\)</span> 入栈。</p>
 <p>遍历结束，栈底元素成为树的根节点。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92478,11 +92476,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

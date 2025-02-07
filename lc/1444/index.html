@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,19 +90863,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二维前缀和 + 记忆化搜索</h3>
-<p>我们可以使用二维前缀和来快速计算出每个子矩形中苹果的数量，定义 $s[i][j]$ 表示矩形前 $i$ 行，前 $j$ 列的子矩形中苹果的数量，那么 $s[i][j]$ 可以由 $s[i-1][j]$, $s[i][j-1]$, $s[i-1][j-1]$ 三个子矩形的苹果数量求得，具体的计算方法如下：</p>
-<p>$$
+<p>我们可以使用二维前缀和来快速计算出每个子矩形中苹果的数量，定义 <span class="arithmatex">\(s[i][j]\)</span> 表示矩形前 <span class="arithmatex">\(i\)</span> 行，前 <span class="arithmatex">\(j\)</span> 列的子矩形中苹果的数量，那么 <span class="arithmatex">\(s[i][j]\)</span> 可以由 <span class="arithmatex">\(s[i-1][j]\)</span>, <span class="arithmatex">\(s[i][j-1]\)</span>, <span class="arithmatex">\(s[i-1][j-1]\)</span> 三个子矩形的苹果数量求得，具体的计算方法如下：</p>
+<div class="arithmatex">\[
 s[i][j] = s[i-1][j] + s[i][j-1] - s[i-1][j-1] + \textit{int}(pizza[i-1][j-1] == 'A')
-$$</p>
-<p>其中 $pizza[i-1][j-1]$ 表示矩形中第 $i$ 行，第 $j$ 列的字符，如果是苹果，则为 $1$，否则为 $0$。</p>
-<p>接下来，我们设计一个函数 $dfs(i, j, k)$，表示将矩形 $(i, j, m-1, n-1)$ 切 $k$ 刀，得到 $k+1$ 块披萨的方案数，其中 $(i, j)$ 和 $(m-1, n-1)$ 分别是矩形的左上角和右下角的坐标。函数 $dfs(i, j, k)$ 的计算方法如下：</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(pizza[i-1][j-1]\)</span> 表示矩形中第 <span class="arithmatex">\(i\)</span> 行，第 <span class="arithmatex">\(j\)</span> 列的字符，如果是苹果，则为 <span class="arithmatex">\(1\)</span>，否则为 <span class="arithmatex">\(0\)</span>。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(i, j, k)\)</span>，表示将矩形 <span class="arithmatex">\((i, j, m-1, n-1)\)</span> 切 <span class="arithmatex">\(k\)</span> 刀，得到 <span class="arithmatex">\(k+1\)</span> 块披萨的方案数，其中 <span class="arithmatex">\((i, j)\)</span> 和 <span class="arithmatex">\((m-1, n-1)\)</span> 分别是矩形的左上角和右下角的坐标。函数 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的计算方法如下：</p>
 <ul>
-<li>如果 $k = 0$，表示没有可以切了，那么我们需要判断矩形中是否有苹果，如果有苹果，则返回 $1$，否则返回 $0$；</li>
-<li>如果 $k \gt 0$，我们需要枚举最后一刀的切法，如果最后一刀是水平切，那么我们需要枚举切的位置 $x$，其中 $i \lt x \lt m$，如果 $s[x][n] - s[i][n] - s[x][j] + s[i][j] \gt 0$，说明切出来的上面一块披萨中有苹果，我们累加 $dfs(x, j, k-1)$ 的值到答案中；如果最后一刀是垂直切，那么我们需要枚举切的位置 $y$，其中 $j \lt y \lt n$，如果 $s[m][y] - s[i][y] - s[m][j] + s[i][j] \gt 0$，说明切出来的左边一块披萨中有苹果，我们累加 $dfs(i, y, k-1)$ 的值到答案中。</li>
+<li>如果 <span class="arithmatex">\(k = 0\)</span>，表示没有可以切了，那么我们需要判断矩形中是否有苹果，如果有苹果，则返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(k \gt 0\)</span>，我们需要枚举最后一刀的切法，如果最后一刀是水平切，那么我们需要枚举切的位置 <span class="arithmatex">\(x\)</span>，其中 <span class="arithmatex">\(i \lt x \lt m\)</span>，如果 <span class="arithmatex">\(s[x][n] - s[i][n] - s[x][j] + s[i][j] \gt 0\)</span>，说明切出来的上面一块披萨中有苹果，我们累加 <span class="arithmatex">\(dfs(x, j, k-1)\)</span> 的值到答案中；如果最后一刀是垂直切，那么我们需要枚举切的位置 <span class="arithmatex">\(y\)</span>，其中 <span class="arithmatex">\(j \lt y \lt n\)</span>，如果 <span class="arithmatex">\(s[m][y] - s[i][y] - s[m][j] + s[i][j] \gt 0\)</span>，说明切出来的左边一块披萨中有苹果，我们累加 <span class="arithmatex">\(dfs(i, y, k-1)\)</span> 的值到答案中。</li>
 </ul>
-<p>最终的答案即为 $dfs(0, 0, k-1)$ 的值。</p>
-<p>为了避免重复计算，我们可以使用记忆化搜索的方法，用一个三维数组 $f$ 来记录 $dfs(i, j, k)$ 的值。当我们需要计算 $dfs(i, j, k)$ 的值时，如果 $f[i][j][k]$ 不为 $-1$，说明我们之前已经计算过了，直接返回 $f[i][j][k]$ 即可，否则我们按照上面的方法计算 $dfs(i, j, k)$ 的值，并将结果保存到 $f[i][j][k]$ 中。</p>
-<p>时间复杂度 $O(m \times n \times k \times (m + n))$，空间复杂度 $O(m \times n \times k)$。其中 $m$, $n$ 分别是矩形的行数和列数。</p>
+<p>最终的答案即为 <span class="arithmatex">\(dfs(0, 0, k-1)\)</span> 的值。</p>
+<p>为了避免重复计算，我们可以使用记忆化搜索的方法，用一个三维数组 <span class="arithmatex">\(f\)</span> 来记录 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的值。当我们需要计算 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的值时，如果 <span class="arithmatex">\(f[i][j][k]\)</span> 不为 <span class="arithmatex">\(-1\)</span>，说明我们之前已经计算过了，直接返回 <span class="arithmatex">\(f[i][j][k]\)</span> 即可，否则我们按照上面的方法计算 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的值，并将结果保存到 <span class="arithmatex">\(f[i][j][k]\)</span> 中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times k \times (m + n))\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>。其中 <span class="arithmatex">\(m\)</span>, <span class="arithmatex">\(n\)</span> 分别是矩形的行数和列数。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2300-2399/2312.Selling%20Pieces%20of%20Wood/README.md">2312. 卖木头块</a></li>
@@ -91502,11 +91500,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,16 +86068,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-dynamic-programming">Solution 1: Hash Table + Dynamic Programming</h3>
-<p>We can use a hash table $ss$ to record all words in the dictionary, which allows us to quickly determine whether a string is in the dictionary.</p>
-<p>Next, we define $f[i]$ to represent the minimum number of extra characters in the first $i$ characters of string $s$, initially $f[0] = 0$.</p>
-<p>When $i \ge 1$, the $i$th character $s[i - 1]$ can be an extra character, in which case $f[i] = f[i - 1] + 1$. If there exists an index $j \in [0, i - 1]$ such that $s[j..i)$ is in the hash table $ss$, then we can take $s[j..i)$ as a word, in which case $f[i] = f[j]$.</p>
+<p>We can use a hash table <span class="arithmatex">\(ss\)</span> to record all words in the dictionary, which allows us to quickly determine whether a string is in the dictionary.</p>
+<p>Next, we define <span class="arithmatex">\(f[i]\)</span> to represent the minimum number of extra characters in the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s\)</span>, initially <span class="arithmatex">\(f[0] = 0\)</span>.</p>
+<p>When <span class="arithmatex">\(i \ge 1\)</span>, the <span class="arithmatex">\(i\)</span>th character <span class="arithmatex">\(s[i - 1]\)</span> can be an extra character, in which case <span class="arithmatex">\(f[i] = f[i - 1] + 1\)</span>. If there exists an index <span class="arithmatex">\(j \in [0, i - 1]\)</span> such that <span class="arithmatex">\(s[j..i)\)</span> is in the hash table <span class="arithmatex">\(ss\)</span>, then we can take <span class="arithmatex">\(s[j..i)\)</span> as a word, in which case <span class="arithmatex">\(f[i] = f[j]\)</span>.</p>
 <p>In summary, we can get the state transition equation:</p>
-<p>$$
-f[i] = \min { f[i - 1] + 1, \min_{j \in [0, i - 1]} f[j] }
-$$</p>
-<p>where $i \ge 1$, and $j \in [0, i - 1]$ and $s[j..i)$ is in the hash table $ss$.</p>
-<p>The final answer is $f[n]$.</p>
-<p>The time complexity is $O(n^3 + L)$, and the space complexity is $O(n + L)$. Here, $n$ is the length of string $s$, and $L$ is the sum of the lengths of all words in the dictionary.</p>
+<div class="arithmatex">\[
+f[i] = \min \{ f[i - 1] + 1, \min_{j \in [0, i - 1]} f[j] \}
+\]</div>
+<p>where <span class="arithmatex">\(i \ge 1\)</span>, and <span class="arithmatex">\(j \in [0, i - 1]\)</span> and <span class="arithmatex">\(s[j..i)\)</span> is in the hash table <span class="arithmatex">\(ss\)</span>.</p>
+<p>The final answer is <span class="arithmatex">\(f[n]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3 + L)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + L)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>, and <span class="arithmatex">\(L\)</span> is the sum of the lengths of all words in the dictionary.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86338,9 +86336,9 @@ $$</p>
 
 <h3 id="solution-2-trie-dynamic-programming">Solution 2: Trie + Dynamic Programming</h3>
 <p>We can use a trie to optimize the time complexity of Solution 1.</p>
-<p>Specifically, we first insert each word in the dictionary into the trie $root$ in reverse order, then we define $f[i]$ to represent the minimum number of extra characters in the first $i$ characters of string $s$, initially $f[0] = 0$.</p>
-<p>When $i \ge 1$, the $i$th character $s[i - 1]$ can be an extra character, in which case $f[i] = f[i - 1] + 1$. We can also enumerate the index $j$ in reverse order in the range $[0..i-1]$, and determine whether $s[j..i)$ is in the trie $root$. If it exists, then we can take $s[j..i)$ as a word, in which case $f[i] = f[j]$.</p>
-<p>The time complexity is $O(n^2 + L)$, and the space complexity is $O(n + L \times |\Sigma|)$. Here, $n$ is the length of string $s$, and $L$ is the sum of the lengths of all words in the dictionary. Additionally, $|\Sigma|$ is the size of the character set. In this problem, the character set is lowercase English letters, so $|\Sigma| = 26$.</p>
+<p>Specifically, we first insert each word in the dictionary into the trie <span class="arithmatex">\(root\)</span> in reverse order, then we define <span class="arithmatex">\(f[i]\)</span> to represent the minimum number of extra characters in the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s\)</span>, initially <span class="arithmatex">\(f[0] = 0\)</span>.</p>
+<p>When <span class="arithmatex">\(i \ge 1\)</span>, the <span class="arithmatex">\(i\)</span>th character <span class="arithmatex">\(s[i - 1]\)</span> can be an extra character, in which case <span class="arithmatex">\(f[i] = f[i - 1] + 1\)</span>. We can also enumerate the index <span class="arithmatex">\(j\)</span> in reverse order in the range <span class="arithmatex">\([0..i-1]\)</span>, and determine whether <span class="arithmatex">\(s[j..i)\)</span> is in the trie <span class="arithmatex">\(root\)</span>. If it exists, then we can take <span class="arithmatex">\(s[j..i)\)</span> as a word, in which case <span class="arithmatex">\(f[i] = f[j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 + L)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + L \times |\Sigma|)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>, and <span class="arithmatex">\(L\)</span> is the sum of the lengths of all words in the dictionary. Additionally, <span class="arithmatex">\(|\Sigma|\)</span> is the size of the character set. In this problem, the character set is lowercase English letters, so <span class="arithmatex">\(|\Sigma| = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86966,11 +86964,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

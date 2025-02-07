@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86099,13 +86097,13 @@ Hence, the answer is 2.
 <!-- solution:start -->
 
 <h3 id="solution-1-greedy-combinatorial-mathematics">Solution 1: Greedy + Combinatorial Mathematics</h3>
-<p>First, we use a hash table $f$ to count the occurrence of each character in the string $s$, i.e., $f[c]$ represents the number of times character $c$ appears in the string $s$.</p>
-<p>Since a $k$-subsequence is a subsequence of length $k$ in the string $s$ with unique characters, if the number of different characters in $f$ is less than $k$, then there is no $k$-subsequence, and we can directly return $0$.</p>
-<p>Otherwise, to maximize the beauty value of the $k$-subsequence, we need to make characters with high beauty values appear as much as possible in the $k$-subsequence. Therefore, we can sort the values in $f$ in reverse order to get an array $vs$.</p>
-<p>We denote the occurrence of the $k$th character in the array $vs$ as $val$, and there are $x$ characters with an occurrence of $val$.</p>
-<p>Then we first find out the characters with occurrences greater than $val$, multiply the occurrences of each character to get the initial answer $ans$, and update the remaining number of characters to be selected to $k$. We need to select $k$ characters from $x$ characters, so the answer needs to be multiplied by the combination number $C_x^k$, and finally multiplied by $val^k$, i.e., $ans = ans \times C_x^k \times val^k$.</p>
+<p>First, we use a hash table <span class="arithmatex">\(f\)</span> to count the occurrence of each character in the string <span class="arithmatex">\(s\)</span>, i.e., <span class="arithmatex">\(f[c]\)</span> represents the number of times character <span class="arithmatex">\(c\)</span> appears in the string <span class="arithmatex">\(s\)</span>.</p>
+<p>Since a <span class="arithmatex">\(k\)</span>-subsequence is a subsequence of length <span class="arithmatex">\(k\)</span> in the string <span class="arithmatex">\(s\)</span> with unique characters, if the number of different characters in <span class="arithmatex">\(f\)</span> is less than <span class="arithmatex">\(k\)</span>, then there is no <span class="arithmatex">\(k\)</span>-subsequence, and we can directly return <span class="arithmatex">\(0\)</span>.</p>
+<p>Otherwise, to maximize the beauty value of the <span class="arithmatex">\(k\)</span>-subsequence, we need to make characters with high beauty values appear as much as possible in the <span class="arithmatex">\(k\)</span>-subsequence. Therefore, we can sort the values in <span class="arithmatex">\(f\)</span> in reverse order to get an array <span class="arithmatex">\(vs\)</span>.</p>
+<p>We denote the occurrence of the <span class="arithmatex">\(k\)</span>th character in the array <span class="arithmatex">\(vs\)</span> as <span class="arithmatex">\(val\)</span>, and there are <span class="arithmatex">\(x\)</span> characters with an occurrence of <span class="arithmatex">\(val\)</span>.</p>
+<p>Then we first find out the characters with occurrences greater than <span class="arithmatex">\(val\)</span>, multiply the occurrences of each character to get the initial answer <span class="arithmatex">\(ans\)</span>, and update the remaining number of characters to be selected to <span class="arithmatex">\(k\)</span>. We need to select <span class="arithmatex">\(k\)</span> characters from <span class="arithmatex">\(x\)</span> characters, so the answer needs to be multiplied by the combination number <span class="arithmatex">\(C_x^k\)</span>, and finally multiplied by <span class="arithmatex">\(val^k\)</span>, i.e., <span class="arithmatex">\(ans = ans \times C_x^k \times val^k\)</span>.</p>
 <p>Note that we need to use fast power and modulo operations here.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(|\Sigma|)$. Here, $n$ is the length of the string, and $\Sigma$ is the character set. In this problem, the character set is lowercase letters, so $|\Sigma| = 26$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string, and <span class="arithmatex">\(\Sigma\)</span> is the character set. In this problem, the character set is lowercase letters, so <span class="arithmatex">\(|\Sigma| = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86817,11 +86815,9 @@ Hence, the answer is 2.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

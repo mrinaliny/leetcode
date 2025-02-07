@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,17 +90863,17 @@
 
 <h3 id="bfs">方法一：BFS</h3>
 <p>我们可以将跳蚤的位置和跳跃方向作为状态，使用 BFS 搜索最短路径。本题比较关键的地方在于确定右边界，即跳蚤最远能跳到哪里。</p>
-<p>如果 $a \geq b$，即往前跳的距离大于往后跳的距离，那么如果跳蚤在位置大于 $x+b$ 的地方，它就不能再往前跳了，因为跳蚤不能连续往后跳两次，如果继续往前跳，那么永远无法跳到 $x$ 的位置。因此，如果 $a \geq b$，那么右边界可以是 $x+b$。</p>
-<p>如果 $a \lt b$，即往前跳的距离小于往后跳的距离，那么如果跳蚤所在的位置减去 $b$ 超过 $2000$，此时选择往后跳，否则往前跳。因此，如果 $a \lt b$，那么右边界不超过 $6000$。</p>
-<p>综上，我们可以将右边界设置为 $6000$。</p>
-<p>接下来，我们使用 BFS 搜索最短路径。我们使用一个队列，初始时将跳蚤的位置和跳跃方向作为状态加入队列。每次从队列中取出一个状态，如果该状态的位置等于 $x$，那么我们就找到了一条从初始状态到达目标状态的路径，返回当前的步数即可。否则，我们将当前状态的下一个状态加入队列，下一个状态有两种情况：</p>
+<p>如果 <span class="arithmatex">\(a \geq b\)</span>，即往前跳的距离大于往后跳的距离，那么如果跳蚤在位置大于 <span class="arithmatex">\(x+b\)</span> 的地方，它就不能再往前跳了，因为跳蚤不能连续往后跳两次，如果继续往前跳，那么永远无法跳到 <span class="arithmatex">\(x\)</span> 的位置。因此，如果 <span class="arithmatex">\(a \geq b\)</span>，那么右边界可以是 <span class="arithmatex">\(x+b\)</span>。</p>
+<p>如果 <span class="arithmatex">\(a \lt b\)</span>，即往前跳的距离小于往后跳的距离，那么如果跳蚤所在的位置减去 <span class="arithmatex">\(b\)</span> 超过 <span class="arithmatex">\(2000\)</span>，此时选择往后跳，否则往前跳。因此，如果 <span class="arithmatex">\(a \lt b\)</span>，那么右边界不超过 <span class="arithmatex">\(6000\)</span>。</p>
+<p>综上，我们可以将右边界设置为 <span class="arithmatex">\(6000\)</span>。</p>
+<p>接下来，我们使用 BFS 搜索最短路径。我们使用一个队列，初始时将跳蚤的位置和跳跃方向作为状态加入队列。每次从队列中取出一个状态，如果该状态的位置等于 <span class="arithmatex">\(x\)</span>，那么我们就找到了一条从初始状态到达目标状态的路径，返回当前的步数即可。否则，我们将当前状态的下一个状态加入队列，下一个状态有两种情况：</p>
 <ul>
-<li>往前跳，跳跃方向为 $1$；</li>
-<li>当前跳跃方向为 $1$ 时，往后跳，跳跃方向为 $0$。</li>
+<li>往前跳，跳跃方向为 <span class="arithmatex">\(1\)</span>；</li>
+<li>当前跳跃方向为 <span class="arithmatex">\(1\)</span> 时，往后跳，跳跃方向为 <span class="arithmatex">\(0\)</span>。</li>
 </ul>
 <p>注意，我们需要判断下一个状态是否合法，即下一个状态的位置不超过右边界，且不在禁止的位置中，且未被访问过。</p>
-<p>如果队列为空，说明无法到达目标位置，返回 $-1$。</p>
-<p>时间复杂度 $O(M)$，空间复杂度 $O(M)$。其中 $M$ 是右边界，本题中 $M \leq 6000$。</p>
+<p>如果队列为空，说明无法到达目标位置，返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(M)\)</span>，空间复杂度 <span class="arithmatex">\(O(M)\)</span>。其中 <span class="arithmatex">\(M\)</span> 是右边界，本题中 <span class="arithmatex">\(M \leq 6000\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91421,11 +91419,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

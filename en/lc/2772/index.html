@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86050,20 +86048,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-difference-array-prefix-sum">Solution 1: Difference Array + Prefix Sum</h3>
-<p>First, let's consider the first element of $nums$, $nums[0]$:</p>
+<p>First, let's consider the first element of <span class="arithmatex">\(nums\)</span>, <span class="arithmatex">\(nums[0]\)</span>:</p>
 <ul>
-<li>If $nums[0] = 0$, we don't need to do anything.</li>
-<li>If $nums[0] &gt; 0$, we need to operate on $nums[0..k-1]$ for $nums[0]$ times, subtracting $nums[0]$ from all elements in $nums[0..k-1]$, so $nums[0]$ becomes $0$.</li>
+<li>If <span class="arithmatex">\(nums[0] = 0\)</span>, we don't need to do anything.</li>
+<li>If <span class="arithmatex">\(nums[0] &gt; 0\)</span>, we need to operate on <span class="arithmatex">\(nums[0..k-1]\)</span> for <span class="arithmatex">\(nums[0]\)</span> times, subtracting <span class="arithmatex">\(nums[0]\)</span> from all elements in <span class="arithmatex">\(nums[0..k-1]\)</span>, so <span class="arithmatex">\(nums[0]\)</span> becomes <span class="arithmatex">\(0\)</span>.</li>
 </ul>
-<p>To perform the add and subtract operations on a contiguous segment of elements simultaneously, we can use a difference array to manage these operations. We represent the difference array with $d[i]$, and calculating the prefix sum of the difference array gives us the change of the value at each position.</p>
-<p>Therefore, we iterate over $nums$. For each element $nums[i]$, the current position's change quantity is $s = \sum_{j=0}^{i} d[j]$. We add $s$ to $nums[i]$ to get the actual value of $nums[i]$.</p>
+<p>To perform the add and subtract operations on a contiguous segment of elements simultaneously, we can use a difference array to manage these operations. We represent the difference array with <span class="arithmatex">\(d[i]\)</span>, and calculating the prefix sum of the difference array gives us the change of the value at each position.</p>
+<p>Therefore, we iterate over <span class="arithmatex">\(nums\)</span>. For each element <span class="arithmatex">\(nums[i]\)</span>, the current position's change quantity is <span class="arithmatex">\(s = \sum_{j=0}^{i} d[j]\)</span>. We add <span class="arithmatex">\(s\)</span> to <span class="arithmatex">\(nums[i]\)</span> to get the actual value of <span class="arithmatex">\(nums[i]\)</span>.</p>
 <ul>
-<li>If $nums[i] = 0$, there's no need for any operation, and we can skip directly.</li>
-<li>If $nums[i]=0$ or $i + k &gt; n$, it indicates that after the previous operations, $nums[i]$ has become negative, or $nums[i..i+k-1]$ is out of bounds. Therefore, it's impossible to make all elements in $nums$ equal to $0$. We return <code>false</code>. Otherwise, we need to subtract $nums[i]$ from all elements in the interval $[i..i+k-1]$. Therefore, we subtract $nums[i]$ from $s$ and add $nums[i]$ to $d[i+k]$.</li>
+<li>If <span class="arithmatex">\(nums[i] = 0\)</span>, there's no need for any operation, and we can skip directly.</li>
+<li>If <span class="arithmatex">\(nums[i]=0\)</span> or <span class="arithmatex">\(i + k &gt; n\)</span>, it indicates that after the previous operations, <span class="arithmatex">\(nums[i]\)</span> has become negative, or <span class="arithmatex">\(nums[i..i+k-1]\)</span> is out of bounds. Therefore, it's impossible to make all elements in <span class="arithmatex">\(nums\)</span> equal to <span class="arithmatex">\(0\)</span>. We return <code>false</code>. Otherwise, we need to subtract <span class="arithmatex">\(nums[i]\)</span> from all elements in the interval <span class="arithmatex">\([i..i+k-1]\)</span>. Therefore, we subtract <span class="arithmatex">\(nums[i]\)</span> from <span class="arithmatex">\(s\)</span> and add <span class="arithmatex">\(nums[i]\)</span> to <span class="arithmatex">\(d[i+k]\)</span>.</li>
 <li>We continue to iterate over the next element.</li>
 </ul>
-<p>If the iteration ends, it means that all elements in $nums$ can be made equal to $0$, so we return <code>true</code>.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$, where $n$ is the length of the array $nums$.</p>
+<p>If the iteration ends, it means that all elements in <span class="arithmatex">\(nums\)</span> can be made equal to <span class="arithmatex">\(0\)</span>, so we return <code>true</code>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86491,11 +86489,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

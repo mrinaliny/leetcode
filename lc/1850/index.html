@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90873,22 +90871,22 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：求下一个排列 + 逆序对</h3>
-<p>我们可以调用 $k$ 次 <code>next_permutation</code> 函数，得到第 $k$ 个最小妙数 $s$。</p>
-<p>接下来，我们只需要计算 $num$ 需要经过多少次交换才能变成 $s$ 即可。</p>
-<p>我们先考虑一个简单的情况，即 $num$ 中的数字都不相同。在这种情况下，我们可以直接把 $num$ 中的数字字符映射为下标。例如 $num$ 等于 <code>"54893"</code>，而 $s$ 等于 <code>"98345"</code>。我们将 $num$ 中的每个数字映射为下标，即：</p>
-<p>$$
+<p>我们可以调用 <span class="arithmatex">\(k\)</span> 次 <code>next_permutation</code> 函数，得到第 <span class="arithmatex">\(k\)</span> 个最小妙数 <span class="arithmatex">\(s\)</span>。</p>
+<p>接下来，我们只需要计算 <span class="arithmatex">\(num\)</span> 需要经过多少次交换才能变成 <span class="arithmatex">\(s\)</span> 即可。</p>
+<p>我们先考虑一个简单的情况，即 <span class="arithmatex">\(num\)</span> 中的数字都不相同。在这种情况下，我们可以直接把 <span class="arithmatex">\(num\)</span> 中的数字字符映射为下标。例如 <span class="arithmatex">\(num\)</span> 等于 <code>"54893"</code>，而 <span class="arithmatex">\(s\)</span> 等于 <code>"98345"</code>。我们将 <span class="arithmatex">\(num\)</span> 中的每个数字映射为下标，即：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-num[0] &amp;= 5 &amp;\rightarrow&amp; \quad 0 \
-num[1] &amp;= 4 &amp;\rightarrow&amp; \quad 1 \
-num[2] &amp;= 8 &amp;\rightarrow&amp; \quad 2 \
-num[3] &amp;= 9 &amp;\rightarrow&amp; \quad 3 \
-num[4] &amp;= 3 &amp;\rightarrow&amp; \quad 4 \
+num[0] &amp;= 5 &amp;\rightarrow&amp; \quad 0 \\
+num[1] &amp;= 4 &amp;\rightarrow&amp; \quad 1 \\
+num[2] &amp;= 8 &amp;\rightarrow&amp; \quad 2 \\
+num[3] &amp;= 9 &amp;\rightarrow&amp; \quad 3 \\
+num[4] &amp;= 3 &amp;\rightarrow&amp; \quad 4 \\
 \end{aligned}
-$$</p>
-<p>那么 $s$ 中的每个数字映射为下标，就是 <code>"32410"</code>。这样，将 $num$ 变成 $s$ 所需要的交换次数，就等于 $s$ 映射后的下标数组的逆序对数。</p>
-<p>如果 $num$ 中存在相同的数字，那么我们可以使用一个数组 $d$ 来记录每个数字出现的下标，其中 $d[i]$ 表示数字 $i$ 出现的下标列表。为了使得交换次数尽可能少，在将 $s$ 映射为下标数组时，我们只需要按顺序贪心地选择 $d$ 中对应数字的下标即可。</p>
+\]</div>
+<p>那么 <span class="arithmatex">\(s\)</span> 中的每个数字映射为下标，就是 <code>"32410"</code>。这样，将 <span class="arithmatex">\(num\)</span> 变成 <span class="arithmatex">\(s\)</span> 所需要的交换次数，就等于 <span class="arithmatex">\(s\)</span> 映射后的下标数组的逆序对数。</p>
+<p>如果 <span class="arithmatex">\(num\)</span> 中存在相同的数字，那么我们可以使用一个数组 <span class="arithmatex">\(d\)</span> 来记录每个数字出现的下标，其中 <span class="arithmatex">\(d[i]\)</span> 表示数字 <span class="arithmatex">\(i\)</span> 出现的下标列表。为了使得交换次数尽可能少，在将 <span class="arithmatex">\(s\)</span> 映射为下标数组时，我们只需要按顺序贪心地选择 <span class="arithmatex">\(d\)</span> 中对应数字的下标即可。</p>
 <p>最后，我们可以直接使用双重循环来计算逆序对数，也可以使用树状数组来优化。</p>
-<p>时间复杂度 $O(n \times (k + n))$，空间复杂度 $O(n)$。其中 $n$ 是 $num$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times (k + n))\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是 <span class="arithmatex">\(num\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91542,11 +91540,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

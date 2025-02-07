@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90881,9 +90879,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 动态规划</h3>
-<p>我们定义 $f[i]$ 表示字符串 $s$ 的前 $i$ 个字符能否拆分成 $wordDict$ 中的单词，初始时 $f[0]=true$，其余为 $false$。答案为 $f[n]$。</p>
-<p>考虑 $f[i]$，如果存在 $j \in [0, i)$ 使得 $f[j] \land s[j:i] \in wordDict$，则 $f[i]=true$。为了优化效率，我们可以使用哈希表存储 $wordDict$ 中的单词，这样可以快速判断 $s[j:i]$ 是否在 $wordDict$ 中。</p>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $s$ 的长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示字符串 <span class="arithmatex">\(s\)</span> 的前 <span class="arithmatex">\(i\)</span> 个字符能否拆分成 <span class="arithmatex">\(wordDict\)</span> 中的单词，初始时 <span class="arithmatex">\(f[0]=true\)</span>，其余为 <span class="arithmatex">\(false\)</span>。答案为 <span class="arithmatex">\(f[n]\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i]\)</span>，如果存在 <span class="arithmatex">\(j \in [0, i)\)</span> 使得 <span class="arithmatex">\(f[j] \land s[j:i] \in wordDict\)</span>，则 <span class="arithmatex">\(f[i]=true\)</span>。为了优化效率，我们可以使用哈希表存储 <span class="arithmatex">\(wordDict\)</span> 中的单词，这样可以快速判断 <span class="arithmatex">\(s[j:i]\)</span> 是否在 <span class="arithmatex">\(wordDict\)</span> 中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91121,10 +91119,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：前缀树 + 动态规划</h3>
-<p>我们先将 $wordDict$ 中的单词存入前缀树中，然后使用动态规划求解。</p>
-<p>我们定义 $f[i]$ 表示从字符串 $s$ 的第 $i$ 个字符开始往后拆分，能否拆分成 $wordDict$ 中的单词，初始时 $f[n]=true$，其余为 $false$。答案为 $f[0]$。</p>
-<p>接下来，我们从大到小枚举 $i$，对于每个 $i$，我们从 $i$ 开始往后拆分，如果 $s[i:j]$ 在前缀树中，且 $f[j+1]=true$，则 $f[i]=true$。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $s$ 的长度。</p>
+<p>我们先将 <span class="arithmatex">\(wordDict\)</span> 中的单词存入前缀树中，然后使用动态规划求解。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示从字符串 <span class="arithmatex">\(s\)</span> 的第 <span class="arithmatex">\(i\)</span> 个字符开始往后拆分，能否拆分成 <span class="arithmatex">\(wordDict\)</span> 中的单词，初始时 <span class="arithmatex">\(f[n]=true\)</span>，其余为 <span class="arithmatex">\(false\)</span>。答案为 <span class="arithmatex">\(f[0]\)</span>。</p>
+<p>接下来，我们从大到小枚举 <span class="arithmatex">\(i\)</span>，对于每个 <span class="arithmatex">\(i\)</span>，我们从 <span class="arithmatex">\(i\)</span> 开始往后拆分，如果 <span class="arithmatex">\(s[i:j]\)</span> 在前缀树中，且 <span class="arithmatex">\(f[j+1]=true\)</span>，则 <span class="arithmatex">\(f[i]=true\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91904,11 +91902,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

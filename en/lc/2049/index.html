@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86066,16 +86064,16 @@ The highest score is 2, and two nodes (node 0 and node 1) have the highest score
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs">Solution 1: DFS</h3>
-<p>First, we construct a graph $g$ based on the given parent array <code>parents</code>, where $g[i]$ represents all child nodes of node $i$. We define a variable $ans$ to represent the number of nodes with the highest score, and a variable $mx$ to represent the highest score.</p>
-<p>Then, we design a function <code>dfs(i, fa)</code> to calculate the score of node $i$ and return the number of nodes in the subtree rooted at node $i$.</p>
+<p>First, we construct a graph <span class="arithmatex">\(g\)</span> based on the given parent array <code>parents</code>, where <span class="arithmatex">\(g[i]\)</span> represents all child nodes of node <span class="arithmatex">\(i\)</span>. We define a variable <span class="arithmatex">\(ans\)</span> to represent the number of nodes with the highest score, and a variable <span class="arithmatex">\(mx\)</span> to represent the highest score.</p>
+<p>Then, we design a function <code>dfs(i, fa)</code> to calculate the score of node <span class="arithmatex">\(i\)</span> and return the number of nodes in the subtree rooted at node <span class="arithmatex">\(i\)</span>.</p>
 <p>The calculation process of the function <code>dfs(i, fa)</code> is as follows:</p>
-<p>We first initialize a variable $cnt = 1$, representing the number of nodes in the subtree rooted at node $i$; a variable $score = 1$, representing the initial score of node $i$.</p>
-<p>Next, we traverse all child nodes $j$ of node $i$. If $j$ is not the parent node $fa$ of node $i$, then we recursively call <code>dfs(j, i)</code>, and multiply the return value into $score$, and add the return value to $cnt$.</p>
-<p>After traversing the child nodes, if $n - cnt &gt; 0$, then we multiply $n - cnt$ into $score$.</p>
-<p>Then, we check whether $mx$ is less than $score$. If it is less, then we update $mx$ to $score$, and update $ans$ to $1$; if it is equal, then we update $ans$ to $ans + 1$.</p>
-<p>Finally, we return $cnt$.</p>
-<p>In the end, we call <code>dfs(0, -1)</code> and return $ans$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes.</p>
+<p>We first initialize a variable <span class="arithmatex">\(cnt = 1\)</span>, representing the number of nodes in the subtree rooted at node <span class="arithmatex">\(i\)</span>; a variable <span class="arithmatex">\(score = 1\)</span>, representing the initial score of node <span class="arithmatex">\(i\)</span>.</p>
+<p>Next, we traverse all child nodes <span class="arithmatex">\(j\)</span> of node <span class="arithmatex">\(i\)</span>. If <span class="arithmatex">\(j\)</span> is not the parent node <span class="arithmatex">\(fa\)</span> of node <span class="arithmatex">\(i\)</span>, then we recursively call <code>dfs(j, i)</code>, and multiply the return value into <span class="arithmatex">\(score\)</span>, and add the return value to <span class="arithmatex">\(cnt\)</span>.</p>
+<p>After traversing the child nodes, if <span class="arithmatex">\(n - cnt &gt; 0\)</span>, then we multiply <span class="arithmatex">\(n - cnt\)</span> into <span class="arithmatex">\(score\)</span>.</p>
+<p>Then, we check whether <span class="arithmatex">\(mx\)</span> is less than <span class="arithmatex">\(score\)</span>. If it is less, then we update <span class="arithmatex">\(mx\)</span> to <span class="arithmatex">\(score\)</span>, and update <span class="arithmatex">\(ans\)</span> to <span class="arithmatex">\(1\)</span>; if it is equal, then we update <span class="arithmatex">\(ans\)</span> to <span class="arithmatex">\(ans + 1\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(cnt\)</span>.</p>
+<p>In the end, we call <code>dfs(0, -1)</code> and return <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86745,11 +86743,9 @@ The highest score is 2, and two nodes (node 0 and node 1) have the highest score
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

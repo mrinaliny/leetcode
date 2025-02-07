@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,13 +90863,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>设计函数 <code>dfs(i, j, s)</code> 表示从 <code>(i, j)</code> 出发，初始路径和模 $k$ 的结果为 $s$ 的路径数目。</p>
-<p>对于每个位置 $(i, j)$，我们可以选择向右或向下移动，因此有：</p>
-<p>$$
+<p>设计函数 <code>dfs(i, j, s)</code> 表示从 <code>(i, j)</code> 出发，初始路径和模 <span class="arithmatex">\(k\)</span> 的结果为 <span class="arithmatex">\(s\)</span> 的路径数目。</p>
+<p>对于每个位置 <span class="arithmatex">\((i, j)\)</span>，我们可以选择向右或向下移动，因此有：</p>
+<div class="arithmatex">\[
 dfs(i, j, s) = dfs(i + 1, j, (s + grid[i][j]) \bmod k) + dfs(i, j + 1, (s + grid[i][j]) \bmod k)
-$$</p>
+\]</div>
 <p>答案为 <code>dfs(0, 0, 0)</code>。记忆化搜索即可。</p>
-<p>时间复杂度 $O(m \times n \times k)$，空间复杂度 $O(m \times n \times k)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数，而 $k$ 为给定的整数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为矩阵的行数和列数，而 <span class="arithmatex">\(k\)</span> 为给定的整数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91152,13 +91150,13 @@ $$</p>
 
 <h3 id="_4">方法二：动态规划</h3>
 <p>我们也可以使用动态规划求解。</p>
-<p>定义状态 $dp[i][j][s]$ 表示从起点 $(0, 0)$ 出发，到达位置 $(i, j)$，路径和模 $k$ 等于 $s$ 的路径数目。</p>
-<p>初始值 $dp[0][0][grid[0][0] \bmod k] = 1$，答案为 $dp[m - 1][n - 1][0]$。</p>
+<p>定义状态 <span class="arithmatex">\(dp[i][j][s]\)</span> 表示从起点 <span class="arithmatex">\((0, 0)\)</span> 出发，到达位置 <span class="arithmatex">\((i, j)\)</span>，路径和模 <span class="arithmatex">\(k\)</span> 等于 <span class="arithmatex">\(s\)</span> 的路径数目。</p>
+<p>初始值 <span class="arithmatex">\(dp[0][0][grid[0][0] \bmod k] = 1\)</span>，答案为 <span class="arithmatex">\(dp[m - 1][n - 1][0]\)</span>。</p>
 <p>我们可以得到状态转移方程：</p>
-<p>$$
+<div class="arithmatex">\[
 dp[i][j][s] = dp[i - 1][j][(s - grid[i][j])\bmod k] + dp[i][j - 1][(s - grid[i][j])\bmod k]
-$$</p>
-<p>时间复杂度 $O(m \times n \times k)$，空间复杂度 $O(m \times n \times k)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数，而 $k$ 为给定的整数。</p>
+\]</div>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n \times k)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为矩阵的行数和列数，而 <span class="arithmatex">\(k\)</span> 为给定的整数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91586,11 +91584,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

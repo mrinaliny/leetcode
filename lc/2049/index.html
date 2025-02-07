@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,16 +90864,16 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：DFS</h3>
-<p>我们先根据给定的父节点数组 <code>parents</code> 构建图 $g$，其中 $g[i]$ 表示节点 $i$ 的所有子节点。定义变量 $ans$ 表示最高得分的节点数目，变量 $mx$ 表示最高得分。</p>
-<p>然后，我们设计一个函数 $dfs(i, fa)$，它的作用是计算节点 $i$ 的分数，并返回以节点 $i$ 为根的子树的节点数目。</p>
-<p>函数 $dfs(i, fa)$ 的计算过程如下：</p>
-<p>我们首先初始化变量 $cnt = 1$，表示以节点 $i$ 为根的子树的节点数目；变量 $score = 1$，表示以节点 $i$ 初始分数。</p>
-<p>接下来，我们遍历节点 $i$ 的所有子节点 $j$，如果 $j$ 不是节点 $i$ 的父节点 $fa$，那么我们递归调用 $dfs(j, i)$，并将返回值累乘到 $score$ 中，同时将返回值累加到 $cnt$ 中。</p>
-<p>遍历完子节点后，如果 $n - cnt &gt; 0$，那么我们将 $n - cnt$ 累乘到 $score$ 中。</p>
-<p>然后，我们判断 $mx$ 是否小于 $score$，如果小于，那么我们将 $mx$ 更新为 $score$，并将 $ans$ 更新为 $1$；如果等于，那么我们将 $ans$ 更新为 $ans + 1$。</p>
-<p>最后，我们返回 $cnt$。</p>
-<p>最终，我们调用 $dfs(0, -1)$，并返回 $ans$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是节点数目。</p>
+<p>我们先根据给定的父节点数组 <code>parents</code> 构建图 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[i]\)</span> 表示节点 <span class="arithmatex">\(i\)</span> 的所有子节点。定义变量 <span class="arithmatex">\(ans\)</span> 表示最高得分的节点数目，变量 <span class="arithmatex">\(mx\)</span> 表示最高得分。</p>
+<p>然后，我们设计一个函数 <span class="arithmatex">\(dfs(i, fa)\)</span>，它的作用是计算节点 <span class="arithmatex">\(i\)</span> 的分数，并返回以节点 <span class="arithmatex">\(i\)</span> 为根的子树的节点数目。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, fa)\)</span> 的计算过程如下：</p>
+<p>我们首先初始化变量 <span class="arithmatex">\(cnt = 1\)</span>，表示以节点 <span class="arithmatex">\(i\)</span> 为根的子树的节点数目；变量 <span class="arithmatex">\(score = 1\)</span>，表示以节点 <span class="arithmatex">\(i\)</span> 初始分数。</p>
+<p>接下来，我们遍历节点 <span class="arithmatex">\(i\)</span> 的所有子节点 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(j\)</span> 不是节点 <span class="arithmatex">\(i\)</span> 的父节点 <span class="arithmatex">\(fa\)</span>，那么我们递归调用 <span class="arithmatex">\(dfs(j, i)\)</span>，并将返回值累乘到 <span class="arithmatex">\(score\)</span> 中，同时将返回值累加到 <span class="arithmatex">\(cnt\)</span> 中。</p>
+<p>遍历完子节点后，如果 <span class="arithmatex">\(n - cnt &gt; 0\)</span>，那么我们将 <span class="arithmatex">\(n - cnt\)</span> 累乘到 <span class="arithmatex">\(score\)</span> 中。</p>
+<p>然后，我们判断 <span class="arithmatex">\(mx\)</span> 是否小于 <span class="arithmatex">\(score\)</span>，如果小于，那么我们将 <span class="arithmatex">\(mx\)</span> 更新为 <span class="arithmatex">\(score\)</span>，并将 <span class="arithmatex">\(ans\)</span> 更新为 <span class="arithmatex">\(1\)</span>；如果等于，那么我们将 <span class="arithmatex">\(ans\)</span> 更新为 <span class="arithmatex">\(ans + 1\)</span>。</p>
+<p>最后，我们返回 <span class="arithmatex">\(cnt\)</span>。</p>
+<p>最终，我们调用 <span class="arithmatex">\(dfs(0, -1)\)</span>，并返回 <span class="arithmatex">\(ans\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点数目。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91545,11 +91543,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

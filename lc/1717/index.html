@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90869,18 +90867,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心</h3>
-<p>我们不妨假设子字符串 "ab" 的得分总是不低于子字符串 "ba" 的得分，如果不是，我们可以交换 "a" 和 "b"，同时交换 $x$ 和 $y$。</p>
+<p>我们不妨假设子字符串 "ab" 的得分总是不低于子字符串 "ba" 的得分，如果不是，我们可以交换 "a" 和 "b"，同时交换 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>。</p>
 <p>接下来，我们只需要考虑字符串中只包含 "a" 和 "b" 的情况。如果字符串中包含其他字符，我们可以将其视为一个分割点，将字符串分割成若干个只包含 "a" 和 "b" 的子字符串，然后分别计算每个子字符串的得分。</p>
 <p>我们观察发现，对于一个只包含 "a" 和 "b" 的子字符串，无论采取什么样的操作，最后一定只剩下一种字符，或者空串。由于每次操作都会同时删除一个 "a" 和一个 "b"，因此总的操作次数一定是固定的。我们可以贪心地先删除 "ab"，再删除 "ba"，这样可以保证得分最大。</p>
-<p>因此，我们可以使用两个变量 $\textit{cnt1}$ 和 $\textit{cnt2}$ 分别记录 "a" 和 "b" 的数量，然后遍历字符串，根据当前字符的不同情况更新 $\textit{cnt1}$ 和 $\textit{cnt2}$，并计算得分。</p>
-<p>对于当前遍历到的字符 $c$：</p>
+<p>因此，我们可以使用两个变量 <span class="arithmatex">\(\textit{cnt1}\)</span> 和 <span class="arithmatex">\(\textit{cnt2}\)</span> 分别记录 "a" 和 "b" 的数量，然后遍历字符串，根据当前字符的不同情况更新 <span class="arithmatex">\(\textit{cnt1}\)</span> 和 <span class="arithmatex">\(\textit{cnt2}\)</span>，并计算得分。</p>
+<p>对于当前遍历到的字符 <span class="arithmatex">\(c\)</span>：</p>
 <ul>
-<li>如果 $c$ 是 "a"，由于要先删除 "ab"，因此此时我们不消除该字符，只增加 $\textit{cnt1}$；</li>
-<li>如果 $c$ 是 "b"，如果此时 $\textit{cnt1} &gt; 0$，我们可以消除一个 "ab"，并增加 $x$ 分，否则我们只能增加 $\textit{cnt2}$；</li>
-<li>如果 $c$ 是其他字符，那么对于该子字符串，我们剩下了一个 $\textit{cnt2}$ 个 "b" 和 $\textit{cnt1}$ 个 "a"，我们可以消除 $\min(\textit{cnt1}, \textit{cnt2})$ 个 "ab"，并增加 $y$ 分。</li>
+<li>如果 <span class="arithmatex">\(c\)</span> 是 "a"，由于要先删除 "ab"，因此此时我们不消除该字符，只增加 <span class="arithmatex">\(\textit{cnt1}\)</span>；</li>
+<li>如果 <span class="arithmatex">\(c\)</span> 是 "b"，如果此时 <span class="arithmatex">\(\textit{cnt1} &gt; 0\)</span>，我们可以消除一个 "ab"，并增加 <span class="arithmatex">\(x\)</span> 分，否则我们只能增加 <span class="arithmatex">\(\textit{cnt2}\)</span>；</li>
+<li>如果 <span class="arithmatex">\(c\)</span> 是其他字符，那么对于该子字符串，我们剩下了一个 <span class="arithmatex">\(\textit{cnt2}\)</span> 个 "b" 和 <span class="arithmatex">\(\textit{cnt1}\)</span> 个 "a"，我们可以消除 <span class="arithmatex">\(\min(\textit{cnt1}, \textit{cnt2})\)</span> 个 "ab"，并增加 <span class="arithmatex">\(y\)</span> 分。</li>
 </ul>
-<p>遍历结束后，我们还需要额外处理一下剩余的 "ab"，增加若干个 $y$ 分。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为字符串 $s$ 的长度。空间复杂度 $O(1)$。</p>
+<p>遍历结束后，我们还需要额外处理一下剩余的 "ab"，增加若干个 <span class="arithmatex">\(y\)</span> 分。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(s\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91595,11 +91593,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

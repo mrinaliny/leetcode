@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86078,11 +86076,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-dynamic-programming">Solution 1: State Compression Dynamic Programming</h3>
-<p>We define $f[i][j]$ to represent the maximum score when selecting numbers from $[1,..i]$ and the state of the rows corresponding to the selected numbers is $j$. Initially, $f[i][j] = 0$, and the answer is $f[\textit{mx}][2^m - 1]$, where $\textit{mx}$ represents the maximum value in the matrix, and $m$ represents the number of rows in the matrix.</p>
-<p>First, we preprocess the matrix using a hash table $g$ to record the set of rows corresponding to each number. Then, we can use state compression dynamic programming to solve the problem.</p>
-<p>For the state $f[i][j]$, we can choose not to select the number $i$, in which case $f[i][j] = f[i-1][j]$. Alternatively, we can choose the number $i$. In this case, we need to enumerate each row $k$ in the set $g[i]$ corresponding to the number $i$. If the $k$-th bit of $j$ is $1$, it means we can select the number $i$. Thus, $f[i][j] = \max(f[i][j], f[i-1][j \oplus 2^k] + i)$.</p>
-<p>Finally, we return $f[\textit{mx}][2^m - 1]$.</p>
-<p>The time complexity is $O(m \times 2^m \times \textit{mx})$, and the space complexity is $O(\textit{mx} \times 2^m)$. Here, $m$ is the number of rows in the matrix, and $\textit{mx}$ is the maximum value in the matrix.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> to represent the maximum score when selecting numbers from <span class="arithmatex">\([1,..i]\)</span> and the state of the rows corresponding to the selected numbers is <span class="arithmatex">\(j\)</span>. Initially, <span class="arithmatex">\(f[i][j] = 0\)</span>, and the answer is <span class="arithmatex">\(f[\textit{mx}][2^m - 1]\)</span>, where <span class="arithmatex">\(\textit{mx}\)</span> represents the maximum value in the matrix, and <span class="arithmatex">\(m\)</span> represents the number of rows in the matrix.</p>
+<p>First, we preprocess the matrix using a hash table <span class="arithmatex">\(g\)</span> to record the set of rows corresponding to each number. Then, we can use state compression dynamic programming to solve the problem.</p>
+<p>For the state <span class="arithmatex">\(f[i][j]\)</span>, we can choose not to select the number <span class="arithmatex">\(i\)</span>, in which case <span class="arithmatex">\(f[i][j] = f[i-1][j]\)</span>. Alternatively, we can choose the number <span class="arithmatex">\(i\)</span>. In this case, we need to enumerate each row <span class="arithmatex">\(k\)</span> in the set <span class="arithmatex">\(g[i]\)</span> corresponding to the number <span class="arithmatex">\(i\)</span>. If the <span class="arithmatex">\(k\)</span>-th bit of <span class="arithmatex">\(j\)</span> is <span class="arithmatex">\(1\)</span>, it means we can select the number <span class="arithmatex">\(i\)</span>. Thus, <span class="arithmatex">\(f[i][j] = \max(f[i][j], f[i-1][j \oplus 2^k] + i)\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(f[\textit{mx}][2^m - 1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times 2^m \times \textit{mx})\)</span>, and the space complexity is <span class="arithmatex">\(O(\textit{mx} \times 2^m)\)</span>. Here, <span class="arithmatex">\(m\)</span> is the number of rows in the matrix, and <span class="arithmatex">\(\textit{mx}\)</span> is the maximum value in the matrix.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86562,11 +86560,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

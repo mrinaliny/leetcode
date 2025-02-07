@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,13 +86060,13 @@ The total sum is 4 + 6 + 6 + 4 = 20.
 <!-- solution:start -->
 
 <h3 id="solution-1-enumeration">Solution 1: Enumeration</h3>
-<p>We can enumerate all the substrings that end with each character $s[i]$ and calculate their gravitational value sum $t$. Finally, we add up all the $t$ to get the total gravitational value sum.</p>
-<p>When we reach $s[i]$, which is added to the end of the substring that ends with $s[i-1]$, we consider the change of the gravitational value sum $t$:</p>
-<p>If $s[i]$ has not appeared before, then the gravitational value of all substrings that end with $s[i-1]$ will increase by $1$, and there are a total of $i$ such substrings. Therefore, $t$ increases by $i$, plus the gravitational value of $s[i]$ itself, which is $1$. Therefore, $t$ increases by a total of $i+1$.</p>
-<p>If $s[i]$ has appeared before, let the last appearance position be $j$. Then we add $s[i]$ to the end of the substrings $s[0..i-1]$, $[1..i-1]$, $s[2..i-1]$, $\cdots$, $s[j..i-1]$. The gravitational value of these substrings will not change because $s[i]$ has already appeared in these substrings. The gravitational value of the substrings $s[j+1..i-1]$, $s[j+2..i-1]$, $\cdots$, $s[i-1]$ will increase by $1$, and there are a total of $i-j-1$ such substrings. Therefore, $t$ increases by $i-j-1$, plus the gravitational value of $s[i]$ itself, which is $1$. Therefore, $t$ increases by a total of $i-j$.
-Therefore, we can use an array $pos$ to record the last appearance position of each character. Initially, all positions are set to $-1$.</p>
-<p>Next, we traverse the string, and each time we update the gravitational value sum $t$ of the substring that ends with the current character to $t = t + i - pos[c]$, where $c$ is the current character. We add $t$ to the answer. Then we update $pos[c]$ to the current position $i$. We continue to traverse until the end of the string.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(|\Sigma|)$, where $n$ is the length of the string $s$, and $|\Sigma|$ is the size of the character set. In this problem, $|\Sigma| = 26$.</p>
+<p>We can enumerate all the substrings that end with each character <span class="arithmatex">\(s[i]\)</span> and calculate their gravitational value sum <span class="arithmatex">\(t\)</span>. Finally, we add up all the <span class="arithmatex">\(t\)</span> to get the total gravitational value sum.</p>
+<p>When we reach <span class="arithmatex">\(s[i]\)</span>, which is added to the end of the substring that ends with <span class="arithmatex">\(s[i-1]\)</span>, we consider the change of the gravitational value sum <span class="arithmatex">\(t\)</span>:</p>
+<p>If <span class="arithmatex">\(s[i]\)</span> has not appeared before, then the gravitational value of all substrings that end with <span class="arithmatex">\(s[i-1]\)</span> will increase by <span class="arithmatex">\(1\)</span>, and there are a total of <span class="arithmatex">\(i\)</span> such substrings. Therefore, <span class="arithmatex">\(t\)</span> increases by <span class="arithmatex">\(i\)</span>, plus the gravitational value of <span class="arithmatex">\(s[i]\)</span> itself, which is <span class="arithmatex">\(1\)</span>. Therefore, <span class="arithmatex">\(t\)</span> increases by a total of <span class="arithmatex">\(i+1\)</span>.</p>
+<p>If <span class="arithmatex">\(s[i]\)</span> has appeared before, let the last appearance position be <span class="arithmatex">\(j\)</span>. Then we add <span class="arithmatex">\(s[i]\)</span> to the end of the substrings <span class="arithmatex">\(s[0..i-1]\)</span>, <span class="arithmatex">\([1..i-1]\)</span>, <span class="arithmatex">\(s[2..i-1]\)</span>, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\(s[j..i-1]\)</span>. The gravitational value of these substrings will not change because <span class="arithmatex">\(s[i]\)</span> has already appeared in these substrings. The gravitational value of the substrings <span class="arithmatex">\(s[j+1..i-1]\)</span>, <span class="arithmatex">\(s[j+2..i-1]\)</span>, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\(s[i-1]\)</span> will increase by <span class="arithmatex">\(1\)</span>, and there are a total of <span class="arithmatex">\(i-j-1\)</span> such substrings. Therefore, <span class="arithmatex">\(t\)</span> increases by <span class="arithmatex">\(i-j-1\)</span>, plus the gravitational value of <span class="arithmatex">\(s[i]\)</span> itself, which is <span class="arithmatex">\(1\)</span>. Therefore, <span class="arithmatex">\(t\)</span> increases by a total of <span class="arithmatex">\(i-j\)</span>.
+Therefore, we can use an array <span class="arithmatex">\(pos\)</span> to record the last appearance position of each character. Initially, all positions are set to <span class="arithmatex">\(-1\)</span>.</p>
+<p>Next, we traverse the string, and each time we update the gravitational value sum <span class="arithmatex">\(t\)</span> of the substring that ends with the current character to <span class="arithmatex">\(t = t + i - pos[c]\)</span>, where <span class="arithmatex">\(c\)</span> is the current character. We add <span class="arithmatex">\(t\)</span> to the answer. Then we update <span class="arithmatex">\(pos[c]\)</span> to the current position <span class="arithmatex">\(i\)</span>. We continue to traverse until the end of the string.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>, and <span class="arithmatex">\(|\Sigma|\)</span> is the size of the character set. In this problem, <span class="arithmatex">\(|\Sigma| = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86449,11 +86447,9 @@ Therefore, we can use an array $pos$ to record the last appearance position of e
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

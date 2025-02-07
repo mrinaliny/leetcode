@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,12 +86081,12 @@ It can be shown that these are the minimum possible relative losses.
 
 <h3 id="solution-1-sorting-binary-search-prefix-sum">Solution 1: Sorting + Binary Search + Prefix Sum</h3>
 <p>Based on the problem description, we know:</p>
-<p>If $prices[i] \leq k$, then Bob needs to pay $prices[i]$, and Alice doesn't need to pay. Therefore, Bob's relative loss is $prices[i]$. In this case, Bob should choose the chocolate with a lower price to minimize the relative loss.</p>
-<p>If $prices[i] &gt; k$, then Bob needs to pay $k$, and Alice needs to pay $prices[i] - k$. Therefore, Bob's relative loss is $k - (prices[i] - k) = 2k - prices[i]$. In this case, Bob should choose the chocolate with a higher price to minimize the relative loss.</p>
-<p>Therefore, we first sort the price array $prices$, and then preprocess the prefix sum array $s$, where $s[i]$ represents the sum of the prices of the first $i$ chocolates.</p>
-<p>Next, for each query $[k, m]$, we first use binary search to find the index $r$ of the first chocolate with a price greater than $k$. Then, we use binary search again to find the number of chocolates $l$ that should be chosen on the left, so the number of chocolates that should be chosen on the right is $m - l$. At this point, Bob's relative loss is $s[l] + 2k(m - l) - (s[n] - s[n - (m - l)])$.</p>
-<p>In the second binary search process mentioned above, we need to judge whether $prices[mid] &lt; 2k - prices[n - (m - mid)]$, where $right$ represents the number of chocolates that should be chosen on the right. If this inequality holds, it means that choosing the chocolate at position $mid$ has a lower relative loss, so we update $l = mid + 1$. Otherwise, it means that the chocolate at position $mid$ has a higher relative loss, so we update $r = mid$.</p>
-<p>The time complexity is $O((n + m) \times \log n)$, and the space complexity is $O(n)$. Where $n$ and $m$ are the lengths of the arrays $prices$ and $queries$, respectively.</p>
+<p>If <span class="arithmatex">\(prices[i] \leq k\)</span>, then Bob needs to pay <span class="arithmatex">\(prices[i]\)</span>, and Alice doesn't need to pay. Therefore, Bob's relative loss is <span class="arithmatex">\(prices[i]\)</span>. In this case, Bob should choose the chocolate with a lower price to minimize the relative loss.</p>
+<p>If <span class="arithmatex">\(prices[i] &gt; k\)</span>, then Bob needs to pay <span class="arithmatex">\(k\)</span>, and Alice needs to pay <span class="arithmatex">\(prices[i] - k\)</span>. Therefore, Bob's relative loss is <span class="arithmatex">\(k - (prices[i] - k) = 2k - prices[i]\)</span>. In this case, Bob should choose the chocolate with a higher price to minimize the relative loss.</p>
+<p>Therefore, we first sort the price array <span class="arithmatex">\(prices\)</span>, and then preprocess the prefix sum array <span class="arithmatex">\(s\)</span>, where <span class="arithmatex">\(s[i]\)</span> represents the sum of the prices of the first <span class="arithmatex">\(i\)</span> chocolates.</p>
+<p>Next, for each query <span class="arithmatex">\([k, m]\)</span>, we first use binary search to find the index <span class="arithmatex">\(r\)</span> of the first chocolate with a price greater than <span class="arithmatex">\(k\)</span>. Then, we use binary search again to find the number of chocolates <span class="arithmatex">\(l\)</span> that should be chosen on the left, so the number of chocolates that should be chosen on the right is <span class="arithmatex">\(m - l\)</span>. At this point, Bob's relative loss is <span class="arithmatex">\(s[l] + 2k(m - l) - (s[n] - s[n - (m - l)])\)</span>.</p>
+<p>In the second binary search process mentioned above, we need to judge whether <span class="arithmatex">\(prices[mid] &lt; 2k - prices[n - (m - mid)]\)</span>, where <span class="arithmatex">\(right\)</span> represents the number of chocolates that should be chosen on the right. If this inequality holds, it means that choosing the chocolate at position <span class="arithmatex">\(mid\)</span> has a lower relative loss, so we update <span class="arithmatex">\(l = mid + 1\)</span>. Otherwise, it means that the chocolate at position <span class="arithmatex">\(mid\)</span> has a higher relative loss, so we update <span class="arithmatex">\(r = mid\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + m) \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the arrays <span class="arithmatex">\(prices\)</span> and <span class="arithmatex">\(queries\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86689,11 +86687,9 @@ It can be shown that these are the minimum possible relative losses.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

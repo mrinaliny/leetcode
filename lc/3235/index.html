@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90906,7 +90904,7 @@
 <p>根据题意，我们分情况讨论：</p>
 <p>当 <code>circles</code> 中只有一个圆时：</p>
 <ol>
-<li>如果起点 $(0, 0)$ 在圆内（包括边界），或者终点 $(\textit{xCorner}, \textit{yCorner})$ 在圆内，那么无法满足“不触碰圆”的条件；</li>
+<li>如果起点 <span class="arithmatex">\((0, 0)\)</span> 在圆内（包括边界），或者终点 <span class="arithmatex">\((\textit{xCorner}, \textit{yCorner})\)</span> 在圆内，那么无法满足“不触碰圆”的条件；</li>
 <li>如果圆与矩形的左侧或上侧有交点，且与矩形的右侧或下侧有交点，这种情况下，圆会阻断从矩形左下角到右上角的路径，也无法满足“不触碰圆”的条件。</li>
 </ol>
 <p>当 <code>circles</code> 中有多个圆时：</p>
@@ -90915,23 +90913,23 @@
 <li>如果有多个圆，多个圆之间可能在矩形内相交，合并形成更大的障碍区域。只要这个障碍区域与矩形的左侧或上侧有交点，且与矩形的右侧或下侧有交点，那么无法满足“不触碰圆”的条件。如果相交区域不在矩形内部，不能进行合并，因为相交的区域无法阻断矩形内部路径。另外，如果相交的区域有一部分在矩形内，有一部分在矩形外，这些圆都可以作为搜索的起点或终点，可以合并，也可以不合并。我们只要任选相交的其中一个点，如果这个点在矩形内，我们就可以将这些圆合并。</li>
 </ol>
 <p>根据上述分析，我们遍历所有圆，对于当前遍历到的圆，如果起点或终点在圆内，我们直接返回 <code>false</code>。否则，如果这个点没有被访问过，且这个圆与矩形的左侧或上侧有交点，我们就从这个圆开始进行深度优先搜索，搜索过程中，如果找到了一个圆，它与矩形的右侧或下侧有交点，说明圆形成的障碍区域阻断了从矩形左下角到右上角的路径，我们就返回 <code>false</code>。</p>
-<p>我们定义 $\textit{dfs}(i)$ 表示从第 $i$ 个圆开始进行深度优先搜索，如果找到了一个圆，它与矩形的右侧或下侧有交点，返回 <code>true</code>，否则返回 <code>false</code>。</p>
-<p>函数 $\textit{dfs}(i)$ 的执行过程如下：</p>
+<p>我们定义 <span class="arithmatex">\(\textit{dfs}(i)\)</span> 表示从第 <span class="arithmatex">\(i\)</span> 个圆开始进行深度优先搜索，如果找到了一个圆，它与矩形的右侧或下侧有交点，返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i)\)</span> 的执行过程如下：</p>
 <ol>
 <li>如果当前圆与矩形的右侧或下侧有交点，返回 <code>true</code>；</li>
 <li>否则，我们将当前圆标记为已访问；</li>
-<li>接下来，遍历其它所有圆，如果圆 $j$ 没被访问过，且圆 $i$ 和圆 $j$ 相交，且这两个圆的其中一个交点在矩形内，我们就继续从圆 $j$ 开始进行深度优先搜索，如果找到了一个圆，它与矩形的右侧或下侧有交点，返回 <code>true</code>；</li>
+<li>接下来，遍历其它所有圆，如果圆 <span class="arithmatex">\(j\)</span> 没被访问过，且圆 <span class="arithmatex">\(i\)</span> 和圆 <span class="arithmatex">\(j\)</span> 相交，且这两个圆的其中一个交点在矩形内，我们就继续从圆 <span class="arithmatex">\(j\)</span> 开始进行深度优先搜索，如果找到了一个圆，它与矩形的右侧或下侧有交点，返回 <code>true</code>；</li>
 <li>如果没有找到这样的圆，返回 <code>false</code>。</li>
 </ol>
-<p>上面的过程中，我们需要在圆 $O_1 = (x_1, y_1, r_1)$ 和 $O_2 = (x_2, y_2, r_2)$ 之间判断是否相交，如果两个圆相交，那么它们的圆心之间的距离不超过两个圆的半径之和，即 $(x_1 - x_2)^2 + (y_1 - y_2)^2 \le (r_1 + r_2)^2$。</p>
-<p>我们还需要寻找两个圆的一个交点，我们取一个点 $A = (x, y)$，满足 $\frac{O_1 A}{O_1 O_2} = \frac{r_1}{r_1 + r_2}$，如果两圆相交，那么点 $A$ 一定在交集中，此时 $\frac{x - x_1}{x_2 - x_1} = \frac{r_1}{r_1 + r_2}$，解得 $x = \frac{x_1 r_2 + x_2 r_1}{r_1 + r_2}$，同理，有 $y = \frac{y_1 r_2 + y_2 r_1}{r_1 + r_2}$。只要这个点在矩形内，我们就可以继续进行深度优先搜索，即满足：</p>
-<p>$$
+<p>上面的过程中，我们需要在圆 <span class="arithmatex">\(O_1 = (x_1, y_1, r_1)\)</span> 和 <span class="arithmatex">\(O_2 = (x_2, y_2, r_2)\)</span> 之间判断是否相交，如果两个圆相交，那么它们的圆心之间的距离不超过两个圆的半径之和，即 <span class="arithmatex">\((x_1 - x_2)^2 + (y_1 - y_2)^2 \le (r_1 + r_2)^2\)</span>。</p>
+<p>我们还需要寻找两个圆的一个交点，我们取一个点 <span class="arithmatex">\(A = (x, y)\)</span>，满足 <span class="arithmatex">\(\frac{O_1 A}{O_1 O_2} = \frac{r_1}{r_1 + r_2}\)</span>，如果两圆相交，那么点 <span class="arithmatex">\(A\)</span> 一定在交集中，此时 <span class="arithmatex">\(\frac{x - x_1}{x_2 - x_1} = \frac{r_1}{r_1 + r_2}\)</span>，解得 <span class="arithmatex">\(x = \frac{x_1 r_2 + x_2 r_1}{r_1 + r_2}\)</span>，同理，有 <span class="arithmatex">\(y = \frac{y_1 r_2 + y_2 r_1}{r_1 + r_2}\)</span>。只要这个点在矩形内，我们就可以继续进行深度优先搜索，即满足：</p>
+<div class="arithmatex">\[
 \begin{cases}
-x_1 r_2 + x_2 r_1 &lt; (r_1 + r_2) \times \textit{xCorner} \
+x_1 r_2 + x_2 r_1 &lt; (r_1 + r_2) \times \textit{xCorner} \\
 y_1 r_2 + y_2 r_1 &lt; (r_1 + r_2) \times \textit{yCorner}
 \end{cases}
-$$</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为圆的数量。</p>
+\]</div>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为圆的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91917,11 +91915,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

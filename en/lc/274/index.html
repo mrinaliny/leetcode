@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86064,8 +86062,8 @@ Since the researcher has 3 papers with at least 3 citations each and the remaini
 <!-- solution:start -->
 
 <h3 id="solution-1-sorting">Solution 1: Sorting</h3>
-<p>We can sort the array <code>citations</code> in descending order. Then we enumerate the value $h$ from large to small, if there is an $h$ value satisfying $citations[h-1] \geq h$, it means that there are at least $h$ papers that have been cited at least $h$ times, just return $h$ directly. If we cannot find such an $h$ value, it means that all the papers have not been cited, return $0$.</p>
-<p>Time complexity $O(n \times \log n)$, space complexity $O(\log n)$. Here $n$ is the length of the array <code>citations</code>.</p>
+<p>We can sort the array <code>citations</code> in descending order. Then we enumerate the value <span class="arithmatex">\(h\)</span> from large to small, if there is an <span class="arithmatex">\(h\)</span> value satisfying <span class="arithmatex">\(citations[h-1] \geq h\)</span>, it means that there are at least <span class="arithmatex">\(h\)</span> papers that have been cited at least <span class="arithmatex">\(h\)</span> times, just return <span class="arithmatex">\(h\)</span> directly. If we cannot find such an <span class="arithmatex">\(h\)</span> value, it means that all the papers have not been cited, return <span class="arithmatex">\(0\)</span>.</p>
+<p>Time complexity <span class="arithmatex">\(O(n \times \log n)\)</span>, space complexity <span class="arithmatex">\(O(\log n)\)</span>. Here <span class="arithmatex">\(n\)</span> is the length of the array <code>citations</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86221,9 +86219,9 @@ Since the researcher has 3 papers with at least 3 citations each and the remaini
 <!-- solution:start -->
 
 <h3 id="solution-2-counting-sum">Solution 2: Counting + Sum</h3>
-<p>We can use an array $cnt$ of length $n+1$, where $cnt[i]$ represents the number of papers with the reference count of $i$. We traverse the array <code>citations</code> and treat the papers with the reference count greater than $n$ as papers with a reference count of $n$. Then we use the reference count as the index and add $1$ to the corresponding element of $cnt$ for each paper. In this way, we have counted the number of papers for each reference count.</p>
-<p>Then we enumerate the value $h$ from large to small, and add the element value of $cnt$ with the index of $h$ to the variable $s$, where $s$ represents the number of papers with a reference count greater than or equal to $h$. If $s \geq h$, it means that at least $h$ papers have been cited at least $h$ times, just return $h$ directly.</p>
-<p>Time complexity $O(n)$, space complexity $O(n)$. Here $n$ is the length of the array <code>citations</code>.</p>
+<p>We can use an array <span class="arithmatex">\(cnt\)</span> of length <span class="arithmatex">\(n+1\)</span>, where <span class="arithmatex">\(cnt[i]\)</span> represents the number of papers with the reference count of <span class="arithmatex">\(i\)</span>. We traverse the array <code>citations</code> and treat the papers with the reference count greater than <span class="arithmatex">\(n\)</span> as papers with a reference count of <span class="arithmatex">\(n\)</span>. Then we use the reference count as the index and add <span class="arithmatex">\(1\)</span> to the corresponding element of <span class="arithmatex">\(cnt\)</span> for each paper. In this way, we have counted the number of papers for each reference count.</p>
+<p>Then we enumerate the value <span class="arithmatex">\(h\)</span> from large to small, and add the element value of <span class="arithmatex">\(cnt\)</span> with the index of <span class="arithmatex">\(h\)</span> to the variable <span class="arithmatex">\(s\)</span>, where <span class="arithmatex">\(s\)</span> represents the number of papers with a reference count greater than or equal to <span class="arithmatex">\(h\)</span>. If <span class="arithmatex">\(s \geq h\)</span>, it means that at least <span class="arithmatex">\(h\)</span> papers have been cited at least <span class="arithmatex">\(h\)</span> times, just return <span class="arithmatex">\(h\)</span> directly.</p>
+<p>Time complexity <span class="arithmatex">\(O(n)\)</span>, space complexity <span class="arithmatex">\(O(n)\)</span>. Here <span class="arithmatex">\(n\)</span> is the length of the array <code>citations</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86381,9 +86379,9 @@ Since the researcher has 3 papers with at least 3 citations each and the remaini
 <!-- solution:start -->
 
 <h3 id="solution-3-binary-search">Solution 3: Binary Search</h3>
-<p>We notice that if there is a $h$ value that satisfies at least $h$ papers are cited at least $h$ times, then for any $h'&lt;h$, at least $h'$ papers are cited at least $h'$ times. Therefore, we can use the binary search method to find the largest $h$ such that at least $h$ papers are cited at least $h$ times.</p>
-<p>We define the left boundary of binary search $l=0$ and the right boundary $r=n$. Each time we take $mid = \lfloor \frac{l + r + 1}{2} \rfloor$, where $\lfloor x \rfloor$ represents floor $x$. Then we count the number of elements in array <code>citations</code> that are greater than or equal to $mid$, and denote it as $s$. If $s \geq mid$, it means that at least $mid$ papers are cited at least $mid$ times. In this case, we change the left boundary $l$ to $mid$. Otherwise, we change the right boundary $r$ to $mid-1$. When the left boundary $l$ is equal to the right boundary $r$, we find the largest $h$ value, which is $l$ or $r$.</p>
-<p>Time complexity $O(n \times \log n)$, where $n$ is the length of array <code>citations</code>. Space complexity $O(1)$.</p>
+<p>We notice that if there is a <span class="arithmatex">\(h\)</span> value that satisfies at least <span class="arithmatex">\(h\)</span> papers are cited at least <span class="arithmatex">\(h\)</span> times, then for any <span class="arithmatex">\(h'&lt;h\)</span>, at least <span class="arithmatex">\(h'\)</span> papers are cited at least <span class="arithmatex">\(h'\)</span> times. Therefore, we can use the binary search method to find the largest <span class="arithmatex">\(h\)</span> such that at least <span class="arithmatex">\(h\)</span> papers are cited at least <span class="arithmatex">\(h\)</span> times.</p>
+<p>We define the left boundary of binary search <span class="arithmatex">\(l=0\)</span> and the right boundary <span class="arithmatex">\(r=n\)</span>. Each time we take <span class="arithmatex">\(mid = \lfloor \frac{l + r + 1}{2} \rfloor\)</span>, where <span class="arithmatex">\(\lfloor x \rfloor\)</span> represents floor <span class="arithmatex">\(x\)</span>. Then we count the number of elements in array <code>citations</code> that are greater than or equal to <span class="arithmatex">\(mid\)</span>, and denote it as <span class="arithmatex">\(s\)</span>. If <span class="arithmatex">\(s \geq mid\)</span>, it means that at least <span class="arithmatex">\(mid\)</span> papers are cited at least <span class="arithmatex">\(mid\)</span> times. In this case, we change the left boundary <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(mid\)</span>. Otherwise, we change the right boundary <span class="arithmatex">\(r\)</span> to <span class="arithmatex">\(mid-1\)</span>. When the left boundary <span class="arithmatex">\(l\)</span> is equal to the right boundary <span class="arithmatex">\(r\)</span>, we find the largest <span class="arithmatex">\(h\)</span> value, which is <span class="arithmatex">\(l\)</span> or <span class="arithmatex">\(r\)</span>.</p>
+<p>Time complexity <span class="arithmatex">\(O(n \times \log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of array <code>citations</code>. Space complexity <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86818,11 +86816,9 @@ Since the researcher has 3 papers with at least 3 citations each and the remaini
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

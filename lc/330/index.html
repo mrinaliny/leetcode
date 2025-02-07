@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90849,21 +90847,21 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心</h3>
-<p>我们假设数字 $x$ 是最小的不能表示的正整数，那么 $[1,..x-1]$ 的这些数都是可以表示的。为了能表示数字 $x$，我们需要添加一个小于等于 $x$ 的数：</p>
+<p>我们假设数字 <span class="arithmatex">\(x\)</span> 是最小的不能表示的正整数，那么 <span class="arithmatex">\([1,..x-1]\)</span> 的这些数都是可以表示的。为了能表示数字 <span class="arithmatex">\(x\)</span>，我们需要添加一个小于等于 <span class="arithmatex">\(x\)</span> 的数：</p>
 <ul>
-<li>如果添加的数等于 $x$，由于 $[1,..x-1]$ 的数都可以表示，添加 $x$ 后，区间 $[1,..2x-1]$ 内的数都可以表示，最小的不能表示的正整数变成了 $2x$。</li>
-<li>如果添加的数小于 $x$，不妨设为 $x'$，由于 $[1,..x-1]$ 的数都可以表示，添加 $x'$ 后，区间 $[1,..x+x'-1]$ 内的数都可以表示，最小的不能表示的正整数变成了 $x+x' \lt 2x$。</li>
+<li>如果添加的数等于 <span class="arithmatex">\(x\)</span>，由于 <span class="arithmatex">\([1,..x-1]\)</span> 的数都可以表示，添加 <span class="arithmatex">\(x\)</span> 后，区间 <span class="arithmatex">\([1,..2x-1]\)</span> 内的数都可以表示，最小的不能表示的正整数变成了 <span class="arithmatex">\(2x\)</span>。</li>
+<li>如果添加的数小于 <span class="arithmatex">\(x\)</span>，不妨设为 <span class="arithmatex">\(x'\)</span>，由于 <span class="arithmatex">\([1,..x-1]\)</span> 的数都可以表示，添加 <span class="arithmatex">\(x'\)</span> 后，区间 <span class="arithmatex">\([1,..x+x'-1]\)</span> 内的数都可以表示，最小的不能表示的正整数变成了 <span class="arithmatex">\(x+x' \lt 2x\)</span>。</li>
 </ul>
-<p>因此，我们应该贪心地添加数字 $x$，这样可以覆盖的区间更大。</p>
-<p>我们用一个变量 $x$ 记录当前不能表示的最小正整数，初始化为 $1$，此时 $[1,..x-1]$ 是空的，表示当前没有任何数可以被覆盖；用一个变量 $i$ 记录当前遍历到的数组下标。</p>
+<p>因此，我们应该贪心地添加数字 <span class="arithmatex">\(x\)</span>，这样可以覆盖的区间更大。</p>
+<p>我们用一个变量 <span class="arithmatex">\(x\)</span> 记录当前不能表示的最小正整数，初始化为 <span class="arithmatex">\(1\)</span>，此时 <span class="arithmatex">\([1,..x-1]\)</span> 是空的，表示当前没有任何数可以被覆盖；用一个变量 <span class="arithmatex">\(i\)</span> 记录当前遍历到的数组下标。</p>
 <p>循环进行以下操作：</p>
 <ul>
-<li>如果 $i$ 在数组范围内且 $nums[i] \le x$，说明当前数字可以被覆盖，因此将 $x$ 的值加上 $nums[i]$，并将 $i$ 的值加 $1$。</li>
-<li>否则，说明 $x$ 没有被覆盖，因此需要在数组中补充一个数 $x$，然后 $x$ 更新为 $2x$。</li>
-<li>重复上述操作，直到 $x$ 的值大于 $n$。</li>
+<li>如果 <span class="arithmatex">\(i\)</span> 在数组范围内且 <span class="arithmatex">\(nums[i] \le x\)</span>，说明当前数字可以被覆盖，因此将 <span class="arithmatex">\(x\)</span> 的值加上 <span class="arithmatex">\(nums[i]\)</span>，并将 <span class="arithmatex">\(i\)</span> 的值加 <span class="arithmatex">\(1\)</span>。</li>
+<li>否则，说明 <span class="arithmatex">\(x\)</span> 没有被覆盖，因此需要在数组中补充一个数 <span class="arithmatex">\(x\)</span>，然后 <span class="arithmatex">\(x\)</span> 更新为 <span class="arithmatex">\(2x\)</span>。</li>
+<li>重复上述操作，直到 <span class="arithmatex">\(x\)</span> 的值大于 <span class="arithmatex">\(n\)</span>。</li>
 </ul>
 <p>最终答案即为补充的数的数量。</p>
-<p>时间复杂度 $O(m + \log n)$，其中 $m$ 为数组 $nums$ 的长度。空间复杂度 $O(1)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m + \log n)\)</span>，其中 <span class="arithmatex">\(m\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91245,11 +91243,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,16 +90861,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩动态规划</h3>
-<p>我们注意到，题目要求正好经过 $k$ 条公路，而每个城市最多只能访问一次，城市的数量为 $n$，因此，我们最多只能经过 $n - 1$ 条公路。所以，如果 $k \ge n$，那么我们无法满足题目要求，直接返回 $-1$ 即可。</p>
-<p>另外，我们也可以发现，城市数量 $n$ 不超过 $15$，这提示我们可以考虑使用状态压缩动态规划的方法求解本题。我们用一个长度为 $n$ 的二进制数表示当前已经经过的城市，其中第 $i$ 位为 $1$ 表示已经经过了第 $i$ 个城市，为 $0$ 表示还没有经过第 $i$ 个城市。</p>
-<p>我们用 $f[i][j]$ 表示当前已经经过的城市为 $i$，最后一个经过的城市为 $j$ 的情况下，最大的旅行费用。初始时 $f[2^i][i]=0$，其余 $f[i][j]=-\infty$。</p>
-<p>考虑 $f[i][j]$ 如何进行状态转移。对于 $f[i]$，我们枚举所有城市 $j$，如果 $i$ 的第 $j$ 位为 $1$，那么我们就可以从其它城市 $h$ 经过公路到达城市 $j$，此时 $f[i][j]$ 的值为 $f[i][h]+cost(h, j)$ 的最大值，其中 $cost(h, j)$ 表示从城市 $h$ 到城市 $j$ 的旅行费用。因此，我们可以得到状态转移方程：</p>
-<p>$$
-f[i][j]=\max_{h \in \textit{city}}{f[i \backslash j][h]+cost(h, j)}
-$$</p>
-<p>其中 $i \backslash j$ 表示将 $i$ 的第 $j$ 位变为 $0$。</p>
-<p>求出 $f[i][j]$ 后，我们判断经过的城市数量是否为 $k+1$，即 $i$ 的二进制表示中 $1$ 的个数是否为 $k+1$，如果是，那么我们就更新答案为 $ans = \max(ans, f[i][j])$。</p>
-<p>时间复杂度 $O(2^n \times n^2)$，空间复杂度 $O(2^n \times n)$。其中 $n$ 表示城市数量。</p>
+<p>我们注意到，题目要求正好经过 <span class="arithmatex">\(k\)</span> 条公路，而每个城市最多只能访问一次，城市的数量为 <span class="arithmatex">\(n\)</span>，因此，我们最多只能经过 <span class="arithmatex">\(n - 1\)</span> 条公路。所以，如果 <span class="arithmatex">\(k \ge n\)</span>，那么我们无法满足题目要求，直接返回 <span class="arithmatex">\(-1\)</span> 即可。</p>
+<p>另外，我们也可以发现，城市数量 <span class="arithmatex">\(n\)</span> 不超过 <span class="arithmatex">\(15\)</span>，这提示我们可以考虑使用状态压缩动态规划的方法求解本题。我们用一个长度为 <span class="arithmatex">\(n\)</span> 的二进制数表示当前已经经过的城市，其中第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span> 表示已经经过了第 <span class="arithmatex">\(i\)</span> 个城市，为 <span class="arithmatex">\(0\)</span> 表示还没有经过第 <span class="arithmatex">\(i\)</span> 个城市。</p>
+<p>我们用 <span class="arithmatex">\(f[i][j]\)</span> 表示当前已经经过的城市为 <span class="arithmatex">\(i\)</span>，最后一个经过的城市为 <span class="arithmatex">\(j\)</span> 的情况下，最大的旅行费用。初始时 <span class="arithmatex">\(f[2^i][i]=0\)</span>，其余 <span class="arithmatex">\(f[i][j]=-\infty\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span> 如何进行状态转移。对于 <span class="arithmatex">\(f[i]\)</span>，我们枚举所有城市 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(j\)</span> 位为 <span class="arithmatex">\(1\)</span>，那么我们就可以从其它城市 <span class="arithmatex">\(h\)</span> 经过公路到达城市 <span class="arithmatex">\(j\)</span>，此时 <span class="arithmatex">\(f[i][j]\)</span> 的值为 <span class="arithmatex">\(f[i][h]+cost(h, j)\)</span> 的最大值，其中 <span class="arithmatex">\(cost(h, j)\)</span> 表示从城市 <span class="arithmatex">\(h\)</span> 到城市 <span class="arithmatex">\(j\)</span> 的旅行费用。因此，我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
+f[i][j]=\max_{h \in \textit{city}}\{f[i \backslash j][h]+cost(h, j)\}
+\]</div>
+<p>其中 <span class="arithmatex">\(i \backslash j\)</span> 表示将 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(j\)</span> 位变为 <span class="arithmatex">\(0\)</span>。</p>
+<p>求出 <span class="arithmatex">\(f[i][j]\)</span> 后，我们判断经过的城市数量是否为 <span class="arithmatex">\(k+1\)</span>，即 <span class="arithmatex">\(i\)</span> 的二进制表示中 <span class="arithmatex">\(1\)</span> 的个数是否为 <span class="arithmatex">\(k+1\)</span>，如果是，那么我们就更新答案为 <span class="arithmatex">\(ans = \max(ans, f[i][j])\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(2^n \times n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^n \times n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示城市数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91462,11 +91460,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,13 +90858,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>对于第 $i$ 个数 $nums[i - 1]$，如果它被选择，且位于第 $j$ 个子数组，那么它对答案的贡献是 $nums[i - 1] \times (k - j + 1) \times (-1)^{j+1}$，我们不妨将 $(-1)^{j+1}$ 记为 $sign$，那么它对答案的贡献是 $sign \times nums[i - 1] \times (k - j + 1)$。</p>
-<p>我们定义 $f[i][j][0]$ 表示从前 $i 个数中选择 $j$ 个子数组，且第 $i$ 个数不被选的最大能量值，定义 $f[i][j][1]$ 表示从前 $i$ 个数中选择 $j$ 个子数组，且第 $i$ 个数被选的最大能量值。初始时 $f[0][0][1] = 0$，其余的值都是 $-\infty$。</p>
-<p>当 $i &gt; 0$ 时，我们考虑 $f[i][j]$ 如何进行状态转移。</p>
-<p>如果第 $i$ 个数不被选，那么第 $i-1$ 个数既可以被选，也可以不被选，所以 $f[i][j][0] = \max(f[i-1][j][0], f[i-1][j][1])$。</p>
-<p>如果第 $i$ 个数被选，此时如果第 $i-1$ 个数与第 $i$ 个数位于同一个子数组中，那么 $f[i][j][1] = \max(f[i][j][1], f[i-1][j][1] + sign \times nums[i-1] \times (k - j + 1))$，否则 $f[i][j][1] = \max(f[i][j][1], \max(f[i-1][j-1][0], f[i-1][j-1][1]) + sign \times nums[i-1] \times (k - j + 1))$。我们取这两种情况的最大值作为 $f[i][j][1]$。</p>
-<p>最终答案是 $\max(f[n][k][0], f[n][k][1])$。</p>
-<p>时间复杂度 $O(n \times k)$，空间复杂度 $O(n \times k)$。其中 $n$ 是数组 $nums$ 的长度。</p>
+<p>对于第 <span class="arithmatex">\(i\)</span> 个数 <span class="arithmatex">\(nums[i - 1]\)</span>，如果它被选择，且位于第 <span class="arithmatex">\(j\)</span> 个子数组，那么它对答案的贡献是 <span class="arithmatex">\(nums[i - 1] \times (k - j + 1) \times (-1)^{j+1}\)</span>，我们不妨将 <span class="arithmatex">\((-1)^{j+1}\)</span> 记为 <span class="arithmatex">\(sign\)</span>，那么它对答案的贡献是 <span class="arithmatex">\(sign \times nums[i - 1] \times (k - j + 1)\)</span>。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j][0]\)</span> 表示从前 $i 个数中选择 <span class="arithmatex">\(j\)</span> 个子数组，且第 <span class="arithmatex">\(i\)</span> 个数不被选的最大能量值，定义 <span class="arithmatex">\(f[i][j][1]\)</span> 表示从前 <span class="arithmatex">\(i\)</span> 个数中选择 <span class="arithmatex">\(j\)</span> 个子数组，且第 <span class="arithmatex">\(i\)</span> 个数被选的最大能量值。初始时 <span class="arithmatex">\(f[0][0][1] = 0\)</span>，其余的值都是 <span class="arithmatex">\(-\infty\)</span>。</p>
+<p>当 <span class="arithmatex">\(i &gt; 0\)</span> 时，我们考虑 <span class="arithmatex">\(f[i][j]\)</span> 如何进行状态转移。</p>
+<p>如果第 <span class="arithmatex">\(i\)</span> 个数不被选，那么第 <span class="arithmatex">\(i-1\)</span> 个数既可以被选，也可以不被选，所以 <span class="arithmatex">\(f[i][j][0] = \max(f[i-1][j][0], f[i-1][j][1])\)</span>。</p>
+<p>如果第 <span class="arithmatex">\(i\)</span> 个数被选，此时如果第 <span class="arithmatex">\(i-1\)</span> 个数与第 <span class="arithmatex">\(i\)</span> 个数位于同一个子数组中，那么 <span class="arithmatex">\(f[i][j][1] = \max(f[i][j][1], f[i-1][j][1] + sign \times nums[i-1] \times (k - j + 1))\)</span>，否则 <span class="arithmatex">\(f[i][j][1] = \max(f[i][j][1], \max(f[i-1][j-1][0], f[i-1][j-1][1]) + sign \times nums[i-1] \times (k - j + 1))\)</span>。我们取这两种情况的最大值作为 <span class="arithmatex">\(f[i][j][1]\)</span>。</p>
+<p>最终答案是 <span class="arithmatex">\(\max(f[n][k][0], f[n][k][1])\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91336,11 +91334,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

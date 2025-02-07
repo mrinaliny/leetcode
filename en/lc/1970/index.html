@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86091,9 +86089,9 @@ The last day where it is possible to cross from top to bottom is on day 3.
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search-bfs">Solution 1: Binary Search + BFS</h3>
-<p>We note that if we can walk from the top row to the bottom row on day $k$, then for any $0 &lt; k' &lt; k$, we can also walk from the top row to the bottom row on day $k'$. This exhibits monotonicity, so we can use binary search to find the largest $k$ such that we can walk from the top row to the bottom row on day $k$.</p>
-<p>We define the left boundary of the binary search as $l = 1$ and the right boundary as $r = |cells|$, where $|cells|$ represents the length of the array $\textit{cells}$. Then, we perform binary search on $k$. For each $k$, we take the first $k$ elements of $\textit{cells}$, turn the corresponding cells into water, and then use breadth-first search (BFS) to try to walk from the top row to the bottom row. If we can reach the bottom row, it means we can walk from the top row to the bottom row on day $k$, so we update the left boundary $l$ to $k$. Otherwise, we update the right boundary $r$ to $k - 1$.</p>
-<p>The time complexity is $O(m \times n \times \log (m \times n))$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ represent the number of rows and columns of the matrix, respectively.</p>
+<p>We note that if we can walk from the top row to the bottom row on day <span class="arithmatex">\(k\)</span>, then for any <span class="arithmatex">\(0 &lt; k' &lt; k\)</span>, we can also walk from the top row to the bottom row on day <span class="arithmatex">\(k'\)</span>. This exhibits monotonicity, so we can use binary search to find the largest <span class="arithmatex">\(k\)</span> such that we can walk from the top row to the bottom row on day <span class="arithmatex">\(k\)</span>.</p>
+<p>We define the left boundary of the binary search as <span class="arithmatex">\(l = 1\)</span> and the right boundary as <span class="arithmatex">\(r = |cells|\)</span>, where <span class="arithmatex">\(|cells|\)</span> represents the length of the array <span class="arithmatex">\(\textit{cells}\)</span>. Then, we perform binary search on <span class="arithmatex">\(k\)</span>. For each <span class="arithmatex">\(k\)</span>, we take the first <span class="arithmatex">\(k\)</span> elements of <span class="arithmatex">\(\textit{cells}\)</span>, turn the corresponding cells into water, and then use breadth-first search (BFS) to try to walk from the top row to the bottom row. If we can reach the bottom row, it means we can walk from the top row to the bottom row on day <span class="arithmatex">\(k\)</span>, so we update the left boundary <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(k\)</span>. Otherwise, we update the right boundary <span class="arithmatex">\(r\)</span> to <span class="arithmatex">\(k - 1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times \log (m \times n))\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> represent the number of rows and columns of the matrix, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86531,8 +86529,8 @@ The last day where it is possible to cross from top to bottom is on day 3.
 <!-- solution:start -->
 
 <h3 id="solution-2-union-find">Solution 2: Union-Find</h3>
-<p>We can first initialize all land cells as $1$, then traverse the array $\textit{cells}$ in reverse order, turning each corresponding land cell into $0$ and merging it with the adjacent land cells (up, down, left, right). We also need to maintain two virtual nodes $s$ and $t$, representing the virtual nodes for the top row and the bottom row, respectively. If $s$ and $t$ are connected in the union-find set, it means we can walk from the top row to the bottom row on day $i$.</p>
-<p>The time complexity is $O(m \times n \times \alpha(m \times n))$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ represent the number of rows and columns of the matrix, respectively, and $\alpha$ represents the inverse Ackermann function.</p>
+<p>We can first initialize all land cells as <span class="arithmatex">\(1\)</span>, then traverse the array <span class="arithmatex">\(\textit{cells}\)</span> in reverse order, turning each corresponding land cell into <span class="arithmatex">\(0\)</span> and merging it with the adjacent land cells (up, down, left, right). We also need to maintain two virtual nodes <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span>, representing the virtual nodes for the top row and the bottom row, respectively. If <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> are connected in the union-find set, it means we can walk from the top row to the bottom row on day <span class="arithmatex">\(i\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times \alpha(m \times n))\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> represent the number of rows and columns of the matrix, respectively, and <span class="arithmatex">\(\alpha\)</span> represents the inverse Ackermann function.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87376,11 +87374,9 @@ The last day where it is possible to cross from top to bottom is on day 3.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

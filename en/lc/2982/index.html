@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,12 +86069,12 @@ It can be shown that the maximum length achievable is 1.
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search-sliding-window-counting">Solution 1: Binary Search + Sliding Window Counting</h3>
-<p>We notice that if there exists a special substring of length $x$ that appears at least three times, then a special substring of length $x-1$ must also exist. This exhibits a monotonicity, so we can use binary search to find the longest special substring.</p>
-<p>We define the left boundary of the binary search as $l = 0$ and the right boundary as $r = n$, where $n$ is the length of the string. In each binary search, we take $mid = \lfloor \frac{l + r + 1}{2} \rfloor$. If a special substring of length $mid$ exists, we update the left boundary to $mid$. Otherwise, we update the right boundary to $mid - 1$. During the binary search, we use a sliding window to count the number of special substrings.</p>
-<p>Specifically, we design a function $check(x)$ to indicate whether a special substring of length $x$ that appears at least three times exists.</p>
-<p>In the function $check(x)$, we define a hash table or an array of length $26$ named $cnt$, where $cnt[i]$ represents the count of special substrings of length $x$ composed of the $i$-th lowercase letter. We traverse the string $s$. If the current character is $s[i]$, we move the pointer $j$ to the right until $s[j] \neq s[i]$. At this point, $s[i \cdots j-1]$ is a special substring of length $x$. We increase $cnt[s[i]]$ by $\max(0, j - i - x + 1)$, and then update the pointer $i$ to $j$.</p>
-<p>After the traversal, we go through the array $cnt$. If there exists $cnt[i] \geq 3$, it means a special substring of length $x$ that appears at least three times exists, so we return $true$. Otherwise, we return $false$.</p>
-<p>The time complexity is $O((n + |\Sigma|) \times \log n)$, and the space complexity is $O(|\Sigma|)$, where $n$ is the length of the string $s$, and $|\Sigma|$ represents the size of the character set. In this problem, the character set is lowercase English letters, so $|\Sigma| = 26$.</p>
+<p>We notice that if there exists a special substring of length <span class="arithmatex">\(x\)</span> that appears at least three times, then a special substring of length <span class="arithmatex">\(x-1\)</span> must also exist. This exhibits a monotonicity, so we can use binary search to find the longest special substring.</p>
+<p>We define the left boundary of the binary search as <span class="arithmatex">\(l = 0\)</span> and the right boundary as <span class="arithmatex">\(r = n\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string. In each binary search, we take <span class="arithmatex">\(mid = \lfloor \frac{l + r + 1}{2} \rfloor\)</span>. If a special substring of length <span class="arithmatex">\(mid\)</span> exists, we update the left boundary to <span class="arithmatex">\(mid\)</span>. Otherwise, we update the right boundary to <span class="arithmatex">\(mid - 1\)</span>. During the binary search, we use a sliding window to count the number of special substrings.</p>
+<p>Specifically, we design a function <span class="arithmatex">\(check(x)\)</span> to indicate whether a special substring of length <span class="arithmatex">\(x\)</span> that appears at least three times exists.</p>
+<p>In the function <span class="arithmatex">\(check(x)\)</span>, we define a hash table or an array of length <span class="arithmatex">\(26\)</span> named <span class="arithmatex">\(cnt\)</span>, where <span class="arithmatex">\(cnt[i]\)</span> represents the count of special substrings of length <span class="arithmatex">\(x\)</span> composed of the <span class="arithmatex">\(i\)</span>-th lowercase letter. We traverse the string <span class="arithmatex">\(s\)</span>. If the current character is <span class="arithmatex">\(s[i]\)</span>, we move the pointer <span class="arithmatex">\(j\)</span> to the right until <span class="arithmatex">\(s[j] \neq s[i]\)</span>. At this point, <span class="arithmatex">\(s[i \cdots j-1]\)</span> is a special substring of length <span class="arithmatex">\(x\)</span>. We increase <span class="arithmatex">\(cnt[s[i]]\)</span> by <span class="arithmatex">\(\max(0, j - i - x + 1)\)</span>, and then update the pointer <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span>.</p>
+<p>After the traversal, we go through the array <span class="arithmatex">\(cnt\)</span>. If there exists <span class="arithmatex">\(cnt[i] \geq 3\)</span>, it means a special substring of length <span class="arithmatex">\(x\)</span> that appears at least three times exists, so we return <span class="arithmatex">\(true\)</span>. Otherwise, we return <span class="arithmatex">\(false\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + |\Sigma|) \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>, and <span class="arithmatex">\(|\Sigma|\)</span> represents the size of the character set. In this problem, the character set is lowercase English letters, so <span class="arithmatex">\(|\Sigma| = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86627,11 +86625,9 @@ It can be shown that the maximum length achievable is 1.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

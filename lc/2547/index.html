@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90884,14 +90882,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i)$，表示从下标 $i$ 开始拆分的最小代价。那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(i)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从下标 <span class="arithmatex">\(i\)</span> 开始拆分的最小代价。那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \ge n$，说明已经拆分到了数组末尾，此时返回 $0$。</li>
-<li>否则，我们枚举子数组的末尾 $j$，过程中用一个数组或哈希表 <code>cnt</code> 统计子数组中每个数字出现的次数，用一个变量 <code>one</code> 统计子数组中出现次数为 $1$ 的数字的个数。那么子数组的重要性就是 $k + j - i + 1 - one$，拆分的代价就是 $k + j - i + 1 - one + dfs(j + 1)$。我们枚举所有的 $j$，取其中的最小值作为 $dfs(i)$ 的返回值。</li>
+<li>如果 <span class="arithmatex">\(i \ge n\)</span>，说明已经拆分到了数组末尾，此时返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>否则，我们枚举子数组的末尾 <span class="arithmatex">\(j\)</span>，过程中用一个数组或哈希表 <code>cnt</code> 统计子数组中每个数字出现的次数，用一个变量 <code>one</code> 统计子数组中出现次数为 <span class="arithmatex">\(1\)</span> 的数字的个数。那么子数组的重要性就是 <span class="arithmatex">\(k + j - i + 1 - one\)</span>，拆分的代价就是 <span class="arithmatex">\(k + j - i + 1 - one + dfs(j + 1)\)</span>。我们枚举所有的 <span class="arithmatex">\(j\)</span>，取其中的最小值作为 <span class="arithmatex">\(dfs(i)\)</span> 的返回值。</li>
 </ul>
-<p>过程中，我们可以使用记忆化搜索，即使用一个数组 $f$ 记忆化函数 $dfs(i)$ 的返回值，避免重复计算。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+<p>过程中，我们可以使用记忆化搜索，即使用一个数组 <span class="arithmatex">\(f\)</span> 记忆化函数 <span class="arithmatex">\(dfs(i)\)</span> 的返回值，避免重复计算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91417,11 +91415,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

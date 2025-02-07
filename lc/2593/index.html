@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90881,10 +90879,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：优先队列（小根堆）</h3>
-<p>我们用一个优先队列维护数组中未被标记的元素，队列中每一项为一个二元组 $(x, i)$，其中 $x$ 和 $i$ 分别表示数组中的元素值和下标，用一个数组 $vis$ 记录数组中的元素是否被标记。</p>
-<p>每次从队列中取出最小的元素 $(x, i)$，我们将 $x$ 加入答案，然后标记 $i$ 位置的元素，以及 $i$ 位置的左右相邻元素，即 $i - 1$ 和 $i + 1$ 位置的元素。接下来判断堆顶元素是否被标记，如果被标记则弹出堆顶元素，直到堆顶元素未被标记，或者堆为空。</p>
+<p>我们用一个优先队列维护数组中未被标记的元素，队列中每一项为一个二元组 <span class="arithmatex">\((x, i)\)</span>，其中 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(i\)</span> 分别表示数组中的元素值和下标，用一个数组 <span class="arithmatex">\(vis\)</span> 记录数组中的元素是否被标记。</p>
+<p>每次从队列中取出最小的元素 <span class="arithmatex">\((x, i)\)</span>，我们将 <span class="arithmatex">\(x\)</span> 加入答案，然后标记 <span class="arithmatex">\(i\)</span> 位置的元素，以及 <span class="arithmatex">\(i\)</span> 位置的左右相邻元素，即 <span class="arithmatex">\(i - 1\)</span> 和 <span class="arithmatex">\(i + 1\)</span> 位置的元素。接下来判断堆顶元素是否被标记，如果被标记则弹出堆顶元素，直到堆顶元素未被标记，或者堆为空。</p>
 <p>最后返回答案即可。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91180,11 +91178,11 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：排序</h3>
-<p>我们可以创建一个下标数组 $idx$，其中 $idx[i]=i$，然后我们对数组 $idx$ 按照数组 $nums$ 中的元素值进行排序，如果元素值相同，则按照下标值进行排序。</p>
-<p>接下来创建一个长度为 $n+2$ 的数组 $vis$，其中 $vis[i]=false$，表示数组中的元素是否被标记。</p>
-<p>我们遍历下标数组 $idx$，对于数组中的每一个下标 $i$，如果 $vis[i + 1]$ 为 $false$，则表示 $i$ 位置的元素未被标记，我们将 $nums[i]$ 加入答案，然后标记 $i$ 位置的元素，以及 $i$ 位置的左右相邻元素，即 $i - 1$ 和 $i + 1$ 位置的元素。继续遍历下标数组 $idx$，直到遍历结束。</p>
+<p>我们可以创建一个下标数组 <span class="arithmatex">\(idx\)</span>，其中 <span class="arithmatex">\(idx[i]=i\)</span>，然后我们对数组 <span class="arithmatex">\(idx\)</span> 按照数组 <span class="arithmatex">\(nums\)</span> 中的元素值进行排序，如果元素值相同，则按照下标值进行排序。</p>
+<p>接下来创建一个长度为 <span class="arithmatex">\(n+2\)</span> 的数组 <span class="arithmatex">\(vis\)</span>，其中 <span class="arithmatex">\(vis[i]=false\)</span>，表示数组中的元素是否被标记。</p>
+<p>我们遍历下标数组 <span class="arithmatex">\(idx\)</span>，对于数组中的每一个下标 <span class="arithmatex">\(i\)</span>，如果 <span class="arithmatex">\(vis[i + 1]\)</span> 为 <span class="arithmatex">\(false\)</span>，则表示 <span class="arithmatex">\(i\)</span> 位置的元素未被标记，我们将 <span class="arithmatex">\(nums[i]\)</span> 加入答案，然后标记 <span class="arithmatex">\(i\)</span> 位置的元素，以及 <span class="arithmatex">\(i\)</span> 位置的左右相邻元素，即 <span class="arithmatex">\(i - 1\)</span> 和 <span class="arithmatex">\(i + 1\)</span> 位置的元素。继续遍历下标数组 <span class="arithmatex">\(idx\)</span>，直到遍历结束。</p>
 <p>最后返回答案即可。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91604,11 +91602,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

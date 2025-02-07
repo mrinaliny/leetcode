@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86098,25 +86096,25 @@ If you select substring source[3..7] as the first operation to change &quot;abcd
 <!-- solution:start -->
 
 <h3 id="solution-1-trie-floyd-algorithm-memoization-search">Solution 1: Trie + Floyd Algorithm + Memoization Search</h3>
-<p>According to the problem description, we can consider each string as a node, and the conversion cost between each pair of strings as a directed edge. We first initialize a $26 \times 26$ two-dimensional array $g$, where $g[i][j]$ represents the minimum cost of converting string $i$ to string $j$. Initially, $g[i][j] = \infty$, and if $i = j$, then $g[i][j] = 0$. Here, we can use a trie to store the strings in <code>original</code> and <code>changed</code> along with their corresponding integer identifiers.</p>
+<p>According to the problem description, we can consider each string as a node, and the conversion cost between each pair of strings as a directed edge. We first initialize a <span class="arithmatex">\(26 \times 26\)</span> two-dimensional array <span class="arithmatex">\(g\)</span>, where <span class="arithmatex">\(g[i][j]\)</span> represents the minimum cost of converting string <span class="arithmatex">\(i\)</span> to string <span class="arithmatex">\(j\)</span>. Initially, <span class="arithmatex">\(g[i][j] = \infty\)</span>, and if <span class="arithmatex">\(i = j\)</span>, then <span class="arithmatex">\(g[i][j] = 0\)</span>. Here, we can use a trie to store the strings in <code>original</code> and <code>changed</code> along with their corresponding integer identifiers.</p>
 <p>Next, we use the Floyd algorithm to calculate the minimum cost between any two strings.</p>
-<p>Then, we define a function $dfs(i)$ to represent the minimum cost of converting the string $source[i..]$ to the string $target[i..]$. The answer is $dfs(0)$.</p>
-<p>The calculation process of the function $dfs(i)$ is as follows:</p>
+<p>Then, we define a function <span class="arithmatex">\(dfs(i)\)</span> to represent the minimum cost of converting the string <span class="arithmatex">\(source[i..]\)</span> to the string <span class="arithmatex">\(target[i..]\)</span>. The answer is <span class="arithmatex">\(dfs(0)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq |source|$, no conversion is needed, return $0$.</li>
-<li>Otherwise, if $source[i] = target[i]$, we can skip directly and recursively calculate $dfs(i + 1)$. We can also enumerate the index $j$ in the range $[i, |source|)$, if $source[i..j]$ and $target[i..j]$ are both in the trie, and their corresponding integer identifiers $x$ and $y$ are both greater than or equal to $0$, then we can add $dfs(j + 1)$ and $g[x][y]$ to get the cost of one conversion scheme, and we take the minimum value among all schemes.</li>
+<li>If <span class="arithmatex">\(i \geq |source|\)</span>, no conversion is needed, return <span class="arithmatex">\(0\)</span>.</li>
+<li>Otherwise, if <span class="arithmatex">\(source[i] = target[i]\)</span>, we can skip directly and recursively calculate <span class="arithmatex">\(dfs(i + 1)\)</span>. We can also enumerate the index <span class="arithmatex">\(j\)</span> in the range <span class="arithmatex">\([i, |source|)\)</span>, if <span class="arithmatex">\(source[i..j]\)</span> and <span class="arithmatex">\(target[i..j]\)</span> are both in the trie, and their corresponding integer identifiers <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are both greater than or equal to <span class="arithmatex">\(0\)</span>, then we can add <span class="arithmatex">\(dfs(j + 1)\)</span> and <span class="arithmatex">\(g[x][y]\)</span> to get the cost of one conversion scheme, and we take the minimum value among all schemes.</li>
 </ul>
 <p>In summary, we can get:</p>
-<p>$$
+<div class="arithmatex">\[
 dfs(i) = \begin{cases}
-0, &amp; i \geq |source| \
-dfs(i + 1), &amp; source[i] = target[i] \
-\min_{i \leq j &lt; |source|} { dfs(j + 1) + g[x][y] }, &amp; \textit{otherwise}
+0, &amp; i \geq |source| \\
+dfs(i + 1), &amp; source[i] = target[i] \\
+\min_{i \leq j &lt; |source|} \{ dfs(j + 1) + g[x][y] \}, &amp; \textit{otherwise}
 \end{cases}
-$$</p>
-<p>Where $x$ and $y$ are the integer identifiers of $source[i..j]$ and $target[i..j]$ in the trie, respectively.</p>
+\]</div>
+<p>Where <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are the integer identifiers of <span class="arithmatex">\(source[i..j]\)</span> and <span class="arithmatex">\(target[i..j]\)</span> in the trie, respectively.</p>
 <p>To avoid repeated calculations, we can use memoization search.</p>
-<p>The time complexity is $O(m^3 + n^2 + m \times n)$, and the space complexity is $O(m^2 + m \times n + n)$. Where $m$ and $n$ are the lengths of the arrays <code>original</code> and <code>source</code>, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m^3 + n^2 + m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m^2 + m \times n + n)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of the arrays <code>original</code> and <code>source</code>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87197,11 +87195,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90883,17 +90881,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：枚举菱形中心点 + 前缀和 + 有序集合</h3>
-<p>我们可以预处理得到两个前缀和数组 $s_1$ 和 $s_2$，其中 $s_1[i][j]$ 表示以 $(i, j)$ 为末尾的左上对角线上的元素之和，而 $s_2[i][j]$ 表示以 $(i, j)$ 为末尾的右上对角线上的元素之和。</p>
-<p>接下来，我们枚举每个位置 $(i, j)$，先将 $grid[i][j]$ 加入有序集合 $ss$ 中，然后枚举菱形的边长 $k$，那么以 $(i, j)$ 为中心点、边长为 $k$ 的菱形的和为：</p>
-<p>$$
+<p>我们可以预处理得到两个前缀和数组 <span class="arithmatex">\(s_1\)</span> 和 <span class="arithmatex">\(s_2\)</span>，其中 <span class="arithmatex">\(s_1[i][j]\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为末尾的左上对角线上的元素之和，而 <span class="arithmatex">\(s_2[i][j]\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为末尾的右上对角线上的元素之和。</p>
+<p>接下来，我们枚举每个位置 <span class="arithmatex">\((i, j)\)</span>，先将 <span class="arithmatex">\(grid[i][j]\)</span> 加入有序集合 <span class="arithmatex">\(ss\)</span> 中，然后枚举菱形的边长 <span class="arithmatex">\(k\)</span>，那么以 <span class="arithmatex">\((i, j)\)</span> 为中心点、边长为 <span class="arithmatex">\(k\)</span> 的菱形的和为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-&amp;\quad s_1[i + k][j] - s_1[i][j - k] + s_1[i][j + k] - s_1[i - k][j] \
-&amp;+ s_2[i][j - k] - s_2[i - k][j] + s_2[i + k][j] - s_2[i][j + k] \
+&amp;\quad s_1[i + k][j] - s_1[i][j - k] + s_1[i][j + k] - s_1[i - k][j] \\
+&amp;+ s_2[i][j - k] - s_2[i - k][j] + s_2[i + k][j] - s_2[i][j + k] \\
 &amp;- grid[i + k - 1][j - 1] + grid[i - k - 1][j - 1]
 \end{aligned}
-$$</p>
-<p>我们将这个值加入有序集合 $ss$ 中，同时保证有序集合 $ss$ 的大小不超过 $3$，最后将有序集合 $ss$ 中的元素逆序输出即可。</p>
-<p>时间复杂度 $O(m \times n \times \min(m, n))$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是矩阵的行数和列数。</p>
+\]</div>
+<p>我们将这个值加入有序集合 <span class="arithmatex">\(ss\)</span> 中，同时保证有序集合 <span class="arithmatex">\(ss\)</span> 的大小不超过 <span class="arithmatex">\(3\)</span>，最后将有序集合 <span class="arithmatex">\(ss\)</span> 中的元素逆序输出即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times \min(m, n))\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是矩阵的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92739,11 +92737,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

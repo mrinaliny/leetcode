@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,20 +86058,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-prefix-and-suffix-decomposition-enumeration">Solution 1: Dynamic Programming + Prefix and Suffix Decomposition + Enumeration</h3>
-<p>We consider dividing the sequence into two parts, the first $k$ elements and the last $k$ elements, and calculate all possible XOR values for the prefixes and suffixes.</p>
-<p>Define $f[i][j][x]$ to represent whether there exists a subset with an XOR value of $x$ by taking $j$ elements from the first $i$ elements. Define $g[i][j][y]$ to represent whether there exists a subset with an XOR value of $y$ by taking $j$ elements starting from index $i$.</p>
-<p>Consider the transition equation for $f[i][j][x]$. For the $i$-th element (starting from $0$), we can choose to take it or not, so we have:</p>
-<p>$$
-f[i + 1][j][x] = f[i + 1][j][x] \lor f[i][j][x] \
+<p>We consider dividing the sequence into two parts, the first <span class="arithmatex">\(k\)</span> elements and the last <span class="arithmatex">\(k\)</span> elements, and calculate all possible XOR values for the prefixes and suffixes.</p>
+<p>Define <span class="arithmatex">\(f[i][j][x]\)</span> to represent whether there exists a subset with an XOR value of <span class="arithmatex">\(x\)</span> by taking <span class="arithmatex">\(j\)</span> elements from the first <span class="arithmatex">\(i\)</span> elements. Define <span class="arithmatex">\(g[i][j][y]\)</span> to represent whether there exists a subset with an XOR value of <span class="arithmatex">\(y\)</span> by taking <span class="arithmatex">\(j\)</span> elements starting from index <span class="arithmatex">\(i\)</span>.</p>
+<p>Consider the transition equation for <span class="arithmatex">\(f[i][j][x]\)</span>. For the <span class="arithmatex">\(i\)</span>-th element (starting from <span class="arithmatex">\(0\)</span>), we can choose to take it or not, so we have:</p>
+<div class="arithmatex">\[
+f[i + 1][j][x] = f[i + 1][j][x] \lor f[i][j][x] \\
 f[i + 1][j + 1][x \lor \text{nums}[i]] = f[i + 1][j + 1][x \lor \text{nums}[i]] \lor f[i][j][x]
-$$</p>
-<p>For the transition equation of $g[i][j][y]$, similarly for the $i$-th element (starting from $n - 1$), we can choose to take it or not, so we have:</p>
-<p>$$
-g[i - 1][j][y] = g[i - 1][j][y] \lor g[i][j][y] \
+\]</div>
+<p>For the transition equation of <span class="arithmatex">\(g[i][j][y]\)</span>, similarly for the <span class="arithmatex">\(i\)</span>-th element (starting from <span class="arithmatex">\(n - 1\)</span>), we can choose to take it or not, so we have:</p>
+<div class="arithmatex">\[
+g[i - 1][j][y] = g[i - 1][j][y] \lor g[i][j][y] \\
 g[i - 1][j + 1][y \lor \text{nums}[i - 1]] = g[i - 1][j + 1][y \lor \text{nums}[i - 1]] \lor g[i][j][y]
-$$</p>
-<p>Finally, we enumerate $i$ in the range $[k, n - k]$. For each $i$, we enumerate $x$ and $y$, where $0 \leq x, y &lt; 2^7$. If both $f[i][k][x]$ and $g[i][k][y]$ are true, we update the answer $\text{ans} = \max(\text{ans}, x \oplus y)$.</p>
-<p>The time complexity is $O(n \times m \times k)$, and the space complexity is $O(n \times m \times k)$, where $n$ is the length of the array, and $m = 2^7$.</p>
+\]</div>
+<p>Finally, we enumerate <span class="arithmatex">\(i\)</span> in the range <span class="arithmatex">\([k, n - k]\)</span>. For each <span class="arithmatex">\(i\)</span>, we enumerate <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, where <span class="arithmatex">\(0 \leq x, y &lt; 2^7\)</span>. If both <span class="arithmatex">\(f[i][k][x]\)</span> and <span class="arithmatex">\(g[i][k][y]\)</span> are true, we update the answer <span class="arithmatex">\(\text{ans} = \max(\text{ans}, x \oplus y)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times m \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times m \times k)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array, and <span class="arithmatex">\(m = 2^7\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86797,11 +86795,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

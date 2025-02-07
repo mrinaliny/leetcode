@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90861,14 +90859,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划（分组背包）</h3>
-<p>我们定义 $f[i][j]$ 表示从前 $i$ 组中取出 $j$ 个硬币的最大面值和，那么答案为 $f[n][k]$，其中 $n$ 为栈的数量。</p>
-<p>对于第 $i$ 组，我们可以选择取前 $0$, $1$, $2$, $\cdots$, $k$ 个硬币。我们可以通过前缀和数组 $s$ 来快速计算出取前 $h$ 个硬币的面值和。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示从前 <span class="arithmatex">\(i\)</span> 组中取出 <span class="arithmatex">\(j\)</span> 个硬币的最大面值和，那么答案为 <span class="arithmatex">\(f[n][k]\)</span>，其中 <span class="arithmatex">\(n\)</span> 为栈的数量。</p>
+<p>对于第 <span class="arithmatex">\(i\)</span> 组，我们可以选择取前 <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span>, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\(k\)</span> 个硬币。我们可以通过前缀和数组 <span class="arithmatex">\(s\)</span> 来快速计算出取前 <span class="arithmatex">\(h\)</span> 个硬币的面值和。</p>
 <p>状态转移方程为：</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \max(f[i][j], f[i - 1][j - h] + s[h])
-$$</p>
-<p>其中 $0 \leq h \leq j$，而 $s[h]$ 表示第 $i$ 组中取前 $h$ 个硬币的面值和。</p>
-<p>时间复杂度 $O(k \times L)$，空间复杂度 $O(n \times k)$。其中 $L$ 为所有硬币的数量，而 $n$ 为栈的数量。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(0 \leq h \leq j\)</span>，而 <span class="arithmatex">\(s[h]\)</span> 表示第 <span class="arithmatex">\(i\)</span> 组中取前 <span class="arithmatex">\(h\)</span> 个硬币的面值和。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(k \times L)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(L\)</span> 为所有硬币的数量，而 <span class="arithmatex">\(n\)</span> 为栈的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91074,8 +91072,8 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划（空间优化）</h3>
-<p>我们可以发现，对于第 $i$ 组，我们只需要用到 $f[i - 1][j]$ 和 $f[i][j - h]$，因此我们可以将二维数组优化为一维数组。</p>
-<p>时间复杂度 $O(k \times L)$，空间复杂度 $O(k)$。</p>
+<p>我们可以发现，对于第 <span class="arithmatex">\(i\)</span> 组，我们只需要用到 <span class="arithmatex">\(f[i - 1][j]\)</span> 和 <span class="arithmatex">\(f[i][j - h]\)</span>，因此我们可以将二维数组优化为一维数组。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(k \times L)\)</span>，空间复杂度 <span class="arithmatex">\(O(k)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91471,11 +91469,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

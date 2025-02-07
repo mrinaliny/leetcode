@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90842,10 +90840,10 @@
 
 <h3 id="_3">方法一：动态规划（逆向）</h3>
 <p>题目需要我们找到从下标 1 到下标 n 的最小花费路径，且字典序最小，我们可以使用动态规划求解。</p>
-<p>我们定义 $f[i]$ 表示从下标 $i$ 到下标 $n-1$ 的最小花费。如果 $coins[n - 1] = -1$，则不存在从下标 $n-1$ 到下标 $n-1$ 的路径，直接返回空数组即可。否则 $f[n - 1] = coins[n - 1]$。</p>
-<p>接下来，我们从下标 $n-2$ 开始，逆向遍历数组，对于下标 $i$，如果 $coins[i] = -1$，则 $f[i] = \infty$，否则 $f[i] = \min_{j = i + 1}^{min(n - 1, i + maxJump)} f[j] + coins[i]$。</p>
-<p>然后我们判断 $f[0]$ 是否为 $\infty$，如果是，则不存在一条满足条件的路径，返回空数组即可。否则，我们的总花费为 $s = f[0]$，我们从下标 0 开始，向后遍历数组，如果 $f[i] = s$，则说明从下标 $i$ 到下标 $n-1$ 的花费为 $s$，我们将 $s$ 减去 $coins[i]$，并将下标 $i+1$ 加入到结果数组中，直到遍历到下标 $n-1$，返回结果数组即可。</p>
-<p>时间复杂度 $O(n \times m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为数组的长度和最大跳跃长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示从下标 <span class="arithmatex">\(i\)</span> 到下标 <span class="arithmatex">\(n-1\)</span> 的最小花费。如果 <span class="arithmatex">\(coins[n - 1] = -1\)</span>，则不存在从下标 <span class="arithmatex">\(n-1\)</span> 到下标 <span class="arithmatex">\(n-1\)</span> 的路径，直接返回空数组即可。否则 <span class="arithmatex">\(f[n - 1] = coins[n - 1]\)</span>。</p>
+<p>接下来，我们从下标 <span class="arithmatex">\(n-2\)</span> 开始，逆向遍历数组，对于下标 <span class="arithmatex">\(i\)</span>，如果 <span class="arithmatex">\(coins[i] = -1\)</span>，则 <span class="arithmatex">\(f[i] = \infty\)</span>，否则 <span class="arithmatex">\(f[i] = \min_{j = i + 1}^{min(n - 1, i + maxJump)} f[j] + coins[i]\)</span>。</p>
+<p>然后我们判断 <span class="arithmatex">\(f[0]\)</span> 是否为 <span class="arithmatex">\(\infty\)</span>，如果是，则不存在一条满足条件的路径，返回空数组即可。否则，我们的总花费为 <span class="arithmatex">\(s = f[0]\)</span>，我们从下标 0 开始，向后遍历数组，如果 <span class="arithmatex">\(f[i] = s\)</span>，则说明从下标 <span class="arithmatex">\(i\)</span> 到下标 <span class="arithmatex">\(n-1\)</span> 的花费为 <span class="arithmatex">\(s\)</span>，我们将 <span class="arithmatex">\(s\)</span> 减去 <span class="arithmatex">\(coins[i]\)</span>，并将下标 <span class="arithmatex">\(i+1\)</span> 加入到结果数组中，直到遍历到下标 <span class="arithmatex">\(n-1\)</span>，返回结果数组即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为数组的长度和最大跳跃长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91374,11 +91372,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

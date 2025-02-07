@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90909,16 +90907,16 @@
 <!-- solution:start -->
 
 <h3 id="bfs">方法一：BFS + 状态压缩 + 记忆化搜索</h3>
-<p>我们首先预处理出每个兵到棋盘上任意一个位置的马的最短距离，记录在数组 $\textit{dist}$ 中，即 $\textit{dist}[i][x][y]$ 表示第 $i$ 个兵到 $(x, y)$ 位置的马的最短距离。</p>
-<p>接下来，我们设计一个函数 $\text{dfs}(\textit{last}, \textit{state}, \textit{k})$，其中 $\textit{last}$ 表示上一个吃掉的兵的编号，而 $\textit{state}$ 表示当前还剩下的兵的状态，而 $\textit{k}$ 表示当前是 Alice 还是 Bob 的回合。函数的返回值表示当前回合的最大移动次数。那么答案为 $\text{dfs}(n, 2^n-1, 1)$。这里我们初始时上一个吃掉的兵的编号记为 $n$，这也是马所在的位置。</p>
-<p>函数 $\text{dfs}$ 的具体实现如下：</p>
+<p>我们首先预处理出每个兵到棋盘上任意一个位置的马的最短距离，记录在数组 <span class="arithmatex">\(\textit{dist}\)</span> 中，即 <span class="arithmatex">\(\textit{dist}[i][x][y]\)</span> 表示第 <span class="arithmatex">\(i\)</span> 个兵到 <span class="arithmatex">\((x, y)\)</span> 位置的马的最短距离。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(\text{dfs}(\textit{last}, \textit{state}, \textit{k})\)</span>，其中 <span class="arithmatex">\(\textit{last}\)</span> 表示上一个吃掉的兵的编号，而 <span class="arithmatex">\(\textit{state}\)</span> 表示当前还剩下的兵的状态，而 <span class="arithmatex">\(\textit{k}\)</span> 表示当前是 Alice 还是 Bob 的回合。函数的返回值表示当前回合的最大移动次数。那么答案为 <span class="arithmatex">\(\text{dfs}(n, 2^n-1, 1)\)</span>。这里我们初始时上一个吃掉的兵的编号记为 <span class="arithmatex">\(n\)</span>，这也是马所在的位置。</p>
+<p>函数 <span class="arithmatex">\(\text{dfs}\)</span> 的具体实现如下：</p>
 <ul>
-<li>如果 $\textit{state} = 0$，表示没有兵了，返回 $0$；</li>
-<li>如果 $\textit{k} = 1$，表示当前是 Alice 的回合，我们需要找到一个兵，使得吃掉这个兵后的移动次数最大，即 $\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]$；</li>
-<li>如果 $\textit{k} = 0$，表示当前是 Bob 的回合，我们需要找到一个兵，使得吃掉这个兵后的移动次数最小，即 $\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]$。</li>
+<li>如果 <span class="arithmatex">\(\textit{state} = 0\)</span>，表示没有兵了，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(\textit{k} = 1\)</span>，表示当前是 Alice 的回合，我们需要找到一个兵，使得吃掉这个兵后的移动次数最大，即 <span class="arithmatex">\(\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]\)</span>；</li>
+<li>如果 <span class="arithmatex">\(\textit{k} = 0\)</span>，表示当前是 Bob 的回合，我们需要找到一个兵，使得吃掉这个兵后的移动次数最小，即 <span class="arithmatex">\(\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]\)</span>。</li>
 </ul>
 <p>为了避免重复计算，我们使用记忆化搜索，即使用哈希表记录已经计算过的状态。</p>
-<p>时间复杂度 $O(n \times m^2 + 2^n \times n^2)$，空间复杂度 $O(n \times m^2 + 2^n \times n)$。其中 $n$ 和 $m$ 分别为兵的数量和棋盘的大小。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m^2 + 2^n \times n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times m^2 + 2^n \times n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为兵的数量和棋盘的大小。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91638,11 +91636,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

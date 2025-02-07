@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,11 +90866,11 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：动态规划（区间 DP）</h3>
-<p>在这道题中，我们需要判断一个字符串是否能够进行压缩，也即是说，一个字符串是否能通过其子串重复多次构成。我们可以利用第 $459$ 题的方法来判断，定义一个方法 $g(i, j)$，表示将字符串 $s[i...j]$ 进行压缩后得到的字符串。</p>
-<p>接下来，我们用动态规划的方法，将字符串 $s$ 编码成一个最短长度的字符串。</p>
-<p>我们定义 $f[i][j]$ 表示将字符串 $s[i..j]$ 编码后的最短字符串。如果直接将 $s[i..j]$ 进行压缩编码，那么 $f[i][j] = g(i, j)$，如果我们将其分成两个子串进行编码，那么 $f[i][j]$ 的值为 $f[i][k] + f[k + 1][j]$ 的最小值，其中 $i \le k &lt; j$。取两种情况下长度较小的字符串即可。</p>
-<p>在枚举 $i$ 和 $j$ 时，我们可以从大到小枚举 $i$，然后从小到大枚举 $j$，这样我们在计算 $f[i][j]$ 时，$f[i][k]$ 和 $f[k + 1][j]$ 的值都已经被计算过了。</p>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n^2)$。其中 $n$ 是字符串 $s$ 的长度。</p>
+<p>在这道题中，我们需要判断一个字符串是否能够进行压缩，也即是说，一个字符串是否能通过其子串重复多次构成。我们可以利用第 <span class="arithmatex">\(459\)</span> 题的方法来判断，定义一个方法 <span class="arithmatex">\(g(i, j)\)</span>，表示将字符串 <span class="arithmatex">\(s[i...j]\)</span> 进行压缩后得到的字符串。</p>
+<p>接下来，我们用动态规划的方法，将字符串 <span class="arithmatex">\(s\)</span> 编码成一个最短长度的字符串。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示将字符串 <span class="arithmatex">\(s[i..j]\)</span> 编码后的最短字符串。如果直接将 <span class="arithmatex">\(s[i..j]\)</span> 进行压缩编码，那么 <span class="arithmatex">\(f[i][j] = g(i, j)\)</span>，如果我们将其分成两个子串进行编码，那么 <span class="arithmatex">\(f[i][j]\)</span> 的值为 <span class="arithmatex">\(f[i][k] + f[k + 1][j]\)</span> 的最小值，其中 <span class="arithmatex">\(i \le k &lt; j\)</span>。取两种情况下长度较小的字符串即可。</p>
+<p>在枚举 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 时，我们可以从大到小枚举 <span class="arithmatex">\(i\)</span>，然后从小到大枚举 <span class="arithmatex">\(j\)</span>，这样我们在计算 <span class="arithmatex">\(f[i][j]\)</span> 时，<span class="arithmatex">\(f[i][k]\)</span> 和 <span class="arithmatex">\(f[k + 1][j]\)</span> 的值都已经被计算过了。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91437,11 +91435,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

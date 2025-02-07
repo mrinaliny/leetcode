@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90878,12 +90876,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找 + 滑动窗口计数</h3>
-<p>我们注意到，如果一个长度为 $x$ 且出现至少三次的特殊子字符串存在，那么长度为 $x-1$ 的特殊子字符串也一定存在，这存在着单调性，因此我们可以使用二分查找的方法来找到最长的特殊子字符串。</p>
-<p>我们定义二分查找的左边界 $l = 0$，右边界 $r = n$，其中 $n$ 是字符串的长度。每次二分查找的过程中，我们取 $mid = \lfloor \frac{l + r + 1}{2} \rfloor$，如果长度为 $mid$ 的特殊子字符串存在，那么我们就将左边界更新为 $mid$，否则我们就将右边界更新为 $mid - 1$。在二分查找的过程中，我们使用滑动窗口来计算特殊子字符串的个数。</p>
-<p>具体地，我们设计一个函数 $check(x)$，表示长度为 $x$ 且出现至少三次的特殊子字符串是否存在。</p>
-<p>在函数 $check(x)$ 中，我们定义一个哈希表或长度为 $26$ 的数组 $cnt$，其中 $cnt[i]$ 表示长度为 $x$，且由第 $i$ 个小写字母组成的特殊子字符串的个数。我们遍历字符串 $s$，如果当前遍历到的字符为 $s[i]$，那么我们将指针 $j$ 向右移动，直到 $s[j] \neq s[i]$，此时 $s[i \cdots j-1]$ 就是一个长度为 $x$ 的特殊子字符串，我们将 $cnt[s[i]]$ 增加 $\max(0, j - i - x + 1)$，然后将指针 $i$ 更新为 $j$。</p>
-<p>在遍历结束之后，我们遍历数组 $cnt$，如果存在 $cnt[i] \geq 3$，那么就说明长度为 $x$ 且出现至少三次的特殊子字符串存在，我们返回 $true$，否则返回 $false$。</p>
-<p>时间复杂度 $O((n + |\Sigma|) \times \log n)$，空间复杂度 $O(|\Sigma|)$，其中 $n$ 是字符串 $s$ 的长度，而 $|\Sigma|$ 表示字符集的大小，本题中字符集为小写英文字母，因此 $|\Sigma| = 26$。</p>
+<p>我们注意到，如果一个长度为 <span class="arithmatex">\(x\)</span> 且出现至少三次的特殊子字符串存在，那么长度为 <span class="arithmatex">\(x-1\)</span> 的特殊子字符串也一定存在，这存在着单调性，因此我们可以使用二分查找的方法来找到最长的特殊子字符串。</p>
+<p>我们定义二分查找的左边界 <span class="arithmatex">\(l = 0\)</span>，右边界 <span class="arithmatex">\(r = n\)</span>，其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。每次二分查找的过程中，我们取 <span class="arithmatex">\(mid = \lfloor \frac{l + r + 1}{2} \rfloor\)</span>，如果长度为 <span class="arithmatex">\(mid\)</span> 的特殊子字符串存在，那么我们就将左边界更新为 <span class="arithmatex">\(mid\)</span>，否则我们就将右边界更新为 <span class="arithmatex">\(mid - 1\)</span>。在二分查找的过程中，我们使用滑动窗口来计算特殊子字符串的个数。</p>
+<p>具体地，我们设计一个函数 <span class="arithmatex">\(check(x)\)</span>，表示长度为 <span class="arithmatex">\(x\)</span> 且出现至少三次的特殊子字符串是否存在。</p>
+<p>在函数 <span class="arithmatex">\(check(x)\)</span> 中，我们定义一个哈希表或长度为 <span class="arithmatex">\(26\)</span> 的数组 <span class="arithmatex">\(cnt\)</span>，其中 <span class="arithmatex">\(cnt[i]\)</span> 表示长度为 <span class="arithmatex">\(x\)</span>，且由第 <span class="arithmatex">\(i\)</span> 个小写字母组成的特殊子字符串的个数。我们遍历字符串 <span class="arithmatex">\(s\)</span>，如果当前遍历到的字符为 <span class="arithmatex">\(s[i]\)</span>，那么我们将指针 <span class="arithmatex">\(j\)</span> 向右移动，直到 <span class="arithmatex">\(s[j] \neq s[i]\)</span>，此时 <span class="arithmatex">\(s[i \cdots j-1]\)</span> 就是一个长度为 <span class="arithmatex">\(x\)</span> 的特殊子字符串，我们将 <span class="arithmatex">\(cnt[s[i]]\)</span> 增加 <span class="arithmatex">\(\max(0, j - i - x + 1)\)</span>，然后将指针 <span class="arithmatex">\(i\)</span> 更新为 <span class="arithmatex">\(j\)</span>。</p>
+<p>在遍历结束之后，我们遍历数组 <span class="arithmatex">\(cnt\)</span>，如果存在 <span class="arithmatex">\(cnt[i] \geq 3\)</span>，那么就说明长度为 <span class="arithmatex">\(x\)</span> 且出现至少三次的特殊子字符串存在，我们返回 <span class="arithmatex">\(true\)</span>，否则返回 <span class="arithmatex">\(false\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + |\Sigma|) \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(|\Sigma|)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度，而 <span class="arithmatex">\(|\Sigma|\)</span> 表示字符集的大小，本题中字符集为小写英文字母，因此 <span class="arithmatex">\(|\Sigma| = 26\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91205,7 +91203,7 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：计数</h3>
-<p>时间复杂度 $O(n)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">TypeScript</label><label for="__tabbed_2_2">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91573,11 +91571,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

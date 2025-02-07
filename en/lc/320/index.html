@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86065,13 +86063,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs">Solution 1: DFS</h3>
-<p>We design a function $dfs(i)$, which returns all possible abbreviations for the string $word[i:]$.</p>
-<p>The execution logic of the function $dfs(i)$ is as follows:</p>
-<p>If $i \geq n$, it means that the string $word$ has been processed, and we directly return a list composed of an empty string.</p>
-<p>Otherwise, we can choose to keep $word[i]$, and then add $word[i]$ to the front of each string in the list returned by $dfs(i + 1)$, and add the obtained result to the answer.</p>
-<p>We can also choose to delete $word[i]$ and some characters after it. Suppose we delete $word[i..j)$, then the $j$ th character is not deleted, and then add $j - i$ to the front of each string in the list returned by $dfs(j + 1)$, and add the obtained result to the answer.</p>
-<p>Finally, we call $dfs(0)$ in the main function.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Where $n$ is the length of the string $word$.</p>
+<p>We design a function <span class="arithmatex">\(dfs(i)\)</span>, which returns all possible abbreviations for the string <span class="arithmatex">\(word[i:]\)</span>.</p>
+<p>The execution logic of the function <span class="arithmatex">\(dfs(i)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i \geq n\)</span>, it means that the string <span class="arithmatex">\(word\)</span> has been processed, and we directly return a list composed of an empty string.</p>
+<p>Otherwise, we can choose to keep <span class="arithmatex">\(word[i]\)</span>, and then add <span class="arithmatex">\(word[i]\)</span> to the front of each string in the list returned by <span class="arithmatex">\(dfs(i + 1)\)</span>, and add the obtained result to the answer.</p>
+<p>We can also choose to delete <span class="arithmatex">\(word[i]\)</span> and some characters after it. Suppose we delete <span class="arithmatex">\(word[i..j)\)</span>, then the <span class="arithmatex">\(j\)</span> th character is not deleted, and then add <span class="arithmatex">\(j - i\)</span> to the front of each string in the list returned by <span class="arithmatex">\(dfs(j + 1)\)</span>, and add the obtained result to the answer.</p>
+<p>Finally, we call <span class="arithmatex">\(dfs(0)\)</span> in the main function.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(word\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86303,8 +86301,8 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-binary-enumeration">Solution 2: Binary Enumeration</h3>
-<p>Since the length of the string $word$ does not exceed $15$, we can use the method of binary enumeration to enumerate all abbreviations. We use a binary number $i$ of length $n$ to represent an abbreviation, where $0$ represents keeping the corresponding character, and $1$ represents deleting the corresponding character. We enumerate all $i$ in the range of $[0, 2^n)$, convert it into the corresponding abbreviation, and add it to the answer list.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Where $n$ is the length of the string $word$.</p>
+<p>Since the length of the string <span class="arithmatex">\(word\)</span> does not exceed <span class="arithmatex">\(15\)</span>, we can use the method of binary enumeration to enumerate all abbreviations. We use a binary number <span class="arithmatex">\(i\)</span> of length <span class="arithmatex">\(n\)</span> to represent an abbreviation, where <span class="arithmatex">\(0\)</span> represents keeping the corresponding character, and <span class="arithmatex">\(1\)</span> represents deleting the corresponding character. We enumerate all <span class="arithmatex">\(i\)</span> in the range of <span class="arithmatex">\([0, 2^n)\)</span>, convert it into the corresponding abbreviation, and add it to the answer list.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(word\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86741,11 +86739,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

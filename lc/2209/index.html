@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90857,16 +90855,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$ 表示从下标 $i$ 开始，使用 $j$ 条地毯，最少有多少个白色砖块没有被覆盖。答案即为 $dfs(0, numCarpets)$。</p>
-<p>对于下标 $i$，我们分情况讨论：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span> 表示从下标 <span class="arithmatex">\(i\)</span> 开始，使用 <span class="arithmatex">\(j\)</span> 条地毯，最少有多少个白色砖块没有被覆盖。答案即为 <span class="arithmatex">\(dfs(0, numCarpets)\)</span>。</p>
+<p>对于下标 <span class="arithmatex">\(i\)</span>，我们分情况讨论：</p>
 <ul>
-<li>如果 $i \ge n$，说明已经覆盖完所有砖块，返回 $0$；</li>
-<li>如果 $floor[i] = 0$，则不需要使用地毯，直接跳过即可，即 $dfs(i, j) = dfs(i + 1, j)$；</li>
-<li>如果 $j = 0$，那么我们可以直接利用前缀和数组 $s$ 计算出剩余未被覆盖的白色砖块的数目，即 $dfs(i, j) = s[n] - s[i]$；</li>
-<li>如果 $floor[i] = 1$，那么我们可以选择使用地毯覆盖，也可以选择不使用地毯覆盖，取两者的最小值即可，即 $dfs(i, j) = min(dfs(i + 1, j), dfs(i + carpetLen, j - 1))$。</li>
+<li>如果 <span class="arithmatex">\(i \ge n\)</span>，说明已经覆盖完所有砖块，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(floor[i] = 0\)</span>，则不需要使用地毯，直接跳过即可，即 <span class="arithmatex">\(dfs(i, j) = dfs(i + 1, j)\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j = 0\)</span>，那么我们可以直接利用前缀和数组 <span class="arithmatex">\(s\)</span> 计算出剩余未被覆盖的白色砖块的数目，即 <span class="arithmatex">\(dfs(i, j) = s[n] - s[i]\)</span>；</li>
+<li>如果 <span class="arithmatex">\(floor[i] = 1\)</span>，那么我们可以选择使用地毯覆盖，也可以选择不使用地毯覆盖，取两者的最小值即可，即 <span class="arithmatex">\(dfs(i, j) = min(dfs(i + 1, j), dfs(i + carpetLen, j - 1))\)</span>。</li>
 </ul>
 <p>记忆化搜索即可。</p>
-<p>时间复杂度 $O(n\times m)$，空间复杂度 $O(n\times m)$。其中 $n$ 和 $m$ 分别为字符串 $floor$ 的长度和 $numCarpets$ 的值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\times m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n\times m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为字符串 <span class="arithmatex">\(floor\)</span> 的长度和 <span class="arithmatex">\(numCarpets\)</span> 的值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91332,11 +91330,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

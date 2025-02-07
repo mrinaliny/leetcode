@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86094,7 +86092,7 @@
 
 <h3 id="solution-1-recursion">Solution 1: Recursion</h3>
 <p>We first recursively traverse the left and right subtrees, then visit the root node.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree. The space complexity mainly depends on the stack space used for recursive calls.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree. The space complexity mainly depends on the stack space used for recursive calls.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86443,14 +86441,14 @@
 <p>The order of preorder traversal is: root, left, right. If we change the order of the left and right children, the order becomes: root, right, left. Finally, reversing the result gives us the postorder traversal result.</p>
 <p>Therefore, the idea of using a stack to implement non-recursive traversal is as follows:</p>
 <ol>
-<li>Define a stack $stk$, and first push the root node into the stack.</li>
+<li>Define a stack <span class="arithmatex">\(stk\)</span>, and first push the root node into the stack.</li>
 <li>If the stack is not empty, pop a node from the stack each time.</li>
 <li>Process the node.</li>
 <li>First push the left child of the node into the stack, then push the right child of the node into the stack (if there are child nodes).</li>
 <li>Repeat steps 2-4.</li>
 <li>Reverse the result to get the postorder traversal result.</li>
 </ol>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree. The space complexity mainly depends on the stack space.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree. The space complexity mainly depends on the stack space.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86768,12 +86766,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-3-morris-implementation-for-postorder-traversal">Solution 3: Morris Implementation for Postorder Traversal</h3>
-<p>Morris traversal does not require a stack, and its space complexity is $O(1)$. The core idea is:</p>
+<p>Morris traversal does not require a stack, and its space complexity is <span class="arithmatex">\(O(1)\)</span>. The core idea is:</p>
 <p>Traverse the binary tree nodes,</p>
 <ol>
-<li>If the right subtree of the current node <code>root</code> is empty, add the current node value to the result list $ans$, and update the current node to <code>root.left</code>.</li>
+<li>If the right subtree of the current node <code>root</code> is empty, add the current node value to the result list <span class="arithmatex">\(ans\)</span>, and update the current node to <code>root.left</code>.</li>
 <li>If the right subtree of the current node <code>root</code> is not empty, find the leftmost node <code>next</code> of the right subtree (which is the successor of the <code>root</code> node in inorder traversal):<ul>
-<li>If the left subtree of the successor node <code>next</code> is empty, add the current node value to the result list $ans$, then point the left subtree of the successor node to the current node <code>root</code>, and update the current node to <code>root.right</code>.</li>
+<li>If the left subtree of the successor node <code>next</code> is empty, add the current node value to the result list <span class="arithmatex">\(ans\)</span>, then point the left subtree of the successor node to the current node <code>root</code>, and update the current node to <code>root.right</code>.</li>
 <li>If the left subtree of the successor node <code>next</code> is not empty, point the left subtree of the successor node to null (i.e., disconnect <code>next</code> and <code>root</code>), and update the current node to <code>root.left</code>.</li>
 </ul>
 </li>
@@ -86783,7 +86781,7 @@
 <blockquote>
 <p>The idea of Morris postorder traversal is consistent with Morris preorder traversal, just change the "root-left-right" of preorder to "root-right-left", and finally reverse the result to become "left-right-root".</p>
 </blockquote>
-<p>The time complexity is $O(n)$, where $n$ is the number of nodes in the binary tree. The space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87379,11 +87377,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

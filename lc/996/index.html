@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,12 +90866,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二进制状态压缩 + 动态规划</h3>
-<p>注意到，数组 $nums$ 的长度 $n$ 不超过 $12$，因此我们可以用一个二进制数表示当前所选的数字的状态，若第 $i$ 位为 $1$，则表示当前选择了第 $i$ 个数字，否则表示当前没有选择第 $i$ 个数字。</p>
-<p>我们定义 $f[i][j]$ 表示当前所选的数字的状态为 $i$，且最后一个数字为 $nums[j]$ 的方案数。那么答案就是 $\sum_{j=0}^{n-1} f[2^n-1][j]$。由于最后求解的是排列数，因此还需要除以每个数字出现的次数的阶乘。</p>
+<p>注意到，数组 <span class="arithmatex">\(nums\)</span> 的长度 <span class="arithmatex">\(n\)</span> 不超过 <span class="arithmatex">\(12\)</span>，因此我们可以用一个二进制数表示当前所选的数字的状态，若第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span>，则表示当前选择了第 <span class="arithmatex">\(i\)</span> 个数字，否则表示当前没有选择第 <span class="arithmatex">\(i\)</span> 个数字。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示当前所选的数字的状态为 <span class="arithmatex">\(i\)</span>，且最后一个数字为 <span class="arithmatex">\(nums[j]\)</span> 的方案数。那么答案就是 <span class="arithmatex">\(\sum_{j=0}^{n-1} f[2^n-1][j]\)</span>。由于最后求解的是排列数，因此还需要除以每个数字出现的次数的阶乘。</p>
 <p>接下来，我们考虑如何进行状态转移。</p>
-<p>假设当前所选的数字的状态为 $i$，最后一个数字为 $nums[j]$，那么我们可以枚举 $i$ 的每一位为 $1$ 的数字作为倒数第二个数，不妨设为 $nums[k]$，那么我们只需要判断 $nums[j]+nums[k]$ 是否为完全平方数即可，若是，方案数 $f[i][j]$ 就可以加上 $f[i \oplus 2^j][k]$，其中 $i \oplus 2^j$ 表示将 $i$ 的第 $j$ 位取反，即表示将 $nums[j]$ 从当前所选的数字中去除。</p>
-<p>最后，我们还需要除以每个数字出现的次数的阶乘，因为我们在枚举 $i$ 的每一位为 $1$ 的数字时，可能会重复计算某些排列，因此需要除以每个数字出现的次数的阶乘。</p>
-<p>时间复杂度 $O(2^n \times n^2)，空间复杂度 O(2^n \times n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+<p>假设当前所选的数字的状态为 <span class="arithmatex">\(i\)</span>，最后一个数字为 <span class="arithmatex">\(nums[j]\)</span>，那么我们可以枚举 <span class="arithmatex">\(i\)</span> 的每一位为 <span class="arithmatex">\(1\)</span> 的数字作为倒数第二个数，不妨设为 <span class="arithmatex">\(nums[k]\)</span>，那么我们只需要判断 <span class="arithmatex">\(nums[j]+nums[k]\)</span> 是否为完全平方数即可，若是，方案数 <span class="arithmatex">\(f[i][j]\)</span> 就可以加上 <span class="arithmatex">\(f[i \oplus 2^j][k]\)</span>，其中 <span class="arithmatex">\(i \oplus 2^j\)</span> 表示将 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(j\)</span> 位取反，即表示将 <span class="arithmatex">\(nums[j]\)</span> 从当前所选的数字中去除。</p>
+<p>最后，我们还需要除以每个数字出现的次数的阶乘，因为我们在枚举 <span class="arithmatex">\(i\)</span> 的每一位为 <span class="arithmatex">\(1\)</span> 的数字时，可能会重复计算某些排列，因此需要除以每个数字出现的次数的阶乘。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(2^n \times n^2)，空间复杂度 O(2^n \times n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91401,11 +91399,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90911,16 +90909,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $\textit{dfs}(i, j, \textit{jump})$，表示当前位于第 $i$ 级台阶，且进行了 $j$ 次操作 $1$ 和 $\textit{jump}$ 次操作 $2$，到达第 $k$ 级台阶的方案数。那么答案就是 $\textit{dfs}(1, 0, 0)$。</p>
-<p>函数 $\textit{dfs}(i, j, \textit{jump})$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, j, \textit{jump})\)</span>，表示当前位于第 <span class="arithmatex">\(i\)</span> 级台阶，且进行了 <span class="arithmatex">\(j\)</span> 次操作 <span class="arithmatex">\(1\)</span> 和 <span class="arithmatex">\(\textit{jump}\)</span> 次操作 <span class="arithmatex">\(2\)</span>，到达第 <span class="arithmatex">\(k\)</span> 级台阶的方案数。那么答案就是 <span class="arithmatex">\(\textit{dfs}(1, 0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i, j, \textit{jump})\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i &gt; k + 1$，由于无法连续两次向下走，所以无法再到达第 $k$ 级台阶，返回 $0$；</li>
-<li>如果 $i = k$，表示已经到达第 $k$ 级台阶，答案初始化为 $1$，然后继续计算；</li>
-<li>如果 $i &gt; 0$ 且 $j = 0$，表示可以向下走，递归计算 $\textit{dfs}(i - 1, 1, \textit{jump})$；</li>
-<li>递归计算 $\textit{dfs}(i + 2^{\textit{jump}}, 0, \textit{jump} + 1)$，累加到答案中。</li>
+<li>如果 <span class="arithmatex">\(i &gt; k + 1\)</span>，由于无法连续两次向下走，所以无法再到达第 <span class="arithmatex">\(k\)</span> 级台阶，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(i = k\)</span>，表示已经到达第 <span class="arithmatex">\(k\)</span> 级台阶，答案初始化为 <span class="arithmatex">\(1\)</span>，然后继续计算；</li>
+<li>如果 <span class="arithmatex">\(i &gt; 0\)</span> 且 <span class="arithmatex">\(j = 0\)</span>，表示可以向下走，递归计算 <span class="arithmatex">\(\textit{dfs}(i - 1, 1, \textit{jump})\)</span>；</li>
+<li>递归计算 <span class="arithmatex">\(\textit{dfs}(i + 2^{\textit{jump}}, 0, \textit{jump} + 1)\)</span>，累加到答案中。</li>
 </ul>
 <p>为了避免重复计算，我们使用记忆化搜索，将已经计算过的状态保存起来。</p>
-<p>时间复杂度 $(\log ^2 k)$，空间复杂度 $(\log ^2 k)$。</p>
+<p>时间复杂度 <span class="arithmatex">\((\log ^2 k)\)</span>，空间复杂度 <span class="arithmatex">\((\log ^2 k)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91394,11 +91392,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

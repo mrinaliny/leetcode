@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90848,11 +90846,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：滑动窗口</h3>
-<p>我们先用哈希表或者一个长度为 $3$ 的数组 $cnt$ 统计字符串 $s$ 中每个字符的个数，如果有字符的个数小于 $k$ 个，则无法取到，提前返回 $-1$。</p>
-<p>题目要我们在字符串左侧以及右侧取走字符，最终取到的每种字符的个数都不少于 $k$ 个。我们不妨反着考虑问题，取走中间某个窗口大小的字符串，使得剩下的两侧字符串中，每种字符的个数都不少于 $k$ 个。</p>
-<p>因此，我们维护一个滑动窗口，用指针 $j$ 和 $i$ 分别表示窗口的左右边界，窗口内的字符串是我们要取走的。我们每一次移动右边界 $i$，将对应的字符 $s[i]$ 加入到窗口中（也即取走一个字符 $s[i]$），此时如果 $cnt[s[i]]$ 个数小于 $k$，那么我们循环移动左边界 $j$，直到 $cnt[s[i]]$ 个数不小于 $k$ 为止。此时的窗口大小为 $i - j + 1$，更新最大窗口。</p>
-<p>最终的答案就是字符串 $s$ 的长度减去最大窗口的大小。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为字符串 $s$ 的长度。空间复杂度 $O(1)$。</p>
+<p>我们先用哈希表或者一个长度为 <span class="arithmatex">\(3\)</span> 的数组 <span class="arithmatex">\(cnt\)</span> 统计字符串 <span class="arithmatex">\(s\)</span> 中每个字符的个数，如果有字符的个数小于 <span class="arithmatex">\(k\)</span> 个，则无法取到，提前返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>题目要我们在字符串左侧以及右侧取走字符，最终取到的每种字符的个数都不少于 <span class="arithmatex">\(k\)</span> 个。我们不妨反着考虑问题，取走中间某个窗口大小的字符串，使得剩下的两侧字符串中，每种字符的个数都不少于 <span class="arithmatex">\(k\)</span> 个。</p>
+<p>因此，我们维护一个滑动窗口，用指针 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(i\)</span> 分别表示窗口的左右边界，窗口内的字符串是我们要取走的。我们每一次移动右边界 <span class="arithmatex">\(i\)</span>，将对应的字符 <span class="arithmatex">\(s[i]\)</span> 加入到窗口中（也即取走一个字符 <span class="arithmatex">\(s[i]\)</span>），此时如果 <span class="arithmatex">\(cnt[s[i]]\)</span> 个数小于 <span class="arithmatex">\(k\)</span>，那么我们循环移动左边界 <span class="arithmatex">\(j\)</span>，直到 <span class="arithmatex">\(cnt[s[i]]\)</span> 个数不小于 <span class="arithmatex">\(k\)</span> 为止。此时的窗口大小为 <span class="arithmatex">\(i - j + 1\)</span>，更新最大窗口。</p>
+<p>最终的答案就是字符串 <span class="arithmatex">\(s\)</span> 的长度减去最大窗口的大小。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(s\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91365,11 +91363,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

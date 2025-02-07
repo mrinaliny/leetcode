@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86051,14 +86049,14 @@ Notice that book number 2 does not have to be on the first shelf.
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i]$ as the minimum height for placing the first $i$ books, initially $f[0] = 0$, and the answer is $f[n]$.</p>
-<p>Consider $f[i]$, the last book is $books[i - 1]$, its thickness is $w$, and its height is $h$.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the minimum height for placing the first <span class="arithmatex">\(i\)</span> books, initially <span class="arithmatex">\(f[0] = 0\)</span>, and the answer is <span class="arithmatex">\(f[n]\)</span>.</p>
+<p>Consider <span class="arithmatex">\(f[i]\)</span>, the last book is <span class="arithmatex">\(books[i - 1]\)</span>, its thickness is <span class="arithmatex">\(w\)</span>, and its height is <span class="arithmatex">\(h\)</span>.</p>
 <ul>
-<li>If this book is placed on a new layer alone, then $f[i] = f[i - 1] + h$;</li>
-<li>If this book can be placed on the same layer with the last few books in front, we enumerate the first book $books[j-1]$ on the same layer from back to front, where $j \in [1, i - 1]$, accumulate the thickness of the book to $w$, if $w &gt; shelfWidth$, it means that $books[j-1]$ can no longer be placed on the same layer with $books[i-1]$, stop enumeration; otherwise, we update the maximum height $h = \max(h, books[j-1][1])$ of the current layer, then $f[i] = \min(f[i], f[j - 1] + h)$.</li>
+<li>If this book is placed on a new layer alone, then <span class="arithmatex">\(f[i] = f[i - 1] + h\)</span>;</li>
+<li>If this book can be placed on the same layer with the last few books in front, we enumerate the first book <span class="arithmatex">\(books[j-1]\)</span> on the same layer from back to front, where <span class="arithmatex">\(j \in [1, i - 1]\)</span>, accumulate the thickness of the book to <span class="arithmatex">\(w\)</span>, if <span class="arithmatex">\(w &gt; shelfWidth\)</span>, it means that <span class="arithmatex">\(books[j-1]\)</span> can no longer be placed on the same layer with <span class="arithmatex">\(books[i-1]\)</span>, stop enumeration; otherwise, we update the maximum height <span class="arithmatex">\(h = \max(h, books[j-1][1])\)</span> of the current layer, then <span class="arithmatex">\(f[i] = \min(f[i], f[j - 1] + h)\)</span>.</li>
 </ul>
-<p>The final answer is $f[n]$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $books$.</p>
+<p>The final answer is <span class="arithmatex">\(f[n]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(books\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86521,11 +86519,9 @@ Notice that book number 2 does not have to be on the first shelf.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

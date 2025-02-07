@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90862,11 +90860,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：格雷码逆变换（格雷码转二进制码）</h3>
-<p>本题实际上求的是格雷码为 $n$ 的逆变换，即通过格雷码构造原数。</p>
+<p>本题实际上求的是格雷码为 <span class="arithmatex">\(n\)</span> 的逆变换，即通过格雷码构造原数。</p>
 <p>我们先来回顾一下二进制码转换成二进制格雷码，其法则是保留二进制码的最高位作为格雷码的最高位，而次高位格雷码为二进制码的高位与次高位相异或，而格雷码其余各位与次高位的求法相类似。</p>
-<p>假设某个二进制数表示为 $B_{n-1}B_{n-2}...B_2B_1B_0$，其格雷码表示为 $G_{n-1}G_{n-2}...G_2G_1G_0$。最高位保留，所以 $G_{n-1} = B_{n-1}$；而其它各位 $G_i = B_{i+1} \oplus B_{i}$，其中 $i=0,1,2..,n-2$。</p>
+<p>假设某个二进制数表示为 <span class="arithmatex">\(B_{n-1}B_{n-2}...B_2B_1B_0\)</span>，其格雷码表示为 <span class="arithmatex">\(G_{n-1}G_{n-2}...G_2G_1G_0\)</span>。最高位保留，所以 <span class="arithmatex">\(G_{n-1} = B_{n-1}\)</span>；而其它各位 <span class="arithmatex">\(G_i = B_{i+1} \oplus B_{i}\)</span>，其中 <span class="arithmatex">\(i=0,1,2..,n-2\)</span>。</p>
 <p>那么，格雷码转换成二进制码的逆变换是什么呢？</p>
-<p>我们可以发现，格雷码的最高位保留，所以 $B_{n-1} = G_{n-1}$；而 $B_{n-2} = G_{n-2} \oplus B_{n-1} = G_{n-2} \oplus G_{n-1}$；而其它各位 $B_i = G_{i} \oplus G_{i+1} \cdots \oplus G_{n-1}$，其中 $i=0,1,2..,n-2$。因此，我们可以用下面的函数 $rev(x)$ 得到其二进制码：</p>
+<p>我们可以发现，格雷码的最高位保留，所以 <span class="arithmatex">\(B_{n-1} = G_{n-1}\)</span>；而 <span class="arithmatex">\(B_{n-2} = G_{n-2} \oplus B_{n-1} = G_{n-2} \oplus G_{n-1}\)</span>；而其它各位 <span class="arithmatex">\(B_i = G_{i} \oplus G_{i+1} \cdots \oplus G_{n-1}\)</span>，其中 <span class="arithmatex">\(i=0,1,2..,n-2\)</span>。因此，我们可以用下面的函数 <span class="arithmatex">\(rev(x)\)</span> 得到其二进制码：</p>
 <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -90875,7 +90873,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>时间复杂度 $O(\log n)$，其中 $n$ 为题目给定的整数。空间复杂度 $O(1)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为题目给定的整数。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91299,11 +91297,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,18 +86058,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-dynamic-programming">Solution 1: State Compression Dynamic Programming</h3>
-<p>We notice that the length of <code>req_skills</code> does not exceed $16$, so we can use a binary number of length no more than $16$ to represent whether each skill is mastered. Let's denote the length of <code>req_skills</code> as $m$ and the length of <code>people</code> as $n$.</p>
-<p>First, we map each skill in <code>req_skills</code> to a number, i.e., $d[s]$ represents the number of skill $s$. Then, we traverse each person in <code>people</code> and represent the skills they master with a binary number, i.e., $p[i]$ represents the skills mastered by the person with number $i$.</p>
+<p>We notice that the length of <code>req_skills</code> does not exceed <span class="arithmatex">\(16\)</span>, so we can use a binary number of length no more than <span class="arithmatex">\(16\)</span> to represent whether each skill is mastered. Let's denote the length of <code>req_skills</code> as <span class="arithmatex">\(m\)</span> and the length of <code>people</code> as <span class="arithmatex">\(n\)</span>.</p>
+<p>First, we map each skill in <code>req_skills</code> to a number, i.e., <span class="arithmatex">\(d[s]\)</span> represents the number of skill <span class="arithmatex">\(s\)</span>. Then, we traverse each person in <code>people</code> and represent the skills they master with a binary number, i.e., <span class="arithmatex">\(p[i]\)</span> represents the skills mastered by the person with number <span class="arithmatex">\(i\)</span>.</p>
 <p>Next, we define the following three arrays:</p>
 <ul>
-<li>Array $f[i]$ represents the minimum number of people to master the skill set $i$, where each bit of the binary representation of $i$ is $1$, indicating that the corresponding skill is mastered. Initially, $f[0] = 0$, and all other positions are infinity.</li>
-<li>Array $g[i]$ represents the number of the last person when the skill set $i$ is mastered by the minimum number of people.</li>
-<li>Array $h[i]$ represents the previous skill set state when the skill set $i$ is mastered by the minimum number of people.</li>
+<li>Array <span class="arithmatex">\(f[i]\)</span> represents the minimum number of people to master the skill set <span class="arithmatex">\(i\)</span>, where each bit of the binary representation of <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(1\)</span>, indicating that the corresponding skill is mastered. Initially, <span class="arithmatex">\(f[0] = 0\)</span>, and all other positions are infinity.</li>
+<li>Array <span class="arithmatex">\(g[i]\)</span> represents the number of the last person when the skill set <span class="arithmatex">\(i\)</span> is mastered by the minimum number of people.</li>
+<li>Array <span class="arithmatex">\(h[i]\)</span> represents the previous skill set state when the skill set <span class="arithmatex">\(i\)</span> is mastered by the minimum number of people.</li>
 </ul>
-<p>We enumerate each skill set in the range of $[0,..2^m-1]$, for each skill set $i$:</p>
-<p>We enumerate each person $j$ in <code>people</code>. If $f[i] + 1 \lt f[i | p[j]]$, it means that $f[i | p[j]]$ can be transferred from $f[i]$. At this time, we update $f[i | p[j]]$ to $f[i] + 1$, and update $g[i | p[j]]$ to $j$, and update $h[i | p[j]]$ to $i$. That is, when the current skill set state is $i | p[j]$, the number of the last person is $j$, and the previous skill set state is $i$. Here, the symbol $|$ represents bitwise OR operation.</p>
-<p>Finally, we start from the skill set $i=2^m-1$, find the number of the last person at this time $g[i]$, add it to the answer, then update $i$ to $h[i]$, and keep backtracking until $i=0$, to get the personnel numbers in the smallest necessary team.</p>
-<p>The time complexity is $O(2^m \times n)$, and the space complexity is $O(2^m)$. Here, $m$ and $n$ are the lengths of <code>req_skills</code> and <code>people</code>, respectively.</p>
+<p>We enumerate each skill set in the range of <span class="arithmatex">\([0,..2^m-1]\)</span>, for each skill set <span class="arithmatex">\(i\)</span>:</p>
+<p>We enumerate each person <span class="arithmatex">\(j\)</span> in <code>people</code>. If <span class="arithmatex">\(f[i] + 1 \lt f[i | p[j]]\)</span>, it means that <span class="arithmatex">\(f[i | p[j]]\)</span> can be transferred from <span class="arithmatex">\(f[i]\)</span>. At this time, we update <span class="arithmatex">\(f[i | p[j]]\)</span> to <span class="arithmatex">\(f[i] + 1\)</span>, and update <span class="arithmatex">\(g[i | p[j]]\)</span> to <span class="arithmatex">\(j\)</span>, and update <span class="arithmatex">\(h[i | p[j]]\)</span> to <span class="arithmatex">\(i\)</span>. That is, when the current skill set state is <span class="arithmatex">\(i | p[j]\)</span>, the number of the last person is <span class="arithmatex">\(j\)</span>, and the previous skill set state is <span class="arithmatex">\(i\)</span>. Here, the symbol <span class="arithmatex">\(|\)</span> represents bitwise OR operation.</p>
+<p>Finally, we start from the skill set <span class="arithmatex">\(i=2^m-1\)</span>, find the number of the last person at this time <span class="arithmatex">\(g[i]\)</span>, add it to the answer, then update <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(h[i]\)</span>, and keep backtracking until <span class="arithmatex">\(i=0\)</span>, to get the personnel numbers in the smallest necessary team.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^m)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of <code>req_skills</code> and <code>people</code>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86678,11 +86676,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

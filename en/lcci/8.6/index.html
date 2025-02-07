@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86029,9 +86027,9 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-recursion">Solution 1: Recursion</h3>
-<p>We design a function $dfs(n, a, b, c)$, which represents moving $n$ disks from $a$ to $c$, with $b$ as the auxiliary rod.</p>
-<p>First, we move $n - 1$ disks from $a$ to $b$, then move the $n$-th disk from $a$ to $c$, and finally move $n - 1$ disks from $b$ to $c$.</p>
-<p>The time complexity is $O(2^n)$, and the space complexity is $O(n)$. Here, $n$ is the number of disks.</p>
+<p>We design a function <span class="arithmatex">\(dfs(n, a, b, c)\)</span>, which represents moving <span class="arithmatex">\(n\)</span> disks from <span class="arithmatex">\(a\)</span> to <span class="arithmatex">\(c\)</span>, with <span class="arithmatex">\(b\)</span> as the auxiliary rod.</p>
+<p>First, we move <span class="arithmatex">\(n - 1\)</span> disks from <span class="arithmatex">\(a\)</span> to <span class="arithmatex">\(b\)</span>, then move the <span class="arithmatex">\(n\)</span>-th disk from <span class="arithmatex">\(a\)</span> to <span class="arithmatex">\(c\)</span>, and finally move <span class="arithmatex">\(n - 1\)</span> disks from <span class="arithmatex">\(b\)</span> to <span class="arithmatex">\(c\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of disks.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86232,16 +86230,16 @@
 
 <h3 id="solution-2-iteration-stack">Solution 2: Iteration (Stack)</h3>
 <p>We can use a stack to simulate the recursive process.</p>
-<p>We define a struct $Task$, which represents a task, where $n$ represents the number of disks, and $a$, $b$, $c$ represent the three rods.</p>
-<p>We push the initial task $Task(len(A), A, B, C)$ into the stack, and then continuously process the task at the top of the stack until the stack is empty.</p>
-<p>If $n = 1$, then we directly move the disk from $a$ to $c$.</p>
+<p>We define a struct <span class="arithmatex">\(Task\)</span>, which represents a task, where <span class="arithmatex">\(n\)</span> represents the number of disks, and <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(c\)</span> represent the three rods.</p>
+<p>We push the initial task <span class="arithmatex">\(Task(len(A), A, B, C)\)</span> into the stack, and then continuously process the task at the top of the stack until the stack is empty.</p>
+<p>If <span class="arithmatex">\(n = 1\)</span>, then we directly move the disk from <span class="arithmatex">\(a\)</span> to <span class="arithmatex">\(c\)</span>.</p>
 <p>Otherwise, we push three subtasks into the stack, which are:</p>
 <ol>
-<li>Move $n - 1$ disks from $b$ to $c$ with the help of $a$;</li>
-<li>Move the $n$-th disk from $a$ to $c$;</li>
-<li>Move $n - 1$ disks from $a$ to $b$ with the help of $c$.</li>
+<li>Move <span class="arithmatex">\(n - 1\)</span> disks from <span class="arithmatex">\(b\)</span> to <span class="arithmatex">\(c\)</span> with the help of <span class="arithmatex">\(a\)</span>;</li>
+<li>Move the <span class="arithmatex">\(n\)</span>-th disk from <span class="arithmatex">\(a\)</span> to <span class="arithmatex">\(c\)</span>;</li>
+<li>Move <span class="arithmatex">\(n - 1\)</span> disks from <span class="arithmatex">\(a\)</span> to <span class="arithmatex">\(b\)</span> with the help of <span class="arithmatex">\(c\)</span>.</li>
 </ol>
-<p>The time complexity is $O(2^n)$, and the space complexity is $O(n)$. Here, $n$ is the number of disks.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of disks.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86706,11 +86704,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

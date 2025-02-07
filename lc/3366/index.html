@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,17 +90863,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>为了方便描述，我们将题目给定的 $k$ 记为 $d$。</p>
-<p>接下来，定义 $f[i][j][k]$ 表示前 $i$ 个数中，使用了 $j$ 次操作 1 和 $k$ 次操作 2 的最小和。初始时 $f[0][0][0] = 0$，其余 $f[i][j][k] = +\infty$。</p>
-<p>考虑 $f[i][j][k]$ 如何进行状态转移，我们可以枚举第 $i$ 个数 $x$，然后考虑 $x$ 的取值对 $f[i][j][k]$ 的影响：</p>
+<p>为了方便描述，我们将题目给定的 <span class="arithmatex">\(k\)</span> 记为 <span class="arithmatex">\(d\)</span>。</p>
+<p>接下来，定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个数中，使用了 <span class="arithmatex">\(j\)</span> 次操作 1 和 <span class="arithmatex">\(k\)</span> 次操作 2 的最小和。初始时 <span class="arithmatex">\(f[0][0][0] = 0\)</span>，其余 <span class="arithmatex">\(f[i][j][k] = +\infty\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j][k]\)</span> 如何进行状态转移，我们可以枚举第 <span class="arithmatex">\(i\)</span> 个数 <span class="arithmatex">\(x\)</span>，然后考虑 <span class="arithmatex">\(x\)</span> 的取值对 <span class="arithmatex">\(f[i][j][k]\)</span> 的影响：</p>
 <ul>
-<li>如果 $x$ 不使用操作 1 和操作 2，那么 $f[i][j][k] = f[i-1][j][k] + x$；</li>
-<li>如果 $j \gt 0$，那么可以使用操作 1，此时 $f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k] + \lceil \frac{x+1}{2} \rceil)$；</li>
-<li>如果 $k \gt 0$ 并且 $x \geq d$，那么可以使用操作 2，此时 $f[i][j][k] = \min(f[i][j][k], f[i-1][j][k-1] + (x - d))$；</li>
-<li>如果 $j \gt 0$ 并且 $k \gt 0$，那么可以同时使用操作 1 和操作 2。如果先使用操作 1，那么 $x$ 变为 $\lceil \frac{x+1}{2} \rceil$，如果 $x \geq d$，那么可以使用操作 2，此时 $f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x+1}{2} \rceil - d)$；如果先使用操作 2，那么 $x$ 变为 $x - d$，如果 $x \geq d$，那么可以使用操作 1，此时 $f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x-d+1}{2} \rceil)$。</li>
+<li>如果 <span class="arithmatex">\(x\)</span> 不使用操作 1 和操作 2，那么 <span class="arithmatex">\(f[i][j][k] = f[i-1][j][k] + x\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j \gt 0\)</span>，那么可以使用操作 1，此时 <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k] + \lceil \frac{x+1}{2} \rceil)\)</span>；</li>
+<li>如果 <span class="arithmatex">\(k \gt 0\)</span> 并且 <span class="arithmatex">\(x \geq d\)</span>，那么可以使用操作 2，此时 <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j][k-1] + (x - d))\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j \gt 0\)</span> 并且 <span class="arithmatex">\(k \gt 0\)</span>，那么可以同时使用操作 1 和操作 2。如果先使用操作 1，那么 <span class="arithmatex">\(x\)</span> 变为 <span class="arithmatex">\(\lceil \frac{x+1}{2} \rceil\)</span>，如果 <span class="arithmatex">\(x \geq d\)</span>，那么可以使用操作 2，此时 <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x+1}{2} \rceil - d)\)</span>；如果先使用操作 2，那么 <span class="arithmatex">\(x\)</span> 变为 <span class="arithmatex">\(x - d\)</span>，如果 <span class="arithmatex">\(x \geq d\)</span>，那么可以使用操作 1，此时 <span class="arithmatex">\(f[i][j][k] = \min(f[i][j][k], f[i-1][j-1][k-1] + \lceil \frac{x-d+1}{2} \rceil)\)</span>。</li>
 </ul>
-<p>最终答案为 $\min_{j=0}^{op1} \min_{k=0}^{op2} f[n][j][k]$，如果为 $+\infty$，则输出 $-1$。</p>
-<p>时间复杂度 $O(n \times \textit{op1} \times \textit{op2})$，空间复杂度 $O(n \times \textit{op1} \times \textit{op2})$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
+<p>最终答案为 <span class="arithmatex">\(\min_{j=0}^{op1} \min_{k=0}^{op2} f[n][j][k]\)</span>，如果为 <span class="arithmatex">\(+\infty\)</span>，则输出 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \textit{op1} \times \textit{op2})\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times \textit{op1} \times \textit{op2})\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91515,11 +91513,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

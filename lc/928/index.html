@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90882,13 +90880,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：并查集</h3>
-<p>我们可以使用并查集，将所有不在 $initial$ 中的节点，并且满足 $graph[i][j] = 1$ 的节点 $(i, j)$ 进行合并。</p>
-<p>接下来，我们创建一个哈希表 $g$，其中 $g[i]$ 表示所有与节点 $i$ 相连的连通分量的根节点。我们还需要一个计数器 $cnt$，用来统计每个根节点被多少个初始节点感染。</p>
-<p>对于每个初始时被感染的节点 $i$，我们遍历所有与节点 $i$ 相连的节点 $j$，如果节点 $j$ 不在 $initial$ 中，我们将节点 $j$ 的根节点加入到集合 $g[i]$ 中。同时，我们统计每个根节点被多少个初始节点感染，将结果保存到计数器 $cnt$ 中。</p>
-<p>然后，我们用一个变量 $ans$ 记录答案，用 $mx$ 记录最多可以减少的被感染节点的数量。初始时 $ans = 0$, $mx = -1$。</p>
-<p>遍历所有初始时被感染的节点，对于每个节点 $i$，我们遍历 $g[i]$ 中的所有根节点，如果根节点只被一个初始节点感染，我们累加这个根节点所在的连通分量的大小到 $t$ 中。如果 $t &gt; mx$ 或者 $t = mx$ 且 $i &lt; ans$，我们更新 $ans = i$, $mx = t$。</p>
-<p>最后返回 $ans$ 即可。</p>
-<p>时间复杂度 $O(n^2 \times \alpha(n))$，空间复杂度 $O(n^2)$。其中 $n$ 是节点的数量，而 $\alpha(n)$ 是 Ackermann 函数的反函数。</p>
+<p>我们可以使用并查集，将所有不在 <span class="arithmatex">\(initial\)</span> 中的节点，并且满足 <span class="arithmatex">\(graph[i][j] = 1\)</span> 的节点 <span class="arithmatex">\((i, j)\)</span> 进行合并。</p>
+<p>接下来，我们创建一个哈希表 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[i]\)</span> 表示所有与节点 <span class="arithmatex">\(i\)</span> 相连的连通分量的根节点。我们还需要一个计数器 <span class="arithmatex">\(cnt\)</span>，用来统计每个根节点被多少个初始节点感染。</p>
+<p>对于每个初始时被感染的节点 <span class="arithmatex">\(i\)</span>，我们遍历所有与节点 <span class="arithmatex">\(i\)</span> 相连的节点 <span class="arithmatex">\(j\)</span>，如果节点 <span class="arithmatex">\(j\)</span> 不在 <span class="arithmatex">\(initial\)</span> 中，我们将节点 <span class="arithmatex">\(j\)</span> 的根节点加入到集合 <span class="arithmatex">\(g[i]\)</span> 中。同时，我们统计每个根节点被多少个初始节点感染，将结果保存到计数器 <span class="arithmatex">\(cnt\)</span> 中。</p>
+<p>然后，我们用一个变量 <span class="arithmatex">\(ans\)</span> 记录答案，用 <span class="arithmatex">\(mx\)</span> 记录最多可以减少的被感染节点的数量。初始时 <span class="arithmatex">\(ans = 0\)</span>, <span class="arithmatex">\(mx = -1\)</span>。</p>
+<p>遍历所有初始时被感染的节点，对于每个节点 <span class="arithmatex">\(i\)</span>，我们遍历 <span class="arithmatex">\(g[i]\)</span> 中的所有根节点，如果根节点只被一个初始节点感染，我们累加这个根节点所在的连通分量的大小到 <span class="arithmatex">\(t\)</span> 中。如果 <span class="arithmatex">\(t &gt; mx\)</span> 或者 <span class="arithmatex">\(t = mx\)</span> 且 <span class="arithmatex">\(i &lt; ans\)</span>，我们更新 <span class="arithmatex">\(ans = i\)</span>, <span class="arithmatex">\(mx = t\)</span>。</p>
+<p>最后返回 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2 \times \alpha(n))\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点的数量，而 <span class="arithmatex">\(\alpha(n)\)</span> 是 Ackermann 函数的反函数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91906,11 +91904,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

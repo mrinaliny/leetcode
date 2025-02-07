@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,14 +90863,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示考虑前 $i$ 条道路，恰好跳过 $j$ 次休息时间的最短用时。初始时 $f[0][0]=0$，其余 $f[i][j]=\infty$。</p>
-<p>由于我们可以选择跳过或者不跳过第 $i$ 条道路的休息时间，因此我们可以列出状态转移方程：</p>
-<p>$$
-f[i][j]=\min\left{\begin{aligned} \lceil f[i-1][j]+\frac{d_i}{s}\rceil &amp; \textit{不跳过第 $i$ 条道路的休息时间} \ f[i-1][j-1]+\frac{d_i}{s} &amp; \textit{跳过第 $i$ 条道路的休息时间} \end{aligned}\right.
-$$</p>
-<p>其中 $\lceil x\rceil$ 表示将 $x$ 向上取整。需要注意的是，由于我们需要保证恰好跳过 $j$ 次休息时间，因此我们必须有 $j\le i$；另外，如果 $j=0$，不能跳过任何休息时间。</p>
-<p>由于浮点数运算以及向上取整运算可能会带来精度误差，因此我们引入一个常量 $eps = 10^{-8}$ 表示一个极小的正实数，在浮点数取整前先减去 $eps$，最后在比较 $f[n][j]$ 和 $hoursBefore$ 时，需要加上 $eps$。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是道路的数量。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示考虑前 <span class="arithmatex">\(i\)</span> 条道路，恰好跳过 <span class="arithmatex">\(j\)</span> 次休息时间的最短用时。初始时 <span class="arithmatex">\(f[0][0]=0\)</span>，其余 <span class="arithmatex">\(f[i][j]=\infty\)</span>。</p>
+<p>由于我们可以选择跳过或者不跳过第 <span class="arithmatex">\(i\)</span> 条道路的休息时间，因此我们可以列出状态转移方程：</p>
+<div class="arithmatex">\[
+f[i][j]=\min\left\{\begin{aligned} \lceil f[i-1][j]+\frac{d_i}{s}\rceil &amp; \textit{不跳过第 $i$ 条道路的休息时间} \\ f[i-1][j-1]+\frac{d_i}{s} &amp; \textit{跳过第 $i$ 条道路的休息时间} \end{aligned}\right.
+\]</div>
+<p>其中 <span class="arithmatex">\(\lceil x\rceil\)</span> 表示将 <span class="arithmatex">\(x\)</span> 向上取整。需要注意的是，由于我们需要保证恰好跳过 <span class="arithmatex">\(j\)</span> 次休息时间，因此我们必须有 <span class="arithmatex">\(j\le i\)</span>；另外，如果 <span class="arithmatex">\(j=0\)</span>，不能跳过任何休息时间。</p>
+<p>由于浮点数运算以及向上取整运算可能会带来精度误差，因此我们引入一个常量 <span class="arithmatex">\(eps = 10^{-8}\)</span> 表示一个极小的正实数，在浮点数取整前先减去 <span class="arithmatex">\(eps\)</span>，最后在比较 <span class="arithmatex">\(f[n][j]\)</span> 和 <span class="arithmatex">\(hoursBefore\)</span> 时，需要加上 <span class="arithmatex">\(eps\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是道路的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Python3</label><label for="__tabbed_1_3">Java</label><label for="__tabbed_1_4">C++</label><label for="__tabbed_1_5">Go</label><label for="__tabbed_1_6">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91386,11 +91384,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

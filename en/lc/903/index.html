@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,12 +86060,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the number of permutations that satisfy the problem's requirements with the first $i$ characters of the string ending with the number $j$. Initially, $f[0][0]=1$, and the rest $f[0][j]=0$. The answer is $\sum_{j=0}^n f[n][j]$.</p>
-<p>Consider $f[i][j]$, where $j \in [0, i]$.</p>
-<p>If the $i$th character $s[i-1]$ is <code>'D'</code>, then $f[i][j]$ can be transferred from $f[i-1][k]$, where $k \in [j+1, i]$. Since $k-1$ can only be up to $i-1$, we move $k$ one place to the left, so $k \in [j, i-1]$. Therefore, we have $f[i][j] = \sum_{k=j}^{i-1} f[i-1][k]$.</p>
-<p>If the $i$th character $s[i-1]$ is <code>'I'</code>, then $f[i][j]$ can be transferred from $f[i-1][k]$, where $k \in [0, j-1]$. Therefore, we have $f[i][j] = \sum_{k=0}^{j-1} f[i-1][k]$.</p>
-<p>The final answer is $\sum_{j=0}^n f[n][j]$.</p>
-<p>The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the string.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the number of permutations that satisfy the problem's requirements with the first <span class="arithmatex">\(i\)</span> characters of the string ending with the number <span class="arithmatex">\(j\)</span>. Initially, <span class="arithmatex">\(f[0][0]=1\)</span>, and the rest <span class="arithmatex">\(f[0][j]=0\)</span>. The answer is <span class="arithmatex">\(\sum_{j=0}^n f[n][j]\)</span>.</p>
+<p>Consider <span class="arithmatex">\(f[i][j]\)</span>, where <span class="arithmatex">\(j \in [0, i]\)</span>.</p>
+<p>If the <span class="arithmatex">\(i\)</span>th character <span class="arithmatex">\(s[i-1]\)</span> is <code>'D'</code>, then <span class="arithmatex">\(f[i][j]\)</span> can be transferred from <span class="arithmatex">\(f[i-1][k]\)</span>, where <span class="arithmatex">\(k \in [j+1, i]\)</span>. Since <span class="arithmatex">\(k-1\)</span> can only be up to <span class="arithmatex">\(i-1\)</span>, we move <span class="arithmatex">\(k\)</span> one place to the left, so <span class="arithmatex">\(k \in [j, i-1]\)</span>. Therefore, we have <span class="arithmatex">\(f[i][j] = \sum_{k=j}^{i-1} f[i-1][k]\)</span>.</p>
+<p>If the <span class="arithmatex">\(i\)</span>th character <span class="arithmatex">\(s[i-1]\)</span> is <code>'I'</code>, then <span class="arithmatex">\(f[i][j]\)</span> can be transferred from <span class="arithmatex">\(f[i-1][k]\)</span>, where <span class="arithmatex">\(k \in [0, j-1]\)</span>. Therefore, we have <span class="arithmatex">\(f[i][j] = \sum_{k=0}^{j-1} f[i-1][k]\)</span>.</p>
+<p>The final answer is <span class="arithmatex">\(\sum_{j=0}^n f[n][j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86342,7 +86340,7 @@
 </div>
 </div>
 </div>
-<p>We can optimize the time complexity to $O(n^2)$ using prefix sums.</p>
+<p>We can optimize the time complexity to <span class="arithmatex">\(O(n^2)\)</span> using prefix sums.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86611,7 +86609,7 @@
 </div>
 </div>
 </div>
-<p>Additionally, we can optimize the space complexity to $O(n)$ using a rolling array.</p>
+<p>Additionally, we can optimize the space complexity to <span class="arithmatex">\(O(n)\)</span> using a rolling array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87115,11 +87113,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

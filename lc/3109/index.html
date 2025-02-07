@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90886,12 +90884,12 @@
 <p>根据题目要求，我们需要找出一共有多少个排列的字典序小于给定的排列。</p>
 <p>我们考虑如何计算字典序小于给定排列的排列个数，一共有两种情况：</p>
 <ul>
-<li>排列的第一个元素小于 $perm[0]$，一共有 $(perm[0] - 1) \times (n-1)!$ 种排列。</li>
-<li>排列的第一个元素等于 $perm[0]$，我们需要继续考虑第二个元素，以此类推。</li>
+<li>排列的第一个元素小于 <span class="arithmatex">\(perm[0]\)</span>，一共有 <span class="arithmatex">\((perm[0] - 1) \times (n-1)!\)</span> 种排列。</li>
+<li>排列的第一个元素等于 <span class="arithmatex">\(perm[0]\)</span>，我们需要继续考虑第二个元素，以此类推。</li>
 <li>累加所有情况即可。</li>
 </ul>
-<p>我们可以用树状数组维护遍历过的元素中，比当前元素小的元素个数，那么对于给定排列的第 $i$ 个元素，剩余的比它小的元素个数为 $perm[i] - 1 - tree.query(perm[i])$，排列种类数为 $(perm[i] - 1 - tree.query(perm[i])) \times (n-i-1)!$，累加到答案中。然后我们更新树状数组，将当前元素加入树状数组。继续遍历下一个元素，直到遍历完所有元素。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为排列的长度。</p>
+<p>我们可以用树状数组维护遍历过的元素中，比当前元素小的元素个数，那么对于给定排列的第 <span class="arithmatex">\(i\)</span> 个元素，剩余的比它小的元素个数为 <span class="arithmatex">\(perm[i] - 1 - tree.query(perm[i])\)</span>，排列种类数为 <span class="arithmatex">\((perm[i] - 1 - tree.query(perm[i])) \times (n-i-1)!\)</span>，累加到答案中。然后我们更新树状数组，将当前元素加入树状数组。继续遍历下一个元素，直到遍历完所有元素。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为排列的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91537,11 +91535,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

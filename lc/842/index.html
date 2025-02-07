@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90854,11 +90852,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：回溯 + 剪枝</h3>
-<p>我们设计一个函数 $dfs(i)$，表示从字符串 $num$ 的第 $i$ 个字符开始拆分，拆分出的斐波那契式序列是否满足题目要求。如果满足，我们就返回 $true$，否则返回 $false$。</p>
-<p>函数 $dfs(i)$ 的具体实现如下：</p>
-<p>如果 $i$ 等于字符串 $num$ 的长度，说明我们已经拆分完整个字符串，此时我们只需要判断拆分出的序列的长度是否大于 $2$ 即可。如果大于 $2$，说明我们找到了一组满足题目要求的斐波那契式序列，返回 $true$；否则返回 $false$。</p>
-<p>如果 $i$ 小于字符串 $num$ 的长度，我们需要枚举拆分出的第一个数 $x$，如果 $x$ 的长度大于 $1$，且以 $0$ 开头，说明 $x$ 不是一个合法的数，我们直接返回 $false$。否则我们将 $x$ 转换成十进制数，如果 $x$ 大于 $2^{31} - 1$，或者 $x$ 大于 $ans$ 的最后两个数之和，直接返回 $false$。如果 $ans$ 的长度小于 $2$，或者 $x$ 等于 $ans$ 的最后两个数之和，我们将 $x$ 加入到 $ans$ 中，然后继续拆分字符串 $num$ 的后面的部分，如果返回 $true$，说明我们找到了一组满足题目要求的斐波那契式序列，返回 $true$；否则我们将 $x$ 从 $ans$ 中移除，然后继续枚举拆分出的第一个数 $x$。</p>
-<p>时间复杂度 $O(n \times \log^2 M)$，空间复杂度 $O(n)$。其中 $n$ 和 $M$ 分别是字符串 $num$ 的长度和整型数的最大值。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从字符串 <span class="arithmatex">\(num\)</span> 的第 <span class="arithmatex">\(i\)</span> 个字符开始拆分，拆分出的斐波那契式序列是否满足题目要求。如果满足，我们就返回 <span class="arithmatex">\(true\)</span>，否则返回 <span class="arithmatex">\(false\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的具体实现如下：</p>
+<p>如果 <span class="arithmatex">\(i\)</span> 等于字符串 <span class="arithmatex">\(num\)</span> 的长度，说明我们已经拆分完整个字符串，此时我们只需要判断拆分出的序列的长度是否大于 <span class="arithmatex">\(2\)</span> 即可。如果大于 <span class="arithmatex">\(2\)</span>，说明我们找到了一组满足题目要求的斐波那契式序列，返回 <span class="arithmatex">\(true\)</span>；否则返回 <span class="arithmatex">\(false\)</span>。</p>
+<p>如果 <span class="arithmatex">\(i\)</span> 小于字符串 <span class="arithmatex">\(num\)</span> 的长度，我们需要枚举拆分出的第一个数 <span class="arithmatex">\(x\)</span>，如果 <span class="arithmatex">\(x\)</span> 的长度大于 <span class="arithmatex">\(1\)</span>，且以 <span class="arithmatex">\(0\)</span> 开头，说明 <span class="arithmatex">\(x\)</span> 不是一个合法的数，我们直接返回 <span class="arithmatex">\(false\)</span>。否则我们将 <span class="arithmatex">\(x\)</span> 转换成十进制数，如果 <span class="arithmatex">\(x\)</span> 大于 <span class="arithmatex">\(2^{31} - 1\)</span>，或者 <span class="arithmatex">\(x\)</span> 大于 <span class="arithmatex">\(ans\)</span> 的最后两个数之和，直接返回 <span class="arithmatex">\(false\)</span>。如果 <span class="arithmatex">\(ans\)</span> 的长度小于 <span class="arithmatex">\(2\)</span>，或者 <span class="arithmatex">\(x\)</span> 等于 <span class="arithmatex">\(ans\)</span> 的最后两个数之和，我们将 <span class="arithmatex">\(x\)</span> 加入到 <span class="arithmatex">\(ans\)</span> 中，然后继续拆分字符串 <span class="arithmatex">\(num\)</span> 的后面的部分，如果返回 <span class="arithmatex">\(true\)</span>，说明我们找到了一组满足题目要求的斐波那契式序列，返回 <span class="arithmatex">\(true\)</span>；否则我们将 <span class="arithmatex">\(x\)</span> 从 <span class="arithmatex">\(ans\)</span> 中移除，然后继续枚举拆分出的第一个数 <span class="arithmatex">\(x\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log^2 M)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别是字符串 <span class="arithmatex">\(num\)</span> 的长度和整型数的最大值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91340,11 +91338,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

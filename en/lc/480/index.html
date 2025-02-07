@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86075,20 +86073,20 @@ Window position                Median
 
 <h3 id="solution-1-dual-priority-queues-min-heap-and-max-heap-lazy-deletion">Solution 1: Dual Priority Queues (Min-Heap and Max-Heap) + Lazy Deletion</h3>
 <p>We can use two priority queues (min-heap and max-heap) to maintain the elements in the current window. One priority queue stores the smaller half of the elements, and the other priority queue stores the larger half of the elements. This way, the median of the current window is either the average of the top elements of the two heaps or one of the top elements.</p>
-<p>We design a class $\textit{MedianFinder}$ to maintain the elements in the current window. This class includes the following methods:</p>
+<p>We design a class <span class="arithmatex">\(\textit{MedianFinder}\)</span> to maintain the elements in the current window. This class includes the following methods:</p>
 <ul>
-<li><code>add_num(num)</code>: Adds $\textit{num}$ to the current window.</li>
+<li><code>add_num(num)</code>: Adds <span class="arithmatex">\(\textit{num}\)</span> to the current window.</li>
 <li><code>find_median()</code>: Returns the median of the elements in the current window.</li>
-<li><code>remove_num(num)</code>: Removes $\textit{num}$ from the current window.</li>
-<li><code>prune(pq)</code>: If the top element of the heap is in the lazy deletion dictionary $\textit{delayed}$, it pops the top element from the heap and decrements its lazy deletion count. If the lazy deletion count of the element becomes zero, it removes the element from the lazy deletion dictionary.</li>
-<li><code>rebalance()</code>: If the number of elements in the smaller half exceeds the number of elements in the larger half by $2$, it moves the top element of the larger half to the smaller half. If the number of elements in the smaller half is less than the number of elements in the larger half, it moves the top element of the larger half to the smaller half.</li>
+<li><code>remove_num(num)</code>: Removes <span class="arithmatex">\(\textit{num}\)</span> from the current window.</li>
+<li><code>prune(pq)</code>: If the top element of the heap is in the lazy deletion dictionary <span class="arithmatex">\(\textit{delayed}\)</span>, it pops the top element from the heap and decrements its lazy deletion count. If the lazy deletion count of the element becomes zero, it removes the element from the lazy deletion dictionary.</li>
+<li><code>rebalance()</code>: If the number of elements in the smaller half exceeds the number of elements in the larger half by <span class="arithmatex">\(2\)</span>, it moves the top element of the larger half to the smaller half. If the number of elements in the smaller half is less than the number of elements in the larger half, it moves the top element of the larger half to the smaller half.</li>
 </ul>
-<p>In the <code>add_num(num)</code> method, we first consider adding $\textit{num}$ to the smaller half. If $\textit{num}$ is greater than the top element of the larger half, we add $\textit{num}$ to the larger half. Then we call the <code>rebalance()</code> method to ensure that the size difference between the two priority queues does not exceed $1$.</p>
-<p>In the <code>remove_num(num)</code> method, we increment the lazy deletion count of $\textit{num}$. Then we compare $\textit{num}$ with the top element of the smaller half. If $\textit{num}$ is less than or equal to the top element of the smaller half, we update the size of the smaller half and call the <code>prune()</code> method to ensure that the top element of the smaller half is not in the lazy deletion dictionary. Otherwise, we update the size of the larger half and call the <code>prune()</code> method to ensure that the top element of the larger half is not in the lazy deletion dictionary.</p>
+<p>In the <code>add_num(num)</code> method, we first consider adding <span class="arithmatex">\(\textit{num}\)</span> to the smaller half. If <span class="arithmatex">\(\textit{num}\)</span> is greater than the top element of the larger half, we add <span class="arithmatex">\(\textit{num}\)</span> to the larger half. Then we call the <code>rebalance()</code> method to ensure that the size difference between the two priority queues does not exceed <span class="arithmatex">\(1\)</span>.</p>
+<p>In the <code>remove_num(num)</code> method, we increment the lazy deletion count of <span class="arithmatex">\(\textit{num}\)</span>. Then we compare <span class="arithmatex">\(\textit{num}\)</span> with the top element of the smaller half. If <span class="arithmatex">\(\textit{num}\)</span> is less than or equal to the top element of the smaller half, we update the size of the smaller half and call the <code>prune()</code> method to ensure that the top element of the smaller half is not in the lazy deletion dictionary. Otherwise, we update the size of the larger half and call the <code>prune()</code> method to ensure that the top element of the larger half is not in the lazy deletion dictionary.</p>
 <p>In the <code>find_median()</code> method, if the current window size is odd, we return the top element of the smaller half; otherwise, we return the average of the top elements of the smaller half and the larger half.</p>
 <p>In the <code>prune(pq)</code> method, if the top element of the heap is in the lazy deletion dictionary, it pops the top element from the heap and decrements its lazy deletion count. If the lazy deletion count of the element becomes zero, it removes the element from the lazy deletion dictionary.</p>
-<p>In the <code>rebalance()</code> method, if the number of elements in the smaller half exceeds the number of elements in the larger half by $2$, it moves the top element of the larger half to the smaller half. If the number of elements in the smaller half is less than the number of elements in the larger half, it moves the top element of the larger half to the smaller half.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>In the <code>rebalance()</code> method, if the number of elements in the smaller half exceeds the number of elements in the larger half by <span class="arithmatex">\(2\)</span>, it moves the top element of the larger half to the smaller half. If the number of elements in the smaller half is less than the number of elements in the larger half, it moves the top element of the larger half to the smaller half.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86776,10 +86774,10 @@ Window position                Median
 <!-- solution:start -->
 
 <h3 id="solution-2-ordered-set">Solution 2: Ordered Set</h3>
-<p>We can use two ordered sets to maintain the elements in the current window. The ordered set $l$ stores the smaller half of the elements in the current window, and the ordered set $r$ stores the larger half of the elements.</p>
-<p>We traverse the array $\textit{nums}$. For each element $x$, we add it to the ordered set $r$, then move the smallest element in the ordered set $r$ to the ordered set $l$. If the size of the ordered set $l$ is greater than the size of the ordered set $r$ by more than $1$, we move the largest element in the ordered set $l$ to the ordered set $r$.</p>
-<p>If the total number of elements in the current window is $k$ and the size is odd, the maximum value in the ordered set $l$ is the median. If the size of the current window is even, the average of the maximum value in the ordered set $l$ and the minimum value in the ordered set $r$ is the median. Then, we remove the leftmost element of the window and continue traversing the array.</p>
-<p>The time complexity is $O(n \log k)$, and the space complexity is $O(k)$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>We can use two ordered sets to maintain the elements in the current window. The ordered set <span class="arithmatex">\(l\)</span> stores the smaller half of the elements in the current window, and the ordered set <span class="arithmatex">\(r\)</span> stores the larger half of the elements.</p>
+<p>We traverse the array <span class="arithmatex">\(\textit{nums}\)</span>. For each element <span class="arithmatex">\(x\)</span>, we add it to the ordered set <span class="arithmatex">\(r\)</span>, then move the smallest element in the ordered set <span class="arithmatex">\(r\)</span> to the ordered set <span class="arithmatex">\(l\)</span>. If the size of the ordered set <span class="arithmatex">\(l\)</span> is greater than the size of the ordered set <span class="arithmatex">\(r\)</span> by more than <span class="arithmatex">\(1\)</span>, we move the largest element in the ordered set <span class="arithmatex">\(l\)</span> to the ordered set <span class="arithmatex">\(r\)</span>.</p>
+<p>If the total number of elements in the current window is <span class="arithmatex">\(k\)</span> and the size is odd, the maximum value in the ordered set <span class="arithmatex">\(l\)</span> is the median. If the size of the current window is even, the average of the maximum value in the ordered set <span class="arithmatex">\(l\)</span> and the minimum value in the ordered set <span class="arithmatex">\(r\)</span> is the median. Then, we remove the leftmost element of the window and continue traversing the array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \log k)\)</span>, and the space complexity is <span class="arithmatex">\(O(k)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -88567,11 +88565,9 @@ Window position                Median
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

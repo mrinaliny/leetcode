@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90875,10 +90873,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：位运算 + 枚举</h3>
-<p>我们先预处理出数组 <code>nums</code> 的异或和 $xs$，即 $xs=nums[0] \oplus nums[1] \oplus \cdots \oplus nums[n-1]$。</p>
-<p>接下来，我们从后往前枚举数组 <code>nums</code> 中的每个元素 $x$，当前的异或和为 $xs$，我们需要找到一个数 $k$，使得 $xs \oplus k$ 的值尽可能大，并且 $k \lt 2^{maximumBit}$。</p>
-<p>也即是说，我们从 $xs$ 的第 $maximumBit - 1$ 位开始，往低位枚举，如果 $xs$ 的某一位为 $0$，那么我们就将 $k$ 的对应位设置为 $1$，否则我们就将 $k$ 的对应位设置为 $0$。这样，最终得到的 $k$ 就是每一次查询的答案。然后，我们将 $xs$ 更新为 $xs \oplus x$，继续枚举下一个元素。</p>
-<p>时间复杂度 $O(n \times m)$，其中 $n$ 和 $m$ 分别是数组 <code>nums</code> 和 <code>maximumBit</code> 的值。忽略答案数组的空间消耗，空间复杂度 $O(1)$。</p>
+<p>我们先预处理出数组 <code>nums</code> 的异或和 <span class="arithmatex">\(xs\)</span>，即 <span class="arithmatex">\(xs=nums[0] \oplus nums[1] \oplus \cdots \oplus nums[n-1]\)</span>。</p>
+<p>接下来，我们从后往前枚举数组 <code>nums</code> 中的每个元素 <span class="arithmatex">\(x\)</span>，当前的异或和为 <span class="arithmatex">\(xs\)</span>，我们需要找到一个数 <span class="arithmatex">\(k\)</span>，使得 <span class="arithmatex">\(xs \oplus k\)</span> 的值尽可能大，并且 <span class="arithmatex">\(k \lt 2^{maximumBit}\)</span>。</p>
+<p>也即是说，我们从 <span class="arithmatex">\(xs\)</span> 的第 <span class="arithmatex">\(maximumBit - 1\)</span> 位开始，往低位枚举，如果 <span class="arithmatex">\(xs\)</span> 的某一位为 <span class="arithmatex">\(0\)</span>，那么我们就将 <span class="arithmatex">\(k\)</span> 的对应位设置为 <span class="arithmatex">\(1\)</span>，否则我们就将 <span class="arithmatex">\(k\)</span> 的对应位设置为 <span class="arithmatex">\(0\)</span>。这样，最终得到的 <span class="arithmatex">\(k\)</span> 就是每一次查询的答案。然后，我们将 <span class="arithmatex">\(xs\)</span> 更新为 <span class="arithmatex">\(xs \oplus x\)</span>，继续枚举下一个元素。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是数组 <code>nums</code> 和 <code>maximumBit</code> 的值。忽略答案数组的空间消耗，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91186,9 +91184,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：枚举优化</h3>
-<p>与方法一类似，我们先预处理出数组 <code>nums</code> 的异或和 $xs$，即 $xs=nums[0] \oplus nums[1] \oplus \cdots \oplus nums[n-1]$。</p>
-<p>接下来，我们算出 $2^{maximumBit} - 1$，即 $2^{maximumBit}$ 减去 $1$，记为 $mask$。然后，我们从后往前枚举数组 <code>nums</code> 中的每个元素 $x$，当前的异或和为 $xs$，那么 $k=xs \oplus mask$ 就是每一次查询的答案。然后，我们将 $xs$ 更新为 $xs \oplus x$，继续枚举下一个元素。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是数组 <code>nums</code> 的长度。忽略答案数组的空间消耗，空间复杂度 $O(1)$。</p>
+<p>与方法一类似，我们先预处理出数组 <code>nums</code> 的异或和 <span class="arithmatex">\(xs\)</span>，即 <span class="arithmatex">\(xs=nums[0] \oplus nums[1] \oplus \cdots \oplus nums[n-1]\)</span>。</p>
+<p>接下来，我们算出 <span class="arithmatex">\(2^{maximumBit} - 1\)</span>，即 <span class="arithmatex">\(2^{maximumBit}\)</span> 减去 <span class="arithmatex">\(1\)</span>，记为 <span class="arithmatex">\(mask\)</span>。然后，我们从后往前枚举数组 <code>nums</code> 中的每个元素 <span class="arithmatex">\(x\)</span>，当前的异或和为 <span class="arithmatex">\(xs\)</span>，那么 <span class="arithmatex">\(k=xs \oplus mask\)</span> 就是每一次查询的答案。然后，我们将 <span class="arithmatex">\(xs\)</span> 更新为 <span class="arithmatex">\(xs \oplus x\)</span>，继续枚举下一个元素。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <code>nums</code> 的长度。忽略答案数组的空间消耗，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91668,11 +91666,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

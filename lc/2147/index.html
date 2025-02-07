@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90871,17 +90869,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $\textit{dfs}(i, k)$，表示在走廊的第 $i$ 个位置，已经放置了 $k$ 个屏风的情况下，划分走廊的方案数。那么答案就是 $\textit{dfs}(0, 0)$。</p>
-<p>函数 $\textit{dfs}(i, k)$ 的计算过程如下：</p>
-<p>如果 $i \geq \textit{len}(\textit{corridor})$，表示已经遍历完了走廊，此时如果 $k = 2$，说明找到了一种划分走廊的方案，返回 $1$，否则返回 $0$；</p>
-<p>否则，我们需要考虑当前位置 $i$ 的情况：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, k)\)</span>，表示在走廊的第 <span class="arithmatex">\(i\)</span> 个位置，已经放置了 <span class="arithmatex">\(k\)</span> 个屏风的情况下，划分走廊的方案数。那么答案就是 <span class="arithmatex">\(\textit{dfs}(0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i, k)\)</span> 的计算过程如下：</p>
+<p>如果 <span class="arithmatex">\(i \geq \textit{len}(\textit{corridor})\)</span>，表示已经遍历完了走廊，此时如果 <span class="arithmatex">\(k = 2\)</span>，说明找到了一种划分走廊的方案，返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>否则，我们需要考虑当前位置 <span class="arithmatex">\(i\)</span> 的情况：</p>
 <ul>
-<li>如果 $\textit{corridor}[i] = \text{'S'}$，表示当前位置是一个座位，我们将 $k$ 加 $1$；</li>
-<li>如果 $k &gt; 2$，表示当前位置放置的屏风数量超过了 $2$，返回 $0$；</li>
-<li>否则，我们可以选择不放置屏风，即 $\textit{dfs}(i + 1, k)$；如果 $k = 2$，我们还可以选择放置屏风，即 $\textit{dfs}(i + 1, 0)$；我们将这两种情况的结果相加并取模 $10^9 + 7$，即 $\textit{ans} = (\textit{ans} + \textit{dfs}(i + 1, k)) \bmod \text{mod}$。</li>
+<li>如果 <span class="arithmatex">\(\textit{corridor}[i] = \text{'S'}\)</span>，表示当前位置是一个座位，我们将 <span class="arithmatex">\(k\)</span> 加 <span class="arithmatex">\(1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(k &gt; 2\)</span>，表示当前位置放置的屏风数量超过了 <span class="arithmatex">\(2\)</span>，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>否则，我们可以选择不放置屏风，即 <span class="arithmatex">\(\textit{dfs}(i + 1, k)\)</span>；如果 <span class="arithmatex">\(k = 2\)</span>，我们还可以选择放置屏风，即 <span class="arithmatex">\(\textit{dfs}(i + 1, 0)\)</span>；我们将这两种情况的结果相加并取模 <span class="arithmatex">\(10^9 + 7\)</span>，即 <span class="arithmatex">\(\textit{ans} = (\textit{ans} + \textit{dfs}(i + 1, k)) \bmod \text{mod}\)</span>。</li>
 </ul>
-<p>最后，我们返回 $\textit{dfs}(0, 0)$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是走廊的长度。</p>
+<p>最后，我们返回 <span class="arithmatex">\(\textit{dfs}(0, 0)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是走廊的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91167,11 +91165,11 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：数学</h3>
-<p>我们可以将每两个座位划分为一组。在相邻的两组座位之间，如果前一组的最后一个座位和后一组的第一个座位之间的距离为 $x$，那么就有 $x$ 种放置屏风的方案。</p>
-<p>我们遍历走廊，用一个变量 $\textit{cnt}$ 记录当前座位数，用一个变量 $\textit{last}$ 记录上一个座位的位置。</p>
-<p>当遍历到一个座位时，我们将 $\textit{cnt}$ 加 $1$，如果 $\textit{cnt}$ 大于 $2$ 且 $\textit{cnt}$ 为奇数，那么我们就需要在 $\textit{last}$ 和当前座位之间放置一个屏风，此时的方案数就是 $\textit{ans} \times (i - \textit{last})$，其中 $\textit{ans}$ 是之前的方案数。然后，我们更新 $\textit{last}$ 为当前座位的位置 $i$。</p>
-<p>最后，如果 $\textit{cnt}$ 大于 $0$ 且 $\textit{cnt}$ 为偶数，那么返回 $\textit{ans}$，否则返回 $0$。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是走廊的长度。空间复杂度 $O(1)$。</p>
+<p>我们可以将每两个座位划分为一组。在相邻的两组座位之间，如果前一组的最后一个座位和后一组的第一个座位之间的距离为 <span class="arithmatex">\(x\)</span>，那么就有 <span class="arithmatex">\(x\)</span> 种放置屏风的方案。</p>
+<p>我们遍历走廊，用一个变量 <span class="arithmatex">\(\textit{cnt}\)</span> 记录当前座位数，用一个变量 <span class="arithmatex">\(\textit{last}\)</span> 记录上一个座位的位置。</p>
+<p>当遍历到一个座位时，我们将 <span class="arithmatex">\(\textit{cnt}\)</span> 加 <span class="arithmatex">\(1\)</span>，如果 <span class="arithmatex">\(\textit{cnt}\)</span> 大于 <span class="arithmatex">\(2\)</span> 且 <span class="arithmatex">\(\textit{cnt}\)</span> 为奇数，那么我们就需要在 <span class="arithmatex">\(\textit{last}\)</span> 和当前座位之间放置一个屏风，此时的方案数就是 <span class="arithmatex">\(\textit{ans} \times (i - \textit{last})\)</span>，其中 <span class="arithmatex">\(\textit{ans}\)</span> 是之前的方案数。然后，我们更新 <span class="arithmatex">\(\textit{last}\)</span> 为当前座位的位置 <span class="arithmatex">\(i\)</span>。</p>
+<p>最后，如果 <span class="arithmatex">\(\textit{cnt}\)</span> 大于 <span class="arithmatex">\(0\)</span> 且 <span class="arithmatex">\(\textit{cnt}\)</span> 为偶数，那么返回 <span class="arithmatex">\(\textit{ans}\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是走廊的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91568,11 +91566,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

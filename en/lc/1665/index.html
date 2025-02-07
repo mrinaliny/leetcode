@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86078,21 +86076,21 @@ Starting with 27 energy, we finish the tasks in the following order:
 <!-- solution:start -->
 
 <h3 id="solution-1-greedy-custom-sorting">Solution 1: Greedy + Custom Sorting</h3>
-<p>Assume the number of tasks is $n$ and the initial energy level is $E$. Consider completing the last task. This requires that after completing the first $n-1$ tasks, the remaining energy level is not less than the energy level required to complete the last task $m_n$, i.e.,</p>
-<p>$$
+<p>Assume the number of tasks is <span class="arithmatex">\(n\)</span> and the initial energy level is <span class="arithmatex">\(E\)</span>. Consider completing the last task. This requires that after completing the first <span class="arithmatex">\(n-1\)</span> tasks, the remaining energy level is not less than the energy level required to complete the last task <span class="arithmatex">\(m_n\)</span>, i.e.,</p>
+<div class="arithmatex">\[
 E-\sum_{i=1}^{n-1} a_i \geq m_n
-$$</p>
-<p>We can express $m_n$ as $a_n+(m_n - a_n)$, and then transform the above formula to get:</p>
-<p>$$
+\]</div>
+<p>We can express <span class="arithmatex">\(m_n\)</span> as <span class="arithmatex">\(a_n+(m_n - a_n)\)</span>, and then transform the above formula to get:</p>
+<div class="arithmatex">\[
 E-\sum_{i=1}^{n-1} a_i \geq a_n+(m_n - a_n)
-$$</p>
+\]</div>
 <p>Rearranging, we get:</p>
-<p>$$
+<div class="arithmatex">\[
 E \geq \sum_{i=1}^{n} a_i + (m_n - a_n)
-$$</p>
-<p>Where $\sum_{i=1}^{n} a_i$ is fixed. To minimize the initial energy level $E$, we need to minimize $m_n - a_n$, i.e., maximize $a_n-m_n$.</p>
-<p>Therefore, we can sort the tasks in ascending order of $a_i-m_i$. Then we traverse the tasks from front to back. For each task, if the current energy level $cur$ is less than $m_i$, we need to increase the energy level by $m_i - cur$ to make the current energy level exactly equal to $m_i$. Then we complete the task and update $cur = cur - a_i$. Continue traversing until all tasks are completed, and we can get the minimum initial energy level required.</p>
-<p>The time complexity is $O(n\times \log n)$, where $n$ is the number of tasks. Ignoring the space overhead of sorting, the space complexity is $O(1)$.</p>
+\]</div>
+<p>Where <span class="arithmatex">\(\sum_{i=1}^{n} a_i\)</span> is fixed. To minimize the initial energy level <span class="arithmatex">\(E\)</span>, we need to minimize <span class="arithmatex">\(m_n - a_n\)</span>, i.e., maximize <span class="arithmatex">\(a_n-m_n\)</span>.</p>
+<p>Therefore, we can sort the tasks in ascending order of <span class="arithmatex">\(a_i-m_i\)</span>. Then we traverse the tasks from front to back. For each task, if the current energy level <span class="arithmatex">\(cur\)</span> is less than <span class="arithmatex">\(m_i\)</span>, we need to increase the energy level by <span class="arithmatex">\(m_i - cur\)</span> to make the current energy level exactly equal to <span class="arithmatex">\(m_i\)</span>. Then we complete the task and update <span class="arithmatex">\(cur = cur - a_i\)</span>. Continue traversing until all tasks are completed, and we can get the minimum initial energy level required.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n\times \log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of tasks. Ignoring the space overhead of sorting, the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86473,11 +86471,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

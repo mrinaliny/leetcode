@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90855,10 +90853,10 @@ p[0][2] = grid[0][0] * grid[0][1] = 12345 * 2 = 24690. 24690 % 12345 = 0 ，所�
 
 <h3 id="_3">方法一：前后缀分解</h3>
 <p>我们可以预处理出每个元素的后缀乘积（不包含自身），然后再遍历矩阵，计算得到每个元素的前缀乘积（不包含自身），将两者相乘即可得到每个位置的结果。</p>
-<p>具体地，我们用 $p[i][j]$ 表示矩阵中第 $i$ 行第 $j$ 列元素的结果，定义一个变量 $suf$ 表示当前位置右下方的所有元素的乘积，初始时 $suf = 1$。我们从矩阵右下角开始遍历，对于每个位置 $(i, j)$，我们将 $suf$ 赋值给 $p[i][j]$，然后更新 $suf$ 为 $suf \times grid[i][j] \bmod 12345$，这样就可以得到每个位置的后缀乘积。</p>
-<p>接下来我们从矩阵左上角开始遍历，对于每个位置 $(i, j)$，我们将 $p[i][j]$ 乘上 $pre$，再对 $12345$ 取模，然后更新 $pre$ 为 $pre \times grid[i][j] \bmod 12345$，这样就可以得到每个位置的前缀乘积。</p>
-<p>遍历结束，返回结果矩阵 $p$ 即可。</p>
-<p>时间复杂度 $O(n \times m)$，其中 $n$ 和 $m$ 分别是矩阵的行数和列数。忽略结果矩阵的空间占用，空间复杂度 $O(1)$。</p>
+<p>具体地，我们用 <span class="arithmatex">\(p[i][j]\)</span> 表示矩阵中第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列元素的结果，定义一个变量 <span class="arithmatex">\(suf\)</span> 表示当前位置右下方的所有元素的乘积，初始时 <span class="arithmatex">\(suf = 1\)</span>。我们从矩阵右下角开始遍历，对于每个位置 <span class="arithmatex">\((i, j)\)</span>，我们将 <span class="arithmatex">\(suf\)</span> 赋值给 <span class="arithmatex">\(p[i][j]\)</span>，然后更新 <span class="arithmatex">\(suf\)</span> 为 <span class="arithmatex">\(suf \times grid[i][j] \bmod 12345\)</span>，这样就可以得到每个位置的后缀乘积。</p>
+<p>接下来我们从矩阵左上角开始遍历，对于每个位置 <span class="arithmatex">\((i, j)\)</span>，我们将 <span class="arithmatex">\(p[i][j]\)</span> 乘上 <span class="arithmatex">\(pre\)</span>，再对 <span class="arithmatex">\(12345\)</span> 取模，然后更新 <span class="arithmatex">\(pre\)</span> 为 <span class="arithmatex">\(pre \times grid[i][j] \bmod 12345\)</span>，这样就可以得到每个位置的前缀乘积。</p>
+<p>遍历结束，返回结果矩阵 <span class="arithmatex">\(p\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是矩阵的行数和列数。忽略结果矩阵的空间占用，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91366,11 +91364,9 @@ p[0][2] = grid[0][0] * grid[0][1] = 12345 * 2 = 24690. 24690 % 12345 = 0 ，所�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

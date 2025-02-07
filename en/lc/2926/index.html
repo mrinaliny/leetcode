@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,16 +86081,16 @@ It is a balanced subsequence, and its sum is the maximum among the balanced subs
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-binary-indexed-tree">Solution 1: Dynamic Programming + Binary Indexed Tree</h3>
-<p>According to the problem description, we can transform the inequality $nums[i] - nums[j] \ge i - j$ into $nums[i] - i \ge nums[j] - j$. Therefore, we consider defining a new array $arr$, where $arr[i] = nums[i] - i$. A balanced subsequence satisfies that for any $j &lt; i$, $arr[j] \le arr[i]$. The problem is transformed into selecting an increasing subsequence in $arr$ such that the corresponding sum in $nums$ is maximized.</p>
-<p>Suppose $i$ is the index of the last element in the subsequence, then we consider the index $j$ of the second to last element in the subsequence. If $arr[j] \le arr[i]$, we can consider whether to add $j$ to the subsequence.</p>
-<p>Therefore, we define $f[i]$ as the maximum sum of $nums$ when the index of the last element in the subsequence is $i$. The answer is $\max_{i=0}^{n-1} f[i]$.</p>
+<p>According to the problem description, we can transform the inequality <span class="arithmatex">\(nums[i] - nums[j] \ge i - j\)</span> into <span class="arithmatex">\(nums[i] - i \ge nums[j] - j\)</span>. Therefore, we consider defining a new array <span class="arithmatex">\(arr\)</span>, where <span class="arithmatex">\(arr[i] = nums[i] - i\)</span>. A balanced subsequence satisfies that for any <span class="arithmatex">\(j &lt; i\)</span>, <span class="arithmatex">\(arr[j] \le arr[i]\)</span>. The problem is transformed into selecting an increasing subsequence in <span class="arithmatex">\(arr\)</span> such that the corresponding sum in <span class="arithmatex">\(nums\)</span> is maximized.</p>
+<p>Suppose <span class="arithmatex">\(i\)</span> is the index of the last element in the subsequence, then we consider the index <span class="arithmatex">\(j\)</span> of the second to last element in the subsequence. If <span class="arithmatex">\(arr[j] \le arr[i]\)</span>, we can consider whether to add <span class="arithmatex">\(j\)</span> to the subsequence.</p>
+<p>Therefore, we define <span class="arithmatex">\(f[i]\)</span> as the maximum sum of <span class="arithmatex">\(nums\)</span> when the index of the last element in the subsequence is <span class="arithmatex">\(i\)</span>. The answer is <span class="arithmatex">\(\max_{i=0}^{n-1} f[i]\)</span>.</p>
 <p>The state transition equation is:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i] = \max(\max_{j=0}^{i-1} f[j], 0) + nums[i]
-$$</p>
-<p>where $j$ satisfies $arr[j] \le arr[i]$.</p>
-<p>We can use a Binary Indexed Tree to maintain the maximum value of the prefix, i.e., for each $arr[i]$, we maintain the maximum value of $f[i]$ in the prefix $arr[0..i]$.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $nums$.</p>
+\]</div>
+<p>where <span class="arithmatex">\(j\)</span> satisfies <span class="arithmatex">\(arr[j] \le arr[i]\)</span>.</p>
+<p>We can use a Binary Indexed Tree to maintain the maximum value of the prefix, i.e., for each <span class="arithmatex">\(arr[i]\)</span>, we maintain the maximum value of <span class="arithmatex">\(f[i]\)</span> in the prefix <span class="arithmatex">\(arr[0..i]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86846,11 +86844,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,12 +90861,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：并查集</h3>
-<p>考虑<strong>从大到小遍历</strong>数组 $nums$ 中的每个元素 $v$，用并查集来维护以 $v$ 作为子数组最小值的连通块。</p>
+<p>考虑<strong>从大到小遍历</strong>数组 <span class="arithmatex">\(nums\)</span> 中的每个元素 <span class="arithmatex">\(v\)</span>，用并查集来维护以 <span class="arithmatex">\(v\)</span> 作为子数组最小值的连通块。</p>
 <p>遍历过程中：</p>
-<p>$v$ 在数组 $nums$ 中的下标为 $i$，若下标 $i-1$ 对应的元素遍历过，可以将 $i-1$ 与 $i$ 进行合并，同理，若下标 $i+1$ 对应的元素也遍历过了，将 $i$ 与 $i+1$ 合并。合并过程中更新连通块的大小。</p>
-<p>$v$ 作为当前连通块的最小值，当前连通块的大小为 $size[find(i)]$，若 $v&gt;\frac{\textit{threshold}}{size[find(i)]}$，说明找到了满足条件的子数组，返回 $true$。</p>
-<p>否则遍历结束，返回 $-1$。</p>
-<p>时间复杂度 $O(nlogn)$。</p>
+<p><span class="arithmatex">\(v\)</span> 在数组 <span class="arithmatex">\(nums\)</span> 中的下标为 <span class="arithmatex">\(i\)</span>，若下标 <span class="arithmatex">\(i-1\)</span> 对应的元素遍历过，可以将 <span class="arithmatex">\(i-1\)</span> 与 <span class="arithmatex">\(i\)</span> 进行合并，同理，若下标 <span class="arithmatex">\(i+1\)</span> 对应的元素也遍历过了，将 <span class="arithmatex">\(i\)</span> 与 <span class="arithmatex">\(i+1\)</span> 合并。合并过程中更新连通块的大小。</p>
+<p><span class="arithmatex">\(v\)</span> 作为当前连通块的最小值，当前连通块的大小为 <span class="arithmatex">\(size[find(i)]\)</span>，若 <span class="arithmatex">\(v&gt;\frac{\textit{threshold}}{size[find(i)]}\)</span>，说明找到了满足条件的子数组，返回 <span class="arithmatex">\(true\)</span>。</p>
+<p>否则遍历结束，返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(nlogn)\)</span>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1500-1599/1562.Find%20Latest%20Group%20of%20Size%20M/README.md">1562. 查找大小为 M 的最新分组</a></li>
@@ -91218,10 +91216,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：单调栈</h3>
-<p>利用单调栈，得到以当前元素 $nums[i]$ 作为最小元素的左右边界 $left[i]$（左边第一个比 $nums[i]$ 小的元素的位置）, $right[i]$（右边第一个比 $nums[i]$ 小的元素的位置）。</p>
-<p>那么对于当前元素 $nums[i]$，有 $k=right[i]-left[i]-1$，若 $nums[i]&gt;\frac{\textit{threshold}}{k}$，说明找到了满足条件的子数组，返回 $true$。</p>
-<p>否则遍历结束，返回 $-1$。</p>
-<p>时间复杂度 $O(n)$。</p>
+<p>利用单调栈，得到以当前元素 <span class="arithmatex">\(nums[i]\)</span> 作为最小元素的左右边界 <span class="arithmatex">\(left[i]\)</span>（左边第一个比 <span class="arithmatex">\(nums[i]\)</span> 小的元素的位置）, <span class="arithmatex">\(right[i]\)</span>（右边第一个比 <span class="arithmatex">\(nums[i]\)</span> 小的元素的位置）。</p>
+<p>那么对于当前元素 <span class="arithmatex">\(nums[i]\)</span>，有 <span class="arithmatex">\(k=right[i]-left[i]-1\)</span>，若 <span class="arithmatex">\(nums[i]&gt;\frac{\textit{threshold}}{k}\)</span>，说明找到了满足条件的子数组，返回 <span class="arithmatex">\(true\)</span>。</p>
+<p>否则遍历结束，返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91719,11 +91717,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

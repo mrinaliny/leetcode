@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,10 +90864,10 @@ s 中没有子串长度为 16 并且等于 words 的任何顺序排列的连接�
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 滑动窗口</h3>
-<p>我们用哈希表 $cnt$ 统计 $words$ 中每个单词出现的次数，用哈希表 $cnt1$ 统计当前滑动窗口中每个单词出现的次数。我们记字符串 $s$ 的长度为 $m$，字符串数组 $words$ 中单词的数量为 $n$，每个单词的长度为 $k$。</p>
-<p>我们可以枚举滑动窗口的起点 $i$，其中 $0 \lt i \lt k$。对于每个起点，我们维护一个滑动窗口，左边界为 $l$，右边界为 $r$，滑动窗口中的单词个数为 $t$，另外用一个哈希表 $cnt1$ 统计滑动窗口中每个单词出现的次数。</p>
-<p>每一次，我们提取字符串 $s[r:r+k]$，如果 $s[r:r+k]$ 不在哈希表 $cnt$ 中，说明当前滑动窗口中的单词不合法，我们将左边界 $l$ 更新为 $r$，同时将哈希表 $cnt1$ 清空，单词个数 $t$ 重置为 0。如果 $s[r:r+k]$ 在哈希表 $cnt$ 中，说明当前滑动窗口中的单词合法，我们将单词个数 $t$ 加 1，将哈希表 $cnt1$ 中 $s[r:r+k]$ 的次数加 1。如果 $cnt1[s[r:r+k]]$ 大于 $cnt[s[r:r+k]]$，说明当前滑动窗口中 $s[r:r+k]$ 出现的次数过多，我们需要将左边界 $l$ 右移，直到 $cnt1[s[r:r+k]] = cnt[s[r:r+k]]$。如果 $t = n$，说明当前滑动窗口中的单词正好合法，我们将左边界 $l$ 加入答案数组。</p>
-<p>时间复杂度 $O(m \times k)$，空间复杂度 $O(n \times k)$。其中 $m$ 和 $n$ 分别是字符串 $s$ 和字符串数组 $words$ 的长度，而 $k$ 是字符串数组 $words$ 中单词的长度。</p>
+<p>我们用哈希表 <span class="arithmatex">\(cnt\)</span> 统计 <span class="arithmatex">\(words\)</span> 中每个单词出现的次数，用哈希表 <span class="arithmatex">\(cnt1\)</span> 统计当前滑动窗口中每个单词出现的次数。我们记字符串 <span class="arithmatex">\(s\)</span> 的长度为 <span class="arithmatex">\(m\)</span>，字符串数组 <span class="arithmatex">\(words\)</span> 中单词的数量为 <span class="arithmatex">\(n\)</span>，每个单词的长度为 <span class="arithmatex">\(k\)</span>。</p>
+<p>我们可以枚举滑动窗口的起点 <span class="arithmatex">\(i\)</span>，其中 <span class="arithmatex">\(0 \lt i \lt k\)</span>。对于每个起点，我们维护一个滑动窗口，左边界为 <span class="arithmatex">\(l\)</span>，右边界为 <span class="arithmatex">\(r\)</span>，滑动窗口中的单词个数为 <span class="arithmatex">\(t\)</span>，另外用一个哈希表 <span class="arithmatex">\(cnt1\)</span> 统计滑动窗口中每个单词出现的次数。</p>
+<p>每一次，我们提取字符串 <span class="arithmatex">\(s[r:r+k]\)</span>，如果 <span class="arithmatex">\(s[r:r+k]\)</span> 不在哈希表 <span class="arithmatex">\(cnt\)</span> 中，说明当前滑动窗口中的单词不合法，我们将左边界 <span class="arithmatex">\(l\)</span> 更新为 <span class="arithmatex">\(r\)</span>，同时将哈希表 <span class="arithmatex">\(cnt1\)</span> 清空，单词个数 <span class="arithmatex">\(t\)</span> 重置为 0。如果 <span class="arithmatex">\(s[r:r+k]\)</span> 在哈希表 <span class="arithmatex">\(cnt\)</span> 中，说明当前滑动窗口中的单词合法，我们将单词个数 <span class="arithmatex">\(t\)</span> 加 1，将哈希表 <span class="arithmatex">\(cnt1\)</span> 中 <span class="arithmatex">\(s[r:r+k]\)</span> 的次数加 1。如果 <span class="arithmatex">\(cnt1[s[r:r+k]]\)</span> 大于 <span class="arithmatex">\(cnt[s[r:r+k]]\)</span>，说明当前滑动窗口中 <span class="arithmatex">\(s[r:r+k]\)</span> 出现的次数过多，我们需要将左边界 <span class="arithmatex">\(l\)</span> 右移，直到 <span class="arithmatex">\(cnt1[s[r:r+k]] = cnt[s[r:r+k]]\)</span>。如果 <span class="arithmatex">\(t = n\)</span>，说明当前滑动窗口中的单词正好合法，我们将左边界 <span class="arithmatex">\(l\)</span> 加入答案数组。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是字符串 <span class="arithmatex">\(s\)</span> 和字符串数组 <span class="arithmatex">\(words\)</span> 的长度，而 <span class="arithmatex">\(k\)</span> 是字符串数组 <span class="arithmatex">\(words\)</span> 中单词的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label><label for="__tabbed_1_7">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91687,11 +91685,9 @@ s 中没有子串长度为 16 并且等于 words 的任何顺序排列的连接�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

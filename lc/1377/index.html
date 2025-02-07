@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,21 +90866,21 @@
 <!-- solution:start -->
 
 <h3 id="bfs">方法一：BFS</h3>
-<p>我们先根据题目给出的无向树的边，建立一个邻接表 $g$，其中 $g[u]$ 表示顶点 $u$ 的所有相邻顶点。</p>
+<p>我们先根据题目给出的无向树的边，建立一个邻接表 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[u]\)</span> 表示顶点 <span class="arithmatex">\(u\)</span> 的所有相邻顶点。</p>
 <p>然后，我们定义以下数据结构：</p>
 <ul>
-<li>队列 $q$，用于存储每一轮搜索的顶点及其概率，初始时 $q = [(1, 1.0)]$，表示青蛙在顶点 $1$ 的概率为 $1.0$；</li>
-<li>数组 $vis$，用于记录每个顶点是否被访问过，初始时 $vis[1] = true$，其余元素均为 $false$。</li>
+<li>队列 <span class="arithmatex">\(q\)</span>，用于存储每一轮搜索的顶点及其概率，初始时 <span class="arithmatex">\(q = [(1, 1.0)]\)</span>，表示青蛙在顶点 <span class="arithmatex">\(1\)</span> 的概率为 <span class="arithmatex">\(1.0\)</span>；</li>
+<li>数组 <span class="arithmatex">\(vis\)</span>，用于记录每个顶点是否被访问过，初始时 <span class="arithmatex">\(vis[1] = true\)</span>，其余元素均为 <span class="arithmatex">\(false\)</span>。</li>
 </ul>
 <p>接下来，我们开始进行广度优先搜索。</p>
-<p>在每一轮搜索中，我们每次取出队首元素 $(u, p)$，其中 $u$ 和 $p$ 分别表示当前顶点及其概率。当前顶点 $u$ 的相邻顶点中未被访问过的顶点的个数记为 $cnt$。</p>
+<p>在每一轮搜索中，我们每次取出队首元素 <span class="arithmatex">\((u, p)\)</span>，其中 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(p\)</span> 分别表示当前顶点及其概率。当前顶点 <span class="arithmatex">\(u\)</span> 的相邻顶点中未被访问过的顶点的个数记为 <span class="arithmatex">\(cnt\)</span>。</p>
 <ul>
-<li>如果 $u = target$，说明青蛙已经到达目标顶点，此时我们判断青蛙是否在 $t$ 秒到达目标顶点，或者不到 $t$ 秒到达目标顶点但是无法再跳跃到其它顶点（即 $t=0$ 或者 $cnt=0$）。如果是，则返回 $p$，否则返回 $0$。</li>
-<li>如果 $u \neq target$，那么我们将概率 $p$ 均分给 $u$ 的所有未被访问过的相邻顶点，然后将这些顶点加入队列 $q$ 中，并且将这些顶点标记为已访问。</li>
+<li>如果 <span class="arithmatex">\(u = target\)</span>，说明青蛙已经到达目标顶点，此时我们判断青蛙是否在 <span class="arithmatex">\(t\)</span> 秒到达目标顶点，或者不到 <span class="arithmatex">\(t\)</span> 秒到达目标顶点但是无法再跳跃到其它顶点（即 <span class="arithmatex">\(t=0\)</span> 或者 <span class="arithmatex">\(cnt=0\)</span>）。如果是，则返回 <span class="arithmatex">\(p\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>如果 <span class="arithmatex">\(u \neq target\)</span>，那么我们将概率 <span class="arithmatex">\(p\)</span> 均分给 <span class="arithmatex">\(u\)</span> 的所有未被访问过的相邻顶点，然后将这些顶点加入队列 <span class="arithmatex">\(q\)</span> 中，并且将这些顶点标记为已访问。</li>
 </ul>
-<p>在一轮搜索结束后，我们将 $t$ 减少 $1$，然后继续进行下一轮搜索，直到队列为空或者 $t \lt 0$。</p>
-<p>最后，若青蛙仍然没有到达目标顶点，那么我们返回 $0$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是无向树的顶点数。</p>
+<p>在一轮搜索结束后，我们将 <span class="arithmatex">\(t\)</span> 减少 <span class="arithmatex">\(1\)</span>，然后继续进行下一轮搜索，直到队列为空或者 <span class="arithmatex">\(t \lt 0\)</span>。</p>
+<p>最后，若青蛙仍然没有到达目标顶点，那么我们返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是无向树的顶点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91503,11 +91501,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

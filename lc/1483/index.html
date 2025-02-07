@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90875,15 +90873,15 @@ treeAncestor.getKthAncestor(6, 3);  // 返回 -1 因为不存在满足要求的�
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划 + 倍增</h3>
-<p>题目要我们寻找节点 $node$ 的第 $k$ 个祖先节点，如果暴力求解，需要从 $node$ 开始向上遍历 $k$ 次，时间复杂度为 $O(k)$，显然会超时。</p>
+<p>题目要我们寻找节点 <span class="arithmatex">\(node\)</span> 的第 <span class="arithmatex">\(k\)</span> 个祖先节点，如果暴力求解，需要从 <span class="arithmatex">\(node\)</span> 开始向上遍历 <span class="arithmatex">\(k\)</span> 次，时间复杂度为 <span class="arithmatex">\(O(k)\)</span>，显然会超时。</p>
 <p>我们可以使用动态规划，结合倍增的思想来处理。</p>
-<p>我们定义 $p[i][j]$ 表示节点 $i$ 的第 $2^j$ 个祖先节点，即 $p[i][j]$ 表示节点 $i$ 向上走 $2^j$ 步的节点。那么我们可以得到状态转移方程：</p>
-<p>$$
+<p>我们定义 <span class="arithmatex">\(p[i][j]\)</span> 表示节点 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(2^j\)</span> 个祖先节点，即 <span class="arithmatex">\(p[i][j]\)</span> 表示节点 <span class="arithmatex">\(i\)</span> 向上走 <span class="arithmatex">\(2^j\)</span> 步的节点。那么我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 p[i][j] = p[p[i][j-1]][j-1]
-$$</p>
-<p>即：要想找到节点 $i$ 的第 $2^j$ 个祖先节点，我们可以先找到节点 $i$ 的第 $2^{j-1}$ 个祖先节点，然后再找到该节点的第 $2^{j-1}$ 个祖先节点即可。所以，我们要找到每个节点的距离为 $2^j$ 的祖先节点，直到达到树的最大高度。</p>
-<p>之后对于每次查询，我们可以把 $k$ 拆成二进制的表示形式，然后根据二进制中 $1$ 的位置，累计向上查询，最终得到节点 $node$ 的第 $k$ 个祖先节点。</p>
-<p>时间复杂度方面，初始化为 $O(n \times \log n)$，查询为 $O(\log n)$。空间复杂度 $O(n \times \log n)$。其中 $n$ 为树的节点数。</p>
+\]</div>
+<p>即：要想找到节点 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(2^j\)</span> 个祖先节点，我们可以先找到节点 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(2^{j-1}\)</span> 个祖先节点，然后再找到该节点的第 <span class="arithmatex">\(2^{j-1}\)</span> 个祖先节点即可。所以，我们要找到每个节点的距离为 <span class="arithmatex">\(2^j\)</span> 的祖先节点，直到达到树的最大高度。</p>
+<p>之后对于每次查询，我们可以把 <span class="arithmatex">\(k\)</span> 拆成二进制的表示形式，然后根据二进制中 <span class="arithmatex">\(1\)</span> 的位置，累计向上查询，最终得到节点 <span class="arithmatex">\(node\)</span> 的第 <span class="arithmatex">\(k\)</span> 个祖先节点。</p>
+<p>时间复杂度方面，初始化为 <span class="arithmatex">\(O(n \times \log n)\)</span>，查询为 <span class="arithmatex">\(O(\log n)\)</span>。空间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为树的节点数。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2800-2899/2836.Maximize%20Value%20of%20Function%20in%20a%20Ball%20Passing%20Game/README.md">2836. 在传球游戏中最大化函数值</a></li>
@@ -91582,11 +91580,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

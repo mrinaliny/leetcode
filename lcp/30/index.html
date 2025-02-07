@@ -50,8 +50,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90726,14 +90724,14 @@
 <h3 id="_3">方法一：贪心 + 优先队列（小根堆）</h3>
 <p>我们定义以下数据结构或变量，其中：</p>
 <ul>
-<li>优先队列（小根堆） $q$：存储当前所有怪物房间的血量减少值，堆顶元素为血量减少值最大的怪物房间（也即是最小的负数）。</li>
-<li>血量 $blood$：存储当前的血量，初始时 $blood = 1$。</li>
-<li>操作次数 $ans$：存储已经进行的操作次数，初始时 $ans = 0$。</li>
-<li>临时变量 $v$：存储当前待减少的血量，初始时 $v = 0$。</li>
+<li>优先队列（小根堆） <span class="arithmatex">\(q\)</span>：存储当前所有怪物房间的血量减少值，堆顶元素为血量减少值最大的怪物房间（也即是最小的负数）。</li>
+<li>血量 <span class="arithmatex">\(blood\)</span>：存储当前的血量，初始时 <span class="arithmatex">\(blood = 1\)</span>。</li>
+<li>操作次数 <span class="arithmatex">\(ans\)</span>：存储已经进行的操作次数，初始时 <span class="arithmatex">\(ans = 0\)</span>。</li>
+<li>临时变量 <span class="arithmatex">\(v\)</span>：存储当前待减少的血量，初始时 <span class="arithmatex">\(v = 0\)</span>。</li>
 </ul>
-<p>我们按照房间编号升序遍历所有房间，对于当前遍历到的房间 $x$，如果 $x$ 为怪物房间，我们就将 $x$ 的血量减少值加入 $q$。然后，我们更新当前的血量 $blood$，即 $blood = blood + x$。如果此时 $blood \le 0$，说明当前的血量不足以通过当前房间，因此我们需要调整访问顺序，此时我们可以贪心地将 $q$ 中血量减少值最大的房间调整至访问顺序的末尾，即把它累加到临时变量 $v$ 上，然后将 $blood$ 增加对应的值，并将该房间从 $q$ 中弹出。</p>
-<p>遍历结束后，我们需要更新当前的血量 $blood$，即 $blood = blood + v$。如果此时 $blood \le 0$，说明无法访问完所有房间，返回 $-1$。否则，返回 $ans$。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$，其中 $n$ 为房间的数量。</p>
+<p>我们按照房间编号升序遍历所有房间，对于当前遍历到的房间 <span class="arithmatex">\(x\)</span>，如果 <span class="arithmatex">\(x\)</span> 为怪物房间，我们就将 <span class="arithmatex">\(x\)</span> 的血量减少值加入 <span class="arithmatex">\(q\)</span>。然后，我们更新当前的血量 <span class="arithmatex">\(blood\)</span>，即 <span class="arithmatex">\(blood = blood + x\)</span>。如果此时 <span class="arithmatex">\(blood \le 0\)</span>，说明当前的血量不足以通过当前房间，因此我们需要调整访问顺序，此时我们可以贪心地将 <span class="arithmatex">\(q\)</span> 中血量减少值最大的房间调整至访问顺序的末尾，即把它累加到临时变量 <span class="arithmatex">\(v\)</span> 上，然后将 <span class="arithmatex">\(blood\)</span> 增加对应的值，并将该房间从 <span class="arithmatex">\(q\)</span> 中弹出。</p>
+<p>遍历结束后，我们需要更新当前的血量 <span class="arithmatex">\(blood\)</span>，即 <span class="arithmatex">\(blood = blood + v\)</span>。如果此时 <span class="arithmatex">\(blood \le 0\)</span>，说明无法访问完所有房间，返回 <span class="arithmatex">\(-1\)</span>。否则，返回 <span class="arithmatex">\(ans\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为房间的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91149,11 +91147,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

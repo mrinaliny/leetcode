@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90853,10 +90851,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示从起点 $(n - 1, n - 1)$ 到达 $(i, j)$ 的最大得分，定义 $g[i][j]$ 表示从起点 $(n - 1, n - 1)$ 到达 $(i, j)$ 的最大得分的方案数。初始时 $f[n - 1][n - 1] = 0$，并且 $g[n - 1][n - 1] = 1$。其它位置的 $f[i][j]$ 均为 $-1$，而 $g[i][j]$ 均为 $0$。</p>
-<p>对于当前位置 $(i, j)$，它可以由 $(i + 1, j)$, $(i, j + 1)$, $(i + 1, j + 1)$ 三个位置转移而来，因此我们可以枚举这三个位置，更新 $f[i][j]$ 和 $g[i][j]$ 的值。如果当前位置 $(i, j)$ 有障碍，或者当前位置是起点，或者其它位置越界，则不进行更新。否则，如果其它位置 $(x, y)$ 满足 $f[x][y] \gt f[i][j]$，那么我们更新 $f[i][j] = f[x][y]$，并且 $g[i][j] = g[x][y]$。如果 $f[x][y] = f[i][j]$，那么我们更新 $g[i][j] = g[i][j] + g[x][y]$。最后，如果当前位置 $(i, j)$ 可达并且是数字，我们更新 $f[i][j] = f[i][j] + board[i][j]$。</p>
-<p>最后，如果 $f[0][0] \lt 0$，说明没有路径可以到达终点，返回 $[0, 0]$。否则，返回 $[f[0][0], g[0][0]]$。注意，返回结果需要对 $10^9 + 7$ 取余。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是数组的边长。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示从起点 <span class="arithmatex">\((n - 1, n - 1)\)</span> 到达 <span class="arithmatex">\((i, j)\)</span> 的最大得分，定义 <span class="arithmatex">\(g[i][j]\)</span> 表示从起点 <span class="arithmatex">\((n - 1, n - 1)\)</span> 到达 <span class="arithmatex">\((i, j)\)</span> 的最大得分的方案数。初始时 <span class="arithmatex">\(f[n - 1][n - 1] = 0\)</span>，并且 <span class="arithmatex">\(g[n - 1][n - 1] = 1\)</span>。其它位置的 <span class="arithmatex">\(f[i][j]\)</span> 均为 <span class="arithmatex">\(-1\)</span>，而 <span class="arithmatex">\(g[i][j]\)</span> 均为 <span class="arithmatex">\(0\)</span>。</p>
+<p>对于当前位置 <span class="arithmatex">\((i, j)\)</span>，它可以由 <span class="arithmatex">\((i + 1, j)\)</span>, <span class="arithmatex">\((i, j + 1)\)</span>, <span class="arithmatex">\((i + 1, j + 1)\)</span> 三个位置转移而来，因此我们可以枚举这三个位置，更新 <span class="arithmatex">\(f[i][j]\)</span> 和 <span class="arithmatex">\(g[i][j]\)</span> 的值。如果当前位置 <span class="arithmatex">\((i, j)\)</span> 有障碍，或者当前位置是起点，或者其它位置越界，则不进行更新。否则，如果其它位置 <span class="arithmatex">\((x, y)\)</span> 满足 <span class="arithmatex">\(f[x][y] \gt f[i][j]\)</span>，那么我们更新 <span class="arithmatex">\(f[i][j] = f[x][y]\)</span>，并且 <span class="arithmatex">\(g[i][j] = g[x][y]\)</span>。如果 <span class="arithmatex">\(f[x][y] = f[i][j]\)</span>，那么我们更新 <span class="arithmatex">\(g[i][j] = g[i][j] + g[x][y]\)</span>。最后，如果当前位置 <span class="arithmatex">\((i, j)\)</span> 可达并且是数字，我们更新 <span class="arithmatex">\(f[i][j] = f[i][j] + board[i][j]\)</span>。</p>
+<p>最后，如果 <span class="arithmatex">\(f[0][0] \lt 0\)</span>，说明没有路径可以到达终点，返回 <span class="arithmatex">\([0, 0]\)</span>。否则，返回 <span class="arithmatex">\([f[0][0], g[0][0]]\)</span>。注意，返回结果需要对 <span class="arithmatex">\(10^9 + 7\)</span> 取余。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组的边长。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91420,11 +91418,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

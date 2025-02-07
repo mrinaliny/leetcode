@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86061,20 +86059,20 @@ Note that square 2 only brushes the right side of square 1, which does not count
 
 <h3 id="solution-1-segment-tree">Solution 1: Segment Tree</h3>
 <p>According to the problem description, we need to maintain a set of intervals that support modification and query operations. In this case, we can use a segment tree to solve the problem.</p>
-<p>A segment tree divides the entire interval into multiple non-contiguous sub-intervals, with the number of sub-intervals not exceeding $\log(width)$, where $width$ is the length of the interval. To update the value of an element, we only need to update $\log(width)$ intervals, and these intervals are all contained within a larger interval that includes the element. When modifying intervals, we need to use <strong>lazy propagation</strong> to ensure efficiency.</p>
+<p>A segment tree divides the entire interval into multiple non-contiguous sub-intervals, with the number of sub-intervals not exceeding <span class="arithmatex">\(\log(width)\)</span>, where <span class="arithmatex">\(width\)</span> is the length of the interval. To update the value of an element, we only need to update <span class="arithmatex">\(\log(width)\)</span> intervals, and these intervals are all contained within a larger interval that includes the element. When modifying intervals, we need to use <strong>lazy propagation</strong> to ensure efficiency.</p>
 <ul>
 <li>Each node of the segment tree represents an interval;</li>
-<li>The segment tree has a unique root node representing the entire statistical range, such as $[1, n]$;</li>
-<li>Each leaf node of the segment tree represents a primitive interval of length 1, $[x, x]$;</li>
-<li>For each internal node $[l, r]$, its left child is $[l, \textit{mid}]$, and its right child is $[\textit{mid} + 1, r]$, where $\textit{mid} = \frac{l + r}{2}$;</li>
+<li>The segment tree has a unique root node representing the entire statistical range, such as <span class="arithmatex">\([1, n]\)</span>;</li>
+<li>Each leaf node of the segment tree represents a primitive interval of length 1, <span class="arithmatex">\([x, x]\)</span>;</li>
+<li>For each internal node <span class="arithmatex">\([l, r]\)</span>, its left child is <span class="arithmatex">\([l, \textit{mid}]\)</span>, and its right child is <span class="arithmatex">\([\textit{mid} + 1, r]\)</span>, where <span class="arithmatex">\(\textit{mid} = \frac{l + r}{2}\)</span>;</li>
 </ul>
 <p>For this problem, the information maintained by the segment tree nodes includes:</p>
 <ol>
-<li>The maximum height $v$ of the blocks in the interval</li>
-<li>Lazy propagation marker $add$</li>
+<li>The maximum height <span class="arithmatex">\(v\)</span> of the blocks in the interval</li>
+<li>Lazy propagation marker <span class="arithmatex">\(add\)</span></li>
 </ol>
-<p>Additionally, since the range of the number line is very large, up to $10^8$, we use dynamic node creation.</p>
-<p>In terms of time complexity, each query and modification has a time complexity of $O(\log n)$, and the total time complexity is $O(n \log n)$. The space complexity is $O(n)$.</p>
+<p>Additionally, since the range of the number line is very large, up to <span class="arithmatex">\(10^8\)</span>, we use dynamic node creation.</p>
+<p>In terms of time complexity, each query and modification has a time complexity of <span class="arithmatex">\(O(\log n)\)</span>, and the total time complexity is <span class="arithmatex">\(O(n \log n)\)</span>. The space complexity is <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87255,11 +87253,9 @@ Note that square 2 only brushes the right side of square 1, which does not count
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

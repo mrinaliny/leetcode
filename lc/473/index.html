@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,9 +90864,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序 + 回溯</h3>
-<p>用 $edges[i]$ 记录正方形每条边当前的长度，对于第 $u$ 根火柴，尝试把它加到 $edges[i]$ 每条边，若加入后 $edges[i]$ 不超过正方形期望长度 $x$，则继续往下递归 $u+1$ 根火柴。若所有火柴都能被加入，说明满足拼成正方形的要求。</p>
-<p>这里对 $matchsticks$ 从大到小排序，可以减少搜索次数。</p>
-<p>时间复杂度 $O(4^n)$，其中 $n$ 表示 $matchsticks$ 的长度。每根火柴可以被放入正方形的 $4$ 条边，共有 $n$ 根火柴。</p>
+<p>用 <span class="arithmatex">\(edges[i]\)</span> 记录正方形每条边当前的长度，对于第 <span class="arithmatex">\(u\)</span> 根火柴，尝试把它加到 <span class="arithmatex">\(edges[i]\)</span> 每条边，若加入后 <span class="arithmatex">\(edges[i]\)</span> 不超过正方形期望长度 <span class="arithmatex">\(x\)</span>，则继续往下递归 <span class="arithmatex">\(u+1\)</span> 根火柴。若所有火柴都能被加入，说明满足拼成正方形的要求。</p>
+<p>这里对 <span class="arithmatex">\(matchsticks\)</span> 从大到小排序，可以减少搜索次数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(4^n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 表示 <span class="arithmatex">\(matchsticks\)</span> 的长度。每根火柴可以被放入正方形的 <span class="arithmatex">\(4\)</span> 条边，共有 <span class="arithmatex">\(n\)</span> 根火柴。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91166,13 +91164,13 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：状态压缩 + 记忆化搜索</h3>
-<p>记当前火柴被划分的情况为 $state$。对于第 $i$ 个数，若 $state  \&amp;  (1&lt;&lt;i)=0$，说明第 $i$ 个火柴棒未被划分。我们的目标是从全部数字中凑出 $k$ 个和为 $s$ 的子集。</p>
-<p>记当前子集的和为 $t$。在未划分第 $i$ 个火柴棒时：</p>
+<p>记当前火柴被划分的情况为 <span class="arithmatex">\(state\)</span>。对于第 <span class="arithmatex">\(i\)</span> 个数，若 <span class="arithmatex">\(state \ \&amp; \ (1&lt;&lt;i)=0\)</span>，说明第 <span class="arithmatex">\(i\)</span> 个火柴棒未被划分。我们的目标是从全部数字中凑出 <span class="arithmatex">\(k\)</span> 个和为 <span class="arithmatex">\(s\)</span> 的子集。</p>
+<p>记当前子集的和为 <span class="arithmatex">\(t\)</span>。在未划分第 <span class="arithmatex">\(i\)</span> 个火柴棒时：</p>
 <ul>
-<li>若 $t+matchsticks[i]&gt;s$，说明第 $i$ 个火柴棒不能被添加到当前子集中，由于我们对 $matchsticks$ 数组进行升序排列，因此从 $matchsticks$ 从第 $i$ 个火柴棒开始的所有数字都不能被添加到当前子集，直接返回 $false$。</li>
-<li>否则，将第 $i$ 个火柴棒添加到当前子集中，状态变为 $state  | (1&lt;&lt;i)$，继续对未划分的数字进行搜索。</li>
+<li>若 <span class="arithmatex">\(t+matchsticks[i]&gt;s\)</span>，说明第 <span class="arithmatex">\(i\)</span> 个火柴棒不能被添加到当前子集中，由于我们对 <span class="arithmatex">\(matchsticks\)</span> 数组进行升序排列，因此从 <span class="arithmatex">\(matchsticks\)</span> 从第 <span class="arithmatex">\(i\)</span> 个火柴棒开始的所有数字都不能被添加到当前子集，直接返回 <span class="arithmatex">\(false\)</span>。</li>
+<li>否则，将第 <span class="arithmatex">\(i\)</span> 个火柴棒添加到当前子集中，状态变为 <span class="arithmatex">\(state \ |\ (1&lt;&lt;i)\)</span>，继续对未划分的数字进行搜索。</li>
 </ul>
-<p>注：若 $t+matchsticks[i]==s$，说明恰好可以得到一个和为 $s$ 的子集，下一步将 $t$ 归零（可以通过 $(t+matchsticks[i]) \%s$ 实现），并继续划分下一个子集。</p>
+<p>注：若 <span class="arithmatex">\(t+matchsticks[i]==s\)</span>，说明恰好可以得到一个和为 <span class="arithmatex">\(s\)</span> 的子集，下一步将 <span class="arithmatex">\(t\)</span> 归零（可以通过 <span class="arithmatex">\((t+matchsticks[i]) \%s\)</span> 实现），并继续划分下一个子集。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91452,11 +91450,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

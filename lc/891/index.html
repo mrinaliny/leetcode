@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90847,39 +90845,39 @@
 
 <h3 id="_3">方法一：排序 + 枚举元素计算贡献</h3>
 <p>题目求解的是数组 <code>nums</code> 中所有子序列中最大值与最小值差值之和，注意到“子序列”，并且涉及到“最大值”与“最小值”，我们考虑先对数组 <code>nums</code> 进行排序。</p>
-<p>然后我们枚举数组 <code>nums</code> 中的每个元素 $nums[i]$，该元素左侧的元素个数为 $i$，右侧的元素个数为 $n-i-1$。</p>
-<p>如果我们将元素 $nums[i]$ 作为子序列的最大值，总共有多少个满足条件的子序列呢？显然，子序列的其他元素应该从左侧的 $i$ 个元素中选取，每个元素有两种选择，即选或不选，因此总共有 $2^i$ 个子序列。同理，如果我们将元素 $nums[i]$ 作为子序列的最小值，那么总共有 $2^{n-i-1}$ 个满足条件的子序列。因此 $nums[i]$ 对答案的贡献为：</p>
-<p>$$
+<p>然后我们枚举数组 <code>nums</code> 中的每个元素 <span class="arithmatex">\(nums[i]\)</span>，该元素左侧的元素个数为 <span class="arithmatex">\(i\)</span>，右侧的元素个数为 <span class="arithmatex">\(n-i-1\)</span>。</p>
+<p>如果我们将元素 <span class="arithmatex">\(nums[i]\)</span> 作为子序列的最大值，总共有多少个满足条件的子序列呢？显然，子序列的其他元素应该从左侧的 <span class="arithmatex">\(i\)</span> 个元素中选取，每个元素有两种选择，即选或不选，因此总共有 <span class="arithmatex">\(2^i\)</span> 个子序列。同理，如果我们将元素 <span class="arithmatex">\(nums[i]\)</span> 作为子序列的最小值，那么总共有 <span class="arithmatex">\(2^{n-i-1}\)</span> 个满足条件的子序列。因此 <span class="arithmatex">\(nums[i]\)</span> 对答案的贡献为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
 nums[i] \times (2^i - 2^{n-i-1})
 \end{aligned}
-$$</p>
+\]</div>
 <p>我们将数组 <code>nums</code> 中所有元素的贡献累加，即为答案：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 \sum_{i=0}^{n-1} nums[i] \times (2^i - 2^{n-i-1})
 \end{aligned}
-$$</p>
+\]</div>
 <p>我们将上式展开，可以得到：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 nums[0] \times (2^0 - 2^{n-1}) + nums[1] \times (2^1 - 2^{n-2}) + ... + nums[n-1] \times (2^{n-1} - 2^0)
 \end{aligned}
-$$</p>
+\]</div>
 <p>再将式子中相同的幂次项合并，可以得到：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 (nums[0] - nums[n-1]) \times 2^0 + (nums[1] - nums[n-2]) \times 2^1 + ... + (nums[n-1] - nums[0]) \times 2^{n-1}
 \end{aligned}
-$$</p>
+\]</div>
 <p>即：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 \sum_{i=0}^{n-1} (nums[i] - nums[n-i-1]) \times 2^i
 \end{aligned}
-$$</p>
+\]</div>
 <p>因此我们只需要对数组 <code>nums</code> 进行排序，然后计算上述的贡献即可。注意答案的取模操作。</p>
-<p>时间复杂度 $O(n\times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 为数组 <code>nums</code> 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <code>nums</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91217,11 +91215,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

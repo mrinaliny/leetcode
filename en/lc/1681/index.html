@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86075,13 +86073,13 @@ The incompatibility is (2-1) + (3-2) + (8-6) + (3-1) = 6.
 <!-- solution:start -->
 
 <h3 id="solution-1-preprocessing-state-compression-dynamic-programming">Solution 1: Preprocessing + State Compression + Dynamic Programming</h3>
-<p>Let's assume that the size of each subset after partitioning is $m$, so $m=\frac{n}{k}$, where $n$ is the length of the array.</p>
-<p>We can enumerate all subsets $i$, where $i \in [0, 2^n)$, if the binary representation of subset $i$ has $m$ ones, and the elements in subset $i$ are not repeated, then we can calculate the incompatibility of subset $i$, denoted as $g[i]$, i.e., $g[i]=\max_{j \in i} {nums[j]} - \min_{j \in i} {nums[j]}$.</p>
+<p>Let's assume that the size of each subset after partitioning is <span class="arithmatex">\(m\)</span>, so <span class="arithmatex">\(m=\frac{n}{k}\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array.</p>
+<p>We can enumerate all subsets <span class="arithmatex">\(i\)</span>, where <span class="arithmatex">\(i \in [0, 2^n)\)</span>, if the binary representation of subset <span class="arithmatex">\(i\)</span> has <span class="arithmatex">\(m\)</span> ones, and the elements in subset <span class="arithmatex">\(i\)</span> are not repeated, then we can calculate the incompatibility of subset <span class="arithmatex">\(i\)</span>, denoted as <span class="arithmatex">\(g[i]\)</span>, i.e., <span class="arithmatex">\(g[i]=\max_{j \in i} \{nums[j]\} - \min_{j \in i} \{nums[j]\}\)</span>.</p>
 <p>Next, we can use dynamic programming to solve.</p>
-<p>We define $f[i]$ as the minimum sum of incompatibilities when the current partitioned subset state is $i$. Initially, $f[0]=0$, which means no elements are partitioned into the subset, and the rest $f[i]=+\infty$.</p>
-<p>For state $i$, we find all undivided and non-repeated elements, represented by a state $mask$. If the number of elements in state $mask$ is greater than or equal to $m$, then we enumerate all subsets $j$ of $mask$, and satisfy $j \subset mask$, then $f[i \cup j]=\min {f[i \cup j], f[i]+g[j]}$.</p>
-<p>Finally, if $f[2^n-1]=+\infty$, it means that it cannot be partitioned into $k$ subsets, return $-1$, otherwise return $f[2^n-1]$.</p>
-<p>The time complexity is $O(3^n)$, and the space complexity is $O(2^n)$. Here, $n$ is the length of the array.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the minimum sum of incompatibilities when the current partitioned subset state is <span class="arithmatex">\(i\)</span>. Initially, <span class="arithmatex">\(f[0]=0\)</span>, which means no elements are partitioned into the subset, and the rest <span class="arithmatex">\(f[i]=+\infty\)</span>.</p>
+<p>For state <span class="arithmatex">\(i\)</span>, we find all undivided and non-repeated elements, represented by a state <span class="arithmatex">\(mask\)</span>. If the number of elements in state <span class="arithmatex">\(mask\)</span> is greater than or equal to <span class="arithmatex">\(m\)</span>, then we enumerate all subsets <span class="arithmatex">\(j\)</span> of <span class="arithmatex">\(mask\)</span>, and satisfy <span class="arithmatex">\(j \subset mask\)</span>, then <span class="arithmatex">\(f[i \cup j]=\min \{f[i \cup j], f[i]+g[j]\}\)</span>.</p>
+<p>Finally, if <span class="arithmatex">\(f[2^n-1]=+\infty\)</span>, it means that it cannot be partitioned into <span class="arithmatex">\(k\)</span> subsets, return <span class="arithmatex">\(-1\)</span>, otherwise return <span class="arithmatex">\(f[2^n-1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(3^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87035,11 +87033,9 @@ The incompatibility is (2-1) + (3-2) + (8-6) + (3-1) = 6.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

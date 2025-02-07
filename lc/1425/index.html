@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,18 +90864,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划 + 单调队列</h3>
-<p>我们定义 $f[i]$ 表示以 $\textit{nums}[i]$ 结尾的满足条件的子序列的最大和。初始时 $f[i] = 0$，答案为 $\max_{0 \leq i \lt n} f(i)$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示以 <span class="arithmatex">\(\textit{nums}[i]\)</span> 结尾的满足条件的子序列的最大和。初始时 <span class="arithmatex">\(f[i] = 0\)</span>，答案为 <span class="arithmatex">\(\max_{0 \leq i \lt n} f(i)\)</span>。</p>
 <p>我们注意到题目需要我们维护滑动窗口的最大值，这就是一个典型的单调队列应用场景。我们可以使用单调队列来优化动态规划的转移。</p>
-<p>我们维护一个从队首到队尾单调递减的单调队列 $q$，队列中存储的是下标 $i$，初始时，我们将一个哨兵 $0$ 加入队列中。</p>
-<p>我们遍历 $i$ 从 $0$ 到 $n - 1$，对于每个 $i$，我们执行以下操作：</p>
+<p>我们维护一个从队首到队尾单调递减的单调队列 <span class="arithmatex">\(q\)</span>，队列中存储的是下标 <span class="arithmatex">\(i\)</span>，初始时，我们将一个哨兵 <span class="arithmatex">\(0\)</span> 加入队列中。</p>
+<p>我们遍历 <span class="arithmatex">\(i\)</span> 从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(n - 1\)</span>，对于每个 <span class="arithmatex">\(i\)</span>，我们执行以下操作：</p>
 <ul>
-<li>如果队首元素 $q[0]$ 满足 $i - q[0] &gt; k$，说明队首元素已经不在滑动窗口内，我们需要从队首弹出队首元素；</li>
-<li>然后，我们计算 $f[i] = \max(0, f[q[0]]) + \textit{nums}[i]$，表示我们将 $\textit{nums}[i]$ 加入滑动窗口后的最大子序列和；</li>
-<li>接下来，我们更新答案 $\textit{ans} = \max(\textit{ans}, f[i])$；</li>
-<li>最后，我们将 $i$ 加入队列尾部，并且保持队列的单调性，即如果 $f[q[\textit{back}]] \leq f[i]$，我们需要将队尾元素弹出，直到队列为空或者 $f[q[\textit{back}]] &gt; f[i]$。</li>
+<li>如果队首元素 <span class="arithmatex">\(q[0]\)</span> 满足 <span class="arithmatex">\(i - q[0] &gt; k\)</span>，说明队首元素已经不在滑动窗口内，我们需要从队首弹出队首元素；</li>
+<li>然后，我们计算 <span class="arithmatex">\(f[i] = \max(0, f[q[0]]) + \textit{nums}[i]\)</span>，表示我们将 <span class="arithmatex">\(\textit{nums}[i]\)</span> 加入滑动窗口后的最大子序列和；</li>
+<li>接下来，我们更新答案 <span class="arithmatex">\(\textit{ans} = \max(\textit{ans}, f[i])\)</span>；</li>
+<li>最后，我们将 <span class="arithmatex">\(i\)</span> 加入队列尾部，并且保持队列的单调性，即如果 <span class="arithmatex">\(f[q[\textit{back}]] \leq f[i]\)</span>，我们需要将队尾元素弹出，直到队列为空或者 <span class="arithmatex">\(f[q[\textit{back}]] &gt; f[i]\)</span>。</li>
 </ul>
-<p>最终答案即为 $\textit{ans}$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
+<p>最终答案即为 <span class="arithmatex">\(\textit{ans}\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91621,11 +91619,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

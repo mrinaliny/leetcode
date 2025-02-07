@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,12 +90858,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示数组 $\textit{nums1}$ 的前 $i$ 个元素和数组 $\textit{nums2}$ 的前 $j$ 个元素中，最小的最大值。初始时 $f[i][j] = 0$，答案为 $f[m][n]$，其中 $m$ 和 $n$ 分别是数组 $\textit{nums1}$ 和 $\textit{nums2}$ 的长度。</p>
-<p>如果 $j = 0$，那么 $f[i][0]$ 的值只能由 $f[i - 1][0]$ 转移得到，转移方程为 $f[i][0] = \textit{nxt}(f[i - 1][0], \textit{nums1}[i - 1])$，其中 $\textit{nxt}(x, y)$ 表示比 $x$ 大且奇偶性与 $y$ 相同的最小整数。</p>
-<p>如果 $i = 0$，那么 $f[0][j]$ 的值只能由 $f[0][j - 1]$ 转移得到，转移方程为 $f[0][j] = \textit{nxt}(f[0][j - 1], \textit{nums2}[j - 1])$。</p>
-<p>如果 $i &gt; 0$ 且 $j &gt; 0$，那么 $f[i][j]$ 的值可以由 $f[i - 1][j]$ 和 $f[i][j - 1]$ 转移得到，转移方程为 $f[i][j] = \min(\textit{nxt}(f[i - 1][j], \textit{nums1}[i - 1]), \textit{nxt}(f[i][j - 1], \textit{nums2}[j - 1]))$。</p>
-<p>最后返回 $f[m][n]$ 即可。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是数组 $\textit{nums1}$ 和 $\textit{nums2}$ 的长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示数组 <span class="arithmatex">\(\textit{nums1}\)</span> 的前 <span class="arithmatex">\(i\)</span> 个元素和数组 <span class="arithmatex">\(\textit{nums2}\)</span> 的前 <span class="arithmatex">\(j\)</span> 个元素中，最小的最大值。初始时 <span class="arithmatex">\(f[i][j] = 0\)</span>，答案为 <span class="arithmatex">\(f[m][n]\)</span>，其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是数组 <span class="arithmatex">\(\textit{nums1}\)</span> 和 <span class="arithmatex">\(\textit{nums2}\)</span> 的长度。</p>
+<p>如果 <span class="arithmatex">\(j = 0\)</span>，那么 <span class="arithmatex">\(f[i][0]\)</span> 的值只能由 <span class="arithmatex">\(f[i - 1][0]\)</span> 转移得到，转移方程为 <span class="arithmatex">\(f[i][0] = \textit{nxt}(f[i - 1][0], \textit{nums1}[i - 1])\)</span>，其中 <span class="arithmatex">\(\textit{nxt}(x, y)\)</span> 表示比 <span class="arithmatex">\(x\)</span> 大且奇偶性与 <span class="arithmatex">\(y\)</span> 相同的最小整数。</p>
+<p>如果 <span class="arithmatex">\(i = 0\)</span>，那么 <span class="arithmatex">\(f[0][j]\)</span> 的值只能由 <span class="arithmatex">\(f[0][j - 1]\)</span> 转移得到，转移方程为 <span class="arithmatex">\(f[0][j] = \textit{nxt}(f[0][j - 1], \textit{nums2}[j - 1])\)</span>。</p>
+<p>如果 <span class="arithmatex">\(i &gt; 0\)</span> 且 <span class="arithmatex">\(j &gt; 0\)</span>，那么 <span class="arithmatex">\(f[i][j]\)</span> 的值可以由 <span class="arithmatex">\(f[i - 1][j]\)</span> 和 <span class="arithmatex">\(f[i][j - 1]\)</span> 转移得到，转移方程为 <span class="arithmatex">\(f[i][j] = \min(\textit{nxt}(f[i - 1][j], \textit{nums1}[i - 1]), \textit{nxt}(f[i][j - 1], \textit{nums2}[j - 1]))\)</span>。</p>
+<p>最后返回 <span class="arithmatex">\(f[m][n]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是数组 <span class="arithmatex">\(\textit{nums1}\)</span> 和 <span class="arithmatex">\(\textit{nums2}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91331,11 +91329,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86076,17 +86074,17 @@ For each queries[i], it can be shown that answer[i] is the minimum number of ope
 
 <h3 id="solution-1-binary-lifting-for-lca">Solution 1: Binary Lifting for LCA</h3>
 <p>The problem asks for the minimum number of operations to make all edge weights the same on the path between any two points. This is essentially the length of the path between these two points, minus the number of times the most frequently occurring edge appears on the path.</p>
-<p>The length of the path between two points can be obtained by finding the LCA (Lowest Common Ancestor) using binary lifting. Let's denote the two points as $u$ and $v$, and their LCA as $x$. Then, the path length from $u$ to $v$ is $depth(u) + depth(v) - 2 \times depth(x)$.</p>
-<p>Additionally, we can use an array $cnt[n][26]$ to record the number of occurrences of each edge weight from the root node to each node. Then, the number of times the most frequently occurring edge appears on the path from $u$ to $v$ is $\max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]$, where $x$ is the LCA of $u$ and $v$.</p>
+<p>The length of the path between two points can be obtained by finding the LCA (Lowest Common Ancestor) using binary lifting. Let's denote the two points as <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span>, and their LCA as <span class="arithmatex">\(x\)</span>. Then, the path length from <span class="arithmatex">\(u\)</span> to <span class="arithmatex">\(v\)</span> is <span class="arithmatex">\(depth(u) + depth(v) - 2 \times depth(x)\)</span>.</p>
+<p>Additionally, we can use an array <span class="arithmatex">\(cnt[n][26]\)</span> to record the number of occurrences of each edge weight from the root node to each node. Then, the number of times the most frequently occurring edge appears on the path from <span class="arithmatex">\(u\)</span> to <span class="arithmatex">\(v\)</span> is <span class="arithmatex">\(\max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]\)</span>, where <span class="arithmatex">\(x\)</span> is the LCA of <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span>.</p>
 <p>The process of finding the LCA using binary lifting is as follows:</p>
-<p>We denote the depth of each node as $depth$, its parent node as $p$, and $f[i][j]$ as the $2^j$th ancestor of node $i$. Then, for any two points $x$ and $y$, we can find their LCA as follows:</p>
+<p>We denote the depth of each node as <span class="arithmatex">\(depth\)</span>, its parent node as <span class="arithmatex">\(p\)</span>, and <span class="arithmatex">\(f[i][j]\)</span> as the <span class="arithmatex">\(2^j\)</span>th ancestor of node <span class="arithmatex">\(i\)</span>. Then, for any two points <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, we can find their LCA as follows:</p>
 <ol>
-<li>If $depth(x) &lt; depth(y)$, then swap $x$ and $y$, i.e., ensure that the depth of $x$ is not less than the depth of $y$;</li>
-<li>Next, we continuously raise the depth of $x$ until the depths of $x$ and $y$ are the same, at which point the depths of $x$ and $y$ are both $depth(x)$;</li>
-<li>Then, we raise the depths of $x$ and $y$ simultaneously until the parents of $x$ and $y$ are the same, at which point the parents of $x$ and $y$ are both $f[x][0]$, which is the LCA of $x$ and $y$.</li>
+<li>If <span class="arithmatex">\(depth(x) &lt; depth(y)\)</span>, then swap <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, i.e., ensure that the depth of <span class="arithmatex">\(x\)</span> is not less than the depth of <span class="arithmatex">\(y\)</span>;</li>
+<li>Next, we continuously raise the depth of <span class="arithmatex">\(x\)</span> until the depths of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are the same, at which point the depths of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are both <span class="arithmatex">\(depth(x)\)</span>;</li>
+<li>Then, we raise the depths of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> simultaneously until the parents of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are the same, at which point the parents of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are both <span class="arithmatex">\(f[x][0]\)</span>, which is the LCA of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>.</li>
 </ol>
-<p>Finally, the minimum number of operations from node $u$ to node $v$ is $depth(u) + depth(v) - 2 \times depth(x) - \max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]$.</p>
-<p>The time complexity is $O((n + q) \times C \times \log n)$, and the space complexity is $O(n \times C \times \log n)$. Here, $C$ is the maximum value of the edge weight.</p>
+<p>Finally, the minimum number of operations from node <span class="arithmatex">\(u\)</span> to node <span class="arithmatex">\(v\)</span> is <span class="arithmatex">\(depth(u) + depth(v) - 2 \times depth(x) - \max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + q) \times C \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times C \times \log n)\)</span>. Here, <span class="arithmatex">\(C\)</span> is the maximum value of the edge weight.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86814,11 +86812,9 @@ For each queries[i], it can be shown that answer[i] is the minimum number of ope
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90835,26 +90833,26 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：数位 DP</h3>
-<p>这道题实际上是求在给定区间 $[l,..r]$ 中，数字中出现 $d$ 的个数。个数与数的位数以及每一位上的数字有关。我们可以用数位 DP 的思路来解决这道题。数位 DP 中，数的大小对复杂度的影响很小。</p>
-<p>对于区间 $[l,..r]$ 问题，我们一般会将其转化为 $[1,..r]$ 然后再减去 $[1,..l - 1]$ 的问题，即：</p>
-<p>$$
+<p>这道题实际上是求在给定区间 <span class="arithmatex">\([l,..r]\)</span> 中，数字中出现 <span class="arithmatex">\(d\)</span> 的个数。个数与数的位数以及每一位上的数字有关。我们可以用数位 DP 的思路来解决这道题。数位 DP 中，数的大小对复杂度的影响很小。</p>
+<p>对于区间 <span class="arithmatex">\([l,..r]\)</span> 问题，我们一般会将其转化为 <span class="arithmatex">\([1,..r]\)</span> 然后再减去 <span class="arithmatex">\([1,..l - 1]\)</span> 的问题，即：</p>
+<div class="arithmatex">\[
 ans = \sum_{i=1}^{r} ans_i -  \sum_{i=1}^{l-1} ans_i
-$$</p>
+\]</div>
 <p>这里我们用记忆化搜索来实现数位 DP。从起点向下搜索，到最底层得到方案数，一层层向上返回答案并累加，最后从搜索起点得到最终的答案。</p>
 <p>基本步骤如下：</p>
 <ol>
-<li>将数字 $n$ 转为 int 数组 $a$，其中 $a[1]$ 为最低位，而 $a[len]$ 为最高位；</li>
-<li>根据题目信息，设计函数 $dfs()$，对于本题，我们定义 $dfs(pos, cnt, lead, limit)$，答案为 $dfs(len, 0, true, true)$。</li>
+<li>将数字 <span class="arithmatex">\(n\)</span> 转为 int 数组 <span class="arithmatex">\(a\)</span>，其中 <span class="arithmatex">\(a[1]\)</span> 为最低位，而 <span class="arithmatex">\(a[len]\)</span> 为最高位；</li>
+<li>根据题目信息，设计函数 <span class="arithmatex">\(dfs()\)</span>，对于本题，我们定义 <span class="arithmatex">\(dfs(pos, cnt, lead, limit)\)</span>，答案为 <span class="arithmatex">\(dfs(len, 0, true, true)\)</span>。</li>
 </ol>
 <p>其中：</p>
 <ul>
 <li><code>pos</code> 表示数字的位数，从末位或者第一位开始，一般根据题目的数字构造性质来选择顺序。对于本题，我们选择从高位开始，因此，<code>pos</code> 的初始值为 <code>len</code>；</li>
-<li><code>cnt</code> 表示当前数字中包含 $d$ 的个数；</li>
+<li><code>cnt</code> 表示当前数字中包含 <span class="arithmatex">\(d\)</span> 的个数；</li>
 <li><code>lead</code> 表示当前数字是否有前导零，如果有前导零，则 <code>lead</code> 为 <code>true</code>，否则为 <code>false</code>，初始化为 <code>true</code>；</li>
-<li><code>limit</code> 表示可填的数字的限制，如果无限制，那么可以选择 $[0,1,..9]$，否则，只能选择 $[0,..a[pos]]$。如果 <code>limit</code> 为 <code>true</code> 且已经取到了能取到的最大值，那么下一个 <code>limit</code> 同样为 <code>true</code>；如果 <code>limit</code> 为 <code>true</code> 但是还没有取到最大值，或者 <code>limit</code> 为 <code>false</code>，那么下一个 <code>limit</code> 为 <code>false</code>。</li>
+<li><code>limit</code> 表示可填的数字的限制，如果无限制，那么可以选择 <span class="arithmatex">\([0,1,..9]\)</span>，否则，只能选择 <span class="arithmatex">\([0,..a[pos]]\)</span>。如果 <code>limit</code> 为 <code>true</code> 且已经取到了能取到的最大值，那么下一个 <code>limit</code> 同样为 <code>true</code>；如果 <code>limit</code> 为 <code>true</code> 但是还没有取到最大值，或者 <code>limit</code> 为 <code>false</code>，那么下一个 <code>limit</code> 为 <code>false</code>。</li>
 </ul>
 <p>关于函数的实现细节，可以参考下面的代码。</p>
-<p>时间复杂度 $O(\log m + \log n)$。其中 $m$, $n$ 分别为题目中的 <code>low</code> 和 <code>high</code>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log m + \log n)\)</span>。其中 <span class="arithmatex">\(m\)</span>, <span class="arithmatex">\(n\)</span> 分别为题目中的 <code>low</code> 和 <code>high</code>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README.md">233. 数字 1 的个数</a></li>
@@ -91431,11 +91429,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

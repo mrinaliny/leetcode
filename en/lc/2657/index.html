@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86064,10 +86062,10 @@ At i = 2: 1, 2, and 3 are common in A and B, so C[2] = 3.
 <!-- solution:start -->
 
 <h3 id="solution-1-counting">Solution 1: Counting</h3>
-<p>We can use two arrays $cnt1$ and $cnt2$ to record the occurrence times of each element in arrays $A$ and $B$ respectively, and use an array $ans$ to record the answer.</p>
-<p>Traverse arrays $A$ and $B$, increment the occurrence times of $A[i]$ in $cnt1$, and increment the occurrence times of $B[i]$ in $cnt2$. Then enumerate $j \in [1,n]$, calculate the minimum occurrence times of each element $j$ in $cnt1$ and $cnt2$, and accumulate them into $ans[i]$.</p>
-<p>After the traversal, return the answer array $ans$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of arrays $A$ and $B$.</p>
+<p>We can use two arrays <span class="arithmatex">\(cnt1\)</span> and <span class="arithmatex">\(cnt2\)</span> to record the occurrence times of each element in arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> respectively, and use an array <span class="arithmatex">\(ans\)</span> to record the answer.</p>
+<p>Traverse arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>, increment the occurrence times of <span class="arithmatex">\(A[i]\)</span> in <span class="arithmatex">\(cnt1\)</span>, and increment the occurrence times of <span class="arithmatex">\(B[i]\)</span> in <span class="arithmatex">\(cnt2\)</span>. Then enumerate <span class="arithmatex">\(j \in [1,n]\)</span>, calculate the minimum occurrence times of each element <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(cnt1\)</span> and <span class="arithmatex">\(cnt2\)</span>, and accumulate them into <span class="arithmatex">\(ans[i]\)</span>.</p>
+<p>After the traversal, return the answer array <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86231,11 +86229,11 @@ At i = 2: 1, 2, and 3 are common in A and B, so C[2] = 3.
 <!-- solution:start -->
 
 <h3 id="solution-2-bit-operation-xor-operation">Solution 2: Bit Operation (XOR Operation)</h3>
-<p>We can use an array $vis$ of length $n+1$ to record the occurrence situation of each element in arrays $A$ and $B$, the initial value of array $vis$ is $1$. In addition, we use a variable $s$ to record the current number of common elements.</p>
-<p>Next, we traverse arrays $A$ and $B$, update $vis[A[i]] = vis[A[i]] \oplus 1$, and update $vis[B[i]] = vis[B[i]] \oplus 1$, where $\oplus$ represents XOR operation.</p>
-<p>If at the current position, the element $A[i]$ has appeared twice (i.e., it has appeared in both arrays $A$ and $B$), then the value of $vis[A[i]]$ will be $1$, and we increment $s$. Similarly, if the element $B[i]$ has appeared twice, then the value of $vis[B[i]]$ will be $1$, and we increment $s$. Then add the value of $s$ to the answer array $ans$.</p>
-<p>After the traversal, return the answer array $ans$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of arrays $A$ and $B$.</p>
+<p>We can use an array <span class="arithmatex">\(vis\)</span> of length <span class="arithmatex">\(n+1\)</span> to record the occurrence situation of each element in arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>, the initial value of array <span class="arithmatex">\(vis\)</span> is <span class="arithmatex">\(1\)</span>. In addition, we use a variable <span class="arithmatex">\(s\)</span> to record the current number of common elements.</p>
+<p>Next, we traverse arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>, update <span class="arithmatex">\(vis[A[i]] = vis[A[i]] \oplus 1\)</span>, and update <span class="arithmatex">\(vis[B[i]] = vis[B[i]] \oplus 1\)</span>, where <span class="arithmatex">\(\oplus\)</span> represents XOR operation.</p>
+<p>If at the current position, the element <span class="arithmatex">\(A[i]\)</span> has appeared twice (i.e., it has appeared in both arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>), then the value of <span class="arithmatex">\(vis[A[i]]\)</span> will be <span class="arithmatex">\(1\)</span>, and we increment <span class="arithmatex">\(s\)</span>. Similarly, if the element <span class="arithmatex">\(B[i]\)</span> has appeared twice, then the value of <span class="arithmatex">\(vis[B[i]]\)</span> will be <span class="arithmatex">\(1\)</span>, and we increment <span class="arithmatex">\(s\)</span>. Then add the value of <span class="arithmatex">\(s\)</span> to the answer array <span class="arithmatex">\(ans\)</span>.</p>
+<p>After the traversal, return the answer array <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of arrays <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86633,11 +86631,9 @@ At i = 2: 1, 2, and 3 are common in A and B, so C[2] = 3.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

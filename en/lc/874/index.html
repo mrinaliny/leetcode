@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86113,17 +86111,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-simulation">Solution 1: Hash table + simulation</h3>
-<p>We define a direction array $dirs=[0, 1, 0, -1, 0]$ of length $5$, where adjacent elements in the array represent a direction. That is, $(dirs[0], dirs[1])$ represents north, and $(dirs[1], dirs[2])$ represents east, and so on.</p>
-<p>We use a hash table $s$ to store the coordinates of all obstacles, so that we can determine in $O(1)$ time whether the next step will encounter an obstacle.</p>
-<p>We use two variables $x$ and $y$ to represent the current coordinates of the robot, initially $x = y = 0$. The variable $k$ represents the current direction of the robot, and the answer variable $ans$ represents the maximum Euclidean distance squared of the robot from the origin.</p>
-<p>Next, we traverse each element $c$ in the array $commands$:</p>
+<p>We define a direction array <span class="arithmatex">\(dirs=[0, 1, 0, -1, 0]\)</span> of length <span class="arithmatex">\(5\)</span>, where adjacent elements in the array represent a direction. That is, <span class="arithmatex">\((dirs[0], dirs[1])\)</span> represents north, and <span class="arithmatex">\((dirs[1], dirs[2])\)</span> represents east, and so on.</p>
+<p>We use a hash table <span class="arithmatex">\(s\)</span> to store the coordinates of all obstacles, so that we can determine in <span class="arithmatex">\(O(1)\)</span> time whether the next step will encounter an obstacle.</p>
+<p>We use two variables <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> to represent the current coordinates of the robot, initially <span class="arithmatex">\(x = y = 0\)</span>. The variable <span class="arithmatex">\(k\)</span> represents the current direction of the robot, and the answer variable <span class="arithmatex">\(ans\)</span> represents the maximum Euclidean distance squared of the robot from the origin.</p>
+<p>Next, we traverse each element <span class="arithmatex">\(c\)</span> in the array <span class="arithmatex">\(commands\)</span>:</p>
 <ul>
-<li>If $c = -2$, it means that the robot turns left by $90$ degrees, that is, $k = (k + 3) \bmod 4$;</li>
-<li>If $c = -1$, it means that the robot turns right by $90$ degrees, that is, $k = (k + 1) \bmod 4$;</li>
-<li>Otherwise, it means that the robot moves forward by $c$ units of length. We combine the robot's current direction $k$ with the direction array $dirs$, and we can get the increment of the robot on the $x$ axis and the $y$ axis. We add the increment of $c$ units of length to $x$ and $y$ respectively, and judge whether the new coordinates $(x, y)$ after each move are in the coordinates of obstacles. If not, update the answer $ans$, otherwise stop simulating and perform the simulation of the next instruction.</li>
+<li>If <span class="arithmatex">\(c = -2\)</span>, it means that the robot turns left by <span class="arithmatex">\(90\)</span> degrees, that is, <span class="arithmatex">\(k = (k + 3) \bmod 4\)</span>;</li>
+<li>If <span class="arithmatex">\(c = -1\)</span>, it means that the robot turns right by <span class="arithmatex">\(90\)</span> degrees, that is, <span class="arithmatex">\(k = (k + 1) \bmod 4\)</span>;</li>
+<li>Otherwise, it means that the robot moves forward by <span class="arithmatex">\(c\)</span> units of length. We combine the robot's current direction <span class="arithmatex">\(k\)</span> with the direction array <span class="arithmatex">\(dirs\)</span>, and we can get the increment of the robot on the <span class="arithmatex">\(x\)</span> axis and the <span class="arithmatex">\(y\)</span> axis. We add the increment of <span class="arithmatex">\(c\)</span> units of length to <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> respectively, and judge whether the new coordinates <span class="arithmatex">\((x, y)\)</span> after each move are in the coordinates of obstacles. If not, update the answer <span class="arithmatex">\(ans\)</span>, otherwise stop simulating and perform the simulation of the next instruction.</li>
 </ul>
-<p>Finally return the answer $ans$.</p>
-<p>Time complexity is $O(C \times n + m)$, space complexity is $O(m)$. Where $C$ represents the maximum number of steps that can be moved each time, and $n$ and $m$ respectively represent the lengths of arrays $commands$ and arrays $obstacles$.</p>
+<p>Finally return the answer <span class="arithmatex">\(ans\)</span>.</p>
+<p>Time complexity is <span class="arithmatex">\(O(C \times n + m)\)</span>, space complexity is <span class="arithmatex">\(O(m)\)</span>. Where <span class="arithmatex">\(C\)</span> represents the maximum number of steps that can be moved each time, and <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> respectively represent the lengths of arrays <span class="arithmatex">\(commands\)</span> and arrays <span class="arithmatex">\(obstacles\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86635,11 +86633,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

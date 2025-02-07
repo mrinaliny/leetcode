@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,10 +90866,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：分组 + 动态规划</h3>
-<p>我们先将数组 $nums$ 按照升序排序，然后将数组中的元素按照模 $k$ 分组，即 $nums[i] \bmod k$ 相同的元素放在同一组中。那么对于任意两个不同组的元素，它们的差值的绝对值一定不等于 $k$。因此，我们可以求出每一组的子集个数，然后将每一组的子集个数相乘即可得到答案。</p>
-<p>对于每一组 $arr$，我们可以使用动态规划求出子集个数。设 $f[i]$ 表示前 $i$ 个元素的子集个数，初始时 $f[0] = 1$，而 $f[1]=2$。当 $i \geq 2$ 时，如果 $arr[i-1]-arr[i-2]=k$，如果我们选择 $arr[i-1]$，那么 $f[i]=f[i-2]$；如果我们不选择 $arr[i-1]$，那么 $f[i]=f[i-1]$。因此，当 $arr[i-1]-arr[i-2]=k$ 时，有 $f[i]=f[i-1]+f[i-2]$；否则 $f[i] = f[i - 1] \times 2$。这一组的子集个数即为 $f[m]$，其中 $m$ 为数组 $arr$ 的长度。</p>
+<p>我们先将数组 <span class="arithmatex">\(nums\)</span> 按照升序排序，然后将数组中的元素按照模 <span class="arithmatex">\(k\)</span> 分组，即 <span class="arithmatex">\(nums[i] \bmod k\)</span> 相同的元素放在同一组中。那么对于任意两个不同组的元素，它们的差值的绝对值一定不等于 <span class="arithmatex">\(k\)</span>。因此，我们可以求出每一组的子集个数，然后将每一组的子集个数相乘即可得到答案。</p>
+<p>对于每一组 <span class="arithmatex">\(arr\)</span>，我们可以使用动态规划求出子集个数。设 <span class="arithmatex">\(f[i]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个元素的子集个数，初始时 <span class="arithmatex">\(f[0] = 1\)</span>，而 <span class="arithmatex">\(f[1]=2\)</span>。当 <span class="arithmatex">\(i \geq 2\)</span> 时，如果 <span class="arithmatex">\(arr[i-1]-arr[i-2]=k\)</span>，如果我们选择 <span class="arithmatex">\(arr[i-1]\)</span>，那么 <span class="arithmatex">\(f[i]=f[i-2]\)</span>；如果我们不选择 <span class="arithmatex">\(arr[i-1]\)</span>，那么 <span class="arithmatex">\(f[i]=f[i-1]\)</span>。因此，当 <span class="arithmatex">\(arr[i-1]-arr[i-2]=k\)</span> 时，有 <span class="arithmatex">\(f[i]=f[i-1]+f[i-2]\)</span>；否则 <span class="arithmatex">\(f[i] = f[i - 1] \times 2\)</span>。这一组的子集个数即为 <span class="arithmatex">\(f[m]\)</span>，其中 <span class="arithmatex">\(m\)</span> 为数组 <span class="arithmatex">\(arr\)</span> 的长度。</p>
 <p>最后，我们将每一组的子集个数相乘即可得到答案。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91353,11 +91351,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

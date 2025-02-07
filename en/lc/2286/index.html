@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86079,8 +86077,8 @@ bms.scatter(5, 1); // return False
 <h3 id="solution-1-segment-tree">Solution 1: Segment Tree</h3>
 <p>From the problem description, we can deduce the following:</p>
 <ul>
-<li>For the <code>gather(k, maxRow)</code> operation, the goal is to seat $k$ people on the same row with consecutive seats. In other words, we need to find the smallest row where the remaining seats are greater than or equal to $k$.</li>
-<li>For the <code>scatter(k, maxRow)</code> operation, we just need to find $k$ seats in total, but we want to minimize the row number. Therefore, we need to find the first row that has more than $0$ seats remaining, allocate seats there, and continue searching for the rest.</li>
+<li>For the <code>gather(k, maxRow)</code> operation, the goal is to seat <span class="arithmatex">\(k\)</span> people on the same row with consecutive seats. In other words, we need to find the smallest row where the remaining seats are greater than or equal to <span class="arithmatex">\(k\)</span>.</li>
+<li>For the <code>scatter(k, maxRow)</code> operation, we just need to find <span class="arithmatex">\(k\)</span> seats in total, but we want to minimize the row number. Therefore, we need to find the first row that has more than <span class="arithmatex">\(0\)</span> seats remaining, allocate seats there, and continue searching for the rest.</li>
 </ul>
 <p>We can implement this using a segment tree. Each segment tree node contains the following information:</p>
 <ul>
@@ -86089,24 +86087,24 @@ bms.scatter(5, 1); // return False
 <li><code>s</code>: The total remaining seats in the interval corresponding to the node</li>
 <li><code>mx</code>: The maximum remaining seats in the interval corresponding to the node</li>
 </ul>
-<p>Note that the index range for the segment tree starts from $1$.</p>
+<p>Note that the index range for the segment tree starts from <span class="arithmatex">\(1\)</span>.</p>
 <p>The operations of the segment tree are as follows:</p>
 <ul>
-<li><code>build(u, l, r)</code>: Builds node $u$, corresponding to the interval $[l, r]$, and recursively builds its left and right children.</li>
-<li><code>modify(u, x, v)</code>: Starting from node $u$, finds the first node corresponding to the interval $[l, r]$ where $l = r = x$, and modifies the <code>s</code> and <code>mx</code> values of this node to $v$, then updates the tree upwards.</li>
-<li><code>query_sum(u, l, r)</code>: Starting from node $u$, calculates the sum of <code>s</code> values in the interval $[l, r]$.</li>
-<li><code>query_idx(u, l, r, k)</code>: Starting from node $u$, finds the first node in the interval $[l, r]$ where <code>mx</code> is greater than or equal to $k$, and returns the left endpoint <code>l</code> of this node. When searching, we start from the largest interval $[1, maxRow]$. Since we need to find the leftmost node with <code>mx</code> greater than or equal to $k$, we check whether the <code>mx</code> of the first half of the interval meets the condition. If so, the answer is in the first half, and we recursively search that half. Otherwise, the answer is in the second half, and we search that half recursively.</li>
-<li><code>pushup(u)</code>: Updates the information of node $u$ using the information from its children.</li>
+<li><code>build(u, l, r)</code>: Builds node <span class="arithmatex">\(u\)</span>, corresponding to the interval <span class="arithmatex">\([l, r]\)</span>, and recursively builds its left and right children.</li>
+<li><code>modify(u, x, v)</code>: Starting from node <span class="arithmatex">\(u\)</span>, finds the first node corresponding to the interval <span class="arithmatex">\([l, r]\)</span> where <span class="arithmatex">\(l = r = x\)</span>, and modifies the <code>s</code> and <code>mx</code> values of this node to <span class="arithmatex">\(v\)</span>, then updates the tree upwards.</li>
+<li><code>query_sum(u, l, r)</code>: Starting from node <span class="arithmatex">\(u\)</span>, calculates the sum of <code>s</code> values in the interval <span class="arithmatex">\([l, r]\)</span>.</li>
+<li><code>query_idx(u, l, r, k)</code>: Starting from node <span class="arithmatex">\(u\)</span>, finds the first node in the interval <span class="arithmatex">\([l, r]\)</span> where <code>mx</code> is greater than or equal to <span class="arithmatex">\(k\)</span>, and returns the left endpoint <code>l</code> of this node. When searching, we start from the largest interval <span class="arithmatex">\([1, maxRow]\)</span>. Since we need to find the leftmost node with <code>mx</code> greater than or equal to <span class="arithmatex">\(k\)</span>, we check whether the <code>mx</code> of the first half of the interval meets the condition. If so, the answer is in the first half, and we recursively search that half. Otherwise, the answer is in the second half, and we search that half recursively.</li>
+<li><code>pushup(u)</code>: Updates the information of node <span class="arithmatex">\(u\)</span> using the information from its children.</li>
 </ul>
-<p>For the <code>gather(k, maxRow)</code> operation, we first use <code>query_idx(1, 1, n, k)</code> to find the first row where the remaining seats are greater than or equal to $k$, denoted as $i$. Then, we use <code>query_sum(1, i, i)</code> to get the remaining seats in this row, denoted as $s$. Next, we use <code>modify(1, i, s - k)</code> to modify the remaining seats of this row to $s - k$, and update the tree upwards. Finally, we return the result $[i - 1, m - s]$.</p>
-<p>For the <code>scatter(k, maxRow)</code> operation, we first use <code>query_sum(1, 1, maxRow)</code> to calculate the total remaining seats in the first $maxRow$ rows, denoted as $s$. If $s \lt k$, there are not enough seats, so we return <code>false</code>. Otherwise, we use <code>query_idx(1, 1, maxRow, 1)</code> to find the first row where the remaining seats are greater than or equal to $1$, denoted as $i$. Starting from this row, we use <code>query_sum(1, i, i)</code> to get the remaining seats in row $i$, denoted as $s_i$. If $s_i \geq k$, we directly use <code>modify(1, i, s_i - k)</code> to modify the remaining seats of this row to $s_i - k$, update the tree upwards, and return <code>true</code>. Otherwise, we update $k = k - s_i$, modify the remaining seats of this row to $0$, and update the tree upwards. Finally, we return <code>true</code>.</p>
+<p>For the <code>gather(k, maxRow)</code> operation, we first use <code>query_idx(1, 1, n, k)</code> to find the first row where the remaining seats are greater than or equal to <span class="arithmatex">\(k\)</span>, denoted as <span class="arithmatex">\(i\)</span>. Then, we use <code>query_sum(1, i, i)</code> to get the remaining seats in this row, denoted as <span class="arithmatex">\(s\)</span>. Next, we use <code>modify(1, i, s - k)</code> to modify the remaining seats of this row to <span class="arithmatex">\(s - k\)</span>, and update the tree upwards. Finally, we return the result <span class="arithmatex">\([i - 1, m - s]\)</span>.</p>
+<p>For the <code>scatter(k, maxRow)</code> operation, we first use <code>query_sum(1, 1, maxRow)</code> to calculate the total remaining seats in the first <span class="arithmatex">\(maxRow\)</span> rows, denoted as <span class="arithmatex">\(s\)</span>. If <span class="arithmatex">\(s \lt k\)</span>, there are not enough seats, so we return <code>false</code>. Otherwise, we use <code>query_idx(1, 1, maxRow, 1)</code> to find the first row where the remaining seats are greater than or equal to <span class="arithmatex">\(1\)</span>, denoted as <span class="arithmatex">\(i\)</span>. Starting from this row, we use <code>query_sum(1, i, i)</code> to get the remaining seats in row <span class="arithmatex">\(i\)</span>, denoted as <span class="arithmatex">\(s_i\)</span>. If <span class="arithmatex">\(s_i \geq k\)</span>, we directly use <code>modify(1, i, s_i - k)</code> to modify the remaining seats of this row to <span class="arithmatex">\(s_i - k\)</span>, update the tree upwards, and return <code>true</code>. Otherwise, we update <span class="arithmatex">\(k = k - s_i\)</span>, modify the remaining seats of this row to <span class="arithmatex">\(0\)</span>, and update the tree upwards. Finally, we return <code>true</code>.</p>
 <p>Time complexity:</p>
 <ul>
-<li>The initialization time complexity is $O(n)$.</li>
-<li>The time complexity of <code>gather(k, maxRow)</code> is $O(\log n)$.</li>
-<li>The time complexity of <code>scatter(k, maxRow)</code> is $O((n + q) \times \log n)$.</li>
+<li>The initialization time complexity is <span class="arithmatex">\(O(n)\)</span>.</li>
+<li>The time complexity of <code>gather(k, maxRow)</code> is <span class="arithmatex">\(O(\log n)\)</span>.</li>
+<li>The time complexity of <code>scatter(k, maxRow)</code> is <span class="arithmatex">\(O((n + q) \times \log n)\)</span>.</li>
 </ul>
-<p>The overall time complexity is $O(n + q \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the number of rows, and $q$ is the number of operations.</p>
+<p>The overall time complexity is <span class="arithmatex">\(O(n + q \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of rows, and <span class="arithmatex">\(q\)</span> is the number of operations.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87590,11 +87588,9 @@ bms.scatter(5, 1); // return False
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

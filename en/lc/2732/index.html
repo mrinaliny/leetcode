@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86077,16 +86075,16 @@ The length of the chosen subset is 1.
 <!-- solution:start -->
 
 <h3 id="solution-1-case-analysis">Solution 1: Case Analysis</h3>
-<p>We can consider the number of rows $k$ chosen for the answer from smallest to largest.</p>
+<p>We can consider the number of rows <span class="arithmatex">\(k\)</span> chosen for the answer from smallest to largest.</p>
 <ul>
-<li>If $k = 1$, the maximum sum of each column is $0$. Therefore, there must be a row where all elements are $0$, otherwise, the condition cannot be met.</li>
-<li>If $k = 2$, the maximum sum of each column is $1$. There must exist two rows, and the bitwise AND result of these two rows' elements is $0$, otherwise, the condition cannot be met.</li>
-<li>If $k = 3$, the maximum sum of each column is also $1$. If the condition for $k = 2$ is not met, then the condition for $k = 3$ will definitely not be met either. Therefore, we do not need to consider any case where $k &gt; 2$ and $k$ is odd.</li>
-<li>If $k = 4$, the maximum sum of each column is $2$. This situation definitely occurs when the condition for $k = 2$ is not met, meaning that for any two selected rows, there exists at least one column with a sum of $2$. When choosing any 2 rows out of 4, there are a total of $C_4^2 = 6$ ways to choose, so there are at least $6$ columns with a sum of $2$. Since the number of columns $n \le 5$, there must be at least one column with a sum greater than $2$, so the condition for $k = 4$ is also not met.</li>
-<li>For $k &gt; 4$ and $k$ being even, we can draw the same conclusion, that $k$ definitely does not meet the condition.</li>
+<li>If <span class="arithmatex">\(k = 1\)</span>, the maximum sum of each column is <span class="arithmatex">\(0\)</span>. Therefore, there must be a row where all elements are <span class="arithmatex">\(0\)</span>, otherwise, the condition cannot be met.</li>
+<li>If <span class="arithmatex">\(k = 2\)</span>, the maximum sum of each column is <span class="arithmatex">\(1\)</span>. There must exist two rows, and the bitwise AND result of these two rows' elements is <span class="arithmatex">\(0\)</span>, otherwise, the condition cannot be met.</li>
+<li>If <span class="arithmatex">\(k = 3\)</span>, the maximum sum of each column is also <span class="arithmatex">\(1\)</span>. If the condition for <span class="arithmatex">\(k = 2\)</span> is not met, then the condition for <span class="arithmatex">\(k = 3\)</span> will definitely not be met either. Therefore, we do not need to consider any case where <span class="arithmatex">\(k &gt; 2\)</span> and <span class="arithmatex">\(k\)</span> is odd.</li>
+<li>If <span class="arithmatex">\(k = 4\)</span>, the maximum sum of each column is <span class="arithmatex">\(2\)</span>. This situation definitely occurs when the condition for <span class="arithmatex">\(k = 2\)</span> is not met, meaning that for any two selected rows, there exists at least one column with a sum of <span class="arithmatex">\(2\)</span>. When choosing any 2 rows out of 4, there are a total of <span class="arithmatex">\(C_4^2 = 6\)</span> ways to choose, so there are at least <span class="arithmatex">\(6\)</span> columns with a sum of <span class="arithmatex">\(2\)</span>. Since the number of columns <span class="arithmatex">\(n \le 5\)</span>, there must be at least one column with a sum greater than <span class="arithmatex">\(2\)</span>, so the condition for <span class="arithmatex">\(k = 4\)</span> is also not met.</li>
+<li>For <span class="arithmatex">\(k &gt; 4\)</span> and <span class="arithmatex">\(k\)</span> being even, we can draw the same conclusion, that <span class="arithmatex">\(k\)</span> definitely does not meet the condition.</li>
 </ul>
-<p>In summary, we only need to consider the cases of $k = 1$ and $k = 2$. That is, to check whether there is a row entirely composed of $0$s, or whether there exist two rows whose bitwise AND result is $0$.</p>
-<p>The time complexity is $O(m \times n + 4^n)$, and the space complexity is $O(2^n)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, respectively.</p>
+<p>In summary, we only need to consider the cases of <span class="arithmatex">\(k = 1\)</span> and <span class="arithmatex">\(k = 2\)</span>. That is, to check whether there is a row entirely composed of <span class="arithmatex">\(0\)</span>s, or whether there exist two rows whose bitwise AND result is <span class="arithmatex">\(0\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n + 4^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86600,11 +86598,9 @@ The length of the chosen subset is 1.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

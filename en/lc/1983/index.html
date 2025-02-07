@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86066,11 +86064,11 @@ There are no pairs of indices that meet the requirements.
 <!-- solution:start -->
 
 <h3 id="solution-1-prefix-sum-hash-table">Solution 1: Prefix Sum + Hash Table</h3>
-<p>We observe that for any index pair $(i, j)$, if $nums1[i] + nums1[i+1] + ... + nums1[j] = nums2[i] + nums2[i+1] + ... + nums2[j]$, then $nums1[i] - nums2[i] + nums1[i+1] - nums2[i+1] + ... + nums1[j] - nums2[j] = 0$. If we subtract the corresponding elements of array $nums1$ and array $nums2$ to get a new array $nums$, the problem is transformed into finding the longest subarray in $nums$ such that the sum of the subarray is $0$. This can be solved using the prefix sum + hash table method.</p>
-<p>We define a variable $s$ to represent the current prefix sum of $nums$, and use a hash table $d$ to store the first occurrence position of each prefix sum. Initially, $s = 0$ and $d[0] = -1$.</p>
-<p>Next, we traverse each element $x$ in the array $nums$, calculate the value of $s$, and then check whether $s$ exists in the hash table. If $s$ exists in the hash table, it means that there is a subarray $nums[d[s]+1,..i]$ such that the sum of the subarray is $0$, and we update the answer to $\max(ans, i - d[s])$. Otherwise, we add the value of $s$ to the hash table, indicating that the first occurrence position of $s$ is $i$.</p>
+<p>We observe that for any index pair <span class="arithmatex">\((i, j)\)</span>, if <span class="arithmatex">\(nums1[i] + nums1[i+1] + ... + nums1[j] = nums2[i] + nums2[i+1] + ... + nums2[j]\)</span>, then <span class="arithmatex">\(nums1[i] - nums2[i] + nums1[i+1] - nums2[i+1] + ... + nums1[j] - nums2[j] = 0\)</span>. If we subtract the corresponding elements of array <span class="arithmatex">\(nums1\)</span> and array <span class="arithmatex">\(nums2\)</span> to get a new array <span class="arithmatex">\(nums\)</span>, the problem is transformed into finding the longest subarray in <span class="arithmatex">\(nums\)</span> such that the sum of the subarray is <span class="arithmatex">\(0\)</span>. This can be solved using the prefix sum + hash table method.</p>
+<p>We define a variable <span class="arithmatex">\(s\)</span> to represent the current prefix sum of <span class="arithmatex">\(nums\)</span>, and use a hash table <span class="arithmatex">\(d\)</span> to store the first occurrence position of each prefix sum. Initially, <span class="arithmatex">\(s = 0\)</span> and <span class="arithmatex">\(d[0] = -1\)</span>.</p>
+<p>Next, we traverse each element <span class="arithmatex">\(x\)</span> in the array <span class="arithmatex">\(nums\)</span>, calculate the value of <span class="arithmatex">\(s\)</span>, and then check whether <span class="arithmatex">\(s\)</span> exists in the hash table. If <span class="arithmatex">\(s\)</span> exists in the hash table, it means that there is a subarray <span class="arithmatex">\(nums[d[s]+1,..i]\)</span> such that the sum of the subarray is <span class="arithmatex">\(0\)</span>, and we update the answer to <span class="arithmatex">\(\max(ans, i - d[s])\)</span>. Otherwise, we add the value of <span class="arithmatex">\(s\)</span> to the hash table, indicating that the first occurrence position of <span class="arithmatex">\(s\)</span> is <span class="arithmatex">\(i\)</span>.</p>
 <p>After the traversal, we can get the final answer.</p>
-<p>The time complexity is $O(n)$ and the space complexity is $O(n)$, where $n$ is the length of the array $nums$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span> and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86466,11 +86464,9 @@ There are no pairs of indices that meet the requirements.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

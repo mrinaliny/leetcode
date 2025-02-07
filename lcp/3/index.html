@@ -50,8 +50,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90746,12 +90744,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表</h3>
-<p>我们用哈希表 $vis$ 记录机器人在一轮指令执行完毕后所能到达的所有位置。初始时，机器人位于原点 $(0, 0)$，因此 $vis$ 中只包含一个元素 $(0, 0)$。随后我们遍历指令 $command$ 中的每个字符 $c$，更新机器人的位置，加入哈希表 $vis$ 中。记第一轮执行完毕后，机器人所在的位置为 $(i, j)$。</p>
-<p>如果机器人重复执行多轮指令，那么实际上机器人的位置是在 $vis$ 中的所有位置的线性组合。我们将 $(x, y)$ 分别减去 $k$ 倍 $(i, j)$ 的偏移量，其中 $k = \min(\lfloor x / i \rfloor, \lfloor y / j \rfloor)$，如果 $(x, y)$ 不在 $vis$ 中， 说明机器人不可能到达 $(x, y)$，返回 <code>false</code>。</p>
+<p>我们用哈希表 <span class="arithmatex">\(vis\)</span> 记录机器人在一轮指令执行完毕后所能到达的所有位置。初始时，机器人位于原点 <span class="arithmatex">\((0, 0)\)</span>，因此 <span class="arithmatex">\(vis\)</span> 中只包含一个元素 <span class="arithmatex">\((0, 0)\)</span>。随后我们遍历指令 <span class="arithmatex">\(command\)</span> 中的每个字符 <span class="arithmatex">\(c\)</span>，更新机器人的位置，加入哈希表 <span class="arithmatex">\(vis\)</span> 中。记第一轮执行完毕后，机器人所在的位置为 <span class="arithmatex">\((i, j)\)</span>。</p>
+<p>如果机器人重复执行多轮指令，那么实际上机器人的位置是在 <span class="arithmatex">\(vis\)</span> 中的所有位置的线性组合。我们将 <span class="arithmatex">\((x, y)\)</span> 分别减去 <span class="arithmatex">\(k\)</span> 倍 <span class="arithmatex">\((i, j)\)</span> 的偏移量，其中 <span class="arithmatex">\(k = \min(\lfloor x / i \rfloor, \lfloor y / j \rfloor)\)</span>，如果 <span class="arithmatex">\((x, y)\)</span> 不在 <span class="arithmatex">\(vis\)</span> 中， 说明机器人不可能到达 <span class="arithmatex">\((x, y)\)</span>，返回 <code>false</code>。</p>
 <p>接下来，我们只需要判断机器人有没有经过障碍点即可。</p>
-<p>我们遍历所有障碍点 $(a, b)$，如果 $a \gt x$ 或者 $b \gt y$，说明机器人不会经过该障碍点，跳过即可。否则，我们将 $(x, y)$ 分别减去 $k$ 倍 $(i, j)$ 的偏移量，其中 $k = \min(\lfloor a / i \rfloor, \lfloor b / j \rfloor)$，如果 $(a, b)$ 在 $vis$ 中，说明机器人会经过该障碍点，返回 <code>false</code>。</p>
+<p>我们遍历所有障碍点 <span class="arithmatex">\((a, b)\)</span>，如果 <span class="arithmatex">\(a \gt x\)</span> 或者 <span class="arithmatex">\(b \gt y\)</span>，说明机器人不会经过该障碍点，跳过即可。否则，我们将 <span class="arithmatex">\((x, y)\)</span> 分别减去 <span class="arithmatex">\(k\)</span> 倍 <span class="arithmatex">\((i, j)\)</span> 的偏移量，其中 <span class="arithmatex">\(k = \min(\lfloor a / i \rfloor, \lfloor b / j \rfloor)\)</span>，如果 <span class="arithmatex">\((a, b)\)</span> 在 <span class="arithmatex">\(vis\)</span> 中，说明机器人会经过该障碍点，返回 <code>false</code>。</p>
 <p>否则，遍历结束后，返回 <code>true</code>。</p>
-<p>时间复杂度 $O(m + n)$，空间复杂度 $O(m)$。其中 $m$ 和 $n$ 分别是指令 $command$ 和障碍数组 $obstacles$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m + n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是指令 <span class="arithmatex">\(command\)</span> 和障碍数组 <span class="arithmatex">\(obstacles\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91321,11 +91319,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

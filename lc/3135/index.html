@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90908,17 +90906,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们不妨假设字符串 <code>initial</code> 和 <code>target</code> 的长度分别为 $m$ 和 $n$。</p>
-<p>根据题目描述，我们只需要求出 <code>initial</code> 和 <code>target</code> 的最长公共子串的长度 $mx$，那么我们可以从 <code>initial</code> 中删除 $m - mx$ 个字符，然后再添加 $n - mx$ 个字符，即可将 <code>initial</code> 转换为 <code>target</code>，因此答案为 $m + n - 2 \times mx$。</p>
-<p>我们可以使用动态规划的方法求出 <code>initial</code> 和 <code>target</code> 的最长公共子串的长度 $mx$。我们定义一个二维数组 $f$，其中 $f[i][j]$ 表示以 <code>initial[i - 1]</code> 和 <code>target[j - 1]</code> 结尾的最长公共子串的长度。那么我们可以得到状态转移方程：</p>
-<p>$$
+<p>我们不妨假设字符串 <code>initial</code> 和 <code>target</code> 的长度分别为 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span>。</p>
+<p>根据题目描述，我们只需要求出 <code>initial</code> 和 <code>target</code> 的最长公共子串的长度 <span class="arithmatex">\(mx\)</span>，那么我们可以从 <code>initial</code> 中删除 <span class="arithmatex">\(m - mx\)</span> 个字符，然后再添加 <span class="arithmatex">\(n - mx\)</span> 个字符，即可将 <code>initial</code> 转换为 <code>target</code>，因此答案为 <span class="arithmatex">\(m + n - 2 \times mx\)</span>。</p>
+<p>我们可以使用动态规划的方法求出 <code>initial</code> 和 <code>target</code> 的最长公共子串的长度 <span class="arithmatex">\(mx\)</span>。我们定义一个二维数组 <span class="arithmatex">\(f\)</span>，其中 <span class="arithmatex">\(f[i][j]\)</span> 表示以 <code>initial[i - 1]</code> 和 <code>target[j - 1]</code> 结尾的最长公共子串的长度。那么我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 f[i][j] = \begin{cases}
-f[i - 1][j - 1] + 1, &amp; \textit{if } \textit{initial}[i - 1] = \textit{target}[j - 1], \
+f[i - 1][j - 1] + 1, &amp; \textit{if } \textit{initial}[i - 1] = \textit{target}[j - 1], \\
 0, &amp; \textit{otherwise}.
 \end{cases}
-$$</p>
-<p>那么 $mx = \max f[i][j]$，最终答案为 $m + n - 2 \times mx$。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别为字符串 <code>initial</code> 和 <code>target</code> 的长度。</p>
+\]</div>
+<p>那么 <span class="arithmatex">\(mx = \max f[i][j]\)</span>，最终答案为 <span class="arithmatex">\(m + n - 2 \times mx\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为字符串 <code>initial</code> 和 <code>target</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91316,11 +91314,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

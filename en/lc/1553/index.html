@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86055,20 +86053,20 @@ You need at least 3 days to eat the 6 oranges.
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>According to the problem description, for each $n$, we can choose one of three ways:</p>
+<p>According to the problem description, for each <span class="arithmatex">\(n\)</span>, we can choose one of three ways:</p>
 <ol>
-<li>Decrease $n$ by $1$;</li>
-<li>If $n$ can be divided by $2$, divide the value of $n$ by $2$;</li>
-<li>If $n$ can be divided by $3$, divide the value of $n$ by $3$.</li>
+<li>Decrease <span class="arithmatex">\(n\)</span> by <span class="arithmatex">\(1\)</span>;</li>
+<li>If <span class="arithmatex">\(n\)</span> can be divided by <span class="arithmatex">\(2\)</span>, divide the value of <span class="arithmatex">\(n\)</span> by <span class="arithmatex">\(2\)</span>;</li>
+<li>If <span class="arithmatex">\(n\)</span> can be divided by <span class="arithmatex">\(3\)</span>, divide the value of <span class="arithmatex">\(n\)</span> by <span class="arithmatex">\(3\)</span>.</li>
 </ol>
-<p>Therefore, the problem is equivalent to finding the minimum number of days to reduce $n$ to $0$ through the above three ways.</p>
-<p>We design a function $dfs(n)$, which represents the minimum number of days to reduce $n$ to $0$. The execution process of the function $dfs(n)$ is as follows:</p>
+<p>Therefore, the problem is equivalent to finding the minimum number of days to reduce <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(0\)</span> through the above three ways.</p>
+<p>We design a function <span class="arithmatex">\(dfs(n)\)</span>, which represents the minimum number of days to reduce <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(0\)</span>. The execution process of the function <span class="arithmatex">\(dfs(n)\)</span> is as follows:</p>
 <ol>
-<li>If $n &lt; 2$, return $n$;</li>
-<li>Otherwise, we can first reduce $n$ to a multiple of $2$ by $n \bmod 2$ operations of $1$, and then perform operation $2$ to reduce $n$ to $n/2$; we can also first reduce $n$ to a multiple of $3$ by $n \bmod 3$ operations of $1$, and then perform operation $3$ to reduce $n$ to $n/3$. We choose the minimum of the above two ways, that is, $1 + \min(n \bmod 2 + dfs(n/2), n \bmod 3 + dfs(n/3))$.</li>
+<li>If <span class="arithmatex">\(n &lt; 2\)</span>, return <span class="arithmatex">\(n\)</span>;</li>
+<li>Otherwise, we can first reduce <span class="arithmatex">\(n\)</span> to a multiple of <span class="arithmatex">\(2\)</span> by <span class="arithmatex">\(n \bmod 2\)</span> operations of <span class="arithmatex">\(1\)</span>, and then perform operation <span class="arithmatex">\(2\)</span> to reduce <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(n/2\)</span>; we can also first reduce <span class="arithmatex">\(n\)</span> to a multiple of <span class="arithmatex">\(3\)</span> by <span class="arithmatex">\(n \bmod 3\)</span> operations of <span class="arithmatex">\(1\)</span>, and then perform operation <span class="arithmatex">\(3\)</span> to reduce <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(n/3\)</span>. We choose the minimum of the above two ways, that is, <span class="arithmatex">\(1 + \min(n \bmod 2 + dfs(n/2), n \bmod 3 + dfs(n/3))\)</span>.</li>
 </ol>
-<p>To avoid repeated calculations, we use the method of memoization search and store the calculated values of $dfs(n)$ in a hash table.</p>
-<p>The time complexity is $O(\log^2 n)$, and the space complexity is $O(\log^2 n)$.</p>
+<p>To avoid repeated calculations, we use the method of memoization search and store the calculated values of <span class="arithmatex">\(dfs(n)\)</span> in a hash table.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log^2 n)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log^2 n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86462,11 +86460,9 @@ You need at least 3 days to eat the 6 oranges.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

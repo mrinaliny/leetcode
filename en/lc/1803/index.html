@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86086,8 +86084,8 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-0-1-trie">Solution 1: 0-1 Trie</h3>
-<p>For this kind of problem that counts the interval $[low, high]$, we can consider converting it into counting $[0, high]$ and $[0, low - 1]$, and then subtracting the latter from the former to get the answer.</p>
-<p>In this problem, we can count how many pairs of numbers have an XOR value less than $high+1$, and then count how many pairs of numbers have an XOR value less than $low$. The difference between these two counts is the number of pairs whose XOR value is in the interval $[low, high]$.</p>
+<p>For this kind of problem that counts the interval <span class="arithmatex">\([low, high]\)</span>, we can consider converting it into counting <span class="arithmatex">\([0, high]\)</span> and <span class="arithmatex">\([0, low - 1]\)</span>, and then subtracting the latter from the former to get the answer.</p>
+<p>In this problem, we can count how many pairs of numbers have an XOR value less than <span class="arithmatex">\(high+1\)</span>, and then count how many pairs of numbers have an XOR value less than <span class="arithmatex">\(low\)</span>. The difference between these two counts is the number of pairs whose XOR value is in the interval <span class="arithmatex">\([low, high]\)</span>.</p>
 <p>Moreover, for array XOR counting problems, we can usually use a "0-1 Trie" to solve them.</p>
 <p>The definition of the Trie node is as follows:</p>
 <ul>
@@ -86095,11 +86093,11 @@
 <li><code>cnt</code> represents the number of numbers ending with the current node.</li>
 </ul>
 <p>In the Trie, we also define the following two functions:</p>
-<p>One function is $insert(x)$, which inserts the number $x$ into the Trie. This function inserts the number $x$ into the "0-1 Trie" in the order of binary bits from high to low. If the current binary bit is $0$, it is inserted into the left child node, otherwise, it is inserted into the right child node. Then the count value $cnt$ of the node is increased by $1$.</p>
-<p>Another function is $search(x, limit)$, which searches for the count of numbers in the Trie that have an XOR value with $x$ less than $limit$. This function starts from the root node <code>node</code> of the Trie, traverses the binary bits of $x$ from high to low, and denotes the current binary bit of $x$ as $v$. If the current binary bit of $limit$ is $1$, we can directly add the count value $cnt$ of the child node that has the same binary bit $v$ as $x$ to the answer, and then move the current node to the child node that has a different binary bit $v$ from $x$, i.e., <code>node = node.children[v ^ 1]</code>. Continue to traverse the next bit. If the current binary bit of $limit$ is $0$, we can only move the current node to the child node that has the same binary bit $v$ as $x$, i.e., <code>node = node.children[v]</code>. Continue to traverse the next bit. After traversing the binary bits of $x$, return the answer.</p>
+<p>One function is <span class="arithmatex">\(insert(x)\)</span>, which inserts the number <span class="arithmatex">\(x\)</span> into the Trie. This function inserts the number <span class="arithmatex">\(x\)</span> into the "0-1 Trie" in the order of binary bits from high to low. If the current binary bit is <span class="arithmatex">\(0\)</span>, it is inserted into the left child node, otherwise, it is inserted into the right child node. Then the count value <span class="arithmatex">\(cnt\)</span> of the node is increased by <span class="arithmatex">\(1\)</span>.</p>
+<p>Another function is <span class="arithmatex">\(search(x, limit)\)</span>, which searches for the count of numbers in the Trie that have an XOR value with <span class="arithmatex">\(x\)</span> less than <span class="arithmatex">\(limit\)</span>. This function starts from the root node <code>node</code> of the Trie, traverses the binary bits of <span class="arithmatex">\(x\)</span> from high to low, and denotes the current binary bit of <span class="arithmatex">\(x\)</span> as <span class="arithmatex">\(v\)</span>. If the current binary bit of <span class="arithmatex">\(limit\)</span> is <span class="arithmatex">\(1\)</span>, we can directly add the count value <span class="arithmatex">\(cnt\)</span> of the child node that has the same binary bit <span class="arithmatex">\(v\)</span> as <span class="arithmatex">\(x\)</span> to the answer, and then move the current node to the child node that has a different binary bit <span class="arithmatex">\(v\)</span> from <span class="arithmatex">\(x\)</span>, i.e., <code>node = node.children[v ^ 1]</code>. Continue to traverse the next bit. If the current binary bit of <span class="arithmatex">\(limit\)</span> is <span class="arithmatex">\(0\)</span>, we can only move the current node to the child node that has the same binary bit <span class="arithmatex">\(v\)</span> as <span class="arithmatex">\(x\)</span>, i.e., <code>node = node.children[v]</code>. Continue to traverse the next bit. After traversing the binary bits of <span class="arithmatex">\(x\)</span>, return the answer.</p>
 <p>With the above two functions, we can solve this problem.</p>
-<p>We traverse the array <code>nums</code>. For each number $x$, we first search in the Trie for the count of numbers that have an XOR value with $x$ less than $high+1$, and then search in the Trie for the count of pairs that have an XOR value with $x$ less than $low$, and add the difference between the two counts to the answer. Then insert $x$ into the Trie. Continue to traverse the next number $x$ until the array <code>nums</code> is traversed. Finally, return the answer.</p>
-<p>The time complexity is $O(n \times \log M)$, and the space complexity is $O(n \times \log M)$. Here, $n$ is the length of the array <code>nums</code>, and $M$ is the maximum value in the array <code>nums</code>. In this problem, we directly take $\log M = 16$.</p>
+<p>We traverse the array <code>nums</code>. For each number <span class="arithmatex">\(x\)</span>, we first search in the Trie for the count of numbers that have an XOR value with <span class="arithmatex">\(x\)</span> less than <span class="arithmatex">\(high+1\)</span>, and then search in the Trie for the count of pairs that have an XOR value with <span class="arithmatex">\(x\)</span> less than <span class="arithmatex">\(low\)</span>, and add the difference between the two counts to the answer. Then insert <span class="arithmatex">\(x\)</span> into the Trie. Continue to traverse the next number <span class="arithmatex">\(x\)</span> until the array <code>nums</code> is traversed. Finally, return the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <code>nums</code>, and <span class="arithmatex">\(M\)</span> is the maximum value in the array <code>nums</code>. In this problem, we directly take <span class="arithmatex">\(\log M = 16\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86701,11 +86699,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

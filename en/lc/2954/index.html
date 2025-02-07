@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86069,15 +86067,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-combinatorial-mathematics-multiplicative-inverse-fast-power">Solution 1: Combinatorial Mathematics + Multiplicative Inverse + Fast Power</h3>
-<p>According to the problem description, the children who have a cold have divided the children who have not yet caught a cold into several continuous segments. We can use an array $nums$ to record the number of children who are not cold in each segment, and there are a total of $s = \sum_{i=0}^{k} nums[k]$ children who are not cold. We can find that the number of cold sequences is the number of permutations of $s$ different elements, that is, $s!$.</p>
-<p>Assuming that there is only one transmission scheme for each segment of children who are not cold, there are $\frac{s!}{\prod_{i=0}^{k} nums[k]!}$ cold sequences in total.</p>
-<p>Next, we consider the transmission scheme of each segment of children who are not cold. Suppose there are $x$ children in a segment who are not cold, then they have $2^{x-1}$ transmission schemes, because each time you can choose one end from the left and right ends of a segment to transmit, that is: two choices, there are a total of $x-1$ transmissions. However, if it is the first segment or the last segment, there is only one choice.</p>
+<p>According to the problem description, the children who have a cold have divided the children who have not yet caught a cold into several continuous segments. We can use an array <span class="arithmatex">\(nums\)</span> to record the number of children who are not cold in each segment, and there are a total of <span class="arithmatex">\(s = \sum_{i=0}^{k} nums[k]\)</span> children who are not cold. We can find that the number of cold sequences is the number of permutations of <span class="arithmatex">\(s\)</span> different elements, that is, <span class="arithmatex">\(s!\)</span>.</p>
+<p>Assuming that there is only one transmission scheme for each segment of children who are not cold, there are <span class="arithmatex">\(\frac{s!}{\prod_{i=0}^{k} nums[k]!}\)</span> cold sequences in total.</p>
+<p>Next, we consider the transmission scheme of each segment of children who are not cold. Suppose there are <span class="arithmatex">\(x\)</span> children in a segment who are not cold, then they have <span class="arithmatex">\(2^{x-1}\)</span> transmission schemes, because each time you can choose one end from the left and right ends of a segment to transmit, that is: two choices, there are a total of <span class="arithmatex">\(x-1\)</span> transmissions. However, if it is the first segment or the last segment, there is only one choice.</p>
 <p>In summary, the total number of cold sequences is:</p>
-<p>$$
+<div class="arithmatex">\[
 \frac{s!}{\prod_{i=0}^{k} nums[k]!} \prod_{i=1}^{k-1} 2^{nums[i]-1}
-$$</p>
-<p>Finally, we need to consider that the answer may be very large and need to be modulo $10^9 + 7$. Therefore, we need to preprocess the factorial and multiplicative inverse.</p>
-<p>The time complexity is $O(m)$, where $m$ is the length of the array $sick$. Ignoring the space consumption of the preprocessing array, the space complexity is $O(m)$.</p>
+\]</div>
+<p>Finally, we need to consider that the answer may be very large and need to be modulo <span class="arithmatex">\(10^9 + 7\)</span>. Therefore, we need to preprocess the factorial and multiplicative inverse.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m)\)</span>, where <span class="arithmatex">\(m\)</span> is the length of the array <span class="arithmatex">\(sick\)</span>. Ignoring the space consumption of the preprocessing array, the space complexity is <span class="arithmatex">\(O(m)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86758,11 +86756,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

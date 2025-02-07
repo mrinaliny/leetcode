@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90869,15 +90867,15 @@
 
 <h3 id="_3">方法一：排序 + 离线查询 + 优先队列（小根堆）</h3>
 <p>我们注意到，题目中查询的顺序并不会影响答案，并且涉及到的区间也不会发生变化，因此，我们考虑将所有的查询按照从小到大的顺序进行排序，同时将所有的区间按照左端点从小到大的顺序进行排序。</p>
-<p>我们使用一个优先队列（小根堆） $pq$ 来维护当前所有的区间，队列的每个元素是一个二元组 $(v, r)$，表示一个区间长度为 $v$，右端点为 $r$ 的区间。初始时，优先队列为空。另外，我们定义一个指针 $i$，指向当前遍历到的区间，初始时 $i=0$。</p>
-<p>我们按照从小到大的顺序依次遍历每个查询 $(x, j)$，并进行如下操作：</p>
+<p>我们使用一个优先队列（小根堆） <span class="arithmatex">\(pq\)</span> 来维护当前所有的区间，队列的每个元素是一个二元组 <span class="arithmatex">\((v, r)\)</span>，表示一个区间长度为 <span class="arithmatex">\(v\)</span>，右端点为 <span class="arithmatex">\(r\)</span> 的区间。初始时，优先队列为空。另外，我们定义一个指针 <span class="arithmatex">\(i\)</span>，指向当前遍历到的区间，初始时 <span class="arithmatex">\(i=0\)</span>。</p>
+<p>我们按照从小到大的顺序依次遍历每个查询 <span class="arithmatex">\((x, j)\)</span>，并进行如下操作：</p>
 <ul>
-<li>如果指针 $i$ 尚未遍历完所有的区间，并且当前遍历到的区间 $[a, b]$ 的左端点小于等于 $x$，那么我们将该区间加入优先队列中，并将指针 $i$ 后移一位，循环此过程；</li>
-<li>如果优先队列不为空，并且堆顶元素的右端点小于 $x$，那么我们将堆顶元素弹出，循环此过程；</li>
-<li>此时，如果优先队列不为空，那么堆顶元素就是包含 $x$ 的最小区间。我们将其长度 $v$ 加入答案数组 $ans$ 中。</li>
+<li>如果指针 <span class="arithmatex">\(i\)</span> 尚未遍历完所有的区间，并且当前遍历到的区间 <span class="arithmatex">\([a, b]\)</span> 的左端点小于等于 <span class="arithmatex">\(x\)</span>，那么我们将该区间加入优先队列中，并将指针 <span class="arithmatex">\(i\)</span> 后移一位，循环此过程；</li>
+<li>如果优先队列不为空，并且堆顶元素的右端点小于 <span class="arithmatex">\(x\)</span>，那么我们将堆顶元素弹出，循环此过程；</li>
+<li>此时，如果优先队列不为空，那么堆顶元素就是包含 <span class="arithmatex">\(x\)</span> 的最小区间。我们将其长度 <span class="arithmatex">\(v\)</span> 加入答案数组 <span class="arithmatex">\(ans\)</span> 中。</li>
 </ul>
-<p>在上述过程结束后，我们返回答案数组 $ans$ 即可。</p>
-<p>时间复杂度 $O(n \times \log n + m \times \log m)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别是数组 $intervals$ 和 $queries$ 的长度。</p>
+<p>在上述过程结束后，我们返回答案数组 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n + m \times \log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是数组 <span class="arithmatex">\(intervals\)</span> 和 <span class="arithmatex">\(queries\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91347,11 +91345,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

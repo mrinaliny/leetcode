@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90845,87 +90843,87 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：数学</h3>
-<p>假设 $n$ 在 $k$ 进制下的所有位数均为 $1$，且位数为 $m+1$，那么有式子 ①：</p>
-<p>$$
-n=k<sup>0+k</sup>1+k<sup>2+...+k</sup>m
-$$</p>
-<p>当 $m=0$ 时，上式 $n=1$，而题目 $n$ 取值范围为 $[3, 10^{18}]$，因此 $m&gt;0$。</p>
-<p>当 $m=1$ 时，上式 $n=k<sup>0+k</sup>1=1+k$，即 $k=n-1&gt;=2$。</p>
+<p>假设 <span class="arithmatex">\(n\)</span> 在 <span class="arithmatex">\(k\)</span> 进制下的所有位数均为 <span class="arithmatex">\(1\)</span>，且位数为 <span class="arithmatex">\(m+1\)</span>，那么有式子 ①：</p>
+<div class="arithmatex">\[
+n=k^0+k^1+k^2+...+k^m
+\]</div>
+<p>当 <span class="arithmatex">\(m=0\)</span> 时，上式 <span class="arithmatex">\(n=1\)</span>，而题目 <span class="arithmatex">\(n\)</span> 取值范围为 <span class="arithmatex">\([3, 10^{18}]\)</span>，因此 <span class="arithmatex">\(m&gt;0\)</span>。</p>
+<p>当 <span class="arithmatex">\(m=1\)</span> 时，上式 <span class="arithmatex">\(n=k^0+k^1=1+k\)</span>，即 <span class="arithmatex">\(k=n-1&gt;=2\)</span>。</p>
 <p>我们来证明一般情况下的两个结论，以帮助解决本题。</p>
-<p><strong>结论一：</strong> $m&lt;\log _{k} n$</p>
-<p>注意到式子 ① 是个首项为 $1$，且公比为 $k$ 的等比数列。利用等比数列求和公式，我们可以得出：</p>
-<p>$$
+<p><strong>结论一：</strong> <span class="arithmatex">\(m&lt;\log _{k} n\)</span></p>
+<p>注意到式子 ① 是个首项为 <span class="arithmatex">\(1\)</span>，且公比为 <span class="arithmatex">\(k\)</span> 的等比数列。利用等比数列求和公式，我们可以得出：</p>
+<div class="arithmatex">\[
 n=\frac{1-k^{m+1}}{1-k}
-$$</p>
+\]</div>
 <p>变形得：</p>
-<p>$$
+<div class="arithmatex">\[
 k^{m+1}=k \times n-n+1 &lt; k \times n
-$$</p>
+\]</div>
 <p>移项得：</p>
-<p>$$
+<div class="arithmatex">\[
 m&lt;\log _{k} n
-$$</p>
-<p>题目 $n$ 取值范围为 $[3, 10^{18}]$，又因为 $k&gt;=2$，因此 $m&lt;\log <em 2="2">{k} n&lt;\log </em>&lt;60$。} 10^{18</p>
+\]</div>
+<p>题目 <span class="arithmatex">\(n\)</span> 取值范围为 <span class="arithmatex">\([3, 10^{18}]\)</span>，又因为 <span class="arithmatex">\(k&gt;=2\)</span>，因此 <span class="arithmatex">\(m&lt;\log _{k} n&lt;\log _{2} 10^{18}&lt;60\)</span>。</p>
 <p><strong>结论二：</strong> $k=\left \lfloor \sqrt[m]{n} \right \rfloor $</p>
-<p>$$
-n=k<sup>0+k</sup>1+k<sup>2+...+k</sup>m&gt;k^m
-$$</p>
+<div class="arithmatex">\[
+n=k^0+k^1+k^2+...+k^m&gt;k^m
+\]</div>
 <p>根据二项式定理：</p>
-<p>$$
-(a+b)<sup n="n">{n}=\sum_{k=0}</sup>
-n \
+<div class="arithmatex">\[
+(a+b)^{n}=\sum_{k=0}^{n}\left(\begin{array}{l}
+n \\
 k
 \end{array}\right) a^{n-k} b^{k}
-$$}\left(\begin{array}{l</p>
+\]</div>
 <p>整合，可得：</p>
-<p>$$
+<div class="arithmatex">\[
 (k+1)^{m}=\left(\begin{array}{c}
-m \
+m \\
 0
 \end{array}\right) k^{0}+\left(\begin{array}{c}
-m \
+m \\
 1
 \end{array}\right) k^{1}+\left(\begin{array}{c}
-m \
+m \\
 2
 \end{array}\right) k^{2}+\cdots+\left(\begin{array}{c}
-m \
+m \\
 m
 \end{array}\right) k^{m}
-$$</p>
-<p>当 $m&gt;1$ 时，满足：</p>
-<p>$$
+\]</div>
+<p>当 <span class="arithmatex">\(m&gt;1\)</span> 时，满足：</p>
+<div class="arithmatex">\[
 \forall i \in[1, m-1],\left(\begin{array}{c}
-m \
+m \\
 i
 \end{array}\right)&gt;1
-$$</p>
+\]</div>
 <p>所以有：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
 (k+1)^{m} &amp;=\left(\begin{array}{c}
-m \
+m \\
 0
 \end{array}\right) k^{0}+\left(\begin{array}{c}
-m \
+m \\
 1
 \end{array}\right) k^{1}+\left(\begin{array}{c}
-m \
+m \\
 2
 \end{array}\right) k^{2}+\cdots+\left(\begin{array}{c}
-m \
+m \\
 m
-\end{array}\right) k^{m} \
-&amp;&gt;k<sup 1="1">{0}+k</sup>+k<sup m="m">{2}+\cdots+k</sup>=n
+\end{array}\right) k^{m} \\
+&amp;&gt;k^{0}+k^{1}+k^{2}+\cdots+k^{m}=n
 \end{aligned}
-$$</p>
+\]</div>
 <p>即：</p>
-<p>$$
+<div class="arithmatex">\[
 k &lt; \sqrt[m]{n} &lt; k+1
-$$</p>
-<p>由于 $k$ 是整数，因此 $k=\left \lfloor \sqrt[m]{n} \right \rfloor $。</p>
-<p>综上，依据结论一，我们知道 $m$ 的取值范围为 $[1,log_{k}n)$，且 $m=1$ 时必然有解。随着 $m$ 的增大，进制 $k$ 不断减小。所以我们只需要从大到小检查每一个 $m$ 可能的取值，利用结论二快速算出对应的 $k$ 值，然后校验计算出的 $k$ 值是否有效即可。如果 $k$ 值有效，我们即可返回结果。</p>
-<p>时间复杂度 $O(log^{2}n)$。</p>
+\]</div>
+<p>由于 <span class="arithmatex">\(k\)</span> 是整数，因此 $k=\left \lfloor \sqrt[m]{n} \right \rfloor $。</p>
+<p>综上，依据结论一，我们知道 <span class="arithmatex">\(m\)</span> 的取值范围为 <span class="arithmatex">\([1,log_{k}n)\)</span>，且 <span class="arithmatex">\(m=1\)</span> 时必然有解。随着 <span class="arithmatex">\(m\)</span> 的增大，进制 <span class="arithmatex">\(k\)</span> 不断减小。所以我们只需要从大到小检查每一个 <span class="arithmatex">\(m\)</span> 可能的取值，利用结论二快速算出对应的 <span class="arithmatex">\(k\)</span> 值，然后校验计算出的 <span class="arithmatex">\(k\)</span> 值是否有效即可。如果 <span class="arithmatex">\(k\)</span> 值有效，我们即可返回结果。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(log^{2}n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91327,11 +91325,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

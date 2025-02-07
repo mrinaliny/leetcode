@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90883,9 +90881,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i)$，表示从下标 $i$ 开始跳跃能够访问的最大下标数。我们可以枚举 $i$ 的所有合法的跳跃目标 $j$，即 $i - d \leq j \leq i + d$，并且 $arr[i] \gt arr[j]$。对于每个合法的 $j$，我们可以递归地计算 $dfs(j)$，并取其中的最大值。最终的答案即为所有 $i$ 的 $dfs(i)$ 的最大值。</p>
-<p>我们可以使用记忆化搜索来优化这个过程，即使用一个数组 $f$ 记录每个下标的 $dfs$ 值，避免重复计算。</p>
-<p>时间复杂度 $O(n \times d)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $arr$ 的长度。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从下标 <span class="arithmatex">\(i\)</span> 开始跳跃能够访问的最大下标数。我们可以枚举 <span class="arithmatex">\(i\)</span> 的所有合法的跳跃目标 <span class="arithmatex">\(j\)</span>，即 <span class="arithmatex">\(i - d \leq j \leq i + d\)</span>，并且 <span class="arithmatex">\(arr[i] \gt arr[j]\)</span>。对于每个合法的 <span class="arithmatex">\(j\)</span>，我们可以递归地计算 <span class="arithmatex">\(dfs(j)\)</span>，并取其中的最大值。最终的答案即为所有 <span class="arithmatex">\(i\)</span> 的 <span class="arithmatex">\(dfs(i)\)</span> 的最大值。</p>
+<p>我们可以使用记忆化搜索来优化这个过程，即使用一个数组 <span class="arithmatex">\(f\)</span> 记录每个下标的 <span class="arithmatex">\(dfs\)</span> 值，避免重复计算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times d)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(arr\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91135,11 +91133,11 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：排序 + 动态规划</h3>
-<p>我们可以将数组 $arr$ 中的每个元素 $x$ 与其下标 $i$ 组成一个元组 $(x, i)$，并将这些元组按照 $x$ 从小到大排序。</p>
-<p>接下来定义 $f[i]$ 表示从下标 $i$ 开始跳跃能够访问的最大下标数。初始时 $f[i] = 1$，即每个下标都可以单独作为一次跳跃。</p>
-<p>我们可以按照元组 $(x, i)$ 的顺序枚举 $i$，并枚举 $i$ 的所有合法的跳跃目标 $j$，即 $i - d \leq j \leq i + d$，并且 $arr[i] \gt arr[j]$。对于每个合法的 $j$，我们可以更新 $f[i]$ 的值，即 $f[i] = \max(f[i], 1 + f[j])$。</p>
-<p>最终的答案即为 $\max_{0 \leq i \lt n} f[i]$。</p>
-<p>时间复杂度 $O(n \log n + n \times d)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $arr$ 的长度。</p>
+<p>我们可以将数组 <span class="arithmatex">\(arr\)</span> 中的每个元素 <span class="arithmatex">\(x\)</span> 与其下标 <span class="arithmatex">\(i\)</span> 组成一个元组 <span class="arithmatex">\((x, i)\)</span>，并将这些元组按照 <span class="arithmatex">\(x\)</span> 从小到大排序。</p>
+<p>接下来定义 <span class="arithmatex">\(f[i]\)</span> 表示从下标 <span class="arithmatex">\(i\)</span> 开始跳跃能够访问的最大下标数。初始时 <span class="arithmatex">\(f[i] = 1\)</span>，即每个下标都可以单独作为一次跳跃。</p>
+<p>我们可以按照元组 <span class="arithmatex">\((x, i)\)</span> 的顺序枚举 <span class="arithmatex">\(i\)</span>，并枚举 <span class="arithmatex">\(i\)</span> 的所有合法的跳跃目标 <span class="arithmatex">\(j\)</span>，即 <span class="arithmatex">\(i - d \leq j \leq i + d\)</span>，并且 <span class="arithmatex">\(arr[i] \gt arr[j]\)</span>。对于每个合法的 <span class="arithmatex">\(j\)</span>，我们可以更新 <span class="arithmatex">\(f[i]\)</span> 的值，即 <span class="arithmatex">\(f[i] = \max(f[i], 1 + f[j])\)</span>。</p>
+<p>最终的答案即为 <span class="arithmatex">\(\max_{0 \leq i \lt n} f[i]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \log n + n \times d)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(arr\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91567,11 +91565,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

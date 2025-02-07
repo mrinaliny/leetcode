@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,19 +90864,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示前 $i$ 个数中选取若干个数，使得这若干个数的和模 $3$ 余 $j$ 的最大值。初始时 $f[0][0]=0$，其余为 $-\infty$。</p>
-<p>对于 $f[i][j]$，我们可以考虑第 $i$ 个数 $x$ 的状态：</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个数中选取若干个数，使得这若干个数的和模 <span class="arithmatex">\(3\)</span> 余 <span class="arithmatex">\(j\)</span> 的最大值。初始时 <span class="arithmatex">\(f[0][0]=0\)</span>，其余为 <span class="arithmatex">\(-\infty\)</span>。</p>
+<p>对于 <span class="arithmatex">\(f[i][j]\)</span>，我们可以考虑第 <span class="arithmatex">\(i\)</span> 个数 <span class="arithmatex">\(x\)</span> 的状态：</p>
 <ul>
-<li>如果我们不选 $x$，那么 $f[i][j]=f[i-1][j]$；</li>
-<li>如果我们选 $x$，那么 $f[i][j]=f[i-1][(j-x \bmod 3 + 3)\bmod 3]+x$。</li>
+<li>如果我们不选 <span class="arithmatex">\(x\)</span>，那么 <span class="arithmatex">\(f[i][j]=f[i-1][j]\)</span>；</li>
+<li>如果我们选 <span class="arithmatex">\(x\)</span>，那么 <span class="arithmatex">\(f[i][j]=f[i-1][(j-x \bmod 3 + 3)\bmod 3]+x\)</span>。</li>
 </ul>
 <p>因此我们可以得到状态转移方程：</p>
-<p>$$
-f[i][j]=\max{f[i-1][j],f[i-1][(j-x \bmod 3 + 3)\bmod 3]+x}
-$$</p>
-<p>最终答案为 $f[n][0]$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
-<p>注意到 $f[i][j]$ 的值只与 $f[i-1][j]$ 和 $f[i-1][(j-x \bmod 3 + 3)\bmod 3]$ 有关，因此我们可以使用滚动数组优化空间复杂度，使空间复杂度降低为 $O(1)$。</p>
+<div class="arithmatex">\[
+f[i][j]=\max\{f[i-1][j],f[i-1][(j-x \bmod 3 + 3)\bmod 3]+x\}
+\]</div>
+<p>最终答案为 <span class="arithmatex">\(f[n][0]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
+<p>注意到 <span class="arithmatex">\(f[i][j]\)</span> 的值只与 <span class="arithmatex">\(f[i-1][j]\)</span> 和 <span class="arithmatex">\(f[i-1][(j-x \bmod 3 + 3)\bmod 3]\)</span> 有关，因此我们可以使用滚动数组优化空间复杂度，使空间复杂度降低为 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91411,11 +91409,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

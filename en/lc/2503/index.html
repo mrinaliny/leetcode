@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86084,9 +86082,9 @@
 <h3 id="solution-1-offline-query-bfs-priority-queue-min-heap">Solution 1: Offline Query + BFS + Priority Queue (Min Heap)</h3>
 <p>According to the problem description, each query is independent, the order of the queries does not affect the result, and we are required to start from the top left corner each time, counting the number of cells that can be accessed and whose value is less than the current query value.</p>
 <p>Therefore, we can first sort the <code>queries</code> array, and then process each query in ascending order.</p>
-<p>We use a priority queue (min heap) to maintain the smallest cell value that we have currently accessed, and use an array or hash table <code>vis</code> to record whether the current cell has been visited. Initially, we add the data $(grid[0][0], 0, 0)$ of the top left cell as a tuple to the priority queue, and set <code>vis[0][0]</code> to <code>True</code>.</p>
+<p>We use a priority queue (min heap) to maintain the smallest cell value that we have currently accessed, and use an array or hash table <code>vis</code> to record whether the current cell has been visited. Initially, we add the data <span class="arithmatex">\((grid[0][0], 0, 0)\)</span> of the top left cell as a tuple to the priority queue, and set <code>vis[0][0]</code> to <code>True</code>.</p>
 <p>For each query <code>queries[i]</code>, we judge whether the minimum value of the current priority queue is less than <code>queries[i]</code>. If it is, we pop the current minimum value, increment the counter <code>cnt</code>, and add the four cells above, below, left, and right of the current cell to the priority queue, noting to check whether they have been visited. Repeat the above operation until the minimum value of the current priority queue is greater than or equal to <code>queries[i]</code>, at which point <code>cnt</code> is the answer to the current query.</p>
-<p>The time complexity is $O(k \times \log k + m \times n \log(m \times n))$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the number of rows and columns of the grid, and $k$ is the number of queries. We need to sort the <code>queries</code> array, which has a time complexity of $O(k \times \log k)$. Each cell in the matrix will be visited at most once, and the time complexity of each enqueue and dequeue operation is $O(\log(m \times n))$. Therefore, the total time complexity is $O(k \times \log k + m \times n \log(m \times n))$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(k \times \log k + m \times n \log(m \times n))\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, and <span class="arithmatex">\(k\)</span> is the number of queries. We need to sort the <code>queries</code> array, which has a time complexity of <span class="arithmatex">\(O(k \times \log k)\)</span>. Each cell in the matrix will be visited at most once, and the time complexity of each enqueue and dequeue operation is <span class="arithmatex">\(O(\log(m \times n))\)</span>. Therefore, the total time complexity is <span class="arithmatex">\(O(k \times \log k + m \times n \log(m \times n))\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86600,11 +86598,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

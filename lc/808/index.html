@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90855,23 +90853,23 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>在这道题中，由于每次操作都是 $25$ 的倍数，因此，我们可以将每 $25ml$ 的汤视为一份。这样就能将数据规模缩小到 $\left \lceil \frac{n}{25} \right \rceil$。</p>
-<p>我们设计一个函数 $dfs(i, j)$，表示当前剩余 $i$ 份汤 $A$ 和 $j$ 份汤 $B$ 的结果概率。</p>
-<p>当 $i \leq 0$ 并且 $j \leq 0$ 时，表示两种汤都分配完了，此时应该返回 $0.5$；当 $i \leq 0$ 时，表示汤 $A$ 先分配完了，此时应该返回 $1$；当 $j \leq 0$ 时，表示汤 $B$ 先分配完了，此时应该返回 $0$。</p>
+<p>在这道题中，由于每次操作都是 <span class="arithmatex">\(25\)</span> 的倍数，因此，我们可以将每 <span class="arithmatex">\(25ml\)</span> 的汤视为一份。这样就能将数据规模缩小到 <span class="arithmatex">\(\left \lceil \frac{n}{25} \right \rceil\)</span>。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示当前剩余 <span class="arithmatex">\(i\)</span> 份汤 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(j\)</span> 份汤 <span class="arithmatex">\(B\)</span> 的结果概率。</p>
+<p>当 <span class="arithmatex">\(i \leq 0\)</span> 并且 <span class="arithmatex">\(j \leq 0\)</span> 时，表示两种汤都分配完了，此时应该返回 <span class="arithmatex">\(0.5\)</span>；当 <span class="arithmatex">\(i \leq 0\)</span> 时，表示汤 <span class="arithmatex">\(A\)</span> 先分配完了，此时应该返回 <span class="arithmatex">\(1\)</span>；当 <span class="arithmatex">\(j \leq 0\)</span> 时，表示汤 <span class="arithmatex">\(B\)</span> 先分配完了，此时应该返回 <span class="arithmatex">\(0\)</span>。</p>
 <p>接下来，对于每一次操作，我们都有四种选择，即：</p>
 <ul>
-<li>从 $i$ 份汤 $A$ 中取出 $4$ 份，从 $j$ 份汤 $B$ 中取出 $0$ 份；</li>
-<li>从 $i$ 份汤 $A$ 中取出 $3$ 份，从 $j$ 份汤 $B$ 中取出 $1$ 份；</li>
-<li>从 $i$ 份汤 $A$ 中取出 $2$ 份，从 $j$ 份汤 $B$ 中取出 $2$ 份；</li>
-<li>从 $i$ 份汤 $A$ 中取出 $1$ 份，从 $j$ 份汤 $B$ 中取出 $3$ 份；</li>
+<li>从 <span class="arithmatex">\(i\)</span> 份汤 <span class="arithmatex">\(A\)</span> 中取出 <span class="arithmatex">\(4\)</span> 份，从 <span class="arithmatex">\(j\)</span> 份汤 <span class="arithmatex">\(B\)</span> 中取出 <span class="arithmatex">\(0\)</span> 份；</li>
+<li>从 <span class="arithmatex">\(i\)</span> 份汤 <span class="arithmatex">\(A\)</span> 中取出 <span class="arithmatex">\(3\)</span> 份，从 <span class="arithmatex">\(j\)</span> 份汤 <span class="arithmatex">\(B\)</span> 中取出 <span class="arithmatex">\(1\)</span> 份；</li>
+<li>从 <span class="arithmatex">\(i\)</span> 份汤 <span class="arithmatex">\(A\)</span> 中取出 <span class="arithmatex">\(2\)</span> 份，从 <span class="arithmatex">\(j\)</span> 份汤 <span class="arithmatex">\(B\)</span> 中取出 <span class="arithmatex">\(2\)</span> 份；</li>
+<li>从 <span class="arithmatex">\(i\)</span> 份汤 <span class="arithmatex">\(A\)</span> 中取出 <span class="arithmatex">\(1\)</span> 份，从 <span class="arithmatex">\(j\)</span> 份汤 <span class="arithmatex">\(B\)</span> 中取出 <span class="arithmatex">\(3\)</span> 份；</li>
 </ul>
-<p>每一种选择的概率都是 $0.25$，因此，我们可以得到：</p>
-<p>$$
+<p>每一种选择的概率都是 <span class="arithmatex">\(0.25\)</span>，因此，我们可以得到：</p>
+<div class="arithmatex">\[
 dfs(i, j) = 0.25 \times (dfs(i - 4, j) + dfs(i - 3, j - 1) + dfs(i - 2, j - 2) + dfs(i - 1, j - 3))
-$$</p>
+\]</div>
 <p>记忆化搜索即可。</p>
-<p>另外，我们发现在 $n=4800$ 时，结果为 $0.999994994426$，而题目要求的精度为 $10^{-5}$，并且随着 $n$ 的增大，结果越来越接近 $1$，因此，当 $n \gt 4800$ 时，直接返回 $1$ 即可。</p>
-<p>时间复杂度 $O(C^2)$，空间复杂度 $O(C^2)$。本题中 $C=200$。</p>
+<p>另外，我们发现在 <span class="arithmatex">\(n=4800\)</span> 时，结果为 <span class="arithmatex">\(0.999994994426\)</span>，而题目要求的精度为 <span class="arithmatex">\(10^{-5}\)</span>，并且随着 <span class="arithmatex">\(n\)</span> 的增大，结果越来越接近 <span class="arithmatex">\(1\)</span>，因此，当 <span class="arithmatex">\(n \gt 4800\)</span> 时，直接返回 <span class="arithmatex">\(1\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(C^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(C^2)\)</span>。本题中 <span class="arithmatex">\(C=200\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91332,11 +91330,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

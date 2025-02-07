@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86047,17 +86045,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-mathematics">Solution 1: Mathematics</h3>
-<p>For a point $(x, y)$, its shortest distance to the center of the circle $(xCenter, yCenter)$ is $\sqrt{(x - xCenter)^2 + (y - yCenter)^2}$. If this distance is less than or equal to the radius $radius$, then this point is within the circle (including the boundary).</p>
-<p>For points within the rectangle (including the boundary), their x-coordinates $x$ satisfy $x_1 \leq x \leq x_2$, and their y-coordinates $y$ satisfy $y_1 \leq y \leq y_2$. To determine whether the circle and rectangle overlap, we need to find a point $(x, y)$ within the rectangle such that $a = |x - xCenter|$ and $b = |y - yCenter|$ are minimized. If $a^2 + b^2 \leq radius^2$, then the circle and rectangle overlap.</p>
-<p>Therefore, the problem is transformed into finding the minimum value of $a = |x - xCenter|$ when $x \in [x_1, x_2]$, and the minimum value of $b = |y - yCenter|$ when $y \in [y_1, y_2]$.</p>
-<p>For $x \in [x_1, x_2]$:</p>
+<p>For a point <span class="arithmatex">\((x, y)\)</span>, its shortest distance to the center of the circle <span class="arithmatex">\((xCenter, yCenter)\)</span> is <span class="arithmatex">\(\sqrt{(x - xCenter)^2 + (y - yCenter)^2}\)</span>. If this distance is less than or equal to the radius <span class="arithmatex">\(radius\)</span>, then this point is within the circle (including the boundary).</p>
+<p>For points within the rectangle (including the boundary), their x-coordinates <span class="arithmatex">\(x\)</span> satisfy <span class="arithmatex">\(x_1 \leq x \leq x_2\)</span>, and their y-coordinates <span class="arithmatex">\(y\)</span> satisfy <span class="arithmatex">\(y_1 \leq y \leq y_2\)</span>. To determine whether the circle and rectangle overlap, we need to find a point <span class="arithmatex">\((x, y)\)</span> within the rectangle such that <span class="arithmatex">\(a = |x - xCenter|\)</span> and <span class="arithmatex">\(b = |y - yCenter|\)</span> are minimized. If <span class="arithmatex">\(a^2 + b^2 \leq radius^2\)</span>, then the circle and rectangle overlap.</p>
+<p>Therefore, the problem is transformed into finding the minimum value of <span class="arithmatex">\(a = |x - xCenter|\)</span> when <span class="arithmatex">\(x \in [x_1, x_2]\)</span>, and the minimum value of <span class="arithmatex">\(b = |y - yCenter|\)</span> when <span class="arithmatex">\(y \in [y_1, y_2]\)</span>.</p>
+<p>For <span class="arithmatex">\(x \in [x_1, x_2]\)</span>:</p>
 <ul>
-<li>If $x_1 \leq xCenter \leq x_2$, then the minimum value of $|x - xCenter|$ is $0$;</li>
-<li>If $xCenter &lt; x_1$, then the minimum value of $|x - xCenter|$ is $x_1 - xCenter$;</li>
-<li>If $xCenter &gt; x_2$, then the minimum value of $|x - xCenter|$ is $xCenter - x_2$.</li>
+<li>If <span class="arithmatex">\(x_1 \leq xCenter \leq x_2\)</span>, then the minimum value of <span class="arithmatex">\(|x - xCenter|\)</span> is <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(xCenter &lt; x_1\)</span>, then the minimum value of <span class="arithmatex">\(|x - xCenter|\)</span> is <span class="arithmatex">\(x_1 - xCenter\)</span>;</li>
+<li>If <span class="arithmatex">\(xCenter &gt; x_2\)</span>, then the minimum value of <span class="arithmatex">\(|x - xCenter|\)</span> is <span class="arithmatex">\(xCenter - x_2\)</span>.</li>
 </ul>
-<p>Similarly, we can find the minimum value of $|y - yCenter|$ when $y \in [y_1, y_2]$. We can use a function $f(i, j, k)$ to handle the above situations.</p>
-<p>That is, $a = f(x_1, x_2, xCenter)$, $b = f(y_1, y_2, yCenter)$. If $a^2 + b^2 \leq radius^2$, then the circle and rectangle overlap.</p>
+<p>Similarly, we can find the minimum value of <span class="arithmatex">\(|y - yCenter|\)</span> when <span class="arithmatex">\(y \in [y_1, y_2]\)</span>. We can use a function <span class="arithmatex">\(f(i, j, k)\)</span> to handle the above situations.</p>
+<p>That is, <span class="arithmatex">\(a = f(x_1, x_2, xCenter)\)</span>, <span class="arithmatex">\(b = f(y_1, y_2, yCenter)\)</span>. If <span class="arithmatex">\(a^2 + b^2 \leq radius^2\)</span>, then the circle and rectangle overlap.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86468,11 +86466,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86064,12 +86062,12 @@ So the final output is 4.
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>First, we preprocess the positions of each character $c$ in the string $ring$, and record them in the array $pos[c]$. Suppose the lengths of the strings $key$ and $ring$ are $m$ and $n$, respectively.</p>
-<p>Then we define $f[i][j]$ as the minimum number of steps to spell the first $i+1$ characters of the string $key$, and the $j$-th character of $ring$ is aligned with the $12:00$ direction. Initially, $f[i][j]=+\infty$. The answer is $\min_{0 \leq j &lt; n} f[m - 1][j]$.</p>
-<p>We can first initialize $f[0][j]$, where $j$ is the position where the character $key[0]$ appears in $ring$. Since the $j$-th character of $ring$ is aligned with the $12:00$ direction, we only need $1$ step to spell $key[0]$. In addition, we need $min(j, n - j)$ steps to rotate $ring$ to the $12:00$ direction. Therefore, $f[0][j]=min(j, n - j) + 1$.</p>
-<p>Next, we consider how the state transitions when $i \geq 1$. We can enumerate the position list $pos[key[i]]$ where $key[i]$ appears in $ring$, and enumerate the position list $pos[key[i-1]]$ where $key[i-1]$ appears in $ring$, and then update $f[i][j]$, i.e., $f[i][j]=\min_{k \in pos[key[i-1]]} f[i-1][k] + \min(\textit{abs}(j - k), n - \textit{abs}(j - k)) + 1$.</p>
-<p>Finally, we return $\min_{0 \leq j \lt n} f[m - 1][j]$.</p>
-<p>The time complexity is $O(m \times n^2)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the lengths of the strings $key$ and $ring$, respectively.</p>
+<p>First, we preprocess the positions of each character <span class="arithmatex">\(c\)</span> in the string <span class="arithmatex">\(ring\)</span>, and record them in the array <span class="arithmatex">\(pos[c]\)</span>. Suppose the lengths of the strings <span class="arithmatex">\(key\)</span> and <span class="arithmatex">\(ring\)</span> are <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>, respectively.</p>
+<p>Then we define <span class="arithmatex">\(f[i][j]\)</span> as the minimum number of steps to spell the first <span class="arithmatex">\(i+1\)</span> characters of the string <span class="arithmatex">\(key\)</span>, and the <span class="arithmatex">\(j\)</span>-th character of <span class="arithmatex">\(ring\)</span> is aligned with the <span class="arithmatex">\(12:00\)</span> direction. Initially, <span class="arithmatex">\(f[i][j]=+\infty\)</span>. The answer is <span class="arithmatex">\(\min_{0 \leq j &lt; n} f[m - 1][j]\)</span>.</p>
+<p>We can first initialize <span class="arithmatex">\(f[0][j]\)</span>, where <span class="arithmatex">\(j\)</span> is the position where the character <span class="arithmatex">\(key[0]\)</span> appears in <span class="arithmatex">\(ring\)</span>. Since the <span class="arithmatex">\(j\)</span>-th character of <span class="arithmatex">\(ring\)</span> is aligned with the <span class="arithmatex">\(12:00\)</span> direction, we only need <span class="arithmatex">\(1\)</span> step to spell <span class="arithmatex">\(key[0]\)</span>. In addition, we need <span class="arithmatex">\(min(j, n - j)\)</span> steps to rotate <span class="arithmatex">\(ring\)</span> to the <span class="arithmatex">\(12:00\)</span> direction. Therefore, <span class="arithmatex">\(f[0][j]=min(j, n - j) + 1\)</span>.</p>
+<p>Next, we consider how the state transitions when <span class="arithmatex">\(i \geq 1\)</span>. We can enumerate the position list <span class="arithmatex">\(pos[key[i]]\)</span> where <span class="arithmatex">\(key[i]\)</span> appears in <span class="arithmatex">\(ring\)</span>, and enumerate the position list <span class="arithmatex">\(pos[key[i-1]]\)</span> where <span class="arithmatex">\(key[i-1]\)</span> appears in <span class="arithmatex">\(ring\)</span>, and then update <span class="arithmatex">\(f[i][j]\)</span>, i.e., <span class="arithmatex">\(f[i][j]=\min_{k \in pos[key[i-1]]} f[i-1][k] + \min(\textit{abs}(j - k), n - \textit{abs}(j - k)) + 1\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(\min_{0 \leq j \lt n} f[m - 1][j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of the strings <span class="arithmatex">\(key\)</span> and <span class="arithmatex">\(ring\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86595,11 +86593,9 @@ So the final output is 4.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

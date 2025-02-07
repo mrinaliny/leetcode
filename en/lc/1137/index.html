@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86058,9 +86056,9 @@ T_4 = 1 + 1 + 2 = 4
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
 <p>According to the recurrence relation given in the problem, we can use dynamic programming to solve it.</p>
-<p>We define three variables $a$, $b$, $c$ to represent $T_{n-3}$, $T_{n-2}$, $T_{n-1}$, respectively, with initial values of $0$, $1$, $1$.</p>
-<p>Then we decrease $n$ to $0$, updating the values of $a$, $b$, $c$ each time, until $n$ is $0$, at which point the answer is $a$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is the given integer.</p>
+<p>We define three variables <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(c\)</span> to represent <span class="arithmatex">\(T_{n-3}\)</span>, <span class="arithmatex">\(T_{n-2}\)</span>, <span class="arithmatex">\(T_{n-1}\)</span>, respectively, with initial values of <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(1\)</span>.</p>
+<p>Then we decrease <span class="arithmatex">\(n\)</span> to <span class="arithmatex">\(0\)</span>, updating the values of <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(b\)</span>, <span class="arithmatex">\(c\)</span> each time, until <span class="arithmatex">\(n\)</span> is <span class="arithmatex">\(0\)</span>, at which point the answer is <span class="arithmatex">\(a\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the given integer.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86306,23 +86304,23 @@ T_4 = 1 + 1 + 2 = 4
 <!-- solution:start -->
 
 <h3 id="solution-2-matrix-exponentiation-to-accelerate-recurrence">Solution 2: Matrix Exponentiation to Accelerate Recurrence</h3>
-<p>We define $Tib(n)$ as a $1 \times 3$ matrix $\begin{bmatrix} T_n &amp; T_{n - 1} &amp; T_{n - 2} \end{bmatrix}$, where $T_n$, $T_{n - 1}$ and $T_{n - 2}$ represent the $n$th, $(n - 1)$th and $(n - 2)$th Tribonacci numbers, respectively.</p>
-<p>We hope to derive $Tib(n)$ from $Tib(n-1) = \begin{bmatrix} T_{n - 1} &amp; T_{n - 2} &amp; T_{n - 3} \end{bmatrix}$. That is, we need a matrix $base$ such that $Tib(n - 1) \times base = Tib(n)$, i.e.,</p>
-<p>$$
+<p>We define <span class="arithmatex">\(Tib(n)\)</span> as a <span class="arithmatex">\(1 \times 3\)</span> matrix <span class="arithmatex">\(\begin{bmatrix} T_n &amp; T_{n - 1} &amp; T_{n - 2} \end{bmatrix}\)</span>, where <span class="arithmatex">\(T_n\)</span>, <span class="arithmatex">\(T_{n - 1}\)</span> and <span class="arithmatex">\(T_{n - 2}\)</span> represent the <span class="arithmatex">\(n\)</span>th, <span class="arithmatex">\((n - 1)\)</span>th and <span class="arithmatex">\((n - 2)\)</span>th Tribonacci numbers, respectively.</p>
+<p>We hope to derive <span class="arithmatex">\(Tib(n)\)</span> from <span class="arithmatex">\(Tib(n-1) = \begin{bmatrix} T_{n - 1} &amp; T_{n - 2} &amp; T_{n - 3} \end{bmatrix}\)</span>. That is, we need a matrix <span class="arithmatex">\(base\)</span> such that <span class="arithmatex">\(Tib(n - 1) \times base = Tib(n)\)</span>, i.e.,</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
 T_{n - 1} &amp; T_{n - 2} &amp; T_{n - 3}
 \end{bmatrix} \times base = \begin{bmatrix} T_n &amp; T_{n - 1} &amp; T_{n - 2} \end{bmatrix}
-$$</p>
-<p>Since $T_n = T_{n - 1} + T_{n - 2} + T_{n - 3}$, the matrix $base$ is:</p>
-<p>$$
+\]</div>
+<p>Since <span class="arithmatex">\(T_n = T_{n - 1} + T_{n - 2} + T_{n - 3}\)</span>, the matrix <span class="arithmatex">\(base\)</span> is:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
- 1 &amp; 1 &amp; 0 \
- 1 &amp; 0 &amp; 1 \
+ 1 &amp; 1 &amp; 0 \\
+ 1 &amp; 0 &amp; 1 \\
  1 &amp; 0 &amp; 0
 \end{bmatrix}
-$$</p>
-<p>We define the initial matrix $res = \begin{bmatrix} 1 &amp; 1  &amp; 0 \end{bmatrix}$, then $T_n$ is equal to the sum of all elements in the result matrix of $res$ multiplied by $base^{n - 3}$. This can be solved using matrix exponentiation.</p>
-<p>The time complexity is $O(\log n)$, and the space complexity is $O(1)$.</p>
+\]</div>
+<p>We define the initial matrix <span class="arithmatex">\(res = \begin{bmatrix} 1 &amp; 1  &amp; 0 \end{bmatrix}\)</span>, then <span class="arithmatex">\(T_n\)</span> is equal to the sum of all elements in the result matrix of <span class="arithmatex">\(res\)</span> multiplied by <span class="arithmatex">\(base^{n - 3}\)</span>. This can be solved using matrix exponentiation.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86948,11 +86946,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86066,9 +86064,9 @@ There is no letter that appears in both lower and upper case.
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-enumeration">Solution 1: Hash Table + Enumeration</h3>
-<p>First, we use a hash table $ss$ to record all the letters that appear in the string $s$. Then we start enumerating from the last letter of the uppercase alphabet. If both the uppercase and lowercase forms of the current letter are in $ss$, we return that letter.</p>
+<p>First, we use a hash table <span class="arithmatex">\(ss\)</span> to record all the letters that appear in the string <span class="arithmatex">\(s\)</span>. Then we start enumerating from the last letter of the uppercase alphabet. If both the uppercase and lowercase forms of the current letter are in <span class="arithmatex">\(ss\)</span>, we return that letter.</p>
 <p>At the end of the enumeration, if no letter that meets the conditions is found, we return an empty string.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(C)$. Here, $n$ and $C$ are the length of the string $s$ and the size of the character set, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(C)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(C\)</span> are the length of the string <span class="arithmatex">\(s\)</span> and the size of the character set, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86274,10 +86272,10 @@ There is no letter that appears in both lower and upper case.
 <!-- solution:start -->
 
 <h3 id="solution-2-bit-manipulation-space-optimization">Solution 2: Bit Manipulation (Space Optimization)</h3>
-<p>We can use two integers $mask1$ and $mask2$ to record the lowercase and uppercase letters that appear in the string $s$, respectively. The $i$-th bit of $mask1$ indicates whether the $i$-th lowercase letter appears, and the $i$-th bit of $mask2$ indicates whether the $i$-th uppercase letter appears.</p>
-<p>Then we perform a bitwise AND operation on $mask1$ and $mask2$. The $i$-th bit of the resulting $mask$ indicates whether the $i$-th letter appears in both uppercase and lowercase.</p>
-<p>Next, we just need to get the position of the highest $1$ in the binary representation of $mask$, and convert it to the corresponding uppercase letter. If all binary bits are not $1$, it means that there is no letter that appears in both uppercase and lowercase, so we return an empty string.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the string $s$. The space complexity is $O(1)$.</p>
+<p>We can use two integers <span class="arithmatex">\(mask1\)</span> and <span class="arithmatex">\(mask2\)</span> to record the lowercase and uppercase letters that appear in the string <span class="arithmatex">\(s\)</span>, respectively. The <span class="arithmatex">\(i\)</span>-th bit of <span class="arithmatex">\(mask1\)</span> indicates whether the <span class="arithmatex">\(i\)</span>-th lowercase letter appears, and the <span class="arithmatex">\(i\)</span>-th bit of <span class="arithmatex">\(mask2\)</span> indicates whether the <span class="arithmatex">\(i\)</span>-th uppercase letter appears.</p>
+<p>Then we perform a bitwise AND operation on <span class="arithmatex">\(mask1\)</span> and <span class="arithmatex">\(mask2\)</span>. The <span class="arithmatex">\(i\)</span>-th bit of the resulting <span class="arithmatex">\(mask\)</span> indicates whether the <span class="arithmatex">\(i\)</span>-th letter appears in both uppercase and lowercase.</p>
+<p>Next, we just need to get the position of the highest <span class="arithmatex">\(1\)</span> in the binary representation of <span class="arithmatex">\(mask\)</span>, and convert it to the corresponding uppercase letter. If all binary bits are not <span class="arithmatex">\(1\)</span>, it means that there is no letter that appears in both uppercase and lowercase, so we return an empty string.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86641,11 +86639,9 @@ There is no letter that appears in both lower and upper case.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

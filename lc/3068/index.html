@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90899,19 +90897,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>对于任意一个数 $x$，与 $k$ 异或偶数次后，值不变。所以，对于一棵树的任意一条路径，我们将路径上所有的边都进行操作，那么该路径上除了起点和终点外，其他节点的值都不会改变。</p>
-<p>另外，无论进行了多少次操作，总会有偶数个元素异或了 $k$，其余元素不变。</p>
-<p>因此，问题转化为：对于数组 $\textit{nums}$，任选其中偶数个元素异或 $k$，使得和最大。</p>
-<p>我们可以使用动态规划解决这个问题。设 $f_0$ 表示当前有偶数个元素异或了 $k$ 时的最大和，而 $f_1$ 表示当前有奇数个元素异或了 $k$ 时的最大和。那么状态转移方程为：</p>
-<p>$$
+<p>对于任意一个数 <span class="arithmatex">\(x\)</span>，与 <span class="arithmatex">\(k\)</span> 异或偶数次后，值不变。所以，对于一棵树的任意一条路径，我们将路径上所有的边都进行操作，那么该路径上除了起点和终点外，其他节点的值都不会改变。</p>
+<p>另外，无论进行了多少次操作，总会有偶数个元素异或了 <span class="arithmatex">\(k\)</span>，其余元素不变。</p>
+<p>因此，问题转化为：对于数组 <span class="arithmatex">\(\textit{nums}\)</span>，任选其中偶数个元素异或 <span class="arithmatex">\(k\)</span>，使得和最大。</p>
+<p>我们可以使用动态规划解决这个问题。设 <span class="arithmatex">\(f_0\)</span> 表示当前有偶数个元素异或了 <span class="arithmatex">\(k\)</span> 时的最大和，而 <span class="arithmatex">\(f_1\)</span> 表示当前有奇数个元素异或了 <span class="arithmatex">\(k\)</span> 时的最大和。那么状态转移方程为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-f_0 &amp;= \max(f_0 + x, f_1 + (x \oplus k)) \
+f_0 &amp;= \max(f_0 + x, f_1 + (x \oplus k)) \\
 f_1 &amp;= \max(f_1 + x, f_0 + (x \oplus k))
 \end{aligned}
-$$</p>
-<p>其中 $x$ 表示当前元素的值。</p>
-<p>我们遍历数组 $\textit{nums}$，根据上述状态转移方程更新 $f_0$ 和 $f_1$，最后返回 $f_0$ 即可。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组 $\textit{nums}$ 的长度。空间复杂度 $O(1)$。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(x\)</span> 表示当前元素的值。</p>
+<p>我们遍历数组 <span class="arithmatex">\(\textit{nums}\)</span>，根据上述状态转移方程更新 <span class="arithmatex">\(f_0\)</span> 和 <span class="arithmatex">\(f_1\)</span>，最后返回 <span class="arithmatex">\(f_0\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91305,11 +91303,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

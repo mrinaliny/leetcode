@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,11 +90857,11 @@
 
 <h3 id="_3">方法一：状态压缩 + 前缀和思想</h3>
 <p>根据题目描述，“超赞子字符串”中的字符可以通过交换得到回文字符串，因此，“超赞子字符串”中最多有一个数字字符出现奇数次，其余数字字符出现偶数次。</p>
-<p>我们可以用一个整数 $st$ 来表示当前前缀字符串中数字字符出现的奇偶性，其中 $st$ 的第 $i$ 位表示数字字符 $i$ 出现的奇偶性，即 $st$ 的第 $i$ 位为 $1$ 表示数字字符 $i$ 出现奇数次，为 $0$ 表示数字字符 $i$ 出现偶数次。</p>
-<p>而如果子字符串 $s[j,..i]$ 是“超赞字符串”，那么前缀字符串 $s[0,..i]$ 的状态 $st$ 与前缀字符串 $s[0,..j-1]$ 的状态 $st'$ 的二进制位中，最多只有一位不同。这是因为，二进制位不同，表示奇偶性不同，而奇偶性不同，就意味着子字符串 $s[j,..i]$ 中该数字出现的次数为奇数次。</p>
-<p>所以，我们可以用哈希表或数组记录所有状态 $st$ 第一次出现的位置。若当前前缀字符串的状态 $st$ 在哈希表中已经存在，那么说明当前前缀字符串的状态 $st$ 与前缀字符串 $s[0,..j-1]$ 的状态 $st'$ 的二进制位中，所有位都相同，即子字符串 $s[j,..i]$ 是“超赞字符串”，更新答案的最大值。或者，我们可以枚举每一位，将当前前缀字符串的状态 $st$ 的第 $i$ 位取反，即 $st \oplus 2^i$，然后判断 $st \oplus 2^i$ 是否在哈希表中，若在，那么说明当前前缀字符串的状态 $st$ 与前缀字符串 $s[0,..j-1]$ 的状态 $st' \oplus 2^i$ 的二进制位中，只有第 $i$ 位不同，即子字符串 $s[j,..i]$ 是“超赞字符串”，更新答案的最大值。</p>
+<p>我们可以用一个整数 <span class="arithmatex">\(st\)</span> 来表示当前前缀字符串中数字字符出现的奇偶性，其中 <span class="arithmatex">\(st\)</span> 的第 <span class="arithmatex">\(i\)</span> 位表示数字字符 <span class="arithmatex">\(i\)</span> 出现的奇偶性，即 <span class="arithmatex">\(st\)</span> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span> 表示数字字符 <span class="arithmatex">\(i\)</span> 出现奇数次，为 <span class="arithmatex">\(0\)</span> 表示数字字符 <span class="arithmatex">\(i\)</span> 出现偶数次。</p>
+<p>而如果子字符串 <span class="arithmatex">\(s[j,..i]\)</span> 是“超赞字符串”，那么前缀字符串 <span class="arithmatex">\(s[0,..i]\)</span> 的状态 <span class="arithmatex">\(st\)</span> 与前缀字符串 <span class="arithmatex">\(s[0,..j-1]\)</span> 的状态 <span class="arithmatex">\(st'\)</span> 的二进制位中，最多只有一位不同。这是因为，二进制位不同，表示奇偶性不同，而奇偶性不同，就意味着子字符串 <span class="arithmatex">\(s[j,..i]\)</span> 中该数字出现的次数为奇数次。</p>
+<p>所以，我们可以用哈希表或数组记录所有状态 <span class="arithmatex">\(st\)</span> 第一次出现的位置。若当前前缀字符串的状态 <span class="arithmatex">\(st\)</span> 在哈希表中已经存在，那么说明当前前缀字符串的状态 <span class="arithmatex">\(st\)</span> 与前缀字符串 <span class="arithmatex">\(s[0,..j-1]\)</span> 的状态 <span class="arithmatex">\(st'\)</span> 的二进制位中，所有位都相同，即子字符串 <span class="arithmatex">\(s[j,..i]\)</span> 是“超赞字符串”，更新答案的最大值。或者，我们可以枚举每一位，将当前前缀字符串的状态 <span class="arithmatex">\(st\)</span> 的第 <span class="arithmatex">\(i\)</span> 位取反，即 <span class="arithmatex">\(st \oplus 2^i\)</span>，然后判断 <span class="arithmatex">\(st \oplus 2^i\)</span> 是否在哈希表中，若在，那么说明当前前缀字符串的状态 <span class="arithmatex">\(st\)</span> 与前缀字符串 <span class="arithmatex">\(s[0,..j-1]\)</span> 的状态 <span class="arithmatex">\(st' \oplus 2^i\)</span> 的二进制位中，只有第 <span class="arithmatex">\(i\)</span> 位不同，即子字符串 <span class="arithmatex">\(s[j,..i]\)</span> 是“超赞字符串”，更新答案的最大值。</p>
 <p>最后，返回答案即可。</p>
-<p>时间复杂度 $O(n \times C)$，空间复杂度 $O(2^C)$。其中 $n$ 和 $C$ 分别为字符串 $s$ 的长度和数字字符的种类数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times C)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^C)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(C\)</span> 分别为字符串 <span class="arithmatex">\(s\)</span> 的长度和数字字符的种类数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91319,11 +91317,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

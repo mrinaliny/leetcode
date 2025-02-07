@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,17 +90856,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索 + 剪枝</h3>
-<p>我们先预处理出前缀和数组 $\textit{s}$，其中 $\textit{s}[i]$ 表示数组 $\textit{stoneValue}$ 前 $i$ 个元素的和。</p>
-<p>接下来，我们设计一个函数 $\textit{dfs}(i, j)$，表示数组 $\textit{stoneValue}$ 中下标范围 $[i, j]$ 内的石子，Alice 能够获得的最大分数。那么答案就是 $\textit{dfs}(0, n - 1)$。</p>
-<p>函数 $\textit{dfs}(i, j)$ 的计算过程如下：</p>
+<p>我们先预处理出前缀和数组 <span class="arithmatex">\(\textit{s}\)</span>，其中 <span class="arithmatex">\(\textit{s}[i]\)</span> 表示数组 <span class="arithmatex">\(\textit{stoneValue}\)</span> 前 <span class="arithmatex">\(i\)</span> 个元素的和。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, j)\)</span>，表示数组 <span class="arithmatex">\(\textit{stoneValue}\)</span> 中下标范围 <span class="arithmatex">\([i, j]\)</span> 内的石子，Alice 能够获得的最大分数。那么答案就是 <span class="arithmatex">\(\textit{dfs}(0, n - 1)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i, j)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \geq j$，说明只剩下一块石子，Alice 无法进行分割，因此返回 $0$。</li>
-<li>否则，我们枚举分割点 $k$，即 $i \leq k &lt; j$，将数组 $\textit{stoneValue}$ 中下标范围 $[i, j]$ 内的石子分割为 $[i, k]$ 和 $[k + 1, j]$ 两部分，计算出 $a$ 和 $b$，分别表示两部分的石子总和。然后我们分别计算 $\textit{dfs}(i, k)$ 和 $\textit{dfs}(k + 1, j)$，并更新答案。</li>
+<li>如果 <span class="arithmatex">\(i \geq j\)</span>，说明只剩下一块石子，Alice 无法进行分割，因此返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>否则，我们枚举分割点 <span class="arithmatex">\(k\)</span>，即 <span class="arithmatex">\(i \leq k &lt; j\)</span>，将数组 <span class="arithmatex">\(\textit{stoneValue}\)</span> 中下标范围 <span class="arithmatex">\([i, j]\)</span> 内的石子分割为 <span class="arithmatex">\([i, k]\)</span> 和 <span class="arithmatex">\([k + 1, j]\)</span> 两部分，计算出 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span>，分别表示两部分的石子总和。然后我们分别计算 <span class="arithmatex">\(\textit{dfs}(i, k)\)</span> 和 <span class="arithmatex">\(\textit{dfs}(k + 1, j)\)</span>，并更新答案。</li>
 </ul>
-<p>注意，如果满足 $a &lt; b$ 并且 $\textit{ans} \geq a \times 2$，那么这一次枚举可以跳过；如果满足 $a &gt; b$ 并且 $\textit{ans} \geq b \times 2$，那么后续的枚举都可以跳过，直接退出循环。</p>
+<p>注意，如果满足 <span class="arithmatex">\(a &lt; b\)</span> 并且 <span class="arithmatex">\(\textit{ans} \geq a \times 2\)</span>，那么这一次枚举可以跳过；如果满足 <span class="arithmatex">\(a &gt; b\)</span> 并且 <span class="arithmatex">\(\textit{ans} \geq b \times 2\)</span>，那么后续的枚举都可以跳过，直接退出循环。</p>
 <p>最后，我们返回答案即可。</p>
 <p>为了避免重复计算，我们可以使用记忆化搜索，同时使用剪枝优化枚举的效率。</p>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n^2)$。其中 $n$ 为数组 $\textit{stoneValue}$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{stoneValue}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91511,11 +91509,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

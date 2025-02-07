@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86067,9 +86065,9 @@ queries[4]: substring = &quot;abcda&quot;, could be changed to &quot;abcba&quot;
 <!-- solution:start -->
 
 <h3 id="solution-1-prefix-sum">Solution 1: Prefix Sum</h3>
-<p>First, consider whether a substring can become a palindrome after at most $k$ replacements. Obviously, we need to count the number of times each character appears in the substring, which can be implemented through prefix sum. For characters that appear an even number of times, we do not need to replace them. For characters that appear an odd number of times, we need to replace them. The number of replacements is $\lfloor \frac{x}{2} \rfloor$, where $x$ is the number of characters that appear an odd number of times. If $\lfloor \frac{x}{2} \rfloor \leq k$, then this substring can become a palindrome.</p>
-<p>Therefore, we define a prefix sum array $ss$, where $ss[i][j]$ represents the number of times character $j$ appears in the first $i$ characters of string $s$. Then for a substring $s[l..r]$, we can get the number of times character $j$ appears in the substring through $ss[r + 1][j] - ss[l][j]$. We traverse all queries. For each query $[l, r, k]$, we count the number of characters $x$ that appear an odd number of times in the substring $s[l..r]$. If $\lfloor \frac{x}{2} \rfloor \leq k$, then this substring can become a palindrome.</p>
-<p>The time complexity is $O((n + m) \times C)$, and the space complexity is $O(n \times C)$. Here, $n$ and $m$ are the lengths of the string $s$ and the query array respectively; and $C$ is the size of the character set. In this problem, the character set is lowercase English letters, so $C = 26$.</p>
+<p>First, consider whether a substring can become a palindrome after at most <span class="arithmatex">\(k\)</span> replacements. Obviously, we need to count the number of times each character appears in the substring, which can be implemented through prefix sum. For characters that appear an even number of times, we do not need to replace them. For characters that appear an odd number of times, we need to replace them. The number of replacements is <span class="arithmatex">\(\lfloor \frac{x}{2} \rfloor\)</span>, where <span class="arithmatex">\(x\)</span> is the number of characters that appear an odd number of times. If <span class="arithmatex">\(\lfloor \frac{x}{2} \rfloor \leq k\)</span>, then this substring can become a palindrome.</p>
+<p>Therefore, we define a prefix sum array <span class="arithmatex">\(ss\)</span>, where <span class="arithmatex">\(ss[i][j]\)</span> represents the number of times character <span class="arithmatex">\(j\)</span> appears in the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s\)</span>. Then for a substring <span class="arithmatex">\(s[l..r]\)</span>, we can get the number of times character <span class="arithmatex">\(j\)</span> appears in the substring through <span class="arithmatex">\(ss[r + 1][j] - ss[l][j]\)</span>. We traverse all queries. For each query <span class="arithmatex">\([l, r, k]\)</span>, we count the number of characters <span class="arithmatex">\(x\)</span> that appear an odd number of times in the substring <span class="arithmatex">\(s[l..r]\)</span>. If <span class="arithmatex">\(\lfloor \frac{x}{2} \rfloor \leq k\)</span>, then this substring can become a palindrome.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + m) \times C)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times C)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the string <span class="arithmatex">\(s\)</span> and the query array respectively; and <span class="arithmatex">\(C\)</span> is the size of the character set. In this problem, the character set is lowercase English letters, so <span class="arithmatex">\(C = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86505,11 +86503,9 @@ queries[4]: substring = &quot;abcda&quot;, could be changed to &quot;abcba&quot;
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

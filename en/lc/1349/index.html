@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86081,17 +86079,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-memoization-search">Solution 1: State Compression + Memoization Search</h3>
-<p>We notice that each seat has two states: selectable and non-selectable. Therefore, we can use a binary number to represent the seat state of each row, where $1$ represents selectable, and $0$ represents non-selectable. For example, for the first row in Example 1, we can represent it as $010010$. Therefore, we convert the initial seats into a one-dimensional array $ss$, where $ss[i]$ represents the seat state of the $i$th row.</p>
-<p>Next, we design a function $dfs(seat, i)$, which represents the maximum number of students that can be accommodated starting from the $i$th row, and the seat state of the current row is $seat$.</p>
-<p>We can enumerate all the seat selection states $mask$ of the $i$th row, and judge whether $mask$ meets the following conditions:</p>
+<p>We notice that each seat has two states: selectable and non-selectable. Therefore, we can use a binary number to represent the seat state of each row, where <span class="arithmatex">\(1\)</span> represents selectable, and <span class="arithmatex">\(0\)</span> represents non-selectable. For example, for the first row in Example 1, we can represent it as <span class="arithmatex">\(010010\)</span>. Therefore, we convert the initial seats into a one-dimensional array <span class="arithmatex">\(ss\)</span>, where <span class="arithmatex">\(ss[i]\)</span> represents the seat state of the <span class="arithmatex">\(i\)</span>th row.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(seat, i)\)</span>, which represents the maximum number of students that can be accommodated starting from the <span class="arithmatex">\(i\)</span>th row, and the seat state of the current row is <span class="arithmatex">\(seat\)</span>.</p>
+<p>We can enumerate all the seat selection states <span class="arithmatex">\(mask\)</span> of the <span class="arithmatex">\(i\)</span>th row, and judge whether <span class="arithmatex">\(mask\)</span> meets the following conditions:</p>
 <ul>
-<li>The state $mask$ cannot select seats outside of $seat$;</li>
-<li>The state $mask$ cannot select adjacent seats.</li>
+<li>The state <span class="arithmatex">\(mask\)</span> cannot select seats outside of <span class="arithmatex">\(seat\)</span>;</li>
+<li>The state <span class="arithmatex">\(mask\)</span> cannot select adjacent seats.</li>
 </ul>
-<p>If the conditions are met, we calculate the number of seats selected in the current row $cnt$. If it is the last row, update the return value of the function, that is, $ans = \max(ans, cnt)$. Otherwise, we continue to recursively solve the maximum number of the next row. The seat state of the next row is $nxt = ss[i + 1]$, and we need to exclude the left and right sides of the selected seats in the current row. Then we recursively solve the maximum number of the next row, that is, $ans = \max(ans, cnt + dfs(nxt, i + 1))$.</p>
-<p>Finally, we return $ans$ as the return value of the function.</p>
-<p>To avoid repeated calculations, we can use memoization search to save the return value of the function $dfs(seat, i)$ in a two-dimensional array $f$, where $f[seat][i]$ represents the maximum number of students that can be accommodated starting from the $i$th row, and the seat state of the current row is $seat$.</p>
-<p>The time complexity is $O(4^n \times n \times m)$, and the space complexity is $O(2^n \times m)$. Where $m$ and $n$ are the number of rows and columns of the seats, respectively.</p>
+<p>If the conditions are met, we calculate the number of seats selected in the current row <span class="arithmatex">\(cnt\)</span>. If it is the last row, update the return value of the function, that is, <span class="arithmatex">\(ans = \max(ans, cnt)\)</span>. Otherwise, we continue to recursively solve the maximum number of the next row. The seat state of the next row is <span class="arithmatex">\(nxt = ss[i + 1]\)</span>, and we need to exclude the left and right sides of the selected seats in the current row. Then we recursively solve the maximum number of the next row, that is, <span class="arithmatex">\(ans = \max(ans, cnt + dfs(nxt, i + 1))\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(ans\)</span> as the return value of the function.</p>
+<p>To avoid repeated calculations, we can use memoization search to save the return value of the function <span class="arithmatex">\(dfs(seat, i)\)</span> in a two-dimensional array <span class="arithmatex">\(f\)</span>, where <span class="arithmatex">\(f[seat][i]\)</span> represents the maximum number of students that can be accommodated starting from the <span class="arithmatex">\(i\)</span>th row, and the seat state of the current row is <span class="arithmatex">\(seat\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(4^n \times n \times m)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n \times m)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the seats, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86708,11 +86706,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

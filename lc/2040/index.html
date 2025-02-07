@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90855,16 +90853,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找</h3>
-<p>我们可以二分枚举乘积的值 $p$，定义二分的区间为 $[l, r]$，其中 $l = -\textit{max}(|\textit{nums1}[0]|, |\textit{nums1}[n - 1]|) \times \textit{max}(|\textit{nums2}[0]|, |\textit{nums2}[n - 1]|)$, $r = -l$。</p>
-<p>对于每个 $p$，我们计算出乘积小于等于 $p$ 的乘积的个数，如果这个个数大于等于 $k$，那么说明第 $k$ 小的乘积一定小于等于 $p$，我们就可以将区间右端点缩小到 $p$，否则我们将区间左端点增大到 $p + 1$。</p>
-<p>那么问题的关键就是如何计算乘积小于等于 $p$ 的乘积的个数。我们可以枚举 $\textit{nums1}$ 中的每个数 $x$，分类讨论：</p>
+<p>我们可以二分枚举乘积的值 <span class="arithmatex">\(p\)</span>，定义二分的区间为 <span class="arithmatex">\([l, r]\)</span>，其中 <span class="arithmatex">\(l = -\textit{max}(|\textit{nums1}[0]|, |\textit{nums1}[n - 1]|) \times \textit{max}(|\textit{nums2}[0]|, |\textit{nums2}[n - 1]|)\)</span>, <span class="arithmatex">\(r = -l\)</span>。</p>
+<p>对于每个 <span class="arithmatex">\(p\)</span>，我们计算出乘积小于等于 <span class="arithmatex">\(p\)</span> 的乘积的个数，如果这个个数大于等于 <span class="arithmatex">\(k\)</span>，那么说明第 <span class="arithmatex">\(k\)</span> 小的乘积一定小于等于 <span class="arithmatex">\(p\)</span>，我们就可以将区间右端点缩小到 <span class="arithmatex">\(p\)</span>，否则我们将区间左端点增大到 <span class="arithmatex">\(p + 1\)</span>。</p>
+<p>那么问题的关键就是如何计算乘积小于等于 <span class="arithmatex">\(p\)</span> 的乘积的个数。我们可以枚举 <span class="arithmatex">\(\textit{nums1}\)</span> 中的每个数 <span class="arithmatex">\(x\)</span>，分类讨论：</p>
 <ul>
-<li>如果 $x &gt; 0$，那么 $x \times \textit{nums2}[i]$ 随着 $i$ 的增大是单调递增的，我们可以使用二分查找找到最小的 $i$，使得 $x \times \textit{nums2}[i] &gt; p$，那么 $i$ 就是小于等于 $p$ 的乘积的个数，累加到个数 $\textit{cnt}$ 中；</li>
-<li>如果 $x &lt; 0$，那么 $x \times \textit{nums2}[i]$ 随着 $i$ 的增大是单调递减的，我们可以使用二分查找找到最小的 $i$，使得 $x \times \textit{nums2}[i] \leq p$，那么 $n - i$ 就是小于等于 $p$ 的乘积的个数，累加到个数 $\textit{cnt}$ 中；</li>
-<li>如果 $x = 0$，那么 $x \times \textit{nums2}[i] = 0$，如果 $p \geq 0$，那么 $n$ 就是小于等于 $p$ 的乘积的个数，累加到个数 $\textit{cnt}$ 中。</li>
+<li>如果 <span class="arithmatex">\(x &gt; 0\)</span>，那么 <span class="arithmatex">\(x \times \textit{nums2}[i]\)</span> 随着 <span class="arithmatex">\(i\)</span> 的增大是单调递增的，我们可以使用二分查找找到最小的 <span class="arithmatex">\(i\)</span>，使得 <span class="arithmatex">\(x \times \textit{nums2}[i] &gt; p\)</span>，那么 <span class="arithmatex">\(i\)</span> 就是小于等于 <span class="arithmatex">\(p\)</span> 的乘积的个数，累加到个数 <span class="arithmatex">\(\textit{cnt}\)</span> 中；</li>
+<li>如果 <span class="arithmatex">\(x &lt; 0\)</span>，那么 <span class="arithmatex">\(x \times \textit{nums2}[i]\)</span> 随着 <span class="arithmatex">\(i\)</span> 的增大是单调递减的，我们可以使用二分查找找到最小的 <span class="arithmatex">\(i\)</span>，使得 <span class="arithmatex">\(x \times \textit{nums2}[i] \leq p\)</span>，那么 <span class="arithmatex">\(n - i\)</span> 就是小于等于 <span class="arithmatex">\(p\)</span> 的乘积的个数，累加到个数 <span class="arithmatex">\(\textit{cnt}\)</span> 中；</li>
+<li>如果 <span class="arithmatex">\(x = 0\)</span>，那么 <span class="arithmatex">\(x \times \textit{nums2}[i] = 0\)</span>，如果 <span class="arithmatex">\(p \geq 0\)</span>，那么 <span class="arithmatex">\(n\)</span> 就是小于等于 <span class="arithmatex">\(p\)</span> 的乘积的个数，累加到个数 <span class="arithmatex">\(\textit{cnt}\)</span> 中。</li>
 </ul>
-<p>这样我们就可以通过二分查找找到第 $k$ 小的乘积。</p>
-<p>时间复杂度 $O(m \times \log n \times \log M)$，其中 $m$ 和 $n$ 分别为 $\textit{nums1}$ 和 $\textit{nums2}$ 的长度，而 $M$ 为 $\textit{nums1}$ 和 $\textit{nums2}$ 中的最大值的绝对值。</p>
+<p>这样我们就可以通过二分查找找到第 <span class="arithmatex">\(k\)</span> 小的乘积。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times \log n \times \log M)\)</span>，其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为 <span class="arithmatex">\(\textit{nums1}\)</span> 和 <span class="arithmatex">\(\textit{nums2}\)</span> 的长度，而 <span class="arithmatex">\(M\)</span> 为 <span class="arithmatex">\(\textit{nums1}\)</span> 和 <span class="arithmatex">\(\textit{nums2}\)</span> 中的最大值的绝对值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91466,11 +91464,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

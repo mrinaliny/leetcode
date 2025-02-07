@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86057,23 +86055,23 @@ So the total probability of A becoming empty first plus half the probability tha
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>In this problem, since each operation is a multiple of $25$, we can consider every $25ml$ of soup as one unit. This reduces the data scale to $\left \lceil \frac{n}{25} \right \rceil$.</p>
-<p>We design a function $dfs(i, j)$, which represents the probability result when there are $i$ units of soup $A$ and $j$ units of soup $B$ remaining.</p>
-<p>When $i \leq 0$ and $j \leq 0$, it means both soups are finished, and we should return $0.5$. When $i \leq 0$, it means soup $A$ is finished first, and we should return $1$. When $j \leq 0$, it means soup $B$ is finished first, and we should return $0$.</p>
+<p>In this problem, since each operation is a multiple of <span class="arithmatex">\(25\)</span>, we can consider every <span class="arithmatex">\(25ml\)</span> of soup as one unit. This reduces the data scale to <span class="arithmatex">\(\left \lceil \frac{n}{25} \right \rceil\)</span>.</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents the probability result when there are <span class="arithmatex">\(i\)</span> units of soup <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(j\)</span> units of soup <span class="arithmatex">\(B\)</span> remaining.</p>
+<p>When <span class="arithmatex">\(i \leq 0\)</span> and <span class="arithmatex">\(j \leq 0\)</span>, it means both soups are finished, and we should return <span class="arithmatex">\(0.5\)</span>. When <span class="arithmatex">\(i \leq 0\)</span>, it means soup <span class="arithmatex">\(A\)</span> is finished first, and we should return <span class="arithmatex">\(1\)</span>. When <span class="arithmatex">\(j \leq 0\)</span>, it means soup <span class="arithmatex">\(B\)</span> is finished first, and we should return <span class="arithmatex">\(0\)</span>.</p>
 <p>Next, for each operation, we have four choices:</p>
 <ul>
-<li>Take $4$ units from soup $A$ and $0$ units from soup $B$;</li>
-<li>Take $3$ units from soup $A$ and $1$ unit from soup $B$;</li>
-<li>Take $2$ units from soup $A$ and $2$ units from soup $B$;</li>
-<li>Take $1$ unit from soup $A$ and $3$ units from soup $B$.</li>
+<li>Take <span class="arithmatex">\(4\)</span> units from soup <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(0\)</span> units from soup <span class="arithmatex">\(B\)</span>;</li>
+<li>Take <span class="arithmatex">\(3\)</span> units from soup <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(1\)</span> unit from soup <span class="arithmatex">\(B\)</span>;</li>
+<li>Take <span class="arithmatex">\(2\)</span> units from soup <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(2\)</span> units from soup <span class="arithmatex">\(B\)</span>;</li>
+<li>Take <span class="arithmatex">\(1\)</span> unit from soup <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(3\)</span> units from soup <span class="arithmatex">\(B\)</span>.</li>
 </ul>
-<p>Each choice has a probability of $0.25$, so we can derive:</p>
-<p>$$
+<p>Each choice has a probability of <span class="arithmatex">\(0.25\)</span>, so we can derive:</p>
+<div class="arithmatex">\[
 dfs(i, j) = 0.25 \times (dfs(i - 4, j) + dfs(i - 3, j - 1) + dfs(i - 2, j - 2) + dfs(i - 1, j - 3))
-$$</p>
+\]</div>
 <p>We use memoization to store the results of the function.</p>
-<p>Additionally, we find that when $n=4800$, the result is $0.999994994426$, and the required precision is $10^{-5}$. As $n$ increases, the result gets closer to $1$. Therefore, when $n \gt 4800$, we can directly return $1$.</p>
-<p>The time complexity is $O(C^2)$, and the space complexity is $O(C^2)$. In this problem, $C=200$.</p>
+<p>Additionally, we find that when <span class="arithmatex">\(n=4800\)</span>, the result is <span class="arithmatex">\(0.999994994426\)</span>, and the required precision is <span class="arithmatex">\(10^{-5}\)</span>. As <span class="arithmatex">\(n\)</span> increases, the result gets closer to <span class="arithmatex">\(1\)</span>. Therefore, when <span class="arithmatex">\(n \gt 4800\)</span>, we can directly return <span class="arithmatex">\(1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(C^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(C^2)\)</span>. In this problem, <span class="arithmatex">\(C=200\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86534,11 +86532,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

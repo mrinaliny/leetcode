@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90893,18 +90891,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示以 $(i, j)$ 为顶点的金字塔的最大高度，那么有如下状态转移方程：</p>
-<p>$$
-f[i][j] = \begin{cases} 0 &amp; \textit{grid}[i][j] = 0 \ \min(f[i + 1][j - 1], f[i + 1][j], f[i + 1][j + 1]) + 1 &amp; \textit{grid}[i][j] = 1 \end{cases}
-$$</p>
-<p>因此，我们可以从下往上、从左往右遍历网格，计算出所有的 $f[i][j]$，并累加所有的 $f[i][j]$ 即可得到正金字塔的个数。</p>
-<p>接下来，我们考虑倒金字塔的个数。与金字塔类似，我们定义 $g[i][j]$ 表示以 $(i, j)$ 为顶点的倒金字塔的最大高度，那么有如下状态转移方程：</p>
-<p>$$
-g[i][j] = \begin{cases} 0 &amp; \textit{grid}[i][j] = 0 \ \min(g[i - 1][j - 1], g[i - 1][j], g[i - 1][j + 1]) + 1 &amp; \textit{grid}[i][j] = 1 \end{cases}
-$$</p>
-<p>因此，我们可以从上往下、从左往右遍历网格，计算出所有的 $g[i][j]$，并累加所有的 $g[i][j]$ 即可得到倒金字塔的个数。</p>
-<p>最后，正金字塔的个数加上倒金字塔的个数即为答案。实际代码中，我们可以只用一个二维数组 $f[i][j]$ 即可。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别为网格的行数和列数。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为顶点的金字塔的最大高度，那么有如下状态转移方程：</p>
+<div class="arithmatex">\[
+f[i][j] = \begin{cases} 0 &amp; \textit{grid}[i][j] = 0 \\ \min(f[i + 1][j - 1], f[i + 1][j], f[i + 1][j + 1]) + 1 &amp; \textit{grid}[i][j] = 1 \end{cases}
+\]</div>
+<p>因此，我们可以从下往上、从左往右遍历网格，计算出所有的 <span class="arithmatex">\(f[i][j]\)</span>，并累加所有的 <span class="arithmatex">\(f[i][j]\)</span> 即可得到正金字塔的个数。</p>
+<p>接下来，我们考虑倒金字塔的个数。与金字塔类似，我们定义 <span class="arithmatex">\(g[i][j]\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为顶点的倒金字塔的最大高度，那么有如下状态转移方程：</p>
+<div class="arithmatex">\[
+g[i][j] = \begin{cases} 0 &amp; \textit{grid}[i][j] = 0 \\ \min(g[i - 1][j - 1], g[i - 1][j], g[i - 1][j + 1]) + 1 &amp; \textit{grid}[i][j] = 1 \end{cases}
+\]</div>
+<p>因此，我们可以从上往下、从左往右遍历网格，计算出所有的 <span class="arithmatex">\(g[i][j]\)</span>，并累加所有的 <span class="arithmatex">\(g[i][j]\)</span> 即可得到倒金字塔的个数。</p>
+<p>最后，正金字塔的个数加上倒金字塔的个数即为答案。实际代码中，我们可以只用一个二维数组 <span class="arithmatex">\(f[i][j]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为网格的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91384,11 +91382,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

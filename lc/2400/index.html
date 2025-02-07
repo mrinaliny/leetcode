@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90846,20 +90844,20 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示当前位置距离目标位置的距离为 $i$，还剩 $j$ 步，有多少种方法到达目标位置。那么答案就是 $dfs(abs(startPos - endPos), k)$。</p>
-<p>函数 $dfs(i, j)$ 的计算方式如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示当前位置距离目标位置的距离为 <span class="arithmatex">\(i\)</span>，还剩 <span class="arithmatex">\(j\)</span> 步，有多少种方法到达目标位置。那么答案就是 <span class="arithmatex">\(dfs(abs(startPos - endPos), k)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的计算方式如下：</p>
 <ul>
-<li>如果 $i \gt j$ 或者 $j \lt 0$，说明当前位置距离目标位置的距离大于剩余步数，或者剩余步数为负数，此时无法到达目标位置，返回 $0$；</li>
-<li>如果 $j = 0$，说明剩余步数为 $0$，此时只有当前位置距离目标位置的距离为 $0$ 时才能到达目标位置，否则无法到达目标位置，返回 $1$ 或者 $0$；</li>
-<li>否则，当前位置距离目标位置的距离为 $i$，还剩 $j$ 步，那么有两种方法到达目标位置：<ul>
-<li>向左移动一步，此时当前位置距离目标位置的距离为 $i + 1$，还剩 $j - 1$ 步，方法数为 $dfs(i + 1, j - 1)$；</li>
-<li>向右移动一步，此时当前位置距离目标位置的距离为 $abs(i - 1)$，还剩 $j - 1$ 步，方法数为 $dfs(abs(i - 1), j - 1)$；</li>
+<li>如果 <span class="arithmatex">\(i \gt j\)</span> 或者 <span class="arithmatex">\(j \lt 0\)</span>，说明当前位置距离目标位置的距离大于剩余步数，或者剩余步数为负数，此时无法到达目标位置，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j = 0\)</span>，说明剩余步数为 <span class="arithmatex">\(0\)</span>，此时只有当前位置距离目标位置的距离为 <span class="arithmatex">\(0\)</span> 时才能到达目标位置，否则无法到达目标位置，返回 <span class="arithmatex">\(1\)</span> 或者 <span class="arithmatex">\(0\)</span>；</li>
+<li>否则，当前位置距离目标位置的距离为 <span class="arithmatex">\(i\)</span>，还剩 <span class="arithmatex">\(j\)</span> 步，那么有两种方法到达目标位置：<ul>
+<li>向左移动一步，此时当前位置距离目标位置的距离为 <span class="arithmatex">\(i + 1\)</span>，还剩 <span class="arithmatex">\(j - 1\)</span> 步，方法数为 <span class="arithmatex">\(dfs(i + 1, j - 1)\)</span>；</li>
+<li>向右移动一步，此时当前位置距离目标位置的距离为 <span class="arithmatex">\(abs(i - 1)\)</span>，还剩 <span class="arithmatex">\(j - 1\)</span> 步，方法数为 <span class="arithmatex">\(dfs(abs(i - 1), j - 1)\)</span>；</li>
 </ul>
 </li>
-<li>最后，返回两种方法的和对 $10^9 + 7$ 取余的结果。</li>
+<li>最后，返回两种方法的和对 <span class="arithmatex">\(10^9 + 7\)</span> 取余的结果。</li>
 </ul>
-<p>为了避免重复计算，我们使用记忆化搜索，即使用一个二维数组 $f$ 记录函数 $dfs(i, j)$ 的结果，当函数 $dfs(i, j)$ 被调用时，如果 $f[i][j]$ 不为 $-1$，则直接返回 $f[i][j]$，否则计算 $f[i][j]$ 的值，并返回 $f[i][j]$。</p>
-<p>时间复杂度 $O(k^2)$，空间复杂度 $O(k^2)$。其中 $k$ 为题目给定的步数。</p>
+<p>为了避免重复计算，我们使用记忆化搜索，即使用一个二维数组 <span class="arithmatex">\(f\)</span> 记录函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的结果，当函数 <span class="arithmatex">\(dfs(i, j)\)</span> 被调用时，如果 <span class="arithmatex">\(f[i][j]\)</span> 不为 <span class="arithmatex">\(-1\)</span>，则直接返回 <span class="arithmatex">\(f[i][j]\)</span>，否则计算 <span class="arithmatex">\(f[i][j]\)</span> 的值，并返回 <span class="arithmatex">\(f[i][j]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(k^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(k^2)\)</span>。其中 <span class="arithmatex">\(k\)</span> 为题目给定的步数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91327,11 +91325,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

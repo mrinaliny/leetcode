@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90888,15 +90886,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i)$，表示删除 $s[i..]$ 所有字符所需的最大操作数，那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(i)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示删除 <span class="arithmatex">\(s[i..]\)</span> 所有字符所需的最大操作数，那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \geq n$，那么 $dfs(i) = 0$，直接返回。</li>
-<li>否则，我们枚举字符串的长度 $j$，其中 $1 \leq j \leq (n-1)/2$，如果 $s[i..i+j] = s[i+j..i+j+j]$，那么我们可以删除 $s[i..i+j]$，此时 $dfs(i)=max(dfs(i), dfs(i+j)+1)$。我们需要枚举所有的 $j$，求 $dfs(i)$ 的最大值即可。</li>
+<li>如果 <span class="arithmatex">\(i \geq n\)</span>，那么 <span class="arithmatex">\(dfs(i) = 0\)</span>，直接返回。</li>
+<li>否则，我们枚举字符串的长度 <span class="arithmatex">\(j\)</span>，其中 <span class="arithmatex">\(1 \leq j \leq (n-1)/2\)</span>，如果 <span class="arithmatex">\(s[i..i+j] = s[i+j..i+j+j]\)</span>，那么我们可以删除 <span class="arithmatex">\(s[i..i+j]\)</span>，此时 <span class="arithmatex">\(dfs(i)=max(dfs(i), dfs(i+j)+1)\)</span>。我们需要枚举所有的 <span class="arithmatex">\(j\)</span>，求 <span class="arithmatex">\(dfs(i)\)</span> 的最大值即可。</li>
 </ul>
-<p>这里我们需要快速判断 $s[i..i+j]$ 与 $s[i+j..i+j+j]$ 是否相等，我们可以预处理出字符串 $s$ 的所有最长公共前缀，即 $g[i][j]$ 表示 $s[i..]$ 与 $s[j..]$ 的最长公共前缀的长度。这样我们就可以快速判断 $s[i..i+j]$ 与 $s[i+j..i+j+j]$ 是否相等，即 $g[i][i+j] \geq j$。</p>
-<p>为了避免重复计算，我们可以使用记忆化搜索，用一个数组 $f$ 记录函数 $dfs(i)$ 的值。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是字符串 $s$ 的长度。</p>
+<p>这里我们需要快速判断 <span class="arithmatex">\(s[i..i+j]\)</span> 与 <span class="arithmatex">\(s[i+j..i+j+j]\)</span> 是否相等，我们可以预处理出字符串 <span class="arithmatex">\(s\)</span> 的所有最长公共前缀，即 <span class="arithmatex">\(g[i][j]\)</span> 表示 <span class="arithmatex">\(s[i..]\)</span> 与 <span class="arithmatex">\(s[j..]\)</span> 的最长公共前缀的长度。这样我们就可以快速判断 <span class="arithmatex">\(s[i..i+j]\)</span> 与 <span class="arithmatex">\(s[i+j..i+j+j]\)</span> 是否相等，即 <span class="arithmatex">\(g[i][i+j] \geq j\)</span>。</p>
+<p>为了避免重复计算，我们可以使用记忆化搜索，用一个数组 <span class="arithmatex">\(f\)</span> 记录函数 <span class="arithmatex">\(dfs(i)\)</span> 的值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91184,9 +91182,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划</h3>
-<p>我们可以将方法一的记忆化搜索改为动态规划，定义 $f[i]$ 表示删除 $s[i..]$ 所有字符所需的最大操作数，初始时 $f[i]=1$，答案为 $f[0]$。</p>
-<p>我们可以从后往前枚举 $i$，对于每个 $i$，我们枚举字符串的长度 $j$，其中 $1 \leq j \leq (n-1)/2$，如果 $s[i..i+j] = s[i+j..i+j+j]$，那么我们可以删除 $s[i..i+j]$，此时 $f[i]=max(f[i], f[i+j]+1)$。我们需要枚举所有的 $j$，求 $f[i]$ 的最大值即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是字符串 $s$ 的长度。</p>
+<p>我们可以将方法一的记忆化搜索改为动态规划，定义 <span class="arithmatex">\(f[i]\)</span> 表示删除 <span class="arithmatex">\(s[i..]\)</span> 所有字符所需的最大操作数，初始时 <span class="arithmatex">\(f[i]=1\)</span>，答案为 <span class="arithmatex">\(f[0]\)</span>。</p>
+<p>我们可以从后往前枚举 <span class="arithmatex">\(i\)</span>，对于每个 <span class="arithmatex">\(i\)</span>，我们枚举字符串的长度 <span class="arithmatex">\(j\)</span>，其中 <span class="arithmatex">\(1 \leq j \leq (n-1)/2\)</span>，如果 <span class="arithmatex">\(s[i..i+j] = s[i+j..i+j+j]\)</span>，那么我们可以删除 <span class="arithmatex">\(s[i..i+j]\)</span>，此时 <span class="arithmatex">\(f[i]=max(f[i], f[i+j]+1)\)</span>。我们需要枚举所有的 <span class="arithmatex">\(j\)</span>，求 <span class="arithmatex">\(f[i]\)</span> 的最大值即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91628,11 +91626,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,10 +86060,10 @@ These are the only two combinations.
 
 <h3 id="solution-1-sorting-pruning-backtracking">Solution 1: Sorting + Pruning + Backtracking</h3>
 <p>We can first sort the array to facilitate pruning.</p>
-<p>Next, we design a function $dfs(i, s)$, which means starting the search from index $i$ with a remaining target value of $s$. Here, $i$ and $s$ are both non-negative integers, the current search path is $t$, and the answer is $ans$.</p>
-<p>In the function $dfs(i, s)$, we first check whether $s$ is $0$. If it is, we add the current search path $t$ to the answer $ans$, and then return. If $s \lt candidates[i]$, it means that the elements of the current index and the following indices are all greater than the remaining target value $s$, and the path is invalid, so we return directly. Otherwise, we start the search from index $i$, and the search index range is $j \in [i, n)$, where $n$ is the length of the array $candidates$. During the search, we add the element of the current index to the search path $t$, recursively call the function $dfs(j, s - candidates[j])$, and after the recursion ends, we remove the element of the current index from the search path $t$.</p>
-<p>In the main function, we just need to call the function $dfs(0, target)$ to get the answer.</p>
-<p>The time complexity is $O(2^n \times n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $candidates$. Due to pruning, the actual time complexity is much less than $O(2^n \times n)$.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i, s)\)</span>, which means starting the search from index <span class="arithmatex">\(i\)</span> with a remaining target value of <span class="arithmatex">\(s\)</span>. Here, <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(s\)</span> are both non-negative integers, the current search path is <span class="arithmatex">\(t\)</span>, and the answer is <span class="arithmatex">\(ans\)</span>.</p>
+<p>In the function <span class="arithmatex">\(dfs(i, s)\)</span>, we first check whether <span class="arithmatex">\(s\)</span> is <span class="arithmatex">\(0\)</span>. If it is, we add the current search path <span class="arithmatex">\(t\)</span> to the answer <span class="arithmatex">\(ans\)</span>, and then return. If <span class="arithmatex">\(s \lt candidates[i]\)</span>, it means that the elements of the current index and the following indices are all greater than the remaining target value <span class="arithmatex">\(s\)</span>, and the path is invalid, so we return directly. Otherwise, we start the search from index <span class="arithmatex">\(i\)</span>, and the search index range is <span class="arithmatex">\(j \in [i, n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(candidates\)</span>. During the search, we add the element of the current index to the search path <span class="arithmatex">\(t\)</span>, recursively call the function <span class="arithmatex">\(dfs(j, s - candidates[j])\)</span>, and after the recursion ends, we remove the element of the current index from the search path <span class="arithmatex">\(t\)</span>.</p>
+<p>In the main function, we just need to call the function <span class="arithmatex">\(dfs(0, target)\)</span> to get the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^n \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(candidates\)</span>. Due to pruning, the actual time complexity is much less than <span class="arithmatex">\(O(2^n \times n)\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0040.Combination%20Sum%20II/README_EN.md">40. Combination Sum II</a></li>
@@ -86417,8 +86415,8 @@ These are the only two combinations.
 <!-- solution:start -->
 
 <h3 id="solution-2-sorting-pruning-backtrackinganother-form">Solution 2: Sorting + Pruning + Backtracking(Another Form)</h3>
-<p>We can also change the implementation logic of the function $dfs(i, s)$ to another form. In the function $dfs(i, s)$, we first check whether $s$ is $0$. If it is, we add the current search path $t$ to the answer $ans$, and then return. If $i \geq n$ or $s \lt candidates[i]$, the path is invalid, so we return directly. Otherwise, we consider two situations, one is not selecting the element of the current index, that is, recursively calling the function $dfs(i + 1, s)$, and the other is selecting the element of the current index, that is, recursively calling the function $dfs(i, s - candidates[i])$.</p>
-<p>The time complexity is $O(2^n \times n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $candidates$. Due to pruning, the actual time complexity is much less than $O(2^n \times n)$.</p>
+<p>We can also change the implementation logic of the function <span class="arithmatex">\(dfs(i, s)\)</span> to another form. In the function <span class="arithmatex">\(dfs(i, s)\)</span>, we first check whether <span class="arithmatex">\(s\)</span> is <span class="arithmatex">\(0\)</span>. If it is, we add the current search path <span class="arithmatex">\(t\)</span> to the answer <span class="arithmatex">\(ans\)</span>, and then return. If <span class="arithmatex">\(i \geq n\)</span> or <span class="arithmatex">\(s \lt candidates[i]\)</span>, the path is invalid, so we return directly. Otherwise, we consider two situations, one is not selecting the element of the current index, that is, recursively calling the function <span class="arithmatex">\(dfs(i + 1, s)\)</span>, and the other is selecting the element of the current index, that is, recursively calling the function <span class="arithmatex">\(dfs(i, s - candidates[i])\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^n \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(candidates\)</span>. Due to pruning, the actual time complexity is much less than <span class="arithmatex">\(O(2^n \times n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:8"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><input id="__tabbed_2_8" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label><label for="__tabbed_2_7">C#</label><label for="__tabbed_2_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87058,11 +87056,9 @@ These are the only two combinations.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

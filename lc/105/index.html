@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90856,17 +90854,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 递归</h3>
-<p>前序序列的第一个节点 $preorder[0]$ 为根节点，我们在中序序列中找到根节点的位置 $k$，可以将中序序列划分为左子树 $inorder[0..k]$ 、右子树 $inorder[k+1..]$。</p>
-<p>通过左右子树的区间，可以计算出左、右子树节点的个数，假设为 $a$ 和 $b$。然后在前序节点中，从根节点往后的 $a$ 个节点为左子树，再往后的 $b$ 个节点为右子树。</p>
-<p>因此，我们设计一个函数 $dfs(i, j, n)$，其中 $i$ 和 $j$ 分别表示前序序列和中序序列的起始位置，而 $n$ 表示节点个数。函数的返回值是以 $preorder[i..i+n-1]$ 为前序序列，以 $inorder[j..j+n-1]$ 为中序序列构造出的二叉树。</p>
-<p>函数 $dfs(i, j, n)$ 的执行过程如下：</p>
+<p>前序序列的第一个节点 <span class="arithmatex">\(preorder[0]\)</span> 为根节点，我们在中序序列中找到根节点的位置 <span class="arithmatex">\(k\)</span>，可以将中序序列划分为左子树 <span class="arithmatex">\(inorder[0..k]\)</span> 、右子树 <span class="arithmatex">\(inorder[k+1..]\)</span>。</p>
+<p>通过左右子树的区间，可以计算出左、右子树节点的个数，假设为 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span>。然后在前序节点中，从根节点往后的 <span class="arithmatex">\(a\)</span> 个节点为左子树，再往后的 <span class="arithmatex">\(b\)</span> 个节点为右子树。</p>
+<p>因此，我们设计一个函数 <span class="arithmatex">\(dfs(i, j, n)\)</span>，其中 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 分别表示前序序列和中序序列的起始位置，而 <span class="arithmatex">\(n\)</span> 表示节点个数。函数的返回值是以 <span class="arithmatex">\(preorder[i..i+n-1]\)</span> 为前序序列，以 <span class="arithmatex">\(inorder[j..j+n-1]\)</span> 为中序序列构造出的二叉树。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j, n)\)</span> 的执行过程如下：</p>
 <ul>
-<li>如果 $n \leq 0$，说明没有节点，返回空节点。</li>
-<li>取出前序序列的第一个节点 $v = preorder[i]$ 作为根节点，然后利用哈希表 $d$ 找到根节点在中序序列中的位置 $k$，那么左子树的节点个数为 $k - j$，右子树的节点个数为 $n - k + j - 1$。</li>
-<li>递归构造左子树 $l = dfs(i + 1, j, k - j)$ 和右子树 $r = dfs(i + 1 + k - j, k + 1, n - k + j - 1)$。</li>
-<li>最后返回以 $v$ 为根节点且左右子树分别为 $l$ 和 $r$ 的二叉树。</li>
+<li>如果 <span class="arithmatex">\(n \leq 0\)</span>，说明没有节点，返回空节点。</li>
+<li>取出前序序列的第一个节点 <span class="arithmatex">\(v = preorder[i]\)</span> 作为根节点，然后利用哈希表 <span class="arithmatex">\(d\)</span> 找到根节点在中序序列中的位置 <span class="arithmatex">\(k\)</span>，那么左子树的节点个数为 <span class="arithmatex">\(k - j\)</span>，右子树的节点个数为 <span class="arithmatex">\(n - k + j - 1\)</span>。</li>
+<li>递归构造左子树 <span class="arithmatex">\(l = dfs(i + 1, j, k - j)\)</span> 和右子树 <span class="arithmatex">\(r = dfs(i + 1 + k - j, k + 1, n - k + j - 1)\)</span>。</li>
+<li>最后返回以 <span class="arithmatex">\(v\)</span> 为根节点且左右子树分别为 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(r\)</span> 的二叉树。</li>
 </ul>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为二叉树节点个数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为二叉树节点个数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91833,11 +91831,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

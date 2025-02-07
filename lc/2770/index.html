@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,15 +90858,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>对于每个位置 $i$，我们考虑向后搜索能跳到的位置 $j$，如果满足 $|nums[i] - nums[j]| \leq target$，那么我们就可以从 $i$ 跳到 $j$，并且从 $j$ 开始继续向后搜索。</p>
-<p>因此，我们设计一个函数 $dfs(i)$，表示从位置 $i$ 开始跳跃到末尾下标所需的最大跳跃次数。那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(i)$ 的计算过程如下：</p>
+<p>对于每个位置 <span class="arithmatex">\(i\)</span>，我们考虑向后搜索能跳到的位置 <span class="arithmatex">\(j\)</span>，如果满足 <span class="arithmatex">\(|nums[i] - nums[j]| \leq target\)</span>，那么我们就可以从 <span class="arithmatex">\(i\)</span> 跳到 <span class="arithmatex">\(j\)</span>，并且从 <span class="arithmatex">\(j\)</span> 开始继续向后搜索。</p>
+<p>因此，我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从位置 <span class="arithmatex">\(i\)</span> 开始跳跃到末尾下标所需的最大跳跃次数。那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i = n - 1$，那么我们已经到达了末尾下标，不需要跳跃，因此返回 $0$；</li>
-<li>否则，我们需要枚举从位置 $i$ 开始能跳到的位置 $j$，并计算从 $j$ 开始跳跃到末尾下标所需的最大跳跃次数，那么 $dfs(i)$ 就等于所有 $dfs(j)$ 中的最大值加 $1$。如果不存在从 $i$ 开始能跳到的位置 $j$，那么 $dfs(i) = -\infty$。</li>
+<li>如果 <span class="arithmatex">\(i = n - 1\)</span>，那么我们已经到达了末尾下标，不需要跳跃，因此返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>否则，我们需要枚举从位置 <span class="arithmatex">\(i\)</span> 开始能跳到的位置 <span class="arithmatex">\(j\)</span>，并计算从 <span class="arithmatex">\(j\)</span> 开始跳跃到末尾下标所需的最大跳跃次数，那么 <span class="arithmatex">\(dfs(i)\)</span> 就等于所有 <span class="arithmatex">\(dfs(j)\)</span> 中的最大值加 <span class="arithmatex">\(1\)</span>。如果不存在从 <span class="arithmatex">\(i\)</span> 开始能跳到的位置 <span class="arithmatex">\(j\)</span>，那么 <span class="arithmatex">\(dfs(i) = -\infty\)</span>。</li>
 </ul>
 <p>为了避免重复计算，我们可以使用记忆化搜索。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是数组的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91366,11 +91364,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

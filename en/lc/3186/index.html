@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,12 +86081,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search-memoization">Solution 1: Binary Search + Memoization</h3>
-<p>We can first sort the array $\textit{power}$, use a hash table $\textit{cnt}$ to record the occurrence count of each damage value, and then iterate through the array $\textit{power}$. For each damage value $x$, we can determine the index of the next damage value that can be used when using a spell with damage value $x$, which is the index of the first damage value greater than $x + 2$. We can use binary search to find this index and record it in the array $\textit{nxt}$.</p>
-<p>Next, we define a function $\textit{dfs}$ to calculate the maximum damage value that can be obtained starting from the $i$-th damage value.</p>
-<p>In the $\textit{dfs}$ function, we can choose to skip the current damage value, so we can skip all the same damage values of the current one and directly jump to $i + \textit{cnt}[x]$, obtaining a damage value of $\textit{dfs}(i + \textit{cnt}[x])$; or we can choose to use the current damage value, so we can use all the same damage values of the current one and then jump to the index of the next damage value, obtaining a damage value of $x \times \textit{cnt}[x] + \textit{dfs}(\textit{nxt}[i])$, where $\textit{nxt}[i]$ represents the index of the first damage value greater than $x + 2$. We take the maximum of these two cases as the return value of the function.</p>
-<p>To avoid repeated calculations, we can use memoization, storing the results that have already been calculated in an array $\textit{f}$. Thus, when calculating $\textit{dfs}(i)$, if $\textit{f}[i]$ is not $0$, we directly return $\textit{f}[i]$.</p>
-<p>The answer is $\textit{dfs}(0)$.</p>
-<p>The time complexity is $O(n \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{power}$.</p>
+<p>We can first sort the array <span class="arithmatex">\(\textit{power}\)</span>, use a hash table <span class="arithmatex">\(\textit{cnt}\)</span> to record the occurrence count of each damage value, and then iterate through the array <span class="arithmatex">\(\textit{power}\)</span>. For each damage value <span class="arithmatex">\(x\)</span>, we can determine the index of the next damage value that can be used when using a spell with damage value <span class="arithmatex">\(x\)</span>, which is the index of the first damage value greater than <span class="arithmatex">\(x + 2\)</span>. We can use binary search to find this index and record it in the array <span class="arithmatex">\(\textit{nxt}\)</span>.</p>
+<p>Next, we define a function <span class="arithmatex">\(\textit{dfs}\)</span> to calculate the maximum damage value that can be obtained starting from the <span class="arithmatex">\(i\)</span>-th damage value.</p>
+<p>In the <span class="arithmatex">\(\textit{dfs}\)</span> function, we can choose to skip the current damage value, so we can skip all the same damage values of the current one and directly jump to <span class="arithmatex">\(i + \textit{cnt}[x]\)</span>, obtaining a damage value of <span class="arithmatex">\(\textit{dfs}(i + \textit{cnt}[x])\)</span>; or we can choose to use the current damage value, so we can use all the same damage values of the current one and then jump to the index of the next damage value, obtaining a damage value of <span class="arithmatex">\(x \times \textit{cnt}[x] + \textit{dfs}(\textit{nxt}[i])\)</span>, where <span class="arithmatex">\(\textit{nxt}[i]\)</span> represents the index of the first damage value greater than <span class="arithmatex">\(x + 2\)</span>. We take the maximum of these two cases as the return value of the function.</p>
+<p>To avoid repeated calculations, we can use memoization, storing the results that have already been calculated in an array <span class="arithmatex">\(\textit{f}\)</span>. Thus, when calculating <span class="arithmatex">\(\textit{dfs}(i)\)</span>, if <span class="arithmatex">\(\textit{f}[i]\)</span> is not <span class="arithmatex">\(0\)</span>, we directly return <span class="arithmatex">\(\textit{f}[i]\)</span>.</p>
+<p>The answer is <span class="arithmatex">\(\textit{dfs}(0)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{power}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86614,11 +86612,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

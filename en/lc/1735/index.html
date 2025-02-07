@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86059,13 +86057,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-prime-factorization-combinatorial-mathematics">Solution 1: Prime Factorization + Combinatorial Mathematics</h3>
-<p>We can perform prime factorization on $k$, i.e., $k = p_1^{x_1} \times p_2^{x_2} \times \cdots \times p_m^{x_m}$, where $p_i$ is a prime number, and $x_i$ is the exponent of $p_i$. The problem is equivalent to: placing $x_1$ $p_1$s, $x_2$ $p_2$s, $\cdots$, $x_m$ $p_m$s into $n$ positions respectively, where a single position can be empty. The question is how many schemes are there.</p>
-<p>According to combinatorial mathematics, there are two cases when we put $x$ balls into $n$ boxes:</p>
-<p>If the box cannot be empty, the number of schemes is $C_{x-1}^{n-1}$. This is using the partition method, i.e., there are a total of $x$ balls, and we insert $n-1$ partitions at $x-1$ positions, thereby dividing the $x$ balls into $n$ groups.</p>
-<p>If the box can be empty, we can add $n$ virtual balls, and then use the partition method, i.e., there are a total of $x+n$ balls, and we insert $n-1$ partitions at $x+n-1$ positions, thereby dividing the actual $x$ balls into $n$ groups and allowing the box to be empty. Therefore, the number of schemes is $C_{x+n-1}^{n-1}$.</p>
-<p>Therefore, for each query $queries[i]$, we can first perform prime factorization on $k$ to get the exponents $x_1, x_2, \cdots, x_m$, then calculate $C_{x_1+n-1}^{n-1}, C_{x_2+n-1}^{n-1}, \cdots, C_{x_m+n-1}^{n-1}$, and finally multiply all the scheme numbers.</p>
-<p>So, the problem is transformed into how to quickly calculate $C_m^n$. According to the formula $C_m^n = \frac{m!}{n!(m-n)!}$, we can pre-process $m!$, and then use the inverse element to quickly calculate $C_m^n$.</p>
-<p>The time complexity is $O(K \times \log \log K + N + m \times \log K)$, and the space complexity is $O(N)$.</p>
+<p>We can perform prime factorization on <span class="arithmatex">\(k\)</span>, i.e., <span class="arithmatex">\(k = p_1^{x_1} \times p_2^{x_2} \times \cdots \times p_m^{x_m}\)</span>, where <span class="arithmatex">\(p_i\)</span> is a prime number, and <span class="arithmatex">\(x_i\)</span> is the exponent of <span class="arithmatex">\(p_i\)</span>. The problem is equivalent to: placing <span class="arithmatex">\(x_1\)</span> <span class="arithmatex">\(p_1\)</span>s, <span class="arithmatex">\(x_2\)</span> <span class="arithmatex">\(p_2\)</span>s, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\(x_m\)</span> <span class="arithmatex">\(p_m\)</span>s into <span class="arithmatex">\(n\)</span> positions respectively, where a single position can be empty. The question is how many schemes are there.</p>
+<p>According to combinatorial mathematics, there are two cases when we put <span class="arithmatex">\(x\)</span> balls into <span class="arithmatex">\(n\)</span> boxes:</p>
+<p>If the box cannot be empty, the number of schemes is <span class="arithmatex">\(C_{x-1}^{n-1}\)</span>. This is using the partition method, i.e., there are a total of <span class="arithmatex">\(x\)</span> balls, and we insert <span class="arithmatex">\(n-1\)</span> partitions at <span class="arithmatex">\(x-1\)</span> positions, thereby dividing the <span class="arithmatex">\(x\)</span> balls into <span class="arithmatex">\(n\)</span> groups.</p>
+<p>If the box can be empty, we can add <span class="arithmatex">\(n\)</span> virtual balls, and then use the partition method, i.e., there are a total of <span class="arithmatex">\(x+n\)</span> balls, and we insert <span class="arithmatex">\(n-1\)</span> partitions at <span class="arithmatex">\(x+n-1\)</span> positions, thereby dividing the actual <span class="arithmatex">\(x\)</span> balls into <span class="arithmatex">\(n\)</span> groups and allowing the box to be empty. Therefore, the number of schemes is <span class="arithmatex">\(C_{x+n-1}^{n-1}\)</span>.</p>
+<p>Therefore, for each query <span class="arithmatex">\(queries[i]\)</span>, we can first perform prime factorization on <span class="arithmatex">\(k\)</span> to get the exponents <span class="arithmatex">\(x_1, x_2, \cdots, x_m\)</span>, then calculate <span class="arithmatex">\(C_{x_1+n-1}^{n-1}, C_{x_2+n-1}^{n-1}, \cdots, C_{x_m+n-1}^{n-1}\)</span>, and finally multiply all the scheme numbers.</p>
+<p>So, the problem is transformed into how to quickly calculate <span class="arithmatex">\(C_m^n\)</span>. According to the formula <span class="arithmatex">\(C_m^n = \frac{m!}{n!(m-n)!}\)</span>, we can pre-process <span class="arithmatex">\(m!\)</span>, and then use the inverse element to quickly calculate <span class="arithmatex">\(C_m^n\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(K \times \log \log K + N + m \times \log K)\)</span>, and the space complexity is <span class="arithmatex">\(O(N)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86738,11 +86736,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

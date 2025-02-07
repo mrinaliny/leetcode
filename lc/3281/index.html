@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,16 +90858,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序 + 二分查找</h3>
-<p>我们不妨先对 $\textit{start}$ 数组进行排序，然后我们考虑从左到右选择整数，那么得分就等于我们选择的相邻两个整数的差值的最小值。</p>
-<p>如果一个差值 $x$ 满足条件，那么对于任意 $x' \lt x$，也一定满足条件。因此我们可以使用二分查找的方法来找到最大的满足条件的差值。</p>
-<p>我们定义二分查找的左边界 $l = 0$，右边界 $r = \textit{start}[-1] + d - \textit{start}[0]$，然后我们每次取中间值 $mid = \left\lfloor \frac{l + r + 1}{2} \right\rfloor$，然后判断是否满足条件。</p>
-<p>我们定义一个函数 $\text{check}(mi)$ 来判断是否满足条件，具体实现如下：</p>
+<p>我们不妨先对 <span class="arithmatex">\(\textit{start}\)</span> 数组进行排序，然后我们考虑从左到右选择整数，那么得分就等于我们选择的相邻两个整数的差值的最小值。</p>
+<p>如果一个差值 <span class="arithmatex">\(x\)</span> 满足条件，那么对于任意 <span class="arithmatex">\(x' \lt x\)</span>，也一定满足条件。因此我们可以使用二分查找的方法来找到最大的满足条件的差值。</p>
+<p>我们定义二分查找的左边界 <span class="arithmatex">\(l = 0\)</span>，右边界 <span class="arithmatex">\(r = \textit{start}[-1] + d - \textit{start}[0]\)</span>，然后我们每次取中间值 <span class="arithmatex">\(mid = \left\lfloor \frac{l + r + 1}{2} \right\rfloor\)</span>，然后判断是否满足条件。</p>
+<p>我们定义一个函数 <span class="arithmatex">\(\text{check}(mi)\)</span> 来判断是否满足条件，具体实现如下：</p>
 <ul>
-<li>我们定义一个变量 $\textit{last} = -\infty$，表示上一个选择的整数。</li>
-<li>我们遍历 $\textit{start}$ 数组，如果 $\textit{last} + \textit{mi} &gt; \textit{st} + d$，那么说明我们无法选择整数 $\textit{st}$，返回 $\text{false}$。否则，我们更新 $\textit{last} = \max(\textit{st}, \textit{last} + \textit{mi})$。</li>
-<li>如果遍历完整个 $\textit{start}$ 数组都满足条件，那么返回 $\text{true}$。</li>
+<li>我们定义一个变量 <span class="arithmatex">\(\textit{last} = -\infty\)</span>，表示上一个选择的整数。</li>
+<li>我们遍历 <span class="arithmatex">\(\textit{start}\)</span> 数组，如果 <span class="arithmatex">\(\textit{last} + \textit{mi} &gt; \textit{st} + d\)</span>，那么说明我们无法选择整数 <span class="arithmatex">\(\textit{st}\)</span>，返回 <span class="arithmatex">\(\text{false}\)</span>。否则，我们更新 <span class="arithmatex">\(\textit{last} = \max(\textit{st}, \textit{last} + \textit{mi})\)</span>。</li>
+<li>如果遍历完整个 <span class="arithmatex">\(\textit{start}\)</span> 数组都满足条件，那么返回 <span class="arithmatex">\(\text{true}\)</span>。</li>
 </ul>
-<p>时间复杂度 $O(n \times \log M)$，其中 $n$ 和 $M$ 分别是 $\textit{start}$ 数组的长度和最大值。空间复杂度 $O(1)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别是 <span class="arithmatex">\(\textit{start}\)</span> 数组的长度和最大值。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91359,11 +91357,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

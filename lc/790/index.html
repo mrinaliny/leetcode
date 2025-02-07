@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90844,24 +90842,24 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们首先要读懂题意，题目实际上是让我们求铺满 $2\times n$ 的面板的方案数，其中面板上的每个正方形只能被一个瓷砖覆盖。</p>
+<p>我们首先要读懂题意，题目实际上是让我们求铺满 <span class="arithmatex">\(2\times n\)</span> 的面板的方案数，其中面板上的每个正方形只能被一个瓷砖覆盖。</p>
 <p>瓷砖的形状有两种，分别是 <code>2 x 1</code> 型 和 <code>L</code> 型，并且两种瓷砖都可以旋转。我们将旋转后的瓷砖分别记为 <code>1 x 2</code> 型 和 <code>L'</code> 型。</p>
-<p>我们定义 $f[i][j]$ 表示平铺前 $2\times i$ 的面板，其中 $j$ 表示最后一列的状态。最后一列有 $4$ 种状态，分别是：</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示平铺前 <span class="arithmatex">\(2\times i\)</span> 的面板，其中 <span class="arithmatex">\(j\)</span> 表示最后一列的状态。最后一列有 <span class="arithmatex">\(4\)</span> 种状态，分别是：</p>
 <ul>
-<li>最后一列铺满，记为 $0$</li>
-<li>最后一列只铺了上方一个瓷砖，记为 $1$</li>
-<li>最后一列只铺了下方一个瓷砖，记为 $2$</li>
-<li>最后一列没有铺瓷砖，记为 $3$</li>
+<li>最后一列铺满，记为 <span class="arithmatex">\(0\)</span></li>
+<li>最后一列只铺了上方一个瓷砖，记为 <span class="arithmatex">\(1\)</span></li>
+<li>最后一列只铺了下方一个瓷砖，记为 <span class="arithmatex">\(2\)</span></li>
+<li>最后一列没有铺瓷砖，记为 <span class="arithmatex">\(3\)</span></li>
 </ul>
-<p>那么答案就是 $f[n][0]$。初始时 $f[0][0]=1$，其余 $f[0][j]=0$。</p>
-<p>我们考虑铺到第 $i$ 列，来看看状态转移方程：</p>
-<p>当 $j=0$ 时，最后一列铺满，可由前一列的 $0,1,2,3$ 四种状态铺上对应的瓷砖转移而来，即 $f[i-1][0]$ 铺上 <code>1 x 2</code> 型瓷砖，或者 $f[i-1][1]$ 铺上 <code>L'</code> 型瓷砖，或者 $f[i-1][2]$ 铺上 <code>L'</code> 型瓷砖，或者 $f[i-1][3]$ 铺上两块 <code>2 x 1</code> 型瓷砖。因此 $f[i][0]=\sum_{j=0}^3f[i-1][j]$。</p>
-<p>当 $j=1$ 时，最后一列只铺了上方一个瓷砖，可由前一列的 $2,3$ 两种状态转移而来，即 $f[i-1][2]$ 铺上 <code>2 x 1</code> 型瓷砖，或者 $f[i-1][3]$ 铺上 <code>L</code> 型瓷砖。因此 $f[i][1]=f[i-1][2]+f[i-1][3]$。</p>
-<p>当 $j=2$ 时，最后一列只铺了下方一个瓷砖，可由前一列的 $1,3$ 两种状态转移而来，即 $f[i-1][1]$ 铺上 <code>2 x 1</code> 型瓷砖，或者 $f[i-1][3]$ 铺上 <code>L'</code> 型瓷砖。因此 $f[i][2]=f[i-1][1]+f[i-1][3]$。</p>
-<p>当 $j=3$ 时，最后一列没有铺瓷砖，可由前一列的 $0$ 一种状态转移而来。因此 $f[i][3]=f[i-1][0]$。</p>
+<p>那么答案就是 <span class="arithmatex">\(f[n][0]\)</span>。初始时 <span class="arithmatex">\(f[0][0]=1\)</span>，其余 <span class="arithmatex">\(f[0][j]=0\)</span>。</p>
+<p>我们考虑铺到第 <span class="arithmatex">\(i\)</span> 列，来看看状态转移方程：</p>
+<p>当 <span class="arithmatex">\(j=0\)</span> 时，最后一列铺满，可由前一列的 <span class="arithmatex">\(0,1,2,3\)</span> 四种状态铺上对应的瓷砖转移而来，即 <span class="arithmatex">\(f[i-1][0]\)</span> 铺上 <code>1 x 2</code> 型瓷砖，或者 <span class="arithmatex">\(f[i-1][1]\)</span> 铺上 <code>L'</code> 型瓷砖，或者 <span class="arithmatex">\(f[i-1][2]\)</span> 铺上 <code>L'</code> 型瓷砖，或者 <span class="arithmatex">\(f[i-1][3]\)</span> 铺上两块 <code>2 x 1</code> 型瓷砖。因此 <span class="arithmatex">\(f[i][0]=\sum_{j=0}^3f[i-1][j]\)</span>。</p>
+<p>当 <span class="arithmatex">\(j=1\)</span> 时，最后一列只铺了上方一个瓷砖，可由前一列的 <span class="arithmatex">\(2,3\)</span> 两种状态转移而来，即 <span class="arithmatex">\(f[i-1][2]\)</span> 铺上 <code>2 x 1</code> 型瓷砖，或者 <span class="arithmatex">\(f[i-1][3]\)</span> 铺上 <code>L</code> 型瓷砖。因此 <span class="arithmatex">\(f[i][1]=f[i-1][2]+f[i-1][3]\)</span>。</p>
+<p>当 <span class="arithmatex">\(j=2\)</span> 时，最后一列只铺了下方一个瓷砖，可由前一列的 <span class="arithmatex">\(1,3\)</span> 两种状态转移而来，即 <span class="arithmatex">\(f[i-1][1]\)</span> 铺上 <code>2 x 1</code> 型瓷砖，或者 <span class="arithmatex">\(f[i-1][3]\)</span> 铺上 <code>L'</code> 型瓷砖。因此 <span class="arithmatex">\(f[i][2]=f[i-1][1]+f[i-1][3]\)</span>。</p>
+<p>当 <span class="arithmatex">\(j=3\)</span> 时，最后一列没有铺瓷砖，可由前一列的 <span class="arithmatex">\(0\)</span> 一种状态转移而来。因此 <span class="arithmatex">\(f[i][3]=f[i-1][0]\)</span>。</p>
 <p>可以发现，状态转移方程中只涉及到前一列的状态，因此我们可以使用滚动数组优化空间复杂度。</p>
-<p>注意，过程中的状态数值可能会很大，因此需要对 $10^9+7$ 取模。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(1)$。其中 $n$ 为面板的列数。</p>
+<p>注意，过程中的状态数值可能会很大，因此需要对 <span class="arithmatex">\(10^9+7\)</span> 取模。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为面板的列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91278,11 +91276,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

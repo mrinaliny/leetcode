@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90886,24 +90884,24 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：三进制状态压缩 + 记忆化搜索</h3>
-<p>我们注意到，题目中 $1 \leq m, n \leq 5$，并且每个网格单元只有三种状态，即：不分配人员、分配内向的人、分配外向的人。因此，我们可以用 $0$, $1$, $2$ 表示这三种状态，网格中的每一行可以用一个长度为 $n$ 的三进制数表示。</p>
-<p>我们定义一个函数 $dfs(i, pre, ic, ec)$，表示当前从第 $i$ 行开始，且上一行的状态为 $pre$，内向的人还剩 $ic$ 个，外向的人还剩 $ec$ 个时，网格的最大幸福感。那么答案就是 $dfs(0, 0, introvertsCount, extrovertsCount)$。</p>
-<p>函数 $dfs(i, pre, ic, ec)$ 的计算过程如下：</p>
-<p>如果 $i = m$，表示已经处理完了所有的行，那么返回 $0$；</p>
-<p>如果 $ic = 0$ 且 $ec = 0$，表示所有的人都已经分配完了，那么返回 $0$；</p>
-<p>否则，枚举当前行的状态 $cur$，其中 $cur \in [0, 3^n)$，然后计算当前行的幸福感 $f[cur]$，以及与上一行的状态 $pre$ 之间对幸福感的贡献 $g[pre][cur]$，并递归计算 $dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])$，最后返回 $f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])$ 的最大值，即：</p>
-<p>$$
-dfs(i, pre, ic, ec) = \max_{cur} {f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])}
-$$</p>
+<p>我们注意到，题目中 <span class="arithmatex">\(1 \leq m, n \leq 5\)</span>，并且每个网格单元只有三种状态，即：不分配人员、分配内向的人、分配外向的人。因此，我们可以用 <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span> 表示这三种状态，网格中的每一行可以用一个长度为 <span class="arithmatex">\(n\)</span> 的三进制数表示。</p>
+<p>我们定义一个函数 <span class="arithmatex">\(dfs(i, pre, ic, ec)\)</span>，表示当前从第 <span class="arithmatex">\(i\)</span> 行开始，且上一行的状态为 <span class="arithmatex">\(pre\)</span>，内向的人还剩 <span class="arithmatex">\(ic\)</span> 个，外向的人还剩 <span class="arithmatex">\(ec\)</span> 个时，网格的最大幸福感。那么答案就是 <span class="arithmatex">\(dfs(0, 0, introvertsCount, extrovertsCount)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, pre, ic, ec)\)</span> 的计算过程如下：</p>
+<p>如果 <span class="arithmatex">\(i = m\)</span>，表示已经处理完了所有的行，那么返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>如果 <span class="arithmatex">\(ic = 0\)</span> 且 <span class="arithmatex">\(ec = 0\)</span>，表示所有的人都已经分配完了，那么返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>否则，枚举当前行的状态 <span class="arithmatex">\(cur\)</span>，其中 <span class="arithmatex">\(cur \in [0, 3^n)\)</span>，然后计算当前行的幸福感 <span class="arithmatex">\(f[cur]\)</span>，以及与上一行的状态 <span class="arithmatex">\(pre\)</span> 之间对幸福感的贡献 <span class="arithmatex">\(g[pre][cur]\)</span>，并递归计算 <span class="arithmatex">\(dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\)</span>，最后返回 <span class="arithmatex">\(f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\)</span> 的最大值，即：</p>
+<div class="arithmatex">\[
+dfs(i, pre, ic, ec) = \max_{cur} \{f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\}
+\]</div>
 <p>其中：</p>
 <ul>
-<li>$ix[cur]$ 表示状态 $cur$ 中内向的人的个数；</li>
-<li>$ex[cur]$ 表示状态 $cur$ 中外向的人的个数；</li>
-<li>$f[cur]$ 表示状态 $cur$ 中的人的初始幸福感；</li>
-<li>$g[pre][cur]$ 表示两个相邻状态行对幸福感的贡献。</li>
+<li><span class="arithmatex">\(ix[cur]\)</span> 表示状态 <span class="arithmatex">\(cur\)</span> 中内向的人的个数；</li>
+<li><span class="arithmatex">\(ex[cur]\)</span> 表示状态 <span class="arithmatex">\(cur\)</span> 中外向的人的个数；</li>
+<li><span class="arithmatex">\(f[cur]\)</span> 表示状态 <span class="arithmatex">\(cur\)</span> 中的人的初始幸福感；</li>
+<li><span class="arithmatex">\(g[pre][cur]\)</span> 表示两个相邻状态行对幸福感的贡献。</li>
 </ul>
 <p>这些值都可以通过预处理得到。并且，我们可以使用记忆化搜索的方法，避免重复计算。</p>
-<p>时间复杂度 $O(3^{2n} \times (m \times ic \times ec + n))$，空间复杂度 $O(3^{2n} + 3^n \times m \times ic \times ec)$。其中 $ic$ 和 $ec$ 分别表示内向的人和外向的人的个数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(3^{2n} \times (m \times ic \times ec + n))\)</span>，空间复杂度 <span class="arithmatex">\(O(3^{2n} + 3^n \times m \times ic \times ec)\)</span>。其中 <span class="arithmatex">\(ic\)</span> 和 <span class="arithmatex">\(ec\)</span> 分别表示内向的人和外向的人的个数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91545,15 +91543,15 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="_4">方法二：轮廓线记忆化搜索</h3>
-<p>我们可以考虑搜索每个网格单元，每次搜索一个位置 $(i, j)$，我们记 $pos = i \times n + j$。那么它左边以及上边的相邻网格会影响到它们之间的幸福感贡献。</p>
-<p>我们定义一个函数 $dfs(pos, pre, ic, ec)$，表示当前搜索到位置 $pos$，且此前的 $n$ 个网格单元的状态为 $pre$，内向的人还剩 $ic$ 个，外向的人还剩 $ec$ 个时，网格的最大幸福感。那么答案就是 $dfs(0, 0, introvertsCount, extrovertsCount)$。</p>
-<p>函数 $dfs(pos, pre, ic, ec)$ 的计算过程如下：</p>
-<p>如果 $pos = m \times n$，表示已经处理完了所有的网格单元，那么返回 $0$；</p>
-<p>如果 $ic = 0$ 且 $ec = 0$，表示所有的人都已经分配完了，那么返回 $0$；</p>
-<p>否则，我们根据 $pre$ 算出当前网格单元的上边相邻网格单元的状态 $up = \frac{pre}{3^{n-1}}$，以及左边相邻网格单元的状态 $left = pre \bmod 3$（注意，如果 $pos$ 在第 $0$ 列，那么 $left = 0$）。</p>
-<p>接下来，我们枚举当前网格单元的状态 $i$，其中 $i \in [0, 3)$。那么当前的 $n$ 个网格单元的状态为 $cur = pre \bmod 3^{n-1} \times 3 + i$，当前网格单元以及左边和上边的相邻网格单元的幸福感贡献为 $h[up][i]+h[left][i]$；而当前网格单元本身的幸福感取决于该位置是否分配人员，以及分配的人员是内向的还是外向的，如果是内向的，那么幸福感为 $120$，如果是外向的，那么幸福感为 $40$，否则幸福感为 $0$；然后，如果当前网格单元分配了人员，那么我们递归调用时需要更新 $ic$ 或 $ec$。累计这些幸福感，取最大值作为函数的返回值。</p>
+<p>我们可以考虑搜索每个网格单元，每次搜索一个位置 <span class="arithmatex">\((i, j)\)</span>，我们记 <span class="arithmatex">\(pos = i \times n + j\)</span>。那么它左边以及上边的相邻网格会影响到它们之间的幸福感贡献。</p>
+<p>我们定义一个函数 <span class="arithmatex">\(dfs(pos, pre, ic, ec)\)</span>，表示当前搜索到位置 <span class="arithmatex">\(pos\)</span>，且此前的 <span class="arithmatex">\(n\)</span> 个网格单元的状态为 <span class="arithmatex">\(pre\)</span>，内向的人还剩 <span class="arithmatex">\(ic\)</span> 个，外向的人还剩 <span class="arithmatex">\(ec\)</span> 个时，网格的最大幸福感。那么答案就是 <span class="arithmatex">\(dfs(0, 0, introvertsCount, extrovertsCount)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(pos, pre, ic, ec)\)</span> 的计算过程如下：</p>
+<p>如果 <span class="arithmatex">\(pos = m \times n\)</span>，表示已经处理完了所有的网格单元，那么返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>如果 <span class="arithmatex">\(ic = 0\)</span> 且 <span class="arithmatex">\(ec = 0\)</span>，表示所有的人都已经分配完了，那么返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>否则，我们根据 <span class="arithmatex">\(pre\)</span> 算出当前网格单元的上边相邻网格单元的状态 <span class="arithmatex">\(up = \frac{pre}{3^{n-1}}\)</span>，以及左边相邻网格单元的状态 <span class="arithmatex">\(left = pre \bmod 3\)</span>（注意，如果 <span class="arithmatex">\(pos\)</span> 在第 <span class="arithmatex">\(0\)</span> 列，那么 <span class="arithmatex">\(left = 0\)</span>）。</p>
+<p>接下来，我们枚举当前网格单元的状态 <span class="arithmatex">\(i\)</span>，其中 <span class="arithmatex">\(i \in [0, 3)\)</span>。那么当前的 <span class="arithmatex">\(n\)</span> 个网格单元的状态为 <span class="arithmatex">\(cur = pre \bmod 3^{n-1} \times 3 + i\)</span>，当前网格单元以及左边和上边的相邻网格单元的幸福感贡献为 <span class="arithmatex">\(h[up][i]+h[left][i]\)</span>；而当前网格单元本身的幸福感取决于该位置是否分配人员，以及分配的人员是内向的还是外向的，如果是内向的，那么幸福感为 <span class="arithmatex">\(120\)</span>，如果是外向的，那么幸福感为 <span class="arithmatex">\(40\)</span>，否则幸福感为 <span class="arithmatex">\(0\)</span>；然后，如果当前网格单元分配了人员，那么我们递归调用时需要更新 <span class="arithmatex">\(ic\)</span> 或 <span class="arithmatex">\(ec\)</span>。累计这些幸福感，取最大值作为函数的返回值。</p>
 <p>与方法一类似，我们也可以使用记忆化搜索的方法，避免重复计算。</p>
-<p>时间复杂度 $O(3^{n+1} \times m \times n \times ic \times ec)$，空间复杂度 $O(3^n \times m \times n \times ic \times ec)$。其中 $ic$ 和 $ec$ 分别表示内向的人和外向的人的个数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(3^{n+1} \times m \times n \times ic \times ec)\)</span>，空间复杂度 <span class="arithmatex">\(O(3^n \times m \times n \times ic \times ec)\)</span>。其中 <span class="arithmatex">\(ic\)</span> 和 <span class="arithmatex">\(ec\)</span> 分别表示内向的人和外向的人的个数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92202,11 +92200,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

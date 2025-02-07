@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,21 +90863,21 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>记 $f[i][j]$ 表示使用前 $i$ 个点构造了 $j$ 条线段，且最后一条线段的右端点不为 $i$ 的方案数；记 $g[i][j]$ 表示使用了前 $i$ 个点构造了 $j$ 条线段，且最后一条线段的右端点为 $i$ 的方案数。初始时 $f[1][0]=1$。</p>
-<p>考虑 $f[i][j]$，由于第 $j$ 条线段的右端点不为 $i$，因此前 $i-1$ 个点构造了 $j$ 条线段，因此有：</p>
-<p>$$
+<p>记 <span class="arithmatex">\(f[i][j]\)</span> 表示使用前 <span class="arithmatex">\(i\)</span> 个点构造了 <span class="arithmatex">\(j\)</span> 条线段，且最后一条线段的右端点不为 <span class="arithmatex">\(i\)</span> 的方案数；记 <span class="arithmatex">\(g[i][j]\)</span> 表示使用了前 <span class="arithmatex">\(i\)</span> 个点构造了 <span class="arithmatex">\(j\)</span> 条线段，且最后一条线段的右端点为 <span class="arithmatex">\(i\)</span> 的方案数。初始时 <span class="arithmatex">\(f[1][0]=1\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span>，由于第 <span class="arithmatex">\(j\)</span> 条线段的右端点不为 <span class="arithmatex">\(i\)</span>，因此前 <span class="arithmatex">\(i-1\)</span> 个点构造了 <span class="arithmatex">\(j\)</span> 条线段，因此有：</p>
+<div class="arithmatex">\[
 f[i][j] = f[i-1][j] + g[i - 1][j]
-$$</p>
-<p>考虑 $g[i][j]$，第 $j$ 条线段的右端点为 $i$，如果第 $j$ 条线段的长度超过 $1$，则前 $i-1$ 个点构造了 $j$ 条线段，且第 $j$ 条线段的右端点一定覆盖了 $i-1$，因此有：</p>
-<p>$$
+\]</div>
+<p>考虑 <span class="arithmatex">\(g[i][j]\)</span>，第 <span class="arithmatex">\(j\)</span> 条线段的右端点为 <span class="arithmatex">\(i\)</span>，如果第 <span class="arithmatex">\(j\)</span> 条线段的长度超过 <span class="arithmatex">\(1\)</span>，则前 <span class="arithmatex">\(i-1\)</span> 个点构造了 <span class="arithmatex">\(j\)</span> 条线段，且第 <span class="arithmatex">\(j\)</span> 条线段的右端点一定覆盖了 <span class="arithmatex">\(i-1\)</span>，因此有：</p>
+<div class="arithmatex">\[
 g[i][j] = g[i - 1][j]
-$$</p>
-<p>如果第 $j$ 条线段的长度为 $1$，则前 $i-1$ 个点构造了 $j-1$ 条线段，有：</p>
-<p>$$
+\]</div>
+<p>如果第 <span class="arithmatex">\(j\)</span> 条线段的长度为 <span class="arithmatex">\(1\)</span>，则前 <span class="arithmatex">\(i-1\)</span> 个点构造了 <span class="arithmatex">\(j-1\)</span> 条线段，有：</p>
+<div class="arithmatex">\[
 g[i][j] = f[i - 1][j - 1] + g[i - 1][j - 1]
-$$</p>
-<p>答案为 $f[n][k]+g[n][k]$。</p>
-<p>时间复杂度 $O(n\times k)$，空间复杂度 $O(n\times k)$。</p>
+\]</div>
+<p>答案为 <span class="arithmatex">\(f[n][k]+g[n][k]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n\times k)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91338,11 +91336,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

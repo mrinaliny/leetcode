@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90831,11 +90829,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：滑动窗口</h3>
-<p>不妨记字符串 $s1$ 的长度为 $m$，字符串 $s2$ 的长度为 $n$。</p>
-<p>我们观察发现，题目实际上等价于判断字符串 $s2$ 中是否存在窗口大小为 $m$，且窗口内的字符及其个数与字符串 $s1$ 相同的子串。</p>
-<p>因此，我们先用哈希表或数组 $cnt1$ 统计字符串 $s1$ 中每个字符出现的次数，然后遍历字符串 $s2$，维护一个窗口大小为 $m$ 的滑动窗口，用哈希表或数组 $cnt2$ 统计窗口内每个字符出现的次数，当 $cnt1 = cnt2$ 时，说明窗口内的字符及其个数与字符串 $s1$ 相同，返回 <code>true</code> 即可。</p>
+<p>不妨记字符串 <span class="arithmatex">\(s1\)</span> 的长度为 <span class="arithmatex">\(m\)</span>，字符串 <span class="arithmatex">\(s2\)</span> 的长度为 <span class="arithmatex">\(n\)</span>。</p>
+<p>我们观察发现，题目实际上等价于判断字符串 <span class="arithmatex">\(s2\)</span> 中是否存在窗口大小为 <span class="arithmatex">\(m\)</span>，且窗口内的字符及其个数与字符串 <span class="arithmatex">\(s1\)</span> 相同的子串。</p>
+<p>因此，我们先用哈希表或数组 <span class="arithmatex">\(cnt1\)</span> 统计字符串 <span class="arithmatex">\(s1\)</span> 中每个字符出现的次数，然后遍历字符串 <span class="arithmatex">\(s2\)</span>，维护一个窗口大小为 <span class="arithmatex">\(m\)</span> 的滑动窗口，用哈希表或数组 <span class="arithmatex">\(cnt2\)</span> 统计窗口内每个字符出现的次数，当 <span class="arithmatex">\(cnt1 = cnt2\)</span> 时，说明窗口内的字符及其个数与字符串 <span class="arithmatex">\(s1\)</span> 相同，返回 <code>true</code> 即可。</p>
 <p>否则，遍历结束后，返回 <code>false</code>。</p>
-<p>时间复杂度 $(m + n \times |\Sigma|)$，空间复杂度 $O(|\Sigma|)$。其中 $m$ 和 $n$ 分别为字符串 $s1$ 和 $s2$ 的长度；而 $|\Sigma|$ 为字符集的大小，本题中 $|\Sigma|=26$。</p>
+<p>时间复杂度 <span class="arithmatex">\((m + n \times |\Sigma|)\)</span>，空间复杂度 <span class="arithmatex">\(O(|\Sigma|)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为字符串 <span class="arithmatex">\(s1\)</span> 和 <span class="arithmatex">\(s2\)</span> 的长度；而 <span class="arithmatex">\(|\Sigma|\)</span> 为字符集的大小，本题中 <span class="arithmatex">\(|\Sigma|=26\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91079,8 +91077,8 @@
 <!-- solution:start-->
 
 <h3 id="_4">方法二：滑动窗口优化</h3>
-<p>在方法一中，我们每次加入和移除一个字符时，都需要比较两个哈希表或数组，时间复杂度较高。我们可以维护一个变量 $diff$，表示两个大小为 $m$ 的字符串中，有多少种字符出现的个数不同。当 $diff=0$ 时，说明两个字符串中的字符个数相同。</p>
-<p>时间复杂度 $O(m + n + |\Sigma|)$，空间复杂度 $O(|\Sigma|)$。其中 $m$ 和 $n$ 分别为字符串 $s1$ 和 $s2$ 的长度；而 $|\Sigma|$ 为字符集的大小，本题中 $|\Sigma|=26$。</p>
+<p>在方法一中，我们每次加入和移除一个字符时，都需要比较两个哈希表或数组，时间复杂度较高。我们可以维护一个变量 <span class="arithmatex">\(diff\)</span>，表示两个大小为 <span class="arithmatex">\(m\)</span> 的字符串中，有多少种字符出现的个数不同。当 <span class="arithmatex">\(diff=0\)</span> 时，说明两个字符串中的字符个数相同。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m + n + |\Sigma|)\)</span>，空间复杂度 <span class="arithmatex">\(O(|\Sigma|)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为字符串 <span class="arithmatex">\(s1\)</span> 和 <span class="arithmatex">\(s2\)</span> 的长度；而 <span class="arithmatex">\(|\Sigma|\)</span> 为字符集的大小，本题中 <span class="arithmatex">\(|\Sigma|=26\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91805,11 +91803,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

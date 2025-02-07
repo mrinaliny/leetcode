@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90876,11 +90874,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：单调栈 + 动态规划</h3>
-<p>我们定义 $dp[i]$ 表示以 $books[i]$ 结尾时能取走的书的最大数量。</p>
-<p>若从 $i$ 到 $0$ 可以取成一个公差为 $1$ 的等差数列，那么 $dp[i]$ 可以直接通过等差数列求和算出。</p>
-<p>若从 $i$ 到 $0$ 不能取成一个公差为 $-1$ 的等差数列，即这个规律在某个 $j$ 处断掉了（$0 \le j \lt i$），那么一定有 $books[j] \lt books[i] - (i-j)$，也即 $books[j] - j \lt books[i] - i$，利用单调栈在新数组 $books[i] - i$ 的每个位置，找到左边第一个比它严格小的数的位置，可以求出符合题意的 $j$，此时 $dp[i]=dp[j] + \sum_{k=j+1}^{i} (books[k]-k)$。</p>
-<p>答案为 $\max_{i=0}^{n-1} dp[i]$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组长度。</p>
+<p>我们定义 <span class="arithmatex">\(dp[i]\)</span> 表示以 <span class="arithmatex">\(books[i]\)</span> 结尾时能取走的书的最大数量。</p>
+<p>若从 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(0\)</span> 可以取成一个公差为 <span class="arithmatex">\(1\)</span> 的等差数列，那么 <span class="arithmatex">\(dp[i]\)</span> 可以直接通过等差数列求和算出。</p>
+<p>若从 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(0\)</span> 不能取成一个公差为 <span class="arithmatex">\(-1\)</span> 的等差数列，即这个规律在某个 <span class="arithmatex">\(j\)</span> 处断掉了（<span class="arithmatex">\(0 \le j \lt i\)</span>），那么一定有 <span class="arithmatex">\(books[j] \lt books[i] - (i-j)\)</span>，也即 <span class="arithmatex">\(books[j] - j \lt books[i] - i\)</span>，利用单调栈在新数组 <span class="arithmatex">\(books[i] - i\)</span> 的每个位置，找到左边第一个比它严格小的数的位置，可以求出符合题意的 <span class="arithmatex">\(j\)</span>，此时 <span class="arithmatex">\(dp[i]=dp[j] + \sum_{k=j+1}^{i} (books[k]-k)\)</span>。</p>
+<p>答案为 <span class="arithmatex">\(\max_{i=0}^{n-1} dp[i]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91364,11 +91362,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

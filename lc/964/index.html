@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,16 +90857,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们定义一个函数 $dfs(v)$，表示用 $x$ 凑成数字 $v$ 所需要的最少运算符数量。那么答案就是 $dfs(target)$。</p>
-<p>函数 $dfs(v)$ 的执行逻辑如下：</p>
-<p>如果 $x \geq v$，那么此时可以用 $v$ 个 $x / x$ 相加来得到 $v$，运算符数量为 $v \times 2 - 1$；也可以用 $x$ 减去 $(x - v)$ 个 $x / x$ 来得到 $v$，运算符数量为 $(x - v) \times 2$。取两者的最小值。</p>
-<p>否则，我们从 $k=2$ 开始枚举 $x^k$，找到第一个 $x^k \geq v$ 的 $k$：</p>
+<p>我们定义一个函数 <span class="arithmatex">\(dfs(v)\)</span>，表示用 <span class="arithmatex">\(x\)</span> 凑成数字 <span class="arithmatex">\(v\)</span> 所需要的最少运算符数量。那么答案就是 <span class="arithmatex">\(dfs(target)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(v)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(x \geq v\)</span>，那么此时可以用 <span class="arithmatex">\(v\)</span> 个 <span class="arithmatex">\(x / x\)</span> 相加来得到 <span class="arithmatex">\(v\)</span>，运算符数量为 <span class="arithmatex">\(v \times 2 - 1\)</span>；也可以用 <span class="arithmatex">\(x\)</span> 减去 <span class="arithmatex">\((x - v)\)</span> 个 <span class="arithmatex">\(x / x\)</span> 来得到 <span class="arithmatex">\(v\)</span>，运算符数量为 <span class="arithmatex">\((x - v) \times 2\)</span>。取两者的最小值。</p>
+<p>否则，我们从 <span class="arithmatex">\(k=2\)</span> 开始枚举 <span class="arithmatex">\(x^k\)</span>，找到第一个 <span class="arithmatex">\(x^k \geq v\)</span> 的 <span class="arithmatex">\(k\)</span>：</p>
 <ul>
-<li>如果此时 $x^k - v \geq v$，那么只能先得到 $x^{k-1}$，然后再递归计算 $dfs(v - x^{k-1})$，此时运算符数量为 $k - 1 + dfs(v - x^{k-1})$；</li>
-<li>如果此时 $x^k - v &lt; v$，那么可以按照上面的方式得到 $v$，此时运算符数量为 $k - 1 + dfs(v - x^{k-1})$；也可以先得到 $x^k$，再递归计算 $dfs(x^k - v)$，此时运算符数量为 $k + dfs(x^k - v)$。取两者的最小值。</li>
+<li>如果此时 <span class="arithmatex">\(x^k - v \geq v\)</span>，那么只能先得到 <span class="arithmatex">\(x^{k-1}\)</span>，然后再递归计算 <span class="arithmatex">\(dfs(v - x^{k-1})\)</span>，此时运算符数量为 <span class="arithmatex">\(k - 1 + dfs(v - x^{k-1})\)</span>；</li>
+<li>如果此时 <span class="arithmatex">\(x^k - v &lt; v\)</span>，那么可以按照上面的方式得到 <span class="arithmatex">\(v\)</span>，此时运算符数量为 <span class="arithmatex">\(k - 1 + dfs(v - x^{k-1})\)</span>；也可以先得到 <span class="arithmatex">\(x^k\)</span>，再递归计算 <span class="arithmatex">\(dfs(x^k - v)\)</span>，此时运算符数量为 <span class="arithmatex">\(k + dfs(x^k - v)\)</span>。取两者的最小值。</li>
 </ul>
-<p>为了避免重复计算，我们使用记忆化搜索的方式实现 $dfs$ 函数。</p>
-<p>时间复杂度 $O(\log_{x}{target})$，空间复杂度 $O(\log_{x}{target})$。</p>
+<p>为了避免重复计算，我们使用记忆化搜索的方式实现 <span class="arithmatex">\(dfs\)</span> 函数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log_{x}{target})\)</span>，空间复杂度 <span class="arithmatex">\(O(\log_{x}{target})\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91352,11 +91350,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

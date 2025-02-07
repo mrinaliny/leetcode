@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86094,15 +86092,15 @@ It can be proven that 6 is the minimum number of days needed.
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-memoization-search">Solution 1: State Compression + Memoization Search</h3>
-<p>We note that the number of monsters is at most $17$, which means we can use a 17-bit binary number to represent the state of the monsters. The $i$-th bit being $1$ indicates that the $i$-th monster is still alive, and $0$ indicates that the $i$-th monster has been defeated.</p>
-<p>We design a function $\textit{dfs}(\textit{mask})$ to represent the minimum number of days needed to defeat all monsters when the current state of the monsters is $\textit{mask}$. The answer is $\textit{dfs}(2^n - 1)$, where $n$ is the number of monsters.</p>
-<p>The calculation of the function $\textit{dfs}(\textit{mask})$ is as follows:</p>
+<p>We note that the number of monsters is at most <span class="arithmatex">\(17\)</span>, which means we can use a 17-bit binary number to represent the state of the monsters. The <span class="arithmatex">\(i\)</span>-th bit being <span class="arithmatex">\(1\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th monster is still alive, and <span class="arithmatex">\(0\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th monster has been defeated.</p>
+<p>We design a function <span class="arithmatex">\(\textit{dfs}(\textit{mask})\)</span> to represent the minimum number of days needed to defeat all monsters when the current state of the monsters is <span class="arithmatex">\(\textit{mask}\)</span>. The answer is <span class="arithmatex">\(\textit{dfs}(2^n - 1)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of monsters.</p>
+<p>The calculation of the function <span class="arithmatex">\(\textit{dfs}(\textit{mask})\)</span> is as follows:</p>
 <ul>
-<li>If $\textit{mask} = 0$, it means all monsters have been defeated, return $0$;</li>
-<li>Otherwise, we enumerate each monster $i$. If the $i$-th monster is still alive, we can choose to defeat the $i$-th monster, then recursively calculate $\textit{dfs}(\textit{mask} \oplus 2^i)$, and update the answer to $\textit{ans} = \min(\textit{ans}, \textit{dfs}(\textit{mask} \oplus 2^i) + \lceil \frac{x}{\textit{gain}} \rceil)$, where $x$ is the strength of the $i$-th monster, and $\textit{gain} = 1 + (n - \textit{mask}.\textit{bit_count}())$ represents the current daily mana gain.</li>
+<li>If <span class="arithmatex">\(\textit{mask} = 0\)</span>, it means all monsters have been defeated, return <span class="arithmatex">\(0\)</span>;</li>
+<li>Otherwise, we enumerate each monster <span class="arithmatex">\(i\)</span>. If the <span class="arithmatex">\(i\)</span>-th monster is still alive, we can choose to defeat the <span class="arithmatex">\(i\)</span>-th monster, then recursively calculate <span class="arithmatex">\(\textit{dfs}(\textit{mask} \oplus 2^i)\)</span>, and update the answer to <span class="arithmatex">\(\textit{ans} = \min(\textit{ans}, \textit{dfs}(\textit{mask} \oplus 2^i) + \lceil \frac{x}{\textit{gain}} \rceil)\)</span>, where <span class="arithmatex">\(x\)</span> is the strength of the <span class="arithmatex">\(i\)</span>-th monster, and <span class="arithmatex">\(\textit{gain} = 1 + (n - \textit{mask}.\textit{bit\_count}())\)</span> represents the current daily mana gain.</li>
 </ul>
-<p>Finally, we return $\textit{dfs}(2^n - 1)$.</p>
-<p>The time complexity is $O(2^n \times n)$, and the space complexity is $O(2^n)$. Here, $n$ is the number of monsters.</p>
+<p>Finally, we return <span class="arithmatex">\(\textit{dfs}(2^n - 1)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^n \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of monsters.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86370,10 +86368,10 @@ It can be proven that 6 is the minimum number of days needed.
 <!-- solution:start -->
 
 <h3 id="solution-2-state-compression-dynamic-programming">Solution 2: State Compression + Dynamic Programming</h3>
-<p>We can convert the memoization search in Solution 1 to dynamic programming. Define $f[\textit{mask}]$ to represent the minimum number of days needed to defeat all monsters when the current state of the monsters is $\textit{mask}$. Here, $\textit{mask}$ is an $n$-bit binary number, where the $i$-th bit being $1$ indicates that the $i$-th monster has been defeated, and $0$ indicates that the $i$-th monster is still alive. Initially, $f[0] = 0$, and the rest $f[\textit{mask}] = +\infty$. The answer is $f[2^n - 1]$.</p>
-<p>We enumerate $\textit{mask}$ in the range $[1, 2^n - 1]$. For each $\textit{mask}$, we enumerate each monster $i$. If the $i$-th monster is defeated, it can be transferred from the previous state $\textit{mask} \oplus 2^i$, with a transfer cost of $(\textit{power}[i] + \textit{gain} - 1) / \textit{gain}$, where $\textit{gain} = \textit{mask}.\textit{bitCount}()$.</p>
-<p>Finally, return $f[2^n - 1]$.</p>
-<p>The time complexity is $O(2^n \times n)$, and the space complexity is $O(2^n)$. Here, $n$ is the number of monsters.</p>
+<p>We can convert the memoization search in Solution 1 to dynamic programming. Define <span class="arithmatex">\(f[\textit{mask}]\)</span> to represent the minimum number of days needed to defeat all monsters when the current state of the monsters is <span class="arithmatex">\(\textit{mask}\)</span>. Here, <span class="arithmatex">\(\textit{mask}\)</span> is an <span class="arithmatex">\(n\)</span>-bit binary number, where the <span class="arithmatex">\(i\)</span>-th bit being <span class="arithmatex">\(1\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th monster has been defeated, and <span class="arithmatex">\(0\)</span> indicates that the <span class="arithmatex">\(i\)</span>-th monster is still alive. Initially, <span class="arithmatex">\(f[0] = 0\)</span>, and the rest <span class="arithmatex">\(f[\textit{mask}] = +\infty\)</span>. The answer is <span class="arithmatex">\(f[2^n - 1]\)</span>.</p>
+<p>We enumerate <span class="arithmatex">\(\textit{mask}\)</span> in the range <span class="arithmatex">\([1, 2^n - 1]\)</span>. For each <span class="arithmatex">\(\textit{mask}\)</span>, we enumerate each monster <span class="arithmatex">\(i\)</span>. If the <span class="arithmatex">\(i\)</span>-th monster is defeated, it can be transferred from the previous state <span class="arithmatex">\(\textit{mask} \oplus 2^i\)</span>, with a transfer cost of <span class="arithmatex">\((\textit{power}[i] + \textit{gain} - 1) / \textit{gain}\)</span>, where <span class="arithmatex">\(\textit{gain} = \textit{mask}.\textit{bitCount}()\)</span>.</p>
+<p>Finally, return <span class="arithmatex">\(f[2^n - 1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(2^n \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of monsters.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86794,11 +86792,9 @@ It can be proven that 6 is the minimum number of days needed.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

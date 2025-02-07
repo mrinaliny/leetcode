@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,14 +90865,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i)$，表示从第 $i$ 个问题开始解决，能够获得的最高分数。那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(i)$ 的计算方式如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从第 <span class="arithmatex">\(i\)</span> 个问题开始解决，能够获得的最高分数。那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的计算方式如下：</p>
 <ul>
-<li>如果 $i \geq n$，表示已经解决完所有问题，返回 $0$；</li>
-<li>否则，设第 $i$ 个问题的分数为 $p$，需要跳过的问题数为 $b$，那么 $dfs(i) = \max(p + dfs(i + b + 1), dfs(i + 1))$。</li>
+<li>如果 <span class="arithmatex">\(i \geq n\)</span>，表示已经解决完所有问题，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>否则，设第 <span class="arithmatex">\(i\)</span> 个问题的分数为 <span class="arithmatex">\(p\)</span>，需要跳过的问题数为 <span class="arithmatex">\(b\)</span>，那么 <span class="arithmatex">\(dfs(i) = \max(p + dfs(i + b + 1), dfs(i + 1))\)</span>。</li>
 </ul>
-<p>为了避免重复计算，我们可以使用记忆化搜索的方法，用一个数组 $f$ 记录所有已经计算过的 $dfs(i)$ 的值。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是问题的数量。</p>
+<p>为了避免重复计算，我们可以使用记忆化搜索的方法，用一个数组 <span class="arithmatex">\(f\)</span> 记录所有已经计算过的 <span class="arithmatex">\(dfs(i)\)</span> 的值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是问题的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91062,13 +91060,13 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划</h3>
-<p>我们定义 $f[i]$ 表示从第 $i$ 个问题开始解决，能够获得的最高分数。那么答案就是 $f[0]$。</p>
-<p>考虑 $f[i]$，第 $i$ 个问题的分数为 $p$，需要跳过的问题数为 $b$。如果我们解决了第 $i$ 个问题，那么接下来我们需要解决 $b$ 个问题，因此 $f[i] = p + f[i + b + 1]$。如果我们跳过了第 $i$ 个问题，那么接下来我们从第 $i + 1$ 个问题开始解决，因此 $f[i] = f[i + 1]$。两者取最大值即可。状态转移方程如下：</p>
-<p>$$
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示从第 <span class="arithmatex">\(i\)</span> 个问题开始解决，能够获得的最高分数。那么答案就是 <span class="arithmatex">\(f[0]\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i]\)</span>，第 <span class="arithmatex">\(i\)</span> 个问题的分数为 <span class="arithmatex">\(p\)</span>，需要跳过的问题数为 <span class="arithmatex">\(b\)</span>。如果我们解决了第 <span class="arithmatex">\(i\)</span> 个问题，那么接下来我们需要解决 <span class="arithmatex">\(b\)</span> 个问题，因此 <span class="arithmatex">\(f[i] = p + f[i + b + 1]\)</span>。如果我们跳过了第 <span class="arithmatex">\(i\)</span> 个问题，那么接下来我们从第 <span class="arithmatex">\(i + 1\)</span> 个问题开始解决，因此 <span class="arithmatex">\(f[i] = f[i + 1]\)</span>。两者取最大值即可。状态转移方程如下：</p>
+<div class="arithmatex">\[
 f[i] = \max(p + f[i + b + 1], f[i + 1])
-$$</p>
-<p>我们从后往前计算 $f$ 的值，最后返回 $f[0]$ 即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是问题的数量。</p>
+\]</div>
+<p>我们从后往前计算 <span class="arithmatex">\(f\)</span> 的值，最后返回 <span class="arithmatex">\(f[0]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是问题的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91431,11 +91429,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

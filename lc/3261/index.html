@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90877,10 +90875,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：滑动窗口 + 前缀和</h3>
-<p>我们用两个变量 $\textit{cnt0}$ 和 $\textit{cnt1}$ 分别记录当前窗口内的 $0$ 和 $1$ 的个数，指针 $i$ 和 $j$ 分别标识窗口的左右边界。用一个数组 $d$ 记录每个位置 $i$ 右边第一个不满足 $k$ 约束的位置，初始时 $d[i] = n$。另外，用一个长度为 $n + 1$ 的前缀和数组 $\textit{pre}[i]$ 记录以前 $i$ 个位置作为右边界的满足 $k$ 约束的子字符串的个数。</p>
-<p>当我们右移窗口时，如果窗口内的 $0$ 和 $1$ 的个数都大于 $k$，我们将 $d[i]$ 更新为 $j$，表示位置 $i$ 右边第一个不满足 $k$ 约束的位置。然后我们将 $i$ 右移一位，直到窗口内的 $0$ 和 $1$ 的个数都不大于 $k$。此时，我们可以计算出以 $j$ 为右边界的满足 $k$ 约束的子字符串的个数，即 $j - i + 1$，我们更新到前缀和数组中。</p>
-<p>最后，对于每个查询 $[l, r]$，我们首先找出 $l$ 右边第一个不满足 $k$ 约束的位置 $p$，那么 $p = \min(r + 1, d[l])$，那么 $[l, p - 1]$ 的所有子字符串都满足 $k$ 约束，个数为 $(1 + p - l) \times (p - l) / 2$，然后，我们计算以 $[p, r]$ 为右边界的满足 $k$ 约束的子字符串的个数，即 $\textit{pre}[r + 1] - \textit{pre}[p]$，最后将两者相加即可。</p>
-<p>时间复杂度 $O(n + m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为字符串 $s$ 的长度和查询数组 $\textit{queries}$ 的长度。</p>
+<p>我们用两个变量 <span class="arithmatex">\(\textit{cnt0}\)</span> 和 <span class="arithmatex">\(\textit{cnt1}\)</span> 分别记录当前窗口内的 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的个数，指针 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 分别标识窗口的左右边界。用一个数组 <span class="arithmatex">\(d\)</span> 记录每个位置 <span class="arithmatex">\(i\)</span> 右边第一个不满足 <span class="arithmatex">\(k\)</span> 约束的位置，初始时 <span class="arithmatex">\(d[i] = n\)</span>。另外，用一个长度为 <span class="arithmatex">\(n + 1\)</span> 的前缀和数组 <span class="arithmatex">\(\textit{pre}[i]\)</span> 记录以前 <span class="arithmatex">\(i\)</span> 个位置作为右边界的满足 <span class="arithmatex">\(k\)</span> 约束的子字符串的个数。</p>
+<p>当我们右移窗口时，如果窗口内的 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的个数都大于 <span class="arithmatex">\(k\)</span>，我们将 <span class="arithmatex">\(d[i]\)</span> 更新为 <span class="arithmatex">\(j\)</span>，表示位置 <span class="arithmatex">\(i\)</span> 右边第一个不满足 <span class="arithmatex">\(k\)</span> 约束的位置。然后我们将 <span class="arithmatex">\(i\)</span> 右移一位，直到窗口内的 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的个数都不大于 <span class="arithmatex">\(k\)</span>。此时，我们可以计算出以 <span class="arithmatex">\(j\)</span> 为右边界的满足 <span class="arithmatex">\(k\)</span> 约束的子字符串的个数，即 <span class="arithmatex">\(j - i + 1\)</span>，我们更新到前缀和数组中。</p>
+<p>最后，对于每个查询 <span class="arithmatex">\([l, r]\)</span>，我们首先找出 <span class="arithmatex">\(l\)</span> 右边第一个不满足 <span class="arithmatex">\(k\)</span> 约束的位置 <span class="arithmatex">\(p\)</span>，那么 <span class="arithmatex">\(p = \min(r + 1, d[l])\)</span>，那么 <span class="arithmatex">\([l, p - 1]\)</span> 的所有子字符串都满足 <span class="arithmatex">\(k\)</span> 约束，个数为 <span class="arithmatex">\((1 + p - l) \times (p - l) / 2\)</span>，然后，我们计算以 <span class="arithmatex">\([p, r]\)</span> 为右边界的满足 <span class="arithmatex">\(k\)</span> 约束的子字符串的个数，即 <span class="arithmatex">\(\textit{pre}[r + 1] - \textit{pre}[p]\)</span>，最后将两者相加即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n + m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为字符串 <span class="arithmatex">\(s\)</span> 的长度和查询数组 <span class="arithmatex">\(\textit{queries}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91372,11 +91370,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

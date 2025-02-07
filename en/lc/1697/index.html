@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,10 +86066,10 @@ For the second query, there is a path (0 -&gt; 1 -&gt; 2) of two edges with dist
 <!-- solution:start -->
 
 <h3 id="solution-1-offline-queries-union-find">Solution 1: Offline Queries + Union-Find</h3>
-<p>According to the problem requirements, we need to judge each query $queries[i]$, that is, to determine whether there is a path with edge weight less than or equal to $limit$ between the two points $a$ and $b$ of the current query.</p>
-<p>The connectivity of two points can be determined by a union-find set. Moreover, since the order of queries does not affect the result, we can sort all queries in ascending order by $limit$, and also sort all edges in ascending order by edge weight.</p>
-<p>Then for each query, we start from the edge with the smallest weight, add all edges with weights strictly less than $limit$ to the union-find set, and then use the query operation of the union-find set to determine whether the two points are connected.</p>
-<p>The time complexity is $O(m \times \log m + q \times \log q)$, where $m$ and $q$ are the number of edges and queries, respectively.</p>
+<p>According to the problem requirements, we need to judge each query <span class="arithmatex">\(queries[i]\)</span>, that is, to determine whether there is a path with edge weight less than or equal to <span class="arithmatex">\(limit\)</span> between the two points <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> of the current query.</p>
+<p>The connectivity of two points can be determined by a union-find set. Moreover, since the order of queries does not affect the result, we can sort all queries in ascending order by <span class="arithmatex">\(limit\)</span>, and also sort all edges in ascending order by edge weight.</p>
+<p>Then for each query, we start from the edge with the smallest weight, add all edges with weights strictly less than <span class="arithmatex">\(limit\)</span> to the union-find set, and then use the query operation of the union-find set to determine whether the two points are connected.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times \log m + q \times \log q)\)</span>, where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(q\)</span> are the number of edges and queries, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86464,17 +86462,17 @@ For the second query, there is a path (0 -&gt; 1 -&gt; 2) of two edges with dist
 </div>
 <p>Union-Find is a tree-like data structure that, as the name suggests, is used to handle some disjoint set <strong>merge</strong> and <strong>query</strong> problems. It supports two operations:</p>
 <ol>
-<li>Find: Determine which subset an element belongs to. The time complexity of a single operation is $O(\alpha(n))$.</li>
-<li>Union: Merge two subsets into one set. The time complexity of a single operation is $O(\alpha(n))$.</li>
+<li>Find: Determine which subset an element belongs to. The time complexity of a single operation is <span class="arithmatex">\(O(\alpha(n))\)</span>.</li>
+<li>Union: Merge two subsets into one set. The time complexity of a single operation is <span class="arithmatex">\(O(\alpha(n))\)</span>.</li>
 </ol>
-<p>Here, $\alpha$ is the inverse Ackermann function, which grows extremely slowly. In other words, the average running time of its single operation can be considered a very small constant.</p>
+<p>Here, <span class="arithmatex">\(\alpha\)</span> is the inverse Ackermann function, which grows extremely slowly. In other words, the average running time of its single operation can be considered a very small constant.</p>
 <p>Below is a common template for Union-Find, which needs to be mastered proficiently. Where:</p>
 <ul>
 <li><code>n</code> represents the number of nodes.</li>
 <li><code>p</code> stores the parent node of each point. Initially, the parent node of each point is itself.</li>
 <li><code>size</code> only makes sense when the node is an ancestor node, indicating the number of points in the set where the ancestor node is located.</li>
-<li><code>find(x)</code> function is used to find the ancestor node of the set where $x$ is located.</li>
-<li><code>union(a, b)</code> function is used to merge the sets where $a$ and $b$ are located.</li>
+<li><code>find(x)</code> function is used to find the ancestor node of the set where <span class="arithmatex">\(x\)</span> is located.</li>
+<li><code>union(a, b)</code> function is used to merge the sets where <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> are located.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
@@ -86879,11 +86877,9 @@ For the second query, there is a path (0 -&gt; 1 -&gt; 2) of two edges with dist
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

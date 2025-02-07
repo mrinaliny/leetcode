@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90885,21 +90883,21 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩 + 动态规划</h3>
-<p>我们记第一组的点数为 $m$，第二组的点数为 $n$。</p>
-<p>由于 $1 \leq n \leq m \leq 12$，因此，我们可以用一个整数来表示第二组中点的状态，即二进制表示的一个长度为 $n$ 的整数，其中第 $k$ 位为 $1$ 表示第二组中的第 $k$ 个点与第一组中的点连通，为 $0$ 表示不连通。</p>
-<p>接下来，我们定义 $f[i][j]$ 表示第一组中的前 $i$ 个点已经全部连通，且第二组中的点的状态为 $j$ 时的最小成本。初始时 $f[0][0] = 0$，其余值均为正无穷大。答案即为 $f[m][2^n - 1]$。</p>
-<p>考虑 $f[i][j]$，其中 $i \geq 1$。我们可以枚举第二组中的每个点 $k$，如果点 $k$ 与第一组中的第 $i$ 个点连通，那么我们可以分以下两种情况讨论：</p>
+<p>我们记第一组的点数为 <span class="arithmatex">\(m\)</span>，第二组的点数为 <span class="arithmatex">\(n\)</span>。</p>
+<p>由于 <span class="arithmatex">\(1 \leq n \leq m \leq 12\)</span>，因此，我们可以用一个整数来表示第二组中点的状态，即二进制表示的一个长度为 <span class="arithmatex">\(n\)</span> 的整数，其中第 <span class="arithmatex">\(k\)</span> 位为 <span class="arithmatex">\(1\)</span> 表示第二组中的第 <span class="arithmatex">\(k\)</span> 个点与第一组中的点连通，为 <span class="arithmatex">\(0\)</span> 表示不连通。</p>
+<p>接下来，我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示第一组中的前 <span class="arithmatex">\(i\)</span> 个点已经全部连通，且第二组中的点的状态为 <span class="arithmatex">\(j\)</span> 时的最小成本。初始时 <span class="arithmatex">\(f[0][0] = 0\)</span>，其余值均为正无穷大。答案即为 <span class="arithmatex">\(f[m][2^n - 1]\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span>，其中 <span class="arithmatex">\(i \geq 1\)</span>。我们可以枚举第二组中的每个点 <span class="arithmatex">\(k\)</span>，如果点 <span class="arithmatex">\(k\)</span> 与第一组中的第 <span class="arithmatex">\(i\)</span> 个点连通，那么我们可以分以下两种情况讨论：</p>
 <ul>
-<li>如果点 $k$ 只与第一组中的第 $i$ 个点连通，那么 $f[i][j]$ 可以从 $f[i][j \oplus 2^k]$ 或者 $f[i - 1][j \oplus 2^k]$ 转移而来，其中 $\oplus$ 表示异或运算；</li>
-<li>如果点 $k$ 与第一组中的第 $i$ 个点以及其他点都连通，那么 $f[i][j]$ 可以从 $f[i - 1][j]$ 转移而来。</li>
+<li>如果点 <span class="arithmatex">\(k\)</span> 只与第一组中的第 <span class="arithmatex">\(i\)</span> 个点连通，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i][j \oplus 2^k]\)</span> 或者 <span class="arithmatex">\(f[i - 1][j \oplus 2^k]\)</span> 转移而来，其中 <span class="arithmatex">\(\oplus\)</span> 表示异或运算；</li>
+<li>如果点 <span class="arithmatex">\(k\)</span> 与第一组中的第 <span class="arithmatex">\(i\)</span> 个点以及其他点都连通，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i - 1][j]\)</span> 转移而来。</li>
 </ul>
 <p>在上述两种情况中，我们需要选择转移值最小的那个，即有：</p>
-<p>$$
-f[i][j] = \min_{k \in {0, 1, \cdots, n - 1}} {f[i][j \oplus 2^k], f[i - 1][j \oplus 2^k], f[i - 1][j]} + cost[i - 1][k]
-$$</p>
-<p>最后，我们返回 $f[m][2^n - 1]$ 即可。</p>
-<p>时间复杂度 $O(m \times n \times 2^n)$，空间复杂度 $O(m \times 2^n)$。其中 $m$ 和 $n$ 分别是第一组和第二组中的点数。</p>
-<p>我们注意到 $f[i][j]$ 的转移只与 $f[i - 1][\cdot]$ 以及 $f[i][\cdot]$ 有关，因此我们可以使用滚动数组优化空间复杂度，将空间复杂度优化到 $O(2^n)$。</p>
+<div class="arithmatex">\[
+f[i][j] = \min_{k \in \{0, 1, \cdots, n - 1\}} \{f[i][j \oplus 2^k], f[i - 1][j \oplus 2^k], f[i - 1][j]\} + cost[i - 1][k]
+\]</div>
+<p>最后，我们返回 <span class="arithmatex">\(f[m][2^n - 1]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times 2^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times 2^n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是第一组和第二组中的点数。</p>
+<p>我们注意到 <span class="arithmatex">\(f[i][j]\)</span> 的转移只与 <span class="arithmatex">\(f[i - 1][\cdot]\)</span> 以及 <span class="arithmatex">\(f[i][\cdot]\)</span> 有关，因此我们可以使用滚动数组优化空间复杂度，将空间复杂度优化到 <span class="arithmatex">\(O(2^n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91607,11 +91605,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

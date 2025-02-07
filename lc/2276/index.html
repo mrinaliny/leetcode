@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90874,15 +90872,15 @@ countIntervals.count();    // 返回 8
 
 <h3 id="_3">方法一：线段树（动态开点）</h3>
 <p>根据题目描述，我们需要维护一个区间集合，支持区间的添加和查询操作。对于区间的添加，我们可以使用线段树来维护区间集合。</p>
-<p>线段树将整个区间分割为多个不连续的子区间，子区间的数量不超过 $\log(width)$。更新某个元素的值，只需要更新 $\log(width)$ 个区间，并且这些区间都包含在一个包含该元素的大区间内。区间修改时，需要使用<strong>懒标记</strong>保证效率。</p>
+<p>线段树将整个区间分割为多个不连续的子区间，子区间的数量不超过 <span class="arithmatex">\(\log(width)\)</span>。更新某个元素的值，只需要更新 <span class="arithmatex">\(\log(width)\)</span> 个区间，并且这些区间都包含在一个包含该元素的大区间内。区间修改时，需要使用<strong>懒标记</strong>保证效率。</p>
 <ul>
 <li>线段树的每个节点代表一个区间；</li>
-<li>线段树具有唯一的根节点，代表的区间是整个统计范围，如 $[1,N]$；</li>
-<li>线段树的每个叶子节点代表一个长度为 $1$ 的元区间 $[x,x]$；</li>
-<li>对于每个内部节点 $[l,r]$，它的左儿子是 $[l,mid]$，右儿子是 $[mid+1,r]$, 其中 $mid=⌊(l+r)/2⌋$ (即向下取整)。</li>
+<li>线段树具有唯一的根节点，代表的区间是整个统计范围，如 <span class="arithmatex">\([1,N]\)</span>；</li>
+<li>线段树的每个叶子节点代表一个长度为 <span class="arithmatex">\(1\)</span> 的元区间 <span class="arithmatex">\([x,x]\)</span>；</li>
+<li>对于每个内部节点 <span class="arithmatex">\([l,r]\)</span>，它的左儿子是 <span class="arithmatex">\([l,mid]\)</span>，右儿子是 <span class="arithmatex">\([mid+1,r]\)</span>, 其中 <span class="arithmatex">\(mid=⌊(l+r)/2⌋\)</span> (即向下取整)。</li>
 </ul>
 <p>由于题目数据范围较大，我们可以使用动态开点的线段树来实现。动态开点的线段树是指，我们只在需要的时候才开点，而不是一开始就开好所有的点，这样可以节省空间。</p>
-<p>时间复杂度方面，每次操作的时间复杂度为 $O(\log n)$。空间复杂度为 $O(m \times \log n)$。其中 $m$ 为操作次数，而 $n$ 为数据范围。</p>
+<p>时间复杂度方面，每次操作的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span>。空间复杂度为 <span class="arithmatex">\(O(m \times \log n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 为操作次数，而 <span class="arithmatex">\(n\)</span> 为数据范围。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92150,11 +92148,9 @@ countIntervals.count();    // 返回 8
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

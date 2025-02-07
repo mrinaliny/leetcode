@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,11 +90865,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心 + 位运算</h3>
-<p>观察题目中的操作，我们发现，每次操作实际上是把一个大于 $1$ 的数拆分为两个相等的数，这意味着操作后数组的元素和不会发生变化。因此，如果数组的元素和 $s$ 小于 $target$，则无法通过题目描述的操作得到和为 $target$ 的子序列，直接返回 $-1$ 即可。否则，我们一定可以通过拆分操作，使得数组某个子序列的元素和等于 $target$。</p>
-<p>另外，拆分操作实际上会把二进制高位为 $1$ 的数置为 $0$，并把低一位的数加上 $2$。因此，我们先用一个长度为 $32$ 的数组记录数组 $nums$ 所有元素的二进制表示中每个二进制位上 $1$ 的出现次数。</p>
-<p>接下来，从 $target$ 的低位开始遍历，对于 $target$ 的第 $i$ 位，如果当前位数字为 $0$，则直接跳过，即 $i = i + 1$。如果当前位数字为 $1$，我们需要在数组 $cnt$ 中，找到最小的数字 $j$（其中 $j \ge i$），使得 $cnt[j] \gt 0$，然后我们将该位的数字 $1$ 往低位 $i$ 拆分，即把 $cnt[j]$ 减 $1$，而 $cnt[i..j-1]$ 的每一位置为 $1$，操作次数为 $j-i$。接下来，我们令 $j = i$，然后 $i = i + 1$。重复上述操作，直到 $i$ 超出数组 $cnt$ 的下标范围，返回此时的操作次数。</p>
-<p>注意，如果 $j \lt i$，实际上两个低位的 $1$ 可以合并成一个高一位的 $1$。因此，如果 $j \lt i$，我们将 $\frac{cnt[j]}{2}$ 加到 $cnt[j+1]$ 中，并将 $cnt[j]$ 取模 $2$，然后令 $j = j + 1$，继续上述操作。</p>
-<p>时间复杂度 $O(n \times \log M)$，空间复杂度 $O(\log M)$。其中 $n$ 是数组 $nums$ 的长度，而 $M$ 是数组 $nums$ 中的最大值。</p>
+<p>观察题目中的操作，我们发现，每次操作实际上是把一个大于 <span class="arithmatex">\(1\)</span> 的数拆分为两个相等的数，这意味着操作后数组的元素和不会发生变化。因此，如果数组的元素和 <span class="arithmatex">\(s\)</span> 小于 <span class="arithmatex">\(target\)</span>，则无法通过题目描述的操作得到和为 <span class="arithmatex">\(target\)</span> 的子序列，直接返回 <span class="arithmatex">\(-1\)</span> 即可。否则，我们一定可以通过拆分操作，使得数组某个子序列的元素和等于 <span class="arithmatex">\(target\)</span>。</p>
+<p>另外，拆分操作实际上会把二进制高位为 <span class="arithmatex">\(1\)</span> 的数置为 <span class="arithmatex">\(0\)</span>，并把低一位的数加上 <span class="arithmatex">\(2\)</span>。因此，我们先用一个长度为 <span class="arithmatex">\(32\)</span> 的数组记录数组 <span class="arithmatex">\(nums\)</span> 所有元素的二进制表示中每个二进制位上 <span class="arithmatex">\(1\)</span> 的出现次数。</p>
+<p>接下来，从 <span class="arithmatex">\(target\)</span> 的低位开始遍历，对于 <span class="arithmatex">\(target\)</span> 的第 <span class="arithmatex">\(i\)</span> 位，如果当前位数字为 <span class="arithmatex">\(0\)</span>，则直接跳过，即 <span class="arithmatex">\(i = i + 1\)</span>。如果当前位数字为 <span class="arithmatex">\(1\)</span>，我们需要在数组 <span class="arithmatex">\(cnt\)</span> 中，找到最小的数字 <span class="arithmatex">\(j\)</span>（其中 <span class="arithmatex">\(j \ge i\)</span>），使得 <span class="arithmatex">\(cnt[j] \gt 0\)</span>，然后我们将该位的数字 <span class="arithmatex">\(1\)</span> 往低位 <span class="arithmatex">\(i\)</span> 拆分，即把 <span class="arithmatex">\(cnt[j]\)</span> 减 <span class="arithmatex">\(1\)</span>，而 <span class="arithmatex">\(cnt[i..j-1]\)</span> 的每一位置为 <span class="arithmatex">\(1\)</span>，操作次数为 <span class="arithmatex">\(j-i\)</span>。接下来，我们令 <span class="arithmatex">\(j = i\)</span>，然后 <span class="arithmatex">\(i = i + 1\)</span>。重复上述操作，直到 <span class="arithmatex">\(i\)</span> 超出数组 <span class="arithmatex">\(cnt\)</span> 的下标范围，返回此时的操作次数。</p>
+<p>注意，如果 <span class="arithmatex">\(j \lt i\)</span>，实际上两个低位的 <span class="arithmatex">\(1\)</span> 可以合并成一个高一位的 <span class="arithmatex">\(1\)</span>。因此，如果 <span class="arithmatex">\(j \lt i\)</span>，我们将 <span class="arithmatex">\(\frac{cnt[j]}{2}\)</span> 加到 <span class="arithmatex">\(cnt[j+1]\)</span> 中，并将 <span class="arithmatex">\(cnt[j]\)</span> 取模 <span class="arithmatex">\(2\)</span>，然后令 <span class="arithmatex">\(j = j + 1\)</span>，继续上述操作。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log M)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度，而 <span class="arithmatex">\(M\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 中的最大值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91483,11 +91481,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86057,19 +86055,19 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-bfs">Solution 1: BFS</h3>
-<p>First, based on the undirected tree edges given in the problem, we construct an adjacency list $g$, where $g[u]$ represents all adjacent vertices of vertex $u$.</p>
+<p>First, based on the undirected tree edges given in the problem, we construct an adjacency list <span class="arithmatex">\(g\)</span>, where <span class="arithmatex">\(g[u]\)</span> represents all adjacent vertices of vertex <span class="arithmatex">\(u\)</span>.</p>
 <p>Then, we define the following data structures:</p>
 <ul>
-<li>Queue $q$, used to store the vertices and their probabilities for each round of search. Initially, $q = [(1, 1.0)]$, indicating that the probability of the frog being at vertex $1$ is $1.0$;</li>
-<li>Array $vis$, used to record whether each vertex has been visited. Initially, $vis[1] = true$, and all other elements are $false$.</li>
+<li>Queue <span class="arithmatex">\(q\)</span>, used to store the vertices and their probabilities for each round of search. Initially, <span class="arithmatex">\(q = [(1, 1.0)]\)</span>, indicating that the probability of the frog being at vertex <span class="arithmatex">\(1\)</span> is <span class="arithmatex">\(1.0\)</span>;</li>
+<li>Array <span class="arithmatex">\(vis\)</span>, used to record whether each vertex has been visited. Initially, <span class="arithmatex">\(vis[1] = true\)</span>, and all other elements are <span class="arithmatex">\(false\)</span>.</li>
 </ul>
 <p>Next, we start the breadth-first search.</p>
-<p>In each round of search, we take out the head element $(u, p)$ of the queue, where $u$ and $p$ represent the current vertex and its probability, respectively. The number of unvisited adjacent vertices of the current vertex $u$ is denoted as $cnt$.</p>
+<p>In each round of search, we take out the head element <span class="arithmatex">\((u, p)\)</span> of the queue, where <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(p\)</span> represent the current vertex and its probability, respectively. The number of unvisited adjacent vertices of the current vertex <span class="arithmatex">\(u\)</span> is denoted as <span class="arithmatex">\(cnt\)</span>.</p>
 <ul>
-<li>If $u = target$, it means that the frog has reached the target vertex. At this time, we judge whether the frog reaches the target vertex in $t$ seconds, or it reaches the target vertex in less than $t$ seconds but cannot jump to other vertices (i.e., $t=0$ or $cnt=0$). If so, return $p$, otherwise return $0$.</li>
-<li>If $u \neq target$, we evenly distribute the probability $p$ to all unvisited adjacent vertices of $u$, then add these vertices to the queue $q$, and mark these vertices as visited.</li>
+<li>If <span class="arithmatex">\(u = target\)</span>, it means that the frog has reached the target vertex. At this time, we judge whether the frog reaches the target vertex in <span class="arithmatex">\(t\)</span> seconds, or it reaches the target vertex in less than <span class="arithmatex">\(t\)</span> seconds but cannot jump to other vertices (i.e., <span class="arithmatex">\(t=0\)</span> or <span class="arithmatex">\(cnt=0\)</span>). If so, return <span class="arithmatex">\(p\)</span>, otherwise return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(u \neq target\)</span>, we evenly distribute the probability <span class="arithmatex">\(p\)</span> to all unvisited adjacent vertices of <span class="arithmatex">\(u\)</span>, then add these vertices to the queue <span class="arithmatex">\(q\)</span>, and mark these vertices as visited.</li>
 </ul>
-<p>At the end of a round of search, we decrease $t$ by $1$, and then continue the next round of search until the queue is empty or $t \lt 0$.</p>
+<p>At the end of a round of search, we decrease <span class="arithmatex">\(t\)</span> by <span class="arithmatex">\(1\)</span>, and then continue the next round of search until the queue is empty or <span class="arithmatex">\(t \lt 0\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86690,11 +86688,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

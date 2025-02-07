@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,14 +90865,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示经过 $i$ 分钟，从城市 $0$ 到达城市 $j$ 的最小花费。初始时 $f[0][0] = \textit{passingFees}[0]$，其余的 $f[0][j] = +\infty$。</p>
-<p>接下来，我们在 $[1, \textit{maxTime}]$ 的时间范围内，遍历所有的边，对于每一条边 $(x, y, t)$，如果 $t \leq i$，那么我们：</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示经过 <span class="arithmatex">\(i\)</span> 分钟，从城市 <span class="arithmatex">\(0\)</span> 到达城市 <span class="arithmatex">\(j\)</span> 的最小花费。初始时 <span class="arithmatex">\(f[0][0] = \textit{passingFees}[0]\)</span>，其余的 <span class="arithmatex">\(f[0][j] = +\infty\)</span>。</p>
+<p>接下来，我们在 <span class="arithmatex">\([1, \textit{maxTime}]\)</span> 的时间范围内，遍历所有的边，对于每一条边 <span class="arithmatex">\((x, y, t)\)</span>，如果 <span class="arithmatex">\(t \leq i\)</span>，那么我们：</p>
 <ul>
-<li>可以先经过 $i - t$ 分钟，从城市 $0$ 到达城市 $y$，然后再经过 $t$ 分钟，从城市 $y$ 到达城市 $x$，再加上到达城市 $x$ 的通行费，即 $f[i][x] = \min(f[i][x], f[i - t][y] + \textit{passingFees}[x])$；</li>
-<li>也可以先经过 $i - t$ 分钟，从城市 $0$ 到达城市 $x$，然后再经过 $t$ 分钟，从城市 $x$ 到达城市 $y$，再加上到达城市 $y$ 的通行费，即 $f[i][y] = \min(f[i][y], f[i - t][x] + \textit{passingFees}[y])$。</li>
+<li>可以先经过 <span class="arithmatex">\(i - t\)</span> 分钟，从城市 <span class="arithmatex">\(0\)</span> 到达城市 <span class="arithmatex">\(y\)</span>，然后再经过 <span class="arithmatex">\(t\)</span> 分钟，从城市 <span class="arithmatex">\(y\)</span> 到达城市 <span class="arithmatex">\(x\)</span>，再加上到达城市 <span class="arithmatex">\(x\)</span> 的通行费，即 <span class="arithmatex">\(f[i][x] = \min(f[i][x], f[i - t][y] + \textit{passingFees}[x])\)</span>；</li>
+<li>也可以先经过 <span class="arithmatex">\(i - t\)</span> 分钟，从城市 <span class="arithmatex">\(0\)</span> 到达城市 <span class="arithmatex">\(x\)</span>，然后再经过 <span class="arithmatex">\(t\)</span> 分钟，从城市 <span class="arithmatex">\(x\)</span> 到达城市 <span class="arithmatex">\(y\)</span>，再加上到达城市 <span class="arithmatex">\(y\)</span> 的通行费，即 <span class="arithmatex">\(f[i][y] = \min(f[i][y], f[i - t][x] + \textit{passingFees}[y])\)</span>。</li>
 </ul>
-<p>最终答案即为 $\min{f[i][n - 1]}$，其中 $i \in [0, \textit{maxTime}]$。如果答案为 $+\infty$，则返回 $-1$。</p>
-<p>时间复杂度 $O(\textit{maxTime} \times (m + n))$，其中 $m$ 和 $n$ 分别是边的数量和城市的数量。空间复杂度 $O(\textit{maxTime} \times n)$。</p>
+<p>最终答案即为 <span class="arithmatex">\(\min\{f[i][n - 1]\}\)</span>，其中 <span class="arithmatex">\(i \in [0, \textit{maxTime}]\)</span>。如果答案为 <span class="arithmatex">\(+\infty\)</span>，则返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\textit{maxTime} \times (m + n))\)</span>，其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是边的数量和城市的数量。空间复杂度 <span class="arithmatex">\(O(\textit{maxTime} \times n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91336,11 +91334,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

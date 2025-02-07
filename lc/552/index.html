@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,17 +90858,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j, k)$，表示从第 $i$ 个出勤记录开始，当前缺勤次数为 $j$，目前最后连续迟到次数为 $k$ 时，可获得出勤奖励的情况数量。那么答案就是 $dfs(0, 0, 0)$。</p>
-<p>函数 $dfs(i, j, k)$ 的执行过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j, k)\)</span>，表示从第 <span class="arithmatex">\(i\)</span> 个出勤记录开始，当前缺勤次数为 <span class="arithmatex">\(j\)</span>，目前最后连续迟到次数为 <span class="arithmatex">\(k\)</span> 时，可获得出勤奖励的情况数量。那么答案就是 <span class="arithmatex">\(dfs(0, 0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的执行过程如下：</p>
 <ul>
-<li>如果 $i \ge n$，说明已经遍历完所有出勤记录，返回 $1$；</li>
-<li>如果 $j = 0$，说明当前缺勤次数为 $0$，那么可以选择缺勤，即 $dfs(i + 1, j + 1, 0)$；</li>
-<li>如果 $k \lt 2$，说明当前连续迟到次数小于 $2$，那么可以选择迟到，即 $dfs(i + 1, j, k + 1)$；</li>
-<li>无论如何，都可以选择到场，即 $dfs(i + 1, j, 0)$。</li>
+<li>如果 <span class="arithmatex">\(i \ge n\)</span>，说明已经遍历完所有出勤记录，返回 <span class="arithmatex">\(1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j = 0\)</span>，说明当前缺勤次数为 <span class="arithmatex">\(0\)</span>，那么可以选择缺勤，即 <span class="arithmatex">\(dfs(i + 1, j + 1, 0)\)</span>；</li>
+<li>如果 <span class="arithmatex">\(k \lt 2\)</span>，说明当前连续迟到次数小于 <span class="arithmatex">\(2\)</span>，那么可以选择迟到，即 <span class="arithmatex">\(dfs(i + 1, j, k + 1)\)</span>；</li>
+<li>无论如何，都可以选择到场，即 <span class="arithmatex">\(dfs(i + 1, j, 0)\)</span>。</li>
 </ul>
-<p>我们将上述三种情况的结果相加，即为 $dfs(i, j, k)$ 的结果。</p>
+<p>我们将上述三种情况的结果相加，即为 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的结果。</p>
 <p>为了避免重复计算，我们可以使用记忆化搜索。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为出勤记录的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为出勤记录的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91607,11 +91605,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

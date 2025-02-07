@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,15 +90865,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们先预处理出前缀和数组 $s$，其中 $s[i]$ 表示前 $i$ 个石头的总和。</p>
-<p>接下来，设计一个函数 $dfs(i, j)$，表示当剩下的石子为 $stones[i], stones[i + 1], \dots, stones[j]$ 时，先手与后手的得分差值。那么答案即为 $dfs(0, n - 1)$。</p>
-<p>函数 $dfs(i, j)$ 的计算过程如下：</p>
+<p>我们先预处理出前缀和数组 <span class="arithmatex">\(s\)</span>，其中 <span class="arithmatex">\(s[i]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个石头的总和。</p>
+<p>接下来，设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示当剩下的石子为 <span class="arithmatex">\(stones[i], stones[i + 1], \dots, stones[j]\)</span> 时，先手与后手的得分差值。那么答案即为 <span class="arithmatex">\(dfs(0, n - 1)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \gt j$，说明当前没有石子，返回 $0$；</li>
-<li>否则，先手有两种选择，分别是移除 $stones[i]$ 或 $stones[j]$，然后计算得分差值，即 $a = s[j + 1] - s[i + 1] - dfs(i + 1, j)$ 和 $b = s[j] - s[i] - dfs(i, j - 1)$，我们取两者中的较大值作为 $dfs(i, j)$ 的返回值。</li>
+<li>如果 <span class="arithmatex">\(i \gt j\)</span>，说明当前没有石子，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>否则，先手有两种选择，分别是移除 <span class="arithmatex">\(stones[i]\)</span> 或 <span class="arithmatex">\(stones[j]\)</span>，然后计算得分差值，即 <span class="arithmatex">\(a = s[j + 1] - s[i + 1] - dfs(i + 1, j)\)</span> 和 <span class="arithmatex">\(b = s[j] - s[i] - dfs(i, j - 1)\)</span>，我们取两者中的较大值作为 <span class="arithmatex">\(dfs(i, j)\)</span> 的返回值。</li>
 </ul>
-<p>过程中，我们使用记忆化搜索，即使用数组 $f$ 记录函数 $dfs(i, j)$ 的返回值，避免重复计算。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 为石子的数量。</p>
+<p>过程中，我们使用记忆化搜索，即使用数组 <span class="arithmatex">\(f\)</span> 记录函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的返回值，避免重复计算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为石子的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91111,14 +91109,14 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划</h3>
-<p>我们可以将方法一中的记忆化搜索转换为动态规划，定义 $f[i][j]$ 表示当剩下的石子为 $stones[i], stones[i + 1], \dots, stones[j]$ 时，先手与后手的得分差值。那么答案即为 $f[0][n - 1]$。</p>
+<p>我们可以将方法一中的记忆化搜索转换为动态规划，定义 <span class="arithmatex">\(f[i][j]\)</span> 表示当剩下的石子为 <span class="arithmatex">\(stones[i], stones[i + 1], \dots, stones[j]\)</span> 时，先手与后手的得分差值。那么答案即为 <span class="arithmatex">\(f[0][n - 1]\)</span>。</p>
 <p>状态转移方程如下：</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \max(s[j + 1] - s[i + 1] - f[i + 1][j], s[j] - s[i] - f[i][j - 1])
-$$</p>
-<p>在计算 $f[i][j]$ 时，我们需要保证 $f[i + 1][j]$ 和 $f[i][j - 1]$ 已经被计算出来，因此我们需要按照从大到小的顺序枚举 $i$，从小到大的顺序枚举 $j$。</p>
-<p>最后，答案即为 $f[0][n - 1]$。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 为石子的数量。</p>
+\]</div>
+<p>在计算 <span class="arithmatex">\(f[i][j]\)</span> 时，我们需要保证 <span class="arithmatex">\(f[i + 1][j]\)</span> 和 <span class="arithmatex">\(f[i][j - 1]\)</span> 已经被计算出来，因此我们需要按照从大到小的顺序枚举 <span class="arithmatex">\(i\)</span>，从小到大的顺序枚举 <span class="arithmatex">\(j\)</span>。</p>
+<p>最后，答案即为 <span class="arithmatex">\(f[0][n - 1]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为石子的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91529,11 +91527,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

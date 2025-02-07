@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90871,13 +90869,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找</h3>
-<p>根据题目描述，如果一个天数 $t$ 可以满足制作 $m$ 束花，那么对任意 $t' &gt; t$，也一定可以满足制作 $m$ 束花。因此，我们可以使用二分查找的方法找到最小的满足制作 $m$ 束花的天数。</p>
-<p>我们记花园中最大的开花天数为 $mx$，接下来，我们定义二分查找的左边界 $l = 1$，右边界 $r = mx + 1$。</p>
-<p>然后，我们进行二分查找，对于每一个中间值 $\textit{mid} = \frac{l + r}{2}$，我们判断是否可以制作 $m$ 束花。如果可以，我们将右边界 $r$ 更新为 $\textit{mid}$，否则，我们将左边界 $l$ 更新为 $\textit{mid} + 1$。</p>
-<p>最终，当 $l = r$ 时，结束二分查找。此时如果 $l &gt; mx$，说明无法制作 $m$ 束花，返回 $-1$，否则返回 $l$。</p>
-<p>因此，问题转换为判断一个天数 $\textit{days}$ 是否可以制作 $m$ 束花。</p>
-<p>我们可以使用一个函数 $\text{check}(\textit{days})$ 来判断是否可以制作 $m$ 束花。具体地，我们从左到右遍历花园中的每一朵花，如果当前花开的天数小于等于 $\textit{days}$，我们将当前花加入到当前花束中，否则，我们将当前花束清空。当当前花束中的花的数量等于 $k$ 时，我们将当前花束的数量加一，并清空当前花束。最后，我们判断当前花束的数量是否大于等于 $m$，如果是，说明可以制作 $m$ 束花，否则，说明无法制作 $m$ 束花。</p>
-<p>时间复杂度 $O(n \times \log M)$，其中 $n$ 和 $M$ 分别为花园中的花的数量和最大的开花天数，本题中 $M \leq 10^9$。空间复杂度 $O(1)$。</p>
+<p>根据题目描述，如果一个天数 <span class="arithmatex">\(t\)</span> 可以满足制作 <span class="arithmatex">\(m\)</span> 束花，那么对任意 <span class="arithmatex">\(t' &gt; t\)</span>，也一定可以满足制作 <span class="arithmatex">\(m\)</span> 束花。因此，我们可以使用二分查找的方法找到最小的满足制作 <span class="arithmatex">\(m\)</span> 束花的天数。</p>
+<p>我们记花园中最大的开花天数为 <span class="arithmatex">\(mx\)</span>，接下来，我们定义二分查找的左边界 <span class="arithmatex">\(l = 1\)</span>，右边界 <span class="arithmatex">\(r = mx + 1\)</span>。</p>
+<p>然后，我们进行二分查找，对于每一个中间值 <span class="arithmatex">\(\textit{mid} = \frac{l + r}{2}\)</span>，我们判断是否可以制作 <span class="arithmatex">\(m\)</span> 束花。如果可以，我们将右边界 <span class="arithmatex">\(r\)</span> 更新为 <span class="arithmatex">\(\textit{mid}\)</span>，否则，我们将左边界 <span class="arithmatex">\(l\)</span> 更新为 <span class="arithmatex">\(\textit{mid} + 1\)</span>。</p>
+<p>最终，当 <span class="arithmatex">\(l = r\)</span> 时，结束二分查找。此时如果 <span class="arithmatex">\(l &gt; mx\)</span>，说明无法制作 <span class="arithmatex">\(m\)</span> 束花，返回 <span class="arithmatex">\(-1\)</span>，否则返回 <span class="arithmatex">\(l\)</span>。</p>
+<p>因此，问题转换为判断一个天数 <span class="arithmatex">\(\textit{days}\)</span> 是否可以制作 <span class="arithmatex">\(m\)</span> 束花。</p>
+<p>我们可以使用一个函数 <span class="arithmatex">\(\text{check}(\textit{days})\)</span> 来判断是否可以制作 <span class="arithmatex">\(m\)</span> 束花。具体地，我们从左到右遍历花园中的每一朵花，如果当前花开的天数小于等于 <span class="arithmatex">\(\textit{days}\)</span>，我们将当前花加入到当前花束中，否则，我们将当前花束清空。当当前花束中的花的数量等于 <span class="arithmatex">\(k\)</span> 时，我们将当前花束的数量加一，并清空当前花束。最后，我们判断当前花束的数量是否大于等于 <span class="arithmatex">\(m\)</span>，如果是，说明可以制作 <span class="arithmatex">\(m\)</span> 束花，否则，说明无法制作 <span class="arithmatex">\(m\)</span> 束花。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别为花园中的花的数量和最大的开花天数，本题中 <span class="arithmatex">\(M \leq 10^9\)</span>。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91366,11 +91364,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

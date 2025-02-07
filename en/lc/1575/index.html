@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86078,16 +86076,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization">Solution 1: Memoization</h3>
-<p>We design a function $dfs(i, k)$, which represents the number of paths from city $i$ with $k$ remaining fuel to the destination $finish$. So the answer is $dfs(start, fuel)$.</p>
-<p>The process of calculating the function $dfs(i, k)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, k)\)</span>, which represents the number of paths from city <span class="arithmatex">\(i\)</span> with <span class="arithmatex">\(k\)</span> remaining fuel to the destination <span class="arithmatex">\(finish\)</span>. So the answer is <span class="arithmatex">\(dfs(start, fuel)\)</span>.</p>
+<p>The process of calculating the function <span class="arithmatex">\(dfs(i, k)\)</span> is as follows:</p>
 <ul>
-<li>If $k \lt |locations[i] - locations[finish]|$, then return $0$.</li>
-<li>If $i = finish$, then the number of paths is $1$ at the beginning, otherwise it is $0$.</li>
-<li>Then, we traverse all cities $j$. If $j \ne i$, then we can move from city $i$ to city $j$, and the remaining fuel is $k - |locations[i] - locations[j]|$. Then we can add the number of paths to the answer $dfs(j, k - |locations[i] - locations[j]|)$.</li>
+<li>If <span class="arithmatex">\(k \lt |locations[i] - locations[finish]|\)</span>, then return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(i = finish\)</span>, then the number of paths is <span class="arithmatex">\(1\)</span> at the beginning, otherwise it is <span class="arithmatex">\(0\)</span>.</li>
+<li>Then, we traverse all cities <span class="arithmatex">\(j\)</span>. If <span class="arithmatex">\(j \ne i\)</span>, then we can move from city <span class="arithmatex">\(i\)</span> to city <span class="arithmatex">\(j\)</span>, and the remaining fuel is <span class="arithmatex">\(k - |locations[i] - locations[j]|\)</span>. Then we can add the number of paths to the answer <span class="arithmatex">\(dfs(j, k - |locations[i] - locations[j]|)\)</span>.</li>
 <li>Finally, we return the number of paths to the answer.</li>
 </ul>
 <p>To avoid repeated calculations, we can use memoization.</p>
-<p>The time complexity is $O(n^2 \times m)$, and the space complexity is $O(n \times m)$. Where $n$ and $m$ are the size of the array $locations$ and $fuel$ respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times m)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the size of the array <span class="arithmatex">\(locations\)</span> and <span class="arithmatex">\(fuel\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86372,10 +86370,10 @@
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can also convert the memoization of solution 1 into dynamic programming.</p>
-<p>We define $f[i][k]$ represents the number of paths from city $i$ with $k$ remaining fuel to the destination $finish$. So the answer is $f[start][fuel]$. Initially $f[finish][k]=1$, others are $0$.</p>
-<p>Next, we enumerate the remaining fuel $k$ from small to large, and then enumerate all cities $i$. For each city $i$, we enumerate all cities $j$. If $j \ne i$, and $|locations[i] - locations[j]| \le k$, then we can move from city $i$ to city $j$, and the remaining fuel is $k - |locations[i] - locations[j]|$. Then we can add the number of paths to the answer $f[j][k - |locations[i] - locations[j]|]$.</p>
-<p>Finally, we return the number of paths to the answer $f[start][fuel]$.</p>
-<p>The time complexity is $O(n^2 \times m)$, and the space complexity is $O(n \times m)$. Where $n$ and $m$ are the size of the array $locations$ and $fuel$ respectively.</p>
+<p>We define <span class="arithmatex">\(f[i][k]\)</span> represents the number of paths from city <span class="arithmatex">\(i\)</span> with <span class="arithmatex">\(k\)</span> remaining fuel to the destination <span class="arithmatex">\(finish\)</span>. So the answer is <span class="arithmatex">\(f[start][fuel]\)</span>. Initially <span class="arithmatex">\(f[finish][k]=1\)</span>, others are <span class="arithmatex">\(0\)</span>.</p>
+<p>Next, we enumerate the remaining fuel <span class="arithmatex">\(k\)</span> from small to large, and then enumerate all cities <span class="arithmatex">\(i\)</span>. For each city <span class="arithmatex">\(i\)</span>, we enumerate all cities <span class="arithmatex">\(j\)</span>. If <span class="arithmatex">\(j \ne i\)</span>, and <span class="arithmatex">\(|locations[i] - locations[j]| \le k\)</span>, then we can move from city <span class="arithmatex">\(i\)</span> to city <span class="arithmatex">\(j\)</span>, and the remaining fuel is <span class="arithmatex">\(k - |locations[i] - locations[j]|\)</span>. Then we can add the number of paths to the answer <span class="arithmatex">\(f[j][k - |locations[i] - locations[j]|]\)</span>.</p>
+<p>Finally, we return the number of paths to the answer <span class="arithmatex">\(f[start][fuel]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times m)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the size of the array <span class="arithmatex">\(locations\)</span> and <span class="arithmatex">\(fuel\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86839,11 +86837,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

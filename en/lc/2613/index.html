@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86073,13 +86071,13 @@
 
 <h3 id="solution-1-sorting-divide-and-conquer">Solution 1: Sorting + Divide and Conquer</h3>
 <p>This problem is equivalent to finding two points in the plane, such that the Manhattan distance between them is the smallest. If there are multiple points satisfying the condition, return the one with the smallest index.</p>
-<p>First, we handle the case where there are duplicate points. For each point, we record the corresponding indices in a list. If the length of the index list is greater than $1$, then the first two indices in the index list can be used as candidates, and we find the smallest index pair.</p>
-<p>If there are no duplicate points, we sort all the points by $x$ coordinates, and then use the divide and conquer to solve the problem.</p>
-<p>For each interval $[l, r]$, we first calculate the median of the $x$ coordinates $m$, and then recursively solve the left and right intervals, and get $d_1, (pi_1, pj_1)$ and $d_2, (pi_2, pj_2)$ respectively, where $d_1$ and $d_2$ are the minimum Manhattan distances of the left and right intervals respectively, and $(pi_1, pj_1)$ and $(pi_2, pj_2)$ are the index pairs of the two points of the minimum Manhattan distance of the left and right intervals respectively. We take the smaller one of $d_1$ and $d_2$ as the minimum Manhattan distance of the current interval, and if $d_1 = d_2$, we take the one with the smaller index as the answer. The corresponding two points of the index are taken as the answer.</p>
-<p>The above considers the case where the two points are on the same side. If the two points are on different sides, we take the middle point, i.e. the point with the index of $m = \lfloor (l + r) / 2 \rfloor$ as the standard, and divide a new region. The range of this region is to expand the range of $d_1$ from the middle point to the left and right sides respectively. Then we sort these points in the range by $y$ coordinates, and then traverse each point pair in the sorted order. If the difference of the $y$ coordinates of the two points is greater than the current minimum Manhattan distance, then the following point pairs do not need to be considered, because their $y$ coordinate differences are larger, so the Manhattan distance is larger, and it will not be smaller than the current minimum Manhattan distance. Otherwise, we update the minimum Manhattan distance, and update the answer.</p>
+<p>First, we handle the case where there are duplicate points. For each point, we record the corresponding indices in a list. If the length of the index list is greater than <span class="arithmatex">\(1\)</span>, then the first two indices in the index list can be used as candidates, and we find the smallest index pair.</p>
+<p>If there are no duplicate points, we sort all the points by <span class="arithmatex">\(x\)</span> coordinates, and then use the divide and conquer to solve the problem.</p>
+<p>For each interval <span class="arithmatex">\([l, r]\)</span>, we first calculate the median of the <span class="arithmatex">\(x\)</span> coordinates <span class="arithmatex">\(m\)</span>, and then recursively solve the left and right intervals, and get <span class="arithmatex">\(d_1, (pi_1, pj_1)\)</span> and <span class="arithmatex">\(d_2, (pi_2, pj_2)\)</span> respectively, where <span class="arithmatex">\(d_1\)</span> and <span class="arithmatex">\(d_2\)</span> are the minimum Manhattan distances of the left and right intervals respectively, and <span class="arithmatex">\((pi_1, pj_1)\)</span> and <span class="arithmatex">\((pi_2, pj_2)\)</span> are the index pairs of the two points of the minimum Manhattan distance of the left and right intervals respectively. We take the smaller one of <span class="arithmatex">\(d_1\)</span> and <span class="arithmatex">\(d_2\)</span> as the minimum Manhattan distance of the current interval, and if <span class="arithmatex">\(d_1 = d_2\)</span>, we take the one with the smaller index as the answer. The corresponding two points of the index are taken as the answer.</p>
+<p>The above considers the case where the two points are on the same side. If the two points are on different sides, we take the middle point, i.e. the point with the index of <span class="arithmatex">\(m = \lfloor (l + r) / 2 \rfloor\)</span> as the standard, and divide a new region. The range of this region is to expand the range of <span class="arithmatex">\(d_1\)</span> from the middle point to the left and right sides respectively. Then we sort these points in the range by <span class="arithmatex">\(y\)</span> coordinates, and then traverse each point pair in the sorted order. If the difference of the <span class="arithmatex">\(y\)</span> coordinates of the two points is greater than the current minimum Manhattan distance, then the following point pairs do not need to be considered, because their <span class="arithmatex">\(y\)</span> coordinate differences are larger, so the Manhattan distance is larger, and it will not be smaller than the current minimum Manhattan distance. Otherwise, we update the minimum Manhattan distance, and update the answer.</p>
 <p>Finally, we return the answer.</p>
-<p>Time complexity: $O(n \times \log n)$, where $n$ is the length of the array.</p>
-<p>Space complexity: $O(n)$.</p>
+<p>Time complexity: <span class="arithmatex">\(O(n \times \log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array.</p>
+<p>Space complexity: <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86926,11 +86924,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

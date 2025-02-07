@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90849,10 +90847,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：回溯</h3>
-<p>我们创建一个二维数组 $g$，用于记录骑士的移动顺序，初始时 $g[r][c] = -1$，其余位置均为 $-1$。另外，我们还需要一个变量 $ok$，用于记录是否找到了一种方案。</p>
-<p>接下来，我们从 $(r, c)$ 开始进行深度优先搜索，每次搜索位置 $(i, j)$ 时，我们先判断 $g[i][j]$ 是否等于 $m \times n - 1$，若是，说明我们已经找到了一种方案，此时将 $ok$ 置为 <code>true</code> 并且返回。否则我们枚举骑士的八个移动方向对应的位置 $(x, y)$，若满足 $0 \leq x \lt m$, $0 \leq y \lt n$，并且 $g[x][y]=-1$，那么我们将 $g[x][y]$ 更新为 $g[i][j]+1$，然后递归搜索位置 $(x, y)$。如果搜索结束后，变量 $ok$ 为 <code>true</code>，则直接返回。否则，我们将 $g[x][y]$ 重置为 $-1$，继续搜索其他方向。</p>
-<p>最后返回二维数组 $g$ 即可。</p>
-<p>时间复杂度 $O(8^{m \times n})$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 为题目给定的整数。</p>
+<p>我们创建一个二维数组 <span class="arithmatex">\(g\)</span>，用于记录骑士的移动顺序，初始时 <span class="arithmatex">\(g[r][c] = -1\)</span>，其余位置均为 <span class="arithmatex">\(-1\)</span>。另外，我们还需要一个变量 <span class="arithmatex">\(ok\)</span>，用于记录是否找到了一种方案。</p>
+<p>接下来，我们从 <span class="arithmatex">\((r, c)\)</span> 开始进行深度优先搜索，每次搜索位置 <span class="arithmatex">\((i, j)\)</span> 时，我们先判断 <span class="arithmatex">\(g[i][j]\)</span> 是否等于 <span class="arithmatex">\(m \times n - 1\)</span>，若是，说明我们已经找到了一种方案，此时将 <span class="arithmatex">\(ok\)</span> 置为 <code>true</code> 并且返回。否则我们枚举骑士的八个移动方向对应的位置 <span class="arithmatex">\((x, y)\)</span>，若满足 <span class="arithmatex">\(0 \leq x \lt m\)</span>, <span class="arithmatex">\(0 \leq y \lt n\)</span>，并且 <span class="arithmatex">\(g[x][y]=-1\)</span>，那么我们将 <span class="arithmatex">\(g[x][y]\)</span> 更新为 <span class="arithmatex">\(g[i][j]+1\)</span>，然后递归搜索位置 <span class="arithmatex">\((x, y)\)</span>。如果搜索结束后，变量 <span class="arithmatex">\(ok\)</span> 为 <code>true</code>，则直接返回。否则，我们将 <span class="arithmatex">\(g[x][y]\)</span> 重置为 <span class="arithmatex">\(-1\)</span>，继续搜索其他方向。</p>
+<p>最后返回二维数组 <span class="arithmatex">\(g\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(8^{m \times n})\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 为题目给定的整数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91460,11 +91458,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

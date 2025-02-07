@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86043,25 +86041,25 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-simulate-the-construction-process">Solution 1: Simulate the Construction Process</h3>
-<p>According to the problem, we know that each group of numbers in the string $s$ can be obtained from the digits of the string $s$ itself.</p>
-<p>The first two groups of numbers in string $s$ are $1$ and $22$, which are obtained from the first and second digits of string $s$, respectively. Moreover, the first group of numbers contains only $1$, the second group contains only $2$, the third group contains only $1$, and so on.</p>
-<p>Since the first two groups of numbers are known, we initialize string $s$ as $122$, and then start constructing from the third group. The third group of numbers is obtained from the third digit of string $s$ (index $i=2$), so at this point, we point the pointer $i$ to the third digit $2$ of string $s$.</p>
+<p>According to the problem, we know that each group of numbers in the string <span class="arithmatex">\(s\)</span> can be obtained from the digits of the string <span class="arithmatex">\(s\)</span> itself.</p>
+<p>The first two groups of numbers in string <span class="arithmatex">\(s\)</span> are <span class="arithmatex">\(1\)</span> and <span class="arithmatex">\(22\)</span>, which are obtained from the first and second digits of string <span class="arithmatex">\(s\)</span>, respectively. Moreover, the first group of numbers contains only <span class="arithmatex">\(1\)</span>, the second group contains only <span class="arithmatex">\(2\)</span>, the third group contains only <span class="arithmatex">\(1\)</span>, and so on.</p>
+<p>Since the first two groups of numbers are known, we initialize string <span class="arithmatex">\(s\)</span> as <span class="arithmatex">\(122\)</span>, and then start constructing from the third group. The third group of numbers is obtained from the third digit of string <span class="arithmatex">\(s\)</span> (index <span class="arithmatex">\(i=2\)</span>), so at this point, we point the pointer <span class="arithmatex">\(i\)</span> to the third digit <span class="arithmatex">\(2\)</span> of string <span class="arithmatex">\(s\)</span>.</p>
 <div class="highlight"><pre><span></span><code>1 2 2
     ^
     i
 </code></pre></div>
-<p>The digit pointed by pointer $i$ is $2$, indicating that the third group of numbers will appear twice. Since the previous group of numbers is $2$, and the numbers alternate between groups, the third group of numbers is two $1$s, i.e., $11$. After construction, the pointer $i$ moves to the next position, pointing to the fourth digit $1$ of string $s$.</p>
+<p>The digit pointed by pointer <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(2\)</span>, indicating that the third group of numbers will appear twice. Since the previous group of numbers is <span class="arithmatex">\(2\)</span>, and the numbers alternate between groups, the third group of numbers is two <span class="arithmatex">\(1\)</span>s, i.e., <span class="arithmatex">\(11\)</span>. After construction, the pointer <span class="arithmatex">\(i\)</span> moves to the next position, pointing to the fourth digit <span class="arithmatex">\(1\)</span> of string <span class="arithmatex">\(s\)</span>.</p>
 <div class="highlight"><pre><span></span><code>1 2 2 1 1
       ^
       i
 </code></pre></div>
-<p>At this point, the digit pointed by pointer $i$ is $1$, indicating that the fourth group of numbers will appear once. Since the previous group of numbers is $1$, and the numbers alternate between groups, the fourth group of numbers is one $2$, i.e., $2$. After construction, the pointer $i$ moves to the next position, pointing to the fifth digit $1$ of string $s$.</p>
+<p>At this point, the digit pointed by pointer <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(1\)</span>, indicating that the fourth group of numbers will appear once. Since the previous group of numbers is <span class="arithmatex">\(1\)</span>, and the numbers alternate between groups, the fourth group of numbers is one <span class="arithmatex">\(2\)</span>, i.e., <span class="arithmatex">\(2\)</span>. After construction, the pointer <span class="arithmatex">\(i\)</span> moves to the next position, pointing to the fifth digit <span class="arithmatex">\(1\)</span> of string <span class="arithmatex">\(s\)</span>.</p>
 <div class="highlight"><pre><span></span><code>1 2 2 1 1 2
         ^
         i
 </code></pre></div>
-<p>Following this rule, we simulate the construction process sequentially until the length of string $s$ is greater than or equal to $n$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$.</p>
+<p>Following this rule, we simulate the construction process sequentially until the length of string <span class="arithmatex">\(s\)</span> is greater than or equal to <span class="arithmatex">\(n\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86486,11 +86484,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

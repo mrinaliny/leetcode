@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86047,7 +86045,7 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-classification-discussion-enumeration">Solution 1: Classification Discussion + Enumeration</h3>
-<p>According to the problem description, we need to find the maximum value of the array $\sum_{i=0}^{n-2} |a_i - a_{i+1}|$ when reversing a subarray once.</p>
+<p>According to the problem description, we need to find the maximum value of the array <span class="arithmatex">\(\sum_{i=0}^{n-2} |a_i - a_{i+1}|\)</span> when reversing a subarray once.</p>
 <p>Next, we discuss the following cases:</p>
 <ol>
 <li>Do not reverse the subarray.</li>
@@ -86055,27 +86053,27 @@
 <li>Reverse the subarray, and the subarray "includes" the last element.</li>
 <li>Reverse the subarray, and the subarray "does not include" the first and last elements.</li>
 </ol>
-<p>Let $s$ be the array value when the subarray is not reversed, then $s = \sum_{i=0}^{n-2} |a_i - a_{i+1}|$. We can initialize the answer $ans$ to $s$.</p>
-<p>If we reverse the subarray and the subarray includes the first element, we can enumerate the last element $a_i$ of the reversed subarray, where $0 \leq i &lt; n-1$. In this case, $ans = \max(ans, s + |a_0 - a_{i+1}| - |a_i - a_{i+1}|)$.</p>
+<p>Let <span class="arithmatex">\(s\)</span> be the array value when the subarray is not reversed, then <span class="arithmatex">\(s = \sum_{i=0}^{n-2} |a_i - a_{i+1}|\)</span>. We can initialize the answer <span class="arithmatex">\(ans\)</span> to <span class="arithmatex">\(s\)</span>.</p>
+<p>If we reverse the subarray and the subarray includes the first element, we can enumerate the last element <span class="arithmatex">\(a_i\)</span> of the reversed subarray, where <span class="arithmatex">\(0 \leq i &lt; n-1\)</span>. In this case, <span class="arithmatex">\(ans = \max(ans, s + |a_0 - a_{i+1}| - |a_i - a_{i+1}|)\)</span>.</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/1-drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/1-drawio.png" /></a></p>
 
-<p>Similarly, if we reverse the subarray and the subarray includes the last element, we can enumerate the first element $a_{i+1}$ of the reversed subarray, where $0 \leq i &lt; n-1$. In this case, $ans = \max(ans, s + |a_{n-1} - a_i| - |a_i - a_{i+1}|)$.</p>
+<p>Similarly, if we reverse the subarray and the subarray includes the last element, we can enumerate the first element <span class="arithmatex">\(a_{i+1}\)</span> of the reversed subarray, where <span class="arithmatex">\(0 \leq i &lt; n-1\)</span>. In this case, <span class="arithmatex">\(ans = \max(ans, s + |a_{n-1} - a_i| - |a_i - a_{i+1}|)\)</span>.</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/2-drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/2-drawio.png" /></a></p>
 
-<p>If we reverse the subarray and the subarray does not include the first and last elements, we consider any two adjacent elements in the array as a point pair $(x, y)$. Let the first element of the reversed subarray be $y_1$, and its left adjacent element be $x_1$; let the last element of the reversed subarray be $x_2$, and its right adjacent element be $y_2$.</p>
+<p>If we reverse the subarray and the subarray does not include the first and last elements, we consider any two adjacent elements in the array as a point pair <span class="arithmatex">\((x, y)\)</span>. Let the first element of the reversed subarray be <span class="arithmatex">\(y_1\)</span>, and its left adjacent element be <span class="arithmatex">\(x_1\)</span>; let the last element of the reversed subarray be <span class="arithmatex">\(x_2\)</span>, and its right adjacent element be <span class="arithmatex">\(y_2\)</span>.</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/3-drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/3-drawio.png" /></a></p>
 
-<p>At this time, compared to not reversing the subarray, the change in the array value is $|x_1 - x_2| + |y_1 - y_2| - |x_1 - y_1| - |x_2 - y_2|$, where the first two terms can be expressed as:</p>
-<p>$$
-\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | = \max \begin{cases} (x_1 + y_1) - (x_2 + y_2) \ (x_1 - y_1) - (x_2 - y_2) \ (-x_1 + y_1) - (-x_2 + y_2) \ (-x_1 - y_1) - (-x_2 - y_2) \end{cases}
-$$</p>
+<p>At this time, compared to not reversing the subarray, the change in the array value is <span class="arithmatex">\(|x_1 - x_2| + |y_1 - y_2| - |x_1 - y_1| - |x_2 - y_2|\)</span>, where the first two terms can be expressed as:</p>
+<div class="arithmatex">\[
+\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | = \max \begin{cases} (x_1 + y_1) - (x_2 + y_2) \\ (x_1 - y_1) - (x_2 - y_2) \\ (-x_1 + y_1) - (-x_2 + y_2) \\ (-x_1 - y_1) - (-x_2 - y_2) \end{cases}
+\]</div>
 <p>Then the change in the array value is:</p>
-<p>$$
-\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | - \left | x_1 - y_1 \right | - \left | x_2 - y_2 \right |  = \max \begin{cases} (x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \ (x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \ (-x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \ (-x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \end{cases}
-$$</p>
-<p>Therefore, we only need to find the maximum value $mx$ of $k_1 \times x + k_2 \times y$, where $k_1, k_2 \in {-1, 1}$, and the corresponding minimum value $mi$ of $|x - y|$. Then the maximum change in the array value is $mx - mi$. The answer is $ans = \max(ans, s + \max(0, mx - mi))$.</p>
-<p>In the code implementation, we define an array of length 5, $dirs=[1, -1, -1, 1, 1]$. Each time we take two adjacent elements of the array as the values of $k_1$ and $k_2$, which can cover all cases of $k_1, k_2 \in {-1, 1}$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array $nums$. The space complexity is $O(1)$.</p>
+<div class="arithmatex">\[
+\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | - \left | x_1 - y_1 \right | - \left | x_2 - y_2 \right |  = \max \begin{cases} (x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \\ (x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \\ (-x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \\ (-x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \end{cases}
+\]</div>
+<p>Therefore, we only need to find the maximum value <span class="arithmatex">\(mx\)</span> of <span class="arithmatex">\(k_1 \times x + k_2 \times y\)</span>, where <span class="arithmatex">\(k_1, k_2 \in \{-1, 1\}\)</span>, and the corresponding minimum value <span class="arithmatex">\(mi\)</span> of <span class="arithmatex">\(|x - y|\)</span>. Then the maximum change in the array value is <span class="arithmatex">\(mx - mi\)</span>. The answer is <span class="arithmatex">\(ans = \max(ans, s + \max(0, mx - mi))\)</span>.</p>
+<p>In the code implementation, we define an array of length 5, <span class="arithmatex">\(dirs=[1, -1, -1, 1, 1]\)</span>. Each time we take two adjacent elements of the array as the values of <span class="arithmatex">\(k_1\)</span> and <span class="arithmatex">\(k_2\)</span>, which can cover all cases of <span class="arithmatex">\(k_1, k_2 \in \{-1, 1\}\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1100-1199/1131.Maximum%20of%20Absolute%20Value%20Expression/README_EN.md">1131. Maximum of Absolute Value Expression</a></li>
@@ -86595,11 +86593,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

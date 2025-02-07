@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90877,12 +90875,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：组合计数</h3>
-<p>根据题目描述我们可以知道，最终的路径是由 $destination[0]$ 个 <code>'V'</code> 和 $destination[1]$ 个 <code>'H'</code> 组成的，且按字典序排列后的第 $k$ 条最小指令。</p>
-<p>我们首先考虑字典序的最高位，即最左边的字符。如果高位字符是 <code>'V'</code>，那么所有以 <code>'H'</code> 开头的路径的字典序都比它小，而以 <code>'H'</code> 开头的路径总数为 $x = C_{v+h-1}^{h-1}$。</p>
-<p>如果 $k \lt x$，那么高位字符一定是 <code>'V'</code>，我们将 $k$ 减去 $x$，并将 $v$ 减 $1$，然后继续考虑下一位字符；否则，高位字符一定是 <code>'H'</code>，我们将 $h$ 减 $1$，然后继续考虑下一位字符。</p>
-<p>注意，如果 $h = 0$，那么高位字符一定是 <code>'V'</code>，因为剩下的字符都是 <code>'V'</code>。</p>
-<p>问题可以转换为求解 $C_{n}^{k}$，我们可以通过公式 $C_{n}^{k} = C_{n-1}^{k-1} + C_{n-1}^{k}$ 递推求解。</p>
-<p>时间复杂度 $O((h + v) \times h)$，空间复杂度 $O((h + v) \times h)$。其中 $h$ 和 $v$ 分别为 $destination[1]$ 和 $destination[0]$。</p>
+<p>根据题目描述我们可以知道，最终的路径是由 <span class="arithmatex">\(destination[0]\)</span> 个 <code>'V'</code> 和 <span class="arithmatex">\(destination[1]\)</span> 个 <code>'H'</code> 组成的，且按字典序排列后的第 <span class="arithmatex">\(k\)</span> 条最小指令。</p>
+<p>我们首先考虑字典序的最高位，即最左边的字符。如果高位字符是 <code>'V'</code>，那么所有以 <code>'H'</code> 开头的路径的字典序都比它小，而以 <code>'H'</code> 开头的路径总数为 <span class="arithmatex">\(x = C_{v+h-1}^{h-1}\)</span>。</p>
+<p>如果 <span class="arithmatex">\(k \lt x\)</span>，那么高位字符一定是 <code>'V'</code>，我们将 <span class="arithmatex">\(k\)</span> 减去 <span class="arithmatex">\(x\)</span>，并将 <span class="arithmatex">\(v\)</span> 减 <span class="arithmatex">\(1\)</span>，然后继续考虑下一位字符；否则，高位字符一定是 <code>'H'</code>，我们将 <span class="arithmatex">\(h\)</span> 减 <span class="arithmatex">\(1\)</span>，然后继续考虑下一位字符。</p>
+<p>注意，如果 <span class="arithmatex">\(h = 0\)</span>，那么高位字符一定是 <code>'V'</code>，因为剩下的字符都是 <code>'V'</code>。</p>
+<p>问题可以转换为求解 <span class="arithmatex">\(C_{n}^{k}\)</span>，我们可以通过公式 <span class="arithmatex">\(C_{n}^{k} = C_{n-1}^{k-1} + C_{n-1}^{k}\)</span> 递推求解。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((h + v) \times h)\)</span>，空间复杂度 <span class="arithmatex">\(O((h + v) \times h)\)</span>。其中 <span class="arithmatex">\(h\)</span> 和 <span class="arithmatex">\(v\)</span> 分别为 <span class="arithmatex">\(destination[1]\)</span> 和 <span class="arithmatex">\(destination[0]\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91353,11 +91351,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

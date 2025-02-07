@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90840,11 +90838,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：直接枚举</h3>
-<p>一种直观且有效的思路是，直接枚举 $[1,2,..n]$ 中的每个数，判断其是否为好数，若为好数，则答案加一。</p>
-<p>那么题目的重点转化为如何判断一个数字 $x$ 是否为好数。判断的逻辑如下：</p>
-<p>我们先用一个长度为 $10$ 的数组 $d$ 记录每个有效数字对应的旋转数字，在这道题中，有效数字有 $[0, 1, 8, 2, 5, 6, 9]$，分别对应旋转数字 $[0, 1, 8, 5, 2, 9, 6]$。如果不是有效数字，我们将对应的旋转数字设为 $-1$。</p>
-<p>然后遍历数字 $x$ 的每一位数字 $v$，如果 $v$ 不是有效数字，说明 $x$ 不是好数，直接返回 $\textit{false}$。否则，我们将数字 $v$ 对应的旋转数字 $d[v]$ 加入到 $y$ 中。最后，判断 $x$ 和 $y$ 是否相等，若不相等，则说明 $x$ 是好数，返回 $\textit{true}$。</p>
-<p>时间复杂度 $O(n \times \log n)$，其中 $n$ 为题目给定的数字。空间复杂度 $O(1)$。</p>
+<p>一种直观且有效的思路是，直接枚举 <span class="arithmatex">\([1,2,..n]\)</span> 中的每个数，判断其是否为好数，若为好数，则答案加一。</p>
+<p>那么题目的重点转化为如何判断一个数字 <span class="arithmatex">\(x\)</span> 是否为好数。判断的逻辑如下：</p>
+<p>我们先用一个长度为 <span class="arithmatex">\(10\)</span> 的数组 <span class="arithmatex">\(d\)</span> 记录每个有效数字对应的旋转数字，在这道题中，有效数字有 <span class="arithmatex">\([0, 1, 8, 2, 5, 6, 9]\)</span>，分别对应旋转数字 <span class="arithmatex">\([0, 1, 8, 5, 2, 9, 6]\)</span>。如果不是有效数字，我们将对应的旋转数字设为 <span class="arithmatex">\(-1\)</span>。</p>
+<p>然后遍历数字 <span class="arithmatex">\(x\)</span> 的每一位数字 <span class="arithmatex">\(v\)</span>，如果 <span class="arithmatex">\(v\)</span> 不是有效数字，说明 <span class="arithmatex">\(x\)</span> 不是好数，直接返回 <span class="arithmatex">\(\textit{false}\)</span>。否则，我们将数字 <span class="arithmatex">\(v\)</span> 对应的旋转数字 <span class="arithmatex">\(d[v]\)</span> 加入到 <span class="arithmatex">\(y\)</span> 中。最后，判断 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 是否相等，若不相等，则说明 <span class="arithmatex">\(x\)</span> 是好数，返回 <span class="arithmatex">\(\textit{true}\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为题目给定的数字。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1000-1099/1056.Confusing%20Number/README.md">1056. 易混淆数</a></li>
@@ -91092,21 +91090,21 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法二：数位 DP</h3>
-<p>方法一的做法足以通过本题，但时间复杂度较高。如果题目的数据范围达到 $10^9$ 级别，则方法一的做法会超出时间限制。</p>
-<p>这道题实际上是求在给定区间 $[l,..r]$ 中，满足条件的数的个数。条件与数的大小无关，而只与数的组成有关，因此可以使用数位 DP 的思想求解。数位 DP 中，数的大小对复杂度的影响很小。</p>
-<p>对于区间 $[l,..r]$ 问题，我们一般会将其转化为 $[1,..r]$ 然后再减去 $[1,..l - 1]$ 的问题，即：</p>
-<p>$$
+<p>方法一的做法足以通过本题，但时间复杂度较高。如果题目的数据范围达到 <span class="arithmatex">\(10^9\)</span> 级别，则方法一的做法会超出时间限制。</p>
+<p>这道题实际上是求在给定区间 <span class="arithmatex">\([l,..r]\)</span> 中，满足条件的数的个数。条件与数的大小无关，而只与数的组成有关，因此可以使用数位 DP 的思想求解。数位 DP 中，数的大小对复杂度的影响很小。</p>
+<p>对于区间 <span class="arithmatex">\([l,..r]\)</span> 问题，我们一般会将其转化为 <span class="arithmatex">\([1,..r]\)</span> 然后再减去 <span class="arithmatex">\([1,..l - 1]\)</span> 的问题，即：</p>
+<div class="arithmatex">\[
 ans = \sum_{i=1}^{r} ans_i -  \sum_{i=1}^{l-1} ans_i
-$$</p>
-<p>不过对于本题而言，我们只需要求出区间 $[1,..r]$ 的值即可。</p>
+\]</div>
+<p>不过对于本题而言，我们只需要求出区间 <span class="arithmatex">\([1,..r]\)</span> 的值即可。</p>
 <p>这里我们用记忆化搜索来实现数位 DP。从起点向下搜索，到最底层得到方案数，一层层向上返回答案并累加，最后从搜索起点得到最终的答案。</p>
 <p>基本步骤如下：</p>
-<p>我们将数字 $n$ 转为字符串 $s$。然后定义函数 $\textit{dfs}(i, \textit{ok}, \textit{limit})$，其中 $i$ 表示数字的位数，数字 $\textit{ok}$ 表示当前数字是否满足题目要求，布尔值 $\textit{limit}$ 表示可填的数字的限制。</p>
+<p>我们将数字 <span class="arithmatex">\(n\)</span> 转为字符串 <span class="arithmatex">\(s\)</span>。然后定义函数 <span class="arithmatex">\(\textit{dfs}(i, \textit{ok}, \textit{limit})\)</span>，其中 <span class="arithmatex">\(i\)</span> 表示数字的位数，数字 <span class="arithmatex">\(\textit{ok}\)</span> 表示当前数字是否满足题目要求，布尔值 <span class="arithmatex">\(\textit{limit}\)</span> 表示可填的数字的限制。</p>
 <p>函数的执行逻辑如下：</p>
-<p>如果 $i$ 大于等于字符串 $s$ 的长度，返回 $\textit{ok}$；</p>
-<p>否则，我们获取当前位的数字 $up$，如果 $\textit{limit}$ 为 $\textit{true}$，则 $up$ 为当前位的数字，否则 $up$ 为 $9$；</p>
-<p>接下来，我们遍历 $[0,..up]$，如果 $j$ 是有效数字 $[0, 1, 8]$，则递归调用 $\textit{dfs}(i + 1, \textit{ok}, \textit{limit} \land j = \textit{up})$；如果 $j$ 是有效数字 $[2, 5, 6, 9]$，则递归调用 $\textit{dfs}(i + 1, 1, \textit{limit} \land j = \textit{up})$；将所有递归调用的结果累加并返回。</p>
-<p>时间复杂度 $O(\log n \times D)$，空间复杂度 $O(\log n)$。其中 $D = 10$。</p>
+<p>如果 <span class="arithmatex">\(i\)</span> 大于等于字符串 <span class="arithmatex">\(s\)</span> 的长度，返回 <span class="arithmatex">\(\textit{ok}\)</span>；</p>
+<p>否则，我们获取当前位的数字 <span class="arithmatex">\(up\)</span>，如果 <span class="arithmatex">\(\textit{limit}\)</span> 为 <span class="arithmatex">\(\textit{true}\)</span>，则 <span class="arithmatex">\(up\)</span> 为当前位的数字，否则 <span class="arithmatex">\(up\)</span> 为 <span class="arithmatex">\(9\)</span>；</p>
+<p>接下来，我们遍历 <span class="arithmatex">\([0,..up]\)</span>，如果 <span class="arithmatex">\(j\)</span> 是有效数字 <span class="arithmatex">\([0, 1, 8]\)</span>，则递归调用 <span class="arithmatex">\(\textit{dfs}(i + 1, \textit{ok}, \textit{limit} \land j = \textit{up})\)</span>；如果 <span class="arithmatex">\(j\)</span> 是有效数字 <span class="arithmatex">\([2, 5, 6, 9]\)</span>，则递归调用 <span class="arithmatex">\(\textit{dfs}(i + 1, 1, \textit{limit} \land j = \textit{up})\)</span>；将所有递归调用的结果累加并返回。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log n \times D)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log n)\)</span>。其中 <span class="arithmatex">\(D = 10\)</span>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README.md">233. 数字 1 的个数</a></li>
@@ -91641,11 +91639,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

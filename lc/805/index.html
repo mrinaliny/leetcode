@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,35 +90856,35 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：折半查找 + 二进制枚举</h3>
-<p>根据题目要求，要判断是否可以将数组 $\textit{nums}$ 划分为两个子数组 $A$ 和 $B$，使得两个子数组的平均值相等。</p>
-<p>我们记数组 $\textit{nums}$ 的和为 $s$，元素个数为 $n$。子数组 $A$ 的和以及个数分别为 $s_1$ 和 $k$，那么子数组 $B$ 的和为 $s_2 = s - s_1$，个数为 $n - k$，即：</p>
-<p>$$
+<p>根据题目要求，要判断是否可以将数组 <span class="arithmatex">\(\textit{nums}\)</span> 划分为两个子数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span>，使得两个子数组的平均值相等。</p>
+<p>我们记数组 <span class="arithmatex">\(\textit{nums}\)</span> 的和为 <span class="arithmatex">\(s\)</span>，元素个数为 <span class="arithmatex">\(n\)</span>。子数组 <span class="arithmatex">\(A\)</span> 的和以及个数分别为 <span class="arithmatex">\(s_1\)</span> 和 <span class="arithmatex">\(k\)</span>，那么子数组 <span class="arithmatex">\(B\)</span> 的和为 <span class="arithmatex">\(s_2 = s - s_1\)</span>，个数为 <span class="arithmatex">\(n - k\)</span>，即：</p>
+<div class="arithmatex">\[
 \frac{s_1}{k} = \frac{s_2}{n - k} = \frac{s-s_1}{n-k}
-$$</p>
+\]</div>
 <p>整理可得：</p>
-<p>$$
+<div class="arithmatex">\[
 s_1 \times (n-k) = (s-s_1) \times k
-$$</p>
+\]</div>
 <p>化简可得：</p>
-<p>$$
+<div class="arithmatex">\[
 \frac{s_1}{k} = \frac{s}{n}
-$$</p>
-<p>也就是说，要我们找出一个子数组 $A$，使得其平均值等于数组 $\textit{nums}$ 的平均值。我们考虑将数组 $\textit{nums}$ 每个元素都减去数组 $\textit{nums}$ 的平均值，这样问题就转化为了在数组 $\textit{nums}$ 中找出一个子数组，使得其和为 $0$。</p>
-<p>但是，数组 $\textit{nums}$ 的平均值可能不是整数，浮点数计算可能存在精度问题，我们不妨将数组 $\textit{nums}$ 中的每个元素都乘以 $n$，即 $nums[i] \leftarrow nums[i] \times n$，上述式子就变成：</p>
-<p>$$
+\]</div>
+<p>也就是说，要我们找出一个子数组 <span class="arithmatex">\(A\)</span>，使得其平均值等于数组 <span class="arithmatex">\(\textit{nums}\)</span> 的平均值。我们考虑将数组 <span class="arithmatex">\(\textit{nums}\)</span> 每个元素都减去数组 <span class="arithmatex">\(\textit{nums}\)</span> 的平均值，这样问题就转化为了在数组 <span class="arithmatex">\(\textit{nums}\)</span> 中找出一个子数组，使得其和为 <span class="arithmatex">\(0\)</span>。</p>
+<p>但是，数组 <span class="arithmatex">\(\textit{nums}\)</span> 的平均值可能不是整数，浮点数计算可能存在精度问题，我们不妨将数组 <span class="arithmatex">\(\textit{nums}\)</span> 中的每个元素都乘以 <span class="arithmatex">\(n\)</span>，即 <span class="arithmatex">\(nums[i] \leftarrow nums[i] \times n\)</span>，上述式子就变成：</p>
+<div class="arithmatex">\[
 \frac{s_1\times n}{k} = s
-$$</p>
-<p>此时我们将数组 $\textit{nums}$ 中每个元素都减去整数 $s$，题目就转化为：在数组 $nums$ 中找出一个子数组 $A$，使得其和为 $0$。</p>
-<p>数组 $\textit{nums}$ 的长度范围为 $[1, 30]$，如果我们使用暴力枚举子数组的方法，时间复杂度为 $O(2^n)$，会超时。我们可以使用折半查找的方法，将时间复杂度降低到 $O(2^{n/2})$。</p>
-<p>我们将数组 $\textit{nums}$ 分成左右两部分，那么子数组 $A$ 可能存在三种情况：</p>
+\]</div>
+<p>此时我们将数组 <span class="arithmatex">\(\textit{nums}\)</span> 中每个元素都减去整数 <span class="arithmatex">\(s\)</span>，题目就转化为：在数组 <span class="arithmatex">\(nums\)</span> 中找出一个子数组 <span class="arithmatex">\(A\)</span>，使得其和为 <span class="arithmatex">\(0\)</span>。</p>
+<p>数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度范围为 <span class="arithmatex">\([1, 30]\)</span>，如果我们使用暴力枚举子数组的方法，时间复杂度为 <span class="arithmatex">\(O(2^n)\)</span>，会超时。我们可以使用折半查找的方法，将时间复杂度降低到 <span class="arithmatex">\(O(2^{n/2})\)</span>。</p>
+<p>我们将数组 <span class="arithmatex">\(\textit{nums}\)</span> 分成左右两部分，那么子数组 <span class="arithmatex">\(A\)</span> 可能存在三种情况：</p>
 <ol>
-<li>子数组 $A$ 完全在数组 $\textit{nums}$ 的左半部分；</li>
-<li>子数组 $A$ 完全在数组 $\textit{nums}$ 的右半部分；</li>
-<li>子数组 $A$ 一部分在数组 $\textit{nums}$ 的左半部分，一部分在数组 $\textit{nums}$ 的右半部分。</li>
+<li>子数组 <span class="arithmatex">\(A\)</span> 完全在数组 <span class="arithmatex">\(\textit{nums}\)</span> 的左半部分；</li>
+<li>子数组 <span class="arithmatex">\(A\)</span> 完全在数组 <span class="arithmatex">\(\textit{nums}\)</span> 的右半部分；</li>
+<li>子数组 <span class="arithmatex">\(A\)</span> 一部分在数组 <span class="arithmatex">\(\textit{nums}\)</span> 的左半部分，一部分在数组 <span class="arithmatex">\(\textit{nums}\)</span> 的右半部分。</li>
 </ol>
-<p>我们可以使用二进制枚举的方法，先枚举左半部分所有子数组的和，如果存在一个子数组和为 $0$，直接返回 <code>true</code>，否则我们将其存入哈希表 $\textit{vis}$ 中；然后枚举右半部分所有子数组的和，如果存在一个子数组和为 $0$，直接返回 <code>true</code>，否则我们判断此时哈希表 $\textit{vis}$ 中是否存在该和的相反数，如果存在，直接返回 <code>true</code>。</p>
-<p>需要注意的是，我们不能同时全选左半部分和右半部分，因为这样会导致子数组 $B$ 为空，这是不符合题意的。在实现上，我们只需要考虑数组的 $n-1$ 个数。</p>
-<p>时间复杂度 $O(n\times 2^{\frac{n}{2}})$，空间复杂度 $O(2^{\frac{n}{2}})$。</p>
+<p>我们可以使用二进制枚举的方法，先枚举左半部分所有子数组的和，如果存在一个子数组和为 <span class="arithmatex">\(0\)</span>，直接返回 <code>true</code>，否则我们将其存入哈希表 <span class="arithmatex">\(\textit{vis}\)</span> 中；然后枚举右半部分所有子数组的和，如果存在一个子数组和为 <span class="arithmatex">\(0\)</span>，直接返回 <code>true</code>，否则我们判断此时哈希表 <span class="arithmatex">\(\textit{vis}\)</span> 中是否存在该和的相反数，如果存在，直接返回 <code>true</code>。</p>
+<p>需要注意的是，我们不能同时全选左半部分和右半部分，因为这样会导致子数组 <span class="arithmatex">\(B\)</span> 为空，这是不符合题意的。在实现上，我们只需要考虑数组的 <span class="arithmatex">\(n-1\)</span> 个数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n\times 2^{\frac{n}{2}})\)</span>，空间复杂度 <span class="arithmatex">\(O(2^{\frac{n}{2}})\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91372,11 +91370,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

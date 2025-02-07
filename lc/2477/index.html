@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90883,10 +90881,10 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：贪心 + DFS</h3>
-<p>根据题目描述，我们可以发现，所有车只会往首都（节点 $0$）开。</p>
-<p>假设有一个节点 $a$，它的下一个节点为 $b$，节点 $a$ 需要经过节点 $b$ 才能到达首都。为了使得节点 $a$ 的车辆（油耗）尽可能少，我们应该贪心地让节点 $a$ 的子节点先汇聚到节点 $a$，然后按照座位数 $seats$ 分配车辆，那么到达节点 $b$ 需要的最少车辆（油耗）就是 $\lceil \frac{sz}{seats} \rceil$。其中 $sz$ 表示以节点 $a$ 为根的子树的节点数。</p>
-<p>我们从节点 $0$ 开始进行深度优先搜索，用一个变量 $sz$ 统计以当前节点为根节点的子树的节点数。初始时 $sz = 1$，表示当前节点本身。然后我们遍历当前节点的所有子节点，对于每个子节点 $b$，我们递归地计算以 $b$ 为根节点的子树的节点数 $t$，并将 $t$ 累加到 $sz$ 上，然后我们将 $\lceil \frac{t}{seats} \rceil$ 累加到答案上。最后返回 $sz$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为节点数。</p>
+<p>根据题目描述，我们可以发现，所有车只会往首都（节点 <span class="arithmatex">\(0\)</span>）开。</p>
+<p>假设有一个节点 <span class="arithmatex">\(a\)</span>，它的下一个节点为 <span class="arithmatex">\(b\)</span>，节点 <span class="arithmatex">\(a\)</span> 需要经过节点 <span class="arithmatex">\(b\)</span> 才能到达首都。为了使得节点 <span class="arithmatex">\(a\)</span> 的车辆（油耗）尽可能少，我们应该贪心地让节点 <span class="arithmatex">\(a\)</span> 的子节点先汇聚到节点 <span class="arithmatex">\(a\)</span>，然后按照座位数 <span class="arithmatex">\(seats\)</span> 分配车辆，那么到达节点 <span class="arithmatex">\(b\)</span> 需要的最少车辆（油耗）就是 <span class="arithmatex">\(\lceil \frac{sz}{seats} \rceil\)</span>。其中 <span class="arithmatex">\(sz\)</span> 表示以节点 <span class="arithmatex">\(a\)</span> 为根的子树的节点数。</p>
+<p>我们从节点 <span class="arithmatex">\(0\)</span> 开始进行深度优先搜索，用一个变量 <span class="arithmatex">\(sz\)</span> 统计以当前节点为根节点的子树的节点数。初始时 <span class="arithmatex">\(sz = 1\)</span>，表示当前节点本身。然后我们遍历当前节点的所有子节点，对于每个子节点 <span class="arithmatex">\(b\)</span>，我们递归地计算以 <span class="arithmatex">\(b\)</span> 为根节点的子树的节点数 <span class="arithmatex">\(t\)</span>，并将 <span class="arithmatex">\(t\)</span> 累加到 <span class="arithmatex">\(sz\)</span> 上，然后我们将 <span class="arithmatex">\(\lceil \frac{t}{seats} \rceil\)</span> 累加到答案上。最后返回 <span class="arithmatex">\(sz\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91426,11 +91424,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

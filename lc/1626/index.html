@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90862,10 +90860,10 @@
 <h3 id="_3">方法一：排序 + 动态规划</h3>
 <p>我们可以将球员按照分数从小到大排序，如果分数相同，则按照年龄从小到大排序。</p>
 <p>接下来，使用动态规划求解。</p>
-<p>我们定义 $f[i]$ 表示以排序后的第 $i$ 个球员作为最后一个球员的最大得分，那么答案就是 $\max_{0 \leq i &lt; n} f[i]$。</p>
-<p>对于 $f[i]$，我们可以枚举 $0 \leq j \lt i$，如果第 $i$ 个球员的年龄大于等于第 $j$ 个球员的年龄，则 $f[i]$ 可以从 $f[j]$ 转移而来，转移方程为 $f[i] = \max(f[i], f[j])$。然后我们将第 $i$ 个球员的分数加到 $f[i]$ 中，即 $f[i] += scores[i]$。</p>
-<p>最后，我们返回 $\max_{0 \leq i &lt; n} f[i]$ 即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为球员的数量。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示以排序后的第 <span class="arithmatex">\(i\)</span> 个球员作为最后一个球员的最大得分，那么答案就是 <span class="arithmatex">\(\max_{0 \leq i &lt; n} f[i]\)</span>。</p>
+<p>对于 <span class="arithmatex">\(f[i]\)</span>，我们可以枚举 <span class="arithmatex">\(0 \leq j \lt i\)</span>，如果第 <span class="arithmatex">\(i\)</span> 个球员的年龄大于等于第 <span class="arithmatex">\(j\)</span> 个球员的年龄，则 <span class="arithmatex">\(f[i]\)</span> 可以从 <span class="arithmatex">\(f[j]\)</span> 转移而来，转移方程为 <span class="arithmatex">\(f[i] = \max(f[i], f[j])\)</span>。然后我们将第 <span class="arithmatex">\(i\)</span> 个球员的分数加到 <span class="arithmatex">\(f[i]\)</span> 中，即 <span class="arithmatex">\(f[i] += scores[i]\)</span>。</p>
+<p>最后，我们返回 <span class="arithmatex">\(\max_{0 \leq i &lt; n} f[i]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为球员的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91108,9 +91106,9 @@
 
 <h3 id="_4">方法二：排序 + 树状数组</h3>
 <p>与方法一类似，我们可以将球员按照分数从小到大排序，如果分数相同，则按照年龄从小到大排序。</p>
-<p>接下来，我们使用树状数组维护不超过当前球员年龄的球员的最大得分。每一次，我们只需要在 $O(\log m)$ 的时间内找出不超过当前球员年龄的球员的最大得分，然后将当前球员的分数加到该得分上，即可更新当前球员年龄的最大得分。</p>
+<p>接下来，我们使用树状数组维护不超过当前球员年龄的球员的最大得分。每一次，我们只需要在 <span class="arithmatex">\(O(\log m)\)</span> 的时间内找出不超过当前球员年龄的球员的最大得分，然后将当前球员的分数加到该得分上，即可更新当前球员年龄的最大得分。</p>
 <p>最后，我们返回得分的最大值即可。</p>
-<p>时间复杂度 $O(n \times (\log n + \log m))$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别为球员的数量和球员的年龄的最大值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times (\log n + \log m))\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为球员的数量和球员的年龄的最大值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91673,11 +91671,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

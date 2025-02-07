@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90898,10 +90896,10 @@ tracker.get();              // 从好到坏的景点为：branford, orlando, alp
 <!-- solution:start -->
 
 <h3 id="_3">方法一：有序集合</h3>
-<p>我们可以使用有序集合来存储景点，用一个变量 $i$ 来记录当前查询的次数，初始时 $i = -1$。</p>
+<p>我们可以使用有序集合来存储景点，用一个变量 <span class="arithmatex">\(i\)</span> 来记录当前查询的次数，初始时 <span class="arithmatex">\(i = -1\)</span>。</p>
 <p>调用 <code>add</code> 方法时，我们将景点的评分取负数，这样就可以使用有序集合按照评分从大到小排序，如果评分相同，按照景点名字的字典序从小到大排序。</p>
-<p>调用 <code>get</code> 方法时，我们将 $i$ 加一，然后返回有序集合中第 $i$ 个景点的名字。</p>
-<p>每次操作的时间复杂度为 $O(\log n)$，其中 $n$ 为已添加的景点数。空间复杂度为 $O(n)$。</p>
+<p>调用 <code>get</code> 方法时，我们将 <span class="arithmatex">\(i\)</span> 加一，然后返回有序集合中第 <span class="arithmatex">\(i\)</span> 个景点的名字。</p>
+<p>每次操作的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为已添加的景点数。空间复杂度为 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">C++</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91013,10 +91011,10 @@ tracker.get();              // 从好到坏的景点为：branford, orlando, alp
 <!-- solution:start -->
 
 <h3 id="_4">方法二：双优先队列（大小根堆）</h3>
-<p>我们注意到，由于本题中的查询操作是按照严格递增的顺序进行的，因此我们可以使用类似于数据流中的中位数的方法，定义两个优先队列 <code>good</code> 和 <code>bad</code>，其中 <code>good</code> 是一个小根堆，存储当前最好的景点，<code>bad</code> 是一个大根堆，存储当前第 $i$ 好的景点。</p>
+<p>我们注意到，由于本题中的查询操作是按照严格递增的顺序进行的，因此我们可以使用类似于数据流中的中位数的方法，定义两个优先队列 <code>good</code> 和 <code>bad</code>，其中 <code>good</code> 是一个小根堆，存储当前最好的景点，<code>bad</code> 是一个大根堆，存储当前第 <span class="arithmatex">\(i\)</span> 好的景点。</p>
 <p>每次调用 <code>add</code> 方法时，我们将景点的评分和名字加入 <code>good</code> 中，然后将 <code>good</code> 中的最差的景点加入 <code>bad</code> 中。</p>
 <p>每次调用 <code>get</code> 方法时，我们将 <code>bad</code> 中的最好的景点加入 <code>good</code> 中，然后返回 <code>good</code> 中的最差的景点。</p>
-<p>每次操作的时间复杂度为 $O(\log n)$，其中 $n$ 为已添加的景点数。空间复杂度为 $O(n)$。</p>
+<p>每次操作的时间复杂度为 <span class="arithmatex">\(O(\log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为已添加的景点数。空间复杂度为 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91432,11 +91430,9 @@ tracker.get();              // 从好到坏的景点为：branford, orlando, alp
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

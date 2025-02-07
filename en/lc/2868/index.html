@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86097,11 +86095,11 @@ So Alice wins, and the game ends.
 <!-- solution:start -->
 
 <h3 id="solution-1-simulation">Solution 1: Simulation</h3>
-<p>We use $k$ to record whose turn it is, where $k=0$ means it is Alice's turn, and $k=1$ means it is Bob's turn. We use $i$ to record Alice's index, $j$ to record Bob's index, and $w$ to record the current word. Initially, we set $i=1$, $j=0$, and $w=a[0]$.</p>
+<p>We use <span class="arithmatex">\(k\)</span> to record whose turn it is, where <span class="arithmatex">\(k=0\)</span> means it is Alice's turn, and <span class="arithmatex">\(k=1\)</span> means it is Bob's turn. We use <span class="arithmatex">\(i\)</span> to record Alice's index, <span class="arithmatex">\(j\)</span> to record Bob's index, and <span class="arithmatex">\(w\)</span> to record the current word. Initially, we set <span class="arithmatex">\(i=1\)</span>, <span class="arithmatex">\(j=0\)</span>, and <span class="arithmatex">\(w=a[0]\)</span>.</p>
 <p>We perform the following steps repeatedly:</p>
-<p>If $k=1$, we check if $j$ is equal to the length of $b$. If it is, then Alice wins and we return $true$. Otherwise, we check if the first letter of $b[j]$ is equal to the first letter of $w$. If it is, we check if $b[j]$ is greater than $w$, or if the first letter of $b[j]$ is one greater than the first letter of $w$. If either of these conditions is true, then Bob can play the $j$-th word. We set $w=b[j]$ and toggle $k$. Otherwise, Bob cannot play the $j$-th word, so we increment $j$.</p>
-<p>If $k=0$, we check if $i$ is equal to the length of $a$. If it is, then Bob wins and we return $false$. Otherwise, we check if the first letter of $a[i]$ is equal to the first letter of $w$. If it is, we check if $a[i]$ is greater than $w$, or if the first letter of $a[i]$ is one greater than the first letter of $w$. If either of these conditions is true, then Alice can play the $i$-th word. We set $w=a[i]$ and toggle $k$. Otherwise, Alice cannot play the $i$-th word, so we increment $i$.</p>
-<p>The time complexity is $O(m+n)$, where $m$ and $n$ are the lengths of arrays $a$ and $b$, respectively. We only need to traverse the arrays once. The space complexity is $O(1)$.</p>
+<p>If <span class="arithmatex">\(k=1\)</span>, we check if <span class="arithmatex">\(j\)</span> is equal to the length of <span class="arithmatex">\(b\)</span>. If it is, then Alice wins and we return <span class="arithmatex">\(true\)</span>. Otherwise, we check if the first letter of <span class="arithmatex">\(b[j]\)</span> is equal to the first letter of <span class="arithmatex">\(w\)</span>. If it is, we check if <span class="arithmatex">\(b[j]\)</span> is greater than <span class="arithmatex">\(w\)</span>, or if the first letter of <span class="arithmatex">\(b[j]\)</span> is one greater than the first letter of <span class="arithmatex">\(w\)</span>. If either of these conditions is true, then Bob can play the <span class="arithmatex">\(j\)</span>-th word. We set <span class="arithmatex">\(w=b[j]\)</span> and toggle <span class="arithmatex">\(k\)</span>. Otherwise, Bob cannot play the <span class="arithmatex">\(j\)</span>-th word, so we increment <span class="arithmatex">\(j\)</span>.</p>
+<p>If <span class="arithmatex">\(k=0\)</span>, we check if <span class="arithmatex">\(i\)</span> is equal to the length of <span class="arithmatex">\(a\)</span>. If it is, then Bob wins and we return <span class="arithmatex">\(false\)</span>. Otherwise, we check if the first letter of <span class="arithmatex">\(a[i]\)</span> is equal to the first letter of <span class="arithmatex">\(w\)</span>. If it is, we check if <span class="arithmatex">\(a[i]\)</span> is greater than <span class="arithmatex">\(w\)</span>, or if the first letter of <span class="arithmatex">\(a[i]\)</span> is one greater than the first letter of <span class="arithmatex">\(w\)</span>. If either of these conditions is true, then Alice can play the <span class="arithmatex">\(i\)</span>-th word. We set <span class="arithmatex">\(w=a[i]\)</span> and toggle <span class="arithmatex">\(k\)</span>. Otherwise, Alice cannot play the <span class="arithmatex">\(i\)</span>-th word, so we increment <span class="arithmatex">\(i\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m+n)\)</span>, where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of arrays <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>, respectively. We only need to traverse the arrays once. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86599,11 +86597,9 @@ So Alice wins, and the game ends.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

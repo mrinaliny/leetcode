@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90878,12 +90876,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心 + 构造</h3>
-<p>我们可以先初始化一个 $m$ 行 $n$ 列的答案矩阵 $ans$。</p>
-<p>接下来，遍历矩阵的每一个位置 $(i, j)$，将该位置的元素设为 $x = min(rowSum[i], colSum[j])$，并将 $rowSum[i]$ 和 $colSum[j]$ 分别减去 $x$。遍历完所有的位置后，我们就可以得到一个满足题目要求的矩阵 $ans$。</p>
+<p>我们可以先初始化一个 <span class="arithmatex">\(m\)</span> 行 <span class="arithmatex">\(n\)</span> 列的答案矩阵 <span class="arithmatex">\(ans\)</span>。</p>
+<p>接下来，遍历矩阵的每一个位置 <span class="arithmatex">\((i, j)\)</span>，将该位置的元素设为 <span class="arithmatex">\(x = min(rowSum[i], colSum[j])\)</span>，并将 <span class="arithmatex">\(rowSum[i]\)</span> 和 <span class="arithmatex">\(colSum[j]\)</span> 分别减去 <span class="arithmatex">\(x\)</span>。遍历完所有的位置后，我们就可以得到一个满足题目要求的矩阵 <span class="arithmatex">\(ans\)</span>。</p>
 <p>以上策略的正确性说明如下：</p>
-<p>根据题目的要求，我们知道 $rowSum$ 和 $colSum$ 的和是相等的，那么 $rowSum[0]$ 一定小于等于 $\sum_{j = 0}^{n - 1} colSum[j]$。所以，在经过 $n$ 次操作后，一定能够使得 $rowSum[0]$ 为 $0$，并且保证对任意 $j \in [0, n - 1]$，都有 $colSum[j] \geq 0$。</p>
-<p>因此，我们把原问题缩小为一个 $m-1$ 行和 $n$ 列的子问题，继续进行上述的操作，直到 $rowSum$ 和 $colSum$ 中的所有元素都为 $0$，就可以得到一个满足题目要求的矩阵 $ans$。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别为 $rowSum$ 和 $colSum$ 的长度。</p>
+<p>根据题目的要求，我们知道 <span class="arithmatex">\(rowSum\)</span> 和 <span class="arithmatex">\(colSum\)</span> 的和是相等的，那么 <span class="arithmatex">\(rowSum[0]\)</span> 一定小于等于 <span class="arithmatex">\(\sum_{j = 0}^{n - 1} colSum[j]\)</span>。所以，在经过 <span class="arithmatex">\(n\)</span> 次操作后，一定能够使得 <span class="arithmatex">\(rowSum[0]\)</span> 为 <span class="arithmatex">\(0\)</span>，并且保证对任意 <span class="arithmatex">\(j \in [0, n - 1]\)</span>，都有 <span class="arithmatex">\(colSum[j] \geq 0\)</span>。</p>
+<p>因此，我们把原问题缩小为一个 <span class="arithmatex">\(m-1\)</span> 行和 <span class="arithmatex">\(n\)</span> 列的子问题，继续进行上述的操作，直到 <span class="arithmatex">\(rowSum\)</span> 和 <span class="arithmatex">\(colSum\)</span> 中的所有元素都为 <span class="arithmatex">\(0\)</span>，就可以得到一个满足题目要求的矩阵 <span class="arithmatex">\(ans\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为 <span class="arithmatex">\(rowSum\)</span> 和 <span class="arithmatex">\(colSum\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91318,11 +91316,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

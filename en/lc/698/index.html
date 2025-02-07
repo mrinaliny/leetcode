@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86079,10 +86077,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs-pruning">Solution 1: DFS + Pruning</h3>
-<p>According to the problem description, we need to partition the array $\textit{nums}$ into $k$ subsets such that the sum of each subset is equal. Therefore, we first sum all the elements in $\textit{nums}$. If the total sum cannot be divided by $k$, it means we cannot partition the array into $k$ subsets, and we return $\textit{false}$ early.</p>
-<p>If the total sum can be divided by $k$, let's denote the expected sum of each subset as $s$. Then, we create an array $\textit{cur}$ of length $k$ to represent the current sum of each subset.</p>
-<p>We sort the array $\textit{nums}$ in descending order (to reduce the number of searches), and then start from the first element, trying to add it to each subset in $\textit{cur}$ one by one. If adding $\textit{nums}[i]$ to a subset $\textit{cur}[j]$ makes the subset's sum exceed $s$, it means it cannot be placed in that subset, and we can skip it. Additionally, if $\textit{cur}[j]$ is equal to $\textit{cur}[j - 1]$, it means we have already completed the search for $\textit{cur}[j - 1]$, and we can skip the current search.</p>
-<p>If we can add all elements to $\textit{cur}$, it means we can partition the array into $k$ subsets, and we return $\textit{true}$.</p>
+<p>According to the problem description, we need to partition the array <span class="arithmatex">\(\textit{nums}\)</span> into <span class="arithmatex">\(k\)</span> subsets such that the sum of each subset is equal. Therefore, we first sum all the elements in <span class="arithmatex">\(\textit{nums}\)</span>. If the total sum cannot be divided by <span class="arithmatex">\(k\)</span>, it means we cannot partition the array into <span class="arithmatex">\(k\)</span> subsets, and we return <span class="arithmatex">\(\textit{false}\)</span> early.</p>
+<p>If the total sum can be divided by <span class="arithmatex">\(k\)</span>, let's denote the expected sum of each subset as <span class="arithmatex">\(s\)</span>. Then, we create an array <span class="arithmatex">\(\textit{cur}\)</span> of length <span class="arithmatex">\(k\)</span> to represent the current sum of each subset.</p>
+<p>We sort the array <span class="arithmatex">\(\textit{nums}\)</span> in descending order (to reduce the number of searches), and then start from the first element, trying to add it to each subset in <span class="arithmatex">\(\textit{cur}\)</span> one by one. If adding <span class="arithmatex">\(\textit{nums}[i]\)</span> to a subset <span class="arithmatex">\(\textit{cur}[j]\)</span> makes the subset's sum exceed <span class="arithmatex">\(s\)</span>, it means it cannot be placed in that subset, and we can skip it. Additionally, if <span class="arithmatex">\(\textit{cur}[j]\)</span> is equal to <span class="arithmatex">\(\textit{cur}[j - 1]\)</span>, it means we have already completed the search for <span class="arithmatex">\(\textit{cur}[j - 1]\)</span>, and we can skip the current search.</p>
+<p>If we can add all elements to <span class="arithmatex">\(\textit{cur}\)</span>, it means we can partition the array into <span class="arithmatex">\(k\)</span> subsets, and we return <span class="arithmatex">\(\textit{true}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86396,20 +86394,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-state-compression-memoization">Solution 2: State Compression + Memoization</h3>
-<p>Similar to Solution 1, we first check whether the array $\textit{nums}$ can be partitioned into $k$ subsets. If it cannot be divided by $k$, we directly return $\textit{false}$.</p>
-<p>Let $s$ be the expected sum of each subset, and let $\textit{state}$ represent the current partitioning state of the elements. For the $i$-th number, if the $i$-th bit of $\textit{state}$ is $0$, it means the $i$-th element has not been partitioned.</p>
-<p>Our goal is to form $k$ subsets with a sum of $s$ from all elements. Let $t$ be the current sum of the subset. When the $i$-th element is not partitioned:</p>
+<p>Similar to Solution 1, we first check whether the array <span class="arithmatex">\(\textit{nums}\)</span> can be partitioned into <span class="arithmatex">\(k\)</span> subsets. If it cannot be divided by <span class="arithmatex">\(k\)</span>, we directly return <span class="arithmatex">\(\textit{false}\)</span>.</p>
+<p>Let <span class="arithmatex">\(s\)</span> be the expected sum of each subset, and let <span class="arithmatex">\(\textit{state}\)</span> represent the current partitioning state of the elements. For the <span class="arithmatex">\(i\)</span>-th number, if the <span class="arithmatex">\(i\)</span>-th bit of <span class="arithmatex">\(\textit{state}\)</span> is <span class="arithmatex">\(0\)</span>, it means the <span class="arithmatex">\(i\)</span>-th element has not been partitioned.</p>
+<p>Our goal is to form <span class="arithmatex">\(k\)</span> subsets with a sum of <span class="arithmatex">\(s\)</span> from all elements. Let <span class="arithmatex">\(t\)</span> be the current sum of the subset. When the <span class="arithmatex">\(i\)</span>-th element is not partitioned:</p>
 <ul>
-<li>If $t + \textit{nums}[i] \gt s$, it means the $i$-th element cannot be added to the current subset. Since we sort the array $\textit{nums}$ in ascending order, all elements from position $i$ onwards cannot be added to the current subset, and we directly return $\textit{false}$.</li>
-<li>Otherwise, add the $i$-th element to the current subset, change the state to $\textit{state} | 2^i$, and continue searching for unpartitioned elements. Note that if $t + \textit{nums}[i] = s$, it means we can form a subset with a sum of $s$. The next step is to reset $t$ to zero (which can be achieved by $(t + \textit{nums}[i]) \bmod s$) and continue partitioning the next subset.</li>
+<li>If <span class="arithmatex">\(t + \textit{nums}[i] \gt s\)</span>, it means the <span class="arithmatex">\(i\)</span>-th element cannot be added to the current subset. Since we sort the array <span class="arithmatex">\(\textit{nums}\)</span> in ascending order, all elements from position <span class="arithmatex">\(i\)</span> onwards cannot be added to the current subset, and we directly return <span class="arithmatex">\(\textit{false}\)</span>.</li>
+<li>Otherwise, add the <span class="arithmatex">\(i\)</span>-th element to the current subset, change the state to <span class="arithmatex">\(\textit{state} | 2^i\)</span>, and continue searching for unpartitioned elements. Note that if <span class="arithmatex">\(t + \textit{nums}[i] = s\)</span>, it means we can form a subset with a sum of <span class="arithmatex">\(s\)</span>. The next step is to reset <span class="arithmatex">\(t\)</span> to zero (which can be achieved by <span class="arithmatex">\((t + \textit{nums}[i]) \bmod s\)</span>) and continue partitioning the next subset.</li>
 </ul>
-<p>To avoid repeated searches, we use an array $\textit{f}$ of length $2^n$ to record the search results for each state. The array $\textit{f}$ has three possible values:</p>
+<p>To avoid repeated searches, we use an array <span class="arithmatex">\(\textit{f}\)</span> of length <span class="arithmatex">\(2^n\)</span> to record the search results for each state. The array <span class="arithmatex">\(\textit{f}\)</span> has three possible values:</p>
 <ul>
 <li><code>0</code> indicates that the current state has not been searched yet;</li>
-<li><code>-1</code>: indicates that the current state cannot be partitioned into $k$ subsets;</li>
-<li><code>1</code>: indicates that the current state can be partitioned into $k$ subsets.</li>
+<li><code>-1</code>: indicates that the current state cannot be partitioned into <span class="arithmatex">\(k\)</span> subsets;</li>
+<li><code>1</code>: indicates that the current state can be partitioned into <span class="arithmatex">\(k\)</span> subsets.</li>
 </ul>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(2^n)$. Here, $n$ represents the length of the array $\textit{nums}$. For each state, we need to traverse the array $\textit{nums}$, which has a time complexity of $O(n)$. The total number of states is $2^n$, so the overall time complexity is $O(n \times 2^n)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Here, <span class="arithmatex">\(n\)</span> represents the length of the array <span class="arithmatex">\(\textit{nums}\)</span>. For each state, we need to traverse the array <span class="arithmatex">\(\textit{nums}\)</span>, which has a time complexity of <span class="arithmatex">\(O(n)\)</span>. The total number of states is <span class="arithmatex">\(2^n\)</span>, so the overall time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86786,10 +86784,10 @@
 
 <h3 id="solution-3-dynamic-programming">Solution 3: Dynamic Programming</h3>
 <p>We can use dynamic programming to solve this problem.</p>
-<p>We define $f[i]$ to represent whether there exists $k$ subsets that meet the requirements when the current selected numbers' state is $i$. Initially, $f[0] = \text{true}$, and the answer is $f[2^n - 1]$, where $n$ is the length of the array $\textit{nums}$. Additionally, we define $cur[i]$ to represent the sum of the last subset when the current selected numbers' state is $i$.</p>
-<p>We enumerate the states $i$ in the range $[0, 2^n]$. For each state $i$, if $f[i]$ is $\text{false}$, we skip it. Otherwise, we enumerate any number $\textit{nums}[j]$ in the array $\textit{nums}$. If $cur[i] + \textit{nums}[j] &gt; s$, we break the enumeration loop because the subsequent numbers are larger and cannot be placed in the current subset. Otherwise, if the $j$-th bit of the binary representation of $i$ is $0$, it means the current $\textit{nums}[j]$ has not been selected. We can place it in the current subset, change the state to $i | 2^j$, update $cur[i | 2^j] = (cur[i] + \textit{nums}[j]) \bmod s$, and set $f[i | 2^j] = \text{true}$.</p>
-<p>Finally, we return $f[2^n - 1]$.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(2^n)$. Here, $n$ represents the length of the array $\textit{nums}$.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> to represent whether there exists <span class="arithmatex">\(k\)</span> subsets that meet the requirements when the current selected numbers' state is <span class="arithmatex">\(i\)</span>. Initially, <span class="arithmatex">\(f[0] = \text{true}\)</span>, and the answer is <span class="arithmatex">\(f[2^n - 1]\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>. Additionally, we define <span class="arithmatex">\(cur[i]\)</span> to represent the sum of the last subset when the current selected numbers' state is <span class="arithmatex">\(i\)</span>.</p>
+<p>We enumerate the states <span class="arithmatex">\(i\)</span> in the range <span class="arithmatex">\([0, 2^n]\)</span>. For each state <span class="arithmatex">\(i\)</span>, if <span class="arithmatex">\(f[i]\)</span> is <span class="arithmatex">\(\text{false}\)</span>, we skip it. Otherwise, we enumerate any number <span class="arithmatex">\(\textit{nums}[j]\)</span> in the array <span class="arithmatex">\(\textit{nums}\)</span>. If <span class="arithmatex">\(cur[i] + \textit{nums}[j] &gt; s\)</span>, we break the enumeration loop because the subsequent numbers are larger and cannot be placed in the current subset. Otherwise, if the <span class="arithmatex">\(j\)</span>-th bit of the binary representation of <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(0\)</span>, it means the current <span class="arithmatex">\(\textit{nums}[j]\)</span> has not been selected. We can place it in the current subset, change the state to <span class="arithmatex">\(i | 2^j\)</span>, update <span class="arithmatex">\(cur[i | 2^j] = (cur[i] + \textit{nums}[j]) \bmod s\)</span>, and set <span class="arithmatex">\(f[i | 2^j] = \text{true}\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(f[2^n - 1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Here, <span class="arithmatex">\(n\)</span> represents the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87324,11 +87322,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

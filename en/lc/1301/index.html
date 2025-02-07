@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86058,10 +86056,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ to represent the maximum score from the starting point $(n - 1, n - 1)$ to $(i, j)$, and $g[i][j]$ to represent the number of ways to achieve the maximum score from the starting point $(n - 1, n - 1)$ to $(i, j)$. Initially, $f[n - 1][n - 1] = 0$ and $g[n - 1][n - 1] = 1$. The other positions of $f[i][j]$ are all $-1$, and $g[i][j]$ are all $0$.</p>
-<p>For the current position $(i, j)$, it can be transferred from three positions: $(i + 1, j)$, $(i, j + 1)$, and $(i + 1, j + 1)$. Therefore, we can enumerate these three positions to update the values of $f[i][j]$ and $g[i][j]$. If the current position $(i, j)$ has an obstacle, or the current position is the starting point, or other positions are out of bounds, no update is performed. Otherwise, if another position $(x, y)$ satisfies $f[x][y] \gt f[i][j]$, then we update $f[i][j] = f[x][y]$ and $g[i][j] = g[x][y]$. If $f[x][y] = f[i][j]$, then we update $g[i][j] = g[i][j] + g[x][y]$. Finally, if the current position $(i, j)$ is reachable and is a number, we update $f[i][j] = f[i][j] + board[i][j]$.</p>
-<p>Finally, if $f[0][0] \lt 0$, it means there is no path to reach the endpoint, return $[0, 0]$. Otherwise, return $[f[0][0], g[0][0]]$. Note that the result needs to be taken modulo $10^9 + 7$.</p>
-<p>Time complexity $O(n^2)$, space complexity $O(n^2)$. Where $n$ is the side length of the array.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> to represent the maximum score from the starting point <span class="arithmatex">\((n - 1, n - 1)\)</span> to <span class="arithmatex">\((i, j)\)</span>, and <span class="arithmatex">\(g[i][j]\)</span> to represent the number of ways to achieve the maximum score from the starting point <span class="arithmatex">\((n - 1, n - 1)\)</span> to <span class="arithmatex">\((i, j)\)</span>. Initially, <span class="arithmatex">\(f[n - 1][n - 1] = 0\)</span> and <span class="arithmatex">\(g[n - 1][n - 1] = 1\)</span>. The other positions of <span class="arithmatex">\(f[i][j]\)</span> are all <span class="arithmatex">\(-1\)</span>, and <span class="arithmatex">\(g[i][j]\)</span> are all <span class="arithmatex">\(0\)</span>.</p>
+<p>For the current position <span class="arithmatex">\((i, j)\)</span>, it can be transferred from three positions: <span class="arithmatex">\((i + 1, j)\)</span>, <span class="arithmatex">\((i, j + 1)\)</span>, and <span class="arithmatex">\((i + 1, j + 1)\)</span>. Therefore, we can enumerate these three positions to update the values of <span class="arithmatex">\(f[i][j]\)</span> and <span class="arithmatex">\(g[i][j]\)</span>. If the current position <span class="arithmatex">\((i, j)\)</span> has an obstacle, or the current position is the starting point, or other positions are out of bounds, no update is performed. Otherwise, if another position <span class="arithmatex">\((x, y)\)</span> satisfies <span class="arithmatex">\(f[x][y] \gt f[i][j]\)</span>, then we update <span class="arithmatex">\(f[i][j] = f[x][y]\)</span> and <span class="arithmatex">\(g[i][j] = g[x][y]\)</span>. If <span class="arithmatex">\(f[x][y] = f[i][j]\)</span>, then we update <span class="arithmatex">\(g[i][j] = g[i][j] + g[x][y]\)</span>. Finally, if the current position <span class="arithmatex">\((i, j)\)</span> is reachable and is a number, we update <span class="arithmatex">\(f[i][j] = f[i][j] + board[i][j]\)</span>.</p>
+<p>Finally, if <span class="arithmatex">\(f[0][0] \lt 0\)</span>, it means there is no path to reach the endpoint, return <span class="arithmatex">\([0, 0]\)</span>. Otherwise, return <span class="arithmatex">\([f[0][0], g[0][0]]\)</span>. Note that the result needs to be taken modulo <span class="arithmatex">\(10^9 + 7\)</span>.</p>
+<p>Time complexity <span class="arithmatex">\(O(n^2)\)</span>, space complexity <span class="arithmatex">\(O(n^2)\)</span>. Where <span class="arithmatex">\(n\)</span> is the side length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86625,11 +86623,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

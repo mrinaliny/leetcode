@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86107,15 +86105,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-preprocessing-prefix-sum-binary-search">Solution 1: Preprocessing + Prefix Sum + Binary Search</h3>
-<p>We can preprocess to obtain the occurrence count of the greatest common divisor (GCD) of all pairs in the array $\textit{nums}$, recorded in the array $\textit{cntG}$. Then, we calculate the prefix sum of the array $\textit{cntG}$. Finally, for each query, we can use binary search to find the index of the first element in the array $\textit{cntG}$ that is greater than $\textit{queries}[i]$, which is the answer.</p>
-<p>Let $\textit{mx}$ denote the maximum value in the array $\textit{nums}$, and let $\textit{cnt}$ record the occurrence count of each number in the array $\textit{nums}$. Let $\textit{cntG}[i]$ denote the number of pairs in the array $\textit{nums}$ whose GCD is equal to $i$. To calculate $\textit{cntG}[i]$, we can follow these steps:</p>
+<p>We can preprocess to obtain the occurrence count of the greatest common divisor (GCD) of all pairs in the array <span class="arithmatex">\(\textit{nums}\)</span>, recorded in the array <span class="arithmatex">\(\textit{cntG}\)</span>. Then, we calculate the prefix sum of the array <span class="arithmatex">\(\textit{cntG}\)</span>. Finally, for each query, we can use binary search to find the index of the first element in the array <span class="arithmatex">\(\textit{cntG}\)</span> that is greater than <span class="arithmatex">\(\textit{queries}[i]\)</span>, which is the answer.</p>
+<p>Let <span class="arithmatex">\(\textit{mx}\)</span> denote the maximum value in the array <span class="arithmatex">\(\textit{nums}\)</span>, and let <span class="arithmatex">\(\textit{cnt}\)</span> record the occurrence count of each number in the array <span class="arithmatex">\(\textit{nums}\)</span>. Let <span class="arithmatex">\(\textit{cntG}[i]\)</span> denote the number of pairs in the array <span class="arithmatex">\(\textit{nums}\)</span> whose GCD is equal to <span class="arithmatex">\(i\)</span>. To calculate <span class="arithmatex">\(\textit{cntG}[i]\)</span>, we can follow these steps:</p>
 <ol>
-<li>Calculate the occurrence count $v$ of multiples of $i$ in the array $\textit{nums}$. Then, the number of pairs formed by any two elements from these multiples must have a GCD that is a multiple of $i$, i.e., $\textit{cntG}[i]$ needs to be increased by $v \times (v - 1) / 2$;</li>
-<li>We need to exclude pairs whose GCD is a multiple of $i$ and greater than $i$. Therefore, for multiples $j$ of $i$, we need to subtract $\textit{cntG}[j]$.</li>
+<li>Calculate the occurrence count <span class="arithmatex">\(v\)</span> of multiples of <span class="arithmatex">\(i\)</span> in the array <span class="arithmatex">\(\textit{nums}\)</span>. Then, the number of pairs formed by any two elements from these multiples must have a GCD that is a multiple of <span class="arithmatex">\(i\)</span>, i.e., <span class="arithmatex">\(\textit{cntG}[i]\)</span> needs to be increased by <span class="arithmatex">\(v \times (v - 1) / 2\)</span>;</li>
+<li>We need to exclude pairs whose GCD is a multiple of <span class="arithmatex">\(i\)</span> and greater than <span class="arithmatex">\(i\)</span>. Therefore, for multiples <span class="arithmatex">\(j\)</span> of <span class="arithmatex">\(i\)</span>, we need to subtract <span class="arithmatex">\(\textit{cntG}[j]\)</span>.</li>
 </ol>
-<p>The above steps require us to traverse $i$ from large to small so that when calculating $\textit{cntG}[i]$, we have already calculated all $\textit{cntG}[j]$.</p>
-<p>Finally, we calculate the prefix sum of the array $\textit{cntG}$, and for each query, we can use binary search to find the index of the first element in the array $\textit{cntG}$ that is greater than $\textit{queries}[i]$, which is the answer.</p>
-<p>The time complexity is $O(n + (M + q) \times \log M)$, and the space complexity is $O(M)$. Here, $n$ and $M$ represent the length and the maximum value of the array $\textit{nums}$, respectively, and $q$ represents the number of queries.</p>
+<p>The above steps require us to traverse <span class="arithmatex">\(i\)</span> from large to small so that when calculating <span class="arithmatex">\(\textit{cntG}[i]\)</span>, we have already calculated all <span class="arithmatex">\(\textit{cntG}[j]\)</span>.</p>
+<p>Finally, we calculate the prefix sum of the array <span class="arithmatex">\(\textit{cntG}\)</span>, and for each query, we can use binary search to find the index of the first element in the array <span class="arithmatex">\(\textit{cntG}\)</span> that is greater than <span class="arithmatex">\(\textit{queries}[i]\)</span>, which is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + (M + q) \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(M)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(M\)</span> represent the length and the maximum value of the array <span class="arithmatex">\(\textit{nums}\)</span>, respectively, and <span class="arithmatex">\(q\)</span> represents the number of queries.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86565,11 +86563,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

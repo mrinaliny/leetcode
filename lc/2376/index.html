@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90844,28 +90842,28 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：状态压缩 + 数位 DP</h3>
-<p>这道题实际上是求在给定区间 $[l,..r]$ 中，满足条件的数的个数。条件与数的大小无关，而只与数的组成有关，因此可以使用数位 DP 的思想求解。数位 DP 中，数的大小对复杂度的影响很小。</p>
-<p>对于区间 $[l,..r]$ 问题，我们一般会将其转化为 $[1,..r]$ 然后再减去 $[1,..l - 1]$ 的问题，即：</p>
-<p>$$
+<p>这道题实际上是求在给定区间 <span class="arithmatex">\([l,..r]\)</span> 中，满足条件的数的个数。条件与数的大小无关，而只与数的组成有关，因此可以使用数位 DP 的思想求解。数位 DP 中，数的大小对复杂度的影响很小。</p>
+<p>对于区间 <span class="arithmatex">\([l,..r]\)</span> 问题，我们一般会将其转化为 <span class="arithmatex">\([1,..r]\)</span> 然后再减去 <span class="arithmatex">\([1,..l - 1]\)</span> 的问题，即：</p>
+<div class="arithmatex">\[
 ans = \sum_{i=1}^{r} ans_i -  \sum_{i=1}^{l-1} ans_i
-$$</p>
-<p>不过对于本题而言，我们只需要求出区间 $[1,..n]$ 的值即可。</p>
+\]</div>
+<p>不过对于本题而言，我们只需要求出区间 <span class="arithmatex">\([1,..n]\)</span> 的值即可。</p>
 <p>这里我们用记忆化搜索来实现数位 DP。从起点向下搜索，到最底层得到方案数，一层层向上返回答案并累加，最后从搜索起点得到最终的答案。</p>
-<p>我们根据题目信息，设计一个函数 $\textit{dfs}(i, \textit{mask}, \textit{lead}, \textit{limit})$，其中：</p>
+<p>我们根据题目信息，设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, \textit{mask}, \textit{lead}, \textit{limit})\)</span>，其中：</p>
 <ul>
-<li>数字 $i$ 表示当前搜索到的位置，我们从高位开始搜索，即 $i = 0$ 表示最高位。</li>
-<li>数字 $\textit{mask}$ 表示当前数字的状态，即 $\textit{mask}$ 的第 $j$ 位为 $1$ 表示数字 $j$ 已经被使用过。</li>
-<li>布尔值 $\textit{lead}$ 表示当前是否只包含前导 $0$。</li>
-<li>布尔值 $\textit{limit}$ 表示当前是否受到上界的限制。</li>
+<li>数字 <span class="arithmatex">\(i\)</span> 表示当前搜索到的位置，我们从高位开始搜索，即 <span class="arithmatex">\(i = 0\)</span> 表示最高位。</li>
+<li>数字 <span class="arithmatex">\(\textit{mask}\)</span> 表示当前数字的状态，即 <span class="arithmatex">\(\textit{mask}\)</span> 的第 <span class="arithmatex">\(j\)</span> 位为 <span class="arithmatex">\(1\)</span> 表示数字 <span class="arithmatex">\(j\)</span> 已经被使用过。</li>
+<li>布尔值 <span class="arithmatex">\(\textit{lead}\)</span> 表示当前是否只包含前导 <span class="arithmatex">\(0\)</span>。</li>
+<li>布尔值 <span class="arithmatex">\(\textit{limit}\)</span> 表示当前是否受到上界的限制。</li>
 </ul>
 <p>函数的执行过程如下：</p>
-<p>如果 $i$ 超过了数字 $n$ 的长度，说明搜索结束，如果此时 $\textit{lead}$ 为真，说明当前数字只包含前导 $0$，直接返回 $0$，否则返回 $1$。</p>
-<p>如果 $\textit{limit}$ 为假且 $\textit{lead}$ 为假且 $\textit{mask}$ 的状态已经被记忆化，直接返回记忆化的结果。</p>
-<p>否则，我们计算当前数字的上界 $up$，如果 $\textit{limit}$ 为真，$up$ 为当前数字的第 $i$ 位，否则 $up = 9$。</p>
-<p>然后我们遍历 $[0, up]$，对于每个数字 $j$，如果 $\textit{mask}$ 的第 $j$ 位为 $1$，说明数字 $j$ 已经被使用过，直接跳过。否则，如果 $\textit{lead}$ 为真且 $j = 0$，说明当前数字只包含前导 $0$，递归搜索下一位，否则递归搜索下一位并更新 $\textit{mask}$ 的状态。</p>
-<p>最后，如果 $\textit{limit}$ 为假且 $\textit{lead}$ 为假，将当前状态记忆化。</p>
+<p>如果 <span class="arithmatex">\(i\)</span> 超过了数字 <span class="arithmatex">\(n\)</span> 的长度，说明搜索结束，如果此时 <span class="arithmatex">\(\textit{lead}\)</span> 为真，说明当前数字只包含前导 <span class="arithmatex">\(0\)</span>，直接返回 <span class="arithmatex">\(0\)</span>，否则返回 <span class="arithmatex">\(1\)</span>。</p>
+<p>如果 <span class="arithmatex">\(\textit{limit}\)</span> 为假且 <span class="arithmatex">\(\textit{lead}\)</span> 为假且 <span class="arithmatex">\(\textit{mask}\)</span> 的状态已经被记忆化，直接返回记忆化的结果。</p>
+<p>否则，我们计算当前数字的上界 <span class="arithmatex">\(up\)</span>，如果 <span class="arithmatex">\(\textit{limit}\)</span> 为真，<span class="arithmatex">\(up\)</span> 为当前数字的第 <span class="arithmatex">\(i\)</span> 位，否则 <span class="arithmatex">\(up = 9\)</span>。</p>
+<p>然后我们遍历 <span class="arithmatex">\([0, up]\)</span>，对于每个数字 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(\textit{mask}\)</span> 的第 <span class="arithmatex">\(j\)</span> 位为 <span class="arithmatex">\(1\)</span>，说明数字 <span class="arithmatex">\(j\)</span> 已经被使用过，直接跳过。否则，如果 <span class="arithmatex">\(\textit{lead}\)</span> 为真且 <span class="arithmatex">\(j = 0\)</span>，说明当前数字只包含前导 <span class="arithmatex">\(0\)</span>，递归搜索下一位，否则递归搜索下一位并更新 <span class="arithmatex">\(\textit{mask}\)</span> 的状态。</p>
+<p>最后，如果 <span class="arithmatex">\(\textit{limit}\)</span> 为假且 <span class="arithmatex">\(\textit{lead}\)</span> 为假，将当前状态记忆化。</p>
 <p>最终返回答案。</p>
-<p>时间复杂度 $O(m \times 2^D \times D)$，空间复杂度 $O(m \times 2^D)$。其中 $m$ 为数字 $n$ 的长度，而 $D = 10$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times 2^D \times D)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times 2^D)\)</span>。其中 <span class="arithmatex">\(m\)</span> 为数字 <span class="arithmatex">\(n\)</span> 的长度，而 <span class="arithmatex">\(D = 10\)</span>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README.md">233. 数字 1 的个数</a></li>
@@ -91438,11 +91436,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

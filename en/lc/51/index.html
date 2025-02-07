@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86039,12 +86037,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs-backtracking">Solution 1: DFS (Backtracking)</h3>
-<p>We define three arrays $col$, $dg$, and $udg$ to represent whether there is a queen in the column, the main diagonal, and the anti-diagonal, respectively. If there is a queen at position $(i, j)$, then $col[j]$, $dg[i + j]$, and $udg[n - i + j]$ are all $1$. In addition, we use an array $g$ to record the current state of the chessboard, where all elements in $g$ are initially <code>'.'</code>.</p>
-<p>Next, we define a function $dfs(i)$, which represents placing queens starting from the $i$th row.</p>
-<p>In $dfs(i)$, if $i = n$, it means that we have completed the placement of all queens. We put the current $g$ into the answer array and end the recursion.</p>
-<p>Otherwise, we enumerate each column $j$ of the current row. If there is no queen at position $(i, j)$, that is, $col[j]$, $dg[i + j]$, and $udg[n - i + j]$ are all $0$, then we can place a queen, that is, change $g[i][j]$ to <code>'Q'</code>, and set $col[j]$, $dg[i + j]$, and $udg[n - i + j]$ to $1$. Then we continue to search the next row, that is, call $dfs(i + 1)$. After the recursion ends, we need to change $g[i][j]$ back to <code>'.'</code> and set $col[j]$, $dg[i + j]$, and $udg[n - i + j]$ to $0$.</p>
-<p>In the main function, we call $dfs(0)$ to start recursion, and finally return the answer array.</p>
-<p>The time complexity is $O(n^2 \times n!)$, and the space complexity is $O(n)$. Here, $n$ is the integer given in the problem.</p>
+<p>We define three arrays <span class="arithmatex">\(col\)</span>, <span class="arithmatex">\(dg\)</span>, and <span class="arithmatex">\(udg\)</span> to represent whether there is a queen in the column, the main diagonal, and the anti-diagonal, respectively. If there is a queen at position <span class="arithmatex">\((i, j)\)</span>, then <span class="arithmatex">\(col[j]\)</span>, <span class="arithmatex">\(dg[i + j]\)</span>, and <span class="arithmatex">\(udg[n - i + j]\)</span> are all <span class="arithmatex">\(1\)</span>. In addition, we use an array <span class="arithmatex">\(g\)</span> to record the current state of the chessboard, where all elements in <span class="arithmatex">\(g\)</span> are initially <code>'.'</code>.</p>
+<p>Next, we define a function <span class="arithmatex">\(dfs(i)\)</span>, which represents placing queens starting from the <span class="arithmatex">\(i\)</span>th row.</p>
+<p>In <span class="arithmatex">\(dfs(i)\)</span>, if <span class="arithmatex">\(i = n\)</span>, it means that we have completed the placement of all queens. We put the current <span class="arithmatex">\(g\)</span> into the answer array and end the recursion.</p>
+<p>Otherwise, we enumerate each column <span class="arithmatex">\(j\)</span> of the current row. If there is no queen at position <span class="arithmatex">\((i, j)\)</span>, that is, <span class="arithmatex">\(col[j]\)</span>, <span class="arithmatex">\(dg[i + j]\)</span>, and <span class="arithmatex">\(udg[n - i + j]\)</span> are all <span class="arithmatex">\(0\)</span>, then we can place a queen, that is, change <span class="arithmatex">\(g[i][j]\)</span> to <code>'Q'</code>, and set <span class="arithmatex">\(col[j]\)</span>, <span class="arithmatex">\(dg[i + j]\)</span>, and <span class="arithmatex">\(udg[n - i + j]\)</span> to <span class="arithmatex">\(1\)</span>. Then we continue to search the next row, that is, call <span class="arithmatex">\(dfs(i + 1)\)</span>. After the recursion ends, we need to change <span class="arithmatex">\(g[i][j]\)</span> back to <code>'.'</code> and set <span class="arithmatex">\(col[j]\)</span>, <span class="arithmatex">\(dg[i + j]\)</span>, and <span class="arithmatex">\(udg[n - i + j]\)</span> to <span class="arithmatex">\(0\)</span>.</p>
+<p>In the main function, we call <span class="arithmatex">\(dfs(0)\)</span> to start recursion, and finally return the answer array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times n!)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the integer given in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86656,11 +86654,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

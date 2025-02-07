@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90850,19 +90848,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：逆向思维 + 动态规划</h3>
-<p>对于一个长度为 $n$ 的数组 <code>nums</code>，每个元素都可以选择放入第一个分区或第二个分区，因此一共有 $2^n$ 种分区方式。每一种分区方式，得到的结果可以是“好分区”或者“坏分区”，题目要我们求“好分区”的个数，我们可以转换为求“坏分区”的个数。那么“好分区”的个数就是 $2^n$ 减去“坏分区”的个数。</p>
-<p>“坏分区”实际上就是从数组 <code>nums</code> 中选出若干个元素，使得这若干个元素之和不超过 $k$。这可以通过动态规划（0-1 背包问题）来求解。</p>
-<p>我们用 $f[i][j]$ 表示从数组 <code>nums</code> 的前 $i$ 个元素中选出若干个元素，使得这若干个元素之和为 $j$ 的方案数。那么 $f[i][j]$ 的状态转移方程为：</p>
-<p>$$
-f[i][j] = \left{
+<p>对于一个长度为 <span class="arithmatex">\(n\)</span> 的数组 <code>nums</code>，每个元素都可以选择放入第一个分区或第二个分区，因此一共有 <span class="arithmatex">\(2^n\)</span> 种分区方式。每一种分区方式，得到的结果可以是“好分区”或者“坏分区”，题目要我们求“好分区”的个数，我们可以转换为求“坏分区”的个数。那么“好分区”的个数就是 <span class="arithmatex">\(2^n\)</span> 减去“坏分区”的个数。</p>
+<p>“坏分区”实际上就是从数组 <code>nums</code> 中选出若干个元素，使得这若干个元素之和不超过 <span class="arithmatex">\(k\)</span>。这可以通过动态规划（0-1 背包问题）来求解。</p>
+<p>我们用 <span class="arithmatex">\(f[i][j]\)</span> 表示从数组 <code>nums</code> 的前 <span class="arithmatex">\(i\)</span> 个元素中选出若干个元素，使得这若干个元素之和为 <span class="arithmatex">\(j\)</span> 的方案数。那么 <span class="arithmatex">\(f[i][j]\)</span> 的状态转移方程为：</p>
+<div class="arithmatex">\[
+f[i][j] = \left\{
 \begin{aligned}
-&amp;f[i - 1][j] &amp; \textit{如果不选第 } i \textit{ 个元素} \
+&amp;f[i - 1][j] &amp; \textit{如果不选第 } i \textit{ 个元素} \\
 &amp;f[i - 1][j - nums[i - 1]] &amp; \textit{如果选第 } i \textit{ 个元素}
 \end{aligned}
 \right.
-$$</p>
-<p>那么“坏分区”的个数就是 $\sum_{j=0}^{k-1} f[n][j] \times 2$，其中 $n$ 为数组 <code>nums</code> 的长度。最后，我们用 $2^n$ 减去“坏分区”的个数，即可得到“好分区”的个数。</p>
-<p>时间复杂度 $O(n \times k)$，空间复杂度 $O(n \times k)$。其中 $n$ 为数组 <code>nums</code> 的长度，而 $k$ 为整数 $k$。</p>
+\]</div>
+<p>那么“坏分区”的个数就是 <span class="arithmatex">\(\sum_{j=0}^{k-1} f[n][j] \times 2\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <code>nums</code> 的长度。最后，我们用 <span class="arithmatex">\(2^n\)</span> 减去“坏分区”的个数，即可得到“好分区”的个数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <code>nums</code> 的长度，而 <span class="arithmatex">\(k\)</span> 为整数 <span class="arithmatex">\(k\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91316,11 +91314,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

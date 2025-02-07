@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,22 +90858,22 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示从左上角走到 $(i, j)$ 的路径数量，初始时 $f[0][0] = 1$，答案为 $f[m - 1][n - 1]$。</p>
-<p>考虑 $f[i][j]$：</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示从左上角走到 <span class="arithmatex">\((i, j)\)</span> 的路径数量，初始时 <span class="arithmatex">\(f[0][0] = 1\)</span>，答案为 <span class="arithmatex">\(f[m - 1][n - 1]\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span>：</p>
 <ul>
-<li>如果 $i \gt 0$，那么 $f[i][j]$ 可以从 $f[i - 1][j]$ 走一步到达，因此 $f[i][j] = f[i][j] + f[i - 1][j]$；</li>
-<li>如果 $j \gt 0$，那么 $f[i][j]$ 可以从 $f[i][j - 1]$ 走一步到达，因此 $f[i][j] = f[i][j] + f[i][j - 1]$。</li>
+<li>如果 <span class="arithmatex">\(i \gt 0\)</span>，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i - 1][j]\)</span> 走一步到达，因此 <span class="arithmatex">\(f[i][j] = f[i][j] + f[i - 1][j]\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j \gt 0\)</span>，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i][j - 1]\)</span> 走一步到达，因此 <span class="arithmatex">\(f[i][j] = f[i][j] + f[i][j - 1]\)</span>。</li>
 </ul>
 <p>因此，我们有如下的状态转移方程：</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \begin{cases}
-1 &amp; i = 0, j = 0 \
+1 &amp; i = 0, j = 0 \\
 f[i - 1][j] + f[i][j - 1] &amp; \textit{otherwise}
 \end{cases}
-$$</p>
-<p>最终的答案即为 $f[m - 1][n - 1]$。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是网格的行数和列数。</p>
-<p>我们注意到 $f[i][j]$ 仅与 $f[i - 1][j]$ 和 $f[i][j - 1]$ 有关，因此我们优化掉第一维空间，仅保留第二维空间，得到时间复杂度 $O(m \times n)$，空间复杂度 $O(n)$ 的实现。</p>
+\]</div>
+<p>最终的答案即为 <span class="arithmatex">\(f[m - 1][n - 1]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是网格的行数和列数。</p>
+<p>我们注意到 <span class="arithmatex">\(f[i][j]\)</span> 仅与 <span class="arithmatex">\(f[i - 1][j]\)</span> 和 <span class="arithmatex">\(f[i][j - 1]\)</span> 有关，因此我们优化掉第一维空间，仅保留第二维空间，得到时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span> 的实现。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91750,11 +91748,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

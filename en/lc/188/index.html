@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,17 +86058,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $dfs(i, j, k)$ to represent the maximum profit that can be obtained when starting from day $i$, completing at most $j$ transactions, and holding the stock with the current state $k$ (not holding the stock is represented by $0$, and holding the stock is represented by $1$). The answer is $dfs(0, k, 0)$.</p>
-<p>The execution logic of the function $dfs(i, j, k)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j, k)\)</span> to represent the maximum profit that can be obtained when starting from day <span class="arithmatex">\(i\)</span>, completing at most <span class="arithmatex">\(j\)</span> transactions, and holding the stock with the current state <span class="arithmatex">\(k\)</span> (not holding the stock is represented by <span class="arithmatex">\(0\)</span>, and holding the stock is represented by <span class="arithmatex">\(1\)</span>). The answer is <span class="arithmatex">\(dfs(0, k, 0)\)</span>.</p>
+<p>The execution logic of the function <span class="arithmatex">\(dfs(i, j, k)\)</span> is as follows:</p>
 <ul>
-<li>If $i$ is greater than or equal to $n$, return $0$ directly.</li>
-<li>The i-th day can choose not to do anything, then $dfs(i, j, k) = dfs(i + 1, j, k)$.</li>
-<li>If $k &gt; 0$, the i-th day can choose to sell the stock, then $dfs(i, j, k) = \max(dfs(i + 1, j - 1, 0) + prices[i], dfs(i + 1, j, k))$.</li>
-<li>Otherwise, if $j &gt; 0$, the i-th day can choose to buy the stock, then $dfs(i, j, k) = \max(dfs(i + 1, j - 1, 1) - prices[i], dfs(i + 1, j, k))$.</li>
+<li>If <span class="arithmatex">\(i\)</span> is greater than or equal to <span class="arithmatex">\(n\)</span>, return <span class="arithmatex">\(0\)</span> directly.</li>
+<li>The i-th day can choose not to do anything, then <span class="arithmatex">\(dfs(i, j, k) = dfs(i + 1, j, k)\)</span>.</li>
+<li>If <span class="arithmatex">\(k &gt; 0\)</span>, the i-th day can choose to sell the stock, then <span class="arithmatex">\(dfs(i, j, k) = \max(dfs(i + 1, j - 1, 0) + prices[i], dfs(i + 1, j, k))\)</span>.</li>
+<li>Otherwise, if <span class="arithmatex">\(j &gt; 0\)</span>, the i-th day can choose to buy the stock, then <span class="arithmatex">\(dfs(i, j, k) = \max(dfs(i + 1, j - 1, 1) - prices[i], dfs(i + 1, j, k))\)</span>.</li>
 </ul>
-<p>The value of $dfs(i, j, k)$ is the maximum value of the above three cases.</p>
+<p>The value of <span class="arithmatex">\(dfs(i, j, k)\)</span> is the maximum value of the above three cases.</p>
 <p>During the process, we can use memoization search to save the results of each calculation to avoid repeated calculations.</p>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(n \times k)$, where $n$ and $k$ are the length of the prices array and the value of $k$, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> are the length of the prices array and the value of <span class="arithmatex">\(k\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86394,23 +86392,23 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
-<p>We can also use dynamic programming to define $f[i][j][k]$ as the maximum profit that can be obtained when completing at most j transactions (here we define the number of transactions as the number of purchases), and holding the stock with the current state k on the i-th day. The initial value of $f[i][j][k]$ is 0. The answer is $f[n - 1][k][0]$.</p>
-<p>When $i = 0$, the stock price is $prices[0]$. For any $j$ \in [1, k]$, we have $f[0][j][1] = -prices[0]$, which means buying the stock on the 0-th day with a profit of $-prices[0]$.</p>
-<p>When $i &gt; 0$:</p>
+<p>We can also use dynamic programming to define <span class="arithmatex">\(f[i][j][k]\)</span> as the maximum profit that can be obtained when completing at most j transactions (here we define the number of transactions as the number of purchases), and holding the stock with the current state k on the i-th day. The initial value of <span class="arithmatex">\(f[i][j][k]\)</span> is 0. The answer is <span class="arithmatex">\(f[n - 1][k][0]\)</span>.</p>
+<p>When <span class="arithmatex">\(i = 0\)</span>, the stock price is <span class="arithmatex">\(prices[0]\)</span>. For any <span class="arithmatex">\(j\)</span> \in [1, k]$, we have <span class="arithmatex">\(f[0][j][1] = -prices[0]\)</span>, which means buying the stock on the 0-th day with a profit of <span class="arithmatex">\(-prices[0]\)</span>.</p>
+<p>When <span class="arithmatex">\(i &gt; 0\)</span>:</p>
 <ul>
-<li>If the i-th day does not hold the stock, it may be that the stock was held on the i-1-th day and sold on the i-th day, or the stock was not held on the i-1-th day and no operation was performed on the i-th day. Therefore, $f[i][j][0] = \max(f[i - 1][j][1] + prices[i], f[i - 1][j][0])$.</li>
-<li>If the i-th day holds the stock, it may be that the stock was not held on the i-1-th day and bought on the i-th day, or the stock was held on the i-1-th day and no operation was performed on the i-th day. Therefore, $f[i][j][1] = max(f[i - 1][j - 1][0] - prices[i], f[i - 1][j][1])$.</li>
+<li>If the i-th day does not hold the stock, it may be that the stock was held on the i-1-th day and sold on the i-th day, or the stock was not held on the i-1-th day and no operation was performed on the i-th day. Therefore, <span class="arithmatex">\(f[i][j][0] = \max(f[i - 1][j][1] + prices[i], f[i - 1][j][0])\)</span>.</li>
+<li>If the i-th day holds the stock, it may be that the stock was not held on the i-1-th day and bought on the i-th day, or the stock was held on the i-1-th day and no operation was performed on the i-th day. Therefore, <span class="arithmatex">\(f[i][j][1] = max(f[i - 1][j - 1][0] - prices[i], f[i - 1][j][1])\)</span>.</li>
 </ul>
-<p>Therefore, when $i &gt; 0$, we can get the state transition equation:</p>
-<p>$$
+<p>Therefore, when <span class="arithmatex">\(i &gt; 0\)</span>, we can get the state transition equation:</p>
+<div class="arithmatex">\[
 \begin{aligned}
-f[i][j][0] &amp;= \max(f[i - 1][j][1] + prices[i], f[i - 1][j][0]) \
+f[i][j][0] &amp;= \max(f[i - 1][j][1] + prices[i], f[i - 1][j][0]) \\
 f[i][j][1] &amp;= \max(f[i - 1][j - 1][0] - prices[i], f[i - 1][j][1])
 \end{aligned}
-$$</p>
-<p>The final answer is $f[n - 1][k][0]$.</p>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(n \times k)$, where $n$ and $k$ are the length of the prices array and the value of $k$, respectively.</p>
-<p>We notice that the state $f[i][]$ only depends on the state $f[i - 1][]$, so we can optimize the first dimension of the space and reduce the space complexity to $O(k)$.</p>
+\]</div>
+<p>The final answer is <span class="arithmatex">\(f[n - 1][k][0]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> are the length of the prices array and the value of <span class="arithmatex">\(k\)</span>, respectively.</p>
+<p>We notice that the state <span class="arithmatex">\(f[i][]\)</span> only depends on the state <span class="arithmatex">\(f[i - 1][]\)</span>, so we can optimize the first dimension of the space and reduce the space complexity to <span class="arithmatex">\(O(k)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87042,11 +87040,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

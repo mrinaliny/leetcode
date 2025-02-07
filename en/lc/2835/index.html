@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86069,11 +86067,11 @@ It can be shown that there is no shorter sequence of operations that results in 
 <!-- solution:start -->
 
 <h3 id="solution-1-greedy-bit-manipulation">Solution 1: Greedy + Bit Manipulation</h3>
-<p>Observing the operation in the problem, we find that each operation actually splits a number greater than $1$ into two equal numbers, which means that the sum of the elements in the array will not change after the operation. Therefore, if the sum of the elements in the array $s$ is less than $target$, it is impossible to obtain a subsequence with a sum of $target$ through the operation described in the problem, and we can directly return $-1$. Otherwise, we can definitely make the sum of some subsequences in the array equal to $target$ through the split operation.</p>
-<p>In addition, the split operation will actually set the binary high bit of the number to $0$ and add $2$ to the lower bit. Therefore, we first use an array of length $32$ to record the number of times $1$ appears on each binary bit in the binary representation of all elements in the array $nums$.</p>
-<p>Next, starting from the low bit of $target$, for the $i$th bit of $target$, if the current bit number is $0$, skip it directly, that is, $i = i + 1$. If the current bit number is $1$, we need to find the smallest number $j$ (where $j \ge i$) in the array $cnt$ such that $cnt[j] &gt; 0$, and then we split the number $1$ at this bit to the lower bit $i$, that is, subtract $1$ from $cnt[j]$, and set each bit from $i$ to $j-1$ in $cnt$ to $1$, and the number of operations is $j-i$. Next, we let $j = i$, and then $i = i + 1$. Repeat the above operation until $i$ exceeds the index range of the array $cnt$, and return the number of operations at this time.</p>
-<p>Note that if $j &lt; i$, actually two lower bits of $1$ can be combined into a higher bit of $1$. Therefore, if $j &lt; i$, we add $\frac{cnt[j]}{2}$ to $cnt[j+1]$, and take $cnt[j]$ modulo $2$, then let $j = j + 1$, and continue the above operation.</p>
-<p>The time complexity is $O(n \times \log M)$, and the space complexity is $O(\log M)$. Here, $n$ is the length of the array $nums$, and $M$ is the maximum value in the array $nums$.</p>
+<p>Observing the operation in the problem, we find that each operation actually splits a number greater than <span class="arithmatex">\(1\)</span> into two equal numbers, which means that the sum of the elements in the array will not change after the operation. Therefore, if the sum of the elements in the array <span class="arithmatex">\(s\)</span> is less than <span class="arithmatex">\(target\)</span>, it is impossible to obtain a subsequence with a sum of <span class="arithmatex">\(target\)</span> through the operation described in the problem, and we can directly return <span class="arithmatex">\(-1\)</span>. Otherwise, we can definitely make the sum of some subsequences in the array equal to <span class="arithmatex">\(target\)</span> through the split operation.</p>
+<p>In addition, the split operation will actually set the binary high bit of the number to <span class="arithmatex">\(0\)</span> and add <span class="arithmatex">\(2\)</span> to the lower bit. Therefore, we first use an array of length <span class="arithmatex">\(32\)</span> to record the number of times <span class="arithmatex">\(1\)</span> appears on each binary bit in the binary representation of all elements in the array <span class="arithmatex">\(nums\)</span>.</p>
+<p>Next, starting from the low bit of <span class="arithmatex">\(target\)</span>, for the <span class="arithmatex">\(i\)</span>th bit of <span class="arithmatex">\(target\)</span>, if the current bit number is <span class="arithmatex">\(0\)</span>, skip it directly, that is, <span class="arithmatex">\(i = i + 1\)</span>. If the current bit number is <span class="arithmatex">\(1\)</span>, we need to find the smallest number <span class="arithmatex">\(j\)</span> (where <span class="arithmatex">\(j \ge i\)</span>) in the array <span class="arithmatex">\(cnt\)</span> such that <span class="arithmatex">\(cnt[j] &gt; 0\)</span>, and then we split the number <span class="arithmatex">\(1\)</span> at this bit to the lower bit <span class="arithmatex">\(i\)</span>, that is, subtract <span class="arithmatex">\(1\)</span> from <span class="arithmatex">\(cnt[j]\)</span>, and set each bit from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j-1\)</span> in <span class="arithmatex">\(cnt\)</span> to <span class="arithmatex">\(1\)</span>, and the number of operations is <span class="arithmatex">\(j-i\)</span>. Next, we let <span class="arithmatex">\(j = i\)</span>, and then <span class="arithmatex">\(i = i + 1\)</span>. Repeat the above operation until <span class="arithmatex">\(i\)</span> exceeds the index range of the array <span class="arithmatex">\(cnt\)</span>, and return the number of operations at this time.</p>
+<p>Note that if <span class="arithmatex">\(j &lt; i\)</span>, actually two lower bits of <span class="arithmatex">\(1\)</span> can be combined into a higher bit of <span class="arithmatex">\(1\)</span>. Therefore, if <span class="arithmatex">\(j &lt; i\)</span>, we add <span class="arithmatex">\(\frac{cnt[j]}{2}\)</span> to <span class="arithmatex">\(cnt[j+1]\)</span>, and take <span class="arithmatex">\(cnt[j]\)</span> modulo <span class="arithmatex">\(2\)</span>, then let <span class="arithmatex">\(j = j + 1\)</span>, and continue the above operation.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log M)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>, and <span class="arithmatex">\(M\)</span> is the maximum value in the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86685,11 +86683,9 @@ It can be shown that there is no shorter sequence of operations that results in 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

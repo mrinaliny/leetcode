@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90890,11 +90888,11 @@ matrix3D.largestMatrix(); // 返回 3。0 到 3 的对应值都有相同数量�
 <!-- solution:start -->
 
 <h3 id="_3">方法一：计数 + 有序集合</h3>
-<p>我们使用一个三维数组 $\textit{g}$ 来表示矩阵，其中 $\textit{g}[x][y][z]$ 表示矩阵中坐标 $(x, y, z)$ 的值，用一个长度为 $n$ 的数组 $\textit{cnt}$ 来记录每一层的 $1$ 的个数，用一个有序集合 $\textit{sl}$ 来维护每一层的 $1$ 的个数和层数，其中 $\textit{sl}$ 中的元素是 $(\textit{cnt}[x], x)$，这样 $\textit{sl}$ 就能按照 $1$ 的个数降序排序，如果 $1$ 的个数相同，则按照层数降序排序。</p>
-<p>调用 <code>setCell</code> 方法时，我们先判断 $(x, y, z)$ 是否已经被设置为 $1$，如果是则直接返回，否则将 $\textit{g}[x][y][z]$ 设置为 $1$，然后将 $(\textit{cnt}[x], x)$ 从 $\textit{sl}$ 中删除，将 $\textit{cnt}[x]$ 加一，再将 $(\textit{cnt}[x], x)$ 加入 $\textit{sl}$。</p>
-<p>调用 <code>unsetCell</code> 方法时，我们先判断 $(x, y, z)$ 是否已经被设置为 $0$，如果是则直接返回，否则将 $\textit{g}[x][y][z]$ 设置为 $0$，然后将 $(\textit{cnt}[x], x)$ 从 $\textit{sl}$ 中删除，将 $\textit{cnt}[x]$ 减一，如果 $\textit{cnt}[x]$ 大于 $0$，则将 $(\textit{cnt}[x], x)$ 加入 $\textit{sl}$。</p>
-<p>调用 <code>largestMatrix</code> 方法时，我们返回 $\textit{sl}$ 中第一个元素的第二个值，如果 $\textit{sl}$ 为空，则返回 $n - 1$。</p>
-<p>时间复杂度方面，<code>setCell</code> 和 <code>unsetCell</code> 方法的时间复杂度均为 $O(\log n)$，<code>largestMatrix</code> 方法的时间复杂度为 $O(1)$。空间复杂度 $O(n^3)$。</p>
+<p>我们使用一个三维数组 <span class="arithmatex">\(\textit{g}\)</span> 来表示矩阵，其中 <span class="arithmatex">\(\textit{g}[x][y][z]\)</span> 表示矩阵中坐标 <span class="arithmatex">\((x, y, z)\)</span> 的值，用一个长度为 <span class="arithmatex">\(n\)</span> 的数组 <span class="arithmatex">\(\textit{cnt}\)</span> 来记录每一层的 <span class="arithmatex">\(1\)</span> 的个数，用一个有序集合 <span class="arithmatex">\(\textit{sl}\)</span> 来维护每一层的 <span class="arithmatex">\(1\)</span> 的个数和层数，其中 <span class="arithmatex">\(\textit{sl}\)</span> 中的元素是 <span class="arithmatex">\((\textit{cnt}[x], x)\)</span>，这样 <span class="arithmatex">\(\textit{sl}\)</span> 就能按照 <span class="arithmatex">\(1\)</span> 的个数降序排序，如果 <span class="arithmatex">\(1\)</span> 的个数相同，则按照层数降序排序。</p>
+<p>调用 <code>setCell</code> 方法时，我们先判断 <span class="arithmatex">\((x, y, z)\)</span> 是否已经被设置为 <span class="arithmatex">\(1\)</span>，如果是则直接返回，否则将 <span class="arithmatex">\(\textit{g}[x][y][z]\)</span> 设置为 <span class="arithmatex">\(1\)</span>，然后将 <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> 从 <span class="arithmatex">\(\textit{sl}\)</span> 中删除，将 <span class="arithmatex">\(\textit{cnt}[x]\)</span> 加一，再将 <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> 加入 <span class="arithmatex">\(\textit{sl}\)</span>。</p>
+<p>调用 <code>unsetCell</code> 方法时，我们先判断 <span class="arithmatex">\((x, y, z)\)</span> 是否已经被设置为 <span class="arithmatex">\(0\)</span>，如果是则直接返回，否则将 <span class="arithmatex">\(\textit{g}[x][y][z]\)</span> 设置为 <span class="arithmatex">\(0\)</span>，然后将 <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> 从 <span class="arithmatex">\(\textit{sl}\)</span> 中删除，将 <span class="arithmatex">\(\textit{cnt}[x]\)</span> 减一，如果 <span class="arithmatex">\(\textit{cnt}[x]\)</span> 大于 <span class="arithmatex">\(0\)</span>，则将 <span class="arithmatex">\((\textit{cnt}[x], x)\)</span> 加入 <span class="arithmatex">\(\textit{sl}\)</span>。</p>
+<p>调用 <code>largestMatrix</code> 方法时，我们返回 <span class="arithmatex">\(\textit{sl}\)</span> 中第一个元素的第二个值，如果 <span class="arithmatex">\(\textit{sl}\)</span> 为空，则返回 <span class="arithmatex">\(n - 1\)</span>。</p>
+<p>时间复杂度方面，<code>setCell</code> 和 <code>unsetCell</code> 方法的时间复杂度均为 <span class="arithmatex">\(O(\log n)\)</span>，<code>largestMatrix</code> 方法的时间复杂度为 <span class="arithmatex">\(O(1)\)</span>。空间复杂度 <span class="arithmatex">\(O(n^3)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91386,11 +91384,9 @@ matrix3D.largestMatrix(); // 返回 3。0 到 3 的对应值都有相同数量�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

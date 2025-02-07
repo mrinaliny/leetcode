@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,20 +90856,20 @@
 
 <h3 id="_3">方法一：贪心</h3>
 <p>我们注意到，对于所有能覆盖某个左端点的水龙头，选择能覆盖最远右端点的那个水龙头是最优的。</p>
-<p>因此，我们可以先预处理数组 $ranges$，对于第 $i$ 个水龙头，它能覆盖的左端点 $l = \max(0, i - ranges[i])$，右端点 $r = i + ranges[i]$，我们算出所有能覆盖左端点 $l$ 的水龙头中，右端点最大的那个位置，记录在数组 $last[i]$ 中。</p>
+<p>因此，我们可以先预处理数组 <span class="arithmatex">\(ranges\)</span>，对于第 <span class="arithmatex">\(i\)</span> 个水龙头，它能覆盖的左端点 <span class="arithmatex">\(l = \max(0, i - ranges[i])\)</span>，右端点 <span class="arithmatex">\(r = i + ranges[i]\)</span>，我们算出所有能覆盖左端点 <span class="arithmatex">\(l\)</span> 的水龙头中，右端点最大的那个位置，记录在数组 <span class="arithmatex">\(last[i]\)</span> 中。</p>
 <p>然后我们定义以下三个变量，其中：</p>
 <ul>
-<li>变量 $ans$ 表示最终答案，即最少水龙头数目；</li>
-<li>变量 $mx$ 表示当前能覆盖的最远右端点；</li>
-<li>变量 $pre$ 表示上一个水龙头覆盖的最远右端点。</li>
+<li>变量 <span class="arithmatex">\(ans\)</span> 表示最终答案，即最少水龙头数目；</li>
+<li>变量 <span class="arithmatex">\(mx\)</span> 表示当前能覆盖的最远右端点；</li>
+<li>变量 <span class="arithmatex">\(pre\)</span> 表示上一个水龙头覆盖的最远右端点。</li>
 </ul>
-<p>我们在 $[0,...n-1]$ 的范围内遍历所有位置，对于当前位置 $i$，我们用 $last[i]$ 更新 $mx$，即 $mx = \max(mx, last[i])$。</p>
+<p>我们在 <span class="arithmatex">\([0,...n-1]\)</span> 的范围内遍历所有位置，对于当前位置 <span class="arithmatex">\(i\)</span>，我们用 <span class="arithmatex">\(last[i]\)</span> 更新 <span class="arithmatex">\(mx\)</span>，即 <span class="arithmatex">\(mx = \max(mx, last[i])\)</span>。</p>
 <ul>
-<li>如果 $mx \leq i$，说明无法覆盖下一个位置，返回 $-1$。</li>
-<li>如果 $pre = i$，说明需要使用一个新的子区间，因此我们将 $ans$ 加 $1$，并且更新 $pre = mx$。</li>
+<li>如果 <span class="arithmatex">\(mx \leq i\)</span>，说明无法覆盖下一个位置，返回 <span class="arithmatex">\(-1\)</span>。</li>
+<li>如果 <span class="arithmatex">\(pre = i\)</span>，说明需要使用一个新的子区间，因此我们将 <span class="arithmatex">\(ans\)</span> 加 <span class="arithmatex">\(1\)</span>，并且更新 <span class="arithmatex">\(pre = mx\)</span>。</li>
 </ul>
-<p>遍历结束后，返回 $ans$ 即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为花园的长度。</p>
+<p>遍历结束后，返回 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为花园的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0000-0099/0045.Jump%20Game%20II/README.md">45. 跳跃游戏 II</a></li>
@@ -91392,11 +91390,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

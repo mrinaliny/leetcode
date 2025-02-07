@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,16 +90864,16 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：DFS</h3>
-<p>我们先根据题目给定的边 $\textit{edges}$ 构建出树的邻接表 $\textit{g}$，其中 $\textit{g}[a]$ 表示节点 $a$ 的所有邻居节点。</p>
-<p>然后，我们设计一个函数 $\textit{dfs}(a, \textit{fa})$，表示计算以节点 $a$ 为根的子树中的节点数，并累计好节点的数量。其中 $\textit{fa}$ 表示节点 $a$ 的父节点。</p>
-<p>函数 $\textit{dfs}(a, \textit{fa})$ 的执行过程如下：</p>
+<p>我们先根据题目给定的边 <span class="arithmatex">\(\textit{edges}\)</span> 构建出树的邻接表 <span class="arithmatex">\(\textit{g}\)</span>，其中 <span class="arithmatex">\(\textit{g}[a]\)</span> 表示节点 <span class="arithmatex">\(a\)</span> 的所有邻居节点。</p>
+<p>然后，我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(a, \textit{fa})\)</span>，表示计算以节点 <span class="arithmatex">\(a\)</span> 为根的子树中的节点数，并累计好节点的数量。其中 <span class="arithmatex">\(\textit{fa}\)</span> 表示节点 <span class="arithmatex">\(a\)</span> 的父节点。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(a, \textit{fa})\)</span> 的执行过程如下：</p>
 <ol>
-<li>初始化变量 $\textit{pre} = -1$, $\textit{cnt} = 1$, $\textit{ok} = 1$，分别表示节点 $a$ 的某个子树的节点数、节点 $a$ 的所有子树的节点数、以及节点 $a$ 是否为好节点。</li>
-<li>遍历节点 $a$ 的所有邻居节点 $b$，如果 $b$ 不等于 $\textit{fa}$，则递归调用 $\textit{dfs}(b, a)$，返回值为 $\textit{cur}$，并累加到 $\textit{cnt}$ 中。如果 $\textit{pre} &lt; 0$，则将 $\textit{cur}$ 赋值给 $\textit{pre}$；否则，如果 $\textit{pre}$ 不等于 $\textit{cur}$，说明节点 $a$ 的不同子树的节点数不同，将 $\textit{ok}$ 置为 $0$。</li>
-<li>最后，累加 $\textit{ok}$ 到答案中，并返回 $\textit{cnt}$。</li>
+<li>初始化变量 <span class="arithmatex">\(\textit{pre} = -1\)</span>, <span class="arithmatex">\(\textit{cnt} = 1\)</span>, <span class="arithmatex">\(\textit{ok} = 1\)</span>，分别表示节点 <span class="arithmatex">\(a\)</span> 的某个子树的节点数、节点 <span class="arithmatex">\(a\)</span> 的所有子树的节点数、以及节点 <span class="arithmatex">\(a\)</span> 是否为好节点。</li>
+<li>遍历节点 <span class="arithmatex">\(a\)</span> 的所有邻居节点 <span class="arithmatex">\(b\)</span>，如果 <span class="arithmatex">\(b\)</span> 不等于 <span class="arithmatex">\(\textit{fa}\)</span>，则递归调用 <span class="arithmatex">\(\textit{dfs}(b, a)\)</span>，返回值为 <span class="arithmatex">\(\textit{cur}\)</span>，并累加到 <span class="arithmatex">\(\textit{cnt}\)</span> 中。如果 <span class="arithmatex">\(\textit{pre} &lt; 0\)</span>，则将 <span class="arithmatex">\(\textit{cur}\)</span> 赋值给 <span class="arithmatex">\(\textit{pre}\)</span>；否则，如果 <span class="arithmatex">\(\textit{pre}\)</span> 不等于 <span class="arithmatex">\(\textit{cur}\)</span>，说明节点 <span class="arithmatex">\(a\)</span> 的不同子树的节点数不同，将 <span class="arithmatex">\(\textit{ok}\)</span> 置为 <span class="arithmatex">\(0\)</span>。</li>
+<li>最后，累加 <span class="arithmatex">\(\textit{ok}\)</span> 到答案中，并返回 <span class="arithmatex">\(\textit{cnt}\)</span>。</li>
 </ol>
-<p>在主函数中，我们调用 $\textit{dfs}(0, -1)$，最后返回答案。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 表示节点的数量。</p>
+<p>在主函数中，我们调用 <span class="arithmatex">\(\textit{dfs}(0, -1)\)</span>，最后返回答案。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示节点的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91407,11 +91405,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86050,11 +86048,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the length of the longest Fibonacci-like subsequence, with $\textit{arr}[i]$ as the last element and $\textit{arr}[j]$ as the second to last element. Initially, for any $i \in [0, n)$ and $j \in [0, i)$, we have $f[i][j] = 2$. All other elements are $0$.</p>
-<p>We use a hash table $d$ to record the indices of each element in the array $\textit{arr}$.</p>
-<p>Then, we can enumerate $\textit{arr}[i]$ and $\textit{arr}[j]$, where $i \in [2, n)$ and $j \in [1, i)$. Suppose the currently enumerated elements are $\textit{arr}[i]$ and $\textit{arr}[j]$, we can obtain $\textit{arr}[i] - \textit{arr}[j]$, denoted as $t$. If $t$ is in the array $\textit{arr}$, and the index $k$ of $t$ satisfies $k &lt; j$, then we can get a Fibonacci-like subsequence with $\textit{arr}[j]$ and $\textit{arr}[i]$ as the last two elements, and its length is $f[i][j] = \max(f[i][j], f[j][k] + 1)$. We can continuously update the value of $f[i][j]$ in this way, and then update the answer.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the length of the longest Fibonacci-like subsequence, with <span class="arithmatex">\(\textit{arr}[i]\)</span> as the last element and <span class="arithmatex">\(\textit{arr}[j]\)</span> as the second to last element. Initially, for any <span class="arithmatex">\(i \in [0, n)\)</span> and <span class="arithmatex">\(j \in [0, i)\)</span>, we have <span class="arithmatex">\(f[i][j] = 2\)</span>. All other elements are <span class="arithmatex">\(0\)</span>.</p>
+<p>We use a hash table <span class="arithmatex">\(d\)</span> to record the indices of each element in the array <span class="arithmatex">\(\textit{arr}\)</span>.</p>
+<p>Then, we can enumerate <span class="arithmatex">\(\textit{arr}[i]\)</span> and <span class="arithmatex">\(\textit{arr}[j]\)</span>, where <span class="arithmatex">\(i \in [2, n)\)</span> and <span class="arithmatex">\(j \in [1, i)\)</span>. Suppose the currently enumerated elements are <span class="arithmatex">\(\textit{arr}[i]\)</span> and <span class="arithmatex">\(\textit{arr}[j]\)</span>, we can obtain <span class="arithmatex">\(\textit{arr}[i] - \textit{arr}[j]\)</span>, denoted as <span class="arithmatex">\(t\)</span>. If <span class="arithmatex">\(t\)</span> is in the array <span class="arithmatex">\(\textit{arr}\)</span>, and the index <span class="arithmatex">\(k\)</span> of <span class="arithmatex">\(t\)</span> satisfies <span class="arithmatex">\(k &lt; j\)</span>, then we can get a Fibonacci-like subsequence with <span class="arithmatex">\(\textit{arr}[j]\)</span> and <span class="arithmatex">\(\textit{arr}[i]\)</span> as the last two elements, and its length is <span class="arithmatex">\(f[i][j] = \max(f[i][j], f[j][k] + 1)\)</span>. We can continuously update the value of <span class="arithmatex">\(f[i][j]\)</span> in this way, and then update the answer.</p>
 <p>After the enumeration ends, return the answer.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$, where $n$ is the length of the array $\textit{arr}$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{arr}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86650,11 +86648,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

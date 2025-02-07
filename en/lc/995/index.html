@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,9 +86081,9 @@ Flip nums[5],nums[6],nums[7]: nums becomes [1,1,1,1,1,1,1,1]
 <h3 id="solution-1-difference-array">Solution 1: Difference Array</h3>
 <p>We notice that the result of reversing several consecutive elements is independent of the order of the reversals. Therefore, we can greedily consider the number of reversals needed at each position.</p>
 <p>We can process the array from left to right.</p>
-<p>Suppose we need to process position $i$, and the elements to the left of position $i$ have been processed. If the element at position $i$ is $0$, then we must perform a reversal operation, we need to reverse the elements in the interval $[i,..i+k-1]$. Here we use a difference array $d$ to maintain the number of reversals at each position, then to determine whether the current position $i$ needs to be reversed, we only need to see $s = \sum_{j=0}^{i}d[j]$ and the parity of $nums[i]$. If $s$ and $nums[i]$ have the same parity, then the element at position $i$ is still $0$ and needs to be reversed. At this time, we check whether $i+k$ exceeds the length of the array. If it exceeds the length of the array, then the target cannot be achieved, return $-1$. Otherwise, we increase $d[i]$ by $1$, decrease $d[i+k]$ by $1$, increase the answer by $1$, and increase $s$ by $1$.</p>
+<p>Suppose we need to process position <span class="arithmatex">\(i\)</span>, and the elements to the left of position <span class="arithmatex">\(i\)</span> have been processed. If the element at position <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(0\)</span>, then we must perform a reversal operation, we need to reverse the elements in the interval <span class="arithmatex">\([i,..i+k-1]\)</span>. Here we use a difference array <span class="arithmatex">\(d\)</span> to maintain the number of reversals at each position, then to determine whether the current position <span class="arithmatex">\(i\)</span> needs to be reversed, we only need to see <span class="arithmatex">\(s = \sum_{j=0}^{i}d[j]\)</span> and the parity of <span class="arithmatex">\(nums[i]\)</span>. If <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(nums[i]\)</span> have the same parity, then the element at position <span class="arithmatex">\(i\)</span> is still <span class="arithmatex">\(0\)</span> and needs to be reversed. At this time, we check whether <span class="arithmatex">\(i+k\)</span> exceeds the length of the array. If it exceeds the length of the array, then the target cannot be achieved, return <span class="arithmatex">\(-1\)</span>. Otherwise, we increase <span class="arithmatex">\(d[i]\)</span> by <span class="arithmatex">\(1\)</span>, decrease <span class="arithmatex">\(d[i+k]\)</span> by <span class="arithmatex">\(1\)</span>, increase the answer by <span class="arithmatex">\(1\)</span>, and increase <span class="arithmatex">\(s\)</span> by <span class="arithmatex">\(1\)</span>.</p>
 <p>In this way, when we have processed all the elements in the array, we can return the answer.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $nums$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86335,10 +86333,10 @@ Flip nums[5],nums[6],nums[7]: nums becomes [1,1,1,1,1,1,1,1]
 <!-- solution:start -->
 
 <h3 id="solution-2-sliding-window">Solution 2: Sliding Window</h3>
-<p>We can use a variable $\textit{flipped}$ to indicate whether the current position has been flipped. If $\textit{flipped} = 1$, it means the current position has already been flipped; otherwise, it means the current position has not been flipped. For positions that have been flipped, we can set their value to $-1$, allowing us to distinguish which positions have been flipped.</p>
-<p>Next, we traverse the array from left to right. For each position $i$, if $i \geq k$ and the element at position $i-k$ is $-1$, then the flip state of the current position should be the opposite of the flip state of the previous position. That is, $\textit{flipped} = \textit{flipped} \oplus 1$. If the element at the current position is the same as the current flip state, then we need to flip the current position. At this point, we check if $i+k$ exceeds the length of the array. If it does, then it is impossible to achieve the goal, and we return $-1$. Otherwise, we invert the current flip state, increase the answer by $1$, and set the element at the current position to $-1$.</p>
+<p>We can use a variable <span class="arithmatex">\(\textit{flipped}\)</span> to indicate whether the current position has been flipped. If <span class="arithmatex">\(\textit{flipped} = 1\)</span>, it means the current position has already been flipped; otherwise, it means the current position has not been flipped. For positions that have been flipped, we can set their value to <span class="arithmatex">\(-1\)</span>, allowing us to distinguish which positions have been flipped.</p>
+<p>Next, we traverse the array from left to right. For each position <span class="arithmatex">\(i\)</span>, if <span class="arithmatex">\(i \geq k\)</span> and the element at position <span class="arithmatex">\(i-k\)</span> is <span class="arithmatex">\(-1\)</span>, then the flip state of the current position should be the opposite of the flip state of the previous position. That is, <span class="arithmatex">\(\textit{flipped} = \textit{flipped} \oplus 1\)</span>. If the element at the current position is the same as the current flip state, then we need to flip the current position. At this point, we check if <span class="arithmatex">\(i+k\)</span> exceeds the length of the array. If it does, then it is impossible to achieve the goal, and we return <span class="arithmatex">\(-1\)</span>. Otherwise, we invert the current flip state, increase the answer by <span class="arithmatex">\(1\)</span>, and set the element at the current position to <span class="arithmatex">\(-1\)</span>.</p>
 <p>By processing all elements in the array in this manner, we can return the answer upon completion.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array $nums$. The space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86813,11 +86811,9 @@ Flip nums[5],nums[6],nums[7]: nums becomes [1,1,1,1,1,1,1,1]
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

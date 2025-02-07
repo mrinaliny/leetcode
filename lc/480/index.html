@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,20 +90865,20 @@
 
 <h3 id="_3">方法一：双优先队列（大小根堆） + 延迟删除</h3>
 <p>我们可以使用两个优先队列（大小根堆）维护当前窗口中的元素，其中一个优先队列存储当前窗口中较小的一半元素，另一个优先队列存储当前窗口中较大的一半元素。这样，当前窗口的中位数就是两个优先队列的堆顶元素的平均值或其中的一个。</p>
-<p>我们设计一个类 $\textit{MedianFinder}$，用于维护当前窗口中的元素。该类包含以下方法：</p>
+<p>我们设计一个类 <span class="arithmatex">\(\textit{MedianFinder}\)</span>，用于维护当前窗口中的元素。该类包含以下方法：</p>
 <ul>
-<li><code>add_num(num)</code>：将 $\textit{num}$ 加入当前窗口中。</li>
+<li><code>add_num(num)</code>：将 <span class="arithmatex">\(\textit{num}\)</span> 加入当前窗口中。</li>
 <li><code>find_median()</code>：返回当前窗口中元素的中位数。</li>
-<li><code>remove_num(num)</code>：将 $\textit{num}$ 从当前窗口中移除。</li>
-<li><code>prune(pq)</code>：如果堆顶元素在延迟删除字典 $\textit{delayed}$ 中，则将其从堆顶弹出，并从该元素的延迟删除次数中减一。如果该元素的延迟删除次数为零，则将其从延迟删除字典中删除。</li>
-<li><code>rebalance()</code>：如果较小的一半元素的数量比较大的一半元素的数量多 $2$ 个，则将较大的一半元素的堆顶元素加入较小的一半元素中；如果较小的一半元素的数量比较大的一半元素的数量少，则将较大的一半元素的堆顶元素加入较小的一半元素中。</li>
+<li><code>remove_num(num)</code>：将 <span class="arithmatex">\(\textit{num}\)</span> 从当前窗口中移除。</li>
+<li><code>prune(pq)</code>：如果堆顶元素在延迟删除字典 <span class="arithmatex">\(\textit{delayed}\)</span> 中，则将其从堆顶弹出，并从该元素的延迟删除次数中减一。如果该元素的延迟删除次数为零，则将其从延迟删除字典中删除。</li>
+<li><code>rebalance()</code>：如果较小的一半元素的数量比较大的一半元素的数量多 <span class="arithmatex">\(2\)</span> 个，则将较大的一半元素的堆顶元素加入较小的一半元素中；如果较小的一半元素的数量比较大的一半元素的数量少，则将较大的一半元素的堆顶元素加入较小的一半元素中。</li>
 </ul>
-<p>在 <code>add_num(num)</code> 方法中，我们先考虑将 $\textit{num}$ 加入较小的一半元素中，如果 $\textit{num}$ 大于较大的一半元素的堆顶元素，则将 $\textit{num}$ 加入较大的一半元素中。然后我们调用 <code>rebalance()</code> 方法，使得两个优先队列的大小之差不超过 $1$。</p>
-<p>在 <code>remove_num(num)</code> 方法中，我们将 $\textit{num}$ 的延迟删除次数加一。然后我们将 $\textit{num}$ 与较小的一半元素的堆顶元素进行比较，如果 $\textit{num}$ 小于等于较小的一半元素的堆顶元素，则更新较小的一半元素的大小，并且调用 <code>prune()</code> 方法，使得较小的一半元素的堆顶元素不在延迟删除字典中。否则，我们更新较大的一半元素的大小，并且调用 <code>prune()</code> 方法，使得较大的一半元素的堆顶元素不在延迟删除字典中。</p>
+<p>在 <code>add_num(num)</code> 方法中，我们先考虑将 <span class="arithmatex">\(\textit{num}\)</span> 加入较小的一半元素中，如果 <span class="arithmatex">\(\textit{num}\)</span> 大于较大的一半元素的堆顶元素，则将 <span class="arithmatex">\(\textit{num}\)</span> 加入较大的一半元素中。然后我们调用 <code>rebalance()</code> 方法，使得两个优先队列的大小之差不超过 <span class="arithmatex">\(1\)</span>。</p>
+<p>在 <code>remove_num(num)</code> 方法中，我们将 <span class="arithmatex">\(\textit{num}\)</span> 的延迟删除次数加一。然后我们将 <span class="arithmatex">\(\textit{num}\)</span> 与较小的一半元素的堆顶元素进行比较，如果 <span class="arithmatex">\(\textit{num}\)</span> 小于等于较小的一半元素的堆顶元素，则更新较小的一半元素的大小，并且调用 <code>prune()</code> 方法，使得较小的一半元素的堆顶元素不在延迟删除字典中。否则，我们更新较大的一半元素的大小，并且调用 <code>prune()</code> 方法，使得较大的一半元素的堆顶元素不在延迟删除字典中。</p>
 <p>在 <code>find_median()</code> 方法中，如果当前窗口的大小为奇数，则返回较小的一半元素的堆顶元素；否则，返回较小的一半元素的堆顶元素与较大的一半元素的堆顶元素的平均值。</p>
 <p>在 <code>prune(pq)</code> 方法中，如果堆顶元素在延迟删除字典中，则将其从堆顶弹出，并从该元素的延迟删除次数中减一。如果该元素的延迟删除次数为零，则将其从延迟删除字典中删除。</p>
-<p>在 <code>rebalance()</code> 方法中，如果较小的一半元素的数量比较大的一半元素的数量多 $2$ 个，则将较大的一半元素的堆顶元素加入较小的一半元素中；如果较小的一半元素的数量比较大的一半元素的数量少，则将较大的一半元素的堆顶元素加入较小的一半元素中。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
+<p>在 <code>rebalance()</code> 方法中，如果较小的一半元素的数量比较大的一半元素的数量多 <span class="arithmatex">\(2\)</span> 个，则将较大的一半元素的堆顶元素加入较小的一半元素中；如果较小的一半元素的数量比较大的一半元素的数量少，则将较大的一半元素的堆顶元素加入较小的一半元素中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91568,10 +91566,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：有序集合</h3>
-<p>我们可以用两个有序集合来维护当前窗口中的元素，其中有序集合 $l$ 存储当前窗口中较小的一半元素，有序集合 $r$ 存储当前窗口中较大的一半元素。</p>
-<p>遍历数组 $\textit{nums}$，对于每个元素 $x$，我们将其加入有序集合 $r$，然后将有序集合 $r$ 的最小值加入有序集合 $l$。如果有序集合 $l$ 的大小比有序集合 $r$ 的大小大于 $1$，我们将有序集合 $l$ 的最大值加入有序集合 $r$。</p>
-<p>如果当前窗口元素总数为 $k$，大小为奇数，则有序集合 $l$ 的最大值就是中位数；如果当前窗口的大小为偶数，则有序集合 $l$ 的最大值和有序集合 $r$ 的最小值的平均值就是中位数。然后，我们将窗口的最左边元素移除，继续遍历数组。</p>
-<p>时间复杂度 $O(n \log k)$，空间复杂度 $O(k)$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
+<p>我们可以用两个有序集合来维护当前窗口中的元素，其中有序集合 <span class="arithmatex">\(l\)</span> 存储当前窗口中较小的一半元素，有序集合 <span class="arithmatex">\(r\)</span> 存储当前窗口中较大的一半元素。</p>
+<p>遍历数组 <span class="arithmatex">\(\textit{nums}\)</span>，对于每个元素 <span class="arithmatex">\(x\)</span>，我们将其加入有序集合 <span class="arithmatex">\(r\)</span>，然后将有序集合 <span class="arithmatex">\(r\)</span> 的最小值加入有序集合 <span class="arithmatex">\(l\)</span>。如果有序集合 <span class="arithmatex">\(l\)</span> 的大小比有序集合 <span class="arithmatex">\(r\)</span> 的大小大于 <span class="arithmatex">\(1\)</span>，我们将有序集合 <span class="arithmatex">\(l\)</span> 的最大值加入有序集合 <span class="arithmatex">\(r\)</span>。</p>
+<p>如果当前窗口元素总数为 <span class="arithmatex">\(k\)</span>，大小为奇数，则有序集合 <span class="arithmatex">\(l\)</span> 的最大值就是中位数；如果当前窗口的大小为偶数，则有序集合 <span class="arithmatex">\(l\)</span> 的最大值和有序集合 <span class="arithmatex">\(r\)</span> 的最小值的平均值就是中位数。然后，我们将窗口的最左边元素移除，继续遍历数组。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \log k)\)</span>，空间复杂度 <span class="arithmatex">\(O(k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -93359,11 +93357,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

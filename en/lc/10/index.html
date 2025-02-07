@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,15 +86068,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $dfs(i, j)$, which indicates whether the $i$-th character of $s$ matches the $j$-th character of $p$. The answer is $dfs(0, 0)$.</p>
-<p>The calculation process of the function $dfs(i, j)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which indicates whether the <span class="arithmatex">\(i\)</span>-th character of <span class="arithmatex">\(s\)</span> matches the <span class="arithmatex">\(j\)</span>-th character of <span class="arithmatex">\(p\)</span>. The answer is <span class="arithmatex">\(dfs(0, 0)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $j$ has reached the end of $p$, then if $i$ has also reached the end of $s$, the match is successful, otherwise, the match fails.</li>
-<li>If the next character of $j$ is <code>'*'</code>, we can choose to match $0$ $s[i]$ characters, which is $dfs(i, j + 2)$. If $i \lt m$ and $s[i]$ matches $p[j]$, we can choose to match $1$ $s[i]$ character, which is $dfs(i + 1, j)$.</li>
-<li>If the next character of $j$ is not <code>'*'</code>, then if $i \lt m$ and $s[i]$ matches $p[j]$, it is $dfs(i + 1, j + 1)$. Otherwise, the match fails.</li>
+<li>If <span class="arithmatex">\(j\)</span> has reached the end of <span class="arithmatex">\(p\)</span>, then if <span class="arithmatex">\(i\)</span> has also reached the end of <span class="arithmatex">\(s\)</span>, the match is successful, otherwise, the match fails.</li>
+<li>If the next character of <span class="arithmatex">\(j\)</span> is <code>'*'</code>, we can choose to match <span class="arithmatex">\(0\)</span> <span class="arithmatex">\(s[i]\)</span> characters, which is <span class="arithmatex">\(dfs(i, j + 2)\)</span>. If <span class="arithmatex">\(i \lt m\)</span> and <span class="arithmatex">\(s[i]\)</span> matches <span class="arithmatex">\(p[j]\)</span>, we can choose to match <span class="arithmatex">\(1\)</span> <span class="arithmatex">\(s[i]\)</span> character, which is <span class="arithmatex">\(dfs(i + 1, j)\)</span>.</li>
+<li>If the next character of <span class="arithmatex">\(j\)</span> is not <code>'*'</code>, then if <span class="arithmatex">\(i \lt m\)</span> and <span class="arithmatex">\(s[i]\)</span> matches <span class="arithmatex">\(p[j]\)</span>, it is <span class="arithmatex">\(dfs(i + 1, j + 1)\)</span>. Otherwise, the match fails.</li>
 </ul>
 <p>During the process, we can use memoization search to avoid repeated calculations.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the lengths of $s$ and $p$ respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(p\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86523,13 +86521,13 @@
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can convert the memoization search in Solution 1 into dynamic programming.</p>
-<p>Define $f[i][j]$ to represent whether the first $i$ characters of string $s$ match the first $j$ characters of string $p$. The answer is $f[m][n]$. Initialize $f[0][0] = true$, indicating that the empty string and the empty regular expression match.</p>
+<p>Define <span class="arithmatex">\(f[i][j]\)</span> to represent whether the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s\)</span> match the first <span class="arithmatex">\(j\)</span> characters of string <span class="arithmatex">\(p\)</span>. The answer is <span class="arithmatex">\(f[m][n]\)</span>. Initialize <span class="arithmatex">\(f[0][0] = true\)</span>, indicating that the empty string and the empty regular expression match.</p>
 <p>Similar to Solution 1, we can discuss different cases.</p>
 <ul>
-<li>If $p[j - 1]$ is <code>'*'</code>, we can choose to match $0$ $s[i - 1]$ characters, which is $f[i][j] = f[i][j - 2]$. If $s[i - 1]$ matches $p[j - 2]$, we can choose to match $1$ $s[i - 1]$ character, which is $f[i][j] = f[i][j] \lor f[i - 1][j]$.</li>
-<li>If $p[j - 1]$ is not <code>'*'</code>, then if $s[i - 1]$ matches $p[j - 1]$, it is $f[i][j] = f[i - 1][j - 1]$. Otherwise, the match fails.</li>
+<li>If <span class="arithmatex">\(p[j - 1]\)</span> is <code>'*'</code>, we can choose to match <span class="arithmatex">\(0\)</span> <span class="arithmatex">\(s[i - 1]\)</span> characters, which is <span class="arithmatex">\(f[i][j] = f[i][j - 2]\)</span>. If <span class="arithmatex">\(s[i - 1]\)</span> matches <span class="arithmatex">\(p[j - 2]\)</span>, we can choose to match <span class="arithmatex">\(1\)</span> <span class="arithmatex">\(s[i - 1]\)</span> character, which is <span class="arithmatex">\(f[i][j] = f[i][j] \lor f[i - 1][j]\)</span>.</li>
+<li>If <span class="arithmatex">\(p[j - 1]\)</span> is not <code>'*'</code>, then if <span class="arithmatex">\(s[i - 1]\)</span> matches <span class="arithmatex">\(p[j - 1]\)</span>, it is <span class="arithmatex">\(f[i][j] = f[i - 1][j - 1]\)</span>. Otherwise, the match fails.</li>
 </ul>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the lengths of $s$ and $p$ respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(p\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:8"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><input id="__tabbed_2_8" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">Rust</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">C#</label><label for="__tabbed_2_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87174,11 +87172,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

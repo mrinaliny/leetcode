@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90921,19 +90919,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划 + 单调队列优化</h3>
-<p>我们定义 $f[i]$ 表示把前 $i$ 个箱子从仓库运送到相应码头的最少行程数，那么答案就是 $f[n]$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示把前 <span class="arithmatex">\(i\)</span> 个箱子从仓库运送到相应码头的最少行程数，那么答案就是 <span class="arithmatex">\(f[n]\)</span>。</p>
 <p>箱子需要按数组顺序运输，每一次运输，卡车会按顺序取出连续的几个箱子，然后依次送往对应的码头，全部送达之后，又回到了仓库。</p>
-<p>因此，我们可以枚举上一次运输的最后一个箱子的编号 $j$，那么 $f[i]$ 就可以从 $f[j]$ 转移而来，转移的时候，我们需要考虑以下几个问题：</p>
+<p>因此，我们可以枚举上一次运输的最后一个箱子的编号 <span class="arithmatex">\(j\)</span>，那么 <span class="arithmatex">\(f[i]\)</span> 就可以从 <span class="arithmatex">\(f[j]\)</span> 转移而来，转移的时候，我们需要考虑以下几个问题：</p>
 <ul>
-<li>从 $f[j]$ 转移过来的时候，卡车上的箱子数量不能超过 $maxBoxes$</li>
-<li>从 $f[j]$ 转移过来的时候，卡车上的箱子总重量不能超过 $maxWeight$</li>
+<li>从 <span class="arithmatex">\(f[j]\)</span> 转移过来的时候，卡车上的箱子数量不能超过 <span class="arithmatex">\(maxBoxes\)</span></li>
+<li>从 <span class="arithmatex">\(f[j]\)</span> 转移过来的时候，卡车上的箱子总重量不能超过 <span class="arithmatex">\(maxWeight\)</span></li>
 </ul>
 <p>状态转移方程为：</p>
-<p>$$
+<div class="arithmatex">\[
 f[i] = \min_{j \in [i - maxBoxes, i - 1]} \left(f[j] + \sum_{k = j + 1}^i \textit{cost}(k)\right)
-$$</p>
-<p>其中 $\sum_{k = j + 1}^i \textit{cost}(k)$ 表示通过一次运输，把 $[j+1,..i]$ 这些箱子送往对应的码头所需要的行程数。这部分行程数可以通过前缀和快速计算出来。</p>
-<p>简单举个例子，假设我们取出了 $1, 2, 3$ 这三个箱子，需要送往 $4, 4, 5$ 这三个码头，那么我们首先要从仓库到 $4$ 号码头，然后再从 $4$ 号码头到 $5$ 号码头，最后再从 $5$ 号码头回到仓库。可以发现，从仓库到码头，以及从码头到仓库，需要花费 $2$ 趟行程，而从码头到码头的行程数，取决于相邻两个码头是否相同，如果不相同，那么行程数会增加 $1$，否则不变。因此，我们可以通过前缀和，计算出码头之间的行程数，再加上首尾两趟行程，就能把 $[j+1,..i]$ 这些箱子送往对应的码头所需要的行程数计算出来。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(\sum_{k = j + 1}^i \textit{cost}(k)\)</span> 表示通过一次运输，把 <span class="arithmatex">\([j+1,..i]\)</span> 这些箱子送往对应的码头所需要的行程数。这部分行程数可以通过前缀和快速计算出来。</p>
+<p>简单举个例子，假设我们取出了 <span class="arithmatex">\(1, 2, 3\)</span> 这三个箱子，需要送往 <span class="arithmatex">\(4, 4, 5\)</span> 这三个码头，那么我们首先要从仓库到 <span class="arithmatex">\(4\)</span> 号码头，然后再从 <span class="arithmatex">\(4\)</span> 号码头到 <span class="arithmatex">\(5\)</span> 号码头，最后再从 <span class="arithmatex">\(5\)</span> 号码头回到仓库。可以发现，从仓库到码头，以及从码头到仓库，需要花费 <span class="arithmatex">\(2\)</span> 趟行程，而从码头到码头的行程数，取决于相邻两个码头是否相同，如果不相同，那么行程数会增加 <span class="arithmatex">\(1\)</span>，否则不变。因此，我们可以通过前缀和，计算出码头之间的行程数，再加上首尾两趟行程，就能把 <span class="arithmatex">\([j+1,..i]\)</span> 这些箱子送往对应的码头所需要的行程数计算出来。</p>
 <p>代码实现如下：</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
@@ -91137,12 +91135,12 @@ $$</p>
 </div>
 </div>
 </div>
-<p>本题数据规模达到 $10^5$，而以上代码的时间复杂度为 $O(n^2)$，会超出时间限制。我们仔细观察：</p>
-<p>$$
+<p>本题数据规模达到 <span class="arithmatex">\(10^5\)</span>，而以上代码的时间复杂度为 <span class="arithmatex">\(O(n^2)\)</span>，会超出时间限制。我们仔细观察：</p>
+<div class="arithmatex">\[
 f[i] = \min(f[i], f[j] + cs[i - 1] - cs[j] + 2)
-$$</p>
-<p>实际上我们是要在 $[i-maxBoxes,..i-1]$ 这个窗口内找到一个 $j$，使得 $f[j] - cs[j]$ 的值最小，求滑动窗口的最小值，一种常用的做法是使用单调队列，可以在 $O(1)$ 时间内获取到满足条件的最小值。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是题目中箱子的数量。</p>
+\]</div>
+<p>实际上我们是要在 <span class="arithmatex">\([i-maxBoxes,..i-1]\)</span> 这个窗口内找到一个 <span class="arithmatex">\(j\)</span>，使得 <span class="arithmatex">\(f[j] - cs[j]\)</span> 的值最小，求滑动窗口的最小值，一种常用的做法是使用单调队列，可以在 <span class="arithmatex">\(O(1)\)</span> 时间内获取到满足条件的最小值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是题目中箱子的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91611,11 +91609,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,17 +90865,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i)$，表示当前玩家在 $[i, n)$ 范围内进行游戏时，可以获得的最大得分差值。如果 $dfs(0) \gt 0$，则表示先手玩家 Alice 可以获胜；如果 $dfs(0) \lt 0$，则表示后手玩家 Bob 可以获胜；否则，表示两人打成平局。</p>
-<p>函数 $dfs(i)$ 的执行逻辑如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示当前玩家在 <span class="arithmatex">\([i, n)\)</span> 范围内进行游戏时，可以获得的最大得分差值。如果 <span class="arithmatex">\(dfs(0) \gt 0\)</span>，则表示先手玩家 Alice 可以获胜；如果 <span class="arithmatex">\(dfs(0) \lt 0\)</span>，则表示后手玩家 Bob 可以获胜；否则，表示两人打成平局。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的执行逻辑如下：</p>
 <ul>
-<li>如果 $i \geq n$，说明当前没有石子可以拿了，直接返回 $0$ 即可；</li>
-<li>否则，我们枚举当前玩家拿走前 $j+1$ 堆石子，其中 $j \in {0, 1, 2}$，那么另一个玩家在下一轮可以获得的得分差值为 $dfs(i + j + 1)$，从而当前玩家可以获得的得分差值为 $\sum_{k=i}^{i+j} stoneValue[k] - dfs(i + j + 1)$。我们要使得当前玩家的得分差值最大，因此可以用 $\max$ 函数得到最大得分差值，即：</li>
+<li>如果 <span class="arithmatex">\(i \geq n\)</span>，说明当前没有石子可以拿了，直接返回 <span class="arithmatex">\(0\)</span> 即可；</li>
+<li>否则，我们枚举当前玩家拿走前 <span class="arithmatex">\(j+1\)</span> 堆石子，其中 <span class="arithmatex">\(j \in \{0, 1, 2\}\)</span>，那么另一个玩家在下一轮可以获得的得分差值为 <span class="arithmatex">\(dfs(i + j + 1)\)</span>，从而当前玩家可以获得的得分差值为 <span class="arithmatex">\(\sum_{k=i}^{i+j} stoneValue[k] - dfs(i + j + 1)\)</span>。我们要使得当前玩家的得分差值最大，因此可以用 <span class="arithmatex">\(\max\)</span> 函数得到最大得分差值，即：</li>
 </ul>
-<p>$$
-dfs(i) = \max_{j \in {0, 1, 2}} \left{\sum_{k=i}^{i+j} stoneValue[k] - dfs(i + j + 1)\right}
-$$</p>
+<div class="arithmatex">\[
+dfs(i) = \max_{j \in \{0, 1, 2\}} \left\{\sum_{k=i}^{i+j} stoneValue[k] - dfs(i + j + 1)\right\}
+\]</div>
 <p>为了防止重复计算，我们可以使用记忆化搜索。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是石子的堆数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是石子的堆数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91391,11 +91389,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

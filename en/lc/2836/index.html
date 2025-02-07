@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86127,13 +86125,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-binary-lifting">Solution 1: Dynamic Programming + Binary Lifting</h3>
-<p>The problem asks us to find the maximum sum of the player IDs who have touched the ball within $k$ passes starting from each player $i$. If we solve it by brute force, we need to traverse upwards $k$ times starting from $i$, with a time complexity of $O(k)$, which will obviously time out.</p>
+<p>The problem asks us to find the maximum sum of the player IDs who have touched the ball within <span class="arithmatex">\(k\)</span> passes starting from each player <span class="arithmatex">\(i\)</span>. If we solve it by brute force, we need to traverse upwards <span class="arithmatex">\(k\)</span> times starting from <span class="arithmatex">\(i\)</span>, with a time complexity of <span class="arithmatex">\(O(k)\)</span>, which will obviously time out.</p>
 <p>We can use dynamic programming combined with binary lifting to handle this.</p>
-<p>We define $f[i][j]$ as the player ID that can be reached by passing the ball $2^j$ times starting from player $i$, and define $g[i][j]$ as the sum of the player IDs that can be reached by passing the ball $2^j$ times starting from player $i$ (excluding the last player).</p>
-<p>When $j=0$, the number of passes is $1$, so $f[i][0] = receiver[i]$, and $g[i][0] = i$.</p>
-<p>When $j &gt; 0$, the number of passes is $2^j$, which is equivalent to passing the ball $2^{j-1}$ times starting from player $i$, and then passing the ball $2^{j-1}$ times starting from player $f[i][j-1]$, so $f[i][j] = f[f[i][j-1]][j-1]$, and $g[i][j] = g[i][j-1] + g[f[i][j-1]][j-1]$.</p>
-<p>Next, we can enumerate each player $i$ as the starting player, then accumulate upwards according to the binary representation of $k$, and finally get the maximum sum of the player IDs who have touched the ball within $k$ passes starting from player $i$.</p>
-<p>The time complexity is $O(n \times \log k)$, and the space complexity is $O(n \times \log k)$. Here, $n$ is the number of players.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the player ID that can be reached by passing the ball <span class="arithmatex">\(2^j\)</span> times starting from player <span class="arithmatex">\(i\)</span>, and define <span class="arithmatex">\(g[i][j]\)</span> as the sum of the player IDs that can be reached by passing the ball <span class="arithmatex">\(2^j\)</span> times starting from player <span class="arithmatex">\(i\)</span> (excluding the last player).</p>
+<p>When <span class="arithmatex">\(j=0\)</span>, the number of passes is <span class="arithmatex">\(1\)</span>, so <span class="arithmatex">\(f[i][0] = receiver[i]\)</span>, and <span class="arithmatex">\(g[i][0] = i\)</span>.</p>
+<p>When <span class="arithmatex">\(j &gt; 0\)</span>, the number of passes is <span class="arithmatex">\(2^j\)</span>, which is equivalent to passing the ball <span class="arithmatex">\(2^{j-1}\)</span> times starting from player <span class="arithmatex">\(i\)</span>, and then passing the ball <span class="arithmatex">\(2^{j-1}\)</span> times starting from player <span class="arithmatex">\(f[i][j-1]\)</span>, so <span class="arithmatex">\(f[i][j] = f[f[i][j-1]][j-1]\)</span>, and <span class="arithmatex">\(g[i][j] = g[i][j-1] + g[f[i][j-1]][j-1]\)</span>.</p>
+<p>Next, we can enumerate each player <span class="arithmatex">\(i\)</span> as the starting player, then accumulate upwards according to the binary representation of <span class="arithmatex">\(k\)</span>, and finally get the maximum sum of the player IDs who have touched the ball within <span class="arithmatex">\(k\)</span> passes starting from player <span class="arithmatex">\(i\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times \log k)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of players.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1400-1499/1483.Kth%20Ancestor%20of%20a%20Tree%20Node/README_EN.md">1483. Kth Ancestor of a Tree Node</a></li>
@@ -86601,11 +86599,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

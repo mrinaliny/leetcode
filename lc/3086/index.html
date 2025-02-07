@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90879,14 +90877,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心 + 前缀和 + 二分查找</h3>
-<p>我们考虑枚举 Alice 的站立位置 $i$，对于每个 $i$，我们按照如下的策略进行操作：</p>
+<p>我们考虑枚举 Alice 的站立位置 <span class="arithmatex">\(i\)</span>，对于每个 <span class="arithmatex">\(i\)</span>，我们按照如下的策略进行操作：</p>
 <ul>
-<li>首先，如果位置 $i$ 的数字为 $1$，我们可以直接拾取一个 $1$，不需要行动次数。</li>
-<li>然后，我们对 $i$ 的左右两侧位置的数字 $1$ 进行拾取，执行的是行动 $2$，即把位置 $i-1$ 的 $1$ 移到位置 $i$，然后拾取；把位置 $i+1$ 的 $1$ 移到位置 $i$，然后拾取。每拾取一个 $1$，需要 $1$ 次行动。</li>
-<li>接下来，我们最大限度地将 $i-1$ 或 $i+1$ 上的 $0$，利用行动 $1$，将其置为 $1$，然后利用行动 $2$，将其移动到位置 $i$，拾取。直到拾取的 $1$ 的数量达到 $k$ 或者行动 $1$ 的次数达到 $\textit{maxChanges}$。我们假设行动 $1$ 的次数为 $c$，那么总共需要 $2c$ 次行动。</li>
-<li>利用完行动 $1$，如果拾取的 $1$ 的数量还没有达到 $k$，我们需要继续考虑在 $[1,..i-2]$ 和 $[i+2,..n]$ 的区间内，进行行动 $2$，将 $1$ 移动到位置 $i$，拾取。我们可以使用二分查找来确定这个区间的大小，使得拾取的 $1$ 的数量达到 $k$。具体地，我们二分枚举一个区间的大小 $d$，然后在区间 $[i-d,..i-2]$ 和 $[i+2,..i+d]$ 内，进行行动 $2$，将 $1$ 移动到位置 $i$，拾取。如果拾取的 $1$ 的数量达到 $k$，我们就更新答案。</li>
+<li>首先，如果位置 <span class="arithmatex">\(i\)</span> 的数字为 <span class="arithmatex">\(1\)</span>，我们可以直接拾取一个 <span class="arithmatex">\(1\)</span>，不需要行动次数。</li>
+<li>然后，我们对 <span class="arithmatex">\(i\)</span> 的左右两侧位置的数字 <span class="arithmatex">\(1\)</span> 进行拾取，执行的是行动 <span class="arithmatex">\(2\)</span>，即把位置 <span class="arithmatex">\(i-1\)</span> 的 <span class="arithmatex">\(1\)</span> 移到位置 <span class="arithmatex">\(i\)</span>，然后拾取；把位置 <span class="arithmatex">\(i+1\)</span> 的 <span class="arithmatex">\(1\)</span> 移到位置 <span class="arithmatex">\(i\)</span>，然后拾取。每拾取一个 <span class="arithmatex">\(1\)</span>，需要 <span class="arithmatex">\(1\)</span> 次行动。</li>
+<li>接下来，我们最大限度地将 <span class="arithmatex">\(i-1\)</span> 或 <span class="arithmatex">\(i+1\)</span> 上的 <span class="arithmatex">\(0\)</span>，利用行动 <span class="arithmatex">\(1\)</span>，将其置为 <span class="arithmatex">\(1\)</span>，然后利用行动 <span class="arithmatex">\(2\)</span>，将其移动到位置 <span class="arithmatex">\(i\)</span>，拾取。直到拾取的 <span class="arithmatex">\(1\)</span> 的数量达到 <span class="arithmatex">\(k\)</span> 或者行动 <span class="arithmatex">\(1\)</span> 的次数达到 <span class="arithmatex">\(\textit{maxChanges}\)</span>。我们假设行动 <span class="arithmatex">\(1\)</span> 的次数为 <span class="arithmatex">\(c\)</span>，那么总共需要 <span class="arithmatex">\(2c\)</span> 次行动。</li>
+<li>利用完行动 <span class="arithmatex">\(1\)</span>，如果拾取的 <span class="arithmatex">\(1\)</span> 的数量还没有达到 <span class="arithmatex">\(k\)</span>，我们需要继续考虑在 <span class="arithmatex">\([1,..i-2]\)</span> 和 <span class="arithmatex">\([i+2,..n]\)</span> 的区间内，进行行动 <span class="arithmatex">\(2\)</span>，将 <span class="arithmatex">\(1\)</span> 移动到位置 <span class="arithmatex">\(i\)</span>，拾取。我们可以使用二分查找来确定这个区间的大小，使得拾取的 <span class="arithmatex">\(1\)</span> 的数量达到 <span class="arithmatex">\(k\)</span>。具体地，我们二分枚举一个区间的大小 <span class="arithmatex">\(d\)</span>，然后在区间 <span class="arithmatex">\([i-d,..i-2]\)</span> 和 <span class="arithmatex">\([i+2,..i+d]\)</span> 内，进行行动 <span class="arithmatex">\(2\)</span>，将 <span class="arithmatex">\(1\)</span> 移动到位置 <span class="arithmatex">\(i\)</span>，拾取。如果拾取的 <span class="arithmatex">\(1\)</span> 的数量达到 <span class="arithmatex">\(k\)</span>，我们就更新答案。</li>
 </ul>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $\textit{nums}$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91636,11 +91634,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

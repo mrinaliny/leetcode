@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86079,10 +86077,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-sliding-window-prefix-sum">Solution 1: Sliding Window + Prefix Sum</h3>
-<p>We use two variables $\textit{cnt0}$ and $\textit{cnt1}$ to record the number of $0$s and $1$s in the current window, respectively. Pointers $i$ and $j$ mark the left and right boundaries of the window. We use an array $d$ to record the first position to the right of each position $i$ that does not satisfy the $k$ constraint, initially setting $d[i] = n$. Additionally, we use a prefix sum array $\textit{pre}[i]$ of length $n + 1$ to record the number of substrings that satisfy the $k$ constraint with the right boundary at position $i$.</p>
-<p>When we move the window to the right, if the number of $0$s and $1$s in the window both exceed $k$, we update $d[i]$ to $j$, indicating that the first position to the right of $i$ that does not satisfy the $k$ constraint is $j$. Then we move $i$ one position to the right until the number of $0$s and $1$s in the window are both less than or equal to $k$. At this point, we can calculate the number of substrings that satisfy the $k$ constraint with the right boundary at $j$, which is $j - i + 1$, and update this in the prefix sum array.</p>
-<p>Finally, for each query $[l, r]$, we first find the first position $p$ to the right of $l$ that does not satisfy the $k$ constraint, which is $p = \min(r + 1, d[l])$. All substrings in the range $[l, p - 1]$ satisfy the $k$ constraint, and the number of such substrings is $(1 + p - l) \times (p - l) / 2$. Then, we calculate the number of substrings that satisfy the $k$ constraint with the right boundary in the range $[p, r]$, which is $\textit{pre}[r + 1] - \textit{pre}[p]$. Finally, we add the two results together.</p>
-<p>The time complexity is $O(n + m)$, and the space complexity is $O(n)$. Here, $n$ and $m$ are the lengths of the string $s$ and the query array $\textit{queries}$, respectively.</p>
+<p>We use two variables <span class="arithmatex">\(\textit{cnt0}\)</span> and <span class="arithmatex">\(\textit{cnt1}\)</span> to record the number of <span class="arithmatex">\(0\)</span>s and <span class="arithmatex">\(1\)</span>s in the current window, respectively. Pointers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> mark the left and right boundaries of the window. We use an array <span class="arithmatex">\(d\)</span> to record the first position to the right of each position <span class="arithmatex">\(i\)</span> that does not satisfy the <span class="arithmatex">\(k\)</span> constraint, initially setting <span class="arithmatex">\(d[i] = n\)</span>. Additionally, we use a prefix sum array <span class="arithmatex">\(\textit{pre}[i]\)</span> of length <span class="arithmatex">\(n + 1\)</span> to record the number of substrings that satisfy the <span class="arithmatex">\(k\)</span> constraint with the right boundary at position <span class="arithmatex">\(i\)</span>.</p>
+<p>When we move the window to the right, if the number of <span class="arithmatex">\(0\)</span>s and <span class="arithmatex">\(1\)</span>s in the window both exceed <span class="arithmatex">\(k\)</span>, we update <span class="arithmatex">\(d[i]\)</span> to <span class="arithmatex">\(j\)</span>, indicating that the first position to the right of <span class="arithmatex">\(i\)</span> that does not satisfy the <span class="arithmatex">\(k\)</span> constraint is <span class="arithmatex">\(j\)</span>. Then we move <span class="arithmatex">\(i\)</span> one position to the right until the number of <span class="arithmatex">\(0\)</span>s and <span class="arithmatex">\(1\)</span>s in the window are both less than or equal to <span class="arithmatex">\(k\)</span>. At this point, we can calculate the number of substrings that satisfy the <span class="arithmatex">\(k\)</span> constraint with the right boundary at <span class="arithmatex">\(j\)</span>, which is <span class="arithmatex">\(j - i + 1\)</span>, and update this in the prefix sum array.</p>
+<p>Finally, for each query <span class="arithmatex">\([l, r]\)</span>, we first find the first position <span class="arithmatex">\(p\)</span> to the right of <span class="arithmatex">\(l\)</span> that does not satisfy the <span class="arithmatex">\(k\)</span> constraint, which is <span class="arithmatex">\(p = \min(r + 1, d[l])\)</span>. All substrings in the range <span class="arithmatex">\([l, p - 1]\)</span> satisfy the <span class="arithmatex">\(k\)</span> constraint, and the number of such substrings is <span class="arithmatex">\((1 + p - l) \times (p - l) / 2\)</span>. Then, we calculate the number of substrings that satisfy the <span class="arithmatex">\(k\)</span> constraint with the right boundary in the range <span class="arithmatex">\([p, r]\)</span>, which is <span class="arithmatex">\(\textit{pre}[r + 1] - \textit{pre}[p]\)</span>. Finally, we add the two results together.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the string <span class="arithmatex">\(s\)</span> and the query array <span class="arithmatex">\(\textit{queries}\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86574,11 +86572,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

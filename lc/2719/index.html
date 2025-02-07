@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90850,10 +90848,10 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：数位 DP</h3>
-<p>题目实际上求的是区间 $[num1,..num2]$ 中，数位和在 $[min_sum,..max_sum]$ 的数的个数。对于这种区间 $[l,..r]$ 的问题，我们可以考虑转化为求 $[1,..r]$ 和 $[1,..l-1]$ 的答案，然后相减即可。</p>
-<p>对于 $[1,..r]$ 的答案，我们可以使用数位 DP 来求解。我们设计一个函数 $dfs(pos, s, limit)$ 表示当前处理到第 $pos$ 位，数位和为 $s$，当前数是否有上界限制 $limit$ 的方案数。其中 $pos$ 从高到低枚举。</p>
-<p>对于 $dfs(pos, s, limit)$，我们可以枚举当前数位 $i$ 的值，然后递归计算 $dfs(pos+1, s+i, limit \bigcap  i==up)$，其中 $up$ 表示当前数位的上界。如果 $limit$ 为真，那么 $up$ 就是当前数位的上界，否则 $up$ 为 $9$。如果 $pos$ 大于等于 $num$ 的长度，那么我们就可以判断 $s$ 是否在 $[min_sum,..max_sum]$ 的范围内，如果在就返回 $1$，否则返回 $0$。</p>
-<p>时间复杂度 $O(10 \times n \times max_sum)$，空间复杂度 $O(n \times max_sum)$。其中 $n$ 表示 $num$ 的长度。</p>
+<p>题目实际上求的是区间 <span class="arithmatex">\([num1,..num2]\)</span> 中，数位和在 <span class="arithmatex">\([min\_sum,..max\_sum]\)</span> 的数的个数。对于这种区间 <span class="arithmatex">\([l,..r]\)</span> 的问题，我们可以考虑转化为求 <span class="arithmatex">\([1,..r]\)</span> 和 <span class="arithmatex">\([1,..l-1]\)</span> 的答案，然后相减即可。</p>
+<p>对于 <span class="arithmatex">\([1,..r]\)</span> 的答案，我们可以使用数位 DP 来求解。我们设计一个函数 <span class="arithmatex">\(dfs(pos, s, limit)\)</span> 表示当前处理到第 <span class="arithmatex">\(pos\)</span> 位，数位和为 <span class="arithmatex">\(s\)</span>，当前数是否有上界限制 <span class="arithmatex">\(limit\)</span> 的方案数。其中 <span class="arithmatex">\(pos\)</span> 从高到低枚举。</p>
+<p>对于 <span class="arithmatex">\(dfs(pos, s, limit)\)</span>，我们可以枚举当前数位 <span class="arithmatex">\(i\)</span> 的值，然后递归计算 <span class="arithmatex">\(dfs(pos+1, s+i, limit \bigcap  i==up)\)</span>，其中 <span class="arithmatex">\(up\)</span> 表示当前数位的上界。如果 <span class="arithmatex">\(limit\)</span> 为真，那么 <span class="arithmatex">\(up\)</span> 就是当前数位的上界，否则 <span class="arithmatex">\(up\)</span> 为 <span class="arithmatex">\(9\)</span>。如果 <span class="arithmatex">\(pos\)</span> 大于等于 <span class="arithmatex">\(num\)</span> 的长度，那么我们就可以判断 <span class="arithmatex">\(s\)</span> 是否在 <span class="arithmatex">\([min\_sum,..max\_sum]\)</span> 的范围内，如果在就返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(10 \times n \times max\_sum)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times max\_sum)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示 <span class="arithmatex">\(num\)</span> 的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2800-2899/2801.Count%20Stepping%20Numbers%20in%20Range/README.md">2801. 统计范围内的步进数字数目</a></li>
@@ -91462,11 +91460,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

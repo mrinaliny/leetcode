@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86064,13 +86062,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-sliding-window">Solution 1: Sliding Window</h3>
-<p>The problem is essentially to find how many substrings in $\textit{word1}$ contain all the characters in $\textit{word2}$. We can use a sliding window to handle this.</p>
-<p>First, if the length of $\textit{word1}$ is less than the length of $\textit{word2}$, then it is impossible for $\textit{word1}$ to contain all the characters of $\textit{word2}$, so we directly return $0$.</p>
-<p>Next, we use a hash table or an array of length $26$ called $\textit{cnt}$ to count the occurrences of characters in $\textit{word2}$. Then, we use $\textit{need}$ to record how many more characters are needed to meet the condition, initialized to the length of $\textit{cnt}$.</p>
-<p>We then use a sliding window $\textit{win}$ to record the occurrences of characters in the current window. We use $\textit{ans}$ to record the number of substrings that meet the condition, and $\textit{l}$ to record the left boundary of the window.</p>
-<p>We traverse each character in $\textit{word1}$. For the current character $c$, we add it to $\textit{win}$. If the value of $\textit{win}[c]$ equals $\textit{cnt}[c]$, it means the current window already contains one of the characters in $\textit{word2}$, so we decrement $\textit{need}$ by one. If $\textit{need}$ equals $0$, it means the current window contains all the characters in $\textit{word2}$. We need to shrink the left boundary of the window until $\textit{need}$ is greater than $0$. Specifically, if $\textit{win}[\textit{word1}[l]]$ equals $\textit{cnt}[\textit{word1}[l]]$, it means the current window contains one of the characters in $\textit{word2}$. After shrinking the left boundary, it no longer meets the condition, so we increment $\textit{need}$ by one and decrement $\textit{win}[\textit{word1}[l]]$ by one. Then, we increment $\textit{l}$ by one. At this point, the window is $[l, r]$. For any $0 \leq l' &lt; l$, $[l', r]$ are substrings that meet the condition, and there are $l$ such substrings, which we add to the answer.</p>
-<p>After traversing all characters in $\textit{word1}$, we get the answer.</p>
-<p>The time complexity is $O(n + m)$, where $n$ and $m$ are the lengths of $\textit{word1}$ and $\textit{word2}$, respectively. The space complexity is $O(|\Sigma|)$, where $\Sigma$ is the character set. Here, it is the set of lowercase letters, so the space complexity is constant.</p>
+<p>The problem is essentially to find how many substrings in <span class="arithmatex">\(\textit{word1}\)</span> contain all the characters in <span class="arithmatex">\(\textit{word2}\)</span>. We can use a sliding window to handle this.</p>
+<p>First, if the length of <span class="arithmatex">\(\textit{word1}\)</span> is less than the length of <span class="arithmatex">\(\textit{word2}\)</span>, then it is impossible for <span class="arithmatex">\(\textit{word1}\)</span> to contain all the characters of <span class="arithmatex">\(\textit{word2}\)</span>, so we directly return <span class="arithmatex">\(0\)</span>.</p>
+<p>Next, we use a hash table or an array of length <span class="arithmatex">\(26\)</span> called <span class="arithmatex">\(\textit{cnt}\)</span> to count the occurrences of characters in <span class="arithmatex">\(\textit{word2}\)</span>. Then, we use <span class="arithmatex">\(\textit{need}\)</span> to record how many more characters are needed to meet the condition, initialized to the length of <span class="arithmatex">\(\textit{cnt}\)</span>.</p>
+<p>We then use a sliding window <span class="arithmatex">\(\textit{win}\)</span> to record the occurrences of characters in the current window. We use <span class="arithmatex">\(\textit{ans}\)</span> to record the number of substrings that meet the condition, and <span class="arithmatex">\(\textit{l}\)</span> to record the left boundary of the window.</p>
+<p>We traverse each character in <span class="arithmatex">\(\textit{word1}\)</span>. For the current character <span class="arithmatex">\(c\)</span>, we add it to <span class="arithmatex">\(\textit{win}\)</span>. If the value of <span class="arithmatex">\(\textit{win}[c]\)</span> equals <span class="arithmatex">\(\textit{cnt}[c]\)</span>, it means the current window already contains one of the characters in <span class="arithmatex">\(\textit{word2}\)</span>, so we decrement <span class="arithmatex">\(\textit{need}\)</span> by one. If <span class="arithmatex">\(\textit{need}\)</span> equals <span class="arithmatex">\(0\)</span>, it means the current window contains all the characters in <span class="arithmatex">\(\textit{word2}\)</span>. We need to shrink the left boundary of the window until <span class="arithmatex">\(\textit{need}\)</span> is greater than <span class="arithmatex">\(0\)</span>. Specifically, if <span class="arithmatex">\(\textit{win}[\textit{word1}[l]]\)</span> equals <span class="arithmatex">\(\textit{cnt}[\textit{word1}[l]]\)</span>, it means the current window contains one of the characters in <span class="arithmatex">\(\textit{word2}\)</span>. After shrinking the left boundary, it no longer meets the condition, so we increment <span class="arithmatex">\(\textit{need}\)</span> by one and decrement <span class="arithmatex">\(\textit{win}[\textit{word1}[l]]\)</span> by one. Then, we increment <span class="arithmatex">\(\textit{l}\)</span> by one. At this point, the window is <span class="arithmatex">\([l, r]\)</span>. For any <span class="arithmatex">\(0 \leq l' &lt; l\)</span>, <span class="arithmatex">\([l', r]\)</span> are substrings that meet the condition, and there are <span class="arithmatex">\(l\)</span> such substrings, which we add to the answer.</p>
+<p>After traversing all characters in <span class="arithmatex">\(\textit{word1}\)</span>, we get the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + m)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of <span class="arithmatex">\(\textit{word1}\)</span> and <span class="arithmatex">\(\textit{word2}\)</span>, respectively. The space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>, where <span class="arithmatex">\(\Sigma\)</span> is the character set. Here, it is the set of lowercase letters, so the space complexity is constant.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86608,11 +86606,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

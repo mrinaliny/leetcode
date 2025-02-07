@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90817,15 +90815,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们先将数字 <code>num</code> 转为字符串 $s$，字符串 $s$ 的长度记为 $n$。</p>
-<p>然后我们设计一个函数 $dfs(i)$，表示从索引为 $i$ 的数字开始的不同翻译的数目。那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(i)$ 的计算如下：</p>
+<p>我们先将数字 <code>num</code> 转为字符串 <span class="arithmatex">\(s\)</span>，字符串 <span class="arithmatex">\(s\)</span> 的长度记为 <span class="arithmatex">\(n\)</span>。</p>
+<p>然后我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从索引为 <span class="arithmatex">\(i\)</span> 的数字开始的不同翻译的数目。那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的计算如下：</p>
 <ul>
-<li>如果 $i \ge n - 1$，说明已经翻译到最后一个数字或者越过最后一个字符，均只有一种翻译方法，返回 $1$；</li>
-<li>否则，我们可以选择翻译索引为 $i$ 的数字，此时翻译方法数目为 $dfs(i + 1)$；如果索引为 $i$ 的数字和索引为 $i + 1$ 的数字可以组成一个有效的字符（即 $s[i] == 1$ 或者 $s[i] == 2$ 且 $s[i + 1] \lt 6$），那么我们还可以选择翻译索引为 $i$ 和索引为 $i + 1$ 的数字，此时翻译方法数目为 $dfs(i + 2)$。因此 $dfs(i) = dfs(i+1) + dfs(i+2)$。</li>
+<li>如果 <span class="arithmatex">\(i \ge n - 1\)</span>，说明已经翻译到最后一个数字或者越过最后一个字符，均只有一种翻译方法，返回 <span class="arithmatex">\(1\)</span>；</li>
+<li>否则，我们可以选择翻译索引为 <span class="arithmatex">\(i\)</span> 的数字，此时翻译方法数目为 <span class="arithmatex">\(dfs(i + 1)\)</span>；如果索引为 <span class="arithmatex">\(i\)</span> 的数字和索引为 <span class="arithmatex">\(i + 1\)</span> 的数字可以组成一个有效的字符（即 <span class="arithmatex">\(s[i] == 1\)</span> 或者 <span class="arithmatex">\(s[i] == 2\)</span> 且 <span class="arithmatex">\(s[i + 1] \lt 6\)</span>），那么我们还可以选择翻译索引为 <span class="arithmatex">\(i\)</span> 和索引为 <span class="arithmatex">\(i + 1\)</span> 的数字，此时翻译方法数目为 <span class="arithmatex">\(dfs(i + 2)\)</span>。因此 <span class="arithmatex">\(dfs(i) = dfs(i+1) + dfs(i+2)\)</span>。</li>
 </ul>
-<p>过程中我们可以使用记忆化搜索，将已经计算过的 $dfs(i)$ 的值存储起来，避免重复计算。</p>
-<p>时间复杂度 $O(\log num)$，空间复杂度 $O(\log num)$。其中 $num$ 为给定的数字。</p>
+<p>过程中我们可以使用记忆化搜索，将已经计算过的 <span class="arithmatex">\(dfs(i)\)</span> 的值存储起来，避免重复计算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log num)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log num)\)</span>。其中 <span class="arithmatex">\(num\)</span> 为给定的数字。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label><label for="__tabbed_1_9">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91226,10 +91224,10 @@
 
 <h3 id="_4">方法二：动态规划</h3>
 <p>我们可以将方法一中的记忆化搜索改为动态规划。</p>
-<p>定义 $f[i]$ 表示前 $i$ 个数字的不同翻译的数目，那么答案就是 $f[n]$。初始化 $f[0] = 1$, $f[1] = 1$。</p>
-<p>我们可以从前往后计算 $f[i]$ 的值，对于每个 $i$，我们可以选择翻译第 $i$ 个数字，此时翻译方法数目为 $f[i - 1]$；如果第 $i-1$ 个数字和第 $i$ 个数字可以组成一个有效的字符（即 $s[i - 1] == 1$ 或者 $s[i - 1] == 2$ 且 $s[i] \lt 6$），那么我们还可以选择翻译第 $i - 1$ 和第 $i$ 个数字，此时翻译方法数目为 $f[i - 2]$。因此 $f[i] = f[i-1] + f[i-2]$。</p>
-<p>由于 $f[i]$ 只与 $f[i - 1]$ 和 $f[i - 2]$ 有关，因此我们可以只用两个变量来存储 $f[i - 1]$ 和 $f[i - 2]$ 的值，从而省去数组 $f$ 的空间。</p>
-<p>时间复杂度 $O(\log num)$，空间复杂度 $O(\log num)$。其中 $num$ 为给定的数字。</p>
+<p>定义 <span class="arithmatex">\(f[i]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个数字的不同翻译的数目，那么答案就是 <span class="arithmatex">\(f[n]\)</span>。初始化 <span class="arithmatex">\(f[0] = 1\)</span>, <span class="arithmatex">\(f[1] = 1\)</span>。</p>
+<p>我们可以从前往后计算 <span class="arithmatex">\(f[i]\)</span> 的值，对于每个 <span class="arithmatex">\(i\)</span>，我们可以选择翻译第 <span class="arithmatex">\(i\)</span> 个数字，此时翻译方法数目为 <span class="arithmatex">\(f[i - 1]\)</span>；如果第 <span class="arithmatex">\(i-1\)</span> 个数字和第 <span class="arithmatex">\(i\)</span> 个数字可以组成一个有效的字符（即 <span class="arithmatex">\(s[i - 1] == 1\)</span> 或者 <span class="arithmatex">\(s[i - 1] == 2\)</span> 且 <span class="arithmatex">\(s[i] \lt 6\)</span>），那么我们还可以选择翻译第 <span class="arithmatex">\(i - 1\)</span> 和第 <span class="arithmatex">\(i\)</span> 个数字，此时翻译方法数目为 <span class="arithmatex">\(f[i - 2]\)</span>。因此 <span class="arithmatex">\(f[i] = f[i-1] + f[i-2]\)</span>。</p>
+<p>由于 <span class="arithmatex">\(f[i]\)</span> 只与 <span class="arithmatex">\(f[i - 1]\)</span> 和 <span class="arithmatex">\(f[i - 2]\)</span> 有关，因此我们可以只用两个变量来存储 <span class="arithmatex">\(f[i - 1]\)</span> 和 <span class="arithmatex">\(f[i - 2]\)</span> 的值，从而省去数组 <span class="arithmatex">\(f\)</span> 的空间。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log num)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log num)\)</span>。其中 <span class="arithmatex">\(num\)</span> 为给定的数字。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label><label for="__tabbed_2_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91720,11 +91718,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

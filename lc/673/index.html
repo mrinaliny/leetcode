@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,10 +90858,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i]$ 表示以 $nums[i]$ 结尾的最长递增子序列的长度，定义 $cnt[i]$ 表示以 $nums[i]$ 结尾的最长递增子序列的个数。初始时 $f[i]=1$, $cnt[i]=1$。另外，定义 $mx$ 表示最长递增子序列的长度，定义 $ans$ 表示最长递增子序列的个数。</p>
-<p>对于每一个 $nums[i]$，我们枚举 $nums[0:i-1]$ 中的所有元素 $nums[j]$，如果 $nums[j] \lt nums[i]$，则 $nums[i]$ 可以接在 $nums[j]$ 后面，形成一个更长的递增子序列。如果 $f[i] \lt f[j] + 1$，说明以 $nums[i]$ 结尾的最长递增子序列的长度增加了，那么我们需要更新 $f[i]=f[j]+1$，并且 $cnt[i]=cnt[j]$。如果 $f[i]=f[j]+1$，说明我们找到了一条长度与之前相同的最长递增子序列，那么我们需要将 $cnt[i]$ 增加 $cnt[j]$。然后，如果 $mx \lt f[i]$，说明最长递增子序列的长度增加了，那么我们需要更新 $mx=f[i]$，并且 $ans=cnt[i]$。如果 $mx=f[i]$，说明我们找到了一条长度与之前相同的最长递增子序列，那么我们需要将 $ans$ 增加 $cnt[i]$。</p>
-<p>最后，我们返回 $ans$ 即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $nums$ 的长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示以 <span class="arithmatex">\(nums[i]\)</span> 结尾的最长递增子序列的长度，定义 <span class="arithmatex">\(cnt[i]\)</span> 表示以 <span class="arithmatex">\(nums[i]\)</span> 结尾的最长递增子序列的个数。初始时 <span class="arithmatex">\(f[i]=1\)</span>, <span class="arithmatex">\(cnt[i]=1\)</span>。另外，定义 <span class="arithmatex">\(mx\)</span> 表示最长递增子序列的长度，定义 <span class="arithmatex">\(ans\)</span> 表示最长递增子序列的个数。</p>
+<p>对于每一个 <span class="arithmatex">\(nums[i]\)</span>，我们枚举 <span class="arithmatex">\(nums[0:i-1]\)</span> 中的所有元素 <span class="arithmatex">\(nums[j]\)</span>，如果 <span class="arithmatex">\(nums[j] \lt nums[i]\)</span>，则 <span class="arithmatex">\(nums[i]\)</span> 可以接在 <span class="arithmatex">\(nums[j]\)</span> 后面，形成一个更长的递增子序列。如果 <span class="arithmatex">\(f[i] \lt f[j] + 1\)</span>，说明以 <span class="arithmatex">\(nums[i]\)</span> 结尾的最长递增子序列的长度增加了，那么我们需要更新 <span class="arithmatex">\(f[i]=f[j]+1\)</span>，并且 <span class="arithmatex">\(cnt[i]=cnt[j]\)</span>。如果 <span class="arithmatex">\(f[i]=f[j]+1\)</span>，说明我们找到了一条长度与之前相同的最长递增子序列，那么我们需要将 <span class="arithmatex">\(cnt[i]\)</span> 增加 <span class="arithmatex">\(cnt[j]\)</span>。然后，如果 <span class="arithmatex">\(mx \lt f[i]\)</span>，说明最长递增子序列的长度增加了，那么我们需要更新 <span class="arithmatex">\(mx=f[i]\)</span>，并且 <span class="arithmatex">\(ans=cnt[i]\)</span>。如果 <span class="arithmatex">\(mx=f[i]\)</span>，说明我们找到了一条长度与之前相同的最长递增子序列，那么我们需要将 <span class="arithmatex">\(ans\)</span> 增加 <span class="arithmatex">\(cnt[i]\)</span>。</p>
+<p>最后，我们返回 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91193,8 +91191,8 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：树状数组</h3>
-<p>我们可以用树状数组维护前缀区间的最长递增子序列的长度和个数。我们将数组 $nums$ 中的元素去重并排序，得到数组 $arr$，然后我们枚举 $nums$ 中的每一个元素 $x$，在数组 $arr$ 中二分查找 $x$ 的位置 $i$，然后查询 $[1,i-1]$ 的最长递增子序列的长度和个数，记为 $v$ 和 $cnt$，然后更新 $[i]$ 的最长递增子序列的长度和个数为 $v+1$ 和 $\max(cnt,1)$。最后，我们查询 $[1,m]$ 的最长递增子序列的长度和个数，其中 $m$ 是数组 $arr$ 的长度，即为答案。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $nums$ 的长度。</p>
+<p>我们可以用树状数组维护前缀区间的最长递增子序列的长度和个数。我们将数组 <span class="arithmatex">\(nums\)</span> 中的元素去重并排序，得到数组 <span class="arithmatex">\(arr\)</span>，然后我们枚举 <span class="arithmatex">\(nums\)</span> 中的每一个元素 <span class="arithmatex">\(x\)</span>，在数组 <span class="arithmatex">\(arr\)</span> 中二分查找 <span class="arithmatex">\(x\)</span> 的位置 <span class="arithmatex">\(i\)</span>，然后查询 <span class="arithmatex">\([1,i-1]\)</span> 的最长递增子序列的长度和个数，记为 <span class="arithmatex">\(v\)</span> 和 <span class="arithmatex">\(cnt\)</span>，然后更新 <span class="arithmatex">\([i]\)</span> 的最长递增子序列的长度和个数为 <span class="arithmatex">\(v+1\)</span> 和 <span class="arithmatex">\(\max(cnt,1)\)</span>。最后，我们查询 <span class="arithmatex">\([1,m]\)</span> 的最长递增子序列的长度和个数，其中 <span class="arithmatex">\(m\)</span> 是数组 <span class="arithmatex">\(arr\)</span> 的长度，即为答案。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92097,11 +92095,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86055,10 +86053,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-enumerate-character-types-sliding-window">Solution 1: Enumerate Character Types + Sliding Window</h3>
-<p>According to condition 2 in the problem description, we can find that in a complete string, the difference between two adjacent characters does not exceed 2. Therefore, we traverse the string $word$, and we can use two pointers to split $word$ into several substrings. The number of character types in these substrings does not exceed 26, and the difference between adjacent characters does not exceed 2. Next, we only need to count the number of substrings in each substring where each character appears $k$ times.</p>
-<p>We define a function $f(s)$, which is used to count the number of substrings in the string $s$ where each character appears $k$ times. Since the number of character types in $s$ does not exceed 26, we can enumerate each character type $i$, where $1 \le i \le 26$, then the length of the substring with character type $i$ is $l = i \times k$.</p>
-<p>We can use an array or hash table $cnt$ to maintain the number of times each character appears in a sliding window of length $l$, and use another hash table $freq$ to maintain the number of times each frequency appears. If $freq[k] = i$, that is, there are $i$ characters that appear $k$ times, then we have found a substring that meets the conditions. We can use two pointers to maintain this sliding window. Each time we move the right pointer, we increase the number of times the character pointed to by the right pointer appears and update the $freq$ array; each time we move the left pointer, we decrease the number of times the character pointed to by the left pointer appears and update the $freq$ array. After each pointer movement, we judge whether $freq[k]$ is equal to $i$. If it is equal, it means that we have found a substring that meets the conditions.</p>
-<p>The time complexity is $O(n \times |\Sigma|)$, and the space complexity is $O(|\Sigma|)$, where $n$ is the length of the string $word$; and $\Sigma$ is the size of the character set. In this problem, the character set is lowercase English letters, so $|\Sigma| = 26$.</p>
+<p>According to condition 2 in the problem description, we can find that in a complete string, the difference between two adjacent characters does not exceed 2. Therefore, we traverse the string <span class="arithmatex">\(word\)</span>, and we can use two pointers to split <span class="arithmatex">\(word\)</span> into several substrings. The number of character types in these substrings does not exceed 26, and the difference between adjacent characters does not exceed 2. Next, we only need to count the number of substrings in each substring where each character appears <span class="arithmatex">\(k\)</span> times.</p>
+<p>We define a function <span class="arithmatex">\(f(s)\)</span>, which is used to count the number of substrings in the string <span class="arithmatex">\(s\)</span> where each character appears <span class="arithmatex">\(k\)</span> times. Since the number of character types in <span class="arithmatex">\(s\)</span> does not exceed 26, we can enumerate each character type <span class="arithmatex">\(i\)</span>, where <span class="arithmatex">\(1 \le i \le 26\)</span>, then the length of the substring with character type <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(l = i \times k\)</span>.</p>
+<p>We can use an array or hash table <span class="arithmatex">\(cnt\)</span> to maintain the number of times each character appears in a sliding window of length <span class="arithmatex">\(l\)</span>, and use another hash table <span class="arithmatex">\(freq\)</span> to maintain the number of times each frequency appears. If <span class="arithmatex">\(freq[k] = i\)</span>, that is, there are <span class="arithmatex">\(i\)</span> characters that appear <span class="arithmatex">\(k\)</span> times, then we have found a substring that meets the conditions. We can use two pointers to maintain this sliding window. Each time we move the right pointer, we increase the number of times the character pointed to by the right pointer appears and update the <span class="arithmatex">\(freq\)</span> array; each time we move the left pointer, we decrease the number of times the character pointed to by the left pointer appears and update the <span class="arithmatex">\(freq\)</span> array. After each pointer movement, we judge whether <span class="arithmatex">\(freq[k]\)</span> is equal to <span class="arithmatex">\(i\)</span>. If it is equal, it means that we have found a substring that meets the conditions.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times |\Sigma|)\)</span>, and the space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(word\)</span>; and <span class="arithmatex">\(\Sigma\)</span> is the size of the character set. In this problem, the character set is lowercase English letters, so <span class="arithmatex">\(|\Sigma| = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86793,11 +86791,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

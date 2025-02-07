@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,12 +90863,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们首先预处理出字符串 $ring$ 中每个字符 $c$ 出现的位置列表，记录在数组 $pos[c]$ 中。不妨假设字符串 $key$ 和 $ring$ 的长度分别为 $m$ 和 $n$。</p>
-<p>然后我们定义 $f[i][j]$ 表示拼写完字符串 $key$ 的前 $i+1$ 个字符，且 $ring$ 的第 $j$ 个字符与 $12:00$ 方向对齐的最少步数。初始时 $f[i][j]=+\infty$。答案为 $\min_{0 \leq j &lt; n} f[m - 1][j]$。</p>
-<p>我们可以先初始化 $f[0][j]$，其中 $j$ 是字符 $key[0]$ 在 $ring$ 中出现的位置。由于 $ring$ 的第 $j$ 个字符与 $12:00$ 方向对齐，因此我们只需要 $1$ 步即可拼写出 $key[0]$。此外，我们还需要 $min(j, n - j)$ 步将 $ring$ 旋转到 $12:00$ 方向。因此 $f[0][j]=min(j, n - j) + 1$。</p>
-<p>接下来，我们考虑当 $i \geq 1$ 时，状态如何转移。我们可以枚举 $key[i]$ 在 $ring$ 中的位置列表 $pos[key[i]]$，并枚举 $key[i-1]$ 在 $ring$ 中的位置列表 $pos[key[i-1]]$，然后更新 $f[i][j]$，即 $f[i][j]=\min_{k \in pos[key[i-1]]} f[i-1][k] + \min(\textit{abs}(j - k), n - \textit{abs}(j - k)) + 1$。</p>
-<p>最后，我们返回 $\min_{0 \leq j \lt n} f[m - 1][j]$ 即可。</p>
-<p>时间复杂度 $O(m \times n^2)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是字符串 $key$ 和 $ring$ 的长度。</p>
+<p>我们首先预处理出字符串 <span class="arithmatex">\(ring\)</span> 中每个字符 <span class="arithmatex">\(c\)</span> 出现的位置列表，记录在数组 <span class="arithmatex">\(pos[c]\)</span> 中。不妨假设字符串 <span class="arithmatex">\(key\)</span> 和 <span class="arithmatex">\(ring\)</span> 的长度分别为 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span>。</p>
+<p>然后我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示拼写完字符串 <span class="arithmatex">\(key\)</span> 的前 <span class="arithmatex">\(i+1\)</span> 个字符，且 <span class="arithmatex">\(ring\)</span> 的第 <span class="arithmatex">\(j\)</span> 个字符与 <span class="arithmatex">\(12:00\)</span> 方向对齐的最少步数。初始时 <span class="arithmatex">\(f[i][j]=+\infty\)</span>。答案为 <span class="arithmatex">\(\min_{0 \leq j &lt; n} f[m - 1][j]\)</span>。</p>
+<p>我们可以先初始化 <span class="arithmatex">\(f[0][j]\)</span>，其中 <span class="arithmatex">\(j\)</span> 是字符 <span class="arithmatex">\(key[0]\)</span> 在 <span class="arithmatex">\(ring\)</span> 中出现的位置。由于 <span class="arithmatex">\(ring\)</span> 的第 <span class="arithmatex">\(j\)</span> 个字符与 <span class="arithmatex">\(12:00\)</span> 方向对齐，因此我们只需要 <span class="arithmatex">\(1\)</span> 步即可拼写出 <span class="arithmatex">\(key[0]\)</span>。此外，我们还需要 <span class="arithmatex">\(min(j, n - j)\)</span> 步将 <span class="arithmatex">\(ring\)</span> 旋转到 <span class="arithmatex">\(12:00\)</span> 方向。因此 <span class="arithmatex">\(f[0][j]=min(j, n - j) + 1\)</span>。</p>
+<p>接下来，我们考虑当 <span class="arithmatex">\(i \geq 1\)</span> 时，状态如何转移。我们可以枚举 <span class="arithmatex">\(key[i]\)</span> 在 <span class="arithmatex">\(ring\)</span> 中的位置列表 <span class="arithmatex">\(pos[key[i]]\)</span>，并枚举 <span class="arithmatex">\(key[i-1]\)</span> 在 <span class="arithmatex">\(ring\)</span> 中的位置列表 <span class="arithmatex">\(pos[key[i-1]]\)</span>，然后更新 <span class="arithmatex">\(f[i][j]\)</span>，即 <span class="arithmatex">\(f[i][j]=\min_{k \in pos[key[i-1]]} f[i-1][k] + \min(\textit{abs}(j - k), n - \textit{abs}(j - k)) + 1\)</span>。</p>
+<p>最后，我们返回 <span class="arithmatex">\(\min_{0 \leq j \lt n} f[m - 1][j]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是字符串 <span class="arithmatex">\(key\)</span> 和 <span class="arithmatex">\(ring\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91396,11 +91394,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

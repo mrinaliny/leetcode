@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86073,18 +86071,18 @@ Total score = 5 + 4 + 5 + 5 = 19.</pre>
 <!-- solution:start -->
 
 <h3 id="solution-1-greedy">Solution 1: Greedy</h3>
-<p>Let's assume that the score of the substring "ab" is always not lower than the score of the substring "ba". If not, we can swap "a" and "b", and simultaneously swap $x$ and $y$.</p>
+<p>Let's assume that the score of the substring "ab" is always not lower than the score of the substring "ba". If not, we can swap "a" and "b", and simultaneously swap <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>.</p>
 <p>Next, we only need to consider the case where the string contains only "a" and "b". If the string contains other characters, we can treat them as a dividing point, splitting the string into several substrings that contain only "a" and "b", and then calculate the score for each substring separately.</p>
 <p>We observe that, for a substring containing only "a" and "b", no matter what operations are taken, in the end, there will only be one type of character left, or an empty string. Since each operation will delete one "a" and one "b" simultaneously, the total number of operations is fixed. We can greedily delete "ab" first, then "ba", to ensure the maximum score.</p>
-<p>Therefore, we can use two variables $\textit{cnt1}$ and $\textit{cnt2}$ to record the number of "a" and "b", respectively. Then, we traverse the string, update $\textit{cnt1}$ and $\textit{cnt2}$ based on the current character, and calculate the score.</p>
-<p>For the current character $c$:</p>
+<p>Therefore, we can use two variables <span class="arithmatex">\(\textit{cnt1}\)</span> and <span class="arithmatex">\(\textit{cnt2}\)</span> to record the number of "a" and "b", respectively. Then, we traverse the string, update <span class="arithmatex">\(\textit{cnt1}\)</span> and <span class="arithmatex">\(\textit{cnt2}\)</span> based on the current character, and calculate the score.</p>
+<p>For the current character <span class="arithmatex">\(c\)</span>:</p>
 <ul>
-<li>If $c$ is "a", since we need to delete "ab" first, we do not eliminate this character at this time, only increase $\textit{cnt1}$;</li>
-<li>If $c$ is "b", if $\textit{cnt1} &gt; 0$ at this time, we can eliminate an "ab" and add $x$ points; otherwise, we can only increase $\textit{cnt2}$;</li>
-<li>If $c$ is another character, then for this substring, we are left with $\textit{cnt2}$ "b" and $\textit{cnt1}$ "a", we can eliminate $\min(\textit{cnt1}, \textit{cnt2})$ "ab" and add $y$ points.</li>
+<li>If <span class="arithmatex">\(c\)</span> is "a", since we need to delete "ab" first, we do not eliminate this character at this time, only increase <span class="arithmatex">\(\textit{cnt1}\)</span>;</li>
+<li>If <span class="arithmatex">\(c\)</span> is "b", if <span class="arithmatex">\(\textit{cnt1} &gt; 0\)</span> at this time, we can eliminate an "ab" and add <span class="arithmatex">\(x\)</span> points; otherwise, we can only increase <span class="arithmatex">\(\textit{cnt2}\)</span>;</li>
+<li>If <span class="arithmatex">\(c\)</span> is another character, then for this substring, we are left with <span class="arithmatex">\(\textit{cnt2}\)</span> "b" and <span class="arithmatex">\(\textit{cnt1}\)</span> "a", we can eliminate <span class="arithmatex">\(\min(\textit{cnt1}, \textit{cnt2})\)</span> "ab" and add <span class="arithmatex">\(y\)</span> points.</li>
 </ul>
-<p>After the traversal is finished, we also need to additionally handle the remaining "ab", adding several $y$ points.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the string $s$. The space complexity is $O(1)$.</p>
+<p>After the traversal is finished, we also need to additionally handle the remaining "ab", adding several <span class="arithmatex">\(y\)</span> points.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86799,11 +86797,9 @@ Total score = 5 + 4 + 5 + 5 = 19.</pre>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

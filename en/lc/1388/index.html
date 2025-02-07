@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86059,23 +86057,23 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We can transform this problem into: In a circular array of length $3n$, select $n$ non-adjacent numbers so that the sum of these $n$ numbers is maximized.</p>
+<p>We can transform this problem into: In a circular array of length <span class="arithmatex">\(3n\)</span>, select <span class="arithmatex">\(n\)</span> non-adjacent numbers so that the sum of these <span class="arithmatex">\(n\)</span> numbers is maximized.</p>
 <p>The proof is as follows:</p>
 <ul>
-<li>When $n = 1$, we can choose any number in the array.</li>
-<li>When $n &gt; 1$, there must exist a number such that there are two consecutive numbers on one side of it that have not been selected, and at least one number on the other side has not been selected. Therefore, we can remove this number and the numbers on both sides of it from the array, and then the remaining $3(n - 1)$ numbers form a new circular array. The problem scale is reduced to selecting $n - 1$ non-adjacent numbers in a circular array of length $3(n - 1)$, so that the sum of these $n - 1$ numbers is maximized.</li>
+<li>When <span class="arithmatex">\(n = 1\)</span>, we can choose any number in the array.</li>
+<li>When <span class="arithmatex">\(n &gt; 1\)</span>, there must exist a number such that there are two consecutive numbers on one side of it that have not been selected, and at least one number on the other side has not been selected. Therefore, we can remove this number and the numbers on both sides of it from the array, and then the remaining <span class="arithmatex">\(3(n - 1)\)</span> numbers form a new circular array. The problem scale is reduced to selecting <span class="arithmatex">\(n - 1\)</span> non-adjacent numbers in a circular array of length <span class="arithmatex">\(3(n - 1)\)</span>, so that the sum of these <span class="arithmatex">\(n - 1\)</span> numbers is maximized.</li>
 </ul>
-<p>Therefore, the problem we need to solve can be transformed into: In a circular array of length $3n$, select $n$ non-adjacent numbers so that the sum of these $n$ numbers is maximized.</p>
+<p>Therefore, the problem we need to solve can be transformed into: In a circular array of length <span class="arithmatex">\(3n\)</span>, select <span class="arithmatex">\(n\)</span> non-adjacent numbers so that the sum of these <span class="arithmatex">\(n\)</span> numbers is maximized.</p>
 <p>In a circular array, if the first number is selected, the last number cannot be selected. If the last number is selected, the first number cannot be selected. Therefore, we can split the circular array into two arrays, one is without the first number, and the other is without the last number. Then solve the maximum value of these two arrays separately, and finally take the larger of the two maximum values.</p>
-<p>We use a function $g(nums)$, which represents the maximum sum of selecting $n$ non-adjacent numbers in the array $nums$. Then our goal is to find the larger value between $g(slices)$ and $g(slices[1:])$.</p>
-<p>The solution method of function $g(nums)$ is as follows:</p>
-<p>We denote the length of array $nums$ as $m$, and define $f[i][j]$ as the maximum sum of selecting $j$ non-adjacent numbers in the first $i$ numbers of array $nums$.</p>
-<p>Consider $f[i][j]$, if we do not select the $i$-th number, then $f[i][j] = f[i - 1][j]$. If we select the $i$-th number, then $f[i][j] = f[i - 2][j - 1] + nums[i - 1]$. Therefore, we can get the state transition equation:</p>
-<p>$$
+<p>We use a function <span class="arithmatex">\(g(nums)\)</span>, which represents the maximum sum of selecting <span class="arithmatex">\(n\)</span> non-adjacent numbers in the array <span class="arithmatex">\(nums\)</span>. Then our goal is to find the larger value between <span class="arithmatex">\(g(slices)\)</span> and <span class="arithmatex">\(g(slices[1:])\)</span>.</p>
+<p>The solution method of function <span class="arithmatex">\(g(nums)\)</span> is as follows:</p>
+<p>We denote the length of array <span class="arithmatex">\(nums\)</span> as <span class="arithmatex">\(m\)</span>, and define <span class="arithmatex">\(f[i][j]\)</span> as the maximum sum of selecting <span class="arithmatex">\(j\)</span> non-adjacent numbers in the first <span class="arithmatex">\(i\)</span> numbers of array <span class="arithmatex">\(nums\)</span>.</p>
+<p>Consider <span class="arithmatex">\(f[i][j]\)</span>, if we do not select the <span class="arithmatex">\(i\)</span>-th number, then <span class="arithmatex">\(f[i][j] = f[i - 1][j]\)</span>. If we select the <span class="arithmatex">\(i\)</span>-th number, then <span class="arithmatex">\(f[i][j] = f[i - 2][j - 1] + nums[i - 1]\)</span>. Therefore, we can get the state transition equation:</p>
+<div class="arithmatex">\[
 f[i][j] = \max(f[i - 1][j], f[i - 2][j - 1] + nums[i - 1])
-$$</p>
-<p>Finally, return $f[m][n]$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Where $n$ is the length of the array $slices$.</p>
+\]</div>
+<p>Finally, return <span class="arithmatex">\(f[m][n]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(slices\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86524,11 +86522,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

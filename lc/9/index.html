@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90847,18 +90845,18 @@
 <h3 id="_3">方法一：反转一半数字</h3>
 <p>我们先判断特殊情况：</p>
 <ul>
-<li>如果 $x \lt 0$，那么 $x$ 不是回文数，直接返回 <code>false</code>；</li>
-<li>如果 $x \gt 0$ 且 $x$ 的个位数是 $0$，那么 $x$ 不是回文数，直接返回 <code>false</code>；</li>
-<li>如果 $x$ 的个位数不是 $0$，那么 $x$ 可能是回文数，继续执行下面的步骤。</li>
+<li>如果 <span class="arithmatex">\(x \lt 0\)</span>，那么 <span class="arithmatex">\(x\)</span> 不是回文数，直接返回 <code>false</code>；</li>
+<li>如果 <span class="arithmatex">\(x \gt 0\)</span> 且 <span class="arithmatex">\(x\)</span> 的个位数是 <span class="arithmatex">\(0\)</span>，那么 <span class="arithmatex">\(x\)</span> 不是回文数，直接返回 <code>false</code>；</li>
+<li>如果 <span class="arithmatex">\(x\)</span> 的个位数不是 <span class="arithmatex">\(0\)</span>，那么 <span class="arithmatex">\(x\)</span> 可能是回文数，继续执行下面的步骤。</li>
 </ul>
-<p>我们将 $x$ 的后半部分反转，与前半部分进行比较，如果相等，那么 $x$ 是回文数，否则 $x$ 不是回文数。</p>
-<p>举个例子，例如 $x = 1221$，我们可以将数字后半部分从 “21” 反转为 “12”，并将其与前半部分 “12” 进行比较，因为二者相等，我们得知数字 $x$ 是回文。</p>
+<p>我们将 <span class="arithmatex">\(x\)</span> 的后半部分反转，与前半部分进行比较，如果相等，那么 <span class="arithmatex">\(x\)</span> 是回文数，否则 <span class="arithmatex">\(x\)</span> 不是回文数。</p>
+<p>举个例子，例如 <span class="arithmatex">\(x = 1221\)</span>，我们可以将数字后半部分从 “21” 反转为 “12”，并将其与前半部分 “12” 进行比较，因为二者相等，我们得知数字 <span class="arithmatex">\(x\)</span> 是回文。</p>
 <p>让我们看看如何将后半部分反转。</p>
-<p>对于数字 $1221$，如果执行 $1221 \bmod 10$，我们将得到最后一位数字 $1$，要得到倒数第二位数字，我们可以先通过除以 $10$ 将最后一位数字从 $1221$ 中移除，$1221 / 10 = 122$，再求出上一步结果除以 $10$ 的余数，$122 \bmod 10 = 2$，就可以得到倒数第二位数字。</p>
+<p>对于数字 <span class="arithmatex">\(1221\)</span>，如果执行 <span class="arithmatex">\(1221 \bmod 10\)</span>，我们将得到最后一位数字 <span class="arithmatex">\(1\)</span>，要得到倒数第二位数字，我们可以先通过除以 <span class="arithmatex">\(10\)</span> 将最后一位数字从 <span class="arithmatex">\(1221\)</span> 中移除，<span class="arithmatex">\(1221 / 10 = 122\)</span>，再求出上一步结果除以 <span class="arithmatex">\(10\)</span> 的余数，<span class="arithmatex">\(122 \bmod 10 = 2\)</span>，就可以得到倒数第二位数字。</p>
 <p>如果继续这个过程，我们将得到更多位数的反转数字。</p>
-<p>通过将最后一位数字不断地累乘到取出数字的变量 $y$ 上，我们可以得到以相反顺序的数字。</p>
-<p>在代码实现上，我们可以反复“取出” $x$ 的最后一位数字，并将其“添加”到 $y$ 的后面，循环直到 $y \ge x$，如果此时 $x = y$，或者 $x = y / 10$，那么 $x$ 就是回文数。</p>
-<p>时间复杂度 $O(\log_{10}(n))$，其中 $n$ 是 $x$。对于每次迭代，我们会将输入除以 $10$，因此时间复杂度为 $O(\log_{10}(n))$。空间复杂度 $O(1)$。</p>
+<p>通过将最后一位数字不断地累乘到取出数字的变量 <span class="arithmatex">\(y\)</span> 上，我们可以得到以相反顺序的数字。</p>
+<p>在代码实现上，我们可以反复“取出” <span class="arithmatex">\(x\)</span> 的最后一位数字，并将其“添加”到 <span class="arithmatex">\(y\)</span> 的后面，循环直到 <span class="arithmatex">\(y \ge x\)</span>，如果此时 <span class="arithmatex">\(x = y\)</span>，或者 <span class="arithmatex">\(x = y / 10\)</span>，那么 <span class="arithmatex">\(x\)</span> 就是回文数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log_{10}(n))\)</span>，其中 <span class="arithmatex">\(n\)</span> 是 <span class="arithmatex">\(x\)</span>。对于每次迭代，我们会将输入除以 <span class="arithmatex">\(10\)</span>，因此时间复杂度为 <span class="arithmatex">\(O(\log_{10}(n))\)</span>。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label><label for="__tabbed_1_9">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91345,11 +91343,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,23 +90861,23 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们可以将这个问题转化为：在一个长度为 $3n$ 的环形数组中，选择其中 $n$ 个不相邻的数，使得这 $n$ 个数的和最大。</p>
+<p>我们可以将这个问题转化为：在一个长度为 <span class="arithmatex">\(3n\)</span> 的环形数组中，选择其中 <span class="arithmatex">\(n\)</span> 个不相邻的数，使得这 <span class="arithmatex">\(n\)</span> 个数的和最大。</p>
 <p>证明如下：</p>
 <ul>
-<li>当 $n = 1$ 时，我们可以选择数组中的任意一个数。</li>
-<li>当 $n \gt 1$ 时，那么一定存在一个数，使得它的某一侧有两个连续的数没有被选择，而另一侧至少有一个数没有被选择。因此，我们可以将这个数和它两侧的数一起从数组中删除，然后剩下的 $3(n - 1)$ 个数构成一个新的环形数组。问题规模缩小成了在长度为 $3(n - 1)$ 的环形数组中选择 $n - 1$ 个不相邻的数，使得这 $n - 1$ 个数的和最大。</li>
+<li>当 <span class="arithmatex">\(n = 1\)</span> 时，我们可以选择数组中的任意一个数。</li>
+<li>当 <span class="arithmatex">\(n \gt 1\)</span> 时，那么一定存在一个数，使得它的某一侧有两个连续的数没有被选择，而另一侧至少有一个数没有被选择。因此，我们可以将这个数和它两侧的数一起从数组中删除，然后剩下的 <span class="arithmatex">\(3(n - 1)\)</span> 个数构成一个新的环形数组。问题规模缩小成了在长度为 <span class="arithmatex">\(3(n - 1)\)</span> 的环形数组中选择 <span class="arithmatex">\(n - 1\)</span> 个不相邻的数，使得这 <span class="arithmatex">\(n - 1\)</span> 个数的和最大。</li>
 </ul>
-<p>因此，我们需要求解的问题可以转化为：在一个长度为 $3n$ 的环形数组中，选择其中 $n$ 个不相邻的数，使得这 $n$ 个数的和最大。</p>
+<p>因此，我们需要求解的问题可以转化为：在一个长度为 <span class="arithmatex">\(3n\)</span> 的环形数组中，选择其中 <span class="arithmatex">\(n\)</span> 个不相邻的数，使得这 <span class="arithmatex">\(n\)</span> 个数的和最大。</p>
 <p>环形数组中，如果选择了第一个数，那么最后一个数就不能选择，如果选择了最后一个数，那么第一个数就不能选择，因此我们可以将环形数组拆成两个数组，一个是去掉第一个数的，一个是去掉最后一个数的，然后分别求解这两个数组的最大值，最后取两个最大值中的较大值即可。</p>
-<p>我们用一个函数 $g(nums)$，表示在数组 $nums$ 中选择 $n$ 个不相邻的数，使得这 $n$ 个数的和最大，那么我们的目标就是求 $g(slices)$ 和 $g(slices[1:])$ 中的较大值。</p>
-<p>函数 $g(nums)$ 的求解方法如下：</p>
-<p>我们记数组 $nums$ 的长度为 $m$，定义 $f[i][j]$ 表示在数组 $nums$ 的前 $i$ 个数中选择 $j$ 个不相邻的数的最大和。</p>
-<p>考虑 $f[i][j]$，如果我们不选择第 $i$ 个数，那么 $f[i][j] = f[i - 1][j]$，如果我们选择第 $i$ 个数，那么 $f[i][j] = f[i - 2][j - 1] + nums[i - 1]$，因此我们可以得到状态转移方程：</p>
-<p>$$
+<p>我们用一个函数 <span class="arithmatex">\(g(nums)\)</span>，表示在数组 <span class="arithmatex">\(nums\)</span> 中选择 <span class="arithmatex">\(n\)</span> 个不相邻的数，使得这 <span class="arithmatex">\(n\)</span> 个数的和最大，那么我们的目标就是求 <span class="arithmatex">\(g(slices)\)</span> 和 <span class="arithmatex">\(g(slices[1:])\)</span> 中的较大值。</p>
+<p>函数 <span class="arithmatex">\(g(nums)\)</span> 的求解方法如下：</p>
+<p>我们记数组 <span class="arithmatex">\(nums\)</span> 的长度为 <span class="arithmatex">\(m\)</span>，定义 <span class="arithmatex">\(f[i][j]\)</span> 表示在数组 <span class="arithmatex">\(nums\)</span> 的前 <span class="arithmatex">\(i\)</span> 个数中选择 <span class="arithmatex">\(j\)</span> 个不相邻的数的最大和。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span>，如果我们不选择第 <span class="arithmatex">\(i\)</span> 个数，那么 <span class="arithmatex">\(f[i][j] = f[i - 1][j]\)</span>，如果我们选择第 <span class="arithmatex">\(i\)</span> 个数，那么 <span class="arithmatex">\(f[i][j] = f[i - 2][j - 1] + nums[i - 1]\)</span>，因此我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 f[i][j] = \max(f[i - 1][j], f[i - 2][j - 1] + nums[i - 1])
-$$</p>
-<p>最后返回 $f[m][n]$ 即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是数组 $slices$ 的长度。</p>
+\]</div>
+<p>最后返回 <span class="arithmatex">\(f[m][n]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(slices\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91328,11 +91326,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

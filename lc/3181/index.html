@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,17 +90856,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划 + 位运算</h3>
-<p>我们定义 $f[i][j]$ 表示用前 $i$ 个奖励值，能否得到总奖励 $j$。初始时 $f[0][0] = \textit{True}$，其余值均为 $\textit{False}$。</p>
-<p>我们考虑第 $i$ 个奖励值 $v$，如果我们不选择它，那么 $f[i][j] = f[i - 1][j]$；如果我们选择它，那么 $f[i][j] = f[i - 1][j - v]$，其中 $0 \leq j - v \lt v$。即状态转移方程为：</p>
-<p>$$
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示用前 <span class="arithmatex">\(i\)</span> 个奖励值，能否得到总奖励 <span class="arithmatex">\(j\)</span>。初始时 <span class="arithmatex">\(f[0][0] = \textit{True}\)</span>，其余值均为 <span class="arithmatex">\(\textit{False}\)</span>。</p>
+<p>我们考虑第 <span class="arithmatex">\(i\)</span> 个奖励值 <span class="arithmatex">\(v\)</span>，如果我们不选择它，那么 <span class="arithmatex">\(f[i][j] = f[i - 1][j]\)</span>；如果我们选择它，那么 <span class="arithmatex">\(f[i][j] = f[i - 1][j - v]\)</span>，其中 <span class="arithmatex">\(0 \leq j - v \lt v\)</span>。即状态转移方程为：</p>
+<div class="arithmatex">\[
 f[i][j] = f[i - 1][j] \vee f[i - 1][j - v]
-$$</p>
-<p>最终答案为 $\max{j \mid f[n][j] = \textit{True}}$。</p>
-<p>由于 $f[i][j]$ 只与 $f[i - 1][j]$ 和 $f[i - 1][j - v]$ 有关，我们可以优化掉第一维，只使用一个一维数组进行状态转移。另外，由于本题数据范围较大，我们需要使用位运算来优化状态转移的效率。</p>
-<p>我们定义一个二进制数 $f$ 保存当前的状态，其中 $f$ 的第 $i$ 位为 $1$ 表示当前总奖励为 $i$ 是可达的。</p>
-<p>观察上述状态转移方程 $f[j] = f[j] \vee f[j - v]$，这相当于取 $f$ 的低 $v$ 位，再左移 $v$ 位，然后与原来的 $f$ 进行或运算。</p>
-<p>那么答案为 $f$ 的最高位的位置。</p>
-<p>时间复杂度 $O(n \times M / w)$，空间复杂度 $O(n + M / w)$。其中 $n$ 是数组 <code>rewardValues</code> 的长度，而 $M$ 是数组 <code>rewardValues</code> 中的最大值的两倍。整数 $w = 32$ 或 $64$。</p>
+\]</div>
+<p>最终答案为 <span class="arithmatex">\(\max\{j \mid f[n][j] = \textit{True}\}\)</span>。</p>
+<p>由于 <span class="arithmatex">\(f[i][j]\)</span> 只与 <span class="arithmatex">\(f[i - 1][j]\)</span> 和 <span class="arithmatex">\(f[i - 1][j - v]\)</span> 有关，我们可以优化掉第一维，只使用一个一维数组进行状态转移。另外，由于本题数据范围较大，我们需要使用位运算来优化状态转移的效率。</p>
+<p>我们定义一个二进制数 <span class="arithmatex">\(f\)</span> 保存当前的状态，其中 <span class="arithmatex">\(f\)</span> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span> 表示当前总奖励为 <span class="arithmatex">\(i\)</span> 是可达的。</p>
+<p>观察上述状态转移方程 <span class="arithmatex">\(f[j] = f[j] \vee f[j - v]\)</span>，这相当于取 <span class="arithmatex">\(f\)</span> 的低 <span class="arithmatex">\(v\)</span> 位，再左移 <span class="arithmatex">\(v\)</span> 位，然后与原来的 <span class="arithmatex">\(f\)</span> 进行或运算。</p>
+<p>那么答案为 <span class="arithmatex">\(f\)</span> 的最高位的位置。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times M / w)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + M / w)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <code>rewardValues</code> 的长度，而 <span class="arithmatex">\(M\)</span> 是数组 <code>rewardValues</code> 中的最大值的两倍。整数 <span class="arithmatex">\(w = 32\)</span> 或 <span class="arithmatex">\(64\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91232,11 +91230,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,10 +86081,10 @@ Our score is 1 + 2 + 2 = 5.
 <!-- solution:start -->
 
 <h3 id="solution-1-priority-queue-min-heap">Solution 1: Priority Queue (Min Heap)</h3>
-<p>We use a priority queue to maintain the unmarked elements in the array, and each item in the queue is a tuple $(x, i)$, where $x$ and $i$ represent the element value and index of the array respectively. An array $vis$ is used to record whether the element in the array is marked.</p>
-<p>Each time we take out the smallest element $(x, i)$ from the queue, we add $x$ to the answer, and then mark the element at the $i$ position, and the left and right adjacent elements at the $i$ position, that is, the elements at the $i-1$ and $i+1$ positions. Then we determine whether the top element of the heap is marked. If it is marked, pop the top element of the heap until the top element is unmarked or the heap is empty.</p>
+<p>We use a priority queue to maintain the unmarked elements in the array, and each item in the queue is a tuple <span class="arithmatex">\((x, i)\)</span>, where <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(i\)</span> represent the element value and index of the array respectively. An array <span class="arithmatex">\(vis\)</span> is used to record whether the element in the array is marked.</p>
+<p>Each time we take out the smallest element <span class="arithmatex">\((x, i)\)</span> from the queue, we add <span class="arithmatex">\(x\)</span> to the answer, and then mark the element at the <span class="arithmatex">\(i\)</span> position, and the left and right adjacent elements at the <span class="arithmatex">\(i\)</span> position, that is, the elements at the <span class="arithmatex">\(i-1\)</span> and <span class="arithmatex">\(i+1\)</span> positions. Then we determine whether the top element of the heap is marked. If it is marked, pop the top element of the heap until the top element is unmarked or the heap is empty.</p>
 <p>Finally, return the answer.</p>
-<p>The time complexity is $O(n \times \log n)$ and the space complexity is $O(n)$, where $n$ is the length of the array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span> and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86382,11 +86380,11 @@ Our score is 1 + 2 + 2 = 5.
 <!-- solution:start -->
 
 <h3 id="solution-2-sorting">Solution 2: Sorting</h3>
-<p>We can create an index array $idx$ where $idx[i]=i$, and then we sort the index array $idx$ according to the element values in the array $nums$. If the element values are the same, then sort them according to the index values.</p>
-<p>Next, create an array $vis$ of length $n+2$ where $vis[i]=false$, which means whether the element in the array is marked.</p>
-<p>We traverse the index array $idx$, and for each index $i$ in the array, if $vis[i+1]$ is $false$, that is, the element at position $i$ is not marked, we add $nums[i]$ to the answer, and then mark the element at position $i$, and the left and right adjacent elements at position $i$, that is, the elements at positions $i-1$ and $i+1$. Continue to traverse the index array $idx$ until the end.</p>
+<p>We can create an index array <span class="arithmatex">\(idx\)</span> where <span class="arithmatex">\(idx[i]=i\)</span>, and then we sort the index array <span class="arithmatex">\(idx\)</span> according to the element values in the array <span class="arithmatex">\(nums\)</span>. If the element values are the same, then sort them according to the index values.</p>
+<p>Next, create an array <span class="arithmatex">\(vis\)</span> of length <span class="arithmatex">\(n+2\)</span> where <span class="arithmatex">\(vis[i]=false\)</span>, which means whether the element in the array is marked.</p>
+<p>We traverse the index array <span class="arithmatex">\(idx\)</span>, and for each index <span class="arithmatex">\(i\)</span> in the array, if <span class="arithmatex">\(vis[i+1]\)</span> is <span class="arithmatex">\(false\)</span>, that is, the element at position <span class="arithmatex">\(i\)</span> is not marked, we add <span class="arithmatex">\(nums[i]\)</span> to the answer, and then mark the element at position <span class="arithmatex">\(i\)</span>, and the left and right adjacent elements at position <span class="arithmatex">\(i\)</span>, that is, the elements at positions <span class="arithmatex">\(i-1\)</span> and <span class="arithmatex">\(i+1\)</span>. Continue to traverse the index array <span class="arithmatex">\(idx\)</span> until the end.</p>
 <p>Finally, return the answer.</p>
-<p>The time complexity is $O(n \times \log n)$ and the space complexity is $O(n)$, where $n$ is the length of the array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span> and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86806,11 +86804,9 @@ Our score is 1 + 2 + 2 = 5.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

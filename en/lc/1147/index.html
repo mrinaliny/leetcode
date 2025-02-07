@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86088,14 +86086,14 @@
 <h3 id="solution-1-greedy-two-pointers">Solution 1: Greedy + Two Pointers</h3>
 <p>We can start from both ends of the string, looking for the shortest, identical, and non-overlapping prefixes and suffixes:</p>
 <ul>
-<li>If such prefixes and suffixes cannot be found, then the entire string is treated as a segmented palindrome, and the answer is incremented by $1$;</li>
-<li>If such prefixes and suffixes are found, then this prefix and suffix are treated as a segmented palindrome, and the answer is incremented by $2$, then continue to find the prefixes and suffixes of the remaining string.</li>
+<li>If such prefixes and suffixes cannot be found, then the entire string is treated as a segmented palindrome, and the answer is incremented by <span class="arithmatex">\(1\)</span>;</li>
+<li>If such prefixes and suffixes are found, then this prefix and suffix are treated as a segmented palindrome, and the answer is incremented by <span class="arithmatex">\(2\)</span>, then continue to find the prefixes and suffixes of the remaining string.</li>
 </ul>
 <p>The proof of the above greedy strategy is as follows:</p>
-<p>Suppose there is a prefix $A_1$ and a suffix $A_2$ that meet the conditions, and there is a prefix $B_1$ and a suffix $B_4$ that meet the conditions. Since $A_1 = A_2$ and $B_1=B_4$, then $B_3=B_1=B_4=B_2$, and $C_1 = C_2$. Therefore, if we greedily split $B_1$ and $B_4$, then the remaining $C_1$ and $C_2$, and $B_2$ and $B_3$ can also be successfully split. Therefore, we should greedily choose the shortest identical prefix and suffix to split, so that in the remaining string, more segmented palindromes may be split.</p>
+<p>Suppose there is a prefix <span class="arithmatex">\(A_1\)</span> and a suffix <span class="arithmatex">\(A_2\)</span> that meet the conditions, and there is a prefix <span class="arithmatex">\(B_1\)</span> and a suffix <span class="arithmatex">\(B_4\)</span> that meet the conditions. Since <span class="arithmatex">\(A_1 = A_2\)</span> and <span class="arithmatex">\(B_1=B_4\)</span>, then <span class="arithmatex">\(B_3=B_1=B_4=B_2\)</span>, and <span class="arithmatex">\(C_1 = C_2\)</span>. Therefore, if we greedily split <span class="arithmatex">\(B_1\)</span> and <span class="arithmatex">\(B_4\)</span>, then the remaining <span class="arithmatex">\(C_1\)</span> and <span class="arithmatex">\(C_2\)</span>, and <span class="arithmatex">\(B_2\)</span> and <span class="arithmatex">\(B_3\)</span> can also be successfully split. Therefore, we should greedily choose the shortest identical prefix and suffix to split, so that in the remaining string, more segmented palindromes may be split.</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1147.Longest%20Chunked%20Palindrome%20Decomposition/images/demo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1100-1199/1147.Longest%20Chunked%20Palindrome%20Decomposition/images/demo.png" style="width: 300px;" /></a></p>
 
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$ or $O(1)$. Here, $n$ is the length of the string.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span> or <span class="arithmatex">\(O(1)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86355,9 +86353,9 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-string-hash">Solution 2: String Hash</h3>
-<p><strong>String hash</strong> is to map a string of any length to a non-negative integer, and its collision probability is almost $0$. String hash is used to calculate the hash value of a string and quickly determine whether two strings are equal.</p>
-<p>Therefore, based on Solution 1, we can use the method of string hash to compare whether two strings are equal in $O(1)$ time.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the string.</p>
+<p><strong>String hash</strong> is to map a string of any length to a non-negative integer, and its collision probability is almost <span class="arithmatex">\(0\)</span>. String hash is used to calculate the hash value of a string and quickly determine whether two strings are equal.</p>
+<p>Therefore, based on Solution 1, we can use the method of string hash to compare whether two strings are equal in <span class="arithmatex">\(O(1)\)</span> time.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86890,11 +86888,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

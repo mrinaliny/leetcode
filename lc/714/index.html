@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90869,13 +90867,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示从第 $i$ 天开始，状态为 $j$ 时，能够获得的最大利润。其中 $j$ 的取值为 $0, 1$，分别表示当前不持有股票和持有股票。答案即为 $dfs(0, 0)$。</p>
-<p>函数 $dfs(i, j)$ 的执行逻辑如下：</p>
-<p>如果 $i \geq n$，那么没有股票可以交易了，此时返回 $0$；</p>
-<p>否则，我们可以选择不交易，此时 $dfs(i, j) = dfs(i + 1, j)$。我们也可以进行股票交易，如果此时 $j \gt 0$，说明当前持有股票，可以卖出，此时 $dfs(i, j) = prices[i] + dfs(i + 1, 0) - fee$；如果此时 $j = 0$，说明当前不持有股票，可以买入，此时 $dfs(i, j) = -prices[i] + dfs(i + 1, 1)$。取最大值作为函数 $dfs(i, j)$ 的返回值。</p>
-<p>答案为 $dfs(0, 0)$。</p>
-<p>为了避免重复计算，我们使用记忆化搜索的方法，用一个数组 $f$ 记录 $dfs(i, j)$ 的返回值，如果 $f[i][j]$ 不为 $-1$，说明已经计算过，直接返回 $f[i][j]$ 即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $prices$ 的长度。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示从第 <span class="arithmatex">\(i\)</span> 天开始，状态为 <span class="arithmatex">\(j\)</span> 时，能够获得的最大利润。其中 <span class="arithmatex">\(j\)</span> 的取值为 <span class="arithmatex">\(0, 1\)</span>，分别表示当前不持有股票和持有股票。答案即为 <span class="arithmatex">\(dfs(0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(i \geq n\)</span>，那么没有股票可以交易了，此时返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>否则，我们可以选择不交易，此时 <span class="arithmatex">\(dfs(i, j) = dfs(i + 1, j)\)</span>。我们也可以进行股票交易，如果此时 <span class="arithmatex">\(j \gt 0\)</span>，说明当前持有股票，可以卖出，此时 <span class="arithmatex">\(dfs(i, j) = prices[i] + dfs(i + 1, 0) - fee\)</span>；如果此时 <span class="arithmatex">\(j = 0\)</span>，说明当前不持有股票，可以买入，此时 <span class="arithmatex">\(dfs(i, j) = -prices[i] + dfs(i + 1, 1)\)</span>。取最大值作为函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的返回值。</p>
+<p>答案为 <span class="arithmatex">\(dfs(0, 0)\)</span>。</p>
+<p>为了避免重复计算，我们使用记忆化搜索的方法，用一个数组 <span class="arithmatex">\(f\)</span> 记录 <span class="arithmatex">\(dfs(i, j)\)</span> 的返回值，如果 <span class="arithmatex">\(f[i][j]\)</span> 不为 <span class="arithmatex">\(-1\)</span>，说明已经计算过，直接返回 <span class="arithmatex">\(f[i][j]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(prices\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91117,10 +91115,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示到第 $i$ 天，且状态为 $j$ 时，能够获得的最大利润。其中 $j$ 的取值为 $0, 1$，分别表示当前不持有股票和持有股票。初始时 $f[0][0] = 0$, $f[0][1] = -prices[0]$。</p>
-<p>当 $i \geq 1$ 时，如果当前不持有股票，那么 $f[i][0]$ 可以由 $f[i - 1][0]$ 和 $f[i - 1][1] + prices[i] - fee$ 转移得到，即 $f[i][0] = \max(f[i - 1][0], f[i - 1][1] + prices[i] - fee)$；如果当前持有股票，那么 $f[i][1]$ 可以由 $f[i - 1][1]$ 和 $f[i - 1][0] - prices[i]$ 转移得到，即 $f[i][1] = \max(f[i - 1][1], f[i - 1][0] - prices[i])$。最终答案为 $f[n - 1][0]$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $prices$ 的长度。</p>
-<p>我们注意到，状态 $f[i][]$ 的转移只与 $f[i - 1][]$ 和 $f[i - 1][]$ 有关，因此我们可以用两个变量 $f_0, f_1$ 代替数组 $f$，将空间复杂度优化到 $O(1)$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示到第 <span class="arithmatex">\(i\)</span> 天，且状态为 <span class="arithmatex">\(j\)</span> 时，能够获得的最大利润。其中 <span class="arithmatex">\(j\)</span> 的取值为 <span class="arithmatex">\(0, 1\)</span>，分别表示当前不持有股票和持有股票。初始时 <span class="arithmatex">\(f[0][0] = 0\)</span>, <span class="arithmatex">\(f[0][1] = -prices[0]\)</span>。</p>
+<p>当 <span class="arithmatex">\(i \geq 1\)</span> 时，如果当前不持有股票，那么 <span class="arithmatex">\(f[i][0]\)</span> 可以由 <span class="arithmatex">\(f[i - 1][0]\)</span> 和 <span class="arithmatex">\(f[i - 1][1] + prices[i] - fee\)</span> 转移得到，即 <span class="arithmatex">\(f[i][0] = \max(f[i - 1][0], f[i - 1][1] + prices[i] - fee)\)</span>；如果当前持有股票，那么 <span class="arithmatex">\(f[i][1]\)</span> 可以由 <span class="arithmatex">\(f[i - 1][1]\)</span> 和 <span class="arithmatex">\(f[i - 1][0] - prices[i]\)</span> 转移得到，即 <span class="arithmatex">\(f[i][1] = \max(f[i - 1][1], f[i - 1][0] - prices[i])\)</span>。最终答案为 <span class="arithmatex">\(f[n - 1][0]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(prices\)</span> 的长度。</p>
+<p>我们注意到，状态 <span class="arithmatex">\(f[i][]\)</span> 的转移只与 <span class="arithmatex">\(f[i - 1][]\)</span> 和 <span class="arithmatex">\(f[i - 1][]\)</span> 有关，因此我们可以用两个变量 <span class="arithmatex">\(f_0, f_1\)</span> 代替数组 <span class="arithmatex">\(f\)</span>，将空间复杂度优化到 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91581,11 +91579,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

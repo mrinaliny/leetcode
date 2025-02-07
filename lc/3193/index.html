@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90902,12 +90900,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示 $[0..i]$ 的排列中，逆序对数量为 $j$ 的排列数。考虑下标为 $i$ 的数 $a_i$ 与前面 $i$ 个数的大小关系。如果 $a_i$ 比前面 $k$ 个数小，那么前面的 $k$ 个数与 $a_i$ 都构成了逆序对，逆序对数量为 $k$。因此，我们可以得到状态转移方程：</p>
-<p>$$
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示 <span class="arithmatex">\([0..i]\)</span> 的排列中，逆序对数量为 <span class="arithmatex">\(j\)</span> 的排列数。考虑下标为 <span class="arithmatex">\(i\)</span> 的数 <span class="arithmatex">\(a_i\)</span> 与前面 <span class="arithmatex">\(i\)</span> 个数的大小关系。如果 <span class="arithmatex">\(a_i\)</span> 比前面 <span class="arithmatex">\(k\)</span> 个数小，那么前面的 <span class="arithmatex">\(k\)</span> 个数与 <span class="arithmatex">\(a_i\)</span> 都构成了逆序对，逆序对数量为 <span class="arithmatex">\(k\)</span>。因此，我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 f[i][j] = \sum_{k=0}^{\min(i, j)} f[i-1][j-k]
-$$</p>
-<p>由于题目要求 $[0..\textit{end}_i]$ 的逆序对数量为 $\textit{cnt}_i$，因此，当我们计算 $i = \textit{end}_i$ 时，我们只需要计算 $f[i][\textit{cnt}_i]$ 即可。其余的 $f[i][..]$ 都为 $0$。</p>
-<p>时间复杂度 $O(n \times m \times \min(n, m))$，空间复杂度 $O(n \times m)$。其中 $m$ 是逆序对数量的最大值。本题中 $m \le 400$。</p>
+\]</div>
+<p>由于题目要求 <span class="arithmatex">\([0..\textit{end}_i]\)</span> 的逆序对数量为 <span class="arithmatex">\(\textit{cnt}_i\)</span>，因此，当我们计算 <span class="arithmatex">\(i = \textit{end}_i\)</span> 时，我们只需要计算 <span class="arithmatex">\(f[i][\textit{cnt}_i]\)</span> 即可。其余的 <span class="arithmatex">\(f[i][..]\)</span> 都为 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m \times \min(n, m))\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>。其中 <span class="arithmatex">\(m\)</span> 是逆序对数量的最大值。本题中 <span class="arithmatex">\(m \le 400\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91427,11 +91425,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

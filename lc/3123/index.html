@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90882,17 +90880,17 @@
 <!-- solution:start -->
 
 <h3 id="dijkstra">方法一：堆优化的 Dijkstra</h3>
-<p>我们先创建一个邻接表 $g$，用于存储图的边。然后创建一个数组 $dist$，用于存储从节点 $0$ 到其他节点的最短距离。初始化 $dist[0] = 0$，其余节点的距离初始化为无穷大。</p>
-<p>然后，我们使用 Dijkstra 算法计算从节点 $0$ 到其他节点的最短距离。具体步骤如下：</p>
+<p>我们先创建一个邻接表 <span class="arithmatex">\(g\)</span>，用于存储图的边。然后创建一个数组 <span class="arithmatex">\(dist\)</span>，用于存储从节点 <span class="arithmatex">\(0\)</span> 到其他节点的最短距离。初始化 <span class="arithmatex">\(dist[0] = 0\)</span>，其余节点的距离初始化为无穷大。</p>
+<p>然后，我们使用 Dijkstra 算法计算从节点 <span class="arithmatex">\(0\)</span> 到其他节点的最短距离。具体步骤如下：</p>
 <ol>
-<li>创建一个优先队列 $q$，用于存储节点的距离和节点编号，初始时将节点 $0$ 加入队列，距离为 $0$。</li>
-<li>从队列中取出一个节点 $a$，如果 $a$ 的距离 $da$ 大于 $dist[a]$，说明 $a$ 已经被更新过了，直接跳过。</li>
-<li>遍历节点 $a$ 的所有邻居节点 $b$，如果 $dist[b] &gt; dist[a] + w$，则更新 $dist[b] = dist[a] + w$，并将节点 $b$ 加入队列。</li>
+<li>创建一个优先队列 <span class="arithmatex">\(q\)</span>，用于存储节点的距离和节点编号，初始时将节点 <span class="arithmatex">\(0\)</span> 加入队列，距离为 <span class="arithmatex">\(0\)</span>。</li>
+<li>从队列中取出一个节点 <span class="arithmatex">\(a\)</span>，如果 <span class="arithmatex">\(a\)</span> 的距离 <span class="arithmatex">\(da\)</span> 大于 <span class="arithmatex">\(dist[a]\)</span>，说明 <span class="arithmatex">\(a\)</span> 已经被更新过了，直接跳过。</li>
+<li>遍历节点 <span class="arithmatex">\(a\)</span> 的所有邻居节点 <span class="arithmatex">\(b\)</span>，如果 <span class="arithmatex">\(dist[b] &gt; dist[a] + w\)</span>，则更新 <span class="arithmatex">\(dist[b] = dist[a] + w\)</span>，并将节点 <span class="arithmatex">\(b\)</span> 加入队列。</li>
 <li>重复步骤 2 和步骤 3，直到队列为空。</li>
 </ol>
-<p>接着，我们创建一个长度为 $m$ 的答案数组 $ans$，初始时所有元素都为 $false$。如果 $dist[n - 1]$ 为无穷大，说明节点 $0$ 无法到达节点 $n - 1$，直接返回 $ans$。否则，我们从节点 $n - 1$ 开始，遍历所有的边，如果边 $(a, b, i)$ 满足 $dist[a] = dist[b] + w$，则将 $ans[i]$ 置为 $true$，并将节点 $b$ 加入队列。</p>
+<p>接着，我们创建一个长度为 <span class="arithmatex">\(m\)</span> 的答案数组 <span class="arithmatex">\(ans\)</span>，初始时所有元素都为 <span class="arithmatex">\(false\)</span>。如果 <span class="arithmatex">\(dist[n - 1]\)</span> 为无穷大，说明节点 <span class="arithmatex">\(0\)</span> 无法到达节点 <span class="arithmatex">\(n - 1\)</span>，直接返回 <span class="arithmatex">\(ans\)</span>。否则，我们从节点 <span class="arithmatex">\(n - 1\)</span> 开始，遍历所有的边，如果边 <span class="arithmatex">\((a, b, i)\)</span> 满足 <span class="arithmatex">\(dist[a] = dist[b] + w\)</span>，则将 <span class="arithmatex">\(ans[i]\)</span> 置为 <span class="arithmatex">\(true\)</span>，并将节点 <span class="arithmatex">\(b\)</span> 加入队列。</p>
 <p>最后，返回答案即可。</p>
-<p>时间复杂度 $O(m \times \log m)$，空间复杂度 $O(n + m)$，其中 $n$ 和 $m$ 分别为节点数和边数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times \log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为节点数和边数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91502,11 +91500,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

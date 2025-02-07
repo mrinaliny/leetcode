@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90885,15 +90883,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示从网格图中的第 $i$ 行第 $j$ 列的格子出发，能够到达任意格子的严格递增路径数目。那么答案就是 $\sum_{i=0}^{m-1} \sum_{j=0}^{n-1} dfs(i, j)$。搜索过程中，我们可以用一个二维数组 $f$ 记录已经计算过的结果，避免重复计算。</p>
-<p>函数 $dfs(i, j)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示从网格图中的第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列的格子出发，能够到达任意格子的严格递增路径数目。那么答案就是 <span class="arithmatex">\(\sum_{i=0}^{m-1} \sum_{j=0}^{n-1} dfs(i, j)\)</span>。搜索过程中，我们可以用一个二维数组 <span class="arithmatex">\(f\)</span> 记录已经计算过的结果，避免重复计算。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $f[i][j]$ 不为 $0$，说明已经计算过，直接返回 $f[i][j]$；</li>
-<li>否则，我们初始化 $f[i][j] = 1$，然后枚举 $(i, j)$ 的四个方向，如果某个方向的格子 $(x, y)$ 满足 $0 \leq x \lt m$, $0 \leq y \lt n$ 且 $grid[i][j] \lt grid[x][y]$，我们就可以从格子 $(i, j)$ 出发，到达格子 $(x, y)$，且路径上的数字是严格递增的，因此有 $f[i][j] += dfs(x, y)$。</li>
+<li>如果 <span class="arithmatex">\(f[i][j]\)</span> 不为 <span class="arithmatex">\(0\)</span>，说明已经计算过，直接返回 <span class="arithmatex">\(f[i][j]\)</span>；</li>
+<li>否则，我们初始化 <span class="arithmatex">\(f[i][j] = 1\)</span>，然后枚举 <span class="arithmatex">\((i, j)\)</span> 的四个方向，如果某个方向的格子 <span class="arithmatex">\((x, y)\)</span> 满足 <span class="arithmatex">\(0 \leq x \lt m\)</span>, <span class="arithmatex">\(0 \leq y \lt n\)</span> 且 <span class="arithmatex">\(grid[i][j] \lt grid[x][y]\)</span>，我们就可以从格子 <span class="arithmatex">\((i, j)\)</span> 出发，到达格子 <span class="arithmatex">\((x, y)\)</span>，且路径上的数字是严格递增的，因此有 <span class="arithmatex">\(f[i][j] += dfs(x, y)\)</span>。</li>
 </ul>
-<p>最后，我们返回 $f[i][j]$。</p>
-<p>答案为 $\sum_{i=0}^{m-1} \sum_{j=0}^{n-1} dfs(i, j)$。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是网格图的行数和列数。</p>
+<p>最后，我们返回 <span class="arithmatex">\(f[i][j]\)</span>。</p>
+<p>答案为 <span class="arithmatex">\(\sum_{i=0}^{m-1} \sum_{j=0}^{n-1} dfs(i, j)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是网格图的行数和列数。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0300-0399/0329.Longest%20Increasing%20Path%20in%20a%20Matrix/README.md">329. 矩阵中的最长递增路径</a>。</li>
@@ -91420,11 +91418,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

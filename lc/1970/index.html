@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90886,9 +90884,9 @@
 <!-- solution:start -->
 
 <h3 id="bfs">方法一：二分查找 + BFS</h3>
-<p>我们注意到，如果我们能在第 $k$ 天从最上面一行走到最下面一行，那么对于任意 $0 \lt k' \lt k$，我们也能在第 $k'$ 天从最上面一行走到最下面一行。这存在着单调性，因此，我们可以使用二分查找，找到最大的 $k$，使得我们能在第 $k$ 天从最上面一行走到最下面一行。</p>
-<p>我们定义二分查找的左边界 $l = 1$，右边界 $r = |cells|$，其中 $|cells|$ 表示数组 $cells$ 的长度。然后，我们二分枚举 $k$，对于每一个 $k$，我们取 $\textit{cells}$ 的前 $k$ 个元素，将这些元素对应的格子变成水域，然后使用广度优先搜索，从最上面一行开始，尝试走到最下面一行。如果我们能走到最下面一行，那么说明我们可以在第 $k$ 天从最上面一行走到最下面一行，我们就将左边界 $l$ 更新为 $k$，否则，我们将右边界 $r$ 更新为 $k - 1$。</p>
-<p>时间复杂度 $O(m \times n \times \log (m \times n))$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别表示矩阵的行数和列数。</p>
+<p>我们注意到，如果我们能在第 <span class="arithmatex">\(k\)</span> 天从最上面一行走到最下面一行，那么对于任意 <span class="arithmatex">\(0 \lt k' \lt k\)</span>，我们也能在第 <span class="arithmatex">\(k'\)</span> 天从最上面一行走到最下面一行。这存在着单调性，因此，我们可以使用二分查找，找到最大的 <span class="arithmatex">\(k\)</span>，使得我们能在第 <span class="arithmatex">\(k\)</span> 天从最上面一行走到最下面一行。</p>
+<p>我们定义二分查找的左边界 <span class="arithmatex">\(l = 1\)</span>，右边界 <span class="arithmatex">\(r = |cells|\)</span>，其中 <span class="arithmatex">\(|cells|\)</span> 表示数组 <span class="arithmatex">\(cells\)</span> 的长度。然后，我们二分枚举 <span class="arithmatex">\(k\)</span>，对于每一个 <span class="arithmatex">\(k\)</span>，我们取 <span class="arithmatex">\(\textit{cells}\)</span> 的前 <span class="arithmatex">\(k\)</span> 个元素，将这些元素对应的格子变成水域，然后使用广度优先搜索，从最上面一行开始，尝试走到最下面一行。如果我们能走到最下面一行，那么说明我们可以在第 <span class="arithmatex">\(k\)</span> 天从最上面一行走到最下面一行，我们就将左边界 <span class="arithmatex">\(l\)</span> 更新为 <span class="arithmatex">\(k\)</span>，否则，我们将右边界 <span class="arithmatex">\(r\)</span> 更新为 <span class="arithmatex">\(k - 1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times \log (m \times n))\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别表示矩阵的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91326,8 +91324,8 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法二：并查集</h3>
-<p>我们可以先将所有的陆地格子初始化为 $1$，然后倒序遍历数组 $\textit{cells}$，将每个格子对应的陆地格子变成 $0$，并将其与上下左右的陆地格子合并。我们还需要维护两个虚拟节点 $s$ 和 $t$，分别表示最上面一行和最下面一行的虚拟节点。如果 $s$ 和 $t$ 在并查集中连通，那么说明我们可以在第 $i$ 天从最上面一行走到最下面一行。</p>
-<p>时间复杂度 $O(m \times n \times \alpha(m \times n))$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别表示矩阵的行数和列数，而 $\alpha$ 表示 Ackermann 函数的反函数。</p>
+<p>我们可以先将所有的陆地格子初始化为 <span class="arithmatex">\(1\)</span>，然后倒序遍历数组 <span class="arithmatex">\(\textit{cells}\)</span>，将每个格子对应的陆地格子变成 <span class="arithmatex">\(0\)</span>，并将其与上下左右的陆地格子合并。我们还需要维护两个虚拟节点 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span>，分别表示最上面一行和最下面一行的虚拟节点。如果 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 在并查集中连通，那么说明我们可以在第 <span class="arithmatex">\(i\)</span> 天从最上面一行走到最下面一行。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n \times \alpha(m \times n))\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别表示矩阵的行数和列数，而 <span class="arithmatex">\(\alpha\)</span> 表示 Ackermann 函数的反函数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92171,11 +92169,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

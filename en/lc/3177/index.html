@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86054,20 +86052,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][h]$ as the length of the longest good subsequence ending with $nums[i]$ and having no more than $h$ indices satisfying the condition. Initially, $f[i][h] = 1$. The answer is $\max(f[i][k])$, where $0 \le i &lt; n$.</p>
-<p>We consider how to calculate $f[i][h]$. We can enumerate $0 \le j &lt; i$, if $nums[i] = nums[j]$, then $f[i][h] = \max(f[i][h], f[j][h] + 1)$; otherwise, if $h &gt; 0$, then $f[i][h] = \max(f[i][h], f[j][h - 1] + 1)$. That is:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i][h]\)</span> as the length of the longest good subsequence ending with <span class="arithmatex">\(nums[i]\)</span> and having no more than <span class="arithmatex">\(h\)</span> indices satisfying the condition. Initially, <span class="arithmatex">\(f[i][h] = 1\)</span>. The answer is <span class="arithmatex">\(\max(f[i][k])\)</span>, where <span class="arithmatex">\(0 \le i &lt; n\)</span>.</p>
+<p>We consider how to calculate <span class="arithmatex">\(f[i][h]\)</span>. We can enumerate <span class="arithmatex">\(0 \le j &lt; i\)</span>, if <span class="arithmatex">\(nums[i] = nums[j]\)</span>, then <span class="arithmatex">\(f[i][h] = \max(f[i][h], f[j][h] + 1)\)</span>; otherwise, if <span class="arithmatex">\(h &gt; 0\)</span>, then <span class="arithmatex">\(f[i][h] = \max(f[i][h], f[j][h - 1] + 1)\)</span>. That is:</p>
+<div class="arithmatex">\[
 f[i][h]=
 \begin{cases}
-\max(f[i][h], f[j][h] + 1), &amp; \textit{if } nums[i] = nums[j], \
+\max(f[i][h], f[j][h] + 1), &amp; \textit{if } nums[i] = nums[j], \\
 \max(f[i][h], f[j][h - 1] + 1), &amp; \textit{if } h &gt; 0.
 \end{cases}
-$$</p>
-<p>The final answer is $\max(f[i][k])$, where $0 \le i &lt; n$.</p>
-<p>The time complexity is $O(n^2 \times k)$, and the space complexity is $O(n \times k)$. Where $n$ is the length of the array <code>nums</code>.</p>
+\]</div>
+<p>The final answer is <span class="arithmatex">\(\max(f[i][k])\)</span>, where <span class="arithmatex">\(0 \le i &lt; n\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <code>nums</code>.</p>
 <p>Due to the large data range of this problem, the above solution will time out and needs to be optimized.</p>
-<p>According to the state transition equation, if $nums[i] = nums[j]$, then we only need to get the maximum value of $f[j][h]$, we can maintain it with an array $mp$ of length $k + 1$. If $nums[i] \neq nums[j]$, we need to record the maximum value of $f[j][h - 1]$ corresponding to $nums[j]$, the maximum value and the second maximum value, we can maintain it with an array $g$ of length $k + 1$.</p>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(n \times k)$. Where $n$ is the length of the array <code>nums</code>.</p>
+<p>According to the state transition equation, if <span class="arithmatex">\(nums[i] = nums[j]\)</span>, then we only need to get the maximum value of <span class="arithmatex">\(f[j][h]\)</span>, we can maintain it with an array <span class="arithmatex">\(mp\)</span> of length <span class="arithmatex">\(k + 1\)</span>. If <span class="arithmatex">\(nums[i] \neq nums[j]\)</span>, we need to record the maximum value of <span class="arithmatex">\(f[j][h - 1]\)</span> corresponding to <span class="arithmatex">\(nums[j]\)</span>, the maximum value and the second maximum value, we can maintain it with an array <span class="arithmatex">\(g\)</span> of length <span class="arithmatex">\(k + 1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <code>nums</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86693,11 +86691,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

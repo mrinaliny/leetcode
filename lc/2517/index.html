@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,11 +90861,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心 + 二分查找</h3>
-<p>我们注意到，如果一个甜蜜度为 $x$ 的礼盒是可行的，那么甜蜜度小于 $x$ 的礼盒也是可行的，这存在着单调性，因此我们可以使用二分查找的方法，找到最大的可行甜蜜度。</p>
-<p>我们首先将数组 $price$ 排序，然后定义二分查找的左边界 $l=0$, $r=price[n-1]-price[0]$。每一次，我们计算出当前的中间值 $mid = \lfloor \frac{l+r+1}{2} \rfloor$，以 $mid$ 作为甜蜜度，判断是否可行。若可行，那么我们将左边界 $l$ 更新为 $mid$，否则将右边界 $r$ 更新为 $mid-1$。最后返回 $l$ 即可。</p>
-<p>那么问题的关键转化为：判断一个甜蜜度是否可行，我们通过函数 $check(x)$ 来实现。函数 $check(x)$ 的执行逻辑如下：</p>
-<p>定义一个变量 $cnt$ 表示当前已经选取的糖果的数量，初始值为 $0$，定义一个变量 $pre$ 表示上一个选取的糖果的价格，初始值为 $-x$。然后我们遍历排好序的数组 $price$，对于每一个糖果的价格 $cur$，如果 $cur-pre \geq x$，那么我们就选取这个糖果，将 $pre$ 更新为 $cur$，并将 $cnt$ 加一。最后判断 $cnt$ 是否大于等于 $k$，如果是，那么返回 $true$，否则返回 $false$。</p>
-<p>时间复杂度 $O(n \times (\log n + \log M))$，空间复杂度 $O(\log n)$。其中 $n$ 是数组 $price$ 的长度；而 $M$ 是数组 $price$ 中的最大值，本题中 $M \leq 10^9$。</p>
+<p>我们注意到，如果一个甜蜜度为 <span class="arithmatex">\(x\)</span> 的礼盒是可行的，那么甜蜜度小于 <span class="arithmatex">\(x\)</span> 的礼盒也是可行的，这存在着单调性，因此我们可以使用二分查找的方法，找到最大的可行甜蜜度。</p>
+<p>我们首先将数组 <span class="arithmatex">\(price\)</span> 排序，然后定义二分查找的左边界 <span class="arithmatex">\(l=0\)</span>, <span class="arithmatex">\(r=price[n-1]-price[0]\)</span>。每一次，我们计算出当前的中间值 <span class="arithmatex">\(mid = \lfloor \frac{l+r+1}{2} \rfloor\)</span>，以 <span class="arithmatex">\(mid\)</span> 作为甜蜜度，判断是否可行。若可行，那么我们将左边界 <span class="arithmatex">\(l\)</span> 更新为 <span class="arithmatex">\(mid\)</span>，否则将右边界 <span class="arithmatex">\(r\)</span> 更新为 <span class="arithmatex">\(mid-1\)</span>。最后返回 <span class="arithmatex">\(l\)</span> 即可。</p>
+<p>那么问题的关键转化为：判断一个甜蜜度是否可行，我们通过函数 <span class="arithmatex">\(check(x)\)</span> 来实现。函数 <span class="arithmatex">\(check(x)\)</span> 的执行逻辑如下：</p>
+<p>定义一个变量 <span class="arithmatex">\(cnt\)</span> 表示当前已经选取的糖果的数量，初始值为 <span class="arithmatex">\(0\)</span>，定义一个变量 <span class="arithmatex">\(pre\)</span> 表示上一个选取的糖果的价格，初始值为 <span class="arithmatex">\(-x\)</span>。然后我们遍历排好序的数组 <span class="arithmatex">\(price\)</span>，对于每一个糖果的价格 <span class="arithmatex">\(cur\)</span>，如果 <span class="arithmatex">\(cur-pre \geq x\)</span>，那么我们就选取这个糖果，将 <span class="arithmatex">\(pre\)</span> 更新为 <span class="arithmatex">\(cur\)</span>，并将 <span class="arithmatex">\(cnt\)</span> 加一。最后判断 <span class="arithmatex">\(cnt\)</span> 是否大于等于 <span class="arithmatex">\(k\)</span>，如果是，那么返回 <span class="arithmatex">\(true\)</span>，否则返回 <span class="arithmatex">\(false\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times (\log n + \log M))\)</span>，空间复杂度 <span class="arithmatex">\(O(\log n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(price\)</span> 的长度；而 <span class="arithmatex">\(M\)</span> 是数组 <span class="arithmatex">\(price\)</span> 中的最大值，本题中 <span class="arithmatex">\(M \leq 10^9\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91381,11 +91379,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

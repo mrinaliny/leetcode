@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90947,9 +90945,9 @@ ride_id 是该表具有唯一值的列。
 <!-- solution:start -->
 
 <h3 id="_3">方法一：递归 + 左连接 + 分组</h3>
-<p>我们可以使用递归的方法生成 $1 \sim 12$ 月的数据，记录在 <code>Month</code> 表中。</p>
+<p>我们可以使用递归的方法生成 <span class="arithmatex">\(1 \sim 12\)</span> 月的数据，记录在 <code>Month</code> 表中。</p>
 <p>接下来，我们用 <code>Month</code> 表与 <code>Drivers</code> 表进行左连接，连接的条件是 <code>year(d.join_date) &lt; 2020 or (year(d.join_date) = 2020 and month(d.join_date) &lt;= month)</code>，这样就可以得到每个月的活跃司机数。</p>
-<p>然后，我们再用 <code>Rides</code> 表与 <code>AcceptedRides</code> 表进行内连接，连接的条件是 <code>ride_id</code> 相等，并且我们只查出 <code>year(requested_at) = 2020</code> 的数据，这样就可以得到 $2020$ 年被接受的所有行程。</p>
+<p>然后，我们再用 <code>Rides</code> 表与 <code>AcceptedRides</code> 表进行内连接，连接的条件是 <code>ride_id</code> 相等，并且我们只查出 <code>year(requested_at) = 2020</code> 的数据，这样就可以得到 <span class="arithmatex">\(2020\)</span> 年被接受的所有行程。</p>
 <p>最后，我们将上面两个表进行左连接，连接的条件是 <code>month</code> 相等、<code>driver_id</code> 相等，并且 <code>join_date</code> 小于等于 <code>requested_at</code>，这样就可以得到每个月被接受的行程数，按月份进行分组，就可以得到每个月的活跃司机数和被接受的行程数，从而计算出每个月的接单率。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">MySQL</label></div>
 <div class="tabbed-content">
@@ -91265,11 +91263,9 @@ ride_id 是该表具有唯一值的列。
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

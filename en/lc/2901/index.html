@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86098,11 +86096,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i]$ as the length of the longest adjacent non-equal subsequence ending with the $i$-th word, and $g[i]$ as the predecessor index of the longest adjacent non-equal subsequence ending with the $i$-th word. Initially, we set $f[i] = 1$ and $g[i] = -1$.</p>
-<p>In addition, we define a variable $mx$ to represent the length of the longest adjacent non-equal subsequence.</p>
-<p>We traverse $i$ and $j \in [0, i)$, and if $groups[i] \neq groups[j]$, $f[i] \lt f[j] + 1$, and the Hamming distance between $words[i]$ and $words[j]$ is $1$, we update $f[i] = f[j] + 1$, $g[i] = j$, and update $mx = \max(mx, f[i])$.</p>
-<p>Finally, we find the index $i$ corresponding to the maximum value in the $f$ array, and then continuously search backwards from $i$ until we find $g[i] = -1$, which gives us the longest adjacent non-equal subsequence.</p>
-<p>The time complexity is $O(n^2 \times L)$, and the space complexity is $O(n)$. Here, $L$ represents the maximum length of a word.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the length of the longest adjacent non-equal subsequence ending with the <span class="arithmatex">\(i\)</span>-th word, and <span class="arithmatex">\(g[i]\)</span> as the predecessor index of the longest adjacent non-equal subsequence ending with the <span class="arithmatex">\(i\)</span>-th word. Initially, we set <span class="arithmatex">\(f[i] = 1\)</span> and <span class="arithmatex">\(g[i] = -1\)</span>.</p>
+<p>In addition, we define a variable <span class="arithmatex">\(mx\)</span> to represent the length of the longest adjacent non-equal subsequence.</p>
+<p>We traverse <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j \in [0, i)\)</span>, and if <span class="arithmatex">\(groups[i] \neq groups[j]\)</span>, <span class="arithmatex">\(f[i] \lt f[j] + 1\)</span>, and the Hamming distance between <span class="arithmatex">\(words[i]\)</span> and <span class="arithmatex">\(words[j]\)</span> is <span class="arithmatex">\(1\)</span>, we update <span class="arithmatex">\(f[i] = f[j] + 1\)</span>, <span class="arithmatex">\(g[i] = j\)</span>, and update <span class="arithmatex">\(mx = \max(mx, f[i])\)</span>.</p>
+<p>Finally, we find the index <span class="arithmatex">\(i\)</span> corresponding to the maximum value in the <span class="arithmatex">\(f\)</span> array, and then continuously search backwards from <span class="arithmatex">\(i\)</span> until we find <span class="arithmatex">\(g[i] = -1\)</span>, which gives us the longest adjacent non-equal subsequence.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times L)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(L\)</span> represents the maximum length of a word.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86588,7 +86586,7 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming-hash-table">Solution 2: Dynamic Programming + Hash Table</h3>
-<p>In Solution 1, we need to enumerate all $i$ and $j$ combinations, a step that can be optimized by maintaining a wildcard hash table. For each string $word[i]$, we enumerate each character, replace it with a wildcard, and then use the replaced string as the key and add its subscript to the list which is the value in the hash table. This allows us to find all $word[j]$ with a Hamming distance of 1 from $word[i]$ in $O(L)$ time. Although the time complexity is still $O(n^2 \times L)$, the average complexity is reduced.</p>
+<p>In Solution 1, we need to enumerate all <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> combinations, a step that can be optimized by maintaining a wildcard hash table. For each string <span class="arithmatex">\(word[i]\)</span>, we enumerate each character, replace it with a wildcard, and then use the replaced string as the key and add its subscript to the list which is the value in the hash table. This allows us to find all <span class="arithmatex">\(word[j]\)</span> with a Hamming distance of 1 from <span class="arithmatex">\(word[i]\)</span> in <span class="arithmatex">\(O(L)\)</span> time. Although the time complexity is still <span class="arithmatex">\(O(n^2 \times L)\)</span>, the average complexity is reduced.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86919,11 +86917,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

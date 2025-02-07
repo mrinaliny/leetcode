@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90871,15 +90869,15 @@
 <!-- solution:start -->
 
 <h3 id="dijkstra">方法一：最短路（Dijkstra 算法）</h3>
-<p>我们先不考虑边权为 $-1$ 的边，使用 Dijkstra 算法求出从 $source$ 到 $destination$ 的最短距离 $d$。</p>
-<p>如果 $d \lt target$，说明存在一条完全由正权边组成的最短路径，此时无论我们如何修改边权为 $-1$ 的边，都无法使得 $source$ 到 $destination$ 的最短距离等于 $target$，因此不存在满足题意的修改方案，返回一个空数组即可。</p>
-<p>如果 $d = target$，说明存在一条完全由正权边组成的、长度为 $target$ 的最短路径，此时我们可以将所有边权为 $-1$ 的边修改为最大值 $2 \times 10^9$ 即可。</p>
-<p>如果 $d \gt target$，我们可以尝试往图中加入一条边权为 $-1$ 的边，将边权设置为 $1$，然后再次使用 Dijkstra 算法求出从 $source$ 到 $destination$ 的最短距离 $d$。</p>
+<p>我们先不考虑边权为 <span class="arithmatex">\(-1\)</span> 的边，使用 Dijkstra 算法求出从 <span class="arithmatex">\(source\)</span> 到 <span class="arithmatex">\(destination\)</span> 的最短距离 <span class="arithmatex">\(d\)</span>。</p>
+<p>如果 <span class="arithmatex">\(d \lt target\)</span>，说明存在一条完全由正权边组成的最短路径，此时无论我们如何修改边权为 <span class="arithmatex">\(-1\)</span> 的边，都无法使得 <span class="arithmatex">\(source\)</span> 到 <span class="arithmatex">\(destination\)</span> 的最短距离等于 <span class="arithmatex">\(target\)</span>，因此不存在满足题意的修改方案，返回一个空数组即可。</p>
+<p>如果 <span class="arithmatex">\(d = target\)</span>，说明存在一条完全由正权边组成的、长度为 <span class="arithmatex">\(target\)</span> 的最短路径，此时我们可以将所有边权为 <span class="arithmatex">\(-1\)</span> 的边修改为最大值 <span class="arithmatex">\(2 \times 10^9\)</span> 即可。</p>
+<p>如果 <span class="arithmatex">\(d \gt target\)</span>，我们可以尝试往图中加入一条边权为 <span class="arithmatex">\(-1\)</span> 的边，将边权设置为 <span class="arithmatex">\(1\)</span>，然后再次使用 Dijkstra 算法求出从 <span class="arithmatex">\(source\)</span> 到 <span class="arithmatex">\(destination\)</span> 的最短距离 <span class="arithmatex">\(d\)</span>。</p>
 <ul>
-<li>如果最短距离 $d \leq target$，说明加入这条边后，可以使得最短路变短，而且最短路也一定经过这条边，那么我们只需要将这条边的边权改为 $target-d+1$，就可以使得最短路等于 $target$。然后我们将其余的边权为 $-1$ 的边修改为最大值 $2 \times 10^9$ 即可。</li>
-<li>如果最短距离 $d \gt target$，说明加入这条边后，最短路不会变短，那么我们贪心地将这条边的边权保持为 $-1$，然后继续尝试加入其余的边权为 $-1$ 的边。</li>
+<li>如果最短距离 <span class="arithmatex">\(d \leq target\)</span>，说明加入这条边后，可以使得最短路变短，而且最短路也一定经过这条边，那么我们只需要将这条边的边权改为 <span class="arithmatex">\(target-d+1\)</span>，就可以使得最短路等于 <span class="arithmatex">\(target\)</span>。然后我们将其余的边权为 <span class="arithmatex">\(-1\)</span> 的边修改为最大值 <span class="arithmatex">\(2 \times 10^9\)</span> 即可。</li>
+<li>如果最短距离 <span class="arithmatex">\(d \gt target\)</span>，说明加入这条边后，最短路不会变短，那么我们贪心地将这条边的边权保持为 <span class="arithmatex">\(-1\)</span>，然后继续尝试加入其余的边权为 <span class="arithmatex">\(-1\)</span> 的边。</li>
 </ul>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n^2)$。其中 $n$ 是图中的点数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是图中的点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91683,11 +91681,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

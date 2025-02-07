@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90880,15 +90878,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩 + 记忆化搜索</h3>
-<p>我们可以用一个整数 <code>state</code> 来表示当前已经添加的直线，其中 <code>state</code> 的第 $i$ 位表示第 $i$ 条直线是否已经添加。如果 <code>state</code> 的第 $i$ 位为 $1$，则表示第 $i$ 条直线已经添加，否则表示第 $i$ 条直线还未添加。</p>
-<p>接下来，我们设计一个函数 $dfs(state)$，表示当前已经添加的直线为 <code>state</code> 时，至少需要添加多少条直线才能使得每个点至少在一条直线上。那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(state)$ 的计算过程如下：</p>
+<p>我们可以用一个整数 <code>state</code> 来表示当前已经添加的直线，其中 <code>state</code> 的第 <span class="arithmatex">\(i\)</span> 位表示第 <span class="arithmatex">\(i\)</span> 条直线是否已经添加。如果 <code>state</code> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span>，则表示第 <span class="arithmatex">\(i\)</span> 条直线已经添加，否则表示第 <span class="arithmatex">\(i\)</span> 条直线还未添加。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(state)\)</span>，表示当前已经添加的直线为 <code>state</code> 时，至少需要添加多少条直线才能使得每个点至少在一条直线上。那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(state)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 <code>state</code> 的所有位都为 $1$，则说明所有直线都已经添加，返回 $0$。</li>
-<li>否则，我们枚举当前还未添加的点 $i$，接下来枚举 $j$，我们将 $i$ 和 $j$ 的点连成一条直线，此时的状态为 $nxt = state | 1 &lt;&lt; i | 1 &lt;&lt; j$，其中 $1 &lt;&lt; i$ 表示将第 $i$ 位设置为 $1$，$1 &lt;&lt; j$ 表示将第 $j$ 位设置为 $1$。接下来，我们枚举所有 $k$，如果 $i$、$j$ 和 $k$ 三个点共线，则将 $k$ 的状态设置为 $1$，即 $nxt = nxt | 1 &lt;&lt; k$。此时，我们可以将 $i$ 和 $j$ 以及 $k$ 这三个点连成一条直线，此时的状态为 $nxt$，此时至少需要添加 $dfs(nxt)$ 条直线，我们取所有情况的最小值，即为 $dfs(state)$ 的值。</li>
+<li>如果 <code>state</code> 的所有位都为 <span class="arithmatex">\(1\)</span>，则说明所有直线都已经添加，返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>否则，我们枚举当前还未添加的点 <span class="arithmatex">\(i\)</span>，接下来枚举 <span class="arithmatex">\(j\)</span>，我们将 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 的点连成一条直线，此时的状态为 <span class="arithmatex">\(nxt = state | 1 &lt;&lt; i | 1 &lt;&lt; j\)</span>，其中 <span class="arithmatex">\(1 &lt;&lt; i\)</span> 表示将第 <span class="arithmatex">\(i\)</span> 位设置为 <span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(1 &lt;&lt; j\)</span> 表示将第 <span class="arithmatex">\(j\)</span> 位设置为 <span class="arithmatex">\(1\)</span>。接下来，我们枚举所有 <span class="arithmatex">\(k\)</span>，如果 <span class="arithmatex">\(i\)</span>、<span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(k\)</span> 三个点共线，则将 <span class="arithmatex">\(k\)</span> 的状态设置为 <span class="arithmatex">\(1\)</span>，即 <span class="arithmatex">\(nxt = nxt | 1 &lt;&lt; k\)</span>。此时，我们可以将 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 以及 <span class="arithmatex">\(k\)</span> 这三个点连成一条直线，此时的状态为 <span class="arithmatex">\(nxt\)</span>，此时至少需要添加 <span class="arithmatex">\(dfs(nxt)\)</span> 条直线，我们取所有情况的最小值，即为 <span class="arithmatex">\(dfs(state)\)</span> 的值。</li>
 </ul>
 <p>为了避免重复计算，我们可以使用记忆化搜索。</p>
-<p>时间复杂度 $O(2^n \times n^3)$，空间复杂度 $O(2^n)$。其中 $n$ 为点的数量。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(2^n \times n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为点的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91428,11 +91426,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

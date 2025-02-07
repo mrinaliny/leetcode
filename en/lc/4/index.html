@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86049,21 +86047,21 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-divide-and-conquer">Solution 1: Divide and Conquer</h3>
-<p>The problem requires the time complexity of the algorithm to be $O(\log (m + n))$, so we cannot directly traverse the two arrays, but need to use the binary search method.</p>
-<p>If $m + n$ is odd, then the median is the $\left\lfloor\frac{m + n + 1}{2}\right\rfloor$-th number; if $m + n$ is even, then the median is the average of the $\left\lfloor\frac{m + n + 1}{2}\right\rfloor$-th and the $\left\lfloor\frac{m + n + 2}{2}\right\rfloor$-th numbers. In fact, we can unify it as the average of the $\left\lfloor\frac{m + n + 1}{2}\right\rfloor$-th and the $\left\lfloor\frac{m + n + 2}{2}\right\rfloor$-th numbers.</p>
-<p>Therefore, we can design a function $f(i, j, k)$, which represents the $k$-th smallest number in the interval $[i, m)$ of array $nums1$ and the interval $[j, n)$ of array $nums2$. The median is the average of $f(0, 0, \left\lfloor\frac{m + n + 1}{2}\right\rfloor)$ and $f(0, 0, \left\lfloor\frac{m + n + 2}{2}\right\rfloor)$.</p>
-<p>The implementation idea of the function $f(i, j, k)$ is as follows:</p>
+<p>The problem requires the time complexity of the algorithm to be <span class="arithmatex">\(O(\log (m + n))\)</span>, so we cannot directly traverse the two arrays, but need to use the binary search method.</p>
+<p>If <span class="arithmatex">\(m + n\)</span> is odd, then the median is the <span class="arithmatex">\(\left\lfloor\frac{m + n + 1}{2}\right\rfloor\)</span>-th number; if <span class="arithmatex">\(m + n\)</span> is even, then the median is the average of the <span class="arithmatex">\(\left\lfloor\frac{m + n + 1}{2}\right\rfloor\)</span>-th and the <span class="arithmatex">\(\left\lfloor\frac{m + n + 2}{2}\right\rfloor\)</span>-th numbers. In fact, we can unify it as the average of the <span class="arithmatex">\(\left\lfloor\frac{m + n + 1}{2}\right\rfloor\)</span>-th and the <span class="arithmatex">\(\left\lfloor\frac{m + n + 2}{2}\right\rfloor\)</span>-th numbers.</p>
+<p>Therefore, we can design a function <span class="arithmatex">\(f(i, j, k)\)</span>, which represents the <span class="arithmatex">\(k\)</span>-th smallest number in the interval <span class="arithmatex">\([i, m)\)</span> of array <span class="arithmatex">\(nums1\)</span> and the interval <span class="arithmatex">\([j, n)\)</span> of array <span class="arithmatex">\(nums2\)</span>. The median is the average of <span class="arithmatex">\(f(0, 0, \left\lfloor\frac{m + n + 1}{2}\right\rfloor)\)</span> and <span class="arithmatex">\(f(0, 0, \left\lfloor\frac{m + n + 2}{2}\right\rfloor)\)</span>.</p>
+<p>The implementation idea of the function <span class="arithmatex">\(f(i, j, k)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq m$, it means that the interval $[i, m)$ of array $nums1$ is empty, so directly return $nums2[j + k - 1]$;</li>
-<li>If $j \geq n$, it means that the interval $[j, n)$ of array $nums2$ is empty, so directly return $nums1[i + k - 1]$;</li>
-<li>If $k = 1$, it means to find the first number, so just return the minimum of $nums1[i]$ and $nums2[j]$;</li>
-<li>Otherwise, we find the $\left\lfloor\frac{k}{2}\right\rfloor$-th number in the two arrays, denoted as $x$ and $y$. (Note, if a certain array does not have the $\left\lfloor\frac{k}{2}\right\rfloor$-th number, then we regard the $\left\lfloor\frac{k}{2}\right\rfloor$-th number as $+\infty$.) Compare the size of $x$ and $y$:<ul>
-<li>If $x \leq y$, it means that the $\left\lfloor\frac{k}{2}\right\rfloor$-th number of array $nums1$ cannot be the $k$-th smallest number, so we can exclude the interval $[i, i + \left\lfloor\frac{k}{2}\right\rfloor)$ of array $nums1$, and recursively call $f(i + \left\lfloor\frac{k}{2}\right\rfloor, j, k - \left\lfloor\frac{k}{2}\right\rfloor)$.</li>
-<li>If $x &gt; y$, it means that the $\left\lfloor\frac{k}{2}\right\rfloor$-th number of array $nums2$ cannot be the $k$-th smallest number, so we can exclude the interval $[j, j + \left\lfloor\frac{k}{2}\right\rfloor)$ of array $nums2$, and recursively call $f(i, j + \left\lfloor\frac{k}{2}\right\rfloor, k - \left\lfloor\frac{k}{2}\right\rfloor)$.</li>
+<li>If <span class="arithmatex">\(i \geq m\)</span>, it means that the interval <span class="arithmatex">\([i, m)\)</span> of array <span class="arithmatex">\(nums1\)</span> is empty, so directly return <span class="arithmatex">\(nums2[j + k - 1]\)</span>;</li>
+<li>If <span class="arithmatex">\(j \geq n\)</span>, it means that the interval <span class="arithmatex">\([j, n)\)</span> of array <span class="arithmatex">\(nums2\)</span> is empty, so directly return <span class="arithmatex">\(nums1[i + k - 1]\)</span>;</li>
+<li>If <span class="arithmatex">\(k = 1\)</span>, it means to find the first number, so just return the minimum of <span class="arithmatex">\(nums1[i]\)</span> and <span class="arithmatex">\(nums2[j]\)</span>;</li>
+<li>Otherwise, we find the <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span>-th number in the two arrays, denoted as <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>. (Note, if a certain array does not have the <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span>-th number, then we regard the <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span>-th number as <span class="arithmatex">\(+\infty\)</span>.) Compare the size of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>:<ul>
+<li>If <span class="arithmatex">\(x \leq y\)</span>, it means that the <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span>-th number of array <span class="arithmatex">\(nums1\)</span> cannot be the <span class="arithmatex">\(k\)</span>-th smallest number, so we can exclude the interval <span class="arithmatex">\([i, i + \left\lfloor\frac{k}{2}\right\rfloor)\)</span> of array <span class="arithmatex">\(nums1\)</span>, and recursively call <span class="arithmatex">\(f(i + \left\lfloor\frac{k}{2}\right\rfloor, j, k - \left\lfloor\frac{k}{2}\right\rfloor)\)</span>.</li>
+<li>If <span class="arithmatex">\(x &gt; y\)</span>, it means that the <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span>-th number of array <span class="arithmatex">\(nums2\)</span> cannot be the <span class="arithmatex">\(k\)</span>-th smallest number, so we can exclude the interval <span class="arithmatex">\([j, j + \left\lfloor\frac{k}{2}\right\rfloor)\)</span> of array <span class="arithmatex">\(nums2\)</span>, and recursively call <span class="arithmatex">\(f(i, j + \left\lfloor\frac{k}{2}\right\rfloor, k - \left\lfloor\frac{k}{2}\right\rfloor)\)</span>.</li>
 </ul>
 </li>
 </ul>
-<p>The time complexity is $O(\log(m + n))$, and the space complexity is $O(\log(m + n))$. Here, $m$ and $n$ are the lengths of arrays $nums1$ and $nums2$ respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log(m + n))\)</span>, and the space complexity is <span class="arithmatex">\(O(\log(m + n))\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of arrays <span class="arithmatex">\(nums1\)</span> and <span class="arithmatex">\(nums2\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label><label for="__tabbed_1_8">PHP</label><label for="__tabbed_1_9">Nim</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86771,11 +86769,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

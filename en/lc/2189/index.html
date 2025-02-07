@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86058,16 +86056,16 @@ The third house of cards uses 2 cards.
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We notice that the number of cards in each layer is $3 \times k + 2$, and the number of cards in each layer is different. Therefore, the problem can be transformed into: how many ways can the integer $n$ be expressed as the sum of numbers of the form $3 \times k + 2$. This is a classic knapsack problem that can be solved using memoization search.</p>
-<p>We design a function $\text{dfs}(n, k)$, which represents the number of ways to build different houses of cards when the remaining number of cards is $n$ and the current layer is $k$. The answer is $\text{dfs}(n, 0)$.</p>
-<p>The execution logic of the function $\text{dfs}(n, k)$ is as follows:</p>
+<p>We notice that the number of cards in each layer is <span class="arithmatex">\(3 \times k + 2\)</span>, and the number of cards in each layer is different. Therefore, the problem can be transformed into: how many ways can the integer <span class="arithmatex">\(n\)</span> be expressed as the sum of numbers of the form <span class="arithmatex">\(3 \times k + 2\)</span>. This is a classic knapsack problem that can be solved using memoization search.</p>
+<p>We design a function <span class="arithmatex">\(\text{dfs}(n, k)\)</span>, which represents the number of ways to build different houses of cards when the remaining number of cards is <span class="arithmatex">\(n\)</span> and the current layer is <span class="arithmatex">\(k\)</span>. The answer is <span class="arithmatex">\(\text{dfs}(n, 0)\)</span>.</p>
+<p>The execution logic of the function <span class="arithmatex">\(\text{dfs}(n, k)\)</span> is as follows:</p>
 <ul>
-<li>If $3 \times k + 2 \gt n$, then the current layer cannot place any cards, return $0$;</li>
-<li>If $3 \times k + 2 = n$, then the current layer can place cards, and after placing them, the entire house of cards is completed, return $1$;</li>
-<li>Otherwise, we can choose not to place cards or to place cards. If we choose not to place cards, the remaining number of cards does not change, and the number of layers increases by $1$, i.e., $\text{dfs}(n, k + 1)$. If we choose to place cards, the remaining number of cards decreases by $3 \times k + 2$, and the number of layers increases by $1$, i.e., $\text{dfs}(n - (3 \times k + 2), k + 1)$. The sum of these two cases is the answer.</li>
+<li>If <span class="arithmatex">\(3 \times k + 2 \gt n\)</span>, then the current layer cannot place any cards, return <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(3 \times k + 2 = n\)</span>, then the current layer can place cards, and after placing them, the entire house of cards is completed, return <span class="arithmatex">\(1\)</span>;</li>
+<li>Otherwise, we can choose not to place cards or to place cards. If we choose not to place cards, the remaining number of cards does not change, and the number of layers increases by <span class="arithmatex">\(1\)</span>, i.e., <span class="arithmatex">\(\text{dfs}(n, k + 1)\)</span>. If we choose to place cards, the remaining number of cards decreases by <span class="arithmatex">\(3 \times k + 2\)</span>, and the number of layers increases by <span class="arithmatex">\(1\)</span>, i.e., <span class="arithmatex">\(\text{dfs}(n - (3 \times k + 2), k + 1)\)</span>. The sum of these two cases is the answer.</li>
 </ul>
 <p>During the process, we can use memoization to avoid repeated calculations.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the number of cards.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of cards.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86507,11 +86505,9 @@ The third house of cards uses 2 cards.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

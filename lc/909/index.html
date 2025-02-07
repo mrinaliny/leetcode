@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90873,11 +90871,11 @@
 
 <h3 id="bfs">方法一：BFS</h3>
 <p>我们可以使用广度优先搜索的方法，从起点开始，每次向前走 1 到 6 步，然后判断是否有蛇或梯子，如果有，就走到蛇或梯子的目的地，否则就走到下一个方格。</p>
-<p>具体地，我们使用一个队列 $\textit{q}$ 来存储当前可以到达的方格编号，初始时将编号 $1$ 放入队列。同时我们使用一个集合 $\textit{vis}$ 来记录已经到达过的方格，避免重复访问，初始时将编号 $1$ 加入集合 $\textit{vis}$。</p>
-<p>在每一次的操作中，我们取出队首的方格编号 $x$，如果 $x$ 是终点，那么我们就可以返回当前的步数。否则我们将 $x$ 向前走 $1$ 到 $6$ 步，设新的编号为 $y$，如果 $y$ 落在棋盘外，那么我们就直接跳过。否则，我们需要找到 $y$ 对应的行和列，由于行的编号是从下到上递减的，而列的编号与行的奇偶性有关，因此我们需要进行一些计算得到 $y$ 对应的行和列。</p>
-<p>如果 $y$ 对应的方格上有蛇或梯子，那么我们需要额外走到蛇或梯子的目的地，设其为 $z$。如果 $z$ 没有被访问过，我们就将 $z$ 加入队列和集合中，这样我们就可以继续进行广度优先搜索。</p>
-<p>如果我们最终无法到达终点，那么我们就返回 $-1$。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是棋盘的边长。</p>
+<p>具体地，我们使用一个队列 <span class="arithmatex">\(\textit{q}\)</span> 来存储当前可以到达的方格编号，初始时将编号 <span class="arithmatex">\(1\)</span> 放入队列。同时我们使用一个集合 <span class="arithmatex">\(\textit{vis}\)</span> 来记录已经到达过的方格，避免重复访问，初始时将编号 <span class="arithmatex">\(1\)</span> 加入集合 <span class="arithmatex">\(\textit{vis}\)</span>。</p>
+<p>在每一次的操作中，我们取出队首的方格编号 <span class="arithmatex">\(x\)</span>，如果 <span class="arithmatex">\(x\)</span> 是终点，那么我们就可以返回当前的步数。否则我们将 <span class="arithmatex">\(x\)</span> 向前走 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(6\)</span> 步，设新的编号为 <span class="arithmatex">\(y\)</span>，如果 <span class="arithmatex">\(y\)</span> 落在棋盘外，那么我们就直接跳过。否则，我们需要找到 <span class="arithmatex">\(y\)</span> 对应的行和列，由于行的编号是从下到上递减的，而列的编号与行的奇偶性有关，因此我们需要进行一些计算得到 <span class="arithmatex">\(y\)</span> 对应的行和列。</p>
+<p>如果 <span class="arithmatex">\(y\)</span> 对应的方格上有蛇或梯子，那么我们需要额外走到蛇或梯子的目的地，设其为 <span class="arithmatex">\(z\)</span>。如果 <span class="arithmatex">\(z\)</span> 没有被访问过，我们就将 <span class="arithmatex">\(z\)</span> 加入队列和集合中，这样我们就可以继续进行广度优先搜索。</p>
+<p>如果我们最终无法到达终点，那么我们就返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是棋盘的边长。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91429,11 +91427,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

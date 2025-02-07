@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,19 +90864,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二维前缀和 + 二维差分</h3>
-<p>根据题目描述，每一个空格子都必须被邮票覆盖，而且不能覆盖任何被占据的格子。因此，我们可以遍历二维矩阵，对于每个格子，如果以该格子为左上角的 $stampHeight \times stampWidth$ 的区域内的所有格子都是空格子（即没有被占据），那么我们就可以在该格子处放置一个邮票。</p>
-<p>为了快速判断一个区域内的所有格子是否都是空格子，我们可以使用二维前缀和。我们用 $s_{i,j}$ 表示二维矩阵中从 $(1,1)$ 到 $(i,j)$ 的子矩阵中被占据的格子的数量。即 $s_{i, j} = s_{i - 1, j} + s_{i, j - 1} - s_{i - 1, j - 1} + grid_{i-1, j-1}$。</p>
-<p>那么以 $(i, j)$ 为左上角，且高度和宽度分别为 $stampHeight$ 和 $stampWidth$ 的子矩阵的右下角坐标为 $(x, y) = (i + stampHeight - 1, j + stampWidth - 1)$，我们可以通过 $s_{x, y} - s_{x, j - 1} - s_{i - 1, y} + s_{i - 1, j - 1}$ 来计算出该子矩阵中被占据的格子的数量。如果该子矩阵中被占据的格子的数量为 $0$，那么我们就可以在 $(i, j)$ 处放置一个邮票，放置邮票后，这 $stampHeight \times stampWidth$ 的区域内的所有格子都会变成被占据的格子，我们可以用二维差分数组 $d$ 来记录这一变化。即：</p>
-<p>$$
+<p>根据题目描述，每一个空格子都必须被邮票覆盖，而且不能覆盖任何被占据的格子。因此，我们可以遍历二维矩阵，对于每个格子，如果以该格子为左上角的 <span class="arithmatex">\(stampHeight \times stampWidth\)</span> 的区域内的所有格子都是空格子（即没有被占据），那么我们就可以在该格子处放置一个邮票。</p>
+<p>为了快速判断一个区域内的所有格子是否都是空格子，我们可以使用二维前缀和。我们用 <span class="arithmatex">\(s_{i,j}\)</span> 表示二维矩阵中从 <span class="arithmatex">\((1,1)\)</span> 到 <span class="arithmatex">\((i,j)\)</span> 的子矩阵中被占据的格子的数量。即 <span class="arithmatex">\(s_{i, j} = s_{i - 1, j} + s_{i, j - 1} - s_{i - 1, j - 1} + grid_{i-1, j-1}\)</span>。</p>
+<p>那么以 <span class="arithmatex">\((i, j)\)</span> 为左上角，且高度和宽度分别为 <span class="arithmatex">\(stampHeight\)</span> 和 <span class="arithmatex">\(stampWidth\)</span> 的子矩阵的右下角坐标为 <span class="arithmatex">\((x, y) = (i + stampHeight - 1, j + stampWidth - 1)\)</span>，我们可以通过 <span class="arithmatex">\(s_{x, y} - s_{x, j - 1} - s_{i - 1, y} + s_{i - 1, j - 1}\)</span> 来计算出该子矩阵中被占据的格子的数量。如果该子矩阵中被占据的格子的数量为 <span class="arithmatex">\(0\)</span>，那么我们就可以在 <span class="arithmatex">\((i, j)\)</span> 处放置一个邮票，放置邮票后，这 <span class="arithmatex">\(stampHeight \times stampWidth\)</span> 的区域内的所有格子都会变成被占据的格子，我们可以用二维差分数组 <span class="arithmatex">\(d\)</span> 来记录这一变化。即：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-d_{i, j} &amp;\leftarrow d_{i, j} + 1 \
-d_{i, y + 1} &amp;\leftarrow d_{i, y + 1} - 1 \
-d_{x + 1, j} &amp;\leftarrow d_{x + 1, j} - 1 \
+d_{i, j} &amp;\leftarrow d_{i, j} + 1 \\
+d_{i, y + 1} &amp;\leftarrow d_{i, y + 1} - 1 \\
+d_{x + 1, j} &amp;\leftarrow d_{x + 1, j} - 1 \\
 d_{x + 1, y + 1} &amp;\leftarrow d_{x + 1, y + 1} + 1
 \end{aligned}
-$$</p>
-<p>最后，我们对二维差分数组 $d$ 进行前缀和运算，可以得出每个格子被邮票覆盖的次数。如果某个格子没有被占据，且被邮票覆盖的次数为 $0$，那么我们就无法将邮票放置在该格子处，因此我们需要返回 $\texttt{false}$。如果所有“没被占据的格子”都成功被邮票覆盖，返回 $\texttt{true}$。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是二维矩阵的高度和宽度。</p>
+\]</div>
+<p>最后，我们对二维差分数组 <span class="arithmatex">\(d\)</span> 进行前缀和运算，可以得出每个格子被邮票覆盖的次数。如果某个格子没有被占据，且被邮票覆盖的次数为 <span class="arithmatex">\(0\)</span>，那么我们就无法将邮票放置在该格子处，因此我们需要返回 <span class="arithmatex">\(\texttt{false}\)</span>。如果所有“没被占据的格子”都成功被邮票覆盖，返回 <span class="arithmatex">\(\texttt{true}\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是二维矩阵的高度和宽度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">Kotlin</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91815,11 +91813,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

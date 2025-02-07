@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,10 +90858,10 @@ i = 2：1，2 和 3 是两个数组的前缀公共元素，所以 C[2] = 3 。
 <!-- solution:start -->
 
 <h3 id="_3">方法一：计数</h3>
-<p>我们可以使用两个数组 $cnt1$ 和 $cnt2$ 分别记录数组 $A$ 和 $B$ 中每个元素出现的次数，用数组 $ans$ 记录答案。</p>
-<p>遍历数组 $A$ 和 $B$，将 $A[i]$ 在 $cnt1$ 中出现次数加一，将 $B[i]$ 在 $cnt2$ 中出现次数加一。然后枚举 $j \in [1,n]$，计算 $cnt1$ 和 $cnt2$ 中每个元素 $j$ 出现次数的最小值，累加到 $ans[i]$ 中。</p>
-<p>遍历结束后，返回答案数组 $ans$ 即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $A$ 和 $B$ 的长度。</p>
+<p>我们可以使用两个数组 <span class="arithmatex">\(cnt1\)</span> 和 <span class="arithmatex">\(cnt2\)</span> 分别记录数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 中每个元素出现的次数，用数组 <span class="arithmatex">\(ans\)</span> 记录答案。</p>
+<p>遍历数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span>，将 <span class="arithmatex">\(A[i]\)</span> 在 <span class="arithmatex">\(cnt1\)</span> 中出现次数加一，将 <span class="arithmatex">\(B[i]\)</span> 在 <span class="arithmatex">\(cnt2\)</span> 中出现次数加一。然后枚举 <span class="arithmatex">\(j \in [1,n]\)</span>，计算 <span class="arithmatex">\(cnt1\)</span> 和 <span class="arithmatex">\(cnt2\)</span> 中每个元素 <span class="arithmatex">\(j\)</span> 出现次数的最小值，累加到 <span class="arithmatex">\(ans[i]\)</span> 中。</p>
+<p>遍历结束后，返回答案数组 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91027,11 +91025,11 @@ i = 2：1，2 和 3 是两个数组的前缀公共元素，所以 C[2] = 3 。
 <!-- solution:start -->
 
 <h3 id="_4">方法二：位运算（异或运算）</h3>
-<p>我们可以使用一个长度为 $n+1$ 的数组 $vis$ 记录数组 $A$ 和 $B$ 中每个元素的出现情况，数组 $vis$ 的初始值为 $1$。另外，我们用一个变量 $s$ 记录当前公共元素的个数。</p>
-<p>接下来，我们遍历数组 $A$ 和 $B$，更新 $vis[A[i]] = vis[A[i]] \oplus 1$，并且更新 $vis[B[i]] = vis[B[i]] \oplus 1$，其中 $\oplus$ 表示异或运算。</p>
-<p>如果遍历到当前位置，元素 $A[i]$ 出现过两次（即在数组 $A$ 和 $B$ 中都出现过），那么 $vis[A[i]]$ 的值将为会 $1$，我们将 $s$ 加一。同理，如果元素 $B[i]$ 出现过两次，那么 $vis[B[i]]$ 的值将为会 $1$，我们将 $s$ 加一。然后将 $s$ 的值加入到答案数组 $ans$ 中。</p>
-<p>遍历结束后，返回答案数组 $ans$ 即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $A$ 和 $B$ 的长度。</p>
+<p>我们可以使用一个长度为 <span class="arithmatex">\(n+1\)</span> 的数组 <span class="arithmatex">\(vis\)</span> 记录数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 中每个元素的出现情况，数组 <span class="arithmatex">\(vis\)</span> 的初始值为 <span class="arithmatex">\(1\)</span>。另外，我们用一个变量 <span class="arithmatex">\(s\)</span> 记录当前公共元素的个数。</p>
+<p>接下来，我们遍历数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span>，更新 <span class="arithmatex">\(vis[A[i]] = vis[A[i]] \oplus 1\)</span>，并且更新 <span class="arithmatex">\(vis[B[i]] = vis[B[i]] \oplus 1\)</span>，其中 <span class="arithmatex">\(\oplus\)</span> 表示异或运算。</p>
+<p>如果遍历到当前位置，元素 <span class="arithmatex">\(A[i]\)</span> 出现过两次（即在数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 中都出现过），那么 <span class="arithmatex">\(vis[A[i]]\)</span> 的值将为会 <span class="arithmatex">\(1\)</span>，我们将 <span class="arithmatex">\(s\)</span> 加一。同理，如果元素 <span class="arithmatex">\(B[i]\)</span> 出现过两次，那么 <span class="arithmatex">\(vis[B[i]]\)</span> 的值将为会 <span class="arithmatex">\(1\)</span>，我们将 <span class="arithmatex">\(s\)</span> 加一。然后将 <span class="arithmatex">\(s\)</span> 的值加入到答案数组 <span class="arithmatex">\(ans\)</span> 中。</p>
+<p>遍历结束后，返回答案数组 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91429,11 +91427,9 @@ i = 2：1，2 和 3 是两个数组的前缀公共元素，所以 C[2] = 3 。
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

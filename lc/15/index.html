@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,18 +90857,18 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 
 <h3 id="_3">方法一：排序 + 双指针</h3>
 <p>我们注意到，题目不要求我们按照顺序返回三元组，因此我们不妨先对数组进行排序，这样就可以方便地跳过重复的元素。</p>
-<p>接下来，我们枚举三元组的第一个元素 $nums[i]$，其中 $0 \leq i \lt n - 2$。对于每个 $i$，我们可以通过维护两个指针 $j = i + 1$ 和 $k = n - 1$，从而找到满足 $nums[i] + nums[j] + nums[k] = 0$ 的 $j$ 和 $k$。在枚举的过程中，我们需要跳过重复的元素，以避免出现重复的三元组。</p>
+<p>接下来，我们枚举三元组的第一个元素 <span class="arithmatex">\(nums[i]\)</span>，其中 <span class="arithmatex">\(0 \leq i \lt n - 2\)</span>。对于每个 <span class="arithmatex">\(i\)</span>，我们可以通过维护两个指针 <span class="arithmatex">\(j = i + 1\)</span> 和 <span class="arithmatex">\(k = n - 1\)</span>，从而找到满足 <span class="arithmatex">\(nums[i] + nums[j] + nums[k] = 0\)</span> 的 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(k\)</span>。在枚举的过程中，我们需要跳过重复的元素，以避免出现重复的三元组。</p>
 <p>具体判断逻辑如下：</p>
-<p>如果 $i \gt 0$ 并且 $nums[i] = nums[i - 1]$，则说明当前枚举的元素与上一个元素相同，我们可以直接跳过，因为不会产生新的结果。</p>
-<p>如果 $nums[i] \gt 0$，则说明当前枚举的元素大于 $0$，则三数之和必然无法等于 $0$，结束枚举。</p>
-<p>否则，我们令左指针 $j = i + 1$，右指针 $k = n - 1$，当 $j \lt k$ 时，执行循环，计算三数之和 $x = nums[i] + nums[j] + nums[k]$，并与 $0$ 比较：</p>
+<p>如果 <span class="arithmatex">\(i \gt 0\)</span> 并且 <span class="arithmatex">\(nums[i] = nums[i - 1]\)</span>，则说明当前枚举的元素与上一个元素相同，我们可以直接跳过，因为不会产生新的结果。</p>
+<p>如果 <span class="arithmatex">\(nums[i] \gt 0\)</span>，则说明当前枚举的元素大于 <span class="arithmatex">\(0\)</span>，则三数之和必然无法等于 <span class="arithmatex">\(0\)</span>，结束枚举。</p>
+<p>否则，我们令左指针 <span class="arithmatex">\(j = i + 1\)</span>，右指针 <span class="arithmatex">\(k = n - 1\)</span>，当 <span class="arithmatex">\(j \lt k\)</span> 时，执行循环，计算三数之和 <span class="arithmatex">\(x = nums[i] + nums[j] + nums[k]\)</span>，并与 <span class="arithmatex">\(0\)</span> 比较：</p>
 <ul>
-<li>如果 $x \lt 0$，则说明 $nums[j]$ 太小，我们需要将 $j$ 右移一位。</li>
-<li>如果 $x \gt 0$，则说明 $nums[k]$ 太大，我们需要将 $k$ 左移一位。</li>
-<li>否则，说明我们找到了一个合法的三元组，将其加入答案，并将 $j$ 右移一位，将 $k$ 左移一位，同时跳过所有重复的元素，继续寻找下一个合法的三元组。</li>
+<li>如果 <span class="arithmatex">\(x \lt 0\)</span>，则说明 <span class="arithmatex">\(nums[j]\)</span> 太小，我们需要将 <span class="arithmatex">\(j\)</span> 右移一位。</li>
+<li>如果 <span class="arithmatex">\(x \gt 0\)</span>，则说明 <span class="arithmatex">\(nums[k]\)</span> 太大，我们需要将 <span class="arithmatex">\(k\)</span> 左移一位。</li>
+<li>否则，说明我们找到了一个合法的三元组，将其加入答案，并将 <span class="arithmatex">\(j\)</span> 右移一位，将 <span class="arithmatex">\(k\)</span> 左移一位，同时跳过所有重复的元素，继续寻找下一个合法的三元组。</li>
 </ul>
 <p>枚举结束后，我们即可得到三元组的答案。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(\log n)$。其中 $n$ 为数组的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:10"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><input id="__tabbed_1_10" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label><label for="__tabbed_1_9">Ruby</label><label for="__tabbed_1_10">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91763,11 +91761,9 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

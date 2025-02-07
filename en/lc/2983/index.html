@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86095,22 +86093,22 @@ Now, s is a palindrome. So, answer[0] = true.</pre>
 <!-- solution:start -->
 
 <h3 id="solution-1-prefix-sum-case-discussion">Solution 1: Prefix Sum + Case Discussion</h3>
-<p>Let's denote the length of string $s$ as $n$, then half of the length is $m = \frac{n}{2}$. Next, we divide string $s$ into two equal-length segments, where the second segment is reversed to get string $t$, and the first segment remains as $s$. For each query $[a_i, b_i, c_i, d_i]$, where $c_i$ and $d_i$ need to be transformed to $n - 1 - d_i$ and $n - 1 - c_i$. The problem is transformed into: for each query $[a_i, b_i, c_i, d_i]$, determine whether $s[a_i, b_i]$ and $t[c_i, d_i]$ can be rearranged to make strings $s$ and $t$ equal.</p>
+<p>Let's denote the length of string <span class="arithmatex">\(s\)</span> as <span class="arithmatex">\(n\)</span>, then half of the length is <span class="arithmatex">\(m = \frac{n}{2}\)</span>. Next, we divide string <span class="arithmatex">\(s\)</span> into two equal-length segments, where the second segment is reversed to get string <span class="arithmatex">\(t\)</span>, and the first segment remains as <span class="arithmatex">\(s\)</span>. For each query <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>, where <span class="arithmatex">\(c_i\)</span> and <span class="arithmatex">\(d_i\)</span> need to be transformed to <span class="arithmatex">\(n - 1 - d_i\)</span> and <span class="arithmatex">\(n - 1 - c_i\)</span>. The problem is transformed into: for each query <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>, determine whether <span class="arithmatex">\(s[a_i, b_i]\)</span> and <span class="arithmatex">\(t[c_i, d_i]\)</span> can be rearranged to make strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> equal.</p>
 <p>We preprocess the following information:</p>
 <ol>
-<li>The prefix sum array $pre_1$ of string $s$, where $pre_1[i][j]$ represents the quantity of character $j$ in the first $i$ characters of string $s$;</li>
-<li>The prefix sum array $pre_2$ of string $t$, where $pre_2[i][j]$ represents the quantity of character $j$ in the first $i$ characters of string $t$;</li>
-<li>The difference array $diff$ of strings $s$ and $t$, where $diff[i]$ represents the quantity of different characters in the first $i$ characters of strings $s$ and $t$.</li>
+<li>The prefix sum array <span class="arithmatex">\(pre_1\)</span> of string <span class="arithmatex">\(s\)</span>, where <span class="arithmatex">\(pre_1[i][j]\)</span> represents the quantity of character <span class="arithmatex">\(j\)</span> in the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s\)</span>;</li>
+<li>The prefix sum array <span class="arithmatex">\(pre_2\)</span> of string <span class="arithmatex">\(t\)</span>, where <span class="arithmatex">\(pre_2[i][j]\)</span> represents the quantity of character <span class="arithmatex">\(j\)</span> in the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(t\)</span>;</li>
+<li>The difference array <span class="arithmatex">\(diff\)</span> of strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span>, where <span class="arithmatex">\(diff[i]\)</span> represents the quantity of different characters in the first <span class="arithmatex">\(i\)</span> characters of strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span>.</li>
 </ol>
-<p>For each query $[a_i, b_i, c_i, d_i]$, let's assume $a_i \le c_i$, then we need to discuss the following cases:</p>
+<p>For each query <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>, let's assume <span class="arithmatex">\(a_i \le c_i\)</span>, then we need to discuss the following cases:</p>
 <ol>
-<li>The prefix substrings $s[..a_i-1]$ and $t[..a_i-1]$ of strings $s$ and $t$ must be equal, and the suffix substrings $s[\max(b_i, d_i)+1..]$ and $t[\max(b_i, d_i)..]$ must also be equal, otherwise, it is impossible to rearrange to make strings $s$ and $t$ equal;</li>
-<li>If $d_i \le b_i$, it means the interval $[a_i, b_i]$ contains the interval $[c_i, d_i]$. If the substrings $s[a_i, b_i]$ and $t[a_i, b_i]$ contain the same quantity of characters, then it is possible to rearrange to make strings $s$ and $t$ equal, otherwise, it is impossible;</li>
-<li>If $b_i &lt; c_i$, it means the intervals $[a_i, b_i]$ and $[c_i, d_i]$ do not intersect. Then the substrings $s[b_i+1, c_i-1]$ and $t[b_i+1, c_i-1]$ must be equal, and the substrings $s[a_i, b_i]$ and $t[a_i, b_i]$ must be equal, and the substrings $s[c_i, d_i]$ and $t[c_i, d_i]$ must be equal, otherwise, it is impossible to rearrange to make strings $s$ and $t$ equal.</li>
-<li>If $c_i \le b_i &lt; d_i$, it means the intervals $[a_i, b_i]$ and $[c_i, d_i]$ intersect. Then the characters contained in $s[a_i, b_i]$, minus the characters contained in $t[a_i, c_i-1]$, must be equal to the characters contained in $t[c_i, d_i]$, minus the characters contained in $s[b_i+1, d_i]$, otherwise, it is impossible to rearrange to make strings $s$ and $t$ equal.</li>
+<li>The prefix substrings <span class="arithmatex">\(s[..a_i-1]\)</span> and <span class="arithmatex">\(t[..a_i-1]\)</span> of strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> must be equal, and the suffix substrings <span class="arithmatex">\(s[\max(b_i, d_i)+1..]\)</span> and <span class="arithmatex">\(t[\max(b_i, d_i)..]\)</span> must also be equal, otherwise, it is impossible to rearrange to make strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> equal;</li>
+<li>If <span class="arithmatex">\(d_i \le b_i\)</span>, it means the interval <span class="arithmatex">\([a_i, b_i]\)</span> contains the interval <span class="arithmatex">\([c_i, d_i]\)</span>. If the substrings <span class="arithmatex">\(s[a_i, b_i]\)</span> and <span class="arithmatex">\(t[a_i, b_i]\)</span> contain the same quantity of characters, then it is possible to rearrange to make strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> equal, otherwise, it is impossible;</li>
+<li>If <span class="arithmatex">\(b_i &lt; c_i\)</span>, it means the intervals <span class="arithmatex">\([a_i, b_i]\)</span> and <span class="arithmatex">\([c_i, d_i]\)</span> do not intersect. Then the substrings <span class="arithmatex">\(s[b_i+1, c_i-1]\)</span> and <span class="arithmatex">\(t[b_i+1, c_i-1]\)</span> must be equal, and the substrings <span class="arithmatex">\(s[a_i, b_i]\)</span> and <span class="arithmatex">\(t[a_i, b_i]\)</span> must be equal, and the substrings <span class="arithmatex">\(s[c_i, d_i]\)</span> and <span class="arithmatex">\(t[c_i, d_i]\)</span> must be equal, otherwise, it is impossible to rearrange to make strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> equal.</li>
+<li>If <span class="arithmatex">\(c_i \le b_i &lt; d_i\)</span>, it means the intervals <span class="arithmatex">\([a_i, b_i]\)</span> and <span class="arithmatex">\([c_i, d_i]\)</span> intersect. Then the characters contained in <span class="arithmatex">\(s[a_i, b_i]\)</span>, minus the characters contained in <span class="arithmatex">\(t[a_i, c_i-1]\)</span>, must be equal to the characters contained in <span class="arithmatex">\(t[c_i, d_i]\)</span>, minus the characters contained in <span class="arithmatex">\(s[b_i+1, d_i]\)</span>, otherwise, it is impossible to rearrange to make strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> equal.</li>
 </ol>
-<p>Based on the above analysis, we iterate through each query $[a_i, b_i, c_i, d_i]$, and determine whether it satisfies the above conditions.</p>
-<p>The time complexity is $O((n + q) \times |\Sigma|)$, and the space complexity is $O(n \times |\Sigma|)$. Where $n$ and $q$ are the lengths of string $s$ and the query array $queries$ respectively; and $|\Sigma|$ is the size of the character set. In this problem, the character set is lowercase English letters, so $|\Sigma| = 26$.</p>
+<p>Based on the above analysis, we iterate through each query <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>, and determine whether it satisfies the above conditions.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + q) \times |\Sigma|)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times |\Sigma|)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(q\)</span> are the lengths of string <span class="arithmatex">\(s\)</span> and the query array <span class="arithmatex">\(queries\)</span> respectively; and <span class="arithmatex">\(|\Sigma|\)</span> is the size of the character set. In this problem, the character set is lowercase English letters, so <span class="arithmatex">\(|\Sigma| = 26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87049,11 +87047,9 @@ Now, s is a palindrome. So, answer[0] = true.</pre>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

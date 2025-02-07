@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,10 +90864,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：离线查询 + 并查集</h3>
-<p>根据题目要求，我们需要对每个查询 $queries[i]$ 进行判断，即判断当前查询的两个点 $a$ 和 $b$ 之间是否存在一条边权小于等于 $limit$ 的路径。</p>
-<p>判断两点是否连通可以通过并查集来实现。另外，由于查询的顺序对结果没有影响，因此我们可以先将所有查询按照 $limit$ 从小到大排序，所有边也按照边权从小到大排序。</p>
-<p>然后对于每个查询，我们从边权最小的边开始，将边权严格小于 $limit$ 的所有边加入并查集，接着利用并查集的查询操作判断两点是否连通即可。</p>
-<p>时间复杂度 $O(m \times \log m + q \times \log q)$，其中 $m$ 和 $q$ 分别为边数和查询数。</p>
+<p>根据题目要求，我们需要对每个查询 <span class="arithmatex">\(queries[i]\)</span> 进行判断，即判断当前查询的两个点 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 之间是否存在一条边权小于等于 <span class="arithmatex">\(limit\)</span> 的路径。</p>
+<p>判断两点是否连通可以通过并查集来实现。另外，由于查询的顺序对结果没有影响，因此我们可以先将所有查询按照 <span class="arithmatex">\(limit\)</span> 从小到大排序，所有边也按照边权从小到大排序。</p>
+<p>然后对于每个查询，我们从边权最小的边开始，将边权严格小于 <span class="arithmatex">\(limit\)</span> 的所有边加入并查集，接着利用并查集的查询操作判断两点是否连通即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times \log m + q \times \log q)\)</span>，其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(q\)</span> 分别为边数和查询数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91263,17 +91261,17 @@
 <p>附并查集相关介绍以及常用模板：</p>
 <p>并查集是一种树形的数据结构，顾名思义，它用于处理一些不交集的<strong>合并</strong>及<strong>查询</strong>问题。 它支持两种操作：</p>
 <ol>
-<li>查找（Find）：确定某个元素处于哪个子集，单次操作时间复杂度 $O(\alpha(n))$</li>
-<li>合并（Union）：将两个子集合并成一个集合，单次操作时间复杂度 $O(\alpha(n))$</li>
+<li>查找（Find）：确定某个元素处于哪个子集，单次操作时间复杂度 <span class="arithmatex">\(O(\alpha(n))\)</span></li>
+<li>合并（Union）：将两个子集合并成一个集合，单次操作时间复杂度 <span class="arithmatex">\(O(\alpha(n))\)</span></li>
 </ol>
-<p>其中 $\alpha$ 为阿克曼函数的反函数，其增长极其缓慢，也就是说其单次操作的平均运行时间可以认为是一个很小的常数。</p>
+<p>其中 <span class="arithmatex">\(\alpha\)</span> 为阿克曼函数的反函数，其增长极其缓慢，也就是说其单次操作的平均运行时间可以认为是一个很小的常数。</p>
 <p>以下是并查集的常用模板，需要熟练掌握。其中：</p>
 <ul>
 <li><code>n</code> 表示节点数</li>
 <li><code>p</code> 存储每个点的父节点，初始时每个点的父节点都是自己</li>
 <li><code>size</code> 只有当节点是祖宗节点时才有意义，表示祖宗节点所在集合中，点的数量</li>
-<li><code>find(x)</code> 函数用于查找 $x$ 所在集合的祖宗节点</li>
-<li><code>union(a, b)</code> 函数用于合并 $a$ 和 $b$ 所在的集合</li>
+<li><code>find(x)</code> 函数用于查找 <span class="arithmatex">\(x\)</span> 所在集合的祖宗节点</li>
+<li><code>union(a, b)</code> 函数用于合并 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 所在的集合</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
@@ -91686,11 +91684,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

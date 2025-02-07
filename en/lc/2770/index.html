@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86065,15 +86063,15 @@ It can be proven that there is no other jumping sequence that goes from 0 to n -
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization">Solution 1: Memoization</h3>
-<p>For each position $i$, we consider to jump to position $j$ which satisfies $|nums[i] - nums[j]| \leq target$. Then we can jump from $i$ to $j$, and continue to jump from $j$ to the end.</p>
-<p>Therefore, we design a function $dfs(i)$, which represents the maximum number of jumps needed to jump to the end index starting from position $i$. Then the answer is $dfs(0)$.</p>
-<p>The calculation process of function $dfs(i)$ is as follows:</p>
+<p>For each position <span class="arithmatex">\(i\)</span>, we consider to jump to position <span class="arithmatex">\(j\)</span> which satisfies <span class="arithmatex">\(|nums[i] - nums[j]| \leq target\)</span>. Then we can jump from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span>, and continue to jump from <span class="arithmatex">\(j\)</span> to the end.</p>
+<p>Therefore, we design a function <span class="arithmatex">\(dfs(i)\)</span>, which represents the maximum number of jumps needed to jump to the end index starting from position <span class="arithmatex">\(i\)</span>. Then the answer is <span class="arithmatex">\(dfs(0)\)</span>.</p>
+<p>The calculation process of function <span class="arithmatex">\(dfs(i)\)</span> is as follows:</p>
 <ul>
-<li>If $i = n - 1$, then we have reached the end index and no jumps are required, so return $0$;</li>
-<li>Otherwise, we need to enumerate the positions $j$ that can be jumped from position $i$, and calculate the maximum number of jumps needed to jump to the end index starting from $j$, then $dfs(i)$ is equal to the maximum value of all $dfs(j)$ plus $1$. If there is no position $j$ that can be jumped from $i$, then $dfs(i) = -\infty$.</li>
+<li>If <span class="arithmatex">\(i = n - 1\)</span>, then we have reached the end index and no jumps are required, so return <span class="arithmatex">\(0\)</span>;</li>
+<li>Otherwise, we need to enumerate the positions <span class="arithmatex">\(j\)</span> that can be jumped from position <span class="arithmatex">\(i\)</span>, and calculate the maximum number of jumps needed to jump to the end index starting from <span class="arithmatex">\(j\)</span>, then <span class="arithmatex">\(dfs(i)\)</span> is equal to the maximum value of all <span class="arithmatex">\(dfs(j)\)</span> plus <span class="arithmatex">\(1\)</span>. If there is no position <span class="arithmatex">\(j\)</span> that can be jumped from <span class="arithmatex">\(i\)</span>, then <span class="arithmatex">\(dfs(i) = -\infty\)</span>.</li>
 </ul>
 <p>To avoid duplicate calculations, we can use memoization.</p>
-<p>Time complexity $O(n^2)$, space complexity $O(n)$. where $n$ is the length of array.</p>
+<p>Time complexity <span class="arithmatex">\(O(n^2)\)</span>, space complexity <span class="arithmatex">\(O(n)\)</span>. where <span class="arithmatex">\(n\)</span> is the length of array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86571,11 +86569,9 @@ It can be proven that there is no other jumping sequence that goes from 0 to n -
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

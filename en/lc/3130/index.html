@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86077,13 +86075,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $dfs(i, j, k)$ to represent the number of stable binary arrays that satisfy the problem conditions when there are $i$ $0$s and $j$ $1$s left, and the next number to be filled is $k$. The answer is $dfs(zero, one, 0) + dfs(zero, one, 1)$.</p>
-<p>The calculation process of the function $dfs(i, j, k)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j, k)\)</span> to represent the number of stable binary arrays that satisfy the problem conditions when there are <span class="arithmatex">\(i\)</span> <span class="arithmatex">\(0\)</span>s and <span class="arithmatex">\(j\)</span> <span class="arithmatex">\(1\)</span>s left, and the next number to be filled is <span class="arithmatex">\(k\)</span>. The answer is <span class="arithmatex">\(dfs(zero, one, 0) + dfs(zero, one, 1)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, j, k)\)</span> is as follows:</p>
 <ul>
-<li>If $i &lt; 0$ or $j &lt; 0$, return $0$.</li>
-<li>If $i = 0$, return $1$ when $k = 1$ and $j \leq \textit{limit}$, otherwise return $0$.</li>
-<li>If $j = 0$, return $1$ when $k = 0$ and $i \leq \textit{limit}$, otherwise return $0$.</li>
-<li>If $k = 0$, we consider the case where the previous number is $0$, $dfs(i - 1, j, 0)$, and the case where the previous number is $1$, $dfs(i - 1, j, 1)$. If the previous number is $0$, it may cause more than $\textit{limit}$ $0$s in the subarray, i.e., the situation where the $\textit{limit} + 1$</li>
+<li>If <span class="arithmatex">\(i &lt; 0\)</span> or <span class="arithmatex">\(j &lt; 0\)</span>, return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(i = 0\)</span>, return <span class="arithmatex">\(1\)</span> when <span class="arithmatex">\(k = 1\)</span> and <span class="arithmatex">\(j \leq \textit{limit}\)</span>, otherwise return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(j = 0\)</span>, return <span class="arithmatex">\(1\)</span> when <span class="arithmatex">\(k = 0\)</span> and <span class="arithmatex">\(i \leq \textit{limit}\)</span>, otherwise return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(k = 0\)</span>, we consider the case where the previous number is <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(dfs(i - 1, j, 0)\)</span>, and the case where the previous number is <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(dfs(i - 1, j, 1)\)</span>. If the previous number is <span class="arithmatex">\(0\)</span>, it may cause more than <span class="arithmatex">\(\textit{limit}\)</span> <span class="arithmatex">\(0\)</span>s in the subarray, i.e., the situation where the <span class="arithmatex">\(\textit{limit} + 1\)</span></li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
@@ -86357,14 +86355,14 @@
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can also convert the memoization search of Solution 1 into dynamic programming.</p>
-<p>We define $f[i][j][k]$ as the number of stable binary arrays using $i$ $0$s and $j$ $1$s, and the last number is $k$. So the answer is $f[zero][one][0] + f[zero][one][1]$.</p>
-<p>Initially, we have $f[i][0][0] = 1$, where $1 \leq i \leq \min(\textit{limit}, \textit{zero})$; and $f[0][j][1] = 1$, where $1 \leq j \leq \min(\textit{limit}, \textit{one})$.</p>
+<p>We define <span class="arithmatex">\(f[i][j][k]\)</span> as the number of stable binary arrays using <span class="arithmatex">\(i\)</span> <span class="arithmatex">\(0\)</span>s and <span class="arithmatex">\(j\)</span> <span class="arithmatex">\(1\)</span>s, and the last number is <span class="arithmatex">\(k\)</span>. So the answer is <span class="arithmatex">\(f[zero][one][0] + f[zero][one][1]\)</span>.</p>
+<p>Initially, we have <span class="arithmatex">\(f[i][0][0] = 1\)</span>, where <span class="arithmatex">\(1 \leq i \leq \min(\textit{limit}, \textit{zero})\)</span>; and <span class="arithmatex">\(f[0][j][1] = 1\)</span>, where <span class="arithmatex">\(1 \leq j \leq \min(\textit{limit}, \textit{one})\)</span>.</p>
 <p>The state transition equation is as follows:</p>
 <ul>
-<li>$f[i][j][0] = f[i - 1][j][0] + f[i - 1][j][1] - f[i - \textit{limit} - 1][j][1]$.</li>
-<li>$f[i][j][1] = f[i][j - 1][0] + f[i][j - 1][1] - f[i][j - \textit{limit} - 1][0]$.</li>
+<li><span class="arithmatex">\(f[i][j][0] = f[i - 1][j][0] + f[i - 1][j][1] - f[i - \textit{limit} - 1][j][1]\)</span>.</li>
+<li><span class="arithmatex">\(f[i][j][1] = f[i][j - 1][0] + f[i][j - 1][1] - f[i][j - \textit{limit} - 1][0]\)</span>.</li>
 </ul>
-<p>The time complexity is $O(zero \times one)$, and the space complexity is $O(zero \times one)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(zero \times one)\)</span>, and the space complexity is <span class="arithmatex">\(O(zero \times one)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86828,11 +86826,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

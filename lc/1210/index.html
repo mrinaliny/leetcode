@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90869,17 +90867,17 @@
 <!-- solution:start -->
 
 <h3 id="bfs">方法一：BFS</h3>
-<p>题目求的是蛇从起始位置到达目标位置的最少移动次数，我们考虑使用广度优先搜索 $BFS$ 来求解。</p>
+<p>题目求的是蛇从起始位置到达目标位置的最少移动次数，我们考虑使用广度优先搜索 <span class="arithmatex">\(BFS\)</span> 来求解。</p>
 <p>我们定义以下数据结构或变量：</p>
 <ul>
-<li>队列 $q$：存储蛇的当前位置，每个位置是一个二元组 $(a, b)$，其中 $a$ 表示蛇的尾部位置，而 $b$ 表示蛇的头部位置。初始时，我们将位置 $(0, 1)$ 加入队列 $q$ 中。如果我们将二维迷宫扁平化成一个一维数组，那么位置 $(0, 1)$ 就表示一维数组下标为 $0$ 和 $1$ 的两个单元格。</li>
-<li>目标位置 $target$：值固定为 $(n^2 - 2, n^2 - 1)$，即二维迷宫的最后一行的最后两个单元格。</li>
-<li>数组或集合 $vis$：存储蛇的当前位置状态是否已经被访问过，每个状态是一个二元组 $(a, status)$，其中 $a$ 表示蛇的尾部位置；而 $status$ 表示蛇当前所处的状态，取值为 $0$ 或 $1$，分别表示蛇的水平状态和垂直状态。初始时将起始位置 $(0, 1)$ 的状态加入集合 $vis$ 中。</li>
-<li>答案变量 $ans$：存储蛇从起始位置到达目标位置的移动次数，初始时为 $0$。</li>
+<li>队列 <span class="arithmatex">\(q\)</span>：存储蛇的当前位置，每个位置是一个二元组 <span class="arithmatex">\((a, b)\)</span>，其中 <span class="arithmatex">\(a\)</span> 表示蛇的尾部位置，而 <span class="arithmatex">\(b\)</span> 表示蛇的头部位置。初始时，我们将位置 <span class="arithmatex">\((0, 1)\)</span> 加入队列 <span class="arithmatex">\(q\)</span> 中。如果我们将二维迷宫扁平化成一个一维数组，那么位置 <span class="arithmatex">\((0, 1)\)</span> 就表示一维数组下标为 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的两个单元格。</li>
+<li>目标位置 <span class="arithmatex">\(target\)</span>：值固定为 <span class="arithmatex">\((n^2 - 2, n^2 - 1)\)</span>，即二维迷宫的最后一行的最后两个单元格。</li>
+<li>数组或集合 <span class="arithmatex">\(vis\)</span>：存储蛇的当前位置状态是否已经被访问过，每个状态是一个二元组 <span class="arithmatex">\((a, status)\)</span>，其中 <span class="arithmatex">\(a\)</span> 表示蛇的尾部位置；而 <span class="arithmatex">\(status\)</span> 表示蛇当前所处的状态，取值为 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>，分别表示蛇的水平状态和垂直状态。初始时将起始位置 <span class="arithmatex">\((0, 1)\)</span> 的状态加入集合 <span class="arithmatex">\(vis\)</span> 中。</li>
+<li>答案变量 <span class="arithmatex">\(ans\)</span>：存储蛇从起始位置到达目标位置的移动次数，初始时为 <span class="arithmatex">\(0\)</span>。</li>
 </ul>
-<p>我们使用广度优先搜索来求解，每次从队列 $q$ 中取出一个位置，判断该位置是否为目标位置 $target$，如果是，则直接返回答案变量 $ans$。如果不是，则将该位置的下一个可能的位置加入队列 $q$ 中，并将该位置加入 $vis$ 中。注意，这里的下一个位置可能是蛇的水平状态或垂直状态，我们需要分别判断（具体见以下代码注释）。在每一轮搜索结束后，答案变量 $ans$ 自增 $1$。</p>
-<p>最后，如果队列 $q$ 为空，说明无法从起始位置到达目标位置，返回 $-1$。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是二维迷宫的行数或列数。</p>
+<p>我们使用广度优先搜索来求解，每次从队列 <span class="arithmatex">\(q\)</span> 中取出一个位置，判断该位置是否为目标位置 <span class="arithmatex">\(target\)</span>，如果是，则直接返回答案变量 <span class="arithmatex">\(ans\)</span>。如果不是，则将该位置的下一个可能的位置加入队列 <span class="arithmatex">\(q\)</span> 中，并将该位置加入 <span class="arithmatex">\(vis\)</span> 中。注意，这里的下一个位置可能是蛇的水平状态或垂直状态，我们需要分别判断（具体见以下代码注释）。在每一轮搜索结束后，答案变量 <span class="arithmatex">\(ans\)</span> 自增 <span class="arithmatex">\(1\)</span>。</p>
+<p>最后，如果队列 <span class="arithmatex">\(q\)</span> 为空，说明无法从起始位置到达目标位置，返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是二维迷宫的行数或列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91690,11 +91688,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

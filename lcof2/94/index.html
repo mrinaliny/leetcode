@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90833,14 +90831,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们先预处理得到字符串 $s$ 的每一个子串 $s[i..j]$ 是否为回文串，记录在二维数组 $g[i][j]$ 中，其中 $g[i][j]$ 表示子串 $s[i..j]$ 是否为回文串。</p>
-<p>接下来，我们定义 $f[i]$ 表示字符串 $s[0..i-1]$ 的最少分割次数，初始时 $f[i]=i$。</p>
-<p>接下来，我们考虑 $f[i]$ 如何进行状态转移。我们可以枚举上一个分割点 $j$，如果子串 $s[j..i]$ 是一个回文串，那么 $f[i]$ 就可以从 $f[j]$ 转移而来。如果 $j=0$，那么说明 $s[0..i]$ 本身就是一个回文串，此时不需要进行分割，即 $f[i]=0$。因此，状态转移方程如下：</p>
-<p>$$
-f[i]=\min_{0\leq j \leq i}\begin{cases} f[j-1]+1, &amp; \textit{if} g[j][i]=\textit{True} \ 0, &amp; \textit{if} g[0][i]=\textit{True} \end{cases}
-$$</p>
-<p>答案即为 $f[n]$，其中 $n$ 是字符串 $s$ 的长度。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是字符串 $s$ 的长度。</p>
+<p>我们先预处理得到字符串 <span class="arithmatex">\(s\)</span> 的每一个子串 <span class="arithmatex">\(s[i..j]\)</span> 是否为回文串，记录在二维数组 <span class="arithmatex">\(g[i][j]\)</span> 中，其中 <span class="arithmatex">\(g[i][j]\)</span> 表示子串 <span class="arithmatex">\(s[i..j]\)</span> 是否为回文串。</p>
+<p>接下来，我们定义 <span class="arithmatex">\(f[i]\)</span> 表示字符串 <span class="arithmatex">\(s[0..i-1]\)</span> 的最少分割次数，初始时 <span class="arithmatex">\(f[i]=i\)</span>。</p>
+<p>接下来，我们考虑 <span class="arithmatex">\(f[i]\)</span> 如何进行状态转移。我们可以枚举上一个分割点 <span class="arithmatex">\(j\)</span>，如果子串 <span class="arithmatex">\(s[j..i]\)</span> 是一个回文串，那么 <span class="arithmatex">\(f[i]\)</span> 就可以从 <span class="arithmatex">\(f[j]\)</span> 转移而来。如果 <span class="arithmatex">\(j=0\)</span>，那么说明 <span class="arithmatex">\(s[0..i]\)</span> 本身就是一个回文串，此时不需要进行分割，即 <span class="arithmatex">\(f[i]=0\)</span>。因此，状态转移方程如下：</p>
+<div class="arithmatex">\[
+f[i]=\min_{0\leq j \leq i}\begin{cases} f[j-1]+1, &amp; \textit{if}\ g[j][i]=\textit{True} \\ 0, &amp; \textit{if}\ g[0][i]=\textit{True} \end{cases}
+\]</div>
+<p>答案即为 <span class="arithmatex">\(f[n]\)</span>，其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label><label for="__tabbed_1_7">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91434,11 +91432,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

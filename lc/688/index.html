@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90841,15 +90839,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[h][i][j]$ 表示骑士从 $(i, j)$ 位置出发，走了 $h$ 步以后还留在棋盘上的概率。那么最终答案就是 $f[k][\textit{row}][\textit{column}]$。</p>
-<p>当 $h=0$ 时，骑士一定在棋盘上，概率为 $1$，即 $f[0][i][j]=1$。</p>
-<p>当 $h \gt 0$ 时，骑士在 $(i, j)$ 位置上的概率可以由其上一步的 $8$ 个位置上的概率转移得到，即：</p>
-<p>$$
+<p>我们定义 <span class="arithmatex">\(f[h][i][j]\)</span> 表示骑士从 <span class="arithmatex">\((i, j)\)</span> 位置出发，走了 <span class="arithmatex">\(h\)</span> 步以后还留在棋盘上的概率。那么最终答案就是 <span class="arithmatex">\(f[k][\textit{row}][\textit{column}]\)</span>。</p>
+<p>当 <span class="arithmatex">\(h=0\)</span> 时，骑士一定在棋盘上，概率为 <span class="arithmatex">\(1\)</span>，即 <span class="arithmatex">\(f[0][i][j]=1\)</span>。</p>
+<p>当 <span class="arithmatex">\(h \gt 0\)</span> 时，骑士在 <span class="arithmatex">\((i, j)\)</span> 位置上的概率可以由其上一步的 <span class="arithmatex">\(8\)</span> 个位置上的概率转移得到，即：</p>
+<div class="arithmatex">\[
 f[h][i][j] = \sum_{x, y} f[h - 1][x][y] \times \frac{1}{8}
-$$</p>
-<p>其中 $(x, y)$ 是从 $(i, j)$ 位置可以走到的 $8$ 个位置中的一个。</p>
-<p>最终答案即为 $f[k][\textit{row}][\textit{column}]$。</p>
-<p>时间复杂度 $O(k \times n^2)$，空间复杂度 $O(k \times n^2)$。其中 $k$ 和 $n$ 分别是给定的步数和棋盘大小。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\((x, y)\)</span> 是从 <span class="arithmatex">\((i, j)\)</span> 位置可以走到的 <span class="arithmatex">\(8\)</span> 个位置中的一个。</p>
+<p>最终答案即为 <span class="arithmatex">\(f[k][\textit{row}][\textit{column}]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(k \times n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(k \times n^2)\)</span>。其中 <span class="arithmatex">\(k\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是给定的步数和棋盘大小。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91410,11 +91408,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

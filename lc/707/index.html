@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,13 +90864,13 @@ myLinkedList.get(1);              // 返回 3
 <p>我们创建链表虚拟头节点 <code>dummy</code>，用变量 <code>cnt</code> 记录当前链表节点个数。</p>
 <p>具体的方法如下：</p>
 <ul>
-<li><code>get(index)</code>：遍历链表，找到第 <code>index</code> 个节点，返回其值，如果不存在，返回 $-1$。时间复杂度 $O(n)$。</li>
-<li><code>addAtHead(val)</code>：创建新节点，将其插入到虚拟头节点后面。时间复杂度 $O(1)$。</li>
-<li><code>addAtTail(val)</code>：创建新节点，将其插入到链表尾部。时间复杂度 $O(n)$。</li>
-<li><code>addAtIndex(index, val)</code>：如果 <code>index</code> 等于链表长度，则该节点将附加到链表的末尾。如果 <code>index</code> 大于链表长度，则不会插入节点。如果 <code>index</code> 小于 $0$，则在头部插入节点。否则，遍历链表，找到第 <code>index</code> 个节点的前一个节点，将新节点插入到该节点后面。时间复杂度 $O(n)$。</li>
-<li><code>deleteAtIndex(index)</code>：如果索引 <code>index</code> 有效，则删除链表中的第 <code>index</code> 个节点。否则，不做任何操作。时间复杂度 $O(n)$。</li>
+<li><code>get(index)</code>：遍历链表，找到第 <code>index</code> 个节点，返回其值，如果不存在，返回 <span class="arithmatex">\(-1\)</span>。时间复杂度 <span class="arithmatex">\(O(n)\)</span>。</li>
+<li><code>addAtHead(val)</code>：创建新节点，将其插入到虚拟头节点后面。时间复杂度 <span class="arithmatex">\(O(1)\)</span>。</li>
+<li><code>addAtTail(val)</code>：创建新节点，将其插入到链表尾部。时间复杂度 <span class="arithmatex">\(O(n)\)</span>。</li>
+<li><code>addAtIndex(index, val)</code>：如果 <code>index</code> 等于链表长度，则该节点将附加到链表的末尾。如果 <code>index</code> 大于链表长度，则不会插入节点。如果 <code>index</code> 小于 <span class="arithmatex">\(0\)</span>，则在头部插入节点。否则，遍历链表，找到第 <code>index</code> 个节点的前一个节点，将新节点插入到该节点后面。时间复杂度 <span class="arithmatex">\(O(n)\)</span>。</li>
+<li><code>deleteAtIndex(index)</code>：如果索引 <code>index</code> 有效，则删除链表中的第 <code>index</code> 个节点。否则，不做任何操作。时间复杂度 <span class="arithmatex">\(O(n)\)</span>。</li>
 </ul>
-<p>时间复杂度见具体的方法说明。其中 $n$ 为链表长度。</p>
+<p>时间复杂度见具体的方法说明。其中 <span class="arithmatex">\(n\)</span> 为链表长度。</p>
 <p>注意：LeetCode 平台已经内置 ListNode 单链表节点类，可以直接使用。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
@@ -91735,15 +91733,15 @@ myLinkedList.get(1);              // 返回 3
 <!-- solution:start -->
 
 <h3 id="_4">方法二：静态数组实现单链表</h3>
-<p>在方法一中，我们使用了指针引用的方式，每次动态创建一个链表节点。在链表节点数量达到 $10^5$ 甚至更大时，频繁执行 new 操作，会大大增加程序的执行耗时。</p>
+<p>在方法一中，我们使用了指针引用的方式，每次动态创建一个链表节点。在链表节点数量达到 <span class="arithmatex">\(10^5\)</span> 甚至更大时，频繁执行 new 操作，会大大增加程序的执行耗时。</p>
 <p>因此，我们可以使用静态数组来实现单链表，预先申请一块大小略大于数据范围的内存空间，每次插入节点时，从数组中取出一个空闲的位置，将新节点插入到该位置，同时更新该位置的前驱和后继节点的指针引用。</p>
 <p>我们定义以下几个变量，其中：</p>
 <ul>
-<li><code>head</code> 存放链表头节点的索引，初始时指向 $-1$。</li>
+<li><code>head</code> 存放链表头节点的索引，初始时指向 <span class="arithmatex">\(-1\)</span>。</li>
 <li><code>e</code> 存放链表所有节点的值（预先申请）。</li>
 <li><code>ne</code> 存放链表所有节点的 <code>next</code> 指针（预先申请）。</li>
-<li><code>idx</code> 指向当前可分配的节点索引，初始时指向索引 $0$。</li>
-<li><code>cnt</code> 记录当前链表节点个数，初始时为 $0$。</li>
+<li><code>idx</code> 指向当前可分配的节点索引，初始时指向索引 <span class="arithmatex">\(0\)</span>。</li>
+<li><code>cnt</code> 记录当前链表节点个数，初始时为 <span class="arithmatex">\(0\)</span>。</li>
 </ul>
 <p>具体操作可参考以下代码。时间复杂度与方法一相同。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
@@ -92742,11 +92740,9 @@ myLinkedList.get(1);              // 返回 3
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

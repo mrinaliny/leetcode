@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86093,7 +86091,7 @@
 <li>When the mouse is in the hole, the mouse wins. This is a must-win state for the mouse and a must-lose state for the cat.</li>
 </ul>
 <p>To get the game result of the initial state, we need to traverse all states starting from the boundary state. Each state includes the position of the mouse, the position of the cat, and the mover. Based on the current state, we can get all possible states of the previous round. The mover of the previous round is opposite to the mover of the current state, and the position of the mover of the previous round is different from the position of the current state.</p>
-<p>We use the tuple $(m, c, t)$ to represent the state of this round, and $(pm, pc, pt)$ to represent the possible state of the previous round. Then, all possible states of the previous round are:</p>
+<p>We use the tuple <span class="arithmatex">\((m, c, t)\)</span> to represent the state of this round, and <span class="arithmatex">\((pm, pc, pt)\)</span> to represent the possible state of the previous round. Then, all possible states of the previous round are:</p>
 <ul>
 <li>If the mover of this round is the mouse, then the mover of the previous round is the cat, the position of the mouse in the previous round is the position of the mouse in this round, and the position of the cat in the previous round is all adjacent points of the position of the cat in this round.</li>
 <li>If the mover of this round is the cat, then the mover of the previous round is the mouse, the position of the cat in the previous round is the position of the cat in this round, and the position of the mouse in the previous round is all adjacent points of the position of the mouse in this round.</li>
@@ -86103,9 +86101,9 @@
 <li>If the mover of the previous round is the same as the winner of this round, then the mover of the previous round can reach the current state and win, directly update the state of the previous round to the winner of this round.</li>
 <li>If the mover of the previous round is different from the winner of this round, and all states that the mover of the previous round can reach are the must-lose states for the mover of the previous round, then we update the state of the previous round to the winner of this round.</li>
 </ol>
-<p>For the second update logic, we need to record the degree of each state. Initially, the degree of each state represents the number of nodes that the mover of the state can move to, that is, the number of adjacent nodes of the node where the mover is located. If the mover is the cat and the node where it is located is adjacent to the hole, the degree of the state needs to be reduced by $1$.</p>
+<p>For the second update logic, we need to record the degree of each state. Initially, the degree of each state represents the number of nodes that the mover of the state can move to, that is, the number of adjacent nodes of the node where the mover is located. If the mover is the cat and the node where it is located is adjacent to the hole, the degree of the state needs to be reduced by <span class="arithmatex">\(1\)</span>.</p>
 <p>When the results of all states are updated, the result of the initial state is the final result.</p>
-<p>The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$. Where $n$ is the number of nodes in the graph.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Where <span class="arithmatex">\(n\)</span> is the number of nodes in the graph.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86923,11 +86921,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

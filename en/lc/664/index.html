@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86044,18 +86042,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the minimum operations to print $s[i..j]$, with the initial value $f[i][j]=\infty$, and the answer is $f[0][n-1]$, where $n$ is the length of string $s$.</p>
-<p>Consider $f[i][j]$, if $s[i] = s[j]$, we can print $s[j]$ when print $s[i]$, so we can ignore $s[j]$ and continue to print $s[i+1..j-1]$. If $s[i] \neq s[j]$, we need to print the substring separately, i.e. $s[i..k]$ and $s[k+1..j]$, where $k \in [i,j)$. So we can have the following transition equation:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the minimum operations to print <span class="arithmatex">\(s[i..j]\)</span>, with the initial value <span class="arithmatex">\(f[i][j]=\infty\)</span>, and the answer is <span class="arithmatex">\(f[0][n-1]\)</span>, where <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>.</p>
+<p>Consider <span class="arithmatex">\(f[i][j]\)</span>, if <span class="arithmatex">\(s[i] = s[j]\)</span>, we can print <span class="arithmatex">\(s[j]\)</span> when print <span class="arithmatex">\(s[i]\)</span>, so we can ignore <span class="arithmatex">\(s[j]\)</span> and continue to print <span class="arithmatex">\(s[i+1..j-1]\)</span>. If <span class="arithmatex">\(s[i] \neq s[j]\)</span>, we need to print the substring separately, i.e. <span class="arithmatex">\(s[i..k]\)</span> and <span class="arithmatex">\(s[k+1..j]\)</span>, where <span class="arithmatex">\(k \in [i,j)\)</span>. So we can have the following transition equation:</p>
+<div class="arithmatex">\[
 f[i][j]=
 \begin{cases}
-1, &amp; \textit{if } i=j \
-f[i][j-1], &amp; \textit{if } s[i]=s[j] \
-\min_{i \leq k &lt; j} {f[i][k]+f[k+1][j]}, &amp; \textit{otherwise}
+1, &amp; \textit{if } i=j \\
+f[i][j-1], &amp; \textit{if } s[i]=s[j] \\
+\min_{i \leq k &lt; j} \{f[i][k]+f[k+1][j]\}, &amp; \textit{otherwise}
 \end{cases}
-$$</p>
-<p>We can enumerate $i$ from large to small and $j$ from small to large, so that we can ensure that $f[i][j-1]$, $f[i][k]$ and $f[k+1][j]$ have been calculated when we calculate $f[i][j]$.</p>
-<p>The time complexity is $O(n^3)$ and the space complexity is $O(n^2)$. Where $n$ is the length of string $s$.</p>
+\]</div>
+<p>We can enumerate <span class="arithmatex">\(i\)</span> from large to small and <span class="arithmatex">\(j\)</span> from small to large, so that we can ensure that <span class="arithmatex">\(f[i][j-1]\)</span>, <span class="arithmatex">\(f[i][k]\)</span> and <span class="arithmatex">\(f[k+1][j]\)</span> have been calculated when we calculate <span class="arithmatex">\(f[i][j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span> and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86498,11 +86496,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

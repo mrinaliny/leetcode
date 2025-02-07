@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90857,26 +90855,26 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[0]$ 表示目前为止的子序列中，和为偶数的子序列个数，而 $f[1]$ 表示目前为止的子序列中，和为奇数的子序列个数。初始时 $f[0] = 0$, $f[1] = 0$。</p>
-<p>遍历数组 $\textit{nums}$，对于每个数 $x$：</p>
-<p>如果 $x$ 为奇数，那么 $f[0]$ 和 $f[1]$ 的更新方式为：</p>
-<p>$$
+<p>我们定义 <span class="arithmatex">\(f[0]\)</span> 表示目前为止的子序列中，和为偶数的子序列个数，而 <span class="arithmatex">\(f[1]\)</span> 表示目前为止的子序列中，和为奇数的子序列个数。初始时 <span class="arithmatex">\(f[0] = 0\)</span>, <span class="arithmatex">\(f[1] = 0\)</span>。</p>
+<p>遍历数组 <span class="arithmatex">\(\textit{nums}\)</span>，对于每个数 <span class="arithmatex">\(x\)</span>：</p>
+<p>如果 <span class="arithmatex">\(x\)</span> 为奇数，那么 <span class="arithmatex">\(f[0]\)</span> 和 <span class="arithmatex">\(f[1]\)</span> 的更新方式为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-f[0] &amp; = (f[0] + f[1]) \bmod 10^9 + 7, \
+f[0] &amp; = (f[0] + f[1]) \bmod 10^9 + 7, \\
 f[1] &amp; = (f[0] + f[1] + 1) \bmod 10^9 + 7.
 \end{aligned}
-$$</p>
-<p>即，当前的和为偶数的子序列个数等于之前的和为偶数的子序列个数，加上之前的和为奇数的子序列拼上当前数 $x$ 的子序列个数；当前的和为奇数的子序列个数等于之前的和为偶数的子序列拼上当前数 $x$ 的子序列个数，加上之前的和为奇数的子序列个数，再加上一个只包含当前数 $x$ 的子序列。</p>
-<p>如果 $x$ 为偶数，那么 $f[0]$ 和 $f[1]$ 的更新方式为：</p>
-<p>$$
+\]</div>
+<p>即，当前的和为偶数的子序列个数等于之前的和为偶数的子序列个数，加上之前的和为奇数的子序列拼上当前数 <span class="arithmatex">\(x\)</span> 的子序列个数；当前的和为奇数的子序列个数等于之前的和为偶数的子序列拼上当前数 <span class="arithmatex">\(x\)</span> 的子序列个数，加上之前的和为奇数的子序列个数，再加上一个只包含当前数 <span class="arithmatex">\(x\)</span> 的子序列。</p>
+<p>如果 <span class="arithmatex">\(x\)</span> 为偶数，那么 <span class="arithmatex">\(f[0]\)</span> 和 <span class="arithmatex">\(f[1]\)</span> 的更新方式为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-f[0] &amp; = (f[0] + f[0] + 1) \bmod 10^9 + 7, \
+f[0] &amp; = (f[0] + f[0] + 1) \bmod 10^9 + 7, \\
 f[1] &amp; = (f[1] + f[1]) \bmod 10^9 + 7.
 \end{aligned}
-$$</p>
-<p>即，当前的和为偶数的子序列个数等于之前的和为偶数的子序列个数，加上之前的和为偶数的子序列拼上当前数 $x$ 的子序列个数，再加上一个只包含当前数 $x$ 的子序列；当前的和为奇数的子序列个数等于之前的和为奇数的子序列拼上当前数 $x$ 的子序列个数，加上之前的和为奇数的子序列个数。</p>
-<p>最终，返回 $f[1]$ 即可。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组 $\textit{nums}$ 的长度。空间复杂度 $O(1)$。</p>
+\]</div>
+<p>即，当前的和为偶数的子序列个数等于之前的和为偶数的子序列个数，加上之前的和为偶数的子序列拼上当前数 <span class="arithmatex">\(x\)</span> 的子序列个数，再加上一个只包含当前数 <span class="arithmatex">\(x\)</span> 的子序列；当前的和为奇数的子序列个数等于之前的和为奇数的子序列拼上当前数 <span class="arithmatex">\(x\)</span> 的子序列个数，加上之前的和为奇数的子序列个数。</p>
+<p>最终，返回 <span class="arithmatex">\(f[1]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91278,11 +91276,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

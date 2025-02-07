@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86066,11 +86064,11 @@ findSumPairs.count(7);  // return 11; pairs (2,1), (2,2), (2,4), (3,1), (3,2), (
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table">Solution 1: Hash Table</h3>
-<p>We note that the length of the array $\textit{nums1}$ does not exceed ${10}^3$, while the length of the array $\textit{nums2}$ reaches ${10}^5$. Therefore, if we directly enumerate all index pairs $(i, j)$ and check whether $\textit{nums1}[i] + \textit{nums2}[j]$ equals the specified value $\textit{tot}$, it will exceed the time limit.</p>
-<p>Can we only enumerate the shorter array $\textit{nums1}$? The answer is yes. We use a hash table $\textit{cnt}$ to count the occurrences of each element in the array $\textit{nums2}$, then enumerate each element $x$ in the array $\textit{nums1}$ and calculate the sum of $\textit{cnt}[\textit{tot} - x]$.</p>
-<p>When calling the $\text{add}$ method, we need to first decrement the value corresponding to $\textit{nums2}[index]$ in $\textit{cnt}$ by $1$, then add $\textit{val}$ to the value of $\textit{nums2}[index]$, and finally increment the value corresponding to $\textit{nums2}[index]$ in $\textit{cnt}$ by $1$.</p>
-<p>When calling the $\text{count}$ method, we only need to traverse the array $\textit{nums1}$ and calculate the sum of $\textit{cnt}[\textit{tot} - x]$ for each element $x$.</p>
-<p>The time complexity is $O(n \times q)$, and the space complexity is $O(m)$. Here, $n$ and $m$ are the lengths of the arrays $\textit{nums1}$ and $\textit{nums2}$, respectively, and $q$ is the number of times the $\text{count}$ method is called.</p>
+<p>We note that the length of the array <span class="arithmatex">\(\textit{nums1}\)</span> does not exceed <span class="arithmatex">\({10}^3\)</span>, while the length of the array <span class="arithmatex">\(\textit{nums2}\)</span> reaches <span class="arithmatex">\({10}^5\)</span>. Therefore, if we directly enumerate all index pairs <span class="arithmatex">\((i, j)\)</span> and check whether <span class="arithmatex">\(\textit{nums1}[i] + \textit{nums2}[j]\)</span> equals the specified value <span class="arithmatex">\(\textit{tot}\)</span>, it will exceed the time limit.</p>
+<p>Can we only enumerate the shorter array <span class="arithmatex">\(\textit{nums1}\)</span>? The answer is yes. We use a hash table <span class="arithmatex">\(\textit{cnt}\)</span> to count the occurrences of each element in the array <span class="arithmatex">\(\textit{nums2}\)</span>, then enumerate each element <span class="arithmatex">\(x\)</span> in the array <span class="arithmatex">\(\textit{nums1}\)</span> and calculate the sum of <span class="arithmatex">\(\textit{cnt}[\textit{tot} - x]\)</span>.</p>
+<p>When calling the <span class="arithmatex">\(\text{add}\)</span> method, we need to first decrement the value corresponding to <span class="arithmatex">\(\textit{nums2}[index]\)</span> in <span class="arithmatex">\(\textit{cnt}\)</span> by <span class="arithmatex">\(1\)</span>, then add <span class="arithmatex">\(\textit{val}\)</span> to the value of <span class="arithmatex">\(\textit{nums2}[index]\)</span>, and finally increment the value corresponding to <span class="arithmatex">\(\textit{nums2}[index]\)</span> in <span class="arithmatex">\(\textit{cnt}\)</span> by <span class="arithmatex">\(1\)</span>.</p>
+<p>When calling the <span class="arithmatex">\(\text{count}\)</span> method, we only need to traverse the array <span class="arithmatex">\(\textit{nums1}\)</span> and calculate the sum of <span class="arithmatex">\(\textit{cnt}[\textit{tot} - x]\)</span> for each element <span class="arithmatex">\(x\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times q)\)</span>, and the space complexity is <span class="arithmatex">\(O(m)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the arrays <span class="arithmatex">\(\textit{nums1}\)</span> and <span class="arithmatex">\(\textit{nums2}\)</span>, respectively, and <span class="arithmatex">\(q\)</span> is the number of times the <span class="arithmatex">\(\text{count}\)</span> method is called.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86816,11 +86814,9 @@ findSumPairs.count(7);  // return 11; pairs (2,1), (2,2), (2,4), (3,1), (3,2), (
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

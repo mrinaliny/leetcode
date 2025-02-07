@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,13 +86066,13 @@ The second path highlighted in blue has a sum of 5 + 3 + 0 + 5 + 2 = 15 which is
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function <code>dfs(i, j, s)</code> to represent the number of paths starting from <code>(i, j)</code> with an initial path sum modulo $k$ equal to $s$.</p>
-<p>For each position $(i, j)$, we can choose to move right or down, so we have:</p>
-<p>$$
+<p>We design a function <code>dfs(i, j, s)</code> to represent the number of paths starting from <code>(i, j)</code> with an initial path sum modulo <span class="arithmatex">\(k\)</span> equal to <span class="arithmatex">\(s\)</span>.</p>
+<p>For each position <span class="arithmatex">\((i, j)\)</span>, we can choose to move right or down, so we have:</p>
+<div class="arithmatex">\[
 dfs(i, j, s) = dfs(i + 1, j, (s + grid[i][j]) \bmod k) + dfs(i, j + 1, (s + grid[i][j]) \bmod k)
-$$</p>
+\]</div>
 <p>The answer is <code>dfs(0, 0, 0)</code>. We can use memoization search.</p>
-<p>The time complexity is $O(m \times n \times k)$, and the space complexity is $O(m \times n \times k)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, and $k$ is the given integer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n \times k)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, and <span class="arithmatex">\(k\)</span> is the given integer.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86355,13 +86353,13 @@ $$</p>
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can also use dynamic programming to solve this problem.</p>
-<p>Define the state $dp[i][j][s]$ to represent the number of paths from the starting point $(0, 0)$ to the position $(i, j)$, where the path sum modulo $k$ equals $s$.</p>
-<p>The initial value is $dp[0][0][grid[0][0] \bmod k] = 1$, and the answer is $dp[m - 1][n - 1][0]$.</p>
+<p>Define the state <span class="arithmatex">\(dp[i][j][s]\)</span> to represent the number of paths from the starting point <span class="arithmatex">\((0, 0)\)</span> to the position <span class="arithmatex">\((i, j)\)</span>, where the path sum modulo <span class="arithmatex">\(k\)</span> equals <span class="arithmatex">\(s\)</span>.</p>
+<p>The initial value is <span class="arithmatex">\(dp[0][0][grid[0][0] \bmod k] = 1\)</span>, and the answer is <span class="arithmatex">\(dp[m - 1][n - 1][0]\)</span>.</p>
 <p>We can get the state transition equation:</p>
-<p>$$
+<div class="arithmatex">\[
 dp[i][j][s] = dp[i - 1][j][(s - grid[i][j])\bmod k] + dp[i][j - 1][(s - grid[i][j])\bmod k]
-$$</p>
-<p>The time complexity is $O(m \times n \times k)$, and the space complexity is $O(m \times n \times k)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, and $k$ is the given integer.</p>
+\]</div>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n \times k)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, and <span class="arithmatex">\(k\)</span> is the given integer.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86789,11 +86787,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

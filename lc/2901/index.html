@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90879,11 +90877,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i]$ 表示以第 $i$ 个单词结尾的最长相邻不相等子序列的长度，定义 $g[i]$ 表示以第 $i$ 个单词结尾的最长相邻不相等子序列的前驱下标。初始时 $f[i] = 1$, $g[i] = -1$。</p>
-<p>另外，我们定义一个变量 $mx$ 表示最长相邻不相等子序列的长度。</p>
-<p>我们枚举 $i$，枚举 $j \in [0, i)$，如果 $groups[i] \neq groups[j]$ 且 $f[i] \lt f[j] + 1$ 且 $words[i]$ 和 $words[j]$ 之间的汉明距离为 $1$，则更新 $f[i] = f[j] + 1$，$g[i] = j$，并且更新 $mx = \max(mx, f[i])$。</p>
-<p>最后，我们从 $f$ 数组中找到最大值对应的下标 $i$，然后从 $i$ 开始不断往前找，直到找到 $g[i] = -1$，这样就找到了最长相邻不相等子序列。</p>
-<p>时间复杂度 $O(n^2 \times L)$，空间复杂度 $O(n)$。其中 $L$ 表示单词的最大长度。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示以第 <span class="arithmatex">\(i\)</span> 个单词结尾的最长相邻不相等子序列的长度，定义 <span class="arithmatex">\(g[i]\)</span> 表示以第 <span class="arithmatex">\(i\)</span> 个单词结尾的最长相邻不相等子序列的前驱下标。初始时 <span class="arithmatex">\(f[i] = 1\)</span>, <span class="arithmatex">\(g[i] = -1\)</span>。</p>
+<p>另外，我们定义一个变量 <span class="arithmatex">\(mx\)</span> 表示最长相邻不相等子序列的长度。</p>
+<p>我们枚举 <span class="arithmatex">\(i\)</span>，枚举 <span class="arithmatex">\(j \in [0, i)\)</span>，如果 <span class="arithmatex">\(groups[i] \neq groups[j]\)</span> 且 <span class="arithmatex">\(f[i] \lt f[j] + 1\)</span> 且 <span class="arithmatex">\(words[i]\)</span> 和 <span class="arithmatex">\(words[j]\)</span> 之间的汉明距离为 <span class="arithmatex">\(1\)</span>，则更新 <span class="arithmatex">\(f[i] = f[j] + 1\)</span>，<span class="arithmatex">\(g[i] = j\)</span>，并且更新 <span class="arithmatex">\(mx = \max(mx, f[i])\)</span>。</p>
+<p>最后，我们从 <span class="arithmatex">\(f\)</span> 数组中找到最大值对应的下标 <span class="arithmatex">\(i\)</span>，然后从 <span class="arithmatex">\(i\)</span> 开始不断往前找，直到找到 <span class="arithmatex">\(g[i] = -1\)</span>，这样就找到了最长相邻不相等子序列。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2 \times L)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(L\)</span> 表示单词的最大长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91369,7 +91367,7 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划 + 通配符哈希表</h3>
-<p>在方法一中，我们需要枚举所有的 $i$ 和 $j$ 组合, 这一步可以通过维护一个通配符哈希表来优化. 对于每个字符串 $word[i]$, 我们枚举它的每个字符, 将其替换为通配符, 然后将替换后的字符串作为键, 将其下标作为值存入哈希表中. 这样我们可以在 $O(L)$ 时间内找到所有距离 $word[i]$ 汉明距离为 1 的 $word[j]$. 尽管时间复杂度仍然是 $O(n^2 \times L)$, 但平均复杂度会有所降低.</p>
+<p>在方法一中，我们需要枚举所有的 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 组合, 这一步可以通过维护一个通配符哈希表来优化. 对于每个字符串 <span class="arithmatex">\(word[i]\)</span>, 我们枚举它的每个字符, 将其替换为通配符, 然后将替换后的字符串作为键, 将其下标作为值存入哈希表中. 这样我们可以在 <span class="arithmatex">\(O(L)\)</span> 时间内找到所有距离 <span class="arithmatex">\(word[i]\)</span> 汉明距离为 1 的 <span class="arithmatex">\(word[j]\)</span>. 尽管时间复杂度仍然是 <span class="arithmatex">\(O(n^2 \times L)\)</span>, 但平均复杂度会有所降低.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Java</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91705,11 +91703,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

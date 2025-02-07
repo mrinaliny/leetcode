@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,19 +86060,19 @@ The total cost is 1 + 1 + 2 = 4. It can be shown that it is the minimum cost pos
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization">Solution 1: Memoization</h3>
-<p>We notice that since each operation reverses two characters, if the number of different characters in the two strings is odd, it is impossible to make them equal, and we directly return $-1$. Otherwise, we store the indices of the different characters in the two strings in an array $idx$, and let $m$ be the length of $idx$.</p>
-<p>Next, we design a function $dfs(i, j)$, which represents the minimum cost of reversing the characters in $idx[i..j]$. The answer is $dfs(0, m - 1)$.</p>
-<p>The calculation process of the function $dfs(i, j)$ is as follows:</p>
-<p>If $i &gt; j$, we do not need to perform any operation, and return $0$.</p>
-<p>Otherwise, we consider the two endpoints of the interval $[i, j]$:</p>
+<p>We notice that since each operation reverses two characters, if the number of different characters in the two strings is odd, it is impossible to make them equal, and we directly return <span class="arithmatex">\(-1\)</span>. Otherwise, we store the indices of the different characters in the two strings in an array <span class="arithmatex">\(idx\)</span>, and let <span class="arithmatex">\(m\)</span> be the length of <span class="arithmatex">\(idx\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents the minimum cost of reversing the characters in <span class="arithmatex">\(idx[i..j]\)</span>. The answer is <span class="arithmatex">\(dfs(0, m - 1)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i &gt; j\)</span>, we do not need to perform any operation, and return <span class="arithmatex">\(0\)</span>.</p>
+<p>Otherwise, we consider the two endpoints of the interval <span class="arithmatex">\([i, j]\)</span>:</p>
 <ul>
-<li>If we perform the first operation on endpoint $i$, since the cost $x$ is fixed, the optimal choice is to reverse $idx[i]$ and $idx[j]$, and then recursively calculate $dfs(i + 1, j - 1)$, with a total cost of $dfs(i + 1, j - 1) + x$.</li>
-<li>If we perform the second operation on endpoint $i$, we need to reverse all the characters in $[idx[i]..idx[i + 1]]$, and then recursively calculate $dfs(i + 2, j)$, with a total cost of $dfs(i + 2, j) + idx[i + 1] - idx[i]$.</li>
-<li>If we perform the second operation on endpoint $j$, we need to reverse all the characters in $[idx[j - 1]..idx[j]]$, and then recursively calculate $dfs(i, j - 2)$, with a total cost of $dfs(i, j - 2) + idx[j] - idx[j - 1]$.</li>
+<li>If we perform the first operation on endpoint <span class="arithmatex">\(i\)</span>, since the cost <span class="arithmatex">\(x\)</span> is fixed, the optimal choice is to reverse <span class="arithmatex">\(idx[i]\)</span> and <span class="arithmatex">\(idx[j]\)</span>, and then recursively calculate <span class="arithmatex">\(dfs(i + 1, j - 1)\)</span>, with a total cost of <span class="arithmatex">\(dfs(i + 1, j - 1) + x\)</span>.</li>
+<li>If we perform the second operation on endpoint <span class="arithmatex">\(i\)</span>, we need to reverse all the characters in <span class="arithmatex">\([idx[i]..idx[i + 1]]\)</span>, and then recursively calculate <span class="arithmatex">\(dfs(i + 2, j)\)</span>, with a total cost of <span class="arithmatex">\(dfs(i + 2, j) + idx[i + 1] - idx[i]\)</span>.</li>
+<li>If we perform the second operation on endpoint <span class="arithmatex">\(j\)</span>, we need to reverse all the characters in <span class="arithmatex">\([idx[j - 1]..idx[j]]\)</span>, and then recursively calculate <span class="arithmatex">\(dfs(i, j - 2)\)</span>, with a total cost of <span class="arithmatex">\(dfs(i, j - 2) + idx[j] - idx[j - 1]\)</span>.</li>
 </ul>
-<p>We take the minimum value of the above three operations as the value of $dfs(i, j)$.</p>
-<p>To avoid redundant calculations, we can use memoization to record the return value of $dfs(i, j)$ in a 2D array $f$. If $f[i][j]$ is not equal to $-1$, it means that we have already calculated it, so we can directly return $f[i][j]$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the strings.</p>
+<p>We take the minimum value of the above three operations as the value of <span class="arithmatex">\(dfs(i, j)\)</span>.</p>
+<p>To avoid redundant calculations, we can use memoization to record the return value of <span class="arithmatex">\(dfs(i, j)\)</span> in a 2D array <span class="arithmatex">\(f\)</span>. If <span class="arithmatex">\(f[i][j]\)</span> is not equal to <span class="arithmatex">\(-1\)</span>, it means that we have already calculated it, so we can directly return <span class="arithmatex">\(f[i][j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the strings.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86676,11 +86674,9 @@ The total cost is 1 + 1 + 2 = 4. It can be shown that it is the minimum cost pos
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

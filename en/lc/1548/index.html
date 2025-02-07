@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,14 +86069,14 @@ It&#39;s equivalent to [&quot;ATL&quot;,&quot;DXB&quot;,&quot;HND&quot;,&quot;DX
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We first build an adjacency list $g$ based on the given roads, where $g[i]$ represents the list of cities directly connected to city $i$.</p>
-<p>Then we define $f[i][j]$ to be the minimum edit distance of the first $i$ cities of $targetPath$ and the first $j$ cities of $names$ when city $i$ of $targetPath$ matches city $j$ of $names$.</p>
+<p>We first build an adjacency list <span class="arithmatex">\(g\)</span> based on the given roads, where <span class="arithmatex">\(g[i]\)</span> represents the list of cities directly connected to city <span class="arithmatex">\(i\)</span>.</p>
+<p>Then we define <span class="arithmatex">\(f[i][j]\)</span> to be the minimum edit distance of the first <span class="arithmatex">\(i\)</span> cities of <span class="arithmatex">\(targetPath\)</span> and the first <span class="arithmatex">\(j\)</span> cities of <span class="arithmatex">\(names\)</span> when city <span class="arithmatex">\(i\)</span> of <span class="arithmatex">\(targetPath\)</span> matches city <span class="arithmatex">\(j\)</span> of <span class="arithmatex">\(names\)</span>.</p>
 <p>Then we can get the following recurrence equation:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \min_{k \in g[j]} f[i - 1][k] + (targetPath[i] \neq names[j])
-$$</p>
-<p>In the process of state transition, we record the predecessor city of each state, and finally restore the optimal path from the end to the beginning according to the predecessor city array $pre$.</p>
-<p>The time complexity is $O(m \times n^2)$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the lengths of $targetPath$ and $names$ respectively.</p>
+\]</div>
+<p>In the process of state transition, we record the predecessor city of each state, and finally restore the optimal path from the end to the beginning according to the predecessor city array <span class="arithmatex">\(pre\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of <span class="arithmatex">\(targetPath\)</span> and <span class="arithmatex">\(names\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86758,11 +86756,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

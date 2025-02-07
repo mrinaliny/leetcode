@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90850,13 +90848,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 枚举</h3>
-<p>根据题目描述，一个强整数可以表示成 $x^i + y^j$，其中 $i \geq 0$, $j \geq 0$。</p>
-<p>题目需要我们找出所有不超过 $bound$ 的强整数，我们注意到 $bound$ 的取值范围不超过 $10^6$，而 $2^{20} = 1048576 \gt 10^6$。因此，如果 $x \geq 2$，那么 $i$ 最大不超过 $20$，才有可能使得 $x^i + y^j \leq bound$ 成立。同理，如果 $y \geq 2$，那么 $j$ 最大不超过 $20$。</p>
-<p>因此我们可以使用双重循环，枚举所有可能的 $x^i$ 和 $y^j$，分别记为 $a$ 和 $b$，并保证 $a + b \leq bound$，此时 $a + b$ 即为一个强整数。我们使用哈希表存储所有满足条件的强整数，最后将哈希表中的所有元素转换成答案列表返回即可。</p>
+<p>根据题目描述，一个强整数可以表示成 <span class="arithmatex">\(x^i + y^j\)</span>，其中 <span class="arithmatex">\(i \geq 0\)</span>, <span class="arithmatex">\(j \geq 0\)</span>。</p>
+<p>题目需要我们找出所有不超过 <span class="arithmatex">\(bound\)</span> 的强整数，我们注意到 <span class="arithmatex">\(bound\)</span> 的取值范围不超过 <span class="arithmatex">\(10^6\)</span>，而 <span class="arithmatex">\(2^{20} = 1048576 \gt 10^6\)</span>。因此，如果 <span class="arithmatex">\(x \geq 2\)</span>，那么 <span class="arithmatex">\(i\)</span> 最大不超过 <span class="arithmatex">\(20\)</span>，才有可能使得 <span class="arithmatex">\(x^i + y^j \leq bound\)</span> 成立。同理，如果 <span class="arithmatex">\(y \geq 2\)</span>，那么 <span class="arithmatex">\(j\)</span> 最大不超过 <span class="arithmatex">\(20\)</span>。</p>
+<p>因此我们可以使用双重循环，枚举所有可能的 <span class="arithmatex">\(x^i\)</span> 和 <span class="arithmatex">\(y^j\)</span>，分别记为 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span>，并保证 <span class="arithmatex">\(a + b \leq bound\)</span>，此时 <span class="arithmatex">\(a + b\)</span> 即为一个强整数。我们使用哈希表存储所有满足条件的强整数，最后将哈希表中的所有元素转换成答案列表返回即可。</p>
 <blockquote>
-<p>注意，如果 $x=1$ 或者 $y=1$，那么 $a$ 或者 $b$ 的值恒等于 $1$，对应的循环只需要执行一次即可退出。</p>
+<p>注意，如果 <span class="arithmatex">\(x=1\)</span> 或者 <span class="arithmatex">\(y=1\)</span>，那么 <span class="arithmatex">\(a\)</span> 或者 <span class="arithmatex">\(b\)</span> 的值恒等于 <span class="arithmatex">\(1\)</span>，对应的循环只需要执行一次即可退出。</p>
 </blockquote>
-<p>时间复杂度 $O(\log^2 bound)$，空间复杂度 $O(\log^2 bound)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log^2 bound)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log^2 bound)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91315,11 +91313,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,10 +90861,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-array-marking">Solution 1: Array Marking</h3>
-<p>Let the number of rows and columns of the matrix be $m$ and $n$, respectively. We use an array $\textit{rows}$ of length $m$ and an array $\textit{cols}$ of length $n$ to record which rows and columns need to be set to zero.</p>
-<p>First, we traverse the matrix. When we find a zero element in the matrix, we set the corresponding row and column markers to $\text{true}$. That is, if $\textit{matrix}[i][j] = 0$, then $\textit{rows}[i] = \textit{cols}[j] = \text{true}$.</p>
-<p>Finally, we traverse the matrix again and use the markers in $\textit{rows}$ and $\textit{cols}$ to update the elements in the matrix. When we find that $\textit{rows}[i]$ or $\textit{cols}[j]$ is $\text{true}$, we set $\textit{matrix}[i][j]$ to zero.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m + n)$. Here, $m$ and $n$ are the number of rows and columns of the matrix, respectively.</p>
+<p>Let the number of rows and columns of the matrix be <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>, respectively. We use an array <span class="arithmatex">\(\textit{rows}\)</span> of length <span class="arithmatex">\(m\)</span> and an array <span class="arithmatex">\(\textit{cols}\)</span> of length <span class="arithmatex">\(n\)</span> to record which rows and columns need to be set to zero.</p>
+<p>First, we traverse the matrix. When we find a zero element in the matrix, we set the corresponding row and column markers to <span class="arithmatex">\(\text{true}\)</span>. That is, if <span class="arithmatex">\(\textit{matrix}[i][j] = 0\)</span>, then <span class="arithmatex">\(\textit{rows}[i] = \textit{cols}[j] = \text{true}\)</span>.</p>
+<p>Finally, we traverse the matrix again and use the markers in <span class="arithmatex">\(\textit{rows}\)</span> and <span class="arithmatex">\(\textit{cols}\)</span> to update the elements in the matrix. When we find that <span class="arithmatex">\(\textit{rows}[i]\)</span> or <span class="arithmatex">\(\textit{cols}[j]\)</span> is <span class="arithmatex">\(\text{true}\)</span>, we set <span class="arithmatex">\(\textit{matrix}[i][j]\)</span> to zero.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m + n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the matrix, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91177,8 +91175,8 @@
 
 <h3 id="_3">方法二：原地标记</h3>
 <p>方法一中使用了额外的数组标记待清零的行和列，实际上我们也可以直接用矩阵的第一行和第一列来标记，不需要开辟额外的数组空间。</p>
-<p>由于第一行、第一列用来做标记，它们的值可能会因为标记而发生改变，因此，我们需要额外的变量 $i0$, $j0$ 来标记第一行、第一列是否需要被清零。</p>
-<p>时间复杂度 $O(m\times n)$，空间复杂度 $O(1)$。其中 $m$ 和 $n$ 分别为矩阵的行数和列数。</p>
+<p>由于第一行、第一列用来做标记，它们的值可能会因为标记而发生改变，因此，我们需要额外的变量 <span class="arithmatex">\(i0\)</span>, <span class="arithmatex">\(j0\)</span> 来标记第一行、第一列是否需要被清零。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m\times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为矩阵的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91943,11 +91941,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

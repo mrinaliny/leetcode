@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,15 +90866,15 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：DFS + 位运算</h3>
-<p>一条路径是伪回文路径，当且仅当该路径经过的节点值的出现次数为奇数的数字为 $0$ 个或 $1$ 个。</p>
-<p>由于二叉树节点值的范围为 $1$ 到 $9$，因此对于每一条从根到叶子的路径，我们可以用一个长度为 $10$ 的二进制数 $mask$ 表示当前路径经过的节点值的出现状态，其中 $mask$ 的第 $i$ 位为 $1$，表示当前路径上节点值 $i$ 的出现次数为奇数，否则表示其出现次数为偶数。那么，如果一条路径是伪回文路径，需要满足 $mask \&amp;(mask - 1) = 0$，其中 $\&amp;$ 表示按位与运算。</p>
-<p>基于以上分析，我们可以使用深度优先搜索的方法计算路径数。我们定义一个函数 $dfs(root, mask)$，表示从当前 $root$ 节点开始，且当前节点的状态为 $mask$ 的所有伪回文路径的个数。那么答案就是 $dfs(root, 0)$。</p>
-<p>函数 $dfs(root, mask)$ 的执行逻辑如下：</p>
-<p>如果 $root$ 为空，则返回 $0$；</p>
-<p>否则，令 $mask = mask \oplus 2^{root.val}$，其中 $\oplus$ 表示按位异或运算。</p>
-<p>如果 $root$ 是叶子节点，那么如果 $mask \&amp;(mask - 1) = 0$，返回 $1$，否则返回 $0$；</p>
-<p>如果 $root$ 不是叶子节点，返回 $dfs(root.left, mask) + dfs(root.right, mask)$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是二叉树的节点数。</p>
+<p>一条路径是伪回文路径，当且仅当该路径经过的节点值的出现次数为奇数的数字为 <span class="arithmatex">\(0\)</span> 个或 <span class="arithmatex">\(1\)</span> 个。</p>
+<p>由于二叉树节点值的范围为 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(9\)</span>，因此对于每一条从根到叶子的路径，我们可以用一个长度为 <span class="arithmatex">\(10\)</span> 的二进制数 <span class="arithmatex">\(mask\)</span> 表示当前路径经过的节点值的出现状态，其中 <span class="arithmatex">\(mask\)</span> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span>，表示当前路径上节点值 <span class="arithmatex">\(i\)</span> 的出现次数为奇数，否则表示其出现次数为偶数。那么，如果一条路径是伪回文路径，需要满足 <span class="arithmatex">\(mask \&amp;(mask - 1) = 0\)</span>，其中 <span class="arithmatex">\(\&amp;\)</span> 表示按位与运算。</p>
+<p>基于以上分析，我们可以使用深度优先搜索的方法计算路径数。我们定义一个函数 <span class="arithmatex">\(dfs(root, mask)\)</span>，表示从当前 <span class="arithmatex">\(root\)</span> 节点开始，且当前节点的状态为 <span class="arithmatex">\(mask\)</span> 的所有伪回文路径的个数。那么答案就是 <span class="arithmatex">\(dfs(root, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(root, mask)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(root\)</span> 为空，则返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>否则，令 <span class="arithmatex">\(mask = mask \oplus 2^{root.val}\)</span>，其中 <span class="arithmatex">\(\oplus\)</span> 表示按位异或运算。</p>
+<p>如果 <span class="arithmatex">\(root\)</span> 是叶子节点，那么如果 <span class="arithmatex">\(mask \&amp;(mask - 1) = 0\)</span>，返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>；</p>
+<p>如果 <span class="arithmatex">\(root\)</span> 不是叶子节点，返回 <span class="arithmatex">\(dfs(root.left, mask) + dfs(root.right, mask)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是二叉树的节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91460,11 +91458,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

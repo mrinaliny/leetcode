@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,18 +90865,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：优先队列（大根堆）</h3>
-<p>题目要求 $y_i + y_j + |x_i - x_j|$ 的最大值，其中 $i \lt j$，并且 $|x_i - x_j| \leq k$。由于 $x_i$ 是严格单调递增的，那么：</p>
-<p>$$
+<p>题目要求 <span class="arithmatex">\(y_i + y_j + |x_i - x_j|\)</span> 的最大值，其中 <span class="arithmatex">\(i \lt j\)</span>，并且 <span class="arithmatex">\(|x_i - x_j| \leq k\)</span>。由于 <span class="arithmatex">\(x_i\)</span> 是严格单调递增的，那么：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-y_i + y_j + |x_i - x_j| &amp; = y_i + y_j + x_j - x_i \
+y_i + y_j + |x_i - x_j| &amp; = y_i + y_j + x_j - x_i \\
 &amp; = (y_i - x_i) + (x_j + y_j)
 \end{aligned}
-$$</p>
-<p>因此，对于当前遍历到的点 $(x_j, y_j)$，我们只需要找到前面所有满足 $x_j - x_i \leq k$ 的点 $(x_i, y_i)$ 中 $y_i - x_i$ 的最大值，再加上当前的 $x_j + y_j$ 即可。而 $y_i - x_i$ 的最大值，我们可以使用优先队列（大根堆）来维护。</p>
-<p>具体地，我们定义一个优先队列（大根堆） $pq$，堆中每个元素是一个二元组 $(y_i - x_i, x_i)$。</p>
-<p>当我们遍历到点 $(x, y)$ 时，如果堆 $pq$ 不为空，并且 $x - pq[0][1] \gt k$，那么循环将堆顶元素弹出，直到堆为空或者满足 $x - pq[0][1] \leq k$。此时，堆顶元素 $(y_i - x_i, x_i)$ 即为所有满足 $x_j - x_i \leq k$ 的点中 $y_i - x_i$ 的最大值，此时更新答案 $ans = \max(ans, x + y + pq[0][0])$。</p>
-<p>然后，我们将点 $(x, y)$ 加入堆中，继续遍历下一个点，直到遍历完整个数组 $points$。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $points$ 的长度。</p>
+\]</div>
+<p>因此，对于当前遍历到的点 <span class="arithmatex">\((x_j, y_j)\)</span>，我们只需要找到前面所有满足 <span class="arithmatex">\(x_j - x_i \leq k\)</span> 的点 <span class="arithmatex">\((x_i, y_i)\)</span> 中 <span class="arithmatex">\(y_i - x_i\)</span> 的最大值，再加上当前的 <span class="arithmatex">\(x_j + y_j\)</span> 即可。而 <span class="arithmatex">\(y_i - x_i\)</span> 的最大值，我们可以使用优先队列（大根堆）来维护。</p>
+<p>具体地，我们定义一个优先队列（大根堆） <span class="arithmatex">\(pq\)</span>，堆中每个元素是一个二元组 <span class="arithmatex">\((y_i - x_i, x_i)\)</span>。</p>
+<p>当我们遍历到点 <span class="arithmatex">\((x, y)\)</span> 时，如果堆 <span class="arithmatex">\(pq\)</span> 不为空，并且 <span class="arithmatex">\(x - pq[0][1] \gt k\)</span>，那么循环将堆顶元素弹出，直到堆为空或者满足 <span class="arithmatex">\(x - pq[0][1] \leq k\)</span>。此时，堆顶元素 <span class="arithmatex">\((y_i - x_i, x_i)\)</span> 即为所有满足 <span class="arithmatex">\(x_j - x_i \leq k\)</span> 的点中 <span class="arithmatex">\(y_i - x_i\)</span> 的最大值，此时更新答案 <span class="arithmatex">\(ans = \max(ans, x + y + pq[0][0])\)</span>。</p>
+<p>然后，我们将点 <span class="arithmatex">\((x, y)\)</span> 加入堆中，继续遍历下一个点，直到遍历完整个数组 <span class="arithmatex">\(points\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(points\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91206,11 +91204,11 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="_4">方法二：单调队列</h3>
-<p>这道题实际上需要我们维护的是一个长度为 $k$ 的窗口中 $y-x$ 的最大值，单调队列可以很好地解决这个问题。</p>
-<p>具体地，我们定义一个单调队列 $q$，队列中每个元素是一个二元组 $(x_i, y_i)$。</p>
-<p>当我们遍历到点 $(x, y)$ 时，如果队列 $q$ 不为空，并且 $x - q[0][0] \gt k$，那么不断弹出队首元素，直到队列为空或者满足 $x - q[0][0] \leq k$。此时，队首元素 $(x_i, y_i)$ 即为所有满足 $x_j - x_i \leq k$ 的点中 $y_i - x_i$ 的最大值，此时更新答案 $ans = \max(ans, x + y + y_i - x_i)$。</p>
-<p>接下来，在将点 $(x, y)$ 加入队尾之前，我们将队列中所有 $y_i - x_i \leq y - x$ 的元素 $(x_i, y_i)$ 弹出队列，然后将点 $(x, y)$ 加入队尾。继续遍历下一个点，直到遍历完整个数组 $points$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $points$ 的长度。</p>
+<p>这道题实际上需要我们维护的是一个长度为 <span class="arithmatex">\(k\)</span> 的窗口中 <span class="arithmatex">\(y-x\)</span> 的最大值，单调队列可以很好地解决这个问题。</p>
+<p>具体地，我们定义一个单调队列 <span class="arithmatex">\(q\)</span>，队列中每个元素是一个二元组 <span class="arithmatex">\((x_i, y_i)\)</span>。</p>
+<p>当我们遍历到点 <span class="arithmatex">\((x, y)\)</span> 时，如果队列 <span class="arithmatex">\(q\)</span> 不为空，并且 <span class="arithmatex">\(x - q[0][0] \gt k\)</span>，那么不断弹出队首元素，直到队列为空或者满足 <span class="arithmatex">\(x - q[0][0] \leq k\)</span>。此时，队首元素 <span class="arithmatex">\((x_i, y_i)\)</span> 即为所有满足 <span class="arithmatex">\(x_j - x_i \leq k\)</span> 的点中 <span class="arithmatex">\(y_i - x_i\)</span> 的最大值，此时更新答案 <span class="arithmatex">\(ans = \max(ans, x + y + y_i - x_i)\)</span>。</p>
+<p>接下来，在将点 <span class="arithmatex">\((x, y)\)</span> 加入队尾之前，我们将队列中所有 <span class="arithmatex">\(y_i - x_i \leq y - x\)</span> 的元素 <span class="arithmatex">\((x_i, y_i)\)</span> 弹出队列，然后将点 <span class="arithmatex">\((x, y)\)</span> 加入队尾。继续遍历下一个点，直到遍历完整个数组 <span class="arithmatex">\(points\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(points\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91637,11 +91635,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

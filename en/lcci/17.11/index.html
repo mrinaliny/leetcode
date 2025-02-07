@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86019,10 +86017,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-single-pass">Solution 1: Single Pass</h3>
-<p>We use two pointers $i$ and $j$ to record the most recent occurrences of the two words $\textit{word1}$ and $\textit{word2}$, respectively. Initially, $i = \infty$ and $j = -\infty$.</p>
-<p>Next, we traverse the entire text file. For each word $w$, if $w$ equals $\textit{word1}$, we update $i = k$, where $k$ is the index of the current word; if $w$ equals $\textit{word2}$, we update $j = k$. Then we update the answer $ans = \min(ans, |i - j|)$.</p>
-<p>After the traversal, we return the answer $ans$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the number of words in the text file. The space complexity is $O(1)$.</p>
+<p>We use two pointers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> to record the most recent occurrences of the two words <span class="arithmatex">\(\textit{word1}\)</span> and <span class="arithmatex">\(\textit{word2}\)</span>, respectively. Initially, <span class="arithmatex">\(i = \infty\)</span> and <span class="arithmatex">\(j = -\infty\)</span>.</p>
+<p>Next, we traverse the entire text file. For each word <span class="arithmatex">\(w\)</span>, if <span class="arithmatex">\(w\)</span> equals <span class="arithmatex">\(\textit{word1}\)</span>, we update <span class="arithmatex">\(i = k\)</span>, where <span class="arithmatex">\(k\)</span> is the index of the current word; if <span class="arithmatex">\(w\)</span> equals <span class="arithmatex">\(\textit{word2}\)</span>, we update <span class="arithmatex">\(j = k\)</span>. Then we update the answer <span class="arithmatex">\(ans = \min(ans, |i - j|)\)</span>.</p>
+<p>After the traversal, we return the answer <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of words in the text file. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86258,11 +86256,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-hash-table-two-pointers">Solution 2: Hash Table + Two Pointers</h3>
-<p>We can use a hash table $d$ to record the positions of each word. Then, for each pair of $\textit{word1}$ and $\textit{word2}$, we can find their shortest distance using the two-pointer method.</p>
-<p>We traverse the entire text file. For each word $w$, we add the index of $w$ to $d[w]$.</p>
-<p>Next, we find the positions where $\textit{word1}$ and $\textit{word2}$ appear in the text file, represented by $idx1$ and $idx2$ respectively. Then we use two pointers $i$ and $j$ to point to $idx1$ and $idx2$ respectively, with initial values $i = 0$, $j = 0$.</p>
-<p>Next, we traverse $idx1$ and $idx2$. Each time we update the answer $ans = \min(ans, |idx1[i] - idx2[j]|)$, then we move the smaller pointer of $i$ and $j$ one step backward.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Where $n$ is the number of words in the text file.</p>
+<p>We can use a hash table <span class="arithmatex">\(d\)</span> to record the positions of each word. Then, for each pair of <span class="arithmatex">\(\textit{word1}\)</span> and <span class="arithmatex">\(\textit{word2}\)</span>, we can find their shortest distance using the two-pointer method.</p>
+<p>We traverse the entire text file. For each word <span class="arithmatex">\(w\)</span>, we add the index of <span class="arithmatex">\(w\)</span> to <span class="arithmatex">\(d[w]\)</span>.</p>
+<p>Next, we find the positions where <span class="arithmatex">\(\textit{word1}\)</span> and <span class="arithmatex">\(\textit{word2}\)</span> appear in the text file, represented by <span class="arithmatex">\(idx1\)</span> and <span class="arithmatex">\(idx2\)</span> respectively. Then we use two pointers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> to point to <span class="arithmatex">\(idx1\)</span> and <span class="arithmatex">\(idx2\)</span> respectively, with initial values <span class="arithmatex">\(i = 0\)</span>, <span class="arithmatex">\(j = 0\)</span>.</p>
+<p>Next, we traverse <span class="arithmatex">\(idx1\)</span> and <span class="arithmatex">\(idx2\)</span>. Each time we update the answer <span class="arithmatex">\(ans = \min(ans, |idx1[i] - idx2[j]|)\)</span>, then we move the smaller pointer of <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> one step backward.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the number of words in the text file.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86714,11 +86712,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90849,21 +90847,21 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：分治</h3>
-<p>题目要求算法的时间复杂度为 $O(\log (m + n))$，因此不能直接遍历两个数组，而是需要使用二分查找的方法。</p>
-<p>如果 $m + n$ 是奇数，那么中位数就是第 $\left\lfloor\frac{m + n + 1}{2}\right\rfloor$ 个数；如果 $m + n$ 是偶数，那么中位数就是第 $\left\lfloor\frac{m + n + 1}{2}\right\rfloor$ 和第 $\left\lfloor\frac{m + n + 2}{2}\right\rfloor$ 个数的平均数。实际上，我们可以统一为求第 $\left\lfloor\frac{m + n + 1}{2}\right\rfloor$ 个数和第 $\left\lfloor\frac{m + n + 2}{2}\right\rfloor$ 个数的平均数。</p>
-<p>因此，我们可以设计一个函数 $f(i, j, k)$，表示在数组 $nums1$ 的区间 $[i, m)$ 和数组 $nums2$ 的区间 $[j, n)$ 中，求第 $k$ 小的数。那么中位数就是 $f(0, 0, \left\lfloor\frac{m + n + 1}{2}\right\rfloor)$ 和 $f(0, 0, \left\lfloor\frac{m + n + 2}{2}\right\rfloor)$ 的平均数。</p>
-<p>函数 $f(i, j, k)$ 的实现思路如下：</p>
+<p>题目要求算法的时间复杂度为 <span class="arithmatex">\(O(\log (m + n))\)</span>，因此不能直接遍历两个数组，而是需要使用二分查找的方法。</p>
+<p>如果 <span class="arithmatex">\(m + n\)</span> 是奇数，那么中位数就是第 <span class="arithmatex">\(\left\lfloor\frac{m + n + 1}{2}\right\rfloor\)</span> 个数；如果 <span class="arithmatex">\(m + n\)</span> 是偶数，那么中位数就是第 <span class="arithmatex">\(\left\lfloor\frac{m + n + 1}{2}\right\rfloor\)</span> 和第 <span class="arithmatex">\(\left\lfloor\frac{m + n + 2}{2}\right\rfloor\)</span> 个数的平均数。实际上，我们可以统一为求第 <span class="arithmatex">\(\left\lfloor\frac{m + n + 1}{2}\right\rfloor\)</span> 个数和第 <span class="arithmatex">\(\left\lfloor\frac{m + n + 2}{2}\right\rfloor\)</span> 个数的平均数。</p>
+<p>因此，我们可以设计一个函数 <span class="arithmatex">\(f(i, j, k)\)</span>，表示在数组 <span class="arithmatex">\(nums1\)</span> 的区间 <span class="arithmatex">\([i, m)\)</span> 和数组 <span class="arithmatex">\(nums2\)</span> 的区间 <span class="arithmatex">\([j, n)\)</span> 中，求第 <span class="arithmatex">\(k\)</span> 小的数。那么中位数就是 <span class="arithmatex">\(f(0, 0, \left\lfloor\frac{m + n + 1}{2}\right\rfloor)\)</span> 和 <span class="arithmatex">\(f(0, 0, \left\lfloor\frac{m + n + 2}{2}\right\rfloor)\)</span> 的平均数。</p>
+<p>函数 <span class="arithmatex">\(f(i, j, k)\)</span> 的实现思路如下：</p>
 <ul>
-<li>如果 $i \geq m$，说明数组 $nums1$ 的区间 $[i, m)$ 为空，因此直接返回 $nums2[j + k - 1]$；</li>
-<li>如果 $j \geq n$，说明数组 $nums2$ 的区间 $[j, n)$ 为空，因此直接返回 $nums1[i + k - 1]$；</li>
-<li>如果 $k = 1$，说明要找第一个数，因此只需要返回 $nums1[i]$ 和 $nums2[j]$ 中的最小值；</li>
-<li>否则，我们分别在两个数组中查找第 $\left\lfloor\frac{k}{2}\right\rfloor$ 个数，设为 $x$ 和 $y$。（注意，如果某个数组不存在第 $\left\lfloor\frac{k}{2}\right\rfloor$ 个数，那么我们将第 $\left\lfloor\frac{k}{2}\right\rfloor$ 个数视为 $+\infty$。）比较 $x$ 和 $y$ 的大小：<ul>
-<li>如果 $x \leq y$，则说明数组 $nums1$ 的第 $\left\lfloor\frac{k}{2}\right\rfloor$ 个数不可能是第 $k$ 小的数，因此我们可以排除数组 $nums1$ 的区间 $[i, i + \left\lfloor\frac{k}{2}\right\rfloor)$，递归调用 $f(i + \left\lfloor\frac{k}{2}\right\rfloor, j, k - \left\lfloor\frac{k}{2}\right\rfloor)$。</li>
-<li>如果 $x &gt; y$，则说明数组 $nums2$ 的第 $\left\lfloor\frac{k}{2}\right\rfloor$ 个数不可能是第 $k$ 小的数，因此我们可以排除数组 $nums2$ 的区间 $[j, j + \left\lfloor\frac{k}{2}\right\rfloor)$，递归调用 $f(i, j + \left\lfloor\frac{k}{2}\right\rfloor, k - \left\lfloor\frac{k}{2}\right\rfloor)$。</li>
+<li>如果 <span class="arithmatex">\(i \geq m\)</span>，说明数组 <span class="arithmatex">\(nums1\)</span> 的区间 <span class="arithmatex">\([i, m)\)</span> 为空，因此直接返回 <span class="arithmatex">\(nums2[j + k - 1]\)</span>；</li>
+<li>如果 <span class="arithmatex">\(j \geq n\)</span>，说明数组 <span class="arithmatex">\(nums2\)</span> 的区间 <span class="arithmatex">\([j, n)\)</span> 为空，因此直接返回 <span class="arithmatex">\(nums1[i + k - 1]\)</span>；</li>
+<li>如果 <span class="arithmatex">\(k = 1\)</span>，说明要找第一个数，因此只需要返回 <span class="arithmatex">\(nums1[i]\)</span> 和 <span class="arithmatex">\(nums2[j]\)</span> 中的最小值；</li>
+<li>否则，我们分别在两个数组中查找第 <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span> 个数，设为 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>。（注意，如果某个数组不存在第 <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span> 个数，那么我们将第 <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span> 个数视为 <span class="arithmatex">\(+\infty\)</span>。）比较 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的大小：<ul>
+<li>如果 <span class="arithmatex">\(x \leq y\)</span>，则说明数组 <span class="arithmatex">\(nums1\)</span> 的第 <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span> 个数不可能是第 <span class="arithmatex">\(k\)</span> 小的数，因此我们可以排除数组 <span class="arithmatex">\(nums1\)</span> 的区间 <span class="arithmatex">\([i, i + \left\lfloor\frac{k}{2}\right\rfloor)\)</span>，递归调用 <span class="arithmatex">\(f(i + \left\lfloor\frac{k}{2}\right\rfloor, j, k - \left\lfloor\frac{k}{2}\right\rfloor)\)</span>。</li>
+<li>如果 <span class="arithmatex">\(x &gt; y\)</span>，则说明数组 <span class="arithmatex">\(nums2\)</span> 的第 <span class="arithmatex">\(\left\lfloor\frac{k}{2}\right\rfloor\)</span> 个数不可能是第 <span class="arithmatex">\(k\)</span> 小的数，因此我们可以排除数组 <span class="arithmatex">\(nums2\)</span> 的区间 <span class="arithmatex">\([j, j + \left\lfloor\frac{k}{2}\right\rfloor)\)</span>，递归调用 <span class="arithmatex">\(f(i, j + \left\lfloor\frac{k}{2}\right\rfloor, k - \left\lfloor\frac{k}{2}\right\rfloor)\)</span>。</li>
 </ul>
 </li>
 </ul>
-<p>时间复杂度 $O(\log(m + n))$，空间复杂度 $O(\log(m + n))$。其中 $m$ 和 $n$ 分别是数组 $nums1$ 和 $nums2$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log(m + n))\)</span>，空间复杂度 <span class="arithmatex">\(O(\log(m + n))\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是数组 <span class="arithmatex">\(nums1\)</span> 和 <span class="arithmatex">\(nums2\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label><label for="__tabbed_1_8">PHP</label><label for="__tabbed_1_9">Nim</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91571,11 +91569,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

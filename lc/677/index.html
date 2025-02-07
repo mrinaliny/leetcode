@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90863,15 +90861,15 @@ mapSum.sum("ap");           // 返回 5 (<u>ap</u>ple + <u>ap</u>p = 3 + 2 = 5)
 <!-- solution:start -->
 
 <h3 id="_3">方法一：哈希表 + 前缀树</h3>
-<p>我们用哈希表 $d$ 存放键值对，用前缀树 $t$ 存放键值对的前缀和。前缀树的每个节点包含两个信息：</p>
+<p>我们用哈希表 <span class="arithmatex">\(d\)</span> 存放键值对，用前缀树 <span class="arithmatex">\(t\)</span> 存放键值对的前缀和。前缀树的每个节点包含两个信息：</p>
 <ul>
 <li><code>val</code>：以该节点为前缀的键值对的值的总和</li>
-<li><code>children</code>：长度为 $26$ 的数组，存放该节点的子节点</li>
+<li><code>children</code>：长度为 <span class="arithmatex">\(26\)</span> 的数组，存放该节点的子节点</li>
 </ul>
-<p>插入键值对 $(key, val)$ 时，我们先判断哈希表是否存在该键，如果存在，那么前缀树每个节点的 <code>val</code> 都要减去该键原来的值，然后再加上新的值。如果不存在，那么前缀树每个节点的 <code>val</code> 都要加上新的值。</p>
-<p>查询前缀和时，我们从前缀树的根节点开始，遍历前缀字符串，如果当前节点的子节点中不存在该字符，那么说明前缀树中不存在该前缀，返回 $0$。否则，继续遍历下一个字符，直到遍历完前缀字符串，返回当前节点的 <code>val</code>。</p>
-<p>时间复杂度方面，插入键值对的时间复杂度为 $O(n)$，其中 $n$ 为键的长度。查询前缀和的时间复杂度为 $O(m)$，其中 $m$ 为前缀的长度。</p>
-<p>空间复杂度 $O(n \times m \times C)$，其中 $n$ 和 $m$ 分别是键的数量以及键的最大长度；而 $C$ 是字符集的大小，本题中 $C = 26$。</p>
+<p>插入键值对 <span class="arithmatex">\((key, val)\)</span> 时，我们先判断哈希表是否存在该键，如果存在，那么前缀树每个节点的 <code>val</code> 都要减去该键原来的值，然后再加上新的值。如果不存在，那么前缀树每个节点的 <code>val</code> 都要加上新的值。</p>
+<p>查询前缀和时，我们从前缀树的根节点开始，遍历前缀字符串，如果当前节点的子节点中不存在该字符，那么说明前缀树中不存在该前缀，返回 <span class="arithmatex">\(0\)</span>。否则，继续遍历下一个字符，直到遍历完前缀字符串，返回当前节点的 <code>val</code>。</p>
+<p>时间复杂度方面，插入键值对的时间复杂度为 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为键的长度。查询前缀和的时间复杂度为 <span class="arithmatex">\(O(m)\)</span>，其中 <span class="arithmatex">\(m\)</span> 为前缀的长度。</p>
+<p>空间复杂度 <span class="arithmatex">\(O(n \times m \times C)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是键的数量以及键的最大长度；而 <span class="arithmatex">\(C\)</span> 是字符集的大小，本题中 <span class="arithmatex">\(C = 26\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91649,11 +91647,9 @@ mapSum.sum("ap");           // 返回 5 (<u>ap</u>ple + <u>ap</u>p = 3 + 2 = 5)
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

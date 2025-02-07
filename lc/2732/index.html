@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90875,16 +90873,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：分情况讨论</h3>
-<p>我们可以从小到大考虑答案选择的行数 $k$。</p>
+<p>我们可以从小到大考虑答案选择的行数 <span class="arithmatex">\(k\)</span>。</p>
 <ul>
-<li>如果 $k = 1$，每一列的和最大为 $0$，那么必须满足有一行的所有元素都是 $0$，否则无法满足条件。</li>
-<li>如果 $k = 2$，每一列的和最大为 $1$，那么必须存在有两行，且这两行的元素按位与之后的结果是 $0$，否则无法满足条件。</li>
-<li>如果 $k = 3$，每一列的和最大也是 $1$。如果 $k = 2$ 不满足条件，那么 $k = 3$ 也一定不满足条件，所以我们不需要考虑所有 $k \gt 2$ 且 $k$ 为奇数的情况。</li>
-<li>如果 $k = 4$，每一列的和最大为 $2$，此时一定是 $k = 2$ 不满足条件，也就是说，任意选取两行，都存在至少一个列的和为 $2$。我们在 $4$ 行中任意选取 $2$ 行，一共有 $C_4^2 = 6$ 种选法，那么存在至少 $6$ 个 $2$ 的列。由于列数 $n \le 5$，所以一定存在至少一列的和大于 $2$，所以 $k = 4$ 也不满足条件。</li>
-<li>对于 $k \gt 4$ 且 $k$ 为偶数的情况，我们可以得出同样的结论，即 $k$ 一定不满足条件。</li>
+<li>如果 <span class="arithmatex">\(k = 1\)</span>，每一列的和最大为 <span class="arithmatex">\(0\)</span>，那么必须满足有一行的所有元素都是 <span class="arithmatex">\(0\)</span>，否则无法满足条件。</li>
+<li>如果 <span class="arithmatex">\(k = 2\)</span>，每一列的和最大为 <span class="arithmatex">\(1\)</span>，那么必须存在有两行，且这两行的元素按位与之后的结果是 <span class="arithmatex">\(0\)</span>，否则无法满足条件。</li>
+<li>如果 <span class="arithmatex">\(k = 3\)</span>，每一列的和最大也是 <span class="arithmatex">\(1\)</span>。如果 <span class="arithmatex">\(k = 2\)</span> 不满足条件，那么 <span class="arithmatex">\(k = 3\)</span> 也一定不满足条件，所以我们不需要考虑所有 <span class="arithmatex">\(k \gt 2\)</span> 且 <span class="arithmatex">\(k\)</span> 为奇数的情况。</li>
+<li>如果 <span class="arithmatex">\(k = 4\)</span>，每一列的和最大为 <span class="arithmatex">\(2\)</span>，此时一定是 <span class="arithmatex">\(k = 2\)</span> 不满足条件，也就是说，任意选取两行，都存在至少一个列的和为 <span class="arithmatex">\(2\)</span>。我们在 <span class="arithmatex">\(4\)</span> 行中任意选取 <span class="arithmatex">\(2\)</span> 行，一共有 <span class="arithmatex">\(C_4^2 = 6\)</span> 种选法，那么存在至少 <span class="arithmatex">\(6\)</span> 个 <span class="arithmatex">\(2\)</span> 的列。由于列数 <span class="arithmatex">\(n \le 5\)</span>，所以一定存在至少一列的和大于 <span class="arithmatex">\(2\)</span>，所以 <span class="arithmatex">\(k = 4\)</span> 也不满足条件。</li>
+<li>对于 <span class="arithmatex">\(k \gt 4\)</span> 且 <span class="arithmatex">\(k\)</span> 为偶数的情况，我们可以得出同样的结论，即 <span class="arithmatex">\(k\)</span> 一定不满足条件。</li>
 </ul>
-<p>综上所述，我们只需要考虑 $k = 1$ 和 $k = 2$ 的情况即可。即判断是否有一行全为 $0$，或者是否存在两行按位与之后的结果为 $0$。</p>
-<p>时间复杂度 $O(m \times n + 4^n)$，空间复杂度 $O(2^n)$。其中 $m$ 和 $n$ 分别是矩阵的行数和列数。</p>
+<p>综上所述，我们只需要考虑 <span class="arithmatex">\(k = 1\)</span> 和 <span class="arithmatex">\(k = 2\)</span> 的情况即可。即判断是否有一行全为 <span class="arithmatex">\(0\)</span>，或者是否存在两行按位与之后的结果为 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n + 4^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(2^n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是矩阵的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91398,11 +91396,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

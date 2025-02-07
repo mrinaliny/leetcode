@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,17 +90857,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：预处理 + 动态规划</h3>
-<p>我们注意到，连续使用同一个轮胎 $(f, r)$ 跑 $i$ 圈，那么第 $i$ 圈的耗时不应该超过 $changeTime + f$，否则我们可以在第 $i$ 圈的时候换轮胎，这样总耗时会更少。即：</p>
-<p>$$
+<p>我们注意到，连续使用同一个轮胎 <span class="arithmatex">\((f, r)\)</span> 跑 <span class="arithmatex">\(i\)</span> 圈，那么第 <span class="arithmatex">\(i\)</span> 圈的耗时不应该超过 <span class="arithmatex">\(changeTime + f\)</span>，否则我们可以在第 <span class="arithmatex">\(i\)</span> 圈的时候换轮胎，这样总耗时会更少。即：</p>
+<div class="arithmatex">\[
 f \times r^{i-1} \leq changeTime + f
-$$</p>
-<p>我们可以求出满足上式的最大的 $i$，要使得 $i$ 最大，那么 $f$ 和 $r$ 应该尽可能小，根据题目的数据范围，我们取 $f=1$, $r=2$，那么 $2^{i-1} \leq changeTime + 1$，即 $i \leq \log_2(changeTime + 1) + 1$。根据这个结论，以及题目中 $changeTime$ 的数据范围，我们可以知道 $i$ 最大为 $17$。</p>
-<p>我们定义 $cost[i]$ 表示使用同一个轮胎跑 $i$ 圈的最小耗时，那么我们可以预处理出 $cost$ 数组，然后使用动态规划求解即可。定义 $f[i]$ 表示跑 $i$ 圈的最小耗时，那么我们可以得到状态转移方程：</p>
-<p>$$
+\]</div>
+<p>我们可以求出满足上式的最大的 <span class="arithmatex">\(i\)</span>，要使得 <span class="arithmatex">\(i\)</span> 最大，那么 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(r\)</span> 应该尽可能小，根据题目的数据范围，我们取 <span class="arithmatex">\(f=1\)</span>, <span class="arithmatex">\(r=2\)</span>，那么 <span class="arithmatex">\(2^{i-1} \leq changeTime + 1\)</span>，即 <span class="arithmatex">\(i \leq \log_2(changeTime + 1) + 1\)</span>。根据这个结论，以及题目中 <span class="arithmatex">\(changeTime\)</span> 的数据范围，我们可以知道 <span class="arithmatex">\(i\)</span> 最大为 <span class="arithmatex">\(17\)</span>。</p>
+<p>我们定义 <span class="arithmatex">\(cost[i]\)</span> 表示使用同一个轮胎跑 <span class="arithmatex">\(i\)</span> 圈的最小耗时，那么我们可以预处理出 <span class="arithmatex">\(cost\)</span> 数组，然后使用动态规划求解即可。定义 <span class="arithmatex">\(f[i]\)</span> 表示跑 <span class="arithmatex">\(i\)</span> 圈的最小耗时，那么我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 f[i] = (\min_{1 \leq j \leq \min(17, i)} f[i-j] + cost[j]) + changeTime
-$$</p>
-<p>初始时 $f[0] = -changeTime$，最终答案为 $f[numLaps]$。</p>
-<p>时间复杂度 $O((n + numLaps) \times \log T_{max})$，空间复杂度 $O(n + \log T_{max})$，其中 $T_{max}$ 是题目中 $f_i$, $r_i$ 和 $changeTime$ 的最大值。本题中 $\log T_{max} \approx 17$。</p>
+\]</div>
+<p>初始时 <span class="arithmatex">\(f[0] = -changeTime\)</span>，最终答案为 <span class="arithmatex">\(f[numLaps]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + numLaps) \times \log T_{max})\)</span>，空间复杂度 <span class="arithmatex">\(O(n + \log T_{max})\)</span>，其中 <span class="arithmatex">\(T_{max}\)</span> 是题目中 <span class="arithmatex">\(f_i\)</span>, <span class="arithmatex">\(r_i\)</span> 和 <span class="arithmatex">\(changeTime\)</span> 的最大值。本题中 <span class="arithmatex">\(\log T_{max} \approx 17\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91355,11 +91353,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

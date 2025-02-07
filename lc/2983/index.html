@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90893,22 +90891,22 @@ a<sub>0</sub> = 1, b<sub>0</sub> = 2, c<sub>0</sub> = 4, d<sub>0</sub> = 5.
 <!-- solution:start -->
 
 <h3 id="_3">方法一：前缀和 + 分类讨论</h3>
-<p>我们记字符串 $s$ 的长度为 $n$，那么一半的长度为 $m = \frac{n}{2}$。接下来，我们把字符串 $s$ 分成长度相等的两段，其中第二段反转后得到字符串 $t$，第一段记为 $s$。那么对于每个查询 $[a_i, b_i, c_i, d_i]$，其中 $c_i$ 和 $d_i$ 需要变换为 $n - 1 - d_i$ 和 $n - 1 - c_i$。问题转化为：对于每个查询 $[a_i, b_i, c_i, d_i]$，判断 $s[a_i, b_i]$ 和 $t[c_i, d_i]$ 是否可以通过重新排列，使得字符串 $s$ 和 $t$ 相等。</p>
+<p>我们记字符串 <span class="arithmatex">\(s\)</span> 的长度为 <span class="arithmatex">\(n\)</span>，那么一半的长度为 <span class="arithmatex">\(m = \frac{n}{2}\)</span>。接下来，我们把字符串 <span class="arithmatex">\(s\)</span> 分成长度相等的两段，其中第二段反转后得到字符串 <span class="arithmatex">\(t\)</span>，第一段记为 <span class="arithmatex">\(s\)</span>。那么对于每个查询 <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>，其中 <span class="arithmatex">\(c_i\)</span> 和 <span class="arithmatex">\(d_i\)</span> 需要变换为 <span class="arithmatex">\(n - 1 - d_i\)</span> 和 <span class="arithmatex">\(n - 1 - c_i\)</span>。问题转化为：对于每个查询 <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>，判断 <span class="arithmatex">\(s[a_i, b_i]\)</span> 和 <span class="arithmatex">\(t[c_i, d_i]\)</span> 是否可以通过重新排列，使得字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 相等。</p>
 <p>我们预处理以下信息：</p>
 <ol>
-<li>字符串 $s$ 的前缀和数组 $pre_1$，其中 $pre_1[i][j]$ 表示字符串 $s$ 前 $i$ 个字符中字符 $j$ 的数量；</li>
-<li>字符串 $t$ 的前缀和数组 $pre_2$，其中 $pre_2[i][j]$ 表示字符串 $t$ 前 $i$ 个字符中字符 $j$ 的数量；</li>
-<li>字符串 $s$ 和 $t$ 的差异数组 $diff$，其中 $diff[i]$ 表示字符串 $s$ 和 $t$ 的前 $i$ 个字符中不同的字符数量。</li>
+<li>字符串 <span class="arithmatex">\(s\)</span> 的前缀和数组 <span class="arithmatex">\(pre_1\)</span>，其中 <span class="arithmatex">\(pre_1[i][j]\)</span> 表示字符串 <span class="arithmatex">\(s\)</span> 前 <span class="arithmatex">\(i\)</span> 个字符中字符 <span class="arithmatex">\(j\)</span> 的数量；</li>
+<li>字符串 <span class="arithmatex">\(t\)</span> 的前缀和数组 <span class="arithmatex">\(pre_2\)</span>，其中 <span class="arithmatex">\(pre_2[i][j]\)</span> 表示字符串 <span class="arithmatex">\(t\)</span> 前 <span class="arithmatex">\(i\)</span> 个字符中字符 <span class="arithmatex">\(j\)</span> 的数量；</li>
+<li>字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 的差异数组 <span class="arithmatex">\(diff\)</span>，其中 <span class="arithmatex">\(diff[i]\)</span> 表示字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 的前 <span class="arithmatex">\(i\)</span> 个字符中不同的字符数量。</li>
 </ol>
-<p>对于每个查询 $[a_i, b_i, c_i, d_i]$，我们不妨假设 $a_i \le c_i$，那么我们需要讨论以下几种情况：</p>
+<p>对于每个查询 <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>，我们不妨假设 <span class="arithmatex">\(a_i \le c_i\)</span>，那么我们需要讨论以下几种情况：</p>
 <ol>
-<li>字符串 $s$ 和 $t$ 的前缀子串 $s[..a_i-1]$ 和 $t[..a_i-1]$ 必须相等，并且后缀子串 $s[\max(b_i, d_i)+1..]$ 和 $t[\max(b_i, d_i)..]$ 也必须相等，否则无法通过重新排列使得字符串 $s$ 和 $t$ 相等；</li>
-<li>如果 $d_i \le b_i$，说明区间 $[a_i, b_i]$ 包含区间 $[c_i, d_i]$，那么如果 $s[a_i, b_i]$ 和 $t[a_i, b_i]$ 这两个子串包含的字符数量相同，那么就可以通过重新排列使得字符串 $s$ 和 $t$ 相等，否则无法通过重新排列使得字符串 $s$ 和 $t$ 相等；</li>
-<li>如果 $b_i &lt; c_i$，说明区间 $[a_i, b_i]$ 和区间 $[c_i, d_i]$ 不相交，那么 $s[b_i+1, c_i-1]$ 和 $t[b_i+1, c_i-1]$ 这两个子串必须相等，并且 $s[a_i, b_i]$ 和 $t[a_i, b_i]$ 这两个子串必须相等，同时 $s[c_i, d_i]$ 和 $t[c_i, d_i]$ 这两个子串必须相等，否则无法通过重新排列使得字符串 $s$ 和 $t$ 相等。</li>
-<li>如果 $c_i \le b_i &lt; d_i$，说明区间 $[a_i, b_i]$ 和区间 $[c_i, d_i]$ 相交，那么 $s[a_i, b_i]$ 包含的字符，减去 $t[a_i, c_i-1]$ 包含的字符，必须等于 $t[c_i, d_i]$ 包含的字符，减去 $s[b_i+1, d_i]$ 包含的字符，否则无法通过重新排列使得字符串 $s$ 和 $t$ 相等。</li>
+<li>字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 的前缀子串 <span class="arithmatex">\(s[..a_i-1]\)</span> 和 <span class="arithmatex">\(t[..a_i-1]\)</span> 必须相等，并且后缀子串 <span class="arithmatex">\(s[\max(b_i, d_i)+1..]\)</span> 和 <span class="arithmatex">\(t[\max(b_i, d_i)..]\)</span> 也必须相等，否则无法通过重新排列使得字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 相等；</li>
+<li>如果 <span class="arithmatex">\(d_i \le b_i\)</span>，说明区间 <span class="arithmatex">\([a_i, b_i]\)</span> 包含区间 <span class="arithmatex">\([c_i, d_i]\)</span>，那么如果 <span class="arithmatex">\(s[a_i, b_i]\)</span> 和 <span class="arithmatex">\(t[a_i, b_i]\)</span> 这两个子串包含的字符数量相同，那么就可以通过重新排列使得字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 相等，否则无法通过重新排列使得字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 相等；</li>
+<li>如果 <span class="arithmatex">\(b_i &lt; c_i\)</span>，说明区间 <span class="arithmatex">\([a_i, b_i]\)</span> 和区间 <span class="arithmatex">\([c_i, d_i]\)</span> 不相交，那么 <span class="arithmatex">\(s[b_i+1, c_i-1]\)</span> 和 <span class="arithmatex">\(t[b_i+1, c_i-1]\)</span> 这两个子串必须相等，并且 <span class="arithmatex">\(s[a_i, b_i]\)</span> 和 <span class="arithmatex">\(t[a_i, b_i]\)</span> 这两个子串必须相等，同时 <span class="arithmatex">\(s[c_i, d_i]\)</span> 和 <span class="arithmatex">\(t[c_i, d_i]\)</span> 这两个子串必须相等，否则无法通过重新排列使得字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 相等。</li>
+<li>如果 <span class="arithmatex">\(c_i \le b_i &lt; d_i\)</span>，说明区间 <span class="arithmatex">\([a_i, b_i]\)</span> 和区间 <span class="arithmatex">\([c_i, d_i]\)</span> 相交，那么 <span class="arithmatex">\(s[a_i, b_i]\)</span> 包含的字符，减去 <span class="arithmatex">\(t[a_i, c_i-1]\)</span> 包含的字符，必须等于 <span class="arithmatex">\(t[c_i, d_i]\)</span> 包含的字符，减去 <span class="arithmatex">\(s[b_i+1, d_i]\)</span> 包含的字符，否则无法通过重新排列使得字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 相等。</li>
 </ol>
-<p>基于上述分析，我们遍历每个查询 $[a_i, b_i, c_i, d_i]$，判断是否满足上述条件即可。</p>
-<p>时间复杂度 $O((n + q) \times |\Sigma|)$，空间复杂度 $O(n \times |\Sigma|)$。其中 $n$ 和 $q$ 分别是字符串 $s$ 的长度和查询数组 $queries$ 的长度；而 $|\Sigma|$ 是字符集的大小，本题中字符集为小写英文字母，因此 $|\Sigma| = 26$。</p>
+<p>基于上述分析，我们遍历每个查询 <span class="arithmatex">\([a_i, b_i, c_i, d_i]\)</span>，判断是否满足上述条件即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + q) \times |\Sigma|)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times |\Sigma|)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(q\)</span> 分别是字符串 <span class="arithmatex">\(s\)</span> 的长度和查询数组 <span class="arithmatex">\(queries\)</span> 的长度；而 <span class="arithmatex">\(|\Sigma|\)</span> 是字符集的大小，本题中字符集为小写英文字母，因此 <span class="arithmatex">\(|\Sigma| = 26\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91847,11 +91845,9 @@ a<sub>0</sub> = 1, b<sub>0</sub> = 2, c<sub>0</sub> = 4, d<sub>0</sub> = 5.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

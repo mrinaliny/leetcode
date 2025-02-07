@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86063,17 +86061,17 @@ The last round Alice has only one choice to divide the row which is [2], [3]. Bo
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-pruning">Solution 1: Memoization + Pruning</h3>
-<p>First, we preprocess the prefix sum array $\textit{s}$, where $\textit{s}[i]$ represents the sum of the first $i$ elements of the array $\textit{stoneValue}$.</p>
-<p>Next, we design a function $\textit{dfs}(i, j)$, which represents the maximum score Alice can get from the stones in the subarray $\textit{stoneValue}$ within the index range $[i, j]$. The answer is $\textit{dfs}(0, n - 1)$.</p>
-<p>The calculation process of the function $\textit{dfs}(i, j)$ is as follows:</p>
+<p>First, we preprocess the prefix sum array <span class="arithmatex">\(\textit{s}\)</span>, where <span class="arithmatex">\(\textit{s}[i]\)</span> represents the sum of the first <span class="arithmatex">\(i\)</span> elements of the array <span class="arithmatex">\(\textit{stoneValue}\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(\textit{dfs}(i, j)\)</span>, which represents the maximum score Alice can get from the stones in the subarray <span class="arithmatex">\(\textit{stoneValue}\)</span> within the index range <span class="arithmatex">\([i, j]\)</span>. The answer is <span class="arithmatex">\(\textit{dfs}(0, n - 1)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(\textit{dfs}(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq j$, it means there is only one stone left, and Alice cannot split it, so return $0$.</li>
-<li>Otherwise, we enumerate the split point $k$, i.e., $i \leq k &lt; j$, splitting the stones in the subarray $\textit{stoneValue}$ within the index range $[i, j]$ into two parts: $[i, k]$ and $[k + 1, j]$. We calculate $a$ and $b$, which represent the total sum of the stones in the two parts, respectively. Then we calculate $\textit{dfs}(i, k)$ and $\textit{dfs}(k + 1, j)$, and update the answer.</li>
+<li>If <span class="arithmatex">\(i \geq j\)</span>, it means there is only one stone left, and Alice cannot split it, so return <span class="arithmatex">\(0\)</span>.</li>
+<li>Otherwise, we enumerate the split point <span class="arithmatex">\(k\)</span>, i.e., <span class="arithmatex">\(i \leq k &lt; j\)</span>, splitting the stones in the subarray <span class="arithmatex">\(\textit{stoneValue}\)</span> within the index range <span class="arithmatex">\([i, j]\)</span> into two parts: <span class="arithmatex">\([i, k]\)</span> and <span class="arithmatex">\([k + 1, j]\)</span>. We calculate <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>, which represent the total sum of the stones in the two parts, respectively. Then we calculate <span class="arithmatex">\(\textit{dfs}(i, k)\)</span> and <span class="arithmatex">\(\textit{dfs}(k + 1, j)\)</span>, and update the answer.</li>
 </ul>
-<p>Note that if $a &lt; b$ and $\textit{ans} \geq a \times 2$, this enumeration can be skipped; if $a &gt; b$ and $\textit{ans} \geq b \times 2$, all subsequent enumerations can be skipped, and the loop can be exited directly.</p>
+<p>Note that if <span class="arithmatex">\(a &lt; b\)</span> and <span class="arithmatex">\(\textit{ans} \geq a \times 2\)</span>, this enumeration can be skipped; if <span class="arithmatex">\(a &gt; b\)</span> and <span class="arithmatex">\(\textit{ans} \geq b \times 2\)</span>, all subsequent enumerations can be skipped, and the loop can be exited directly.</p>
 <p>Finally, we return the answer.</p>
 <p>To avoid repeated calculations, we can use memoization and pruning to optimize the enumeration efficiency.</p>
-<p>The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the array $\textit{stoneValue}$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{stoneValue}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86716,11 +86714,9 @@ The last round Alice has only one choice to divide the row which is [2], [3]. Bo
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

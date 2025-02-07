@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86057,7 +86055,7 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-recurrence">Solution 1: Recurrence</h3>
-<p>According to the problem description, we need to calculate the number of different phone numbers of length $n$. Each digit can only follow certain fixed digits, which we can list as follows:</p>
+<p>According to the problem description, we need to calculate the number of different phone numbers of length <span class="arithmatex">\(n\)</span>. Each digit can only follow certain fixed digits, which we can list as follows:</p>
 <table>
 <thead>
 <tr>
@@ -86108,23 +86106,23 @@
 </tr>
 </tbody>
 </table>
-<p>We can use a recurrence approach to calculate the number of different phone numbers of length $n$. Let $f[i]$ represent the number of different phone numbers of length $i$. Initially, $f[1] = 1$. For phone numbers of length $i$, we can calculate them based on phone numbers of length $i - 1$. Therefore, we can derive the recurrence relations:</p>
-<p>$$
+<p>We can use a recurrence approach to calculate the number of different phone numbers of length <span class="arithmatex">\(n\)</span>. Let <span class="arithmatex">\(f[i]\)</span> represent the number of different phone numbers of length <span class="arithmatex">\(i\)</span>. Initially, <span class="arithmatex">\(f[1] = 1\)</span>. For phone numbers of length <span class="arithmatex">\(i\)</span>, we can calculate them based on phone numbers of length <span class="arithmatex">\(i - 1\)</span>. Therefore, we can derive the recurrence relations:</p>
+<div class="arithmatex">\[
 \begin{aligned}
-g[0] &amp; = f[4] + f[6] \
-g[1] &amp; = f[6] + f[8] \
-g[2] &amp; = f[7] + f[9] \
-g[3] &amp; = f[4] + f[8] \
-g[4] &amp; = f[0] + f[3] + f[9] \
-g[6] &amp; = f[0] + f[1] + f[7] \
-g[7] &amp; = f[2] + f[6] \
-g[8] &amp; = f[1] + f[3] \
+g[0] &amp; = f[4] + f[6] \\
+g[1] &amp; = f[6] + f[8] \\
+g[2] &amp; = f[7] + f[9] \\
+g[3] &amp; = f[4] + f[8] \\
+g[4] &amp; = f[0] + f[3] + f[9] \\
+g[6] &amp; = f[0] + f[1] + f[7] \\
+g[7] &amp; = f[2] + f[6] \\
+g[8] &amp; = f[1] + f[3] \\
 g[9] &amp; = f[2] + f[4]
 \end{aligned}
-$$</p>
-<p>Then, we update $f$ to $g$ and continue calculating the phone numbers of the next length until we calculate the number of phone numbers of length $n$.</p>
-<p>Finally, we sum all the elements in $f$ and take the result modulo $10^9 + 7$ to get the answer.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the phone number. The space complexity is $O(|\Sigma|)$, where $\Sigma$ is the set of digits, and in this problem $|\Sigma| = 10$.</p>
+\]</div>
+<p>Then, we update <span class="arithmatex">\(f\)</span> to <span class="arithmatex">\(g\)</span> and continue calculating the phone numbers of the next length until we calculate the number of phone numbers of length <span class="arithmatex">\(n\)</span>.</p>
+<p>Finally, we sum all the elements in <span class="arithmatex">\(f\)</span> and take the result modulo <span class="arithmatex">\(10^9 + 7\)</span> to get the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the phone number. The space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>, where <span class="arithmatex">\(\Sigma\)</span> is the set of digits, and in this problem <span class="arithmatex">\(|\Sigma| = 10\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86396,44 +86394,44 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-2-matrix-exponentiation-to-accelerate-recurrence">Solution 2: Matrix Exponentiation to Accelerate Recurrence</h3>
-<p>Let's denote $T(n)$ as a $1 \times 10$ matrix $\begin{bmatrix} F_0 &amp; F_1 &amp; F_2 \cdots F_9 \end{bmatrix}$, where $F_i$ represents the number of phone numbers ending with digit $i$. We want to derive $T(n)$ from $T(n - 1)$. In other words, we need a matrix $\textit{base}$ such that $T(n - 1) \times \textit{base} = T(n)$, i.e.:</p>
-<p>$$
+<p>Let's denote <span class="arithmatex">\(T(n)\)</span> as a <span class="arithmatex">\(1 \times 10\)</span> matrix <span class="arithmatex">\(\begin{bmatrix} F_0 &amp; F_1 &amp; F_2 \cdots F_9 \end{bmatrix}\)</span>, where <span class="arithmatex">\(F_i\)</span> represents the number of phone numbers ending with digit <span class="arithmatex">\(i\)</span>. We want to derive <span class="arithmatex">\(T(n)\)</span> from <span class="arithmatex">\(T(n - 1)\)</span>. In other words, we need a matrix <span class="arithmatex">\(\textit{base}\)</span> such that <span class="arithmatex">\(T(n - 1) \times \textit{base} = T(n)\)</span>, i.e.:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
 F_0 &amp; F_1 &amp; F_2 \cdots F_9
 \end{bmatrix} \times \textit{base} = \begin{bmatrix} F_0' &amp; F_1' &amp; F_2' \cdots F_9' \end{bmatrix}
-$$</p>
-<p>Since $F_i' = \sum_{j} F_j$, where $j$ is the previous digit of $i$, the first column of the matrix $\textit{base}$ is:</p>
-<p>$$
+\]</div>
+<p>Since <span class="arithmatex">\(F_i' = \sum_{j} F_j\)</span>, where <span class="arithmatex">\(j\)</span> is the previous digit of <span class="arithmatex">\(i\)</span>, the first column of the matrix <span class="arithmatex">\(\textit{base}\)</span> is:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
-0 \
-0 \
-0 \
-0 \
-1 \
-0 \
-1 \
-0 \
-0 \
+0 \\
+0 \\
+0 \\
+0 \\
+1 \\
+0 \\
+1 \\
+0 \\
+0 \\
 0
 \end{bmatrix}
-$$</p>
-<p>Similarly, we can derive the entire matrix $\textit{base}$ as follows:</p>
-<p>$$
+\]</div>
+<p>Similarly, we can derive the entire matrix <span class="arithmatex">\(\textit{base}\)</span> as follows:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \
-1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \
-1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \
-0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \
-0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
 \end{bmatrix}
-$$</p>
-<p>We define the initial matrix $res = \begin{bmatrix} 1 &amp; 1 &amp; 1 \cdots 1 \end{bmatrix}$, and multiply it by the matrix $\textit{base}$ raised to the power of $n - 1$ to obtain $T(n)$. Finally, we sum all elements in $T(n)$ and take the result modulo $10^9 + 7$ to get the answer. The matrix $\textit{base}^{n - 1}$ can be computed using matrix exponentiation, which has a time complexity of $O(\log n)$.</p>
-<p>The time complexity is $O(\log n)$, and the space complexity is $O(|\Sigma|^2)$, where $\Sigma$ is the set of digits, and in this problem $|\Sigma| = 10$.</p>
+\]</div>
+<p>We define the initial matrix <span class="arithmatex">\(res = \begin{bmatrix} 1 &amp; 1 &amp; 1 \cdots 1 \end{bmatrix}\)</span>, and multiply it by the matrix <span class="arithmatex">\(\textit{base}\)</span> raised to the power of <span class="arithmatex">\(n - 1\)</span> to obtain <span class="arithmatex">\(T(n)\)</span>. Finally, we sum all elements in <span class="arithmatex">\(T(n)\)</span> and take the result modulo <span class="arithmatex">\(10^9 + 7\)</span> to get the answer. The matrix <span class="arithmatex">\(\textit{base}^{n - 1}\)</span> can be computed using matrix exponentiation, which has a time complexity of <span class="arithmatex">\(O(\log n)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(|\Sigma|^2)\)</span>, where <span class="arithmatex">\(\Sigma\)</span> is the set of digits, and in this problem <span class="arithmatex">\(|\Sigma| = 10\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87269,11 +87267,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

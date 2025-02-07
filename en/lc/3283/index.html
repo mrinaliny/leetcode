@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86111,16 +86109,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-bfs-state-compression-memoization">Solution 1: BFS + State Compression + Memoization</h3>
-<p>First, we preprocess the shortest distance for each pawn to any position on the chessboard and record it in the array $\textit{dist}$, where $\textit{dist}[i][x][y]$ represents the shortest distance for the $i$-th pawn to the position $(x, y)$.</p>
-<p>Next, we design a function $\text{dfs}(\textit{last}, \textit{state}, \textit{k})$, where $\textit{last}$ represents the number of the last pawn eaten, $\textit{state}$ represents the current state of the remaining pawns, and $\textit{k}$ represents whether it is Alice's or Bob's turn. The function returns the maximum number of moves for the current turn. The answer is $\text{dfs}(n, 2^n-1, 1)$. Here, initially, the number of the last pawn eaten is $n$, which is also the position of the knight.</p>
-<p>The specific implementation of the function $\text{dfs}$ is as follows:</p>
+<p>First, we preprocess the shortest distance for each pawn to any position on the chessboard and record it in the array <span class="arithmatex">\(\textit{dist}\)</span>, where <span class="arithmatex">\(\textit{dist}[i][x][y]\)</span> represents the shortest distance for the <span class="arithmatex">\(i\)</span>-th pawn to the position <span class="arithmatex">\((x, y)\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(\text{dfs}(\textit{last}, \textit{state}, \textit{k})\)</span>, where <span class="arithmatex">\(\textit{last}\)</span> represents the number of the last pawn eaten, <span class="arithmatex">\(\textit{state}\)</span> represents the current state of the remaining pawns, and <span class="arithmatex">\(\textit{k}\)</span> represents whether it is Alice's or Bob's turn. The function returns the maximum number of moves for the current turn. The answer is <span class="arithmatex">\(\text{dfs}(n, 2^n-1, 1)\)</span>. Here, initially, the number of the last pawn eaten is <span class="arithmatex">\(n\)</span>, which is also the position of the knight.</p>
+<p>The specific implementation of the function <span class="arithmatex">\(\text{dfs}\)</span> is as follows:</p>
 <ul>
-<li>If $\textit{state} = 0$, it means there are no pawns left, return $0$;</li>
-<li>If $\textit{k} = 1$, it means it is Alice's turn. We need to find a pawn such that the number of moves after eating this pawn is maximized, i.e., $\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]$;</li>
-<li>If $\textit{k} = 0$, it means it is Bob's turn. We need to find a pawn such that the number of moves after eating this pawn is minimized, i.e., $\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]$.</li>
+<li>If <span class="arithmatex">\(\textit{state} = 0\)</span>, it means there are no pawns left, return <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(\textit{k} = 1\)</span>, it means it is Alice's turn. We need to find a pawn such that the number of moves after eating this pawn is maximized, i.e., <span class="arithmatex">\(\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]\)</span>;</li>
+<li>If <span class="arithmatex">\(\textit{k} = 0\)</span>, it means it is Bob's turn. We need to find a pawn such that the number of moves after eating this pawn is minimized, i.e., <span class="arithmatex">\(\text{dfs}(i, \textit{state} \oplus 2^i, \textit{k} \oplus 1) + \textit{dist}[\textit{last}][x][y]\)</span>.</li>
 </ul>
 <p>To avoid repeated calculations, we use memoization, i.e., using a hash table to record the states that have already been calculated.</p>
-<p>The time complexity is $O(n \times m^2 + 2^n \times n^2)$, and the space complexity is $O(n \times m^2 + 2^n \times n)$. Here, $n$ and $m$ represent the number of pawns and the size of the chessboard, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times m^2 + 2^n \times n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times m^2 + 2^n \times n)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> represent the number of pawns and the size of the chessboard, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86840,11 +86838,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

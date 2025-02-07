@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,10 +90866,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：枚举</h3>
-<p>我们可以枚举每个删除的位置 $i$，然后计算左侧和右侧的连续 1 的个数，最后取最大值。</p>
-<p>具体地，我们使用两个长度为 $n+1$ 的数组 $left$ 和 $right$，其中 $left[i]$ 表示以 $nums[i-1]$ 结尾的连续 $1$ 的个数，而 $right[i]$ 表示以 $nums[i]$ 开头的连续 $1$ 的个数。</p>
-<p>最终答案即为 $\max_{0 \leq i &lt; n} {left[i] + right[i+1]}$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+<p>我们可以枚举每个删除的位置 <span class="arithmatex">\(i\)</span>，然后计算左侧和右侧的连续 1 的个数，最后取最大值。</p>
+<p>具体地，我们使用两个长度为 <span class="arithmatex">\(n+1\)</span> 的数组 <span class="arithmatex">\(left\)</span> 和 <span class="arithmatex">\(right\)</span>，其中 <span class="arithmatex">\(left[i]\)</span> 表示以 <span class="arithmatex">\(nums[i-1]\)</span> 结尾的连续 <span class="arithmatex">\(1\)</span> 的个数，而 <span class="arithmatex">\(right[i]\)</span> 表示以 <span class="arithmatex">\(nums[i]\)</span> 开头的连续 <span class="arithmatex">\(1\)</span> 的个数。</p>
+<p>最终答案即为 <span class="arithmatex">\(\max_{0 \leq i &lt; n} \{left[i] + right[i+1]\}\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91083,10 +91081,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：双指针</h3>
-<p>题目实际上是让我们找出一个最长的子数组，该子数组中最多只包含一个 $0$，删掉该子数组中的其中一个元素后，剩余的长度即为答案。</p>
-<p>因此，我们可以用两个指针 $j$ 和 $i$ 分别指向子数组的左右边界，初始时 $j = 0$, $i = 0$。另外，我们用一个变量 $cnt$ 记录子数组中 $0$ 的个数。</p>
-<p>接下来，我们移动右指针 $i$，如果 $nums[i] = 0$，则 $cnt$ 加 $1$。当 $cnt &gt; 1$ 时，我们需要移动左指针 $j$，直到 $cnt \leq 1$。然后，我们更新答案，即 $ans = \max(ans, i - j)$。继续移动右指针 $i$，直到 $i$ 到达数组的末尾。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组 $nums$ 的长度。空间复杂度 $O(1)$。</p>
+<p>题目实际上是让我们找出一个最长的子数组，该子数组中最多只包含一个 <span class="arithmatex">\(0\)</span>，删掉该子数组中的其中一个元素后，剩余的长度即为答案。</p>
+<p>因此，我们可以用两个指针 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(i\)</span> 分别指向子数组的左右边界，初始时 <span class="arithmatex">\(j = 0\)</span>, <span class="arithmatex">\(i = 0\)</span>。另外，我们用一个变量 <span class="arithmatex">\(cnt\)</span> 记录子数组中 <span class="arithmatex">\(0\)</span> 的个数。</p>
+<p>接下来，我们移动右指针 <span class="arithmatex">\(i\)</span>，如果 <span class="arithmatex">\(nums[i] = 0\)</span>，则 <span class="arithmatex">\(cnt\)</span> 加 <span class="arithmatex">\(1\)</span>。当 <span class="arithmatex">\(cnt &gt; 1\)</span> 时，我们需要移动左指针 <span class="arithmatex">\(j\)</span>，直到 <span class="arithmatex">\(cnt \leq 1\)</span>。然后，我们更新答案，即 <span class="arithmatex">\(ans = \max(ans, i - j)\)</span>。继续移动右指针 <span class="arithmatex">\(i\)</span>，直到 <span class="arithmatex">\(i\)</span> 到达数组的末尾。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91226,9 +91224,9 @@
 <!-- solution:start -->
 
 <h3 id="_5">方法三：双指针（优化）</h3>
-<p>方法二中，我们每次会循环移动左指针，直到 $cnt \leq 1$。由于题目求的是最长子数组，意味着我们不需要缩小子数组的长度，因此，如果 $\textit{cnt} \gt 1$，我们只移动左指针一次，右指针也继续向右移动。这样可以保证子数组的长度不会减小。</p>
-<p>最后，我们返回的答案即为 $n - l - 1$，其中 $l$ 为左指针的位置。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组 $nums$ 的长度。空间复杂度 $O(1)$。</p>
+<p>方法二中，我们每次会循环移动左指针，直到 <span class="arithmatex">\(cnt \leq 1\)</span>。由于题目求的是最长子数组，意味着我们不需要缩小子数组的长度，因此，如果 <span class="arithmatex">\(\textit{cnt} \gt 1\)</span>，我们只移动左指针一次，右指针也继续向右移动。这样可以保证子数组的长度不会减小。</p>
+<p>最后，我们返回的答案即为 <span class="arithmatex">\(n - l - 1\)</span>，其中 <span class="arithmatex">\(l\)</span> 为左指针的位置。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91582,11 +91580,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

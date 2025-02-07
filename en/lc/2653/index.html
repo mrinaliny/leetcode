@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86082,9 +86080,9 @@ For [0, -3], the 1<sup>st</sup> smallest negative integer is -3.</pre>
 <!-- solution:start -->
 
 <h3 id="solution-1-sliding-window">Solution 1: Sliding Window</h3>
-<p>We notice that the range of elements in the array $nums$ is $[-50,50]$. Therefore, we can use an array of length $101$, denoted as $cnt$, to count the occurrences of each number in $[-50,50]$. Due to the presence of negative numbers, we can add $50$ to each number to make them all non-negative, so we can use the array $cnt$ to count the occurrences of each number.</p>
-<p>Next, we traverse the array $nums$, maintaining a sliding window of length $k$. The occurrence times of all elements in the window are recorded in the array $cnt$. Then we traverse the array $cnt$ to find the $x$-th smallest number, which is the beauty value of the current sliding window. If there is no $x$-th smallest number, then the beauty value is $0$.</p>
-<p>The time complexity is $O(n \times 50)$, and the space complexity is $O(100)$. Where $n$ is the length of the array $nums$.</p>
+<p>We notice that the range of elements in the array <span class="arithmatex">\(nums\)</span> is <span class="arithmatex">\([-50,50]\)</span>. Therefore, we can use an array of length <span class="arithmatex">\(101\)</span>, denoted as <span class="arithmatex">\(cnt\)</span>, to count the occurrences of each number in <span class="arithmatex">\([-50,50]\)</span>. Due to the presence of negative numbers, we can add <span class="arithmatex">\(50\)</span> to each number to make them all non-negative, so we can use the array <span class="arithmatex">\(cnt\)</span> to count the occurrences of each number.</p>
+<p>Next, we traverse the array <span class="arithmatex">\(nums\)</span>, maintaining a sliding window of length <span class="arithmatex">\(k\)</span>. The occurrence times of all elements in the window are recorded in the array <span class="arithmatex">\(cnt\)</span>. Then we traverse the array <span class="arithmatex">\(cnt\)</span> to find the <span class="arithmatex">\(x\)</span>-th smallest number, which is the beauty value of the current sliding window. If there is no <span class="arithmatex">\(x\)</span>-th smallest number, then the beauty value is <span class="arithmatex">\(0\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 50)\)</span>, and the space complexity is <span class="arithmatex">\(O(100)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Python3</label><label for="__tabbed_1_3">Java</label><label for="__tabbed_1_4">C++</label><label for="__tabbed_1_5">Go</label><label for="__tabbed_1_6">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86374,7 +86372,7 @@ For [0, -3], the 1<sup>st</sup> smallest negative integer is -3.</pre>
 <!-- solution:start -->
 
 <h3 id="solution-2-double-priority-queue-min-max-heap-delayed-deletion">Solution 2: Double Priority Queue (Min-Max Heap) + Delayed Deletion</h3>
-<p>We can use two priority queues (min-max heap) to maintain the elements in the current window, one priority queue stores the smaller $x$ elements in the current window, and the other priority queue stores the larger $k - x$ elements in the current window. We also need a delayed deletion dictionary <code>delayed</code> to record whether the elements in the current window need to be deleted.</p>
+<p>We can use two priority queues (min-max heap) to maintain the elements in the current window, one priority queue stores the smaller <span class="arithmatex">\(x\)</span> elements in the current window, and the other priority queue stores the larger <span class="arithmatex">\(k - x\)</span> elements in the current window. We also need a delayed deletion dictionary <code>delayed</code> to record whether the elements in the current window need to be deleted.</p>
 <p>We design a class <code>MedianFinder</code> to maintain the elements in the current window. This class includes the following methods:</p>
 <ul>
 <li><code>add_num(num)</code>: Add <code>num</code> to the current window.</li>
@@ -86383,12 +86381,12 @@ For [0, -3], the 1<sup>st</sup> smallest negative integer is -3.</pre>
 <li><code>prune(pq)</code>: If the top element of the heap is in the delayed deletion dictionary <code>delayed</code>, pop it from the top of the heap and subtract one from its delayed deletion count. If the delayed deletion count of the element is zero, delete it from the delayed deletion dictionary.</li>
 <li><code>rebalance()</code>: Balance the size of the two priority queues.</li>
 </ul>
-<p>In the <code>add_num(num)</code> method, we first consider adding <code>num</code> to the smaller queue. If the count is greater than $x$ or <code>num</code> is less than or equal to the top element of the smaller queue, add <code>num</code> to the smaller queue; otherwise, add <code>num</code> to the larger queue. Then we call the <code>rebalance()</code> method to ensure that the number of elements in the smaller queue does not exceed $x$.</p>
+<p>In the <code>add_num(num)</code> method, we first consider adding <code>num</code> to the smaller queue. If the count is greater than <span class="arithmatex">\(x\)</span> or <code>num</code> is less than or equal to the top element of the smaller queue, add <code>num</code> to the smaller queue; otherwise, add <code>num</code> to the larger queue. Then we call the <code>rebalance()</code> method to ensure that the number of elements in the smaller queue does not exceed <span class="arithmatex">\(x\)</span>.</p>
 <p>In the <code>remove_num(num)</code> method, we increase the delayed deletion count of <code>num</code> by one. Then we compare <code>num</code> with the top element of the smaller queue. If <code>num</code> is less than or equal to the top element of the smaller queue, update the size of the smaller queue and call the <code>prune()</code> method to ensure that the top element of the smaller queue is not in the delayed deletion dictionary. Otherwise, we update the size of the larger queue and call the <code>prune()</code> method to ensure that the top element of the larger queue is not in the delayed deletion dictionary.</p>
-<p>In the <code>find()</code> method, if the size of the smaller queue is equal to $x$, return the top element of the smaller queue, otherwise return $0$.</p>
+<p>In the <code>find()</code> method, if the size of the smaller queue is equal to <span class="arithmatex">\(x\)</span>, return the top element of the smaller queue, otherwise return <span class="arithmatex">\(0\)</span>.</p>
 <p>In the <code>prune(pq)</code> method, if the top element of the heap is in the delayed deletion dictionary, pop it from the top of the heap and subtract one from its delayed deletion count. If the delayed deletion count of the element is zero, delete it from the delayed deletion dictionary.</p>
-<p>In the <code>rebalance()</code> method, if the size of the smaller queue is greater than $x$, add the top element of the smaller queue to the larger queue and call the <code>prune()</code> method to ensure that the top element of the smaller queue is not in the delayed deletion dictionary. If the size of the smaller queue is less than $x$ and the size of the larger queue is greater than $0$, add the top element of the larger queue to the smaller queue and call the <code>prune()</code> method to ensure that the top element of the larger queue is not in the delayed deletion dictionary.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Where $n$ is the length of the array <code>nums</code>.</p>
+<p>In the <code>rebalance()</code> method, if the size of the smaller queue is greater than <span class="arithmatex">\(x\)</span>, add the top element of the smaller queue to the larger queue and call the <code>prune()</code> method to ensure that the top element of the smaller queue is not in the delayed deletion dictionary. If the size of the smaller queue is less than <span class="arithmatex">\(x\)</span> and the size of the larger queue is greater than <span class="arithmatex">\(0\)</span>, add the top element of the larger queue to the smaller queue and call the <code>prune()</code> method to ensure that the top element of the larger queue is not in the delayed deletion dictionary.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the array <code>nums</code>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0400-0499/0480.Sliding%20Window%20Median/README.md">480. Sliding Window Median</a></li>
@@ -87350,11 +87348,9 @@ For [0, -3], the 1<sup>st</sup> smallest negative integer is -3.</pre>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86088,24 +86086,24 @@ The grid happiness is 90 + 80 + 90 = 260.
 <!-- solution:start -->
 
 <h3 id="solution-1-ternary-state-compression-memoization">Solution 1: Ternary State Compression + Memoization</h3>
-<p>We notice that in the problem, $1 \leq m, n \leq 5$, and each grid cell has three states: no personnel assigned, introverted personnel assigned, and extroverted personnel assigned. Therefore, we can use $0$, $1$, $2$ to represent these three states, and each row in the grid can be represented by a ternary number of length $n$.</p>
-<p>We define a function $dfs(i, pre, ic, ec)$, which represents the maximum happiness of the grid starting from the $i$-th row, with the state of the previous row being $pre$, $ic$ introverted people left, and $ec$ extroverted people left. The answer is $dfs(0, 0, introvertsCount, extrovertsCount)$.</p>
-<p>The calculation process of the function $dfs(i, pre, ic, ec)$ is as follows:</p>
-<p>If $i = m$, it means that all rows have been processed, so return $0$;</p>
-<p>If $ic = 0$ and $ec = 0$, it means that all people have been assigned, so return $0$;</p>
-<p>Otherwise, enumerate the current row's state $cur$, where $cur \in [0, 3^n)$, then calculate the happiness $f[cur]$ of the current row, and the contribution $g[pre][cur]$ to the happiness between the state $pre$ of the previous row, and recursively calculate $dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])$, finally return the maximum value of $f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])$, that is:</p>
-<p>$$
-dfs(i, pre, ic, ec) = \max_{cur} {f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])}
-$$</p>
+<p>We notice that in the problem, <span class="arithmatex">\(1 \leq m, n \leq 5\)</span>, and each grid cell has three states: no personnel assigned, introverted personnel assigned, and extroverted personnel assigned. Therefore, we can use <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span> to represent these three states, and each row in the grid can be represented by a ternary number of length <span class="arithmatex">\(n\)</span>.</p>
+<p>We define a function <span class="arithmatex">\(dfs(i, pre, ic, ec)\)</span>, which represents the maximum happiness of the grid starting from the <span class="arithmatex">\(i\)</span>-th row, with the state of the previous row being <span class="arithmatex">\(pre\)</span>, <span class="arithmatex">\(ic\)</span> introverted people left, and <span class="arithmatex">\(ec\)</span> extroverted people left. The answer is <span class="arithmatex">\(dfs(0, 0, introvertsCount, extrovertsCount)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, pre, ic, ec)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i = m\)</span>, it means that all rows have been processed, so return <span class="arithmatex">\(0\)</span>;</p>
+<p>If <span class="arithmatex">\(ic = 0\)</span> and <span class="arithmatex">\(ec = 0\)</span>, it means that all people have been assigned, so return <span class="arithmatex">\(0\)</span>;</p>
+<p>Otherwise, enumerate the current row's state <span class="arithmatex">\(cur\)</span>, where <span class="arithmatex">\(cur \in [0, 3^n)\)</span>, then calculate the happiness <span class="arithmatex">\(f[cur]\)</span> of the current row, and the contribution <span class="arithmatex">\(g[pre][cur]\)</span> to the happiness between the state <span class="arithmatex">\(pre\)</span> of the previous row, and recursively calculate <span class="arithmatex">\(dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\)</span>, finally return the maximum value of <span class="arithmatex">\(f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\)</span>, that is:</p>
+<div class="arithmatex">\[
+dfs(i, pre, ic, ec) = \max_{cur} \{f[cur] + g[pre][cur] + dfs(i + 1, cur, ic - ix[cur], ec - ex[cur])\}
+\]</div>
 <p>Where:</p>
 <ul>
-<li>$ix[cur]$ represents the number of introverted people in state $cur$;</li>
-<li>$ex[cur]$ represents the number of extroverted people in state $cur$;</li>
-<li>$f[cur]$ represents the initial happiness of the people in state $cur$;</li>
-<li>$g[pre][cur]$ represents the contribution to happiness of two adjacent state rows.</li>
+<li><span class="arithmatex">\(ix[cur]\)</span> represents the number of introverted people in state <span class="arithmatex">\(cur\)</span>;</li>
+<li><span class="arithmatex">\(ex[cur]\)</span> represents the number of extroverted people in state <span class="arithmatex">\(cur\)</span>;</li>
+<li><span class="arithmatex">\(f[cur]\)</span> represents the initial happiness of the people in state <span class="arithmatex">\(cur\)</span>;</li>
+<li><span class="arithmatex">\(g[pre][cur]\)</span> represents the contribution to happiness of two adjacent state rows.</li>
 </ul>
 <p>These values can be obtained through preprocessing. And we can use the method of memoization to avoid repeated calculations.</p>
-<p>The time complexity is $O(3^{2n} \times (m \times ic \times ec + n))$, and the space complexity is $O(3^{2n} + 3^n \times m \times ic \times ec)$. Where $ic$ and $ec$ represent the number of introverted and extroverted people, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(3^{2n} \times (m \times ic \times ec + n))\)</span>, and the space complexity is <span class="arithmatex">\(O(3^{2n} + 3^n \times m \times ic \times ec)\)</span>. Where <span class="arithmatex">\(ic\)</span> and <span class="arithmatex">\(ec\)</span> represent the number of introverted and extroverted people, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86747,15 +86745,15 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-2-contour-line-memorized-search">Solution 2: Contour Line Memorized Search</h3>
-<p>We can consider searching each grid cell, each time searching a position $(i, j)$, we denote $pos = i \times n + j$. Then its left and upper adjacent grids will affect their happiness contribution.</p>
-<p>We define a function $dfs(pos, pre, ic, ec)$, which represents the maximum happiness of the grid when we search to position $pos$, and the state of the previous $n$ grid cells is $pre$, with $ic$ introverted people left, and $ec$ extroverted people left. The answer is $dfs(0, 0, introvertsCount, extrovertsCount)$.</p>
-<p>The calculation process of the function $dfs(pos, pre, ic, ec)$ is as follows:</p>
-<p>If $pos = m \times n$, it means that all grid cells have been processed, so return $0$;</p>
-<p>If $ic = 0$ and $ec = 0$, it means that all people have been assigned, so return $0$;</p>
-<p>Otherwise, we calculate the state $up = \frac{pre}{3^{n-1}}$ of the upper adjacent grid cell of the current grid cell based on $pre$, and the state $left = pre \bmod 3$ of the left adjacent grid cell (note that if $pos$ is in the $0$-th column, then $left = 0$).</p>
-<p>Next, we enumerate the state $i$ of the current grid cell, where $i \in [0, 3)$. Then the state of the current $n$ grid cells is $cur = pre \bmod 3^{n-1} \times 3 + i$, and the happiness contribution of the current grid cell and its left and upper adjacent grid cells is $h[up][i]+h[left][i]$; the happiness of the current grid cell itself depends on whether personnel are assigned to this position, and whether the assigned personnel are introverted or extroverted. If they are introverted, the happiness is $120$, if they are extroverted, the happiness is $40$, otherwise, the happiness is $0$; then, if personnel are assigned to the current grid cell, we need to update $ic$ or $ec$ when we recursively call the function. Accumulate these happiness values, and take the maximum value as the return value of the function.</p>
+<p>We can consider searching each grid cell, each time searching a position <span class="arithmatex">\((i, j)\)</span>, we denote <span class="arithmatex">\(pos = i \times n + j\)</span>. Then its left and upper adjacent grids will affect their happiness contribution.</p>
+<p>We define a function <span class="arithmatex">\(dfs(pos, pre, ic, ec)\)</span>, which represents the maximum happiness of the grid when we search to position <span class="arithmatex">\(pos\)</span>, and the state of the previous <span class="arithmatex">\(n\)</span> grid cells is <span class="arithmatex">\(pre\)</span>, with <span class="arithmatex">\(ic\)</span> introverted people left, and <span class="arithmatex">\(ec\)</span> extroverted people left. The answer is <span class="arithmatex">\(dfs(0, 0, introvertsCount, extrovertsCount)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(pos, pre, ic, ec)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(pos = m \times n\)</span>, it means that all grid cells have been processed, so return <span class="arithmatex">\(0\)</span>;</p>
+<p>If <span class="arithmatex">\(ic = 0\)</span> and <span class="arithmatex">\(ec = 0\)</span>, it means that all people have been assigned, so return <span class="arithmatex">\(0\)</span>;</p>
+<p>Otherwise, we calculate the state <span class="arithmatex">\(up = \frac{pre}{3^{n-1}}\)</span> of the upper adjacent grid cell of the current grid cell based on <span class="arithmatex">\(pre\)</span>, and the state <span class="arithmatex">\(left = pre \bmod 3\)</span> of the left adjacent grid cell (note that if <span class="arithmatex">\(pos\)</span> is in the <span class="arithmatex">\(0\)</span>-th column, then <span class="arithmatex">\(left = 0\)</span>).</p>
+<p>Next, we enumerate the state <span class="arithmatex">\(i\)</span> of the current grid cell, where <span class="arithmatex">\(i \in [0, 3)\)</span>. Then the state of the current <span class="arithmatex">\(n\)</span> grid cells is <span class="arithmatex">\(cur = pre \bmod 3^{n-1} \times 3 + i\)</span>, and the happiness contribution of the current grid cell and its left and upper adjacent grid cells is <span class="arithmatex">\(h[up][i]+h[left][i]\)</span>; the happiness of the current grid cell itself depends on whether personnel are assigned to this position, and whether the assigned personnel are introverted or extroverted. If they are introverted, the happiness is <span class="arithmatex">\(120\)</span>, if they are extroverted, the happiness is <span class="arithmatex">\(40\)</span>, otherwise, the happiness is <span class="arithmatex">\(0\)</span>; then, if personnel are assigned to the current grid cell, we need to update <span class="arithmatex">\(ic\)</span> or <span class="arithmatex">\(ec\)</span> when we recursively call the function. Accumulate these happiness values, and take the maximum value as the return value of the function.</p>
 <p>Similar to Solution 1, we can also use the method of memoization to avoid repeated calculations.</p>
-<p>The time complexity is $O(3^{n+1} \times m \times n \times ic \times ec)$, and the space complexity is $O(3^n \times m \times n \times ic \times ec)$. Where $ic$ and $ec$ represent the number of introverted and extroverted people, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(3^{n+1} \times m \times n \times ic \times ec)\)</span>, and the space complexity is <span class="arithmatex">\(O(3^n \times m \times n \times ic \times ec)\)</span>. Where <span class="arithmatex">\(ic\)</span> and <span class="arithmatex">\(ec\)</span> represent the number of introverted and extroverted people, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87404,11 +87402,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

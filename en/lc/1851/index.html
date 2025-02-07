@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,15 +86069,15 @@
 
 <h3 id="solution-1-sorting-offline-query-priority-queue-min-heap">Solution 1: Sorting + Offline Query + Priority Queue (Min Heap)</h3>
 <p>We notice that the order of queries does not affect the answer, and the intervals involved do not change. Therefore, we consider sorting all queries in ascending order, and sorting all intervals in ascending order of the left endpoint.</p>
-<p>We use a priority queue (min heap) $pq$ to maintain all current intervals. Each element in the queue is a pair $(v, r)$, representing an interval with length $v$ and right endpoint $r$. Initially, the priority queue is empty. In addition, we define a pointer $i$ that points to the current interval being traversed, and initially $i=0$.</p>
-<p>We traverse each query $(x, j)$ in ascending order and perform the following operations:</p>
+<p>We use a priority queue (min heap) <span class="arithmatex">\(pq\)</span> to maintain all current intervals. Each element in the queue is a pair <span class="arithmatex">\((v, r)\)</span>, representing an interval with length <span class="arithmatex">\(v\)</span> and right endpoint <span class="arithmatex">\(r\)</span>. Initially, the priority queue is empty. In addition, we define a pointer <span class="arithmatex">\(i\)</span> that points to the current interval being traversed, and initially <span class="arithmatex">\(i=0\)</span>.</p>
+<p>We traverse each query <span class="arithmatex">\((x, j)\)</span> in ascending order and perform the following operations:</p>
 <ul>
-<li>If the pointer $i$ has not traversed all intervals, and the left endpoint of the current interval $[a, b]$ is less than or equal to $x$, then we add this interval to the priority queue and move the pointer $i$ one step forward. Repeat this process.</li>
-<li>If the priority queue is not empty, and the right endpoint of the heap top element is less than $x$, then we pop the heap top element. Repeat this process.</li>
-<li>At this point, if the priority queue is not empty, then the heap top element is the smallest interval containing $x$. We add its length $v$ to the answer array $ans$.</li>
+<li>If the pointer <span class="arithmatex">\(i\)</span> has not traversed all intervals, and the left endpoint of the current interval <span class="arithmatex">\([a, b]\)</span> is less than or equal to <span class="arithmatex">\(x\)</span>, then we add this interval to the priority queue and move the pointer <span class="arithmatex">\(i\)</span> one step forward. Repeat this process.</li>
+<li>If the priority queue is not empty, and the right endpoint of the heap top element is less than <span class="arithmatex">\(x\)</span>, then we pop the heap top element. Repeat this process.</li>
+<li>At this point, if the priority queue is not empty, then the heap top element is the smallest interval containing <span class="arithmatex">\(x\)</span>. We add its length <span class="arithmatex">\(v\)</span> to the answer array <span class="arithmatex">\(ans\)</span>.</li>
 </ul>
-<p>After the above process is over, we return the answer array $ans$.</p>
-<p>The time complexity is $O(n \times \log n + m \times \log m)$, and the space complexity is $O(n + m)$. Where $n$ and $m$ are the lengths of the arrays <code>intervals</code> and <code>queries</code> respectively.</p>
+<p>After the above process is over, we return the answer array <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n + m \times \log m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + m)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the arrays <code>intervals</code> and <code>queries</code> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86549,11 +86547,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

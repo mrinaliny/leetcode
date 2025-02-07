@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90894,20 +90892,20 @@
 <li>左子树的最大值小于根节点的值；</li>
 <li>右子树的最小值大于根节点的值。</li>
 </ul>
-<p>因此，我们设计一个函数 $dfs(root)$，函数的返回值是一个四元组 $(bst, mi, mx, s)$，其中：</p>
+<p>因此，我们设计一个函数 <span class="arithmatex">\(dfs(root)\)</span>，函数的返回值是一个四元组 <span class="arithmatex">\((bst, mi, mx, s)\)</span>，其中：</p>
 <ul>
-<li>数字 $bst$ 表示以 $root$ 为根的树是否是二叉搜索树。如果是二叉搜索树，则 $bst = 1$；否则 $bst = 0$；</li>
-<li>数字 $mi$ 表示以 $root$ 为根的树的最小值；</li>
-<li>数字 $mx$ 表示以 $root$ 为根的树的最大值；</li>
-<li>数字 $s$ 表示以 $root$ 为根的树的所有节点的和。</li>
+<li>数字 <span class="arithmatex">\(bst\)</span> 表示以 <span class="arithmatex">\(root\)</span> 为根的树是否是二叉搜索树。如果是二叉搜索树，则 <span class="arithmatex">\(bst = 1\)</span>；否则 <span class="arithmatex">\(bst = 0\)</span>；</li>
+<li>数字 <span class="arithmatex">\(mi\)</span> 表示以 <span class="arithmatex">\(root\)</span> 为根的树的最小值；</li>
+<li>数字 <span class="arithmatex">\(mx\)</span> 表示以 <span class="arithmatex">\(root\)</span> 为根的树的最大值；</li>
+<li>数字 <span class="arithmatex">\(s\)</span> 表示以 <span class="arithmatex">\(root\)</span> 为根的树的所有节点的和。</li>
 </ul>
-<p>函数 $dfs(root)$ 的执行逻辑如下：</p>
-<p>如果 $root$ 为空节点，则返回 $(1, +\infty, -\infty, 0)$，表示空树是二叉搜索树，最小值和最大值分别为正无穷和负无穷，节点和为 $0$。</p>
-<p>否则，递归计算 $root$ 的左子树和右子树，分别得到 $(lbst, lmi, lmx, ls)$ 和 $(rbst, rmi, rmx, rs)$，然后判断 $root$ 节点是否满足二叉搜索树的条件。</p>
-<p>如果满足 $lbst = 1$ 且 $rbst = 1$ 且 $lmx \lt root.val \lt rmi$，则以 $root$ 为根的树是二叉搜索树，节点和 $s= ls + rs + root.val$。我们更新答案 $ans = \max(ans, s)$，并返回 $(1, \min(lmi, root.val), \max(rmx, root.val), s)$。</p>
-<p>否则，以 $root$ 为根的树不是二叉搜索树，我们返回 $(0, 0, 0, 0)$。</p>
-<p>我们在主函数中调用 $dfs(root)$，执行完毕后，答案即为 $ans$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是二叉树的节点数。</p>
+<p>函数 <span class="arithmatex">\(dfs(root)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(root\)</span> 为空节点，则返回 <span class="arithmatex">\((1, +\infty, -\infty, 0)\)</span>，表示空树是二叉搜索树，最小值和最大值分别为正无穷和负无穷，节点和为 <span class="arithmatex">\(0\)</span>。</p>
+<p>否则，递归计算 <span class="arithmatex">\(root\)</span> 的左子树和右子树，分别得到 <span class="arithmatex">\((lbst, lmi, lmx, ls)\)</span> 和 <span class="arithmatex">\((rbst, rmi, rmx, rs)\)</span>，然后判断 <span class="arithmatex">\(root\)</span> 节点是否满足二叉搜索树的条件。</p>
+<p>如果满足 <span class="arithmatex">\(lbst = 1\)</span> 且 <span class="arithmatex">\(rbst = 1\)</span> 且 <span class="arithmatex">\(lmx \lt root.val \lt rmi\)</span>，则以 <span class="arithmatex">\(root\)</span> 为根的树是二叉搜索树，节点和 <span class="arithmatex">\(s= ls + rs + root.val\)</span>。我们更新答案 <span class="arithmatex">\(ans = \max(ans, s)\)</span>，并返回 <span class="arithmatex">\((1, \min(lmi, root.val), \max(rmx, root.val), s)\)</span>。</p>
+<p>否则，以 <span class="arithmatex">\(root\)</span> 为根的树不是二叉搜索树，我们返回 <span class="arithmatex">\((0, 0, 0, 0)\)</span>。</p>
+<p>我们在主函数中调用 <span class="arithmatex">\(dfs(root)\)</span>，执行完毕后，答案即为 <span class="arithmatex">\(ans\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是二叉树的节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91461,11 +91459,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

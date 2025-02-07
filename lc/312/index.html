@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90838,15 +90836,15 @@ coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167</pre>
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们记数组 $nums$ 的长度为 $n$。根据题目描述，我们可以在数组 $nums$ 的左右两端各添加一个 $1$，记为 $arr$。</p>
-<p>然后，我们定义 $f[i][j]$ 表示戳破区间 $[i, j]$ 内的所有气球能得到的最多硬币数，那么答案即为 $f[0][n+1]$。</p>
-<p>对于 $f[i][j]$，我们枚举区间 $[i, j]$ 内的所有位置 $k$，假设 $k$ 是最后一个戳破的气球，那么我们可以得到如下状态转移方程：</p>
-<p>$$
+<p>我们记数组 <span class="arithmatex">\(nums\)</span> 的长度为 <span class="arithmatex">\(n\)</span>。根据题目描述，我们可以在数组 <span class="arithmatex">\(nums\)</span> 的左右两端各添加一个 <span class="arithmatex">\(1\)</span>，记为 <span class="arithmatex">\(arr\)</span>。</p>
+<p>然后，我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示戳破区间 <span class="arithmatex">\([i, j]\)</span> 内的所有气球能得到的最多硬币数，那么答案即为 <span class="arithmatex">\(f[0][n+1]\)</span>。</p>
+<p>对于 <span class="arithmatex">\(f[i][j]\)</span>，我们枚举区间 <span class="arithmatex">\([i, j]\)</span> 内的所有位置 <span class="arithmatex">\(k\)</span>，假设 <span class="arithmatex">\(k\)</span> 是最后一个戳破的气球，那么我们可以得到如下状态转移方程：</p>
+<div class="arithmatex">\[
 f[i][j] = \max(f[i][j], f[i][k] + f[k][j] + arr[i] \times arr[k] \times arr[j])
-$$</p>
-<p>在实现上，由于 $f[i][j]$ 的状态转移方程中涉及到 $f[i][k]$ 和 $f[k][j]$，其中 $i &lt; k &lt; j$，因此我们需要从大到小地遍历 $i$，从小到大地遍历 $j$，这样才能保证当计算 $f[i][j]$ 时 $f[i][k]$ 和 $f[k][j]$ 已经被计算出来。</p>
-<p>最后，我们返回 $f[0][n+1]$ 即可。</p>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n^2)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+\]</div>
+<p>在实现上，由于 <span class="arithmatex">\(f[i][j]\)</span> 的状态转移方程中涉及到 <span class="arithmatex">\(f[i][k]\)</span> 和 <span class="arithmatex">\(f[k][j]\)</span>，其中 <span class="arithmatex">\(i &lt; k &lt; j\)</span>，因此我们需要从大到小地遍历 <span class="arithmatex">\(i\)</span>，从小到大地遍历 <span class="arithmatex">\(j\)</span>，这样才能保证当计算 <span class="arithmatex">\(f[i][j]\)</span> 时 <span class="arithmatex">\(f[i][k]\)</span> 和 <span class="arithmatex">\(f[k][j]\)</span> 已经被计算出来。</p>
+<p>最后，我们返回 <span class="arithmatex">\(f[0][n+1]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91314,11 +91312,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

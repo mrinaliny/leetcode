@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90840,16 +90838,16 @@ str2 = "cab" 是 "cabac" 的一个子串，因为我们可以删去 "cabac" 末�
 
 <h3 id="_3">方法一：动态规划 + 构造</h3>
 <p>我们先用动态规划求出两个字符串的最长公共子序列，然后根据最长公共子序列构造出最短公共超序列。</p>
-<p>定义 $f[i][j]$ 表示字符串 $str1$ 的前 $i$ 个字符和字符串 $str2$ 的前 $j$ 个字符的最长公共子序列的长度。状态转移方程如下：</p>
-<p>$$
+<p>定义 <span class="arithmatex">\(f[i][j]\)</span> 表示字符串 <span class="arithmatex">\(str1\)</span> 的前 <span class="arithmatex">\(i\)</span> 个字符和字符串 <span class="arithmatex">\(str2\)</span> 的前 <span class="arithmatex">\(j\)</span> 个字符的最长公共子序列的长度。状态转移方程如下：</p>
+<div class="arithmatex">\[
 f[i][j] =
 \begin{cases}
-0 &amp; i = 0 \textit{ or } j = 0 \
-f[i - 1][j - 1] + 1 &amp; str1[i - 1] = str2[j - 1] \
+0 &amp; i = 0 \textit{ or } j = 0 \\
+f[i - 1][j - 1] + 1 &amp; str1[i - 1] = str2[j - 1] \\
 \max(f[i - 1][j], f[i][j - 1]) &amp; str1[i - 1] \neq str2[j - 1]
 \end{cases}
-$$</p>
-<p>接下来我们基于 $f[i][j]$ 构造出最短公共超序列。</p>
+\]</div>
+<p>接下来我们基于 <span class="arithmatex">\(f[i][j]\)</span> 构造出最短公共超序列。</p>
 <div class="highlight"><pre><span></span><code>str1:<span class="w">       </span>a<span class="w">   </span>b<span class="w">   </span>a<span class="w">   </span>c
 
 str2:<span class="w">   </span>c<span class="w">   </span>a<span class="w">   </span>b
@@ -90857,18 +90855,18 @@ str2:<span class="w">   </span>c<span class="w">   </span>a<span class="w">   </
 ans:<span class="w">    </span>c<span class="w">   </span>a<span class="w">   </span>b<span class="w">   </span>a<span class="w">   </span>c
 </code></pre></div>
 <p>不妨对照着上面的示例字符串，来看看如何构造出最短公共超序列。</p>
-<p>我们用双指针 $i$ 和 $j$ 分别指向字符串 $str1$ 和 $str2$ 的末尾，然后从后往前遍历，每次比较 $str1[i]$ 和 $str2[j]$ 的值：</p>
+<p>我们用双指针 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 分别指向字符串 <span class="arithmatex">\(str1\)</span> 和 <span class="arithmatex">\(str2\)</span> 的末尾，然后从后往前遍历，每次比较 <span class="arithmatex">\(str1[i]\)</span> 和 <span class="arithmatex">\(str2[j]\)</span> 的值：</p>
 <ul>
-<li>如果 $str1[i] = str2[j]$，则将 $str1[i]$ 或 $str2[j]$ 中的任意一个字符加入到最答案序列的末尾，然后 $i$ 和 $j$ 同时减 $1$；</li>
-<li>如果 $str1[i] \neq str2[j]$，则将 $f[i][j]$ 与 $f[i - 1][j]$ 和 $f[i][j - 1]$ 中的最大值进行比较：<ul>
-<li>如果 $f[i][j] = f[i - 1][j]$，则将 $str1[i]$ 加入到答案序列的末尾，然后 $i$ 减 $1$；</li>
-<li>如果 $f[i][j] = f[i][j - 1]$，则将 $str2[j]$ 加入到答案序列的末尾，然后 $j$ 减 $1$。</li>
+<li>如果 <span class="arithmatex">\(str1[i] = str2[j]\)</span>，则将 <span class="arithmatex">\(str1[i]\)</span> 或 <span class="arithmatex">\(str2[j]\)</span> 中的任意一个字符加入到最答案序列的末尾，然后 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 同时减 <span class="arithmatex">\(1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(str1[i] \neq str2[j]\)</span>，则将 <span class="arithmatex">\(f[i][j]\)</span> 与 <span class="arithmatex">\(f[i - 1][j]\)</span> 和 <span class="arithmatex">\(f[i][j - 1]\)</span> 中的最大值进行比较：<ul>
+<li>如果 <span class="arithmatex">\(f[i][j] = f[i - 1][j]\)</span>，则将 <span class="arithmatex">\(str1[i]\)</span> 加入到答案序列的末尾，然后 <span class="arithmatex">\(i\)</span> 减 <span class="arithmatex">\(1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(f[i][j] = f[i][j - 1]\)</span>，则将 <span class="arithmatex">\(str2[j]\)</span> 加入到答案序列的末尾，然后 <span class="arithmatex">\(j\)</span> 减 <span class="arithmatex">\(1\)</span>。</li>
 </ul>
 </li>
 </ul>
-<p>重复上述操作，直到 $i = 0$ 或 $j = 0$，然后将剩余的字符串加入到答案序列的末尾即可。</p>
+<p>重复上述操作，直到 <span class="arithmatex">\(i = 0\)</span> 或 <span class="arithmatex">\(j = 0\)</span>，然后将剩余的字符串加入到答案序列的末尾即可。</p>
 <p>最后我们将答案序列反转，即可得到最终的答案。</p>
-<p>时间复杂度 $O(m\times n)$，空间复杂度 $O(m\times n)$。其中 $m$ 和 $n$ 分别是字符串 $str1$ 和 $str2$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m\times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m\times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是字符串 <span class="arithmatex">\(str1\)</span> 和 <span class="arithmatex">\(str2\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91458,11 +91456,9 @@ ans:<span class="w">    </span>c<span class="w">   </span>a<span class="w">   </
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

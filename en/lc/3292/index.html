@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86109,14 +86107,14 @@
 
 <h3 id="solution-1-string-hashing-binary-search-greedy">Solution 1: String Hashing + Binary Search + Greedy</h3>
 <p>Due to the large data scale of this problem, using the "Trie + Memoization" method will time out. We need to find a more efficient solution.</p>
-<p>Consider starting from the $i$-th character of the string $\textit{target}$ and finding the maximum matching substring length, denoted as $\textit{dist}$. For any $j \in [i, i + \textit{dist} - 1]$, we can find a string in $\textit{words}$ such that $\textit{target}[i..j]$ is a prefix of this string. This has a monotonic property, so we can use binary search to determine $\textit{dist}$.</p>
-<p>Specifically, we first preprocess the hash values of all prefixes of strings in $\textit{words}$ and store them in the array $\textit{s}$ grouped by prefix length. Additionally, we preprocess the hash values of $\textit{target}$ and store them in $\textit{hashing}$ to facilitate querying the hash value of any $\textit{target}[l..r]$.</p>
-<p>Next, we design a function $\textit{f}(i)$ to represent the maximum matching substring length starting from the $i$-th character of the string $\textit{target}$. We can determine $\textit{f}(i)$ using binary search.</p>
-<p>Define the left boundary of the binary search as $l = 0$ and the right boundary as $r = \min(n - i, m)$, where $n$ is the length of the string $\textit{target}$ and $m$ is the maximum length of strings in $\textit{words}$. During the binary search, we need to check if $\textit{target}[i..i+\textit{mid}-1]$ is one of the hash values in $\textit{s}[\textit{mid}]$. If it is, update the left boundary $l$ to $\textit{mid}$; otherwise, update the right boundary $r$ to $\textit{mid} - 1$. After the binary search, return $l$.</p>
-<p>After calculating $\textit{f}(i)$, the problem becomes a classic greedy problem. Starting from $i = 0$, for each position $i$, the farthest position we can move to is $i + \textit{f}(i)$. We need to find the minimum number of moves to reach the end.</p>
-<p>We define $\textit{last}$ to represent the last moved position and $\textit{mx}$ to represent the farthest position we can move to from the current position. Initially, $\textit{last} = \textit{mx} = 0$. We traverse from $i = 0$. If $i$ equals $\textit{last}$, it means we need to move again. If $\textit{last} = \textit{mx}$, it means we cannot move further, so we return $-1$. Otherwise, we update $\textit{last}$ to $\textit{mx}$ and increment the answer by one.</p>
+<p>Consider starting from the <span class="arithmatex">\(i\)</span>-th character of the string <span class="arithmatex">\(\textit{target}\)</span> and finding the maximum matching substring length, denoted as <span class="arithmatex">\(\textit{dist}\)</span>. For any <span class="arithmatex">\(j \in [i, i + \textit{dist} - 1]\)</span>, we can find a string in <span class="arithmatex">\(\textit{words}\)</span> such that <span class="arithmatex">\(\textit{target}[i..j]\)</span> is a prefix of this string. This has a monotonic property, so we can use binary search to determine <span class="arithmatex">\(\textit{dist}\)</span>.</p>
+<p>Specifically, we first preprocess the hash values of all prefixes of strings in <span class="arithmatex">\(\textit{words}\)</span> and store them in the array <span class="arithmatex">\(\textit{s}\)</span> grouped by prefix length. Additionally, we preprocess the hash values of <span class="arithmatex">\(\textit{target}\)</span> and store them in <span class="arithmatex">\(\textit{hashing}\)</span> to facilitate querying the hash value of any <span class="arithmatex">\(\textit{target}[l..r]\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(\textit{f}(i)\)</span> to represent the maximum matching substring length starting from the <span class="arithmatex">\(i\)</span>-th character of the string <span class="arithmatex">\(\textit{target}\)</span>. We can determine <span class="arithmatex">\(\textit{f}(i)\)</span> using binary search.</p>
+<p>Define the left boundary of the binary search as <span class="arithmatex">\(l = 0\)</span> and the right boundary as <span class="arithmatex">\(r = \min(n - i, m)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(\textit{target}\)</span> and <span class="arithmatex">\(m\)</span> is the maximum length of strings in <span class="arithmatex">\(\textit{words}\)</span>. During the binary search, we need to check if <span class="arithmatex">\(\textit{target}[i..i+\textit{mid}-1]\)</span> is one of the hash values in <span class="arithmatex">\(\textit{s}[\textit{mid}]\)</span>. If it is, update the left boundary <span class="arithmatex">\(l\)</span> to <span class="arithmatex">\(\textit{mid}\)</span>; otherwise, update the right boundary <span class="arithmatex">\(r\)</span> to <span class="arithmatex">\(\textit{mid} - 1\)</span>. After the binary search, return <span class="arithmatex">\(l\)</span>.</p>
+<p>After calculating <span class="arithmatex">\(\textit{f}(i)\)</span>, the problem becomes a classic greedy problem. Starting from <span class="arithmatex">\(i = 0\)</span>, for each position <span class="arithmatex">\(i\)</span>, the farthest position we can move to is <span class="arithmatex">\(i + \textit{f}(i)\)</span>. We need to find the minimum number of moves to reach the end.</p>
+<p>We define <span class="arithmatex">\(\textit{last}\)</span> to represent the last moved position and <span class="arithmatex">\(\textit{mx}\)</span> to represent the farthest position we can move to from the current position. Initially, <span class="arithmatex">\(\textit{last} = \textit{mx} = 0\)</span>. We traverse from <span class="arithmatex">\(i = 0\)</span>. If <span class="arithmatex">\(i\)</span> equals <span class="arithmatex">\(\textit{last}\)</span>, it means we need to move again. If <span class="arithmatex">\(\textit{last} = \textit{mx}\)</span>, it means we cannot move further, so we return <span class="arithmatex">\(-1\)</span>. Otherwise, we update <span class="arithmatex">\(\textit{last}\)</span> to <span class="arithmatex">\(\textit{mx}\)</span> and increment the answer by one.</p>
 <p>After the traversal, return the answer.</p>
-<p>The time complexity is $O(n \times \log n + L)$, and the space complexity is $O(n + L)$. Here, $n$ is the length of the string $\textit{target}$, and $L$ is the total length of all valid strings.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n + L)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + L)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(\textit{target}\)</span>, and <span class="arithmatex">\(L\)</span> is the total length of all valid strings.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86888,11 +86886,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

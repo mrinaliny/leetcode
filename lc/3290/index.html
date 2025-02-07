@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90846,15 +90844,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $\textit{dfs}(i, j)$，表示从数组 $a$ 的第 $i$ 个元素开始，从数组 $b$ 的第 $j$ 个元素开始，能够获得的最大得分。那么答案就是 $\textit{dfs}(0, 0)$。</p>
-<p>函数 $\textit{dfs}(i, j)$ 的计算方式如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, j)\)</span>，表示从数组 <span class="arithmatex">\(a\)</span> 的第 <span class="arithmatex">\(i\)</span> 个元素开始，从数组 <span class="arithmatex">\(b\)</span> 的第 <span class="arithmatex">\(j\)</span> 个元素开始，能够获得的最大得分。那么答案就是 <span class="arithmatex">\(\textit{dfs}(0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i, j)\)</span> 的计算方式如下：</p>
 <ul>
-<li>如果 $j \geq \text{len}(b)$，表示数组 $b$ 已经遍历完了，此时如果数组 $a$ 也遍历完了，返回 $0$，否则返回负无穷；</li>
-<li>如果 $i \geq \text{len}(a)$，表示数组 $a$ 已经遍历完了，返回 $0$；</li>
-<li>否则，我们可以不选择数组 $b$ 的第 $j$ 个元素，直接跳到下一个元素，即 $\textit{dfs}(i, j + 1)$；也可以选择数组 $b$ 的第 $j$ 个元素，此时得分为 $a[i] \times b[j]$，再加上 $\textit{dfs}(i + 1, j + 1)$。我们取这两者的最大值作为 $\textit{dfs}(i, j)$ 的返回值。</li>
+<li>如果 <span class="arithmatex">\(j \geq \text{len}(b)\)</span>，表示数组 <span class="arithmatex">\(b\)</span> 已经遍历完了，此时如果数组 <span class="arithmatex">\(a\)</span> 也遍历完了，返回 <span class="arithmatex">\(0\)</span>，否则返回负无穷；</li>
+<li>如果 <span class="arithmatex">\(i \geq \text{len}(a)\)</span>，表示数组 <span class="arithmatex">\(a\)</span> 已经遍历完了，返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>否则，我们可以不选择数组 <span class="arithmatex">\(b\)</span> 的第 <span class="arithmatex">\(j\)</span> 个元素，直接跳到下一个元素，即 <span class="arithmatex">\(\textit{dfs}(i, j + 1)\)</span>；也可以选择数组 <span class="arithmatex">\(b\)</span> 的第 <span class="arithmatex">\(j\)</span> 个元素，此时得分为 <span class="arithmatex">\(a[i] \times b[j]\)</span>，再加上 <span class="arithmatex">\(\textit{dfs}(i + 1, j + 1)\)</span>。我们取这两者的最大值作为 <span class="arithmatex">\(\textit{dfs}(i, j)\)</span> 的返回值。</li>
 </ul>
 <p>我们可以使用记忆化搜索的方式，避免重复计算。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别为数组 $a$ 和 $b$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别为数组 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91302,11 +91300,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,17 +86060,17 @@ It can be proven that we can perform at most 2 operations.
 <!-- solution:start -->
 
 <h3 id="solution-1-memorization-search">Solution 1: Memorization Search</h3>
-<p>There are three possible values for the score $s$, which are $s = nums[0] + nums[1]$, $s = nums[0] + nums[n-1]$, and $s = nums[n-1] + nums[n-2]$. We can perform memorization search for these three cases separately.</p>
-<p>We design a function $dfs(i, j)$, which represents the maximum number of operations from index $i$ to index $j$ when the score is $s$. The execution process of function $dfs(i, j)$ is as follows:</p>
+<p>There are three possible values for the score <span class="arithmatex">\(s\)</span>, which are <span class="arithmatex">\(s = nums[0] + nums[1]\)</span>, <span class="arithmatex">\(s = nums[0] + nums[n-1]\)</span>, and <span class="arithmatex">\(s = nums[n-1] + nums[n-2]\)</span>. We can perform memorization search for these three cases separately.</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents the maximum number of operations from index <span class="arithmatex">\(i\)</span> to index <span class="arithmatex">\(j\)</span> when the score is <span class="arithmatex">\(s\)</span>. The execution process of function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $j - i &lt; 1$, it means that the length of the interval $[i, j]$ is less than $2$, and no operation can be performed, so return $0$.</li>
-<li>If $nums[i] + nums[i+1] = s$, it means that the elements at index $i$ and index $i+1$ can be deleted. In this case, the maximum number of operations is $1 + dfs(i+2, j)$.</li>
-<li>If $nums[i] + nums[j] = s$, it means that the elements at index $i$ and index $j$ can be deleted. In this case, the maximum number of operations is $1 + dfs(i+1, j-1)$.</li>
-<li>If $nums[j-1] + nums[j] = s$, it means that the elements at index $j-1$ and index $j$ can be deleted. In this case, the maximum number of operations is $1 + dfs(i, j-2)$.</li>
+<li>If <span class="arithmatex">\(j - i &lt; 1\)</span>, it means that the length of the interval <span class="arithmatex">\([i, j]\)</span> is less than <span class="arithmatex">\(2\)</span>, and no operation can be performed, so return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(nums[i] + nums[i+1] = s\)</span>, it means that the elements at index <span class="arithmatex">\(i\)</span> and index <span class="arithmatex">\(i+1\)</span> can be deleted. In this case, the maximum number of operations is <span class="arithmatex">\(1 + dfs(i+2, j)\)</span>.</li>
+<li>If <span class="arithmatex">\(nums[i] + nums[j] = s\)</span>, it means that the elements at index <span class="arithmatex">\(i\)</span> and index <span class="arithmatex">\(j\)</span> can be deleted. In this case, the maximum number of operations is <span class="arithmatex">\(1 + dfs(i+1, j-1)\)</span>.</li>
+<li>If <span class="arithmatex">\(nums[j-1] + nums[j] = s\)</span>, it means that the elements at index <span class="arithmatex">\(j-1\)</span> and index <span class="arithmatex">\(j\)</span> can be deleted. In this case, the maximum number of operations is <span class="arithmatex">\(1 + dfs(i, j-2)\)</span>.</li>
 <li>Return the maximum of the above values.</li>
 </ul>
 <p>Finally, we calculate the maximum number of operations for the three cases separately, and return the maximum value.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the array $nums$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86650,11 +86648,9 @@ It can be proven that we can perform at most 2 operations.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

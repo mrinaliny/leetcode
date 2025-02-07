@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86106,20 +86104,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $dfs(i, j, a)$, which represents the possible minimum sum of subarray values that can be obtained starting from the $i$-th element, with $j$ subarrays already divided, and the bitwise AND result of the current subarray to be divided is $a$. The answer is $dfs(0, 0, -1)$.</p>
-<p>The execution process of the function $dfs(i, j, a)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j, a)\)</span>, which represents the possible minimum sum of subarray values that can be obtained starting from the <span class="arithmatex">\(i\)</span>-th element, with <span class="arithmatex">\(j\)</span> subarrays already divided, and the bitwise AND result of the current subarray to be divided is <span class="arithmatex">\(a\)</span>. The answer is <span class="arithmatex">\(dfs(0, 0, -1)\)</span>.</p>
+<p>The execution process of the function <span class="arithmatex">\(dfs(i, j, a)\)</span> is as follows:</p>
 <ul>
-<li>If $n - i &lt; m - j$, it means that the remaining elements are not enough to divide into $m - j$ subarrays, return $+\infty$.</li>
-<li>If $j = m$, it means that $m$ subarrays have been divided. At this time, check whether $i = n$ holds. If it holds, return $0$, otherwise return $+\infty$.</li>
-<li>Otherwise, we perform a bitwise AND operation on $a$ and $nums[i]$ to get a new $a$. If $a &lt; andValues[j]$, it means that the bitwise AND result of the current subarray to be divided does not meet the requirements, return $+\infty$. Otherwise, we have two choices:<ul>
-<li>Do not divide the current element, i.e., $dfs(i + 1, j, a)$.</li>
-<li>Divide the current element, i.e., $dfs(i + 1, j + 1, -1) + nums[i]$.</li>
+<li>If <span class="arithmatex">\(n - i &lt; m - j\)</span>, it means that the remaining elements are not enough to divide into <span class="arithmatex">\(m - j\)</span> subarrays, return <span class="arithmatex">\(+\infty\)</span>.</li>
+<li>If <span class="arithmatex">\(j = m\)</span>, it means that <span class="arithmatex">\(m\)</span> subarrays have been divided. At this time, check whether <span class="arithmatex">\(i = n\)</span> holds. If it holds, return <span class="arithmatex">\(0\)</span>, otherwise return <span class="arithmatex">\(+\infty\)</span>.</li>
+<li>Otherwise, we perform a bitwise AND operation on <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(nums[i]\)</span> to get a new <span class="arithmatex">\(a\)</span>. If <span class="arithmatex">\(a &lt; andValues[j]\)</span>, it means that the bitwise AND result of the current subarray to be divided does not meet the requirements, return <span class="arithmatex">\(+\infty\)</span>. Otherwise, we have two choices:<ul>
+<li>Do not divide the current element, i.e., <span class="arithmatex">\(dfs(i + 1, j, a)\)</span>.</li>
+<li>Divide the current element, i.e., <span class="arithmatex">\(dfs(i + 1, j + 1, -1) + nums[i]\)</span>.</li>
 </ul>
 </li>
 <li>Return the minimum of the above two choices.</li>
 </ul>
-<p>To avoid repeated calculations, we use the method of memoization search and store the result of $dfs(i, j, a)$ in a hash table.</p>
-<p>The time complexity is $O(n \times m \times \log M)$, and the space complexity is $O(n \times m \times \log M)$. Where $n$ and $m$ are the lengths of the arrays $nums$ and $andValues$ respectively; and $M$ is the maximum value in the array $nums$, in this problem $M \leq 10^5$.</p>
+<p>To avoid repeated calculations, we use the method of memoization search and store the result of <span class="arithmatex">\(dfs(i, j, a)\)</span> in a hash table.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times m \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times m \times \log M)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the arrays <span class="arithmatex">\(nums\)</span> and <span class="arithmatex">\(andValues\)</span> respectively; and <span class="arithmatex">\(M\)</span> is the maximum value in the array <span class="arithmatex">\(nums\)</span>, in this problem <span class="arithmatex">\(M \leq 10^5\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86683,11 +86681,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

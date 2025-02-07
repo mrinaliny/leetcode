@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90853,8 +90851,8 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：一次遍历</h3>
-<p>根据题目描述，我们遍历字符串数组 <code>words</code> 中的每个字符串 $w$，判断其是否以 $pref$ 作为前缀，如果是，则答案加一。</p>
-<p>时间复杂度 $O(n \times m)$，空间复杂度 $O(1)$。其中 $n$ 和 $m$ 分别是字符串数组 <code>words</code> 和字符串 $pref$ 的长度。</p>
+<p>根据题目描述，我们遍历字符串数组 <code>words</code> 中的每个字符串 <span class="arithmatex">\(w\)</span>，判断其是否以 <span class="arithmatex">\(pref\)</span> 作为前缀，如果是，则答案加一。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是字符串数组 <code>words</code> 和字符串 <span class="arithmatex">\(pref\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -90977,17 +90975,17 @@
 <p>我们还可以使用前缀树来查询答案。</p>
 <p>定义前缀树的每个节点结构如下：</p>
 <ul>
-<li><code>children</code>：长度为 $26$ 的数组，用于存储当前节点的所有子节点，其中 <code>children[i]</code> 表示当前节点的子节点；</li>
+<li><code>children</code>：长度为 <span class="arithmatex">\(26\)</span> 的数组，用于存储当前节点的所有子节点，其中 <code>children[i]</code> 表示当前节点的子节点；</li>
 <li><code>cnt</code>：所有以当前节点为前缀的字符串的数量。</li>
 </ul>
 <p>另外，我们还需要定义两个函数：</p>
 <ul>
-<li>其中一个函数 $insert(w)$ 用于将字符串 $w$ 插入前缀树中；</li>
-<li>另一个函数 $search(pref)$ 用于查询以字符串 $pref$ 作为前缀的字符串的数量。查询时，我们从前缀树的根节点开始，遍历字符串 $pref$，如果当前节点的子节点中不存在 $pref[i]$，则说明 $pref$ 不是任何字符串的前缀，直接返回 $0$。否则，我们继续遍历 $pref$ 的下一个字符，直到遍历完 $pref$，返回当前节点的 <code>cnt</code> 即可。</li>
+<li>其中一个函数 <span class="arithmatex">\(insert(w)\)</span> 用于将字符串 <span class="arithmatex">\(w\)</span> 插入前缀树中；</li>
+<li>另一个函数 <span class="arithmatex">\(search(pref)\)</span> 用于查询以字符串 <span class="arithmatex">\(pref\)</span> 作为前缀的字符串的数量。查询时，我们从前缀树的根节点开始，遍历字符串 <span class="arithmatex">\(pref\)</span>，如果当前节点的子节点中不存在 <span class="arithmatex">\(pref[i]\)</span>，则说明 <span class="arithmatex">\(pref\)</span> 不是任何字符串的前缀，直接返回 <span class="arithmatex">\(0\)</span>。否则，我们继续遍历 <span class="arithmatex">\(pref\)</span> 的下一个字符，直到遍历完 <span class="arithmatex">\(pref\)</span>，返回当前节点的 <code>cnt</code> 即可。</li>
 </ul>
 <p>有了上述函数，我们就可以查询答案了。</p>
-<p>遍历字符串数组 <code>words</code>，对于每个字符串 $w$，调用 $insert(w)$ 函数将其插入前缀树中。最后调用 $search(pref)$ 函数作为答案返回即可。</p>
-<p>时间复杂度 $O(L)$，空间复杂度 $O(L)$。其中 $L$ 是字符串数组 <code>words</code> 中所有字符串的长度之和。</p>
+<p>遍历字符串数组 <code>words</code>，对于每个字符串 <span class="arithmatex">\(w\)</span>，调用 <span class="arithmatex">\(insert(w)\)</span> 函数将其插入前缀树中。最后调用 <span class="arithmatex">\(search(pref)\)</span> 函数作为答案返回即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(L)\)</span>，空间复杂度 <span class="arithmatex">\(O(L)\)</span>。其中 <span class="arithmatex">\(L\)</span> 是字符串数组 <code>words</code> 中所有字符串的长度之和。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91545,11 +91543,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

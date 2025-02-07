@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90869,14 +90867,14 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：树形 DP</h3>
-<p>我们设计一个函数 $dfs(i)$，表示以节点 $i$ 为根的子树中，选择一些边，使得所选的两条边都不相邻，所选边的权值之和最大。该函数返回了两个值 $(a, b)$，第一个值 $a$ 表示当前节点 $i$ 与其父节点之间的边被选中时，所选边的权值之和；第二个值 $b$ 表示当前节点 $i$ 与其父节点之间的边不被选中时，所选边的权值之和。</p>
-<p>我们可以发现，对于当前节点 $i$：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示以节点 <span class="arithmatex">\(i\)</span> 为根的子树中，选择一些边，使得所选的两条边都不相邻，所选边的权值之和最大。该函数返回了两个值 <span class="arithmatex">\((a, b)\)</span>，第一个值 <span class="arithmatex">\(a\)</span> 表示当前节点 <span class="arithmatex">\(i\)</span> 与其父节点之间的边被选中时，所选边的权值之和；第二个值 <span class="arithmatex">\(b\)</span> 表示当前节点 <span class="arithmatex">\(i\)</span> 与其父节点之间的边不被选中时，所选边的权值之和。</p>
+<p>我们可以发现，对于当前节点 <span class="arithmatex">\(i\)</span>：</p>
 <ul>
-<li>如果 $i$ 与父节点的边被选择，则它与子节点的所有边都不能被选择，那么当前节点的 $a$ 值就是其所有子节点的 $b$ 值之和；</li>
-<li>如果 $i$ 与父节点的边没被选择，那么可以选择它与子节点的最多一条边，那么当前节点的 $b$ 值就是其选中的子节点的 $a$ 值与未选中的子节点的 $b$ 值之和，再加上 $i$ 与选中的子节点之间的边的权值。</li>
+<li>如果 <span class="arithmatex">\(i\)</span> 与父节点的边被选择，则它与子节点的所有边都不能被选择，那么当前节点的 <span class="arithmatex">\(a\)</span> 值就是其所有子节点的 <span class="arithmatex">\(b\)</span> 值之和；</li>
+<li>如果 <span class="arithmatex">\(i\)</span> 与父节点的边没被选择，那么可以选择它与子节点的最多一条边，那么当前节点的 <span class="arithmatex">\(b\)</span> 值就是其选中的子节点的 <span class="arithmatex">\(a\)</span> 值与未选中的子节点的 <span class="arithmatex">\(b\)</span> 值之和，再加上 <span class="arithmatex">\(i\)</span> 与选中的子节点之间的边的权值。</li>
 </ul>
-<p>我们调用 $dfs(0)$ 函数，返回的第二个值即为答案，即当前根节点不与父节点之间的边被选中时，所选边的权值之和。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为节点数。</p>
+<p>我们调用 <span class="arithmatex">\(dfs(0)\)</span> 函数，返回的第二个值即为答案，即当前根节点不与父节点之间的边被选中时，所选边的权值之和。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91298,11 +91296,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

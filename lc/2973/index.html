@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90887,23 +90885,23 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：DFS + 排序</h3>
-<p>根据题目描述，每个节点 $a$ 的放置的金币数有两种情况：</p>
+<p>根据题目描述，每个节点 <span class="arithmatex">\(a\)</span> 的放置的金币数有两种情况：</p>
 <ul>
-<li>如果节点 $a$ 对应的子树中的节点数目小于 $3$，那么放 $1$ 个金币；</li>
-<li>如果节点 $a$ 对应的子树中的节点数目大于等于 $3$，那么我们需要取出子树中的 $3$ 个不同节点，计算它们的开销乘积的最大值，然后在节点 $a$ 处放置对应数目的金币，如果最大乘积是负数，那么放置 $0$ 个金币。</li>
+<li>如果节点 <span class="arithmatex">\(a\)</span> 对应的子树中的节点数目小于 <span class="arithmatex">\(3\)</span>，那么放 <span class="arithmatex">\(1\)</span> 个金币；</li>
+<li>如果节点 <span class="arithmatex">\(a\)</span> 对应的子树中的节点数目大于等于 <span class="arithmatex">\(3\)</span>，那么我们需要取出子树中的 <span class="arithmatex">\(3\)</span> 个不同节点，计算它们的开销乘积的最大值，然后在节点 <span class="arithmatex">\(a\)</span> 处放置对应数目的金币，如果最大乘积是负数，那么放置 <span class="arithmatex">\(0\)</span> 个金币。</li>
 </ul>
 <p>第一种情况比较简单，我们只需要在遍历的过程中，统计每个节点的子树中的节点数目即可。</p>
-<p>而对于第二种情况，如果开销都是正数，那么应该取开销最大的 $3$ 个节点；如果开销中有负数，那么应该取开销最小的 $2$ 个节点和开销最大的 $1$ 个节点。因此，我们需要维护每个子树最小的 $2$ 个开销和最大的 $3$ 个开销。</p>
-<p>我们先根据题目给定的二维数组 $edges$ 构建邻接表 $g$，其中 $g[a]$ 表示节点 $a$ 的所有邻居节点。</p>
-<p>接下来，我们设计一个函数 $dfs(a, fa)$，该函数返回一个数组 $res$，其中存储了节点 $a$ 的子树中最小的 $2$ 个开销和最大的 $3$ 个开销（可能不足 $5$ 个）。</p>
-<p>在函数 $dfs(a, fa)$ 中，我们将节点 $a$ 的开销 $cost[a]$ 加入数组 $res$ 中，然后遍历节点 $a$ 的所有邻居节点 $b$，如果 $b$ 不是节点 $a$ 的父节点 $fa$，那么我们将 $dfs(b, a)$ 的结果加入数组 $res$ 中。</p>
-<p>然后，我们对数组 $res$ 进行排序，然后根据数组 $res$ 的长度 $m$ 计算节点 $a$ 的放置金币数目，更新 $ans[a]$：</p>
+<p>而对于第二种情况，如果开销都是正数，那么应该取开销最大的 <span class="arithmatex">\(3\)</span> 个节点；如果开销中有负数，那么应该取开销最小的 <span class="arithmatex">\(2\)</span> 个节点和开销最大的 <span class="arithmatex">\(1\)</span> 个节点。因此，我们需要维护每个子树最小的 <span class="arithmatex">\(2\)</span> 个开销和最大的 <span class="arithmatex">\(3\)</span> 个开销。</p>
+<p>我们先根据题目给定的二维数组 <span class="arithmatex">\(edges\)</span> 构建邻接表 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[a]\)</span> 表示节点 <span class="arithmatex">\(a\)</span> 的所有邻居节点。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(a, fa)\)</span>，该函数返回一个数组 <span class="arithmatex">\(res\)</span>，其中存储了节点 <span class="arithmatex">\(a\)</span> 的子树中最小的 <span class="arithmatex">\(2\)</span> 个开销和最大的 <span class="arithmatex">\(3\)</span> 个开销（可能不足 <span class="arithmatex">\(5\)</span> 个）。</p>
+<p>在函数 <span class="arithmatex">\(dfs(a, fa)\)</span> 中，我们将节点 <span class="arithmatex">\(a\)</span> 的开销 <span class="arithmatex">\(cost[a]\)</span> 加入数组 <span class="arithmatex">\(res\)</span> 中，然后遍历节点 <span class="arithmatex">\(a\)</span> 的所有邻居节点 <span class="arithmatex">\(b\)</span>，如果 <span class="arithmatex">\(b\)</span> 不是节点 <span class="arithmatex">\(a\)</span> 的父节点 <span class="arithmatex">\(fa\)</span>，那么我们将 <span class="arithmatex">\(dfs(b, a)\)</span> 的结果加入数组 <span class="arithmatex">\(res\)</span> 中。</p>
+<p>然后，我们对数组 <span class="arithmatex">\(res\)</span> 进行排序，然后根据数组 <span class="arithmatex">\(res\)</span> 的长度 <span class="arithmatex">\(m\)</span> 计算节点 <span class="arithmatex">\(a\)</span> 的放置金币数目，更新 <span class="arithmatex">\(ans[a]\)</span>：</p>
 <ul>
-<li>如果 $m \ge 3$，那么节点 $a$ 的放置金币数目为 $\max(0, res[m - 1] \times res[m - 2] \times res[m - 3], res[0] \times res[1] \times res[m - 1])$，否则节点 $a$ 的放置金币数目为 $1$；</li>
-<li>如果 $m &gt; 5$，那么我们只需要保留数组 $res$ 的前 $2$ 个元素和后 $3$ 个元素。</li>
+<li>如果 <span class="arithmatex">\(m \ge 3\)</span>，那么节点 <span class="arithmatex">\(a\)</span> 的放置金币数目为 <span class="arithmatex">\(\max(0, res[m - 1] \times res[m - 2] \times res[m - 3], res[0] \times res[1] \times res[m - 1])\)</span>，否则节点 <span class="arithmatex">\(a\)</span> 的放置金币数目为 <span class="arithmatex">\(1\)</span>；</li>
+<li>如果 <span class="arithmatex">\(m &gt; 5\)</span>，那么我们只需要保留数组 <span class="arithmatex">\(res\)</span> 的前 <span class="arithmatex">\(2\)</span> 个元素和后 <span class="arithmatex">\(3\)</span> 个元素。</li>
 </ul>
-<p>最后，我们调用函数 $dfs(0, -1)$，并且返回答案数组 $ans$ 即可。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 是节点的数目。</p>
+<p>最后，我们调用函数 <span class="arithmatex">\(dfs(0, -1)\)</span>，并且返回答案数组 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点的数目。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91480,11 +91478,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

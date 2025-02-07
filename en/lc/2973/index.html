@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86083,23 +86081,23 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs-sorting">Solution 1: DFS + Sorting</h3>
-<p>According to the problem description, there are two situations for the number of coins placed at each node $a$:</p>
+<p>According to the problem description, there are two situations for the number of coins placed at each node <span class="arithmatex">\(a\)</span>:</p>
 <ul>
-<li>If the number of nodes in the subtree corresponding to node $a$ is less than $3$, then place $1$ coin;</li>
-<li>If the number of nodes in the subtree corresponding to node $a$ is greater than or equal to $3$, then we need to take out $3$ different nodes from the subtree, calculate the maximum value of their cost product, and then place the corresponding number of coins at node $a$. If the maximum product is negative, place $0$ coins.</li>
+<li>If the number of nodes in the subtree corresponding to node <span class="arithmatex">\(a\)</span> is less than <span class="arithmatex">\(3\)</span>, then place <span class="arithmatex">\(1\)</span> coin;</li>
+<li>If the number of nodes in the subtree corresponding to node <span class="arithmatex">\(a\)</span> is greater than or equal to <span class="arithmatex">\(3\)</span>, then we need to take out <span class="arithmatex">\(3\)</span> different nodes from the subtree, calculate the maximum value of their cost product, and then place the corresponding number of coins at node <span class="arithmatex">\(a\)</span>. If the maximum product is negative, place <span class="arithmatex">\(0\)</span> coins.</li>
 </ul>
 <p>The first situation is relatively simple, we just need to count the number of nodes in the subtree of each node during the traversal.</p>
-<p>For the second situation, if all costs are positive, we should take the $3$ nodes with the largest costs; if there are negative costs, we should take the $2$ nodes with the smallest costs and the $1$ node with the largest cost. Therefore, we need to maintain the smallest $2$ costs and the largest $3$ costs in each subtree.</p>
-<p>We first construct the adjacency list $g$ based on the given two-dimensional array $edges$, where $g[a]$ represents all neighbor nodes of node $a$.</p>
-<p>Next, we design a function $dfs(a, fa)$, which returns an array $res$, which stores the smallest $2$ costs and the largest $3$ costs in the subtree of node $a$ (may not be $5$).</p>
-<p>In the function $dfs(a, fa)$, we add the cost $cost[a]$ of node $a$ to the array $res$, and then traverse all neighbor nodes $b$ of node $a$. If $b$ is not the parent node $fa$ of node $a$, then we add the result of $dfs(b, a)$ to the array $res$.</p>
-<p>Then, we sort the array $res$, and then calculate the number of coins placed at node $a$ based on the length $m$ of the array $res$, and update $ans[a]$:</p>
+<p>For the second situation, if all costs are positive, we should take the <span class="arithmatex">\(3\)</span> nodes with the largest costs; if there are negative costs, we should take the <span class="arithmatex">\(2\)</span> nodes with the smallest costs and the <span class="arithmatex">\(1\)</span> node with the largest cost. Therefore, we need to maintain the smallest <span class="arithmatex">\(2\)</span> costs and the largest <span class="arithmatex">\(3\)</span> costs in each subtree.</p>
+<p>We first construct the adjacency list <span class="arithmatex">\(g\)</span> based on the given two-dimensional array <span class="arithmatex">\(edges\)</span>, where <span class="arithmatex">\(g[a]\)</span> represents all neighbor nodes of node <span class="arithmatex">\(a\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(a, fa)\)</span>, which returns an array <span class="arithmatex">\(res\)</span>, which stores the smallest <span class="arithmatex">\(2\)</span> costs and the largest <span class="arithmatex">\(3\)</span> costs in the subtree of node <span class="arithmatex">\(a\)</span> (may not be <span class="arithmatex">\(5\)</span>).</p>
+<p>In the function <span class="arithmatex">\(dfs(a, fa)\)</span>, we add the cost <span class="arithmatex">\(cost[a]\)</span> of node <span class="arithmatex">\(a\)</span> to the array <span class="arithmatex">\(res\)</span>, and then traverse all neighbor nodes <span class="arithmatex">\(b\)</span> of node <span class="arithmatex">\(a\)</span>. If <span class="arithmatex">\(b\)</span> is not the parent node <span class="arithmatex">\(fa\)</span> of node <span class="arithmatex">\(a\)</span>, then we add the result of <span class="arithmatex">\(dfs(b, a)\)</span> to the array <span class="arithmatex">\(res\)</span>.</p>
+<p>Then, we sort the array <span class="arithmatex">\(res\)</span>, and then calculate the number of coins placed at node <span class="arithmatex">\(a\)</span> based on the length <span class="arithmatex">\(m\)</span> of the array <span class="arithmatex">\(res\)</span>, and update <span class="arithmatex">\(ans[a]\)</span>:</p>
 <ul>
-<li>If $m \ge 3$, then the number of coins placed at node $a$ is $\max(0, res[m - 1] \times res[m - 2] \times res[m - 3], res[0] \times res[1] \times res[m - 1])$, otherwise the number of coins placed at node $a$ is $1$;</li>
-<li>If $m &gt; 5$, then we only need to keep the first $2$ elements and the last $3$ elements of the array $res$.</li>
+<li>If <span class="arithmatex">\(m \ge 3\)</span>, then the number of coins placed at node <span class="arithmatex">\(a\)</span> is <span class="arithmatex">\(\max(0, res[m - 1] \times res[m - 2] \times res[m - 3], res[0] \times res[1] \times res[m - 1])\)</span>, otherwise the number of coins placed at node <span class="arithmatex">\(a\)</span> is <span class="arithmatex">\(1\)</span>;</li>
+<li>If <span class="arithmatex">\(m &gt; 5\)</span>, then we only need to keep the first <span class="arithmatex">\(2\)</span> elements and the last <span class="arithmatex">\(3\)</span> elements of the array <span class="arithmatex">\(res\)</span>.</li>
 </ul>
-<p>Finally, we call the function $dfs(0, -1)$, and return the answer array $ans$.</p>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Where $n$ is the number of nodes.</p>
+<p>Finally, we call the function <span class="arithmatex">\(dfs(0, -1)\)</span>, and return the answer array <span class="arithmatex">\(ans\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the number of nodes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86676,11 +86674,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

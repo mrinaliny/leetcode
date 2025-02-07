@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86046,12 +86044,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-sorting-dfs">Solution 1: Sorting + DFS</h3>
-<p>We can first sort the array $\textit{nums}$ to facilitate deduplication.</p>
-<p>Then, we design a function $\textit{dfs}(i)$, which represents the current search for subsets starting from the $i$-th element. The execution logic of the function $\textit{dfs}(i)$ is as follows:</p>
-<p>If $i \geq n$, it means all elements have been searched, add the current subset to the answer array, and end the recursion.</p>
-<p>If $i &lt; n$, add the $i$-th element to the subset, execute $\textit{dfs}(i + 1)$, then remove the $i$-th element from the subset. Next, we check if the $i$-th element is the same as the next element. If they are the same, skip the element in a loop until we find the first element different from the $i$-th element, then execute $\textit{dfs}(i + 1)$.</p>
-<p>Finally, we only need to call $\textit{dfs}(0)$ and return the answer array.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>We can first sort the array <span class="arithmatex">\(\textit{nums}\)</span> to facilitate deduplication.</p>
+<p>Then, we design a function <span class="arithmatex">\(\textit{dfs}(i)\)</span>, which represents the current search for subsets starting from the <span class="arithmatex">\(i\)</span>-th element. The execution logic of the function <span class="arithmatex">\(\textit{dfs}(i)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i \geq n\)</span>, it means all elements have been searched, add the current subset to the answer array, and end the recursion.</p>
+<p>If <span class="arithmatex">\(i &lt; n\)</span>, add the <span class="arithmatex">\(i\)</span>-th element to the subset, execute <span class="arithmatex">\(\textit{dfs}(i + 1)\)</span>, then remove the <span class="arithmatex">\(i\)</span>-th element from the subset. Next, we check if the <span class="arithmatex">\(i\)</span>-th element is the same as the next element. If they are the same, skip the element in a loop until we find the first element different from the <span class="arithmatex">\(i\)</span>-th element, then execute <span class="arithmatex">\(\textit{dfs}(i + 1)\)</span>.</p>
+<p>Finally, we only need to call <span class="arithmatex">\(\textit{dfs}(0)\)</span> and return the answer array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86451,10 +86449,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-sorting-binary-enumeration">Solution 2: Sorting + Binary Enumeration</h3>
-<p>Similar to Solution 1, we first sort the array $\textit{nums}$ to facilitate deduplication.</p>
-<p>Next, we enumerate a binary number $\textit{mask}$ in the range $[0, 2^n)$, where the binary representation of $\textit{mask}$ is an $n$-bit bit string. If the $i$-th bit of $\textit{mask}$ is $1$, it means selecting $\textit{nums}[i]$, and $0$ means not selecting $\textit{nums}[i]$. Note that if the $(i - 1)$-th bit of $\textit{mask}$ is $0$ and $\textit{nums}[i] = \textit{nums}[i - 1]$, it means that the $i$-th element is the same as the $(i - 1)$-th element in the current enumeration scheme. To avoid duplication, we skip this case. Otherwise, we add the subset corresponding to $\textit{mask}$ to the answer array.</p>
+<p>Similar to Solution 1, we first sort the array <span class="arithmatex">\(\textit{nums}\)</span> to facilitate deduplication.</p>
+<p>Next, we enumerate a binary number <span class="arithmatex">\(\textit{mask}\)</span> in the range <span class="arithmatex">\([0, 2^n)\)</span>, where the binary representation of <span class="arithmatex">\(\textit{mask}\)</span> is an <span class="arithmatex">\(n\)</span>-bit bit string. If the <span class="arithmatex">\(i\)</span>-th bit of <span class="arithmatex">\(\textit{mask}\)</span> is <span class="arithmatex">\(1\)</span>, it means selecting <span class="arithmatex">\(\textit{nums}[i]\)</span>, and <span class="arithmatex">\(0\)</span> means not selecting <span class="arithmatex">\(\textit{nums}[i]\)</span>. Note that if the <span class="arithmatex">\((i - 1)\)</span>-th bit of <span class="arithmatex">\(\textit{mask}\)</span> is <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(\textit{nums}[i] = \textit{nums}[i - 1]\)</span>, it means that the <span class="arithmatex">\(i\)</span>-th element is the same as the <span class="arithmatex">\((i - 1)\)</span>-th element in the current enumeration scheme. To avoid duplication, we skip this case. Otherwise, we add the subset corresponding to <span class="arithmatex">\(\textit{mask}\)</span> to the answer array.</p>
 <p>After the enumeration, we return the answer array.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:8"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><input id="__tabbed_2_8" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label><label for="__tabbed_2_7">JavaScript</label><label for="__tabbed_2_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87077,11 +87075,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

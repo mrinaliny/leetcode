@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,15 +90857,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：数学 + 模拟</h3>
-<p>我们设计一个函数 $check(nums, l, r)$，用于判断子数组 $nums[l], nums[l+1], \dots, nums[r]$ 是否可以重新排列形成等差数列。</p>
-<p>函数 $check(nums, l, r)$ 的实现逻辑如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(check(nums, l, r)\)</span>，用于判断子数组 <span class="arithmatex">\(nums[l], nums[l+1], \dots, nums[r]\)</span> 是否可以重新排列形成等差数列。</p>
+<p>函数 <span class="arithmatex">\(check(nums, l, r)\)</span> 的实现逻辑如下：</p>
 <ul>
-<li>首先，我们计算子数组的长度 $n = r - l + 1$，并将子数组中的元素放入集合 $s$ 中，方便后续的查找；</li>
-<li>然后，我们获取子数组中的最小值 $a_1$ 和最大值 $a_n$，如果 $a_n - a_1$ 不能被 $n - 1$ 整除，那么子数组不可能形成等差数列，直接返回 $false$；否则，我们计算等差数列的公差 $d = \frac{a_n - a_1}{n - 1}$；</li>
-<li>接下来从 $a_1$ 开始，依次计算等差数列中第 $i$ 项元素，如果第 $i$ 项元素 $a_1 + (i - 1) \times d$ 不在集合 $s$ 中，那么子数组不可能形成等差数列，直接返回 $false$；否则，当我们遍历完所有的元素，说明子数组可以重新排列形成等差数列，返回 $true$。</li>
+<li>首先，我们计算子数组的长度 <span class="arithmatex">\(n = r - l + 1\)</span>，并将子数组中的元素放入集合 <span class="arithmatex">\(s\)</span> 中，方便后续的查找；</li>
+<li>然后，我们获取子数组中的最小值 <span class="arithmatex">\(a_1\)</span> 和最大值 <span class="arithmatex">\(a_n\)</span>，如果 <span class="arithmatex">\(a_n - a_1\)</span> 不能被 <span class="arithmatex">\(n - 1\)</span> 整除，那么子数组不可能形成等差数列，直接返回 <span class="arithmatex">\(false\)</span>；否则，我们计算等差数列的公差 <span class="arithmatex">\(d = \frac{a_n - a_1}{n - 1}\)</span>；</li>
+<li>接下来从 <span class="arithmatex">\(a_1\)</span> 开始，依次计算等差数列中第 <span class="arithmatex">\(i\)</span> 项元素，如果第 <span class="arithmatex">\(i\)</span> 项元素 <span class="arithmatex">\(a_1 + (i - 1) \times d\)</span> 不在集合 <span class="arithmatex">\(s\)</span> 中，那么子数组不可能形成等差数列，直接返回 <span class="arithmatex">\(false\)</span>；否则，当我们遍历完所有的元素，说明子数组可以重新排列形成等差数列，返回 <span class="arithmatex">\(true\)</span>。</li>
 </ul>
-<p>在主函数中，我们遍历所有的查询，对于每个查询 $l[i]$ 和 $r[i]$，我们调用函数 $check(nums, l[i], r[i])$ 判断子数组是否可以重新排列形成等差数列，将结果存入答案数组中。</p>
-<p>时间复杂度 $O(n \times m)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别为数组 $nums$ 的长度以及查询的组数。</p>
+<p>在主函数中，我们遍历所有的查询，对于每个查询 <span class="arithmatex">\(l[i]\)</span> 和 <span class="arithmatex">\(r[i]\)</span>，我们调用函数 <span class="arithmatex">\(check(nums, l[i], r[i])\)</span> 判断子数组是否可以重新排列形成等差数列，将结果存入答案数组中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为数组 <span class="arithmatex">\(nums\)</span> 的长度以及查询的组数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91478,11 +91476,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

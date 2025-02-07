@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86074,15 +86072,15 @@
 <h3 id="solution-1-problem-transformation-sliding-window">Solution 1: Problem Transformation + Sliding Window</h3>
 <p>We can transform the problem into solving the following two subproblems:</p>
 <ol>
-<li>Find the total number of substrings where each vowel appears at least once and contains at least $k$ consonants, denoted as $\textit{f}(k)$;</li>
-<li>Find the total number of substrings where each vowel appears at least once and contains at least $k + 1$ consonants, denoted as $\textit{f}(k + 1)$.</li>
+<li>Find the total number of substrings where each vowel appears at least once and contains at least <span class="arithmatex">\(k\)</span> consonants, denoted as <span class="arithmatex">\(\textit{f}(k)\)</span>;</li>
+<li>Find the total number of substrings where each vowel appears at least once and contains at least <span class="arithmatex">\(k + 1\)</span> consonants, denoted as <span class="arithmatex">\(\textit{f}(k + 1)\)</span>.</li>
 </ol>
-<p>Then the answer is $\textit{f}(k) - \textit{f}(k + 1)$.</p>
-<p>Therefore, we design a function $\textit{f}(k)$ to count the total number of substrings where each vowel appears at least once and contains at least $k$ consonants.</p>
-<p>We can use a hash table $\textit{cnt}$ to count the occurrences of each vowel, a variable $\textit{ans}$ to store the answer, a variable $\textit{l}$ to record the left boundary of the sliding window, and a variable $\textit{x}$ to record the number of consonants in the current window.</p>
-<p>Traverse the string. If the current character is a vowel, add it to the hash table $\textit{cnt}$; otherwise, increment $\textit{x}$ by one. If $\textit{x} \ge k$ and the size of the hash table $\textit{cnt}$ is $5$, it means the current window meets the conditions. We then move the left boundary in a loop until the window no longer meets the conditions. At this point, all substrings ending at the right boundary $\textit{r}$ and with the left boundary in the range $[0, .. \textit{l} - 1]$ meet the conditions, totaling $\textit{l}$ substrings. We add $\textit{l}$ to the answer. Continue traversing the string until the end, and we get $\textit{f}(k)$.</p>
-<p>Finally, we return $\textit{f}(k) - \textit{f}(k + 1)$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the string $\textit{word}$. The space complexity is $O(1)$.</p>
+<p>Then the answer is <span class="arithmatex">\(\textit{f}(k) - \textit{f}(k + 1)\)</span>.</p>
+<p>Therefore, we design a function <span class="arithmatex">\(\textit{f}(k)\)</span> to count the total number of substrings where each vowel appears at least once and contains at least <span class="arithmatex">\(k\)</span> consonants.</p>
+<p>We can use a hash table <span class="arithmatex">\(\textit{cnt}\)</span> to count the occurrences of each vowel, a variable <span class="arithmatex">\(\textit{ans}\)</span> to store the answer, a variable <span class="arithmatex">\(\textit{l}\)</span> to record the left boundary of the sliding window, and a variable <span class="arithmatex">\(\textit{x}\)</span> to record the number of consonants in the current window.</p>
+<p>Traverse the string. If the current character is a vowel, add it to the hash table <span class="arithmatex">\(\textit{cnt}\)</span>; otherwise, increment <span class="arithmatex">\(\textit{x}\)</span> by one. If <span class="arithmatex">\(\textit{x} \ge k\)</span> and the size of the hash table <span class="arithmatex">\(\textit{cnt}\)</span> is <span class="arithmatex">\(5\)</span>, it means the current window meets the conditions. We then move the left boundary in a loop until the window no longer meets the conditions. At this point, all substrings ending at the right boundary <span class="arithmatex">\(\textit{r}\)</span> and with the left boundary in the range <span class="arithmatex">\([0, .. \textit{l} - 1]\)</span> meet the conditions, totaling <span class="arithmatex">\(\textit{l}\)</span> substrings. We add <span class="arithmatex">\(\textit{l}\)</span> to the answer. Continue traversing the string until the end, and we get <span class="arithmatex">\(\textit{f}(k)\)</span>.</p>
+<p>Finally, we return <span class="arithmatex">\(\textit{f}(k) - \textit{f}(k + 1)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(\textit{word}\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86648,11 +86646,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

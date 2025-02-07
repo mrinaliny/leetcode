@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90877,17 +90875,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j, k)$ 表示还剩下 $i$ 个 $0$ 和 $j$ 个 $1$ 且接下来待填的数字是 $k$ 的情况下，满足题目条件的稳定二进制数组的个数。那么答案就是 $dfs(zero, one, 0) + dfs(zero, one, 1)$。</p>
-<p>函数 $dfs(i, j, k)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j, k)\)</span> 表示还剩下 <span class="arithmatex">\(i\)</span> 个 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(j\)</span> 个 <span class="arithmatex">\(1\)</span> 且接下来待填的数字是 <span class="arithmatex">\(k\)</span> 的情况下，满足题目条件的稳定二进制数组的个数。那么答案就是 <span class="arithmatex">\(dfs(zero, one, 0) + dfs(zero, one, 1)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j, k)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \lt 0$ 或 $j \lt 0$，返回 $0$。</li>
-<li>如果 $i = 0$，那么当 $k = 1$ 且 $j \leq \textit{limit}$ 时返回 $1$，否则返回 $0$。</li>
-<li>如果 $j = 0$，那么当 $k = 0$ 且 $i \leq \textit{limit}$ 时返回 $1$，否则返回 $0$。</li>
-<li>如果 $k = 0$，我们考虑前一个数字是 $0$ 的情况 $dfs(i - 1, j, 0)$ 和前一个数字是 $1$ 的情况 $dfs(i - 1, j, 1)$，如果前一个数是 $0$，那么有可能使得子数组中有超过 $\textit{limit}$ 个 $0$，即不允许出现倒数第 $\textit{limit} + 1$ 个数是 $1$ 的情况，所以我们要减去这种情况，即 $dfs(i - \textit{limit} - 1, j, 1)$。</li>
-<li>如果 $k = 1$，我们考虑前一个数字是 $0$ 的情况 $dfs(i, j - 1, 0)$ 和前一个数字是 $1$ 的情况 $dfs(i, j - 1, 1)$，如果前一个数是 $1$，那么有可能使得子数组中有超过 $\textit{limit}$ 个 $1$，即不允许出现倒数第 $\textit{limit} + 1$ 个数是 $0$ 的情况，所以我们要减去这种情况，即 $dfs(i, j - \textit{limit} - 1, 0)$。</li>
+<li>如果 <span class="arithmatex">\(i \lt 0\)</span> 或 <span class="arithmatex">\(j \lt 0\)</span>，返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>如果 <span class="arithmatex">\(i = 0\)</span>，那么当 <span class="arithmatex">\(k = 1\)</span> 且 <span class="arithmatex">\(j \leq \textit{limit}\)</span> 时返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>如果 <span class="arithmatex">\(j = 0\)</span>，那么当 <span class="arithmatex">\(k = 0\)</span> 且 <span class="arithmatex">\(i \leq \textit{limit}\)</span> 时返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</li>
+<li>如果 <span class="arithmatex">\(k = 0\)</span>，我们考虑前一个数字是 <span class="arithmatex">\(0\)</span> 的情况 <span class="arithmatex">\(dfs(i - 1, j, 0)\)</span> 和前一个数字是 <span class="arithmatex">\(1\)</span> 的情况 <span class="arithmatex">\(dfs(i - 1, j, 1)\)</span>，如果前一个数是 <span class="arithmatex">\(0\)</span>，那么有可能使得子数组中有超过 <span class="arithmatex">\(\textit{limit}\)</span> 个 <span class="arithmatex">\(0\)</span>，即不允许出现倒数第 <span class="arithmatex">\(\textit{limit} + 1\)</span> 个数是 <span class="arithmatex">\(1\)</span> 的情况，所以我们要减去这种情况，即 <span class="arithmatex">\(dfs(i - \textit{limit} - 1, j, 1)\)</span>。</li>
+<li>如果 <span class="arithmatex">\(k = 1\)</span>，我们考虑前一个数字是 <span class="arithmatex">\(0\)</span> 的情况 <span class="arithmatex">\(dfs(i, j - 1, 0)\)</span> 和前一个数字是 <span class="arithmatex">\(1\)</span> 的情况 <span class="arithmatex">\(dfs(i, j - 1, 1)\)</span>，如果前一个数是 <span class="arithmatex">\(1\)</span>，那么有可能使得子数组中有超过 <span class="arithmatex">\(\textit{limit}\)</span> 个 <span class="arithmatex">\(1\)</span>，即不允许出现倒数第 <span class="arithmatex">\(\textit{limit} + 1\)</span> 个数是 <span class="arithmatex">\(0\)</span> 的情况，所以我们要减去这种情况，即 <span class="arithmatex">\(dfs(i, j - \textit{limit} - 1, 0)\)</span>。</li>
 </ul>
 <p>为了避免重复计算，我们使用记忆化搜索的方法。</p>
-<p>时间复杂度 $O(zero \times one)$，空间复杂度 $O(zero \times one)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(zero \times one)\)</span>，空间复杂度 <span class="arithmatex">\(O(zero \times one)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91160,14 +91158,14 @@
 
 <h3 id="_4">方法二：动态规划</h3>
 <p>我们也可以将方法一的记忆化搜索转换为动态规划。</p>
-<p>我们定义 $f[i][j][k]$ 表示使用 $i$ 个 $0$ 和 $j$ 个 $1$ 且最后一个数字是 $k$ 的稳定二进制数组的个数。那么答案就是 $f[zero][one][0] + f[zero][one][1]$。</p>
-<p>初始时，我们有 $f[i][0][0] = 1$，其中 $1 \leq i \leq \min(\textit{limit}, \textit{zero})$；有 $f[0][j][1] = 1$，其中 $1 \leq j \leq \min(\textit{limit}, \textit{one})$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示使用 <span class="arithmatex">\(i\)</span> 个 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(j\)</span> 个 <span class="arithmatex">\(1\)</span> 且最后一个数字是 <span class="arithmatex">\(k\)</span> 的稳定二进制数组的个数。那么答案就是 <span class="arithmatex">\(f[zero][one][0] + f[zero][one][1]\)</span>。</p>
+<p>初始时，我们有 <span class="arithmatex">\(f[i][0][0] = 1\)</span>，其中 <span class="arithmatex">\(1 \leq i \leq \min(\textit{limit}, \textit{zero})\)</span>；有 <span class="arithmatex">\(f[0][j][1] = 1\)</span>，其中 <span class="arithmatex">\(1 \leq j \leq \min(\textit{limit}, \textit{one})\)</span>。</p>
 <p>状态转移方程如下：</p>
 <ul>
-<li>$f[i][j][0] = f[i - 1][j][0] + f[i - 1][j][1] - f[i - \textit{limit} - 1][j][1]$。</li>
-<li>$f[i][j][1] = f[i][j - 1][0] + f[i][j - 1][1] - f[i][j - \textit{limit} - 1][0]$。</li>
+<li><span class="arithmatex">\(f[i][j][0] = f[i - 1][j][0] + f[i - 1][j][1] - f[i - \textit{limit} - 1][j][1]\)</span>。</li>
+<li><span class="arithmatex">\(f[i][j][1] = f[i][j - 1][0] + f[i][j - 1][1] - f[i][j - \textit{limit} - 1][0]\)</span>。</li>
 </ul>
-<p>时间复杂度 $O(zero \times one)$，空间复杂度 $O(zero \times one)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(zero \times one)\)</span>，空间复杂度 <span class="arithmatex">\(O(zero \times one)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91631,11 +91629,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

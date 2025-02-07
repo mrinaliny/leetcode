@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,9 +90856,9 @@
 <!-- solution:start -->
 
 <h3 id="on">方法一：O(n) 遍历</h3>
-<p>经过验证，若暴力遍历，调用 $O(n^2)$ 次 $knows$ 方法，会报 TLE 错误。因此，我们需要寻找更优的解法。</p>
-<p>要找出 $n$ 个人中的名人，题目给我们的关键信息是：1. 名人不认识其他所有人；2. 其他所有人都认识名人。</p>
-<p>那么，我们初始时假定名人 $ans=0$。然后在 $[1,n)$ 范围内遍历 $i$，若 $ans$ 认识 $i$，说明 $ans$ 不是我们要找的名人，此时我们可以直接将 $ans$ 更新为 $i$。</p>
+<p>经过验证，若暴力遍历，调用 <span class="arithmatex">\(O(n^2)\)</span> 次 <span class="arithmatex">\(knows\)</span> 方法，会报 TLE 错误。因此，我们需要寻找更优的解法。</p>
+<p>要找出 <span class="arithmatex">\(n\)</span> 个人中的名人，题目给我们的关键信息是：1. 名人不认识其他所有人；2. 其他所有人都认识名人。</p>
+<p>那么，我们初始时假定名人 <span class="arithmatex">\(ans=0\)</span>。然后在 <span class="arithmatex">\([1,n)\)</span> 范围内遍历 <span class="arithmatex">\(i\)</span>，若 <span class="arithmatex">\(ans\)</span> 认识 <span class="arithmatex">\(i\)</span>，说明 <span class="arithmatex">\(ans\)</span> 不是我们要找的名人，此时我们可以直接将 <span class="arithmatex">\(ans\)</span> 更新为 <span class="arithmatex">\(i\)</span>。</p>
 <p>为什么呢？我们来举个实际的例子。</p>
 <div class="highlight"><pre><span></span><code><span class="nv">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 <span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="m">1</span>,n<span class="o">)</span><span class="w"> </span><span class="o">{</span>
@@ -90881,9 +90879,9 @@ ans<span class="w"> </span>not<span class="w"> </span>knows<span class="w"> </sp
 ans<span class="w"> </span>not<span class="w"> </span>knows<span class="w"> </span><span class="m">6</span>
 <span class="nv">ans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span>
 </code></pre></div>
-<p>这里 $ans$ 认识 $3$，说明 $ans$ 不是名人（即 $0$ 不是名人），那么名人会是 $1$ 或者 $2$ 吗？不会！因为若 $1$ 或者 $2$ 是名人，那么 $0$ 应该认识 $1$ 或者 $2$ 才对，与前面的例子冲突。因此，我们可以直接将 $ans$ 更新为 $i$。</p>
-<p>我们找出 $ans$ 之后，接下来再遍历一遍，判断 $ans$ 是否满足名人的条件。若不满足，返回 $-1$。</p>
-<p>否则遍历结束，返回 $ans$。</p>
+<p>这里 <span class="arithmatex">\(ans\)</span> 认识 <span class="arithmatex">\(3\)</span>，说明 <span class="arithmatex">\(ans\)</span> 不是名人（即 <span class="arithmatex">\(0\)</span> 不是名人），那么名人会是 <span class="arithmatex">\(1\)</span> 或者 <span class="arithmatex">\(2\)</span> 吗？不会！因为若 <span class="arithmatex">\(1\)</span> 或者 <span class="arithmatex">\(2\)</span> 是名人，那么 <span class="arithmatex">\(0\)</span> 应该认识 <span class="arithmatex">\(1\)</span> 或者 <span class="arithmatex">\(2\)</span> 才对，与前面的例子冲突。因此，我们可以直接将 <span class="arithmatex">\(ans\)</span> 更新为 <span class="arithmatex">\(i\)</span>。</p>
+<p>我们找出 <span class="arithmatex">\(ans\)</span> 之后，接下来再遍历一遍，判断 <span class="arithmatex">\(ans\)</span> 是否满足名人的条件。若不满足，返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>否则遍历结束，返回 <span class="arithmatex">\(ans\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91292,11 +91290,9 @@ ans<span class="w"> </span>not<span class="w"> </span>knows<span class="w"> </sp
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

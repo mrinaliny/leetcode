@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86069,18 +86067,18 @@ Cost of paint the first and last house (10 + 1) = 11.
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i][j][k]$ to represent the minimum cost to paint houses from index $0$ to $i$, with the last house painted in color $j$, and exactly forming $k$ blocks. The answer is $f[m-1][j][\textit{target}]$, where $j$ ranges from $1$ to $n$. Initially, we check if the house at index $0$ is already painted. If it is not painted, then $f[0][j][1] = \textit{cost}[0][j - 1]$, where $j \in [1,..n]$. If it is already painted, then $f[0][\textit{houses}[0]][1] = 0$. All other values of $f[i][j][k]$ are initialized to $\infty$.</p>
-<p>Next, we start iterating from index $i=1$. For each $i$, we check if the house at index $i$ is already painted:</p>
-<p>If it is not painted, we can paint the house at index $i$ with color $j$. We enumerate the number of blocks $k$, where $k \in [1,..\min(\textit{target}, i + 1)]$, and enumerate the color of the previous house $j_0$, where $j_0 \in [1,..n]$. Then we can derive the state transition equation:</p>
-<p>$$
-f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] + \textit{cost}[i][j - 1] }
-$$</p>
-<p>If it is already painted, we can paint the house at index $i$ with color $j$. We enumerate the number of blocks $k$, where $k \in [1,..\min(\textit{target}, i + 1)]$, and enumerate the color of the previous house $j_0$, where $j_0 \in [1,..n]$. Then we can derive the state transition equation:</p>
-<p>$$
-f[i][j][k] = \min_{j_0 \in [1,..n]} { f[i - 1][j_0][k - (j \neq j_0)] }
-$$</p>
-<p>Finally, we return $f[m - 1][j][\textit{target}]$, where $j \in [1,..n]$. If all values of $f[m - 1][j][\textit{target}]$ are $\infty$, then return $-1$.</p>
-<p>The time complexity is $O(m \times n^2 \times \textit{target})$, and the space complexity is $O(m \times n \times \textit{target})$. Here, $m$, $n$, and $\textit{target}$ represent the number of houses, the number of colors, and the number of blocks, respectively.</p>
+<p>We define <span class="arithmatex">\(f[i][j][k]\)</span> to represent the minimum cost to paint houses from index <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(i\)</span>, with the last house painted in color <span class="arithmatex">\(j\)</span>, and exactly forming <span class="arithmatex">\(k\)</span> blocks. The answer is <span class="arithmatex">\(f[m-1][j][\textit{target}]\)</span>, where <span class="arithmatex">\(j\)</span> ranges from <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(n\)</span>. Initially, we check if the house at index <span class="arithmatex">\(0\)</span> is already painted. If it is not painted, then <span class="arithmatex">\(f[0][j][1] = \textit{cost}[0][j - 1]\)</span>, where <span class="arithmatex">\(j \in [1,..n]\)</span>. If it is already painted, then <span class="arithmatex">\(f[0][\textit{houses}[0]][1] = 0\)</span>. All other values of <span class="arithmatex">\(f[i][j][k]\)</span> are initialized to <span class="arithmatex">\(\infty\)</span>.</p>
+<p>Next, we start iterating from index <span class="arithmatex">\(i=1\)</span>. For each <span class="arithmatex">\(i\)</span>, we check if the house at index <span class="arithmatex">\(i\)</span> is already painted:</p>
+<p>If it is not painted, we can paint the house at index <span class="arithmatex">\(i\)</span> with color <span class="arithmatex">\(j\)</span>. We enumerate the number of blocks <span class="arithmatex">\(k\)</span>, where <span class="arithmatex">\(k \in [1,..\min(\textit{target}, i + 1)]\)</span>, and enumerate the color of the previous house <span class="arithmatex">\(j_0\)</span>, where <span class="arithmatex">\(j_0 \in [1,..n]\)</span>. Then we can derive the state transition equation:</p>
+<div class="arithmatex">\[
+f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] + \textit{cost}[i][j - 1] \}
+\]</div>
+<p>If it is already painted, we can paint the house at index <span class="arithmatex">\(i\)</span> with color <span class="arithmatex">\(j\)</span>. We enumerate the number of blocks <span class="arithmatex">\(k\)</span>, where <span class="arithmatex">\(k \in [1,..\min(\textit{target}, i + 1)]\)</span>, and enumerate the color of the previous house <span class="arithmatex">\(j_0\)</span>, where <span class="arithmatex">\(j_0 \in [1,..n]\)</span>. Then we can derive the state transition equation:</p>
+<div class="arithmatex">\[
+f[i][j][k] = \min_{j_0 \in [1,..n]} \{ f[i - 1][j_0][k - (j \neq j_0)] \}
+\]</div>
+<p>Finally, we return <span class="arithmatex">\(f[m - 1][j][\textit{target}]\)</span>, where <span class="arithmatex">\(j \in [1,..n]\)</span>. If all values of <span class="arithmatex">\(f[m - 1][j][\textit{target}]\)</span> are <span class="arithmatex">\(\infty\)</span>, then return <span class="arithmatex">\(-1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n^2 \times \textit{target})\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n \times \textit{target})\)</span>. Here, <span class="arithmatex">\(m\)</span>, <span class="arithmatex">\(n\)</span>, and <span class="arithmatex">\(\textit{target}\)</span> represent the number of houses, the number of colors, and the number of blocks, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86783,11 +86781,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

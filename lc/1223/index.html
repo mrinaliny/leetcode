@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90854,14 +90852,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们可以设计一个函数 $dfs(i, j, x)$ 表示从第 $i$ 次掷骰子开始，当前掷出的点数为 $j$，且连续掷出 $j$ 的次数为 $x$ 的方案数。其中 $j$ 的取值范围为 $[1, 6]$，而 $x$ 的取值范围为 $[1, rollMax[j - 1]]$。那么答案就是 $dfs(0, 0, 0)$。</p>
-<p>函数 $dfs(i, j, x)$ 的计算过程如下：</p>
+<p>我们可以设计一个函数 <span class="arithmatex">\(dfs(i, j, x)\)</span> 表示从第 <span class="arithmatex">\(i\)</span> 次掷骰子开始，当前掷出的点数为 <span class="arithmatex">\(j\)</span>，且连续掷出 <span class="arithmatex">\(j\)</span> 的次数为 <span class="arithmatex">\(x\)</span> 的方案数。其中 <span class="arithmatex">\(j\)</span> 的取值范围为 <span class="arithmatex">\([1, 6]\)</span>，而 <span class="arithmatex">\(x\)</span> 的取值范围为 <span class="arithmatex">\([1, rollMax[j - 1]]\)</span>。那么答案就是 <span class="arithmatex">\(dfs(0, 0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j, x)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \ge n$，说明已经掷完了 $n$ 次骰子，返回 $1$。</li>
-<li>否则，我们枚举下一次掷出的点数 $k$，如果 $k \ne j$，那么我们可以直接掷出 $k$，此时连续掷出 $j$ 的次数 $x$ 就会被重置为 $1$，因此方案数为 $dfs(i + 1, k, 1)$。如果 $k = j$，那么我们需要判断 $x$ 是否小于 $rollMax[j - 1]$，如果小于，那么我们可以继续掷出 $j$，此时连续掷出 $j$ 的次数 $x$ 就会加 $1$，因此方案数为 $dfs(i + 1, j, x + 1)$。最后将所有方案数相加，即为 $dfs(i, j, x)$ 的值。注意答案可能很大，因此需要对 $10^9 + 7$ 取模。</li>
+<li>如果 <span class="arithmatex">\(i \ge n\)</span>，说明已经掷完了 <span class="arithmatex">\(n\)</span> 次骰子，返回 <span class="arithmatex">\(1\)</span>。</li>
+<li>否则，我们枚举下一次掷出的点数 <span class="arithmatex">\(k\)</span>，如果 <span class="arithmatex">\(k \ne j\)</span>，那么我们可以直接掷出 <span class="arithmatex">\(k\)</span>，此时连续掷出 <span class="arithmatex">\(j\)</span> 的次数 <span class="arithmatex">\(x\)</span> 就会被重置为 <span class="arithmatex">\(1\)</span>，因此方案数为 <span class="arithmatex">\(dfs(i + 1, k, 1)\)</span>。如果 <span class="arithmatex">\(k = j\)</span>，那么我们需要判断 <span class="arithmatex">\(x\)</span> 是否小于 <span class="arithmatex">\(rollMax[j - 1]\)</span>，如果小于，那么我们可以继续掷出 <span class="arithmatex">\(j\)</span>，此时连续掷出 <span class="arithmatex">\(j\)</span> 的次数 <span class="arithmatex">\(x\)</span> 就会加 <span class="arithmatex">\(1\)</span>，因此方案数为 <span class="arithmatex">\(dfs(i + 1, j, x + 1)\)</span>。最后将所有方案数相加，即为 <span class="arithmatex">\(dfs(i, j, x)\)</span> 的值。注意答案可能很大，因此需要对 <span class="arithmatex">\(10^9 + 7\)</span> 取模。</li>
 </ul>
 <p>过程中，我们可以使用记忆化搜索避免重复计算。</p>
-<p>时间复杂度 $O(n \times k^2 \times M)$，空间复杂度 $O(n \times k \times M)$。其中 $k$ 为点数的取值范围，而 $M$ 为连续掷出某个点数的最大次数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k^2 \times M)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k \times M)\)</span>。其中 <span class="arithmatex">\(k\)</span> 为点数的取值范围，而 <span class="arithmatex">\(M\)</span> 为连续掷出某个点数的最大次数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91070,17 +91068,17 @@
 
 <h3 id="_4">方法二：动态规划</h3>
 <p>我们可以将方法一中的记忆化搜索改为动态规划。</p>
-<p>定义 $f[i][j][x]$ 表示投掷前 $i$ 次骰子，且第 $i$ 次投掷的点数为 $j$，且连续投掷点数 $j$ 的次数为 $x$ 的方案数。初始时 $f[1][j][1] = 1$，其中 $1 \leq j \leq 6$。答案即是：</p>
-<p>$$
+<p>定义 <span class="arithmatex">\(f[i][j][x]\)</span> 表示投掷前 <span class="arithmatex">\(i\)</span> 次骰子，且第 <span class="arithmatex">\(i\)</span> 次投掷的点数为 <span class="arithmatex">\(j\)</span>，且连续投掷点数 <span class="arithmatex">\(j\)</span> 的次数为 <span class="arithmatex">\(x\)</span> 的方案数。初始时 <span class="arithmatex">\(f[1][j][1] = 1\)</span>，其中 <span class="arithmatex">\(1 \leq j \leq 6\)</span>。答案即是：</p>
+<div class="arithmatex">\[
 \sum_{j=1}^6 \sum_{x=1}^{rollMax[j-1]} f[n][j][x]
-$$</p>
-<p>我们枚举上一次投掷的点数为 $j$，且连续投掷点数 $j$ 的次数为 $x$，那么当前投掷的点数可以为 $1, 2, \cdots, 6$，如果当前投掷的点数为 $k$，那么有如下两种情况：</p>
+\]</div>
+<p>我们枚举上一次投掷的点数为 <span class="arithmatex">\(j\)</span>，且连续投掷点数 <span class="arithmatex">\(j\)</span> 的次数为 <span class="arithmatex">\(x\)</span>，那么当前投掷的点数可以为 <span class="arithmatex">\(1, 2, \cdots, 6\)</span>，如果当前投掷的点数为 <span class="arithmatex">\(k\)</span>，那么有如下两种情况：</p>
 <ul>
-<li>如果 $k \neq j$，那么我们可以直接投掷出 $k$，此时连续投掷点数 $j$ 的次数 $x$ 就会被重置为 $1$，因此方案数 $f[i][k][1]$ 就会增加 $f[i-1][j][x]$。</li>
-<li>如果 $k = j$，那么我们需要判断 $x+1$ 是否小于等于 $rollMax[j-1]$，如果小于等于，那么我们可以继续投掷出 $j$，此时连续投掷点数 $j$ 的次数 $x$ 就会加 $1$，因此方案数 $f[i][j][x+1]$ 就会增加 $f[i-1][j][x]$。</li>
+<li>如果 <span class="arithmatex">\(k \neq j\)</span>，那么我们可以直接投掷出 <span class="arithmatex">\(k\)</span>，此时连续投掷点数 <span class="arithmatex">\(j\)</span> 的次数 <span class="arithmatex">\(x\)</span> 就会被重置为 <span class="arithmatex">\(1\)</span>，因此方案数 <span class="arithmatex">\(f[i][k][1]\)</span> 就会增加 <span class="arithmatex">\(f[i-1][j][x]\)</span>。</li>
+<li>如果 <span class="arithmatex">\(k = j\)</span>，那么我们需要判断 <span class="arithmatex">\(x+1\)</span> 是否小于等于 <span class="arithmatex">\(rollMax[j-1]\)</span>，如果小于等于，那么我们可以继续投掷出 <span class="arithmatex">\(j\)</span>，此时连续投掷点数 <span class="arithmatex">\(j\)</span> 的次数 <span class="arithmatex">\(x\)</span> 就会加 <span class="arithmatex">\(1\)</span>，因此方案数 <span class="arithmatex">\(f[i][j][x+1]\)</span> 就会增加 <span class="arithmatex">\(f[i-1][j][x]\)</span>。</li>
 </ul>
-<p>最终的答案即为所有 $f[n][j][x]$ 的和。</p>
-<p>时间复杂度 $O(n \times k^2 \times M)$，空间复杂度 $O(n \times k \times M)$。其中 $k$ 为点数的取值范围，而 $M$ 为连续掷出某个点数的最大次数。</p>
+<p>最终的答案即为所有 <span class="arithmatex">\(f[n][j][x]\)</span> 的和。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k^2 \times M)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k \times M)\)</span>。其中 <span class="arithmatex">\(k\)</span> 为点数的取值范围，而 <span class="arithmatex">\(M\)</span> 为连续掷出某个点数的最大次数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91532,11 +91530,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

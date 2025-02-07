@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86057,15 +86055,15 @@ rangeModule.queryRange(16, 17); // return True, (The number 16 in [16, 17) is st
 
 <h3 id="solution-1-segment-tree">Solution 1: Segment Tree</h3>
 <p>According to the problem description, we need to maintain a set of intervals, supporting operations of interval addition, deletion, and query. For the addition and deletion of intervals, we can use a segment tree to maintain the set of intervals.</p>
-<p>The segment tree divides the entire interval into multiple non-continuous sub-intervals, the number of which does not exceed $\log(width)$. To update the value of an element, only $\log(width)$ intervals need to be updated, and these intervals are all included in a large interval containing the element. When modifying the interval, we need to use <strong>lazy propagation</strong> to ensure efficiency.</p>
+<p>The segment tree divides the entire interval into multiple non-continuous sub-intervals, the number of which does not exceed <span class="arithmatex">\(\log(width)\)</span>. To update the value of an element, only <span class="arithmatex">\(\log(width)\)</span> intervals need to be updated, and these intervals are all included in a large interval containing the element. When modifying the interval, we need to use <strong>lazy propagation</strong> to ensure efficiency.</p>
 <ul>
 <li>Each node of the segment tree represents an interval;</li>
-<li>The segment tree has a unique root node, representing the entire statistical range, such as $[1,N]$;</li>
-<li>Each leaf node of the segment tree represents an elementary interval of length $1$, $[x,x]$;</li>
-<li>For each internal node $[l,r]$, its left child is $[l,mid]$, and the right child is $[mid+1,r]$, where $mid=⌊(l+r)/2⌋$ (rounded down).</li>
+<li>The segment tree has a unique root node, representing the entire statistical range, such as <span class="arithmatex">\([1,N]\)</span>;</li>
+<li>Each leaf node of the segment tree represents an elementary interval of length <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\([x,x]\)</span>;</li>
+<li>For each internal node <span class="arithmatex">\([l,r]\)</span>, its left child is <span class="arithmatex">\([l,mid]\)</span>, and the right child is <span class="arithmatex">\([mid+1,r]\)</span>, where <span class="arithmatex">\(mid=⌊(l+r)/2⌋\)</span> (rounded down).</li>
 </ul>
 <p>Due to the large data range of the problem, we can implement it with a dynamically allocated segment tree. A dynamically allocated segment tree means that we only allocate nodes when needed, instead of allocating all nodes at the beginning. This can save space, but it requires <strong>lazy propagation</strong> to maintain interval modification.</p>
-<p>In terms of time complexity, the time complexity of each operation is $O(\log n)$. The space complexity is $O(m \times \log n)$. Here, $m$ is the number of operations, and $n$ is the data range.</p>
+<p>In terms of time complexity, the time complexity of each operation is <span class="arithmatex">\(O(\log n)\)</span>. The space complexity is <span class="arithmatex">\(O(m \times \log n)\)</span>. Here, <span class="arithmatex">\(m\)</span> is the number of operations, and <span class="arithmatex">\(n\)</span> is the data range.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87407,11 +87405,9 @@ rangeModule.queryRange(16, 17); // return True, (The number 16 in [16, 17) is st
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

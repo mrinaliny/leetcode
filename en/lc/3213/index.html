@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86079,13 +86077,13 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-string-hashing-dynamic-programming-enumerating-length">Solution 1: String Hashing + Dynamic Programming + Enumerating Length</h3>
-<p>We define $f[i]$ as the minimum cost to construct the first $i$ characters of $\textit{target}$, with the initial condition $f[0] = 0$ and all other values set to infinity. The answer is $f[n]$, where $n$ is the length of $\textit{target}$.</p>
-<p>For the current $f[i]$, consider enumerating the length $j$ of the word. If $j \leq i$, then we can consider the hash value of the segment from $i - j + 1$ to $i$. If this hash value corresponds to an existing word, then we can transition from $f[i - j]$ to $f[i]$. The state transition equation is as follows:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the minimum cost to construct the first <span class="arithmatex">\(i\)</span> characters of <span class="arithmatex">\(\textit{target}\)</span>, with the initial condition <span class="arithmatex">\(f[0] = 0\)</span> and all other values set to infinity. The answer is <span class="arithmatex">\(f[n]\)</span>, where <span class="arithmatex">\(n\)</span> is the length of <span class="arithmatex">\(\textit{target}\)</span>.</p>
+<p>For the current <span class="arithmatex">\(f[i]\)</span>, consider enumerating the length <span class="arithmatex">\(j\)</span> of the word. If <span class="arithmatex">\(j \leq i\)</span>, then we can consider the hash value of the segment from <span class="arithmatex">\(i - j + 1\)</span> to <span class="arithmatex">\(i\)</span>. If this hash value corresponds to an existing word, then we can transition from <span class="arithmatex">\(f[i - j]\)</span> to <span class="arithmatex">\(f[i]\)</span>. The state transition equation is as follows:</p>
+<div class="arithmatex">\[
 f[i] = \min(f[i], f[i - j] + \textit{cost}[k])
-$$</p>
-<p>where $\textit{cost}[k]$ represents the minimum cost of a word of length $j$ whose hash value matches $\textit{target}[i - j + 1, i]$.</p>
-<p>The time complexity is $O(n \times \sqrt{L})$, and the space complexity is $O(n)$. Here, $n$ is the length of $\textit{target}$, and $L$ is the sum of the lengths of all words in the array $\textit{words}$.</p>
+\]</div>
+<p>where <span class="arithmatex">\(\textit{cost}[k]\)</span> represents the minimum cost of a word of length <span class="arithmatex">\(j\)</span> whose hash value matches <span class="arithmatex">\(\textit{target}[i - j + 1, i]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \sqrt{L})\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of <span class="arithmatex">\(\textit{target}\)</span>, and <span class="arithmatex">\(L\)</span> is the sum of the lengths of all words in the array <span class="arithmatex">\(\textit{words}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86783,11 +86781,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

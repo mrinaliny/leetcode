@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86072,10 +86070,10 @@ F(n) = F(n - 1) + F(n - 2), for n &gt; 1.
 <!-- solution:start -->
 
 <h3 id="solution-1-recurrence">Solution 1: Recurrence</h3>
-<p>We define two variables $a$ and $b$, initially $a = 0$ and $b = 1$.</p>
-<p>Next, we perform $n$ iterations. In each iteration, we update the values of $a$ and $b$ to $b$ and $a + b$, respectively.</p>
-<p>Finally, we return $a$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the given integer. The space complexity is $O(1)$.</p>
+<p>We define two variables <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>, initially <span class="arithmatex">\(a = 0\)</span> and <span class="arithmatex">\(b = 1\)</span>.</p>
+<p>Next, we perform <span class="arithmatex">\(n\)</span> iterations. In each iteration, we update the values of <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> to <span class="arithmatex">\(b\)</span> and <span class="arithmatex">\(a + b\)</span>, respectively.</p>
+<p>Finally, we return <span class="arithmatex">\(a\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the given integer. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86265,33 +86263,33 @@ F(n) = F(n - 1) + F(n - 2), for n &gt; 1.
 <!-- solution:start -->
 
 <h3 id="solution-2-matrix-exponentiation">Solution 2: Matrix Exponentiation</h3>
-<p>We define $\textit{Fib}(n)$ as a $1 \times 2$ matrix $\begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}$, where $F_n$ and $F_{n - 1}$ are the $n$-th and $(n - 1)$-th Fibonacci numbers, respectively.</p>
-<p>We want to derive $\textit{Fib}(n)$ from $\textit{Fib}(n - 1) = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix}$. In other words, we need a matrix $\textit{base}$ such that $\textit{Fib}(n - 1) \times \textit{base} = \textit{Fib}(n)$, i.e.:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(\textit{Fib}(n)\)</span> as a <span class="arithmatex">\(1 \times 2\)</span> matrix <span class="arithmatex">\(\begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}\)</span>, where <span class="arithmatex">\(F_n\)</span> and <span class="arithmatex">\(F_{n - 1}\)</span> are the <span class="arithmatex">\(n\)</span>-th and <span class="arithmatex">\((n - 1)\)</span>-th Fibonacci numbers, respectively.</p>
+<p>We want to derive <span class="arithmatex">\(\textit{Fib}(n)\)</span> from <span class="arithmatex">\(\textit{Fib}(n - 1) = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix}\)</span>. In other words, we need a matrix <span class="arithmatex">\(\textit{base}\)</span> such that <span class="arithmatex">\(\textit{Fib}(n - 1) \times \textit{base} = \textit{Fib}(n)\)</span>, i.e.:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
 F_{n - 1} &amp; F_{n - 2}
 \end{bmatrix} \times \textit{base} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
-$$</p>
-<p>Since $F_n = F_{n - 1} + F_{n - 2}$, the first column of the matrix $\textit{base}$ is:</p>
-<p>$$
+\]</div>
+<p>Since <span class="arithmatex">\(F_n = F_{n - 1} + F_{n - 2}\)</span>, the first column of the matrix <span class="arithmatex">\(\textit{base}\)</span> is:</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 \
+1 \\
 1
 \end{bmatrix}
-$$</p>
+\]</div>
 <p>The second column is:</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 \
+1 \\
 0
 \end{bmatrix}
-$$</p>
+\]</div>
 <p>Thus, we have:</p>
-<p>$$
-\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix} \times \begin{bmatrix}1 &amp; 1 \ 1 &amp; 0\end{bmatrix} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
-$$</p>
-<p>We define the initial matrix $res = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}$, then $F_n$ is equal to the second element of the first row of the result matrix obtained by multiplying $res$ with $\textit{base}^{n}$. We can solve this using matrix exponentiation.</p>
-<p>The time complexity is $O(\log n)$, and the space complexity is $O(1)$.</p>
+<div class="arithmatex">\[
+\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix} \times \begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
+\]</div>
+<p>We define the initial matrix <span class="arithmatex">\(res = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}\)</span>, then <span class="arithmatex">\(F_n\)</span> is equal to the second element of the first row of the result matrix obtained by multiplying <span class="arithmatex">\(res\)</span> with <span class="arithmatex">\(\textit{base}^{n}\)</span>. We can solve this using matrix exponentiation.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label><label for="__tabbed_2_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86977,11 +86975,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

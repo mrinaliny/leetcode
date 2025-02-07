@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90874,10 +90872,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：字符串哈希</h3>
-<p><strong>字符串哈希</strong>是把一个任意长度的字符串映射成一个非负整数，并且其冲突的概率几乎为 $0$。字符串哈希用于计算字符串哈希值，快速判断两个字符串是否相等。</p>
-<p>取一固定值 $BASE$，把字符串看作是 $BASE$ 进制数，并分配一个大于 $0$ 的数值，代表每种字符。一般来说，我们分配的数值都远小于 $BASE$。例如，对于小写字母构成的字符串，可以令 $a=1$, $b=2$, ..., $z=26$。取一固定值 $MOD$，求出该 $BASE$ 进制对 $M$ 的余数，作为该字符串的 $hash$ 值。</p>
-<p>一般来说，取 $BASE=131$ 或者 $BASE=13331$，此时 $hash$ 值产生的冲突概率极低。只要两个字符串 $hash$ 值相同，我们就认为两个字符串是相等的。通常 $MOD$ 取 $2^{64}$，C++ 里，可以直接使用 <code>unsigned long long</code> 类型存储这个 $hash$ 值，在计算时不处理算术溢出问题，产生溢出时相当于自动对 $2^{64}$ 取模，这样可以避免低效取模运算。</p>
-<p>除了在极特殊构造的数据上，上述 $hash$ 算法很难产生冲突，一般情况下上述 $hash$ 算法完全可以出现在题目的标准答案中。我们还可以多取一些恰当的 $BASE$ 和 $MOD$ 的值（例如大质数），多进行几组 $hash$ 运算，当结果都相同时才认为原字符串相等，就更加难以构造出使这个 $hash$ 产生错误的数据。</p>
+<p><strong>字符串哈希</strong>是把一个任意长度的字符串映射成一个非负整数，并且其冲突的概率几乎为 <span class="arithmatex">\(0\)</span>。字符串哈希用于计算字符串哈希值，快速判断两个字符串是否相等。</p>
+<p>取一固定值 <span class="arithmatex">\(BASE\)</span>，把字符串看作是 <span class="arithmatex">\(BASE\)</span> 进制数，并分配一个大于 <span class="arithmatex">\(0\)</span> 的数值，代表每种字符。一般来说，我们分配的数值都远小于 <span class="arithmatex">\(BASE\)</span>。例如，对于小写字母构成的字符串，可以令 <span class="arithmatex">\(a=1\)</span>, <span class="arithmatex">\(b=2\)</span>, ..., <span class="arithmatex">\(z=26\)</span>。取一固定值 <span class="arithmatex">\(MOD\)</span>，求出该 <span class="arithmatex">\(BASE\)</span> 进制对 <span class="arithmatex">\(M\)</span> 的余数，作为该字符串的 <span class="arithmatex">\(hash\)</span> 值。</p>
+<p>一般来说，取 <span class="arithmatex">\(BASE=131\)</span> 或者 <span class="arithmatex">\(BASE=13331\)</span>，此时 <span class="arithmatex">\(hash\)</span> 值产生的冲突概率极低。只要两个字符串 <span class="arithmatex">\(hash\)</span> 值相同，我们就认为两个字符串是相等的。通常 <span class="arithmatex">\(MOD\)</span> 取 <span class="arithmatex">\(2^{64}\)</span>，C++ 里，可以直接使用 <code>unsigned long long</code> 类型存储这个 <span class="arithmatex">\(hash\)</span> 值，在计算时不处理算术溢出问题，产生溢出时相当于自动对 <span class="arithmatex">\(2^{64}\)</span> 取模，这样可以避免低效取模运算。</p>
+<p>除了在极特殊构造的数据上，上述 <span class="arithmatex">\(hash\)</span> 算法很难产生冲突，一般情况下上述 <span class="arithmatex">\(hash\)</span> 算法完全可以出现在题目的标准答案中。我们还可以多取一些恰当的 <span class="arithmatex">\(BASE\)</span> 和 <span class="arithmatex">\(MOD\)</span> 的值（例如大质数），多进行几组 <span class="arithmatex">\(hash\)</span> 运算，当结果都相同时才认为原字符串相等，就更加难以构造出使这个 <span class="arithmatex">\(hash\)</span> 产生错误的数据。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">Go</label><label for="__tabbed_1_4">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91576,11 +91574,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

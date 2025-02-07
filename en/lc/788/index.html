@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86063,11 +86061,11 @@ Note that 1 and 10 are not good numbers, since they remain unchanged after rotat
 <!-- solution:start -->
 
 <h3 id="solution-1-direct-enumeration">Solution 1: Direct Enumeration</h3>
-<p>An intuitive and effective approach is to directly enumerate each number in $[1,2,..n]$ and determine whether it is a good number. If it is a good number, increment the answer by one.</p>
-<p>The key to the problem is how to determine whether a number $x$ is a good number. The logic is as follows:</p>
-<p>We first use an array $d$ of length 10 to record the rotated digits corresponding to each valid digit. In this problem, the valid digits are $[0, 1, 8, 2, 5, 6, 9]$, which correspond to the rotated digits $[0, 1, 8, 5, 2, 9, 6]$ respectively. If a digit is not valid, we set the corresponding rotated digit to $-1$.</p>
-<p>Then, we traverse each digit $v$ of the number $x$. If $v$ is not a valid digit, it means $x$ is not a good number, and we directly return $\textit{false}$. Otherwise, we add the rotated digit $d[v]$ corresponding to the digit $v$ to $y$. Finally, we check whether $x$ and $y$ are equal. If they are not equal, it means $x$ is a good number, and we return $\textit{true}$.</p>
-<p>The time complexity is $O(n \times \log n)$, where $n$ is the given number. The space complexity is $O(1)$.</p>
+<p>An intuitive and effective approach is to directly enumerate each number in <span class="arithmatex">\([1,2,..n]\)</span> and determine whether it is a good number. If it is a good number, increment the answer by one.</p>
+<p>The key to the problem is how to determine whether a number <span class="arithmatex">\(x\)</span> is a good number. The logic is as follows:</p>
+<p>We first use an array <span class="arithmatex">\(d\)</span> of length 10 to record the rotated digits corresponding to each valid digit. In this problem, the valid digits are <span class="arithmatex">\([0, 1, 8, 2, 5, 6, 9]\)</span>, which correspond to the rotated digits <span class="arithmatex">\([0, 1, 8, 5, 2, 9, 6]\)</span> respectively. If a digit is not valid, we set the corresponding rotated digit to <span class="arithmatex">\(-1\)</span>.</p>
+<p>Then, we traverse each digit <span class="arithmatex">\(v\)</span> of the number <span class="arithmatex">\(x\)</span>. If <span class="arithmatex">\(v\)</span> is not a valid digit, it means <span class="arithmatex">\(x\)</span> is not a good number, and we directly return <span class="arithmatex">\(\textit{false}\)</span>. Otherwise, we add the rotated digit <span class="arithmatex">\(d[v]\)</span> corresponding to the digit <span class="arithmatex">\(v\)</span> to <span class="arithmatex">\(y\)</span>. Finally, we check whether <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are equal. If they are not equal, it means <span class="arithmatex">\(x\)</span> is a good number, and we return <span class="arithmatex">\(\textit{true}\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the given number. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1000-1099/1056.Confusing%20Number/README_EN.md">1056. Confusing Number</a></li>
@@ -86315,21 +86313,21 @@ Note that 1 and 10 are not good numbers, since they remain unchanged after rotat
 <!-- solution:start -->
 
 <h3 id="solution-2-digit-dp">Solution 2: Digit DP</h3>
-<p>Solution 1 is sufficient to solve this problem, but its time complexity is relatively high. If the data range of the problem reaches the level of $10^9$, the approach in Solution 1 will exceed the time limit.</p>
-<p>This problem essentially asks for the number of numbers in the given range $[l, ..r]$ that satisfy certain conditions. The conditions are related to the composition of the numbers rather than their size, so we can use the concept of Digit DP to solve it. In Digit DP, the size of the number has little impact on the complexity.</p>
-<p>For the range $[l, ..r]$ problem, we generally convert it to the problem of $[1, ..r]$ and then subtract the result of $[1, ..l - 1]$, i.e.:</p>
-<p>$$
+<p>Solution 1 is sufficient to solve this problem, but its time complexity is relatively high. If the data range of the problem reaches the level of <span class="arithmatex">\(10^9\)</span>, the approach in Solution 1 will exceed the time limit.</p>
+<p>This problem essentially asks for the number of numbers in the given range <span class="arithmatex">\([l, ..r]\)</span> that satisfy certain conditions. The conditions are related to the composition of the numbers rather than their size, so we can use the concept of Digit DP to solve it. In Digit DP, the size of the number has little impact on the complexity.</p>
+<p>For the range <span class="arithmatex">\([l, ..r]\)</span> problem, we generally convert it to the problem of <span class="arithmatex">\([1, ..r]\)</span> and then subtract the result of <span class="arithmatex">\([1, ..l - 1]\)</span>, i.e.:</p>
+<div class="arithmatex">\[
 ans = \sum_{i=1}^{r} ans_i -  \sum_{i=1}^{l-1} ans_i
-$$</p>
-<p>However, for this problem, we only need to find the value for the range $[1, ..r]$.</p>
+\]</div>
+<p>However, for this problem, we only need to find the value for the range <span class="arithmatex">\([1, ..r]\)</span>.</p>
 <p>Here, we use memoized search to implement Digit DP. We search from the starting point downwards, and at the lowest level, we get the number of solutions. We then return the answers layer by layer upwards, and finally get the final answer from the starting point of the search.</p>
 <p>The basic steps are as follows:</p>
-<p>We convert the number $n$ to a string $s$. Then we define a function $\textit{dfs}(i, \textit{ok}, \textit{limit})$, where $i$ represents the digit position, $\textit{ok}$ indicates whether the current number satisfies the problem's conditions, and $\textit{limit}$ is a boolean indicating whether the digits that can be filled are restricted.</p>
+<p>We convert the number <span class="arithmatex">\(n\)</span> to a string <span class="arithmatex">\(s\)</span>. Then we define a function <span class="arithmatex">\(\textit{dfs}(i, \textit{ok}, \textit{limit})\)</span>, where <span class="arithmatex">\(i\)</span> represents the digit position, <span class="arithmatex">\(\textit{ok}\)</span> indicates whether the current number satisfies the problem's conditions, and <span class="arithmatex">\(\textit{limit}\)</span> is a boolean indicating whether the digits that can be filled are restricted.</p>
 <p>The function executes as follows:</p>
-<p>If $i$ is greater than or equal to the length of the string $s$, return $\textit{ok}$;</p>
-<p>Otherwise, we get the current digit $up$. If $\textit{limit}$ is $\textit{true}$, $up$ is the current digit; otherwise, $up$ is $9$;</p>
-<p>Next, we iterate over $[0, ..up]$. If $j$ is a valid digit $[0, 1, 8]$, we recursively call $\textit{dfs}(i + 1, \textit{ok}, \textit{limit} \land j = \textit{up})$; if $j$ is a valid digit $[2, 5, 6, 9]$, we recursively call $\textit{dfs}(i + 1, 1, \textit{limit} \land j = \textit{up})$. We sum all the results of the recursive calls and return.</p>
-<p>The time complexity is $O(\log n \times D)$, and the space complexity is $O(\log n)$. Here, $D = 10$.</p>
+<p>If <span class="arithmatex">\(i\)</span> is greater than or equal to the length of the string <span class="arithmatex">\(s\)</span>, return <span class="arithmatex">\(\textit{ok}\)</span>;</p>
+<p>Otherwise, we get the current digit <span class="arithmatex">\(up\)</span>. If <span class="arithmatex">\(\textit{limit}\)</span> is <span class="arithmatex">\(\textit{true}\)</span>, <span class="arithmatex">\(up\)</span> is the current digit; otherwise, <span class="arithmatex">\(up\)</span> is <span class="arithmatex">\(9\)</span>;</p>
+<p>Next, we iterate over <span class="arithmatex">\([0, ..up]\)</span>. If <span class="arithmatex">\(j\)</span> is a valid digit <span class="arithmatex">\([0, 1, 8]\)</span>, we recursively call <span class="arithmatex">\(\textit{dfs}(i + 1, \textit{ok}, \textit{limit} \land j = \textit{up})\)</span>; if <span class="arithmatex">\(j\)</span> is a valid digit <span class="arithmatex">\([2, 5, 6, 9]\)</span>, we recursively call <span class="arithmatex">\(\textit{dfs}(i + 1, 1, \textit{limit} \land j = \textit{up})\)</span>. We sum all the results of the recursive calls and return.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n \times D)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log n)\)</span>. Here, <span class="arithmatex">\(D = 10\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README_EN.md">233. Number of Digit One</a></li>
@@ -86864,11 +86862,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

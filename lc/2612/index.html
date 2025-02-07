@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90879,20 +90877,20 @@
 <!-- solution:start -->
 
 <h3 id="bfs">方法一：有序集合 + BFS</h3>
-<p>我们注意到，对于一个子数组区间 $[l,..r]$ 中的任意一个下标 $i$，翻转后的下标 $j = l + r - i$。</p>
-<p>如果子数组向右移动一个位置，那么 $j = l + 1 + r + 1 - i = l + r - i + 2$，即 $j$ 会增加 $2$。</p>
-<p>同理，如果子数组向左移动一个位置，那么 $j = l - 1 + r - 1 - i = l + r - i - 2$，即 $j$ 会减少 $2$。</p>
-<p>因此，对于一个特定的下标 $i$，其翻转后的所有位置构成了一个公差为 $2$ 的等差数列，也即是说，翻转后的所有下标，奇偶性都是相同的。</p>
-<p>接下来，我们考虑下标 $i$ 翻转后的位置 $j$ 的取值范围。</p>
+<p>我们注意到，对于一个子数组区间 <span class="arithmatex">\([l,..r]\)</span> 中的任意一个下标 <span class="arithmatex">\(i\)</span>，翻转后的下标 <span class="arithmatex">\(j = l + r - i\)</span>。</p>
+<p>如果子数组向右移动一个位置，那么 <span class="arithmatex">\(j = l + 1 + r + 1 - i = l + r - i + 2\)</span>，即 <span class="arithmatex">\(j\)</span> 会增加 <span class="arithmatex">\(2\)</span>。</p>
+<p>同理，如果子数组向左移动一个位置，那么 <span class="arithmatex">\(j = l - 1 + r - 1 - i = l + r - i - 2\)</span>，即 <span class="arithmatex">\(j\)</span> 会减少 <span class="arithmatex">\(2\)</span>。</p>
+<p>因此，对于一个特定的下标 <span class="arithmatex">\(i\)</span>，其翻转后的所有位置构成了一个公差为 <span class="arithmatex">\(2\)</span> 的等差数列，也即是说，翻转后的所有下标，奇偶性都是相同的。</p>
+<p>接下来，我们考虑下标 <span class="arithmatex">\(i\)</span> 翻转后的位置 <span class="arithmatex">\(j\)</span> 的取值范围。</p>
 <ul>
-<li>如果不考虑边界的情况，那么 $j$ 的取值范围为 $[i - k + 1, i + k - 1]$。</li>
-<li>如果子数组在最左边，那么 $[l, r] = [0, k - 1]$，因此 $i$ 翻转后的下标 $j = 0 + k - 1 - i$，即 $j = k - i - 1$，因此 $j$ 的左边界 $mi = max(i - k + 1, k - i - 1)$。</li>
-<li>如果子数组在最右边，那么 $[l, r] = [n - k, n - 1]$，因此 $i$ 翻转后的下标 $j= n - k + n - 1 - i$，即 $j = n \times 2 - k - i - 1$，因此 $j$ 的右边界 $mx = min(i + k - 1, n \times 2 - k - i - 1)$。</li>
+<li>如果不考虑边界的情况，那么 <span class="arithmatex">\(j\)</span> 的取值范围为 <span class="arithmatex">\([i - k + 1, i + k - 1]\)</span>。</li>
+<li>如果子数组在最左边，那么 <span class="arithmatex">\([l, r] = [0, k - 1]\)</span>，因此 <span class="arithmatex">\(i\)</span> 翻转后的下标 <span class="arithmatex">\(j = 0 + k - 1 - i\)</span>，即 <span class="arithmatex">\(j = k - i - 1\)</span>，因此 <span class="arithmatex">\(j\)</span> 的左边界 <span class="arithmatex">\(mi = max(i - k + 1, k - i - 1)\)</span>。</li>
+<li>如果子数组在最右边，那么 <span class="arithmatex">\([l, r] = [n - k, n - 1]\)</span>，因此 <span class="arithmatex">\(i\)</span> 翻转后的下标 <span class="arithmatex">\(j= n - k + n - 1 - i\)</span>，即 <span class="arithmatex">\(j = n \times 2 - k - i - 1\)</span>，因此 <span class="arithmatex">\(j\)</span> 的右边界 <span class="arithmatex">\(mx = min(i + k - 1, n \times 2 - k - i - 1)\)</span>。</li>
 </ul>
-<p>我们用两个有序集合分别存储所有待搜索的奇数下标和偶数下标，这里需要排除数组 $banned$ 中的下标，以及下标 $p$。</p>
-<p>接下来，我们使用 BFS 搜索，每次搜索当前下标 $i$ 所有翻转后的下标 $j$，即 $j = mi, mi + 2, mi + 4, \dots, mx$，更新下标 $j$ 的答案，并将下标 $j$ 加入到待搜索的队列中，同时将下标 $j$ 从对应的有序集合中移除。</p>
+<p>我们用两个有序集合分别存储所有待搜索的奇数下标和偶数下标，这里需要排除数组 <span class="arithmatex">\(banned\)</span> 中的下标，以及下标 <span class="arithmatex">\(p\)</span>。</p>
+<p>接下来，我们使用 BFS 搜索，每次搜索当前下标 <span class="arithmatex">\(i\)</span> 所有翻转后的下标 <span class="arithmatex">\(j\)</span>，即 <span class="arithmatex">\(j = mi, mi + 2, mi + 4, \dots, mx\)</span>，更新下标 <span class="arithmatex">\(j\)</span> 的答案，并将下标 <span class="arithmatex">\(j\)</span> 加入到待搜索的队列中，同时将下标 <span class="arithmatex">\(j\)</span> 从对应的有序集合中移除。</p>
 <p>当搜索结束时，即可得到所有下标的答案。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 题目中给定的数组长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 题目中给定的数组长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -94028,11 +94026,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

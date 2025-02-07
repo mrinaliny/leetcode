@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90864,16 +90862,16 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：动态规划（区间 DP）+ 前缀和</h3>
-<p>我们不妨记题目中的 $k$ 为 $K$，石头的堆数为 $n$。</p>
-<p>定义 $f[i][j][k]$ 表示将区间 $[i, j]$ 中的石头合并成 $k$ 堆的最小成本。初始时 $f[i][i][1] = 0$，其他位置的值均为 $\infty$。</p>
-<p>注意到 $k$ 的取值范围为 $[1, K]$，因此我们需要枚举 $k$ 的值。</p>
-<p>对于 $f[i][j][k]$，我们可以枚举 $i \leq h \lt j$，将区间 $[i, j]$ 拆分成两个区间 $[i, h]$ 和 $[h + 1, j]$，然后将 $[i, h]$ 中的石头合并成 $1$ 堆，将 $[h + 1, j]$ 中的石头合并成 $k - 1$ 堆，最后将这两堆石头合并成一堆，这样就可以将区间 $[i, j]$ 中的石头合并成 $k$ 堆。因此，我们可以得到状态转移方程：</p>
-<p>$$
-f[i][j][k] = \min_{i \leq h &lt; j} {f[i][h][1] + f[h + 1][j][k - 1]}
-$$</p>
-<p>我们将区间 $[i, j]$ 的 $K$ 堆石头合并成一堆，因此 $f[i][j][1] = f[i][j][K] + \sum_{t = i}^j stones[t]$，其中 $\sum_{t = i}^j stones[t]$ 表示区间 $[i, j]$ 中石头的总数。</p>
-<p>最后答案即为 $f[1][n][1]$，其中 $n$ 为石头的堆数。</p>
-<p>时间复杂度 $O(n^3 \times k)$，空间复杂度 $O(n^2 \times k)$。其中 $n$ 为石头的堆数。</p>
+<p>我们不妨记题目中的 <span class="arithmatex">\(k\)</span> 为 <span class="arithmatex">\(K\)</span>，石头的堆数为 <span class="arithmatex">\(n\)</span>。</p>
+<p>定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示将区间 <span class="arithmatex">\([i, j]\)</span> 中的石头合并成 <span class="arithmatex">\(k\)</span> 堆的最小成本。初始时 <span class="arithmatex">\(f[i][i][1] = 0\)</span>，其他位置的值均为 <span class="arithmatex">\(\infty\)</span>。</p>
+<p>注意到 <span class="arithmatex">\(k\)</span> 的取值范围为 <span class="arithmatex">\([1, K]\)</span>，因此我们需要枚举 <span class="arithmatex">\(k\)</span> 的值。</p>
+<p>对于 <span class="arithmatex">\(f[i][j][k]\)</span>，我们可以枚举 <span class="arithmatex">\(i \leq h \lt j\)</span>，将区间 <span class="arithmatex">\([i, j]\)</span> 拆分成两个区间 <span class="arithmatex">\([i, h]\)</span> 和 <span class="arithmatex">\([h + 1, j]\)</span>，然后将 <span class="arithmatex">\([i, h]\)</span> 中的石头合并成 <span class="arithmatex">\(1\)</span> 堆，将 <span class="arithmatex">\([h + 1, j]\)</span> 中的石头合并成 <span class="arithmatex">\(k - 1\)</span> 堆，最后将这两堆石头合并成一堆，这样就可以将区间 <span class="arithmatex">\([i, j]\)</span> 中的石头合并成 <span class="arithmatex">\(k\)</span> 堆。因此，我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
+f[i][j][k] = \min_{i \leq h &lt; j} \{f[i][h][1] + f[h + 1][j][k - 1]\}
+\]</div>
+<p>我们将区间 <span class="arithmatex">\([i, j]\)</span> 的 <span class="arithmatex">\(K\)</span> 堆石头合并成一堆，因此 <span class="arithmatex">\(f[i][j][1] = f[i][j][K] + \sum_{t = i}^j stones[t]\)</span>，其中 <span class="arithmatex">\(\sum_{t = i}^j stones[t]\)</span> 表示区间 <span class="arithmatex">\([i, j]\)</span> 中石头的总数。</p>
+<p>最后答案即为 <span class="arithmatex">\(f[1][n][1]\)</span>，其中 <span class="arithmatex">\(n\)</span> 为石头的堆数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3 \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2 \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为石头的堆数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91349,11 +91347,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,15 +86069,15 @@ Since s3 can be obtained by interleaving s1 and s2, we return true.
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>Let's denote the length of string $s_1$ as $m$ and the length of string $s_2$ as $n$. If $m + n \neq |s_3|$, then $s_3$ is definitely not an interleaving string of $s_1$ and $s_2$, so we return <code>false</code>.</p>
-<p>Next, we design a function $dfs(i, j)$, which represents whether the remaining part of $s_3$ can be interleaved from the $i$th character of $s_1$ and the $j$th character of $s_2$. The answer is $dfs(0, 0)$.</p>
-<p>The calculation process of function $dfs(i, j)$ is as follows:</p>
-<p>If $i \geq m$ and $j \geq n$, it means that both $s_1$ and $s_2$ have been traversed, so we return <code>true</code>.</p>
-<p>If $i &lt; m$ and $s_1[i] = s_3[i + j]$, it means that the character $s_1[i]$ is part of $s_3[i + j]$. Therefore, we recursively call $dfs(i + 1, j)$ to check whether the next character of $s_1$ can match the current character of $s_2$. If it can match, we return <code>true</code>.</p>
-<p>Similarly, if $j &lt; n$ and $s_2[j] = s_3[i + j]$, it means that the character $s_2[j]$ is part of $s_3[i + j]$. Therefore, we recursively call $dfs(i, j + 1)$ to check whether the next character of $s_2$ can match the current character of $s_1$. If it can match, we return <code>true</code>.</p>
+<p>Let's denote the length of string <span class="arithmatex">\(s_1\)</span> as <span class="arithmatex">\(m\)</span> and the length of string <span class="arithmatex">\(s_2\)</span> as <span class="arithmatex">\(n\)</span>. If <span class="arithmatex">\(m + n \neq |s_3|\)</span>, then <span class="arithmatex">\(s_3\)</span> is definitely not an interleaving string of <span class="arithmatex">\(s_1\)</span> and <span class="arithmatex">\(s_2\)</span>, so we return <code>false</code>.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents whether the remaining part of <span class="arithmatex">\(s_3\)</span> can be interleaved from the <span class="arithmatex">\(i\)</span>th character of <span class="arithmatex">\(s_1\)</span> and the <span class="arithmatex">\(j\)</span>th character of <span class="arithmatex">\(s_2\)</span>. The answer is <span class="arithmatex">\(dfs(0, 0)\)</span>.</p>
+<p>The calculation process of function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i \geq m\)</span> and <span class="arithmatex">\(j \geq n\)</span>, it means that both <span class="arithmatex">\(s_1\)</span> and <span class="arithmatex">\(s_2\)</span> have been traversed, so we return <code>true</code>.</p>
+<p>If <span class="arithmatex">\(i &lt; m\)</span> and <span class="arithmatex">\(s_1[i] = s_3[i + j]\)</span>, it means that the character <span class="arithmatex">\(s_1[i]\)</span> is part of <span class="arithmatex">\(s_3[i + j]\)</span>. Therefore, we recursively call <span class="arithmatex">\(dfs(i + 1, j)\)</span> to check whether the next character of <span class="arithmatex">\(s_1\)</span> can match the current character of <span class="arithmatex">\(s_2\)</span>. If it can match, we return <code>true</code>.</p>
+<p>Similarly, if <span class="arithmatex">\(j &lt; n\)</span> and <span class="arithmatex">\(s_2[j] = s_3[i + j]\)</span>, it means that the character <span class="arithmatex">\(s_2[j]\)</span> is part of <span class="arithmatex">\(s_3[i + j]\)</span>. Therefore, we recursively call <span class="arithmatex">\(dfs(i, j + 1)\)</span> to check whether the next character of <span class="arithmatex">\(s_2\)</span> can match the current character of <span class="arithmatex">\(s_1\)</span>. If it can match, we return <code>true</code>.</p>
 <p>Otherwise, we return <code>false</code>.</p>
 <p>To avoid repeated calculations, we can use memoization search.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the lengths of strings $s_1$ and $s_2$ respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of strings <span class="arithmatex">\(s_1\)</span> and <span class="arithmatex">\(s_2\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86570,17 +86568,17 @@ Since s3 can be obtained by interleaving s1 and s2, we return true.
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can convert the memoization search in Solution 1 into dynamic programming.</p>
-<p>We define $f[i][j]$ to represent whether the first $i$ characters of string $s_1$ and the first $j$ characters of string $s_2$ can interleave to form the first $i + j$ characters of string $s_3$. When transitioning states, we can consider whether the current character is obtained from the last character of $s_1$ or the last character of $s_2$. Therefore, we have the state transition equation:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> to represent whether the first <span class="arithmatex">\(i\)</span> characters of string <span class="arithmatex">\(s_1\)</span> and the first <span class="arithmatex">\(j\)</span> characters of string <span class="arithmatex">\(s_2\)</span> can interleave to form the first <span class="arithmatex">\(i + j\)</span> characters of string <span class="arithmatex">\(s_3\)</span>. When transitioning states, we can consider whether the current character is obtained from the last character of <span class="arithmatex">\(s_1\)</span> or the last character of <span class="arithmatex">\(s_2\)</span>. Therefore, we have the state transition equation:</p>
+<div class="arithmatex">\[
 f[i][j] = \begin{cases}
-f[i - 1][j] &amp; \textit{if } s_1[i - 1] = s_3[i + j - 1] \
-\textit{or } f[i][j - 1] &amp; \textit{if } s_2[j - 1] = s_3[i + j - 1] \
+f[i - 1][j] &amp; \textit{if } s_1[i - 1] = s_3[i + j - 1] \\
+\textit{or } f[i][j - 1] &amp; \textit{if } s_2[j - 1] = s_3[i + j - 1] \\
 \textit{false} &amp; \textit{otherwise}
 \end{cases}
-$$</p>
-<p>where $f[0][0] = \textit{true}$ indicates that an empty string is an interleaving string of two empty strings.</p>
-<p>The answer is $f[m][n]$.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the lengths of strings $s_1$ and $s_2$ respectively.</p>
+\]</div>
+<p>where <span class="arithmatex">\(f[0][0] = \textit{true}\)</span> indicates that an empty string is an interleaving string of two empty strings.</p>
+<p>The answer is <span class="arithmatex">\(f[m][n]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of strings <span class="arithmatex">\(s_1\)</span> and <span class="arithmatex">\(s_2\)</span> respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86851,7 +86849,7 @@ $$</p>
 </div>
 </div>
 </div>
-<p>We notice that the state $f[i][j]$ is only related to the states $f[i - 1][j]$, $f[i][j - 1]$, and $f[i - 1][j - 1]$. Therefore, we can use a rolling array to optimize the space complexity, reducing the original space complexity from $O(m \times n)$ to $O(n)$.</p>
+<p>We notice that the state <span class="arithmatex">\(f[i][j]\)</span> is only related to the states <span class="arithmatex">\(f[i - 1][j]\)</span>, <span class="arithmatex">\(f[i][j - 1]\)</span>, and <span class="arithmatex">\(f[i - 1][j - 1]\)</span>. Therefore, we can use a rolling array to optimize the space complexity, reducing the original space complexity from <span class="arithmatex">\(O(m \times n)\)</span> to <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label><label for="__tabbed_3_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87358,11 +87356,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

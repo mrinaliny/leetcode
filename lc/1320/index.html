@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,18 +90858,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j][k]$ 表示输入完 $\textit{word}[i]$，且手指 $1$ 位于位置 $j$，手指 $2$ 位于位置 $k$ 时，最小的移动距离。这里的位置 $j$ 和 $k$ 表示的是字母对应的数字，取值范围为 $[0,..25]$。初始时 $f[i][j][k]=\infty$。</p>
-<p>我们实现一个函数 $\textit{dist}(a, b)$，表示位置 $a$ 和位置 $b$ 之间的距离，即 $\textit{dist}(a, b) = |\frac{a}{6} - \frac{b}{6}| + |a \bmod 6 - b \bmod 6|$。</p>
-<p>接下来，我们考虑输入 $\textit{word}[0]$，即只有一个字母的的情况，此时有两种选择：</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示输入完 <span class="arithmatex">\(\textit{word}[i]\)</span>，且手指 <span class="arithmatex">\(1\)</span> 位于位置 <span class="arithmatex">\(j\)</span>，手指 <span class="arithmatex">\(2\)</span> 位于位置 <span class="arithmatex">\(k\)</span> 时，最小的移动距离。这里的位置 <span class="arithmatex">\(j\)</span> 和 <span class="arithmatex">\(k\)</span> 表示的是字母对应的数字，取值范围为 <span class="arithmatex">\([0,..25]\)</span>。初始时 <span class="arithmatex">\(f[i][j][k]=\infty\)</span>。</p>
+<p>我们实现一个函数 <span class="arithmatex">\(\textit{dist}(a, b)\)</span>，表示位置 <span class="arithmatex">\(a\)</span> 和位置 <span class="arithmatex">\(b\)</span> 之间的距离，即 <span class="arithmatex">\(\textit{dist}(a, b) = |\frac{a}{6} - \frac{b}{6}| + |a \bmod 6 - b \bmod 6|\)</span>。</p>
+<p>接下来，我们考虑输入 <span class="arithmatex">\(\textit{word}[0]\)</span>，即只有一个字母的的情况，此时有两种选择：</p>
 <ul>
-<li>手指 $1$ 位于 $\textit{word}[0]$ 所在的位置，手指 $2$ 位于任意位置，此时 $f[0][\textit{word}[0]][k] = 0$，其中 $k \in [0,..25]$。</li>
-<li>手指 $2$ 位于 $\textit{word}[0]$ 所在的位置，手指 $1$ 位于任意位置，此时 $f[0][k][\textit{word}[0]] = 0$，其中 $k \in [0,..25]$。</li>
+<li>手指 <span class="arithmatex">\(1\)</span> 位于 <span class="arithmatex">\(\textit{word}[0]\)</span> 所在的位置，手指 <span class="arithmatex">\(2\)</span> 位于任意位置，此时 <span class="arithmatex">\(f[0][\textit{word}[0]][k] = 0\)</span>，其中 <span class="arithmatex">\(k \in [0,..25]\)</span>。</li>
+<li>手指 <span class="arithmatex">\(2\)</span> 位于 <span class="arithmatex">\(\textit{word}[0]\)</span> 所在的位置，手指 <span class="arithmatex">\(1\)</span> 位于任意位置，此时 <span class="arithmatex">\(f[0][k][\textit{word}[0]] = 0\)</span>，其中 <span class="arithmatex">\(k \in [0,..25]\)</span>。</li>
 </ul>
-<p>然后我们考虑输入 $\textit{word}[1,..n-1]$，我们记上一个字母和当前字母所在的位置分别为 $a$ 和 $b$，接下来我们进行分情况讨论：</p>
-<p>如果当前手指 $1$ 位于位置 $b$，我们枚举手指 $2$ 的位置 $j$，假如上一个位置 $a$ 也是手指 $1$ 的位置，那么此时有 $f[i][b][j]=\min(f[i][b][j], f[i-1][a][j]+\textit{dist}(a, b))$。如果手指 $2$ 的位置与上一个位置 $a$ 相同，即 $j=a$，那么我们枚举上一个位置的手指 $1$ 所在的位置 $k$，此时有 $f[i][j][j]=\min(f[i][b][j], f[i-1][k][a]+\textit{dist}(k, b))$。</p>
-<p>同理，如果当前手指 $2$ 位于位置 $b$，我们枚举手指 $1$ 的位置 $j$，假如上一个位置 $a$ 也是手指 $2$ 的位置，那么此时有 $f[i][j][b]=\min(f[i][j][b], f[i-1][j][a]+\textit{dist}(a, b))$。如果手指 $1$ 的位置与上一个位置 $a$ 相同，即 $j=a$，那么我们枚举上一个位置的手指 $2$ 所在的位置 $k$，此时有 $f[i][j][b]=\min(f[i][j][b], f[i-1][a][k]+\textit{dist}(k, b))$。</p>
-<p>最后，我们枚举最后一个位置的手指 $1$ 和手指 $2$ 所在的位置，取最小值即为答案。</p>
-<p>时间复杂度 $O(n \times |\Sigma|^2)$，空间复杂度 $O(n \times |\Sigma|^2)$。其中 $n$ 为字符串 $\textit{word}$ 的长度，而 $|\Sigma|$ 为字母表的大小，本题中 $|\Sigma|=26$。</p>
+<p>然后我们考虑输入 <span class="arithmatex">\(\textit{word}[1,..n-1]\)</span>，我们记上一个字母和当前字母所在的位置分别为 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span>，接下来我们进行分情况讨论：</p>
+<p>如果当前手指 <span class="arithmatex">\(1\)</span> 位于位置 <span class="arithmatex">\(b\)</span>，我们枚举手指 <span class="arithmatex">\(2\)</span> 的位置 <span class="arithmatex">\(j\)</span>，假如上一个位置 <span class="arithmatex">\(a\)</span> 也是手指 <span class="arithmatex">\(1\)</span> 的位置，那么此时有 <span class="arithmatex">\(f[i][b][j]=\min(f[i][b][j], f[i-1][a][j]+\textit{dist}(a, b))\)</span>。如果手指 <span class="arithmatex">\(2\)</span> 的位置与上一个位置 <span class="arithmatex">\(a\)</span> 相同，即 <span class="arithmatex">\(j=a\)</span>，那么我们枚举上一个位置的手指 <span class="arithmatex">\(1\)</span> 所在的位置 <span class="arithmatex">\(k\)</span>，此时有 <span class="arithmatex">\(f[i][j][j]=\min(f[i][b][j], f[i-1][k][a]+\textit{dist}(k, b))\)</span>。</p>
+<p>同理，如果当前手指 <span class="arithmatex">\(2\)</span> 位于位置 <span class="arithmatex">\(b\)</span>，我们枚举手指 <span class="arithmatex">\(1\)</span> 的位置 <span class="arithmatex">\(j\)</span>，假如上一个位置 <span class="arithmatex">\(a\)</span> 也是手指 <span class="arithmatex">\(2\)</span> 的位置，那么此时有 <span class="arithmatex">\(f[i][j][b]=\min(f[i][j][b], f[i-1][j][a]+\textit{dist}(a, b))\)</span>。如果手指 <span class="arithmatex">\(1\)</span> 的位置与上一个位置 <span class="arithmatex">\(a\)</span> 相同，即 <span class="arithmatex">\(j=a\)</span>，那么我们枚举上一个位置的手指 <span class="arithmatex">\(2\)</span> 所在的位置 <span class="arithmatex">\(k\)</span>，此时有 <span class="arithmatex">\(f[i][j][b]=\min(f[i][j][b], f[i-1][a][k]+\textit{dist}(k, b))\)</span>。</p>
+<p>最后，我们枚举最后一个位置的手指 <span class="arithmatex">\(1\)</span> 和手指 <span class="arithmatex">\(2\)</span> 所在的位置，取最小值即为答案。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times |\Sigma|^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times |\Sigma|^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(\textit{word}\)</span> 的长度，而 <span class="arithmatex">\(|\Sigma|\)</span> 为字母表的大小，本题中 <span class="arithmatex">\(|\Sigma|=26\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91431,11 +91429,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

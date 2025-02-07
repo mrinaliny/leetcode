@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90856,24 +90854,24 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>假设 $dp[i][c][j]$ 表示长度为 $i$，搜索代价为 $c$，且最大值为 $j$ 的方案数。考虑第 $i$ 个数：</p>
-<p>若第 $i$ 个数没有改变搜索代价，说明它不严格大于前 $i-1$ 个数，也就是说，$dp[i][c][j]$ 是从 $dp[i-1][c][j]$ 转移而来，即数组的前 $i-1$ 个数的最大值已经是 $j$，并且第 $i$ 个数没有改变最大值，因此第 $i$ 个数的可选范围是 $[1,..j]$，共有 $j$ 种可选方案。即</p>
-<p>$$
+<p>假设 <span class="arithmatex">\(dp[i][c][j]\)</span> 表示长度为 <span class="arithmatex">\(i\)</span>，搜索代价为 <span class="arithmatex">\(c\)</span>，且最大值为 <span class="arithmatex">\(j\)</span> 的方案数。考虑第 <span class="arithmatex">\(i\)</span> 个数：</p>
+<p>若第 <span class="arithmatex">\(i\)</span> 个数没有改变搜索代价，说明它不严格大于前 <span class="arithmatex">\(i-1\)</span> 个数，也就是说，<span class="arithmatex">\(dp[i][c][j]\)</span> 是从 <span class="arithmatex">\(dp[i-1][c][j]\)</span> 转移而来，即数组的前 <span class="arithmatex">\(i-1\)</span> 个数的最大值已经是 <span class="arithmatex">\(j\)</span>，并且第 <span class="arithmatex">\(i\)</span> 个数没有改变最大值，因此第 <span class="arithmatex">\(i\)</span> 个数的可选范围是 <span class="arithmatex">\([1,..j]\)</span>，共有 <span class="arithmatex">\(j\)</span> 种可选方案。即</p>
+<div class="arithmatex">\[
 dp[i][c][j]=dp[i-1][c][j] \times j
-$$</p>
-<p>若第 $i$ 个数改变了搜索代价，说明数组前 $i-1$ 个数的最大值小于 $j$，并且第 $i$ 个数恰好为 $j$。此时 $dp[i][c][j]$ 是从所有 $dp[i-1][c-1][j']$ 转移而来，其中 $j'&lt;j$。即</p>
-<p>$$
+\]</div>
+<p>若第 <span class="arithmatex">\(i\)</span> 个数改变了搜索代价，说明数组前 <span class="arithmatex">\(i-1\)</span> 个数的最大值小于 <span class="arithmatex">\(j\)</span>，并且第 <span class="arithmatex">\(i\)</span> 个数恰好为 <span class="arithmatex">\(j\)</span>。此时 <span class="arithmatex">\(dp[i][c][j]\)</span> 是从所有 <span class="arithmatex">\(dp[i-1][c-1][j']\)</span> 转移而来，其中 <span class="arithmatex">\(j'&lt;j\)</span>。即</p>
+<div class="arithmatex">\[
 dp[i][c][j] = \sum_{j'=1}^{j-1} dp[i-1][c-1][j']
-$$</p>
+\]</div>
 <p>综上，可得</p>
-<p>$$
+<div class="arithmatex">\[
 dp[i][c][j] = dp[i-1][c][j] \times j + \sum_{j'=1}^{j-1} dp[i-1][c-1][j']
-$$</p>
+\]</div>
 <p>答案为</p>
-<p>$$
+<div class="arithmatex">\[
 \sum_{j=1}^{m}dp[n][k][j]
-$$</p>
-<p>时间复杂度 $O(nkm^2)$。</p>
+\]</div>
+<p>时间复杂度 <span class="arithmatex">\(O(nkm^2)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91323,11 +91321,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86089,10 +86087,10 @@ For ans[i] == -1, It can be shown that there is no building where Alice and Bob 
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-indexed-tree">Solution 1: Binary Indexed Tree</h3>
-<p>Let's denote $queries[i] = [l_i, r_i]$, where $l_i \le r_i$. If $l_i = r_i$ or $heights[l_i] &lt; heights[r_i]$, then the answer is $r_i$. Otherwise, we need to find the smallest $j$ among all $j &gt; r_i$ and $heights[j] &gt; heights[l_i]$.</p>
-<p>We can sort $queries$ in descending order of $r_i$, and use a pointer $j$ to point to the current index of $heights$ being traversed.</p>
-<p>Next, we traverse each query $queries[i] = (l, r)$. For the current query, if $j &gt; r$, then we loop to insert $heights[j]$ into the binary indexed tree. The binary indexed tree maintains the minimum index of the suffix height (after discretization). Then, we judge whether $l = r$ or $heights[l] &lt; heights[r]$. If it is, then the answer to the current query is $r$. Otherwise, we query the minimum index of $heights[l]$ in the binary indexed tree, which is the answer to the current query.</p>
-<p>The time complexity is $O((n + m) \times \log n + m \times \log m)$, and the space complexity is $O(n + m)$. Where $n$ and $m$ are the lengths of $heights$ and $queries$ respectively.</p>
+<p>Let's denote <span class="arithmatex">\(queries[i] = [l_i, r_i]\)</span>, where <span class="arithmatex">\(l_i \le r_i\)</span>. If <span class="arithmatex">\(l_i = r_i\)</span> or <span class="arithmatex">\(heights[l_i] &lt; heights[r_i]\)</span>, then the answer is <span class="arithmatex">\(r_i\)</span>. Otherwise, we need to find the smallest <span class="arithmatex">\(j\)</span> among all <span class="arithmatex">\(j &gt; r_i\)</span> and <span class="arithmatex">\(heights[j] &gt; heights[l_i]\)</span>.</p>
+<p>We can sort <span class="arithmatex">\(queries\)</span> in descending order of <span class="arithmatex">\(r_i\)</span>, and use a pointer <span class="arithmatex">\(j\)</span> to point to the current index of <span class="arithmatex">\(heights\)</span> being traversed.</p>
+<p>Next, we traverse each query <span class="arithmatex">\(queries[i] = (l, r)\)</span>. For the current query, if <span class="arithmatex">\(j &gt; r\)</span>, then we loop to insert <span class="arithmatex">\(heights[j]\)</span> into the binary indexed tree. The binary indexed tree maintains the minimum index of the suffix height (after discretization). Then, we judge whether <span class="arithmatex">\(l = r\)</span> or <span class="arithmatex">\(heights[l] &lt; heights[r]\)</span>. If it is, then the answer to the current query is <span class="arithmatex">\(r\)</span>. Otherwise, we query the minimum index of <span class="arithmatex">\(heights[l]\)</span> in the binary indexed tree, which is the answer to the current query.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + m) \times \log n + m \times \log m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + m)\)</span>. Where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of <span class="arithmatex">\(heights\)</span> and <span class="arithmatex">\(queries\)</span> respectively.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2700-2799/2736.Maximum%20Sum%20Queries/README_EN.md">2736. Maximum Sum Queries</a></li>
@@ -86969,11 +86967,9 @@ For ans[i] == -1, It can be shown that there is no building where Alice and Bob 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

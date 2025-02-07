@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86100,10 +86098,10 @@ tracker.get();              // Sorted locations: branford, orlando, alpine, alps
 <!-- solution:start -->
 
 <h3 id="solution-1-ordered-set">Solution 1: Ordered Set</h3>
-<p>We can use an ordered set to store the attractions, and a variable $i$ to record the current number of queries, initially $i = -1$.</p>
+<p>We can use an ordered set to store the attractions, and a variable <span class="arithmatex">\(i\)</span> to record the current number of queries, initially <span class="arithmatex">\(i = -1\)</span>.</p>
 <p>When calling the <code>add</code> method, we take the negative of the attraction's rating, so that we can use the ordered set to sort by rating in descending order. If the ratings are the same, sort by the dictionary order of the attraction names in ascending order.</p>
-<p>When calling the <code>get</code> method, we increment $i$ by one, and then return the name of the $i$-th attraction in the ordered set.</p>
-<p>The time complexity of each operation is $O(\log n)$, where $n$ is the number of added attractions. The space complexity is $O(n)$.</p>
+<p>When calling the <code>get</code> method, we increment <span class="arithmatex">\(i\)</span> by one, and then return the name of the <span class="arithmatex">\(i\)</span>-th attraction in the ordered set.</p>
+<p>The time complexity of each operation is <span class="arithmatex">\(O(\log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of added attractions. The space complexity is <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">C++</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86215,10 +86213,10 @@ tracker.get();              // Sorted locations: branford, orlando, alpine, alps
 <!-- solution:start -->
 
 <h3 id="solution-2-double-priority-queue-min-max-heap">Solution 2: Double Priority Queue (Min-Max Heap)</h3>
-<p>We notice that the query operations in this problem are performed in strictly increasing order. Therefore, we can use a method similar to the median in the data stream. We define two priority queues <code>good</code> and <code>bad</code>. <code>good</code> is a min-heap, storing the current best attractions, and <code>bad</code> is a max-heap, storing the current $i$-th best attraction.</p>
+<p>We notice that the query operations in this problem are performed in strictly increasing order. Therefore, we can use a method similar to the median in the data stream. We define two priority queues <code>good</code> and <code>bad</code>. <code>good</code> is a min-heap, storing the current best attractions, and <code>bad</code> is a max-heap, storing the current <span class="arithmatex">\(i\)</span>-th best attraction.</p>
 <p>Each time the <code>add</code> method is called, we add the attraction's rating and name to <code>good</code>, and then add the worst attraction in <code>good</code> to <code>bad</code>.</p>
 <p>Each time the <code>get</code> method is called, we add the best attraction in <code>bad</code> to <code>good</code>, and then return the worst attraction in <code>good</code>.</p>
-<p>The time complexity of each operation is $O(\log n)$, where $n$ is the number of added attractions. The space complexity is $O(n)$.</p>
+<p>The time complexity of each operation is <span class="arithmatex">\(O(\log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of added attractions. The space complexity is <span class="arithmatex">\(O(n)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86634,11 +86632,9 @@ tracker.get();              // Sorted locations: branford, orlando, alpine, alps
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

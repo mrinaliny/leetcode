@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90845,7 +90843,7 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：分类讨论 + 枚举</h3>
-<p>根据题目描述，我们需要求出：在翻转一次子数组的情况下，数组值 $\sum_{i=0}^{n-2} |a_i - a_{i+1}|$ 的最大值。</p>
+<p>根据题目描述，我们需要求出：在翻转一次子数组的情况下，数组值 <span class="arithmatex">\(\sum_{i=0}^{n-2} |a_i - a_{i+1}|\)</span> 的最大值。</p>
 <p>接下来，我们分以下几种情况讨论：</p>
 <ol>
 <li>不翻转子数组</li>
@@ -90853,27 +90851,27 @@
 <li>翻转子数组，且子数组“包含”最后一个元素</li>
 <li>翻转子数组，且子数组“不包含”第一个元素和最后一个元素</li>
 </ol>
-<p>我们记不翻转子数组时的数组值为 $s$，此时有 $s = \sum_{i=0}^{n-2} |a_i - a_{i+1}|$。我们可以将答案 $ans$ 初始化为 $s$。</p>
-<p>如果翻转子数组，且子数组包含第一个元素，我们可以枚举翻转的子数组的最后一个元素 $a_i$，其中 $0 \leq i \lt n-1$，此时有 $ans = \max(ans, s + |a_0 - a_{i+1}| - |a_i - a_{i+1}|)$。</p>
+<p>我们记不翻转子数组时的数组值为 <span class="arithmatex">\(s\)</span>，此时有 <span class="arithmatex">\(s = \sum_{i=0}^{n-2} |a_i - a_{i+1}|\)</span>。我们可以将答案 <span class="arithmatex">\(ans\)</span> 初始化为 <span class="arithmatex">\(s\)</span>。</p>
+<p>如果翻转子数组，且子数组包含第一个元素，我们可以枚举翻转的子数组的最后一个元素 <span class="arithmatex">\(a_i\)</span>，其中 <span class="arithmatex">\(0 \leq i \lt n-1\)</span>，此时有 <span class="arithmatex">\(ans = \max(ans, s + |a_0 - a_{i+1}| - |a_i - a_{i+1}|)\)</span>。</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/1-drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/1-drawio.png" /></a></p>
 
-<p>同理，如果翻转子数组，且子数组包含最后一个元素，我们可以枚举翻转的子数组的第一个元素 $a_{i+1}$，其中 $0 \leq i \lt n-1$，此时有 $ans = \max(ans, s + |a_{n-1} - a_i| - |a_i - a_{i+1}|)$。</p>
+<p>同理，如果翻转子数组，且子数组包含最后一个元素，我们可以枚举翻转的子数组的第一个元素 <span class="arithmatex">\(a_{i+1}\)</span>，其中 <span class="arithmatex">\(0 \leq i \lt n-1\)</span>，此时有 <span class="arithmatex">\(ans = \max(ans, s + |a_{n-1} - a_i| - |a_i - a_{i+1}|)\)</span>。</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/2-drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/2-drawio.png" /></a></p>
 
-<p>如果翻转子数组，且子数组不包含第一个元素和最后一个元素，我们将数组任意两个相邻元素视为一个点对 $(x, y)$，记翻转的第一个元素为 $y_1$，其左侧相邻元素为 $x_1$；翻转的最后一个元素为 $x_2$，其右侧相邻元素为 $y_2$。</p>
+<p>如果翻转子数组，且子数组不包含第一个元素和最后一个元素，我们将数组任意两个相邻元素视为一个点对 <span class="arithmatex">\((x, y)\)</span>，记翻转的第一个元素为 <span class="arithmatex">\(y_1\)</span>，其左侧相邻元素为 <span class="arithmatex">\(x_1\)</span>；翻转的最后一个元素为 <span class="arithmatex">\(x_2\)</span>，其右侧相邻元素为 <span class="arithmatex">\(y_2\)</span>。</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/3-drawio.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/solution/1300-1399/1330.Reverse%20Subarray%20To%20Maximize%20Array%20Value/images/3-drawio.png" /></a></p>
 
-<p>此时相比较于不翻转子数组，数组值的变化量为 $|x_1 - x_2| + |y_1 - y_2| - |x_1 - y_1| - |x_2 - y_2|$，其中，前两项可以表示为：</p>
-<p>$$
-\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | = \max \begin{cases} (x_1 + y_1) - (x_2 + y_2) \ (x_1 - y_1) - (x_2 - y_2) \ (-x_1 + y_1) - (-x_2 + y_2) \ (-x_1 - y_1) - (-x_2 - y_2) \end{cases}
-$$</p>
+<p>此时相比较于不翻转子数组，数组值的变化量为 <span class="arithmatex">\(|x_1 - x_2| + |y_1 - y_2| - |x_1 - y_1| - |x_2 - y_2|\)</span>，其中，前两项可以表示为：</p>
+<div class="arithmatex">\[
+\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | = \max \begin{cases} (x_1 + y_1) - (x_2 + y_2) \\ (x_1 - y_1) - (x_2 - y_2) \\ (-x_1 + y_1) - (-x_2 + y_2) \\ (-x_1 - y_1) - (-x_2 - y_2) \end{cases}
+\]</div>
 <p>那么数组值变化量为：</p>
-<p>$$
-\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | - \left | x_1 - y_1 \right | - \left | x_2 - y_2 \right |  = \max \begin{cases} (x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \ (x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \ (-x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \ (-x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \end{cases}
-$$</p>
-<p>因此，我们只要求出 $k_1 \times x + k_2 \times y$ 的最大值 $mx$，其中 $k_1, k_2 \in {-1, 1}$，以及对应的 $|x - y|$ 的最小值 $mi$，那么数组值变化量的最大值为 $mx - mi$。答案为 $ans = \max(ans, s + \max(0, mx - mi))$。</p>
-<p>在代码实现上，我们定义了一个长度为 $5$ 的数组 $dirs=[1, -1, -1, 1, 1]$，每次取数组相邻两个元素作为 $k_1, k_2$ 的值，这样可以覆盖 $k_1, k_2 \in {-1, 1}$ 的所有情况。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是数组 $nums$ 的长度。空间复杂度 $O(1)$。</p>
+<div class="arithmatex">\[
+\left | x_1 - x_2 \right |  + \left | y_1 - y_2 \right | - \left | x_1 - y_1 \right | - \left | x_2 - y_2 \right |  = \max \begin{cases} (x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \\ (x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \\ (-x_1 + y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 + y_2) + \left |x_2 - y_2 \right | \right ) \\ (-x_1 - y_1) - \left |x_1 - y_1 \right | - \left ( (-x_2 - y_2) + \left |x_2 - y_2 \right | \right ) \end{cases}
+\]</div>
+<p>因此，我们只要求出 <span class="arithmatex">\(k_1 \times x + k_2 \times y\)</span> 的最大值 <span class="arithmatex">\(mx\)</span>，其中 <span class="arithmatex">\(k_1, k_2 \in \{-1, 1\}\)</span>，以及对应的 <span class="arithmatex">\(|x - y|\)</span> 的最小值 <span class="arithmatex">\(mi\)</span>，那么数组值变化量的最大值为 <span class="arithmatex">\(mx - mi\)</span>。答案为 <span class="arithmatex">\(ans = \max(ans, s + \max(0, mx - mi))\)</span>。</p>
+<p>在代码实现上，我们定义了一个长度为 <span class="arithmatex">\(5\)</span> 的数组 <span class="arithmatex">\(dirs=[1, -1, -1, 1, 1]\)</span>，每次取数组相邻两个元素作为 <span class="arithmatex">\(k_1, k_2\)</span> 的值，这样可以覆盖 <span class="arithmatex">\(k_1, k_2 \in \{-1, 1\}\)</span> 的所有情况。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1100-1199/1131.Maximum%20of%20Absolute%20Value%20Expression/README.md">1131. 绝对值表达式的最大值</a></li>
@@ -91393,11 +91391,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

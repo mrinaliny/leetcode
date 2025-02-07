@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90875,13 +90873,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找 + 双指针</h3>
-<p>我们记数组 $\textit{nums}$ 的长度为 $n$，那么唯一性数组的长度为 $m = \frac{(1 + n) \times n}{2}$，而唯一性数组的中位数就是这 $m$ 个数中的第 $\frac{m + 1}{2}$ 小的数字。</p>
-<p>考虑唯一性数组中，有多少个数小于等于 $x$。随着 $x$ 的增大，只会有越来越多的数小于等于 $x$。这存在着单调性，因此，我们可以二分枚举 $x$，找到第一个 $x$，满足唯一性数组中小于等于 $x$ 的数的个数大于等于 $\frac{m + 1}{2}$，这个 $x$ 就是唯一性数组的中位数。</p>
-<p>我们定义二分查找的左边界 $l = 0$，右边界 $r = n$，然后进行二分查找，对于每个 $\textit{mid}$，我们检查唯一性数组中小于等于 $\textit{mid}$ 的数的个数是否大于等于 $\frac{m + 1}{2}$。我们通过函数 $\text{check}(mx)$ 来实现这一点。</p>
-<p>函数 $\text{check}(mx)$ 的实现思路如下：</p>
-<p>由于子数组越长，不同元素的个数越多，因此，我们可以利用双指针维护一个滑动窗口，使得窗口中的子数组的不同元素的个数不超过 $mx$。具体地，我们维护一个哈希表 $\textit{cnt}$，$\textit{cnt}[x]$ 表示窗口中元素 $x$ 的个数。我们使用两个指针 $l$ 和 $r$，其中 $l$ 表示窗口的左边界，而 $r$ 表示窗口的右边界。初始时 $l = r = 0$。</p>
-<p>我们枚举 $r$，对于每个 $r$，我们将 $\textit{nums}[r]$ 加入窗口中，并更新 $\textit{cnt}[\textit{nums}[r]]$。如果窗口中的不同元素的个数超过了 $mx$，我们需要将 $l$ 右移，直到窗口中的不同元素的个数不超过 $mx$。此时，右端点为 $r$，而左端点为 $[l,..r]$ 的子数组都是满足条件的，一共有 $r - l + 1$ 个子数组。我们将这个数量累加到 $k$ 中，如果 $k$ 大于等于 $\frac{m + 1}{2}$，那么说明唯一性数组中小于等于 $\textit{mid}$ 的数的个数大于等于 $\frac{m + 1}{2}$，我们返回 $\text{true}$，否则返回 $\text{false}$。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $\textit{nums}$ 的长度。</p>
+<p>我们记数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度为 <span class="arithmatex">\(n\)</span>，那么唯一性数组的长度为 <span class="arithmatex">\(m = \frac{(1 + n) \times n}{2}\)</span>，而唯一性数组的中位数就是这 <span class="arithmatex">\(m\)</span> 个数中的第 <span class="arithmatex">\(\frac{m + 1}{2}\)</span> 小的数字。</p>
+<p>考虑唯一性数组中，有多少个数小于等于 <span class="arithmatex">\(x\)</span>。随着 <span class="arithmatex">\(x\)</span> 的增大，只会有越来越多的数小于等于 <span class="arithmatex">\(x\)</span>。这存在着单调性，因此，我们可以二分枚举 <span class="arithmatex">\(x\)</span>，找到第一个 <span class="arithmatex">\(x\)</span>，满足唯一性数组中小于等于 <span class="arithmatex">\(x\)</span> 的数的个数大于等于 <span class="arithmatex">\(\frac{m + 1}{2}\)</span>，这个 <span class="arithmatex">\(x\)</span> 就是唯一性数组的中位数。</p>
+<p>我们定义二分查找的左边界 <span class="arithmatex">\(l = 0\)</span>，右边界 <span class="arithmatex">\(r = n\)</span>，然后进行二分查找，对于每个 <span class="arithmatex">\(\textit{mid}\)</span>，我们检查唯一性数组中小于等于 <span class="arithmatex">\(\textit{mid}\)</span> 的数的个数是否大于等于 <span class="arithmatex">\(\frac{m + 1}{2}\)</span>。我们通过函数 <span class="arithmatex">\(\text{check}(mx)\)</span> 来实现这一点。</p>
+<p>函数 <span class="arithmatex">\(\text{check}(mx)\)</span> 的实现思路如下：</p>
+<p>由于子数组越长，不同元素的个数越多，因此，我们可以利用双指针维护一个滑动窗口，使得窗口中的子数组的不同元素的个数不超过 <span class="arithmatex">\(mx\)</span>。具体地，我们维护一个哈希表 <span class="arithmatex">\(\textit{cnt}\)</span>，<span class="arithmatex">\(\textit{cnt}[x]\)</span> 表示窗口中元素 <span class="arithmatex">\(x\)</span> 的个数。我们使用两个指针 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(r\)</span>，其中 <span class="arithmatex">\(l\)</span> 表示窗口的左边界，而 <span class="arithmatex">\(r\)</span> 表示窗口的右边界。初始时 <span class="arithmatex">\(l = r = 0\)</span>。</p>
+<p>我们枚举 <span class="arithmatex">\(r\)</span>，对于每个 <span class="arithmatex">\(r\)</span>，我们将 <span class="arithmatex">\(\textit{nums}[r]\)</span> 加入窗口中，并更新 <span class="arithmatex">\(\textit{cnt}[\textit{nums}[r]]\)</span>。如果窗口中的不同元素的个数超过了 <span class="arithmatex">\(mx\)</span>，我们需要将 <span class="arithmatex">\(l\)</span> 右移，直到窗口中的不同元素的个数不超过 <span class="arithmatex">\(mx\)</span>。此时，右端点为 <span class="arithmatex">\(r\)</span>，而左端点为 <span class="arithmatex">\([l,..r]\)</span> 的子数组都是满足条件的，一共有 <span class="arithmatex">\(r - l + 1\)</span> 个子数组。我们将这个数量累加到 <span class="arithmatex">\(k\)</span> 中，如果 <span class="arithmatex">\(k\)</span> 大于等于 <span class="arithmatex">\(\frac{m + 1}{2}\)</span>，那么说明唯一性数组中小于等于 <span class="arithmatex">\(\textit{mid}\)</span> 的数的个数大于等于 <span class="arithmatex">\(\frac{m + 1}{2}\)</span>，我们返回 <span class="arithmatex">\(\text{true}\)</span>，否则返回 <span class="arithmatex">\(\text{false}\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91437,11 +91435,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

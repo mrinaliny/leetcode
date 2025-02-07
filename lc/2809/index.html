@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90856,23 +90854,23 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序 + 动态规划</h3>
-<p>我们注意到，如果我们多次操作同一个数，那么只有最后一次操作是有意义的，其余的对该数的操作，只会使得其它数字增大。因此，我们最多对每个数操作一次，也即是说，操作次数在 $[0,..n]$ 之间。</p>
-<p>我们不妨假设进行了 $j$ 次操作，操作的数字下标分别为 $i_1, i_2, \cdots, i_j$，那么对于这 $j$ 次操作，每一次可以使得数组元素和减少的值为：</p>
-<p>$$
+<p>我们注意到，如果我们多次操作同一个数，那么只有最后一次操作是有意义的，其余的对该数的操作，只会使得其它数字增大。因此，我们最多对每个数操作一次，也即是说，操作次数在 <span class="arithmatex">\([0,..n]\)</span> 之间。</p>
+<p>我们不妨假设进行了 <span class="arithmatex">\(j\)</span> 次操作，操作的数字下标分别为 <span class="arithmatex">\(i_1, i_2, \cdots, i_j\)</span>，那么对于这 <span class="arithmatex">\(j\)</span> 次操作，每一次可以使得数组元素和减少的值为：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-&amp; d_1 = nums_1[i_1] + nums_2[i_1] \times 1 \
-&amp; d_2 = nums_1[i_2] + nums_2[i_2] \times 2 \
-&amp; \cdots \
+&amp; d_1 = nums_1[i_1] + nums_2[i_1] \times 1 \\
+&amp; d_2 = nums_1[i_2] + nums_2[i_2] \times 2 \\
+&amp; \cdots \\
 &amp; d_j = nums_1[i_j] + nums_2[i_j] \times j
 \end{aligned}
-$$</p>
-<p>从贪心的角度考虑，为了使得数组元素和的减少量最大，我们应当让 $nums_2$ 中的较大元素尽可能放在后面操作。因此，我们可以对 $nums_1$ 和 $nums_2$ 按照 $nums_2$ 的元素值从小到大进行排序。</p>
-<p>接下来，我们考虑动态规划的实现。我们用 $f[i][j]$ 表示对于数组 $nums_1$ 的前 $i$ 个元素，进行 $j$ 次操作，所能减少的数组元素和的最大值。我们可以得到如下的状态转移方程：</p>
-<p>$$
-f[i][j] = \max {f[i-1][j], f[i-1][j-1] + nums_1[i] + nums_2[i] \times j}
-$$</p>
-<p>最后，我们枚举 $j$，找到最小的满足 $s_1 + s_2 \times j - f[n][j] \le x$ 的 $j$ 即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 是数组的长度。</p>
+\]</div>
+<p>从贪心的角度考虑，为了使得数组元素和的减少量最大，我们应当让 <span class="arithmatex">\(nums_2\)</span> 中的较大元素尽可能放在后面操作。因此，我们可以对 <span class="arithmatex">\(nums_1\)</span> 和 <span class="arithmatex">\(nums_2\)</span> 按照 <span class="arithmatex">\(nums_2\)</span> 的元素值从小到大进行排序。</p>
+<p>接下来，我们考虑动态规划的实现。我们用 <span class="arithmatex">\(f[i][j]\)</span> 表示对于数组 <span class="arithmatex">\(nums_1\)</span> 的前 <span class="arithmatex">\(i\)</span> 个元素，进行 <span class="arithmatex">\(j\)</span> 次操作，所能减少的数组元素和的最大值。我们可以得到如下的状态转移方程：</p>
+<div class="arithmatex">\[
+f[i][j] = \max \{f[i-1][j], f[i-1][j-1] + nums_1[i] + nums_2[i] \times j\}
+\]</div>
+<p>最后，我们枚举 <span class="arithmatex">\(j\)</span>，找到最小的满足 <span class="arithmatex">\(s_1 + s_2 \times j - f[n][j] \le x\)</span> 的 <span class="arithmatex">\(j\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91163,7 +91161,7 @@ $$</p>
 </div>
 </div>
 </div>
-<p>我们注意到，状态 $f[i][j]$ 只与 $f[i-1][j]$ 和 $f[i-1][j-1]$ 有关，因此我们可以优化掉第一维，将空间复杂度降低到 $O(n)$。</p>
+<p>我们注意到，状态 <span class="arithmatex">\(f[i][j]\)</span> 只与 <span class="arithmatex">\(f[i-1][j]\)</span> 和 <span class="arithmatex">\(f[i-1][j-1]\)</span> 有关，因此我们可以优化掉第一维，将空间复杂度降低到 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91641,11 +91639,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

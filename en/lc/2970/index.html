@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,27 +86066,27 @@ It can be shown that there are only 7 incremovable subarrays in nums.
 <h3 id="solution-1-two-pointers">Solution 1: Two Pointers</h3>
 <p>According to the problem description, after removing a subarray, the remaining elements are strictly increasing. Therefore, there are several situations:</p>
 <ol>
-<li>The remaining elements only include the prefix of the array $nums$ (which can be empty);</li>
-<li>The remaining elements only include the suffix of the array $nums$;</li>
-<li>The remaining elements include both the prefix and the suffix of the array $nums$.</li>
+<li>The remaining elements only include the prefix of the array <span class="arithmatex">\(nums\)</span> (which can be empty);</li>
+<li>The remaining elements only include the suffix of the array <span class="arithmatex">\(nums\)</span>;</li>
+<li>The remaining elements include both the prefix and the suffix of the array <span class="arithmatex">\(nums\)</span>.</li>
 </ol>
-<p>The second and third situations can be combined into one, that is, the remaining elements include the suffix of the array $nums$. So there are two situations in total:</p>
+<p>The second and third situations can be combined into one, that is, the remaining elements include the suffix of the array <span class="arithmatex">\(nums\)</span>. So there are two situations in total:</p>
 <ol>
-<li>The remaining elements only include the prefix of the array $nums$ (which can be empty);</li>
-<li>The remaining elements include the suffix of the array $nums$.</li>
+<li>The remaining elements only include the prefix of the array <span class="arithmatex">\(nums\)</span> (which can be empty);</li>
+<li>The remaining elements include the suffix of the array <span class="arithmatex">\(nums\)</span>.</li>
 </ol>
-<p>First, consider the first situation, that is, the remaining elements only include the prefix of the array $nums$. We can use a pointer $i$ to point to the last element of the longest increasing prefix of the array $nums$, that is, $nums[0] \lt nums[1] \lt \cdots \lt nums[i]$, then the number of remaining elements is $n - i - 1$, where $n$ is the length of the array $nums$. Therefore, for this situation, to make the remaining elements strictly increasing, we can choose to remove the following subarrays:</p>
+<p>First, consider the first situation, that is, the remaining elements only include the prefix of the array <span class="arithmatex">\(nums\)</span>. We can use a pointer <span class="arithmatex">\(i\)</span> to point to the last element of the longest increasing prefix of the array <span class="arithmatex">\(nums\)</span>, that is, <span class="arithmatex">\(nums[0] \lt nums[1] \lt \cdots \lt nums[i]\)</span>, then the number of remaining elements is <span class="arithmatex">\(n - i - 1\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>. Therefore, for this situation, to make the remaining elements strictly increasing, we can choose to remove the following subarrays:</p>
 <ol>
-<li>$nums[i+1,...,n-1]$;</li>
-<li>$nums[i,...,n-1]$;</li>
-<li>$nums[i-1,...,n-1]$;</li>
-<li>$nums[i-2,...,n-1]$;</li>
-<li>$\cdots$;</li>
-<li>$nums[0,...,n-1]$.</li>
+<li><span class="arithmatex">\(nums[i+1,...,n-1]\)</span>;</li>
+<li><span class="arithmatex">\(nums[i,...,n-1]\)</span>;</li>
+<li><span class="arithmatex">\(nums[i-1,...,n-1]\)</span>;</li>
+<li><span class="arithmatex">\(nums[i-2,...,n-1]\)</span>;</li>
+<li><span class="arithmatex">\(\cdots\)</span>;</li>
+<li><span class="arithmatex">\(nums[0,...,n-1]\)</span>.</li>
 </ol>
-<p>There are $i + 2$ situations in total, so for this situation, the number of removed increasing subarrays is $i + 2$.</p>
-<p>Next, consider the second situation, that is, the remaining elements include the suffix of the array $nums$. We can use a pointer $j$ to point to the first element of the increasing suffix of the array $nums$. We enumerate $j$ as the first element of the increasing suffix in the range $[n - 1,...,1]$. Each time, we need to move the pointer $i$ to make $nums[i] \lt nums[j]$, then the number of removed increasing subarrays increases by $i + 2$. When $nums[j - 1] \ge nums[j]$, we stop enumerating because the suffix is not strictly increasing at this time.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array $nums$. The space complexity is $O(1)$.</p>
+<p>There are <span class="arithmatex">\(i + 2\)</span> situations in total, so for this situation, the number of removed increasing subarrays is <span class="arithmatex">\(i + 2\)</span>.</p>
+<p>Next, consider the second situation, that is, the remaining elements include the suffix of the array <span class="arithmatex">\(nums\)</span>. We can use a pointer <span class="arithmatex">\(j\)</span> to point to the first element of the increasing suffix of the array <span class="arithmatex">\(nums\)</span>. We enumerate <span class="arithmatex">\(j\)</span> as the first element of the increasing suffix in the range <span class="arithmatex">\([n - 1,...,1]\)</span>. Each time, we need to move the pointer <span class="arithmatex">\(i\)</span> to make <span class="arithmatex">\(nums[i] \lt nums[j]\)</span>, then the number of removed increasing subarrays increases by <span class="arithmatex">\(i + 2\)</span>. When <span class="arithmatex">\(nums[j - 1] \ge nums[j]\)</span>, we stop enumerating because the suffix is not strictly increasing at this time.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86543,11 +86541,9 @@ It can be shown that there are only 7 incremovable subarrays in nums.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

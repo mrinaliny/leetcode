@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90876,11 +90874,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示在 $[1,..i]$ 的数中进行选择，且选择的数对应的行的状态为 $j$ 时的最大得分。初始时 $f[i][j] = 0$，答案为 $f[\textit{mx}][2^m - 1]$。其中 $\textit{mx}$ 表示矩阵中的最大值，而 $m$ 表示矩阵的行数。</p>
-<p>我们首先对矩阵进行预处理，使用一个哈希表 $g$ 记录每个数对应的行的集合。然后我们可以使用状态压缩动态规划的方法求解答案。</p>
-<p>对于状态 $f[i][j]$，我们可以不选择 $i$ 这个数，此时 $f[i][j] = f[i-1][j]$；也可以选择 $i$ 这个数，此时我们需要枚举 $i$ 对应的行的集合 $g[i]$ 中的每一个行 $k$，如果 $j$ 的第 $k$ 位为 $1$，则说明我们可以选择 $i$ 这个数，此时 $f[i][j] = \max(f[i][j], f[i-1][j \oplus 2^k] + i)$。</p>
-<p>最后我们返回 $f[\textit{mx}][2^m - 1]$ 即可。</p>
-<p>时间复杂度 $O(m \times 2^m \times \textit{mx})$，空间复杂度 $O(\textit{mx} \times 2^m)$。其中 $m$ 为矩阵的行数，而 $\textit{mx}$ 为矩阵中的最大值。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示在 <span class="arithmatex">\([1,..i]\)</span> 的数中进行选择，且选择的数对应的行的状态为 <span class="arithmatex">\(j\)</span> 时的最大得分。初始时 <span class="arithmatex">\(f[i][j] = 0\)</span>，答案为 <span class="arithmatex">\(f[\textit{mx}][2^m - 1]\)</span>。其中 <span class="arithmatex">\(\textit{mx}\)</span> 表示矩阵中的最大值，而 <span class="arithmatex">\(m\)</span> 表示矩阵的行数。</p>
+<p>我们首先对矩阵进行预处理，使用一个哈希表 <span class="arithmatex">\(g\)</span> 记录每个数对应的行的集合。然后我们可以使用状态压缩动态规划的方法求解答案。</p>
+<p>对于状态 <span class="arithmatex">\(f[i][j]\)</span>，我们可以不选择 <span class="arithmatex">\(i\)</span> 这个数，此时 <span class="arithmatex">\(f[i][j] = f[i-1][j]\)</span>；也可以选择 <span class="arithmatex">\(i\)</span> 这个数，此时我们需要枚举 <span class="arithmatex">\(i\)</span> 对应的行的集合 <span class="arithmatex">\(g[i]\)</span> 中的每一个行 <span class="arithmatex">\(k\)</span>，如果 <span class="arithmatex">\(j\)</span> 的第 <span class="arithmatex">\(k\)</span> 位为 <span class="arithmatex">\(1\)</span>，则说明我们可以选择 <span class="arithmatex">\(i\)</span> 这个数，此时 <span class="arithmatex">\(f[i][j] = \max(f[i][j], f[i-1][j \oplus 2^k] + i)\)</span>。</p>
+<p>最后我们返回 <span class="arithmatex">\(f[\textit{mx}][2^m - 1]\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times 2^m \times \textit{mx})\)</span>，空间复杂度 <span class="arithmatex">\(O(\textit{mx} \times 2^m)\)</span>。其中 <span class="arithmatex">\(m\)</span> 为矩阵的行数，而 <span class="arithmatex">\(\textit{mx}\)</span> 为矩阵中的最大值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91360,11 +91358,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86089,20 +86087,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>The problem requires us to find all subsequences $\textit{S}$ in the given array $\textit{nums}$, and then calculate the number of ways for each subsequence $\textit{T}$ such that the sum of $\textit{T}$ equals $\textit{k}$.</p>
-<p>We define $f[i][j]$ to represent the number of ways to form subsequences with the first $i$ numbers such that the sum of each subsequence equals $j$. Initially, $f[0][0] = 1$, and all other positions are $0$.</p>
-<p>For the $i$-th number $x$, there are three cases:</p>
+<p>The problem requires us to find all subsequences <span class="arithmatex">\(\textit{S}\)</span> in the given array <span class="arithmatex">\(\textit{nums}\)</span>, and then calculate the number of ways for each subsequence <span class="arithmatex">\(\textit{T}\)</span> such that the sum of <span class="arithmatex">\(\textit{T}\)</span> equals <span class="arithmatex">\(\textit{k}\)</span>.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> to represent the number of ways to form subsequences with the first <span class="arithmatex">\(i\)</span> numbers such that the sum of each subsequence equals <span class="arithmatex">\(j\)</span>. Initially, <span class="arithmatex">\(f[0][0] = 1\)</span>, and all other positions are <span class="arithmatex">\(0\)</span>.</p>
+<p>For the <span class="arithmatex">\(i\)</span>-th number <span class="arithmatex">\(x\)</span>, there are three cases:</p>
 <ol>
-<li>Not in the subsequence $\textit{S}$, in which case $f[i][j] = f[i-1][j]$;</li>
-<li>In the subsequence $\textit{S}$, but not in the subsequence $\textit{T}$, in which case $f[i][j] = f[i-1][j]$;</li>
-<li>In the subsequence $\textit{S}$, and in the subsequence $\textit{T}$, in which case $f[i][j] = f[i-1][j-x]$.</li>
+<li>Not in the subsequence <span class="arithmatex">\(\textit{S}\)</span>, in which case <span class="arithmatex">\(f[i][j] = f[i-1][j]\)</span>;</li>
+<li>In the subsequence <span class="arithmatex">\(\textit{S}\)</span>, but not in the subsequence <span class="arithmatex">\(\textit{T}\)</span>, in which case <span class="arithmatex">\(f[i][j] = f[i-1][j]\)</span>;</li>
+<li>In the subsequence <span class="arithmatex">\(\textit{S}\)</span>, and in the subsequence <span class="arithmatex">\(\textit{T}\)</span>, in which case <span class="arithmatex">\(f[i][j] = f[i-1][j-x]\)</span>.</li>
 </ol>
 <p>In summary, the state transition equation is:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = f[i-1][j] \times 2 + f[i-1][j-x]
-$$</p>
-<p>The final answer is $f[n][k]$.</p>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(n \times k)$. Here, $n$ is the length of the array $\textit{nums}$, and $k$ is the given positive integer.</p>
+\]</div>
+<p>The final answer is <span class="arithmatex">\(f[n][k]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>, and <span class="arithmatex">\(k\)</span> is the given positive integer.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86284,8 +86282,8 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming-optimization">Solution 2: Dynamic Programming (Optimization)</h3>
-<p>In the state transition equation from Solution 1, the value of $f[i][j]$ only depends on $f[i-1][j]$ and $f[i-1][j-x]$. Therefore, we can optimize the first dimension of the space, reducing the space complexity to $O(k)$.</p>
-<p>Time complexity is $O(n \times k)$, and space complexity is $O(k)$. Here, $n$ is the length of the array $\textit{nums}$, and $k$ is the given positive integer.</p>
+<p>In the state transition equation from Solution 1, the value of <span class="arithmatex">\(f[i][j]\)</span> only depends on <span class="arithmatex">\(f[i-1][j]\)</span> and <span class="arithmatex">\(f[i-1][j-x]\)</span>. Therefore, we can optimize the first dimension of the space, reducing the space complexity to <span class="arithmatex">\(O(k)\)</span>.</p>
+<p>Time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and space complexity is <span class="arithmatex">\(O(k)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>, and <span class="arithmatex">\(k\)</span> is the given positive integer.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86657,11 +86655,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

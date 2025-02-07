@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86087,15 +86085,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>Given the numbers $[1, m]$, there are $\textit{cnt0} = \lfloor \frac{m}{2} \rfloor$ even numbers and $\textit{cnt1} = m - \textit{cnt0}$ odd numbers.</p>
-<p>We design a function $\textit{dfs}(i, j, k)$, which represents the number of ways to fill up to the $i$-th position, with $j$ remaining positions needing to satisfy the condition, and the parity of the last position being $k$, where $k = 0$ indicates the last position is even, and $k = 1$ indicates the last position is odd. The answer is $\textit{dfs}(0, k, 1)$.</p>
-<p>The execution logic of the function $\textit{dfs}(i, j, k)$ is as follows:</p>
+<p>Given the numbers <span class="arithmatex">\([1, m]\)</span>, there are <span class="arithmatex">\(\textit{cnt0} = \lfloor \frac{m}{2} \rfloor\)</span> even numbers and <span class="arithmatex">\(\textit{cnt1} = m - \textit{cnt0}\)</span> odd numbers.</p>
+<p>We design a function <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span>, which represents the number of ways to fill up to the <span class="arithmatex">\(i\)</span>-th position, with <span class="arithmatex">\(j\)</span> remaining positions needing to satisfy the condition, and the parity of the last position being <span class="arithmatex">\(k\)</span>, where <span class="arithmatex">\(k = 0\)</span> indicates the last position is even, and <span class="arithmatex">\(k = 1\)</span> indicates the last position is odd. The answer is <span class="arithmatex">\(\textit{dfs}(0, k, 1)\)</span>.</p>
+<p>The execution logic of the function <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span> is as follows:</p>
 <ul>
-<li>If $j &lt; 0$, it means the remaining positions are less than $0$, so return $0$;</li>
-<li>If $i \ge n$, it means all positions are filled. If $j = 0$, it means the condition is satisfied, so return $1$, otherwise return $0$;</li>
+<li>If <span class="arithmatex">\(j &lt; 0\)</span>, it means the remaining positions are less than <span class="arithmatex">\(0\)</span>, so return <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(i \ge n\)</span>, it means all positions are filled. If <span class="arithmatex">\(j = 0\)</span>, it means the condition is satisfied, so return <span class="arithmatex">\(1\)</span>, otherwise return <span class="arithmatex">\(0\)</span>;</li>
 <li>Otherwise, we can choose to fill with an odd or even number, calculate the number of ways for both, and return their sum.</li>
 </ul>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(n \times k)$. Here, $n$ and $k$ are the parameters given in the problem.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> are the parameters given in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86366,16 +86364,16 @@
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can convert the memoized search from Solution 1 into dynamic programming.</p>
-<p>Define $f[i][j][k]$ to represent the number of ways to fill the $i$-th position, with $j$ positions satisfying the condition, and the parity of the previous position being $k$. The answer will be $\sum_{k = 0}^{1} f[n][k]$.</p>
-<p>Initially, we set $f[0][0][1] = 1$, indicating that after filling the $0$-th position, there are $0$ positions satisfying the condition, and the parity of the previous position is odd. All other $f[i][j][k]$ are initialized to $0$.</p>
+<p>Define <span class="arithmatex">\(f[i][j][k]\)</span> to represent the number of ways to fill the <span class="arithmatex">\(i\)</span>-th position, with <span class="arithmatex">\(j\)</span> positions satisfying the condition, and the parity of the previous position being <span class="arithmatex">\(k\)</span>. The answer will be <span class="arithmatex">\(\sum_{k = 0}^{1} f[n][k]\)</span>.</p>
+<p>Initially, we set <span class="arithmatex">\(f[0][0][1] = 1\)</span>, indicating that after filling the <span class="arithmatex">\(0\)</span>-th position, there are <span class="arithmatex">\(0\)</span> positions satisfying the condition, and the parity of the previous position is odd. All other <span class="arithmatex">\(f[i][j][k]\)</span> are initialized to <span class="arithmatex">\(0\)</span>.</p>
 <p>The state transition equations are as follows:</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
-f[i][j][0] &amp;= \left( f[i - 1][j][1] + \left( f[i - 1][j - 1][0] \text{ if } j &gt; 0 \right) \right) \times \textit{cnt0} \bmod \textit{mod}, \
+f[i][j][0] &amp;= \left( f[i - 1][j][1] + \left( f[i - 1][j - 1][0] \text{ if } j &gt; 0 \right) \right) \times \textit{cnt0} \bmod \textit{mod}, \\
 f[i][j][1] &amp;= \left( f[i - 1][j][0] + f[i - 1][j][1] \right) \times \textit{cnt1} \bmod \textit{mod}.
 \end{aligned}
-$$</p>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(n \times k)$, where $n$ and $k$ are the parameters given in the problem.</p>
+\]</div>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> are the parameters given in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86565,8 +86563,8 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-3-dynamic-programming-space-optimization">Solution 3: Dynamic Programming (Space Optimization)</h3>
-<p>We observe that the computation of $f[i]$ only depends on $f[i - 1]$, allowing us to optimize the space usage with a rolling array.</p>
-<p>The time complexity is $O(n \times k)$, and the space complexity is $O(k)$, where $n$ and $k$ are the parameters given in the problem.</p>
+<p>We observe that the computation of <span class="arithmatex">\(f[i]\)</span> only depends on <span class="arithmatex">\(f[i - 1]\)</span>, allowing us to optimize the space usage with a rolling array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(k)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> are the parameters given in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86992,11 +86990,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

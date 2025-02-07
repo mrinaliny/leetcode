@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86077,7 +86075,7 @@ Total profit is 4.
 
 <h3 id="solution-1-greedy-algorithm">Solution 1: Greedy Algorithm</h3>
 <p>Starting from the second day, if the stock price is higher than the previous day, buy on the previous day and sell on the current day to make a profit. If the stock price is lower than the previous day, do not buy or sell. In other words, buy and sell on all rising trading days, and do not trade on all falling trading days. The final profit will be the maximum.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the <code>prices</code> array. The space complexity is $O(1)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the <code>prices</code> array. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86233,18 +86231,18 @@ Total profit is 4.
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the maximum profit after trading on the $i$th day, where $j$ indicates whether we currently hold the stock. When holding the stock, $j=0$, and when not holding the stock, $j=1$. The initial state is $f[0][0]=-prices[0]$, and all other states are $0$.</p>
-<p>If we currently hold the stock, it may be that we held the stock the day before and do nothing today, i.e., $f[i][0]=f[i-1][0]$. Or it may be that we did not hold the stock the day before and bought the stock today, i.e., $f[i][0]=f[i-1][1]-prices[i]$.</p>
-<p>If we currently do not hold the stock, it may be that we did not hold the stock the day before and do nothing today, i.e., $f[i][1]=f[i-1][1]$. Or it may be that we held the stock the day before and sold the stock today, i.e., $f[i][1]=f[i-1][0]+prices[i]$.</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the maximum profit after trading on the <span class="arithmatex">\(i\)</span>th day, where <span class="arithmatex">\(j\)</span> indicates whether we currently hold the stock. When holding the stock, <span class="arithmatex">\(j=0\)</span>, and when not holding the stock, <span class="arithmatex">\(j=1\)</span>. The initial state is <span class="arithmatex">\(f[0][0]=-prices[0]\)</span>, and all other states are <span class="arithmatex">\(0\)</span>.</p>
+<p>If we currently hold the stock, it may be that we held the stock the day before and do nothing today, i.e., <span class="arithmatex">\(f[i][0]=f[i-1][0]\)</span>. Or it may be that we did not hold the stock the day before and bought the stock today, i.e., <span class="arithmatex">\(f[i][0]=f[i-1][1]-prices[i]\)</span>.</p>
+<p>If we currently do not hold the stock, it may be that we did not hold the stock the day before and do nothing today, i.e., <span class="arithmatex">\(f[i][1]=f[i-1][1]\)</span>. Or it may be that we held the stock the day before and sold the stock today, i.e., <span class="arithmatex">\(f[i][1]=f[i-1][0]+prices[i]\)</span>.</p>
 <p>Therefore, we can write the state transition equation as:</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{cases}
-f[i][0]=\max(f[i-1][0],f[i-1][1]-prices[i])\
+f[i][0]=\max(f[i-1][0],f[i-1][1]-prices[i])\\
 f[i][1]=\max(f[i-1][1],f[i-1][0]+prices[i])
 \end{cases}
-$$</p>
-<p>The final answer is $f[n-1][1]$, where $n$ is the length of the <code>prices</code> array.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the <code>prices</code> array.</p>
+\]</div>
+<p>The final answer is <span class="arithmatex">\(f[n-1][1]\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the <code>prices</code> array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the <code>prices</code> array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86376,8 +86374,8 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-3-dynamic-programming-space-optimization">Solution 3: Dynamic Programming (Space Optimization)</h3>
-<p>We can find that in Solution 2, the state of the $i$th day is only related to the state of the $i-1$th day. Therefore, we can use only two variables to maintain the state of the $i-1$th day, thereby optimizing the space complexity to $O(1)$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the <code>prices</code> array. The space complexity is $O(1)$.</p>
+<p>We can find that in Solution 2, the state of the <span class="arithmatex">\(i\)</span>th day is only related to the state of the <span class="arithmatex">\(i-1\)</span>th day. Therefore, we can use only two variables to maintain the state of the <span class="arithmatex">\(i-1\)</span>th day, thereby optimizing the space complexity to <span class="arithmatex">\(O(1)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the <code>prices</code> array. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86725,11 +86723,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

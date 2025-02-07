@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86081,14 +86079,14 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-greedy-prefix-sum-binary-search">Solution 1: Greedy + Prefix Sum + Binary Search</h3>
-<p>We consider enumerating Alice's standing position $i$. For each $i$, we follow the strategy below:</p>
+<p>We consider enumerating Alice's standing position <span class="arithmatex">\(i\)</span>. For each <span class="arithmatex">\(i\)</span>, we follow the strategy below:</p>
 <ul>
-<li>First, if the number at position $i$ is $1$, we can directly pick up a $1$ without needing any moves.</li>
-<li>Then, we pick up the number $1$ from both sides of position $i$, which is action $2$, i.e., move the $1$ from position $i-1$ to position $i$, then pick it up; move the $1$ from position $i+1$ to position $i$, then pick it up. Each pick up of a $1$ requires $1$ move.</li>
-<li>Next, we maximize the conversion of $0$s at positions $i-1$ or $i+1$ to $1$s using action $1$, then move them to position $i$ using action $2$ to pick them up. This continues until the number of $1$s picked up reaches $k$ or the number of times action $1$ is used reaches $\textit{maxChanges}$. Assuming the number of times action $1$ is used is $c$, then a total of $2c$ moves are needed.</li>
-<li>After utilizing action $1$, if the number of $1$s picked up has not reached $k$, we need to continue considering moving $1$s to position $i$ from the intervals $[1,..i-2]$ and $[i+2,..n]$ using action $2$ to pick them up. We can use binary search to determine the size of this interval so that the number of $1$s picked up reaches $k$. Specifically, we binary search for an interval size $d$, then within the intervals $[i-d,..i-2]$ and $[i+2,..i+d]$, we perform action $2$ to move $1$s to position $i$ for pickup. If the number of $1$s picked up reaches $k$, we update the answer.</li>
+<li>First, if the number at position <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\(1\)</span>, we can directly pick up a <span class="arithmatex">\(1\)</span> without needing any moves.</li>
+<li>Then, we pick up the number <span class="arithmatex">\(1\)</span> from both sides of position <span class="arithmatex">\(i\)</span>, which is action <span class="arithmatex">\(2\)</span>, i.e., move the <span class="arithmatex">\(1\)</span> from position <span class="arithmatex">\(i-1\)</span> to position <span class="arithmatex">\(i\)</span>, then pick it up; move the <span class="arithmatex">\(1\)</span> from position <span class="arithmatex">\(i+1\)</span> to position <span class="arithmatex">\(i\)</span>, then pick it up. Each pick up of a <span class="arithmatex">\(1\)</span> requires <span class="arithmatex">\(1\)</span> move.</li>
+<li>Next, we maximize the conversion of <span class="arithmatex">\(0\)</span>s at positions <span class="arithmatex">\(i-1\)</span> or <span class="arithmatex">\(i+1\)</span> to <span class="arithmatex">\(1\)</span>s using action <span class="arithmatex">\(1\)</span>, then move them to position <span class="arithmatex">\(i\)</span> using action <span class="arithmatex">\(2\)</span> to pick them up. This continues until the number of <span class="arithmatex">\(1\)</span>s picked up reaches <span class="arithmatex">\(k\)</span> or the number of times action <span class="arithmatex">\(1\)</span> is used reaches <span class="arithmatex">\(\textit{maxChanges}\)</span>. Assuming the number of times action <span class="arithmatex">\(1\)</span> is used is <span class="arithmatex">\(c\)</span>, then a total of <span class="arithmatex">\(2c\)</span> moves are needed.</li>
+<li>After utilizing action <span class="arithmatex">\(1\)</span>, if the number of <span class="arithmatex">\(1\)</span>s picked up has not reached <span class="arithmatex">\(k\)</span>, we need to continue considering moving <span class="arithmatex">\(1\)</span>s to position <span class="arithmatex">\(i\)</span> from the intervals <span class="arithmatex">\([1,..i-2]\)</span> and <span class="arithmatex">\([i+2,..n]\)</span> using action <span class="arithmatex">\(2\)</span> to pick them up. We can use binary search to determine the size of this interval so that the number of <span class="arithmatex">\(1\)</span>s picked up reaches <span class="arithmatex">\(k\)</span>. Specifically, we binary search for an interval size <span class="arithmatex">\(d\)</span>, then within the intervals <span class="arithmatex">\([i-d,..i-2]\)</span> and <span class="arithmatex">\([i+2,..i+d]\)</span>, we perform action <span class="arithmatex">\(2\)</span> to move <span class="arithmatex">\(1\)</span>s to position <span class="arithmatex">\(i\)</span> for pickup. If the number of <span class="arithmatex">\(1\)</span>s picked up reaches <span class="arithmatex">\(k\)</span>, we update the answer.</li>
 </ul>
-<p>The time complexity is $O(n \times \log n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86838,11 +86836,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

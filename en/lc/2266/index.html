@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,21 +86069,21 @@ Since we need to return the answer modulo 10<sup>9</sup> + 7, we return 20828761
 <!-- solution:start -->
 
 <h3 id="solution-1-grouping-dynamic-programming">Solution 1: Grouping + Dynamic Programming</h3>
-<p>According to the problem description, for consecutive identical characters in the string $\textit{pressedKeys}$, we can group them together and then calculate the number of ways for each group. Finally, we multiply the number of ways for all groups.</p>
+<p>According to the problem description, for consecutive identical characters in the string <span class="arithmatex">\(\textit{pressedKeys}\)</span>, we can group them together and then calculate the number of ways for each group. Finally, we multiply the number of ways for all groups.</p>
 <p>The key problem is how to calculate the number of ways for each group.</p>
-<p>If a group of characters is '7' or '9', we can consider the last $1$, $2$, $3$, or $4$ characters of the group as one letter, then reduce the size of the group and transform it into a smaller subproblem.</p>
-<p>Similarly, if a group of characters is '2', '3', '4', '5', '6', or '8', we can consider the last $1$, $2$, or $3$ characters of the group as one letter, then reduce the size of the group and transform it into a smaller subproblem.</p>
-<p>Therefore, we define $f[i]$ to represent the number of ways for a group of length $i$ with identical characters that are not '7' or '9', and $g[i]$ to represent the number of ways for a group of length $i$ with identical characters that are '7' or '9'.</p>
-<p>Initially, $f[0] = f[1] = 1$, $f[2] = 2$, $f[3] = 4$, $g[0] = g[1] = 1$, $g[2] = 2$, $g[3] = 4$.</p>
-<p>For $i \ge 4$, we have:</p>
-<p>$$
+<p>If a group of characters is '7' or '9', we can consider the last <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span>, <span class="arithmatex">\(3\)</span>, or <span class="arithmatex">\(4\)</span> characters of the group as one letter, then reduce the size of the group and transform it into a smaller subproblem.</p>
+<p>Similarly, if a group of characters is '2', '3', '4', '5', '6', or '8', we can consider the last <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\(2\)</span>, or <span class="arithmatex">\(3\)</span> characters of the group as one letter, then reduce the size of the group and transform it into a smaller subproblem.</p>
+<p>Therefore, we define <span class="arithmatex">\(f[i]\)</span> to represent the number of ways for a group of length <span class="arithmatex">\(i\)</span> with identical characters that are not '7' or '9', and <span class="arithmatex">\(g[i]\)</span> to represent the number of ways for a group of length <span class="arithmatex">\(i\)</span> with identical characters that are '7' or '9'.</p>
+<p>Initially, <span class="arithmatex">\(f[0] = f[1] = 1\)</span>, <span class="arithmatex">\(f[2] = 2\)</span>, <span class="arithmatex">\(f[3] = 4\)</span>, <span class="arithmatex">\(g[0] = g[1] = 1\)</span>, <span class="arithmatex">\(g[2] = 2\)</span>, <span class="arithmatex">\(g[3] = 4\)</span>.</p>
+<p>For <span class="arithmatex">\(i \ge 4\)</span>, we have:</p>
+<div class="arithmatex">\[
 \begin{aligned}
-f[i] &amp; = f[i-1] + f[i-2] + f[i-3] \
+f[i] &amp; = f[i-1] + f[i-2] + f[i-3] \\
 g[i] &amp; = g[i-1] + g[i-2] + g[i-3] + g[i-4]
 \end{aligned}
-$$</p>
-<p>Finally, we traverse $\textit{pressedKeys}$, group consecutive identical characters, calculate the number of ways for each group, and multiply the number of ways for all groups.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the string $\textit{pressedKeys}$.</p>
+\]</div>
+<p>Finally, we traverse <span class="arithmatex">\(\textit{pressedKeys}\)</span>, group consecutive identical characters, calculate the number of ways for each group, and multiply the number of ways for all groups.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(\textit{pressedKeys}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86555,11 +86553,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

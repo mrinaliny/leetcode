@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90877,9 +90875,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：滑动窗口</h3>
-<p>我们注意到，数组 $nums$ 中元素的范围为 $[-50,50]$，因此，我们可以用一个数组长度为 $101$ 的数组 $cnt$ 统计 $[-50,50]$ 中每个数出现的次数。由于负数的存在，我们可以将每个数加上 $50$，使得每个数都变成非负数，这样就可以用数组 $cnt$ 统计每个数出现的次数了。</p>
-<p>接下来，我们遍历数组 $nums$，维护一个长度为 $k$ 的滑动窗口，窗口中所有元素出现的次记数录在数组 $cnt$ 中，然后我们遍历数组 $cnt$，找到第 $x$ 小的负数，即为当前滑动窗口的美丽值。如果不存在第 $x$ 小的负数，那么美丽值为 $0$。</p>
-<p>时间复杂度 $O(n \times 50)$，空间复杂度 $O(100)$。其中 $n$ 为数组 $nums$ 的长度。</p>
+<p>我们注意到，数组 <span class="arithmatex">\(nums\)</span> 中元素的范围为 <span class="arithmatex">\([-50,50]\)</span>，因此，我们可以用一个数组长度为 <span class="arithmatex">\(101\)</span> 的数组 <span class="arithmatex">\(cnt\)</span> 统计 <span class="arithmatex">\([-50,50]\)</span> 中每个数出现的次数。由于负数的存在，我们可以将每个数加上 <span class="arithmatex">\(50\)</span>，使得每个数都变成非负数，这样就可以用数组 <span class="arithmatex">\(cnt\)</span> 统计每个数出现的次数了。</p>
+<p>接下来，我们遍历数组 <span class="arithmatex">\(nums\)</span>，维护一个长度为 <span class="arithmatex">\(k\)</span> 的滑动窗口，窗口中所有元素出现的次记数录在数组 <span class="arithmatex">\(cnt\)</span> 中，然后我们遍历数组 <span class="arithmatex">\(cnt\)</span>，找到第 <span class="arithmatex">\(x\)</span> 小的负数，即为当前滑动窗口的美丽值。如果不存在第 <span class="arithmatex">\(x\)</span> 小的负数，那么美丽值为 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times 50)\)</span>，空间复杂度 <span class="arithmatex">\(O(100)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Python3</label><label for="__tabbed_1_3">Java</label><label for="__tabbed_1_4">C++</label><label for="__tabbed_1_5">Go</label><label for="__tabbed_1_6">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91169,7 +91167,7 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：双优先队列（大小根堆） + 延迟删除</h3>
-<p>我们可以使用两个优先队列（大小根堆）维护当前窗口中的元素，其中一个优先队列存储当前窗口中较小的 $x$ 个元素，另一个优先队列存储当前窗口中较大的 $k - x$ 个元素。我们还需要一个延迟删除字典 <code>delayed</code>，用于记录当前窗口中的元素是否需要删除。</p>
+<p>我们可以使用两个优先队列（大小根堆）维护当前窗口中的元素，其中一个优先队列存储当前窗口中较小的 <span class="arithmatex">\(x\)</span> 个元素，另一个优先队列存储当前窗口中较大的 <span class="arithmatex">\(k - x\)</span> 个元素。我们还需要一个延迟删除字典 <code>delayed</code>，用于记录当前窗口中的元素是否需要删除。</p>
 <p>我们设计一个类 <code>MedianFinder</code>，用于维护当前窗口中的元素。该类包含以下方法：</p>
 <ul>
 <li><code>add_num(num)</code>：将 <code>num</code> 加入当前窗口中。</li>
@@ -91178,12 +91176,12 @@
 <li><code>prune(pq)</code>：如果堆顶元素在延迟删除字典 <code>delayed</code> 中，则将其从堆顶弹出，并从该元素的延迟删除次数中减一。如果该元素的延迟删除次数为零，则将其从延迟删除字典中删除。</li>
 <li><code>rebalance()</code>：平衡两个优先队列的大小。</li>
 </ul>
-<p>在 <code>add_num(num)</code> 方法中，我们先考虑将 <code>num</code> 加入较小的队列中，如果数量大于 $x$ 或者 <code>num</code> 小于等于较小的队列的堆顶元素，则将 <code>num</code> 加入较小的队列中；否则，将 <code>num</code> 加入较大的队列中。然后我们调用 <code>rebalance()</code> 方法，使得较小的队列中的元素数量不超过 $x$。</p>
+<p>在 <code>add_num(num)</code> 方法中，我们先考虑将 <code>num</code> 加入较小的队列中，如果数量大于 <span class="arithmatex">\(x\)</span> 或者 <code>num</code> 小于等于较小的队列的堆顶元素，则将 <code>num</code> 加入较小的队列中；否则，将 <code>num</code> 加入较大的队列中。然后我们调用 <code>rebalance()</code> 方法，使得较小的队列中的元素数量不超过 <span class="arithmatex">\(x\)</span>。</p>
 <p>在 <code>remove_num(num)</code> 方法中，我们将 <code>num</code> 的延迟删除次数加一。然后我们将 <code>num</code> 与较小的队列的堆顶元素进行比较，如果 <code>num</code> 小于等于较小的队列的堆顶元素，则更新较小的队列的大小，并且调用 <code>prune()</code> 方法，使得较小的队列的堆顶元素不在延迟删除字典中。否则，我们更新较大的队列的大小，并且调用 <code>prune()</code> 方法，使得较大的队列的堆顶元素不在延迟删除字典中。</p>
-<p>在 <code>find()</code> 方法中，如果较小的队列的大小等于 $x$，则返回较小的队列的堆顶元素，否则返回 $0$。</p>
+<p>在 <code>find()</code> 方法中，如果较小的队列的大小等于 <span class="arithmatex">\(x\)</span>，则返回较小的队列的堆顶元素，否则返回 <span class="arithmatex">\(0\)</span>。</p>
 <p>在 <code>prune(pq)</code> 方法中，如果堆顶元素在延迟删除字典中，则将其从堆顶弹出，并从该元素的延迟删除次数中减一。如果该元素的延迟删除次数为零，则将其从延迟删除字典中删除。</p>
-<p>在 <code>rebalance()</code> 方法中，如果较小的队列的大小大于 $x$，则将较小的队列的堆顶元素加入较大的队列中，并调用 <code>prune()</code> 方法，使得较小的队列的堆顶元素不在延迟删除字典中。如果较小的队列的大小小于 $x$ 且较大的队列的大小大于 $0$，则将较大的队列的堆顶元素加入较小的队列中，并调用 <code>prune()</code> 方法，使得较大的队列的堆顶元素不在延迟删除字典中。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 <code>nums</code> 的长度。</p>
+<p>在 <code>rebalance()</code> 方法中，如果较小的队列的大小大于 <span class="arithmatex">\(x\)</span>，则将较小的队列的堆顶元素加入较大的队列中，并调用 <code>prune()</code> 方法，使得较小的队列的堆顶元素不在延迟删除字典中。如果较小的队列的大小小于 <span class="arithmatex">\(x\)</span> 且较大的队列的大小大于 <span class="arithmatex">\(0\)</span>，则将较大的队列的堆顶元素加入较小的队列中，并调用 <code>prune()</code> 方法，使得较大的队列的堆顶元素不在延迟删除字典中。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <code>nums</code> 的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0400-0499/0480.Sliding%20Window%20Median/README.md">480. 滑动窗口中位数</a></li>
@@ -92145,11 +92143,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

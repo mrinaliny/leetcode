@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90848,7 +90846,7 @@
 
 <h3 id="_3">方法一：滑动窗口</h3>
 <p>滑动窗口，枚举第三个子数组的位置，同时维护前两个无重叠子数组的最大和及其位置。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是数组 $nums$ 的长度。空间复杂度 $O(1)$。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91202,10 +91200,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：预处理前后缀 + 枚举中间子数组</h3>
-<p>我们可以预处理得到数组 $nums$ 的前缀和数组 $s$，其中 $s[i] = \sum_{j=0}^{i-1} nums[j]$，那么对于任意的 $i$，$j$，$s[j] - s[i]$ 就是子数组 $[i, j)$ 的和。</p>
-<p>接下来，我们使用动态规划的方法，维护两个长度为 $n$ 的数组 $pre$ 和 $suf$，其中 $pre[i]$ 表示 $[0, i]$ 范围内长度为 $k$ 的子数组的最大和及其起始位置，$suf[i]$ 表示 $[i, n)$ 范围内长度为 $k$ 的子数组的最大和及其起始位置。</p>
-<p>然后，我们枚举中间子数组的起始位置 $i$，那么三个子数组的和就是 $pre[i-1][0] + suf[i+k][0] + (s[i+k] - s[i])$，其中 $pre[i-1][0]$ 表示 $[0, i-1]$ 范围内长度为 $k$ 的子数组的最大和，$suf[i+k][0]$ 表示 $[i+k, n)$ 范围内长度为 $k$ 的子数组的最大和，$(s[i+k] - s[i])$ 表示 $[i, i+k)$ 范围内长度为 $k$ 的子数组的和。我们找出和的最大值对应的三个子数组的起始位置即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $nums$ 的长度。</p>
+<p>我们可以预处理得到数组 <span class="arithmatex">\(nums\)</span> 的前缀和数组 <span class="arithmatex">\(s\)</span>，其中 <span class="arithmatex">\(s[i] = \sum_{j=0}^{i-1} nums[j]\)</span>，那么对于任意的 <span class="arithmatex">\(i\)</span>，<span class="arithmatex">\(j\)</span>，<span class="arithmatex">\(s[j] - s[i]\)</span> 就是子数组 <span class="arithmatex">\([i, j)\)</span> 的和。</p>
+<p>接下来，我们使用动态规划的方法，维护两个长度为 <span class="arithmatex">\(n\)</span> 的数组 <span class="arithmatex">\(pre\)</span> 和 <span class="arithmatex">\(suf\)</span>，其中 <span class="arithmatex">\(pre[i]\)</span> 表示 <span class="arithmatex">\([0, i]\)</span> 范围内长度为 <span class="arithmatex">\(k\)</span> 的子数组的最大和及其起始位置，<span class="arithmatex">\(suf[i]\)</span> 表示 <span class="arithmatex">\([i, n)\)</span> 范围内长度为 <span class="arithmatex">\(k\)</span> 的子数组的最大和及其起始位置。</p>
+<p>然后，我们枚举中间子数组的起始位置 <span class="arithmatex">\(i\)</span>，那么三个子数组的和就是 <span class="arithmatex">\(pre[i-1][0] + suf[i+k][0] + (s[i+k] - s[i])\)</span>，其中 <span class="arithmatex">\(pre[i-1][0]\)</span> 表示 <span class="arithmatex">\([0, i-1]\)</span> 范围内长度为 <span class="arithmatex">\(k\)</span> 的子数组的最大和，<span class="arithmatex">\(suf[i+k][0]\)</span> 表示 <span class="arithmatex">\([i+k, n)\)</span> 范围内长度为 <span class="arithmatex">\(k\)</span> 的子数组的最大和，<span class="arithmatex">\((s[i+k] - s[i])\)</span> 表示 <span class="arithmatex">\([i, i+k)\)</span> 范围内长度为 <span class="arithmatex">\(k\)</span> 的子数组的和。我们找出和的最大值对应的三个子数组的起始位置即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91753,11 +91751,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

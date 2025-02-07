@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,12 +86069,12 @@ So the total number of operations for the second query is 2 + 4 + 1 + 3 = 10.
 <!-- solution:start -->
 
 <h3 id="solution-1-sort-prefix-sum-binary-search">Solution 1: sort + prefix sum + binary search</h3>
-<p>First, we sort the array $nums$ and calculate the prefix sum array $s$ with a length of $n+1$, where $s[i]$ represents the sum of the first $i$ elements in the array $nums$.</p>
-<p>Then, we traverse each query $queries[i]$, we need to reduce all elements greater than $queries[i]$ to $queries[i]$, and increase all elements less than $queries[i]$ to $queries[i]$.</p>
-<p>We can use binary search to find the index $i$ of the first element in the array $nums$ that is greater than $queries[i]$. There are $n-i$ elements that need to be reduced to $queries[i]$, and the sum of these elements is $s[n]-s[i]$. These elements need to be reduced by $n-i$ $queries[i]$, so the total number of operations to reduce these elements to $queries[i]$ is $s[n]-s[i]-(n-i)\times queries[i]$.</p>
-<p>Similarly, we can find the index $i$ of the first element in the array $nums$ that is greater than or equal to $queries[i]$. There are $i$ elements that need to be increased to $queries[i]$, and the sum of these elements is $s[i]$. Therefore, the total number of operations to increase these elements to $queries[i]$ is $queries[i]\times i-s[i]$.</p>
-<p>Finally, add these two total operation counts together to get the minimum number of operations to change all elements in the array $nums$ to $queries[i]$, that is, $ans[i]=s[n]-s[i]-(n-i)\times queries[i]+queries[i]\times i-s[i]$.</p>
-<p>Time complexity $O(n \times \log n)$, space complexity $O(n)$, where $n$ is the length of the array $nums$.</p>
+<p>First, we sort the array <span class="arithmatex">\(nums\)</span> and calculate the prefix sum array <span class="arithmatex">\(s\)</span> with a length of <span class="arithmatex">\(n+1\)</span>, where <span class="arithmatex">\(s[i]\)</span> represents the sum of the first <span class="arithmatex">\(i\)</span> elements in the array <span class="arithmatex">\(nums\)</span>.</p>
+<p>Then, we traverse each query <span class="arithmatex">\(queries[i]\)</span>, we need to reduce all elements greater than <span class="arithmatex">\(queries[i]\)</span> to <span class="arithmatex">\(queries[i]\)</span>, and increase all elements less than <span class="arithmatex">\(queries[i]\)</span> to <span class="arithmatex">\(queries[i]\)</span>.</p>
+<p>We can use binary search to find the index <span class="arithmatex">\(i\)</span> of the first element in the array <span class="arithmatex">\(nums\)</span> that is greater than <span class="arithmatex">\(queries[i]\)</span>. There are <span class="arithmatex">\(n-i\)</span> elements that need to be reduced to <span class="arithmatex">\(queries[i]\)</span>, and the sum of these elements is <span class="arithmatex">\(s[n]-s[i]\)</span>. These elements need to be reduced by <span class="arithmatex">\(n-i\)</span> <span class="arithmatex">\(queries[i]\)</span>, so the total number of operations to reduce these elements to <span class="arithmatex">\(queries[i]\)</span> is <span class="arithmatex">\(s[n]-s[i]-(n-i)\times queries[i]\)</span>.</p>
+<p>Similarly, we can find the index <span class="arithmatex">\(i\)</span> of the first element in the array <span class="arithmatex">\(nums\)</span> that is greater than or equal to <span class="arithmatex">\(queries[i]\)</span>. There are <span class="arithmatex">\(i\)</span> elements that need to be increased to <span class="arithmatex">\(queries[i]\)</span>, and the sum of these elements is <span class="arithmatex">\(s[i]\)</span>. Therefore, the total number of operations to increase these elements to <span class="arithmatex">\(queries[i]\)</span> is <span class="arithmatex">\(queries[i]\times i-s[i]\)</span>.</p>
+<p>Finally, add these two total operation counts together to get the minimum number of operations to change all elements in the array <span class="arithmatex">\(nums\)</span> to <span class="arithmatex">\(queries[i]\)</span>, that is, <span class="arithmatex">\(ans[i]=s[n]-s[i]-(n-i)\times queries[i]+queries[i]\times i-s[i]\)</span>.</p>
+<p>Time complexity <span class="arithmatex">\(O(n \times \log n)\)</span>, space complexity <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86540,11 +86538,9 @@ So the total number of operations for the second query is 2 + 4 + 1 + 3 = 10.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

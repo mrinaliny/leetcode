@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,14 +90858,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示当前已经选了 $i$ 个元音字母，且最后一个元音字母是 $j$ 的方案数。那么答案就是 $dfs(0, 0)$。</p>
-<p>函数 $dfs(i, j)$ 的计算过程如下：</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示当前已经选了 <span class="arithmatex">\(i\)</span> 个元音字母，且最后一个元音字母是 <span class="arithmatex">\(j\)</span> 的方案数。那么答案就是 <span class="arithmatex">\(dfs(0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的计算过程如下：</p>
 <ul>
-<li>如果 $i \ge n$，说明已经选了 $n$ 个元音字母，返回 $1$。</li>
-<li>否则，枚举 $j$ 后面的元音字母，即 $k \in [j, 4]$，并将 $dfs(i + 1, k)$ 的结果累加，即 $dfs(i, j) = \sum_{k = j}^4 dfs(i + 1, k)$。</li>
+<li>如果 <span class="arithmatex">\(i \ge n\)</span>，说明已经选了 <span class="arithmatex">\(n\)</span> 个元音字母，返回 <span class="arithmatex">\(1\)</span>。</li>
+<li>否则，枚举 <span class="arithmatex">\(j\)</span> 后面的元音字母，即 <span class="arithmatex">\(k \in [j, 4]\)</span>，并将 <span class="arithmatex">\(dfs(i + 1, k)\)</span> 的结果累加，即 <span class="arithmatex">\(dfs(i, j) = \sum_{k = j}^4 dfs(i + 1, k)\)</span>。</li>
 </ul>
-<p>过程中，我们可以使用记忆化搜索，将已经计算过的 $dfs(i, j)$ 的结果保存起来，避免重复计算。</p>
-<p>时间复杂度 $O(n \times C^2)$，空间复杂度 $O(n \times C)$。其中 $n$ 为题目给定的整数，而 $C$ 是元音字母的数量，本题中 $C = 5$。</p>
+<p>过程中，我们可以使用记忆化搜索，将已经计算过的 <span class="arithmatex">\(dfs(i, j)\)</span> 的结果保存起来，避免重复计算。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times C^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times C)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为题目给定的整数，而 <span class="arithmatex">\(C\)</span> 是元音字母的数量，本题中 <span class="arithmatex">\(C = 5\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91027,9 +91025,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划 + 前缀和</h3>
-<p>定义 $f[i][j]$ 表示当前已经选了 $i$ 个元音字母，且最后一个元音字母是 $j$ 的方案数。初始时 $f[1][j]=1$。答案是 $\sum_{j = 0}^4 f[n][j]$。</p>
-<p>我们可以发现 $f[i][j]$ 只与 $f[i - 1][j]$ 有关，因此可以将二维数组压缩为一维数组，从而优化空间复杂度。</p>
-<p>时间复杂度 $O(n \times C)$，空间复杂度 $O(C)$。其中 $n$ 为题目给定的整数，而 $C$ 是元音字母的数量，本题中 $C = 5$。</p>
+<p>定义 <span class="arithmatex">\(f[i][j]\)</span> 表示当前已经选了 <span class="arithmatex">\(i\)</span> 个元音字母，且最后一个元音字母是 <span class="arithmatex">\(j\)</span> 的方案数。初始时 <span class="arithmatex">\(f[1][j]=1\)</span>。答案是 <span class="arithmatex">\(\sum_{j = 0}^4 f[n][j]\)</span>。</p>
+<p>我们可以发现 <span class="arithmatex">\(f[i][j]\)</span> 只与 <span class="arithmatex">\(f[i - 1][j]\)</span> 有关，因此可以将二维数组压缩为一维数组，从而优化空间复杂度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times C)\)</span>，空间复杂度 <span class="arithmatex">\(O(C)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为题目给定的整数，而 <span class="arithmatex">\(C\)</span> 是元音字母的数量，本题中 <span class="arithmatex">\(C = 5\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91376,11 +91374,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

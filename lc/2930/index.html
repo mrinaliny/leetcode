@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90864,13 +90862,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, l, e, t)$，表示当前剩余字符串长度为 $i$，且已至少有 $l$ 个字符 <code>'l'</code>, $e$ 个字符 <code>'e'</code> 和 $t$ 个字符 <code>'t'</code>，构成的字符串是一个好字符串的方案数。那么答案为 $dfs(n, 0, 0, 0)$。</p>
-<p>函数 $dfs(i, l, e, t)$ 的执行逻辑如下：</p>
-<p>如果 $i = 0$，说明当前字符串已经构造完毕，如果 $l = 1$, $e = 2$ 且 $t = 1$，说明当前字符串是一个好字符串，返回 $1$，否则返回 $0$。</p>
-<p>否则，我们可以考虑在当前位置添加除 <code>'l'</code>, <code>'e'</code>, <code>'t'</code> 以外的任意一个小写字母，一共有 $23$ 种，那么此时得到的方案数为 $dfs(i - 1, l, e, t) \times 23$。</p>
-<p>我们也可以考虑在当前位置添加 <code>'l'</code>，此时得到的方案数为 $dfs(i - 1, \min(1, l + 1), e, t)$。同理，添加 <code>'e'</code> 和 <code>'t'</code> 的方案数分别为 $dfs(i - 1, l, \min(2, e + 1), t)$ 和 $dfs(i - 1, l, e, \min(1, t + 1))$。累加起来，并对 $10^9 + 7$ 取模，即可得到 $dfs(i, l, e, t)$ 的值。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, l, e, t)\)</span>，表示当前剩余字符串长度为 <span class="arithmatex">\(i\)</span>，且已至少有 <span class="arithmatex">\(l\)</span> 个字符 <code>'l'</code>, <span class="arithmatex">\(e\)</span> 个字符 <code>'e'</code> 和 <span class="arithmatex">\(t\)</span> 个字符 <code>'t'</code>，构成的字符串是一个好字符串的方案数。那么答案为 <span class="arithmatex">\(dfs(n, 0, 0, 0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, l, e, t)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(i = 0\)</span>，说明当前字符串已经构造完毕，如果 <span class="arithmatex">\(l = 1\)</span>, <span class="arithmatex">\(e = 2\)</span> 且 <span class="arithmatex">\(t = 1\)</span>，说明当前字符串是一个好字符串，返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>否则，我们可以考虑在当前位置添加除 <code>'l'</code>, <code>'e'</code>, <code>'t'</code> 以外的任意一个小写字母，一共有 <span class="arithmatex">\(23\)</span> 种，那么此时得到的方案数为 <span class="arithmatex">\(dfs(i - 1, l, e, t) \times 23\)</span>。</p>
+<p>我们也可以考虑在当前位置添加 <code>'l'</code>，此时得到的方案数为 <span class="arithmatex">\(dfs(i - 1, \min(1, l + 1), e, t)\)</span>。同理，添加 <code>'e'</code> 和 <code>'t'</code> 的方案数分别为 <span class="arithmatex">\(dfs(i - 1, l, \min(2, e + 1), t)\)</span> 和 <span class="arithmatex">\(dfs(i - 1, l, e, \min(1, t + 1))\)</span>。累加起来，并对 <span class="arithmatex">\(10^9 + 7\)</span> 取模，即可得到 <span class="arithmatex">\(dfs(i, l, e, t)\)</span> 的值。</p>
 <p>为了避免重复计算，我们可以使用记忆化搜索。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为字符串长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91119,17 +91117,17 @@
 <p>我们可以考虑逆向思维，即计算不包含子字符串 <code>"leet"</code> 的字符串数目，然后用总数减去该数目即可。</p>
 <p>我们分成以下几种情况：</p>
 <ul>
-<li>情况 $a$：表示字符串中不包含字符 <code>'l'</code> 的方案数，那么有 $a = 25^n$。</li>
-<li>情况 $b$：与 $a$ 类似，表示字符串中不包含字符 <code>'t'</code> 的方案数，那么有 $b = 25^n$。</li>
-<li>情况 $c$：表示字符串中不包含字符 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 $c = 25^n + n \times 25^{n - 1}$。</li>
-<li>情况 $ab$：表示字符串中不包含字符 <code>'l'</code> 和 <code>'t'</code> 的方案数，那么有 $ab = 24^n$。</li>
-<li>情况 $ac$：表示字符串中不包含字符 <code>'l'</code> 和 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 $ac = 24^n + n \times 24^{n - 1}$。</li>
-<li>情况 $bc$：与 $ac$ 类似，表示字符串中不包含字符 <code>'t'</code> 和 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 $bc = 24^n + n \times 24^{n - 1}$。</li>
-<li>情况 $abc$：表示字符串中不包含字符 <code>'l'</code>、<code>'t'</code> 和 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 $abc = 23^n + n \times 23^{n - 1}$。</li>
+<li>情况 <span class="arithmatex">\(a\)</span>：表示字符串中不包含字符 <code>'l'</code> 的方案数，那么有 <span class="arithmatex">\(a = 25^n\)</span>。</li>
+<li>情况 <span class="arithmatex">\(b\)</span>：与 <span class="arithmatex">\(a\)</span> 类似，表示字符串中不包含字符 <code>'t'</code> 的方案数，那么有 <span class="arithmatex">\(b = 25^n\)</span>。</li>
+<li>情况 <span class="arithmatex">\(c\)</span>：表示字符串中不包含字符 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 <span class="arithmatex">\(c = 25^n + n \times 25^{n - 1}\)</span>。</li>
+<li>情况 <span class="arithmatex">\(ab\)</span>：表示字符串中不包含字符 <code>'l'</code> 和 <code>'t'</code> 的方案数，那么有 <span class="arithmatex">\(ab = 24^n\)</span>。</li>
+<li>情况 <span class="arithmatex">\(ac\)</span>：表示字符串中不包含字符 <code>'l'</code> 和 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 <span class="arithmatex">\(ac = 24^n + n \times 24^{n - 1}\)</span>。</li>
+<li>情况 <span class="arithmatex">\(bc\)</span>：与 <span class="arithmatex">\(ac\)</span> 类似，表示字符串中不包含字符 <code>'t'</code> 和 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 <span class="arithmatex">\(bc = 24^n + n \times 24^{n - 1}\)</span>。</li>
+<li>情况 <span class="arithmatex">\(abc\)</span>：表示字符串中不包含字符 <code>'l'</code>、<code>'t'</code> 和 <code>'e'</code> 或者只包含一个字符 <code>'e'</code> 的方案数，那么有 <span class="arithmatex">\(abc = 23^n + n \times 23^{n - 1}\)</span>。</li>
 </ul>
-<p>那么根据容斥原理，可以得到 $a + b + c - ab - ac - bc + abc$，就是不包含子字符串 <code>"leet"</code> 的字符串数目。</p>
-<p>而总数 $tot = 26^n$，所以答案为 $tot - (a + b + c - ab - ac - bc + abc)$，注意要对 $10^9 + 7$ 取模。</p>
-<p>时间复杂度 $O(\log n)$，其中 $n$ 为字符串长度。空间复杂度 $O(1)$。</p>
+<p>那么根据容斥原理，可以得到 <span class="arithmatex">\(a + b + c - ab - ac - bc + abc\)</span>，就是不包含子字符串 <code>"leet"</code> 的字符串数目。</p>
+<p>而总数 <span class="arithmatex">\(tot = 26^n\)</span>，所以答案为 <span class="arithmatex">\(tot - (a + b + c - ab - ac - bc + abc)\)</span>，注意要对 <span class="arithmatex">\(10^9 + 7\)</span> 取模。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为字符串长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91585,11 +91583,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

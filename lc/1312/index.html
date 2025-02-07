@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,13 +90863,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>我们设计一个函数 $dfs(i, j)$，表示将字符串 $s[i..j]$ 变成回文串所需要的最少操作次数。那么答案就是 $dfs(0, n - 1)$。</p>
-<p>函数 $dfs(i, j)$ 的计算过程如下：</p>
-<p>如果 $i \geq j$，此时无需插入任何字符，我们直接返回 $0$。</p>
-<p>否则，我们判断 $s[i]$ 与 $s[j]$ 是否相等，如果 $s[i]=s[j]$，那么我们只需要将 $s[i+1..j-1]$ 变成回文串，那么我们返回 $dfs(i + 1, j - 1)$。否则，我们可以在 $s[i]$ 的左侧或者 $s[j]$ 的右侧插入一个与另一侧相同的字符，那么 $dfs(i, j) = \min(dfs(i + 1, j), dfs(i, j - 1)) + 1$。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(dfs(i, j)\)</span>，表示将字符串 <span class="arithmatex">\(s[i..j]\)</span> 变成回文串所需要的最少操作次数。那么答案就是 <span class="arithmatex">\(dfs(0, n - 1)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i, j)\)</span> 的计算过程如下：</p>
+<p>如果 <span class="arithmatex">\(i \geq j\)</span>，此时无需插入任何字符，我们直接返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>否则，我们判断 <span class="arithmatex">\(s[i]\)</span> 与 <span class="arithmatex">\(s[j]\)</span> 是否相等，如果 <span class="arithmatex">\(s[i]=s[j]\)</span>，那么我们只需要将 <span class="arithmatex">\(s[i+1..j-1]\)</span> 变成回文串，那么我们返回 <span class="arithmatex">\(dfs(i + 1, j - 1)\)</span>。否则，我们可以在 <span class="arithmatex">\(s[i]\)</span> 的左侧或者 <span class="arithmatex">\(s[j]\)</span> 的右侧插入一个与另一侧相同的字符，那么 <span class="arithmatex">\(dfs(i, j) = \min(dfs(i + 1, j), dfs(i, j - 1)) + 1\)</span>。</p>
 <p>为了避免重复计算，我们可以使用记忆化搜索，即使用哈希表或者数组来存储已经计算过的函数值。</p>
-<p>最后，我们返回 $dfs(0, n - 1)$ 即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 为字符串 $s$ 的长度。</p>
+<p>最后，我们返回 <span class="arithmatex">\(dfs(0, n - 1)\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91069,18 +91067,18 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法二：动态规划（区间 DP）</h3>
-<p>我们定义 $f[i][j]$ 表示将字符串 $s[i..j]$ 变成回文串所需要的最少操作次数。初始时 $f[i][j]=0$，答案即为 $f[0][n-1]$。</p>
-<p>对于 $f[i][j]$，如果 $s[i]=s[j]$，那么我们只需要将 $s[i+1..j-1]$ 变成回文串，因此 $f[i][j]=f[i+1][j-1]$。否则，我们可以在 $s[i]$ 的左侧或者 $s[j]$ 的右侧插入一个与另一侧相同的字符，那么 $f[i][j]=\min(f[i+1][j],f[i][j-1])+1$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示将字符串 <span class="arithmatex">\(s[i..j]\)</span> 变成回文串所需要的最少操作次数。初始时 <span class="arithmatex">\(f[i][j]=0\)</span>，答案即为 <span class="arithmatex">\(f[0][n-1]\)</span>。</p>
+<p>对于 <span class="arithmatex">\(f[i][j]\)</span>，如果 <span class="arithmatex">\(s[i]=s[j]\)</span>，那么我们只需要将 <span class="arithmatex">\(s[i+1..j-1]\)</span> 变成回文串，因此 <span class="arithmatex">\(f[i][j]=f[i+1][j-1]\)</span>。否则，我们可以在 <span class="arithmatex">\(s[i]\)</span> 的左侧或者 <span class="arithmatex">\(s[j]\)</span> 的右侧插入一个与另一侧相同的字符，那么 <span class="arithmatex">\(f[i][j]=\min(f[i+1][j],f[i][j-1])+1\)</span>。</p>
 <p>综上，我们可以得到状态转移方程：</p>
-<p>$$
-f[i][j]=\left{\begin{array}{ll}f[i+1][j-1], &amp; s[i]=s[j]\ \min(f[i+1][j],f[i][j-1])+1, &amp; s[i]\neq s[j]\end{array}\right.
-$$</p>
+<div class="arithmatex">\[
+f[i][j]=\left\{\begin{array}{ll}f[i+1][j-1], &amp; s[i]=s[j]\\ \min(f[i+1][j],f[i][j-1])+1, &amp; s[i]\neq s[j]\end{array}\right.
+\]</div>
 <p>在枚举时，我们可以有两种枚举的方式：</p>
 <ol>
-<li>从大到小枚举 $i$，从小到大枚举 $j$，这样可以保证在计算状态 $f[i][j]$ 时，状态 $f[i+1][j-1]$ 和 $f[i][j-1]$ 都已经计算过了；</li>
-<li>从小到大枚举区间长度 $k$，然后枚举区间的左端点 $i$，那么可以得到右端点 $j=i+k-1$，这样也可以保证在计算较大区间 $f[i][j]$ 时，较小区间 $f[i+1][j]$ 和 $f[i][j-1]$ 都已经计算过了。</li>
+<li>从大到小枚举 <span class="arithmatex">\(i\)</span>，从小到大枚举 <span class="arithmatex">\(j\)</span>，这样可以保证在计算状态 <span class="arithmatex">\(f[i][j]\)</span> 时，状态 <span class="arithmatex">\(f[i+1][j-1]\)</span> 和 <span class="arithmatex">\(f[i][j-1]\)</span> 都已经计算过了；</li>
+<li>从小到大枚举区间长度 <span class="arithmatex">\(k\)</span>，然后枚举区间的左端点 <span class="arithmatex">\(i\)</span>，那么可以得到右端点 <span class="arithmatex">\(j=i+k-1\)</span>，这样也可以保证在计算较大区间 <span class="arithmatex">\(f[i][j]\)</span> 时，较小区间 <span class="arithmatex">\(f[i+1][j]\)</span> 和 <span class="arithmatex">\(f[i][j-1]\)</span> 都已经计算过了。</li>
 </ol>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n^2)$。其中 $n$ 为字符串 $s$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^2)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1000-1099/1039.Minimum%20Score%20Triangulation%20of%20Polygon/README.md">1039. 多边形三角剖分的最低得分</a></li>
@@ -91599,11 +91597,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

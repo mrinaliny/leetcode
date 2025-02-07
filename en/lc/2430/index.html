@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86090,15 +86088,15 @@ We used 4 operations so return 4. It can be proven that 4 is the maximum number 
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $dfs(i)$, which represents the maximum number of operations needed to delete all characters from $s[i..]$. The answer is $dfs(0)$.</p>
-<p>The calculation process of the function $dfs(i)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i)\)</span>, which represents the maximum number of operations needed to delete all characters from <span class="arithmatex">\(s[i..]\)</span>. The answer is <span class="arithmatex">\(dfs(0)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq n$, then $dfs(i) = 0$, return directly.</li>
-<li>Otherwise, we enumerate the length of the string $j$, where $1 \leq j \leq (n-1)/2$. If $s[i..i+j] = s[i+j..i+j+j]$, we can delete $s[i..i+j]$, then $dfs(i)=max(dfs(i), dfs(i+j)+1)$. We need to enumerate all $j$ to find the maximum value of $dfs(i)$.</li>
+<li>If <span class="arithmatex">\(i \geq n\)</span>, then <span class="arithmatex">\(dfs(i) = 0\)</span>, return directly.</li>
+<li>Otherwise, we enumerate the length of the string <span class="arithmatex">\(j\)</span>, where <span class="arithmatex">\(1 \leq j \leq (n-1)/2\)</span>. If <span class="arithmatex">\(s[i..i+j] = s[i+j..i+j+j]\)</span>, we can delete <span class="arithmatex">\(s[i..i+j]\)</span>, then <span class="arithmatex">\(dfs(i)=max(dfs(i), dfs(i+j)+1)\)</span>. We need to enumerate all <span class="arithmatex">\(j\)</span> to find the maximum value of <span class="arithmatex">\(dfs(i)\)</span>.</li>
 </ul>
-<p>Here we need to quickly determine whether $s[i..i+j]$ is equal to $s[i+j..i+j+j]$. We can preprocess all the longest common prefixes of string $s$, that is, $g[i][j]$ represents the length of the longest common prefix of $s[i..]$ and $s[j..]$. In this way, we can quickly determine whether $s[i..i+j]$ is equal to $s[i+j..i+j+j]$, that is, $g[i][i+j] \geq j$.</p>
-<p>To avoid repeated calculations, we can use memoization search and use an array $f$ to record the value of the function $dfs(i)$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the length of the string $s$.</p>
+<p>Here we need to quickly determine whether <span class="arithmatex">\(s[i..i+j]\)</span> is equal to <span class="arithmatex">\(s[i+j..i+j+j]\)</span>. We can preprocess all the longest common prefixes of string <span class="arithmatex">\(s\)</span>, that is, <span class="arithmatex">\(g[i][j]\)</span> represents the length of the longest common prefix of <span class="arithmatex">\(s[i..]\)</span> and <span class="arithmatex">\(s[j..]\)</span>. In this way, we can quickly determine whether <span class="arithmatex">\(s[i..i+j]\)</span> is equal to <span class="arithmatex">\(s[i+j..i+j+j]\)</span>, that is, <span class="arithmatex">\(g[i][i+j] \geq j\)</span>.</p>
+<p>To avoid repeated calculations, we can use memoization search and use an array <span class="arithmatex">\(f\)</span> to record the value of the function <span class="arithmatex">\(dfs(i)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86386,9 +86384,9 @@ We used 4 operations so return 4. It can be proven that 4 is the maximum number 
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
-<p>We can change the memoization search in Solution 1 to dynamic programming. Define $f[i]$ to represent the maximum number of operations needed to delete all characters from $s[i..]$. Initially, $f[i]=1$, and the answer is $f[0]$.</p>
-<p>We can enumerate $i$ from back to front. For each $i$, we enumerate the length of the string $j$, where $1 \leq j \leq (n-1)/2$. If $s[i..i+j] = s[i+j..i+j+j]$, we can delete $s[i..i+j]$, then $f[i]=max(f[i], f[i+j]+1)$. We need to enumerate all $j$ to find the maximum value of $f[i]$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of the string $s$.</p>
+<p>We can change the memoization search in Solution 1 to dynamic programming. Define <span class="arithmatex">\(f[i]\)</span> to represent the maximum number of operations needed to delete all characters from <span class="arithmatex">\(s[i..]\)</span>. Initially, <span class="arithmatex">\(f[i]=1\)</span>, and the answer is <span class="arithmatex">\(f[0]\)</span>.</p>
+<p>We can enumerate <span class="arithmatex">\(i\)</span> from back to front. For each <span class="arithmatex">\(i\)</span>, we enumerate the length of the string <span class="arithmatex">\(j\)</span>, where <span class="arithmatex">\(1 \leq j \leq (n-1)/2\)</span>. If <span class="arithmatex">\(s[i..i+j] = s[i+j..i+j+j]\)</span>, we can delete <span class="arithmatex">\(s[i..i+j]\)</span>, then <span class="arithmatex">\(f[i]=max(f[i], f[i+j]+1)\)</span>. We need to enumerate all <span class="arithmatex">\(j\)</span> to find the maximum value of <span class="arithmatex">\(f[i]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86830,11 +86828,9 @@ We used 4 operations so return 4. It can be proven that 4 is the maximum number 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

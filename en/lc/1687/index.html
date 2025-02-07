@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86108,19 +86106,19 @@ So the total number of trips is 2 + 2 + 2 = 6.
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-monotonic-queue-optimization">Solution 1: Dynamic Programming + Monotonic Queue Optimization</h3>
-<p>We define $f[i]$ as the minimum number of trips required to transport the first $i$ boxes from the warehouse to the corresponding docks, so the answer is $f[n]$.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the minimum number of trips required to transport the first <span class="arithmatex">\(i\)</span> boxes from the warehouse to the corresponding docks, so the answer is <span class="arithmatex">\(f[n]\)</span>.</p>
 <p>The boxes need to be transported in the order of the array. Each time, the truck will take out several consecutive boxes in order, then deliver them to the corresponding docks one by one. After all are delivered, it returns to the warehouse.</p>
-<p>Therefore, we can enumerate the index $j$ of the last box transported in the last trip. Then $f[i]$ can be transferred from $f[j]$. During the transfer, we need to consider the following issues:</p>
+<p>Therefore, we can enumerate the index <span class="arithmatex">\(j\)</span> of the last box transported in the last trip. Then <span class="arithmatex">\(f[i]\)</span> can be transferred from <span class="arithmatex">\(f[j]\)</span>. During the transfer, we need to consider the following issues:</p>
 <ul>
-<li>When transferring from $f[j]$, the number of boxes on the truck cannot exceed $maxBoxes$</li>
-<li>When transferring from $f[j]$, the total weight of the boxes on the truck cannot exceed $maxWeight$</li>
+<li>When transferring from <span class="arithmatex">\(f[j]\)</span>, the number of boxes on the truck cannot exceed <span class="arithmatex">\(maxBoxes\)</span></li>
+<li>When transferring from <span class="arithmatex">\(f[j]\)</span>, the total weight of the boxes on the truck cannot exceed <span class="arithmatex">\(maxWeight\)</span></li>
 </ul>
 <p>The state transition equation is:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i] = \min_{j \in [i - maxBoxes, i - 1]} \left(f[j] + \sum_{k = j + 1}^i \textit{cost}(k)\right)
-$$</p>
-<p>Where $\sum_{k = j + 1}^i \textit{cost}(k)$ represents the number of trips required to deliver the boxes in $[j+1,..i]$ to their corresponding docks in one trip. This part of the trip count can be quickly calculated using prefix sums.</p>
-<p>For example, suppose we take out boxes $1, 2, 3$ and need to deliver them to docks $4, 4, 5$. We first go from the warehouse to dock $4$, then from dock $4$ to dock $5$, and finally from dock $5$ back to the warehouse. It can be seen that it takes $2$ trips to go from the warehouse to the dock and from the dock back to the warehouse. The number of trips from dock to dock depends on whether the two adjacent docks are the same. If they are not the same, the number of trips will increase by $1$, otherwise it remains the same. Therefore, we can calculate the number of trips between docks using prefix sums, and add two trips for the start and end, to calculate the number of trips required to deliver the boxes in $[j+1,..i]$ to their corresponding docks.</p>
+\]</div>
+<p>Where <span class="arithmatex">\(\sum_{k = j + 1}^i \textit{cost}(k)\)</span> represents the number of trips required to deliver the boxes in <span class="arithmatex">\([j+1,..i]\)</span> to their corresponding docks in one trip. This part of the trip count can be quickly calculated using prefix sums.</p>
+<p>For example, suppose we take out boxes <span class="arithmatex">\(1, 2, 3\)</span> and need to deliver them to docks <span class="arithmatex">\(4, 4, 5\)</span>. We first go from the warehouse to dock <span class="arithmatex">\(4\)</span>, then from dock <span class="arithmatex">\(4\)</span> to dock <span class="arithmatex">\(5\)</span>, and finally from dock <span class="arithmatex">\(5\)</span> back to the warehouse. It can be seen that it takes <span class="arithmatex">\(2\)</span> trips to go from the warehouse to the dock and from the dock back to the warehouse. The number of trips from dock to dock depends on whether the two adjacent docks are the same. If they are not the same, the number of trips will increase by <span class="arithmatex">\(1\)</span>, otherwise it remains the same. Therefore, we can calculate the number of trips between docks using prefix sums, and add two trips for the start and end, to calculate the number of trips required to deliver the boxes in <span class="arithmatex">\([j+1,..i]\)</span> to their corresponding docks.</p>
 <p>The code implementation is as follows:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 33/39</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Solution</span><span class="p">:</span>
@@ -86221,12 +86219,12 @@ $$</p>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">f</span><span class="p">[</span><span class="nx">n</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>The data scale of this problem reaches $10^5$, and the time complexity of the above code is $O(n^2)$, which will exceed the time limit. If we observe carefully:</p>
-<p>$$
+<p>The data scale of this problem reaches <span class="arithmatex">\(10^5\)</span>, and the time complexity of the above code is <span class="arithmatex">\(O(n^2)\)</span>, which will exceed the time limit. If we observe carefully:</p>
+<div class="arithmatex">\[
 f[i] = \min(f[i], f[j] + cs[i - 1] - cs[j] + 2)
-$$</p>
-<p>In fact, we are looking for a $j$ in the window $[i-maxBoxes,..i-1]$ that minimizes the value of $f[j] - cs[j]$. To find the minimum value in a sliding window, a common method is to use a monotonic queue, which can get the minimum value that meets the condition in $O(1)$ time.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of boxes in the problem.</p>
+\]</div>
+<p>In fact, we are looking for a <span class="arithmatex">\(j\)</span> in the window <span class="arithmatex">\([i-maxBoxes,..i-1]\)</span> that minimizes the value of <span class="arithmatex">\(f[j] - cs[j]\)</span>. To find the minimum value in a sliding window, a common method is to use a monotonic queue, which can get the minimum value that meets the condition in <span class="arithmatex">\(O(1)\)</span> time.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of boxes in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86695,11 +86693,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

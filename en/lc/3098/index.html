@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,18 +86068,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>Given the problem involves the minimum difference between elements of a subsequence, we might as well sort the array $\textit{nums}$, which facilitates the calculation of the minimum difference between subsequence elements.</p>
-<p>Next, we design a function $dfs(i, j, k, mi)$, representing the value of the energy sum when processing the $i$-th element, the last selected element is the $j$-th element, $k$ more elements need to be selected, and the current minimum difference is $mi$. Therefore, the answer is $dfs(0, n, k, +\infty)$ (If the last selected element is the $n$-th element, it indicates that no element has been selected before).</p>
-<p>The execution process of the function $dfs(i, j, k, mi)$ is as follows:</p>
+<p>Given the problem involves the minimum difference between elements of a subsequence, we might as well sort the array <span class="arithmatex">\(\textit{nums}\)</span>, which facilitates the calculation of the minimum difference between subsequence elements.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i, j, k, mi)\)</span>, representing the value of the energy sum when processing the <span class="arithmatex">\(i\)</span>-th element, the last selected element is the <span class="arithmatex">\(j\)</span>-th element, <span class="arithmatex">\(k\)</span> more elements need to be selected, and the current minimum difference is <span class="arithmatex">\(mi\)</span>. Therefore, the answer is <span class="arithmatex">\(dfs(0, n, k, +\infty)\)</span> (If the last selected element is the <span class="arithmatex">\(n\)</span>-th element, it indicates that no element has been selected before).</p>
+<p>The execution process of the function <span class="arithmatex">\(dfs(i, j, k, mi)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq n$, it means all elements have been processed. If $k = 0$, return $mi$; otherwise, return $0$.</li>
-<li>If the remaining number of elements $n - i$ is less than $k$, return $0$.</li>
-<li>Otherwise, we can choose not to select the $i$-th element, and the energy sum obtained is $dfs(i + 1, j, k, mi)$.</li>
-<li>We can also choose to select the $i$-th element. If $j = n$, it means no element has been selected before, then the energy sum obtained is $dfs(i + 1, i, k - 1, mi)$; otherwise, the energy sum obtained is $dfs(i + 1, i, k - 1, \min(mi, \textit{nums}[i] - \textit{nums}[j]))$.</li>
-<li>We add up the above results and return the result modulo $10^9 + 7$.</li>
+<li>If <span class="arithmatex">\(i \geq n\)</span>, it means all elements have been processed. If <span class="arithmatex">\(k = 0\)</span>, return <span class="arithmatex">\(mi\)</span>; otherwise, return <span class="arithmatex">\(0\)</span>.</li>
+<li>If the remaining number of elements <span class="arithmatex">\(n - i\)</span> is less than <span class="arithmatex">\(k\)</span>, return <span class="arithmatex">\(0\)</span>.</li>
+<li>Otherwise, we can choose not to select the <span class="arithmatex">\(i\)</span>-th element, and the energy sum obtained is <span class="arithmatex">\(dfs(i + 1, j, k, mi)\)</span>.</li>
+<li>We can also choose to select the <span class="arithmatex">\(i\)</span>-th element. If <span class="arithmatex">\(j = n\)</span>, it means no element has been selected before, then the energy sum obtained is <span class="arithmatex">\(dfs(i + 1, i, k - 1, mi)\)</span>; otherwise, the energy sum obtained is <span class="arithmatex">\(dfs(i + 1, i, k - 1, \min(mi, \textit{nums}[i] - \textit{nums}[j]))\)</span>.</li>
+<li>We add up the above results and return the result modulo <span class="arithmatex">\(10^9 + 7\)</span>.</li>
 </ul>
 <p>To avoid repeated calculations, we can use memoization, saving the results that have already been calculated.</p>
-<p>The time complexity is $O(n^4 \times k)$, and the space complexity is $O(n^4 \times k)$. Here, $n$ is the length of the array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^4 \times k)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^4 \times k)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86629,11 +86627,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

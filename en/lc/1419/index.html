@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86051,15 +86049,15 @@ The second frog could yell later &quot;cr<strong>c</strong>oak<strong>roak</stro
 <!-- solution:start -->
 
 <h3 id="solution-1-counting-simulation">Solution 1: Counting + Simulation</h3>
-<p>We note that if the string <code>croakOfFrogs</code> is composed of several valid <code>"croak"</code> characters mixed together, its length must be a multiple of $5$. Therefore, if the length of the string is not a multiple of $5$, we can directly return $-1$.</p>
-<p>Next, we map the letters <code>'c'</code>, <code>'r'</code>, <code>'o'</code>, <code>'a'</code>, <code>'k'</code> to indices $0$ to $4$, respectively, and use an array $cnt$ of length $5$ to record the number of occurrences of each letter in the string <code>croakOfFrogs</code>, where $cnt[i]$ represents the number of occurrences of the letter at index $i$. Additionally, we define an integer variable $x$ to represent the number of frogs that have not completed their croak, and the minimum number of frogs needed $ans$ is the maximum value of $x$.</p>
-<p>We traverse each letter $c$ in the string <code>croakOfFrogs</code>, find the index $i$ corresponding to $c$, and then increment $cnt[i]$ by $1$. Next, depending on the value of $i$, we perform the following operations:</p>
+<p>We note that if the string <code>croakOfFrogs</code> is composed of several valid <code>"croak"</code> characters mixed together, its length must be a multiple of <span class="arithmatex">\(5\)</span>. Therefore, if the length of the string is not a multiple of <span class="arithmatex">\(5\)</span>, we can directly return <span class="arithmatex">\(-1\)</span>.</p>
+<p>Next, we map the letters <code>'c'</code>, <code>'r'</code>, <code>'o'</code>, <code>'a'</code>, <code>'k'</code> to indices <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(4\)</span>, respectively, and use an array <span class="arithmatex">\(cnt\)</span> of length <span class="arithmatex">\(5\)</span> to record the number of occurrences of each letter in the string <code>croakOfFrogs</code>, where <span class="arithmatex">\(cnt[i]\)</span> represents the number of occurrences of the letter at index <span class="arithmatex">\(i\)</span>. Additionally, we define an integer variable <span class="arithmatex">\(x\)</span> to represent the number of frogs that have not completed their croak, and the minimum number of frogs needed <span class="arithmatex">\(ans\)</span> is the maximum value of <span class="arithmatex">\(x\)</span>.</p>
+<p>We traverse each letter <span class="arithmatex">\(c\)</span> in the string <code>croakOfFrogs</code>, find the index <span class="arithmatex">\(i\)</span> corresponding to <span class="arithmatex">\(c\)</span>, and then increment <span class="arithmatex">\(cnt[i]\)</span> by <span class="arithmatex">\(1\)</span>. Next, depending on the value of <span class="arithmatex">\(i\)</span>, we perform the following operations:</p>
 <ul>
-<li>If $i=0$, then a new frog starts croaking, so we increment $x$ by $1$, and then update $ans = \max(ans, x)$;</li>
-<li>Otherwise, if $cnt[i-1]=0$, it means that there is no frog that can make the sound $c$, and the croak cannot be completed, so we return $-1$. Otherwise, we decrement $cnt[i-1]$ by $1$. If $i=4$, it means that a frog has completed a croak, so we decrement $x$ by $1$.</li>
+<li>If <span class="arithmatex">\(i=0\)</span>, then a new frog starts croaking, so we increment <span class="arithmatex">\(x\)</span> by <span class="arithmatex">\(1\)</span>, and then update <span class="arithmatex">\(ans = \max(ans, x)\)</span>;</li>
+<li>Otherwise, if <span class="arithmatex">\(cnt[i-1]=0\)</span>, it means that there is no frog that can make the sound <span class="arithmatex">\(c\)</span>, and the croak cannot be completed, so we return <span class="arithmatex">\(-1\)</span>. Otherwise, we decrement <span class="arithmatex">\(cnt[i-1]\)</span> by <span class="arithmatex">\(1\)</span>. If <span class="arithmatex">\(i=4\)</span>, it means that a frog has completed a croak, so we decrement <span class="arithmatex">\(x\)</span> by <span class="arithmatex">\(1\)</span>.</li>
 </ul>
-<p>After traversing, if $x=0$, it means that all frogs have completed their croaks, and we return $ans$. Otherwise, we return $-1$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(C)$. Where $n$ is the length of the string <code>croakOfFrogs</code>, and $C$ is the size of the character set, in this problem $C=26$.</p>
+<p>After traversing, if <span class="arithmatex">\(x=0\)</span>, it means that all frogs have completed their croaks, and we return <span class="arithmatex">\(ans\)</span>. Otherwise, we return <span class="arithmatex">\(-1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(C)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the string <code>croakOfFrogs</code>, and <span class="arithmatex">\(C\)</span> is the size of the character set, in this problem <span class="arithmatex">\(C=26\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86577,11 +86575,9 @@ The second frog could yell later &quot;cr<strong>c</strong>oak<strong>roak</stro
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

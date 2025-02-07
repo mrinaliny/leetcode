@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86028,14 +86026,14 @@ Can you solve it without using additional space?</p>
 <h3 id="solution-1-two-pointers">Solution 1: Two Pointers</h3>
 <p>We first use the fast and slow pointers to judge whether the linked list has a ring. If there is a ring, the fast and slow pointers will definitely meet, and the meeting node must be in the ring.</p>
 <p>If there is no ring, the fast pointer will reach the tail of the linked list first, and return <code>null</code> directly.</p>
-<p>If there is a ring, we then define an answer pointer $ans$ to point to the head of the linked list, and then let $ans$ and the slow pointer move forward together, moving one step at a time, until $ans$ and the slow pointer meet, and the meeting node is the ring entrance node.</p>
+<p>If there is a ring, we then define an answer pointer <span class="arithmatex">\(ans\)</span> to point to the head of the linked list, and then let <span class="arithmatex">\(ans\)</span> and the slow pointer move forward together, moving one step at a time, until <span class="arithmatex">\(ans\)</span> and the slow pointer meet, and the meeting node is the ring entrance node.</p>
 <p>Why can this find the entrance node of the ring?</p>
-<p>Let's assume that the distance from the head node of the linked list to the entrance of the ring is $x$, the distance from the entrance of the ring to the meeting node is $y$, and the distance from the meeting node to the entrance of the ring is $z$. Then the distance traveled by the slow pointer is $x + y$, and the distance traveled by the fast pointer is $x + y + k \times (y + z)$, where $k$ is the number of times the fast pointer goes around the ring.</p>
+<p>Let's assume that the distance from the head node of the linked list to the entrance of the ring is <span class="arithmatex">\(x\)</span>, the distance from the entrance of the ring to the meeting node is <span class="arithmatex">\(y\)</span>, and the distance from the meeting node to the entrance of the ring is <span class="arithmatex">\(z\)</span>. Then the distance traveled by the slow pointer is <span class="arithmatex">\(x + y\)</span>, and the distance traveled by the fast pointer is <span class="arithmatex">\(x + y + k \times (y + z)\)</span>, where <span class="arithmatex">\(k\)</span> is the number of times the fast pointer goes around the ring.</p>
 <p><a class="glightbox" href="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcci/02.08.Linked%20List%20Cycle/images/linked-list-cycle-ii.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://fastly.jsdelivr.net/gh/doocs/leetcode@main/lcci/02.08.Linked%20List%20Cycle/images/linked-list-cycle-ii.png" /></a></p>
 
-<p>Because the speed of the fast pointer is twice that of the slow pointer, it is $2 \times (x + y) = x + y + k \times (y + z)$, which can be deduced that $x + y = k \times (y + z)$, that is $x = (k - 1) \times (y + z) + z$.</p>
-<p>That is to say, if we define an answer pointer $ans$ to point to the head of the linked list, and the $ans$ and the slow pointer move forward together, they will definitely meet at the ring entrance.</p>
-<p>The time complexity is $O(n)$, where $n$ is the number of nodes in the linked list. The space complexity is $O(1)$.</p>
+<p>Because the speed of the fast pointer is twice that of the slow pointer, it is <span class="arithmatex">\(2 \times (x + y) = x + y + k \times (y + z)\)</span>, which can be deduced that <span class="arithmatex">\(x + y = k \times (y + z)\)</span>, that is <span class="arithmatex">\(x = (k - 1) \times (y + z) + z\)</span>.</p>
+<p>That is to say, if we define an answer pointer <span class="arithmatex">\(ans\)</span> to point to the head of the linked list, and the <span class="arithmatex">\(ans\)</span> and the slow pointer move forward together, they will definitely meet at the ring entrance.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of nodes in the linked list. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86660,11 +86658,9 @@ Can you solve it without using additional space?</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,15 +86066,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dfs-backtracking">Solution 1: DFS (Backtracking)</h3>
-<p>We can enumerate each position $(i, j)$ in the grid as the starting point of the search, and then start a depth-first search from the starting point. If we can search to the end of the word, it means the word exists, otherwise, it means the word does not exist.</p>
-<p>Therefore, we design a function $dfs(i, j, k)$, which represents whether we can successfully search from the $(i, j)$ position of the grid, starting from the $k$th character of the word. The execution steps of the function $dfs(i, j, k)$ are as follows:</p>
+<p>We can enumerate each position <span class="arithmatex">\((i, j)\)</span> in the grid as the starting point of the search, and then start a depth-first search from the starting point. If we can search to the end of the word, it means the word exists, otherwise, it means the word does not exist.</p>
+<p>Therefore, we design a function <span class="arithmatex">\(dfs(i, j, k)\)</span>, which represents whether we can successfully search from the <span class="arithmatex">\((i, j)\)</span> position of the grid, starting from the <span class="arithmatex">\(k\)</span>th character of the word. The execution steps of the function <span class="arithmatex">\(dfs(i, j, k)\)</span> are as follows:</p>
 <ul>
-<li>If $k = |word|-1$, it means that we have searched to the last character of the word. At this time, we only need to judge whether the character at the $(i, j)$ position of the grid is equal to $word[k]$. If they are equal, it means the word exists, otherwise, it means the word does not exist. Whether the word exists or not, there is no need to continue to search, so return the result directly.</li>
-<li>Otherwise, if the $word[k]$ character is not equal to the character at the $(i, j)$ position of the grid, it means that the search failed this time, so return <code>false</code> directly.</li>
-<li>Otherwise, we temporarily store the character at the $(i, j)$ position of the grid in $c$, and then modify the character at this position to a special character <code>'0'</code>, indicating that the character at this position has been used to prevent it from being reused in subsequent searches. Then we start from the up, down, left, and right directions of the $(i, j)$ position to search for the $k+1$th character in the grid. If any direction is successful, it means the search is successful, otherwise, it means the search failed. At this time, we need to restore the character at the $(i, j)$ position of the grid, that is, put $c$ back to the $(i, j)$ position (backtracking).</li>
+<li>If <span class="arithmatex">\(k = |word|-1\)</span>, it means that we have searched to the last character of the word. At this time, we only need to judge whether the character at the <span class="arithmatex">\((i, j)\)</span> position of the grid is equal to <span class="arithmatex">\(word[k]\)</span>. If they are equal, it means the word exists, otherwise, it means the word does not exist. Whether the word exists or not, there is no need to continue to search, so return the result directly.</li>
+<li>Otherwise, if the <span class="arithmatex">\(word[k]\)</span> character is not equal to the character at the <span class="arithmatex">\((i, j)\)</span> position of the grid, it means that the search failed this time, so return <code>false</code> directly.</li>
+<li>Otherwise, we temporarily store the character at the <span class="arithmatex">\((i, j)\)</span> position of the grid in <span class="arithmatex">\(c\)</span>, and then modify the character at this position to a special character <code>'0'</code>, indicating that the character at this position has been used to prevent it from being reused in subsequent searches. Then we start from the up, down, left, and right directions of the <span class="arithmatex">\((i, j)\)</span> position to search for the <span class="arithmatex">\(k+1\)</span>th character in the grid. If any direction is successful, it means the search is successful, otherwise, it means the search failed. At this time, we need to restore the character at the <span class="arithmatex">\((i, j)\)</span> position of the grid, that is, put <span class="arithmatex">\(c\)</span> back to the <span class="arithmatex">\((i, j)\)</span> position (backtracking).</li>
 </ul>
-<p>In the main function, we enumerate each position $(i, j)$ in the grid as the starting point. If calling $dfs(i, j, 0)$ returns <code>true</code>, it means the word exists, otherwise, it means the word does not exist, so return <code>false</code>.</p>
-<p>The time complexity is $O(m \times n \times 3^k)$, and the space complexity is $O(\min(m \times n, k))$. Here, $m$ and $n$ are the number of rows and columns of the grid, respectively; and $k$ is the length of the string $word$.</p>
+<p>In the main function, we enumerate each position <span class="arithmatex">\((i, j)\)</span> in the grid as the starting point. If calling <span class="arithmatex">\(dfs(i, j, 0)\)</span> returns <code>true</code>, it means the word exists, otherwise, it means the word does not exist, so return <code>false</code>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times 3^k)\)</span>, and the space complexity is <span class="arithmatex">\(O(\min(m \times n, k))\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively; and <span class="arithmatex">\(k\)</span> is the length of the string <span class="arithmatex">\(word\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">Rust</label><label for="__tabbed_1_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86891,11 +86889,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

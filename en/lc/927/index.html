@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86046,20 +86044,20 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-counting-three-pointers">Solution 1: Counting + Three Pointers</h3>
-<p>We denote the length of the array as $n$, and the number of '1's in the array as $cnt$.</p>
-<p>Obviously, $cnt$ must be a multiple of $3$, otherwise the array cannot be divided into three equal parts, and we can return $[-1, -1]$ in advance. If $cnt$ is $0$, it means that all elements in the array are '0', and we can directly return $[0, n - 1]$.</p>
-<p>We divide $cnt$ by $3$ to get the number of '1's in each part, and then find the position of the first '1' in each part in the array <code>arr</code> (refer to the $find(x)$ function in the following code), denoted as $i$, $j$, $k$ respectively.</p>
+<p>We denote the length of the array as <span class="arithmatex">\(n\)</span>, and the number of '1's in the array as <span class="arithmatex">\(cnt\)</span>.</p>
+<p>Obviously, <span class="arithmatex">\(cnt\)</span> must be a multiple of <span class="arithmatex">\(3\)</span>, otherwise the array cannot be divided into three equal parts, and we can return <span class="arithmatex">\([-1, -1]\)</span> in advance. If <span class="arithmatex">\(cnt\)</span> is <span class="arithmatex">\(0\)</span>, it means that all elements in the array are '0', and we can directly return <span class="arithmatex">\([0, n - 1]\)</span>.</p>
+<p>We divide <span class="arithmatex">\(cnt\)</span> by <span class="arithmatex">\(3\)</span> to get the number of '1's in each part, and then find the position of the first '1' in each part in the array <code>arr</code> (refer to the <span class="arithmatex">\(find(x)\)</span> function in the following code), denoted as <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(j\)</span>, <span class="arithmatex">\(k\)</span> respectively.</p>
 <div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
 <span class="w">  </span>^<span class="w">         </span>^<span class="w">             </span>^
 <span class="w">  </span>i<span class="w">         </span>j<span class="w">             </span>k
 </code></pre></div>
-<p>Then we start from $i$, $j$, $k$ and traverse each part at the same time, check whether the corresponding values of the three parts are equal. If they are, continue to traverse until $k$ reaches the end of <code>arr</code>.</p>
+<p>Then we start from <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(j\)</span>, <span class="arithmatex">\(k\)</span> and traverse each part at the same time, check whether the corresponding values of the three parts are equal. If they are, continue to traverse until <span class="arithmatex">\(k\)</span> reaches the end of <code>arr</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
 <span class="w">          </span>^<span class="w">         </span>^<span class="w">             </span>^
 <span class="w">          </span>i<span class="w">         </span>j<span class="w">             </span>k
 </code></pre></div>
-<p>At the end of the traversal, if $k=n$, it means that it satisfies the three equal parts, and we return $[i - 1, j]$ as the answer, otherwise return $[-1, -1]$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of <code>arr</code>. The space complexity is $O(1)$.</p>
+<p>At the end of the traversal, if <span class="arithmatex">\(k=n\)</span>, it means that it satisfies the three equal parts, and we return <span class="arithmatex">\([i - 1, j]\)</span> as the answer, otherwise return <span class="arithmatex">\([-1, -1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of <code>arr</code>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1500-1599/1573.Number%20of%20Ways%20to%20Split%20a%20String/README_EN.md">1573. Number of Ways to Split a String</a></li>
@@ -86585,11 +86583,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86087,13 +86085,13 @@ It can be shown that the other 3 permutations are not self-divisible. Hence the 
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-memoization-search">Solution 1: State Compression + Memoization Search</h3>
-<p>We can use a binary number $mask$ to represent the current permutation state, where the $i$-th bit is $1$ indicates that the number $i$ has been used, and $0$ indicates that the number $i$ has not been used yet.</p>
-<p>Then, we design a function $dfs(mask)$, which represents the number of permutations that can be constructed from the current permutation state $mask$ and meet the requirements of the problem. The answer is $dfs(0)$.</p>
-<p>We can use the method of memoization search to calculate the value of $dfs(mask)$.</p>
-<p>In the process of calculating $dfs(mask)$, we use $i$ to indicate which number is to be added to the permutation. If $i \gt n$, it means that the permutation has been constructed, and we can return $1$.</p>
-<p>Otherwise, we enumerate the numbers $j$ that have not been used in the current permutation. If $i$ and $j$ meet the requirements of the problem, then we can add $j$ to the permutation. At this time, the state becomes $mask \mid 2^j$, where $|$ represents bitwise OR operation. Since $j$ has been used, we need to recursively calculate the value of $dfs(mask \mid 2^j)$ and add it to $dfs(mask)$.</p>
-<p>Finally, we can get the value of $dfs(0)$, which is the answer.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(2^n)$. Where $n$ is the length of the permutation.</p>
+<p>We can use a binary number <span class="arithmatex">\(mask\)</span> to represent the current permutation state, where the <span class="arithmatex">\(i\)</span>-th bit is <span class="arithmatex">\(1\)</span> indicates that the number <span class="arithmatex">\(i\)</span> has been used, and <span class="arithmatex">\(0\)</span> indicates that the number <span class="arithmatex">\(i\)</span> has not been used yet.</p>
+<p>Then, we design a function <span class="arithmatex">\(dfs(mask)\)</span>, which represents the number of permutations that can be constructed from the current permutation state <span class="arithmatex">\(mask\)</span> and meet the requirements of the problem. The answer is <span class="arithmatex">\(dfs(0)\)</span>.</p>
+<p>We can use the method of memoization search to calculate the value of <span class="arithmatex">\(dfs(mask)\)</span>.</p>
+<p>In the process of calculating <span class="arithmatex">\(dfs(mask)\)</span>, we use <span class="arithmatex">\(i\)</span> to indicate which number is to be added to the permutation. If <span class="arithmatex">\(i \gt n\)</span>, it means that the permutation has been constructed, and we can return <span class="arithmatex">\(1\)</span>.</p>
+<p>Otherwise, we enumerate the numbers <span class="arithmatex">\(j\)</span> that have not been used in the current permutation. If <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> meet the requirements of the problem, then we can add <span class="arithmatex">\(j\)</span> to the permutation. At this time, the state becomes <span class="arithmatex">\(mask \mid 2^j\)</span>, where <span class="arithmatex">\(|\)</span> represents bitwise OR operation. Since <span class="arithmatex">\(j\)</span> has been used, we need to recursively calculate the value of <span class="arithmatex">\(dfs(mask \mid 2^j)\)</span> and add it to <span class="arithmatex">\(dfs(mask)\)</span>.</p>
+<p>Finally, we can get the value of <span class="arithmatex">\(dfs(0)\)</span>, which is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the permutation.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86349,10 +86347,10 @@ It can be shown that the other 3 permutations are not self-divisible. Hence the 
 <!-- solution:start -->
 
 <h3 id="solution-2-state-compression-dynamic-programming">Solution 2: State Compression + Dynamic Programming</h3>
-<p>We can rewrite the memoization search in Solution 1 into the form of dynamic programming, define $f[mask]$ to represent the number of permutations that the current permutation state is $mask$ and meet the requirements of the problem. Initially, $f[0]=1$, and the rest are $0$.</p>
-<p>We enumerate $mask$ in the range of $[0, 2^n)$, for each $mask$, we use $i$ to represent which number is the last one to join the permutation, then we enumerate the last number $j$ added to the current permutation. If $i$ and $j$ meet the requirements of the problem, then the state $f[mask]$ can be transferred from the state $f[mask \oplus 2^(j-1)]$, where $\oplus$ represents bitwise XOR operation. We add all the values of the transferred state $f[mask \oplus 2^(j-1)]$ to $f[mask]$, which is the value of $f[mask]$.</p>
-<p>Finally, we can get the value of $f[2^n - 1]$, which is the answer.</p>
-<p>The time complexity is $O(n \times 2^n)$, and the space complexity is $O(2^n)$. Where $n$ is the length of the permutation.</p>
+<p>We can rewrite the memoization search in Solution 1 into the form of dynamic programming, define <span class="arithmatex">\(f[mask]\)</span> to represent the number of permutations that the current permutation state is <span class="arithmatex">\(mask\)</span> and meet the requirements of the problem. Initially, <span class="arithmatex">\(f[0]=1\)</span>, and the rest are <span class="arithmatex">\(0\)</span>.</p>
+<p>We enumerate <span class="arithmatex">\(mask\)</span> in the range of <span class="arithmatex">\([0, 2^n)\)</span>, for each <span class="arithmatex">\(mask\)</span>, we use <span class="arithmatex">\(i\)</span> to represent which number is the last one to join the permutation, then we enumerate the last number <span class="arithmatex">\(j\)</span> added to the current permutation. If <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> meet the requirements of the problem, then the state <span class="arithmatex">\(f[mask]\)</span> can be transferred from the state <span class="arithmatex">\(f[mask \oplus 2^(j-1)]\)</span>, where <span class="arithmatex">\(\oplus\)</span> represents bitwise XOR operation. We add all the values of the transferred state <span class="arithmatex">\(f[mask \oplus 2^(j-1)]\)</span> to <span class="arithmatex">\(f[mask]\)</span>, which is the value of <span class="arithmatex">\(f[mask]\)</span>.</p>
+<p>Finally, we can get the value of <span class="arithmatex">\(f[2^n - 1]\)</span>, which is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times 2^n)\)</span>, and the space complexity is <span class="arithmatex">\(O(2^n)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the permutation.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86755,11 +86753,9 @@ It can be shown that the other 3 permutations are not self-divisible. Hence the 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

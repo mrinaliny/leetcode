@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90871,24 +90869,24 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：数学（裴蜀定理） + 中位数贪心</h3>
-<p>题目要求每个长度为 $k$ 的子数组的元素总和相等，那么有以下等式成立：</p>
-<p>$$
+<p>题目要求每个长度为 <span class="arithmatex">\(k\)</span> 的子数组的元素总和相等，那么有以下等式成立：</p>
+<div class="arithmatex">\[
 arr_i + arr_{i + 1} + \cdots + arr_{i + k - 1} = arr_{i + 1} + arr_{i + 2} + \cdots + arr_{i + k}
-$$</p>
+\]</div>
 <p>化简得：</p>
-<p>$$
+<div class="arithmatex">\[
 arr_i = arr_{i + k}
-$$</p>
-<p>也即是说，数组 $arr$ 有一个大小为 $k$ 的循环节，而由于数组 $arr$ 是一个循环数组，那么数组 $arr$ 也有一个长度为 $n$ 的循环节。换句话说，数组 $arr$ 上间隔为 $k$，以及间隔为 $n$ 的元素均相等。即有：</p>
-<p>$$
+\]</div>
+<p>也即是说，数组 <span class="arithmatex">\(arr\)</span> 有一个大小为 <span class="arithmatex">\(k\)</span> 的循环节，而由于数组 <span class="arithmatex">\(arr\)</span> 是一个循环数组，那么数组 <span class="arithmatex">\(arr\)</span> 也有一个长度为 <span class="arithmatex">\(n\)</span> 的循环节。换句话说，数组 <span class="arithmatex">\(arr\)</span> 上间隔为 <span class="arithmatex">\(k\)</span>，以及间隔为 <span class="arithmatex">\(n\)</span> 的元素均相等。即有：</p>
+<div class="arithmatex">\[
 arr_i = arr_{i + k \times x + n \times y}
-$$</p>
-<p>根据裴蜀定理，有 $a \times x + b \times y = gcd(a, b)$，因此，有：</p>
-<p>$$
+\]</div>
+<p>根据裴蜀定理，有 <span class="arithmatex">\(a \times x + b \times y = gcd(a, b)\)</span>，因此，有：</p>
+<div class="arithmatex">\[
 arr_i = arr_{i + k \times x + n \times y} = arr_{i + gcd(k, n)}
-$$</p>
-<p>因此，数组 $arr$ 上的元素可以分为 $gcd(k, n)$ 组，每组的元素间隔为 $gcd(k, n)$，且每一组中的所有元素均相等。对于每一组，我们可以将其元素按照大小排序，然后取中位数，即可将该组中的所有元素变为中位数。对于所有组，我们将其中位数之差的绝对值求和，即为答案。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组 $arr$ 的长度。</p>
+\]</div>
+<p>因此，数组 <span class="arithmatex">\(arr\)</span> 上的元素可以分为 <span class="arithmatex">\(gcd(k, n)\)</span> 组，每组的元素间隔为 <span class="arithmatex">\(gcd(k, n)\)</span>，且每一组中的所有元素均相等。对于每一组，我们可以将其元素按照大小排序，然后取中位数，即可将该组中的所有元素变为中位数。对于所有组，我们将其中位数之差的绝对值求和，即为答案。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(arr\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91346,11 +91344,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

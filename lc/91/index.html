@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,13 +90863,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i]$ 表示字符串的前 $i$ 个字符的解码方法数，初始时 $f[0]=1$，其余 $f[i]=0$。</p>
-<p>考虑 $f[i]$ 如何进行状态转移。</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示字符串的前 <span class="arithmatex">\(i\)</span> 个字符的解码方法数，初始时 <span class="arithmatex">\(f[0]=1\)</span>，其余 <span class="arithmatex">\(f[i]=0\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i]\)</span> 如何进行状态转移。</p>
 <ul>
-<li>如果第 $i$ 个字符（即 $s[i-1]$）单独形成编码，那么它对应一种解码方式，即 $f[i]=f[i-1]$。前提是 $s[i-1] \neq 0$。</li>
-<li>如果第 $i-1$ 个字符和第 $i$ 个字符组成的字符串在 $[1,26]$ 范围内，那么它们可以作为一个整体，对应一种解码方式，即 $f[i] = f[i] + f[i-2]$。前提是 $s[i-2] \neq 0$，且 $s[i-2]s[i-1]$ 在 $[1,26]$ 范围内。</li>
+<li>如果第 <span class="arithmatex">\(i\)</span> 个字符（即 <span class="arithmatex">\(s[i-1]\)</span>）单独形成编码，那么它对应一种解码方式，即 <span class="arithmatex">\(f[i]=f[i-1]\)</span>。前提是 <span class="arithmatex">\(s[i-1] \neq 0\)</span>。</li>
+<li>如果第 <span class="arithmatex">\(i-1\)</span> 个字符和第 <span class="arithmatex">\(i\)</span> 个字符组成的字符串在 <span class="arithmatex">\([1,26]\)</span> 范围内，那么它们可以作为一个整体，对应一种解码方式，即 <span class="arithmatex">\(f[i] = f[i] + f[i-2]\)</span>。前提是 <span class="arithmatex">\(s[i-2] \neq 0\)</span>，且 <span class="arithmatex">\(s[i-2]s[i-1]\)</span> 在 <span class="arithmatex">\([1,26]\)</span> 范围内。</li>
 </ul>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是字符串的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91064,7 +91062,7 @@
 </div>
 </div>
 </div>
-<p>我们注意到，状态 $f[i]$ 仅与状态 $f[i-1]$ 和状态 $f[i-2]$ 有关，而与其他状态无关，因此我们可以使用两个变量代替这两个状态，使得原来的空间复杂度 $O(n)$ 降低至 $O(1)$。</p>
+<p>我们注意到，状态 <span class="arithmatex">\(f[i]\)</span> 仅与状态 <span class="arithmatex">\(f[i-1]\)</span> 和状态 <span class="arithmatex">\(f[i-2]\)</span> 有关，而与其他状态无关，因此我们可以使用两个变量代替这两个状态，使得原来的空间复杂度 <span class="arithmatex">\(O(n)\)</span> 降低至 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91479,11 +91477,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,16 +86069,16 @@ Concatenating everything results in [1] + [2] + [4,7,8,9,10] + [6,3] = [1,2,4,7,
 <h3 id="solution-1-dfs">Solution 1: DFS</h3>
 <p>First, if the tree has only one node, we directly return a list with the value of that node.</p>
 <p>Otherwise, we can use depth-first search (DFS) to find the left boundary, leaf nodes, and right boundary of the binary tree.</p>
-<p>Specifically, we can use a recursive function $\textit{dfs}$ to find these three parts. In the $\textit{dfs}$ function, we need to pass in a list $\textit{nums}$, a node $\textit{root}$, and an integer $\textit{i}$, where $\textit{nums}$ is used to store the current part's node values, and $\textit{root}$ and $\textit{i}$ represent the current node and the type of the current part (left boundary, leaf nodes, or right boundary), respectively.</p>
+<p>Specifically, we can use a recursive function <span class="arithmatex">\(\textit{dfs}\)</span> to find these three parts. In the <span class="arithmatex">\(\textit{dfs}\)</span> function, we need to pass in a list <span class="arithmatex">\(\textit{nums}\)</span>, a node <span class="arithmatex">\(\textit{root}\)</span>, and an integer <span class="arithmatex">\(\textit{i}\)</span>, where <span class="arithmatex">\(\textit{nums}\)</span> is used to store the current part's node values, and <span class="arithmatex">\(\textit{root}\)</span> and <span class="arithmatex">\(\textit{i}\)</span> represent the current node and the type of the current part (left boundary, leaf nodes, or right boundary), respectively.</p>
 <p>The function implementation is as follows:</p>
 <ul>
-<li>If $\textit{root}$ is null, then directly return.</li>
-<li>If $\textit{i} = 0$, we need to find the left boundary. If $\textit{root}$ is not a leaf node, we add the value of $\textit{root}$ to $\textit{nums}$. If $\textit{root}$ has a left child, we recursively call the $\textit{dfs}$ function, passing in $\textit{nums}$, the left child of $\textit{root}$, and $\textit{i}$. Otherwise, we recursively call the $\textit{dfs}$ function, passing in $\textit{nums}$, the right child of $\textit{root}$, and $\textit{i}$.</li>
-<li>If $\textit{i} = 1$, we need to find the leaf nodes. If $\textit{root}$ is a leaf node, we add the value of $\textit{root}$ to $\textit{nums}$. Otherwise, we recursively call the $\textit{dfs}$ function, passing in $\textit{nums}$, the left child of $\textit{root}$ and $\textit{i}$, as well as $\textit{nums}$, the right child of $\textit{root}$ and $\textit{i}$.</li>
-<li>If $\textit{i} = 2$, we need to find the right boundary. If $\textit{root}$ is not a leaf node, we add the value of $\textit{root}$ to $\textit{nums}$. If $\textit{root}$ has a right child, we recursively call the $\textit{dfs}$ function, passing in $\textit{nums}$, the right child of $\textit{root}$, and $\textit{i}$. Otherwise, we recursively call the $\textit{dfs}$ function, passing in $\textit{nums}$, the left child of $\textit{root}$, and $\textit{i}$.</li>
+<li>If <span class="arithmatex">\(\textit{root}\)</span> is null, then directly return.</li>
+<li>If <span class="arithmatex">\(\textit{i} = 0\)</span>, we need to find the left boundary. If <span class="arithmatex">\(\textit{root}\)</span> is not a leaf node, we add the value of <span class="arithmatex">\(\textit{root}\)</span> to <span class="arithmatex">\(\textit{nums}\)</span>. If <span class="arithmatex">\(\textit{root}\)</span> has a left child, we recursively call the <span class="arithmatex">\(\textit{dfs}\)</span> function, passing in <span class="arithmatex">\(\textit{nums}\)</span>, the left child of <span class="arithmatex">\(\textit{root}\)</span>, and <span class="arithmatex">\(\textit{i}\)</span>. Otherwise, we recursively call the <span class="arithmatex">\(\textit{dfs}\)</span> function, passing in <span class="arithmatex">\(\textit{nums}\)</span>, the right child of <span class="arithmatex">\(\textit{root}\)</span>, and <span class="arithmatex">\(\textit{i}\)</span>.</li>
+<li>If <span class="arithmatex">\(\textit{i} = 1\)</span>, we need to find the leaf nodes. If <span class="arithmatex">\(\textit{root}\)</span> is a leaf node, we add the value of <span class="arithmatex">\(\textit{root}\)</span> to <span class="arithmatex">\(\textit{nums}\)</span>. Otherwise, we recursively call the <span class="arithmatex">\(\textit{dfs}\)</span> function, passing in <span class="arithmatex">\(\textit{nums}\)</span>, the left child of <span class="arithmatex">\(\textit{root}\)</span> and <span class="arithmatex">\(\textit{i}\)</span>, as well as <span class="arithmatex">\(\textit{nums}\)</span>, the right child of <span class="arithmatex">\(\textit{root}\)</span> and <span class="arithmatex">\(\textit{i}\)</span>.</li>
+<li>If <span class="arithmatex">\(\textit{i} = 2\)</span>, we need to find the right boundary. If <span class="arithmatex">\(\textit{root}\)</span> is not a leaf node, we add the value of <span class="arithmatex">\(\textit{root}\)</span> to <span class="arithmatex">\(\textit{nums}\)</span>. If <span class="arithmatex">\(\textit{root}\)</span> has a right child, we recursively call the <span class="arithmatex">\(\textit{dfs}\)</span> function, passing in <span class="arithmatex">\(\textit{nums}\)</span>, the right child of <span class="arithmatex">\(\textit{root}\)</span>, and <span class="arithmatex">\(\textit{i}\)</span>. Otherwise, we recursively call the <span class="arithmatex">\(\textit{dfs}\)</span> function, passing in <span class="arithmatex">\(\textit{nums}\)</span>, the left child of <span class="arithmatex">\(\textit{root}\)</span>, and <span class="arithmatex">\(\textit{i}\)</span>.</li>
 </ul>
-<p>We call the $\textit{dfs}$ function separately to find the left boundary, leaf nodes, and right boundary, and then concatenate these three parts to get the answer.</p>
-<p>The time complexity is $O(n)$ and the space complexity is $O(n)$, where $n$ is the number of nodes in the binary tree.</p>
+<p>We call the <span class="arithmatex">\(\textit{dfs}\)</span> function separately to find the left boundary, leaf nodes, and right boundary, and then concatenate these three parts to get the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span> and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87006,11 +87004,9 @@ Concatenating everything results in [1] + [2] + [4,7,8,9,10] + [6,3] = [1,2,4,7,
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

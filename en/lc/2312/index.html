@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86072,14 +86070,14 @@ Notice that we cannot rotate the 1 x 4 piece of wood to obtain a 4 x 1 piece of 
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>First, we define a 2D array $d$, where $d[i][j]$ represents the price of a wood block with height $i$ and width $j$.</p>
-<p>Then, we design a function $dfs(h, w)$ to denote the maximum amount of money obtained by cutting a wood block with height $h$ and width $w$. The answer will be $dfs(m, n)$.</p>
-<p>The process of function $dfs(h, w)$ is as follows:</p>
+<p>First, we define a 2D array <span class="arithmatex">\(d\)</span>, where <span class="arithmatex">\(d[i][j]\)</span> represents the price of a wood block with height <span class="arithmatex">\(i\)</span> and width <span class="arithmatex">\(j\)</span>.</p>
+<p>Then, we design a function <span class="arithmatex">\(dfs(h, w)\)</span> to denote the maximum amount of money obtained by cutting a wood block with height <span class="arithmatex">\(h\)</span> and width <span class="arithmatex">\(w\)</span>. The answer will be <span class="arithmatex">\(dfs(m, n)\)</span>.</p>
+<p>The process of function <span class="arithmatex">\(dfs(h, w)\)</span> is as follows:</p>
 <ul>
-<li>If $(h, w)$ has been calculated before, return the answer directly.</li>
-<li>Otherwise, initialize the answer as $d[h][w]$, then enumerate the cutting positions, calculate the maximum amount of money obtained by cutting the wood block into two pieces, and take the maximum value.</li>
+<li>If <span class="arithmatex">\((h, w)\)</span> has been calculated before, return the answer directly.</li>
+<li>Otherwise, initialize the answer as <span class="arithmatex">\(d[h][w]\)</span>, then enumerate the cutting positions, calculate the maximum amount of money obtained by cutting the wood block into two pieces, and take the maximum value.</li>
 </ul>
-<p>The time complexity is $O(m \times n \times (m + n) + p)$, and the space complexity is $O(m \times n)$. Here, $p$ represents the length of the price array, while $m$ and $n$ represent the height and width of the wood blocks, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times (m + n) + p)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(p\)</span> represents the length of the price array, while <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> represent the height and width of the wood blocks, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86346,10 +86344,10 @@ Notice that we cannot rotate the 1 x 4 piece of wood to obtain a 4 x 1 piece of 
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can transform the memoization search in Solution 1 into dynamic programming.</p>
-<p>Similar to Solution 1, we define a 2D array $d$, where $d[i][j]$ represents the price of a wood block with height $i$ and width $j$. Initially, we iterate through the price array $prices$ and store the price $p$ of each wood block $(h, w, p)$ in $d[h][w]$, while the rest of the prices are set to $0$.</p>
-<p>Then, we define another 2D array $f$, where $f[i][j]$ represents the maximum amount of money obtained by cutting a wood block with height $i$ and width $j$. The answer will be $f[m][n]$.</p>
-<p>Considering how $f[i][j]$ transitions, initially $f[i][j] = d[i][j]$. We enumerate the cutting positions, calculate the maximum amount of money obtained by cutting the wood block into two pieces, and take the maximum value.</p>
-<p>The time complexity is $O(m \times n \times (m + n) + p)$, and the space complexity is $O(m \times n)$. Here, $p$ represents the length of the price array, while $m$ and $n$ represent the height and width of the wood blocks, respectively.</p>
+<p>Similar to Solution 1, we define a 2D array <span class="arithmatex">\(d\)</span>, where <span class="arithmatex">\(d[i][j]\)</span> represents the price of a wood block with height <span class="arithmatex">\(i\)</span> and width <span class="arithmatex">\(j\)</span>. Initially, we iterate through the price array <span class="arithmatex">\(prices\)</span> and store the price <span class="arithmatex">\(p\)</span> of each wood block <span class="arithmatex">\((h, w, p)\)</span> in <span class="arithmatex">\(d[h][w]\)</span>, while the rest of the prices are set to <span class="arithmatex">\(0\)</span>.</p>
+<p>Then, we define another 2D array <span class="arithmatex">\(f\)</span>, where <span class="arithmatex">\(f[i][j]\)</span> represents the maximum amount of money obtained by cutting a wood block with height <span class="arithmatex">\(i\)</span> and width <span class="arithmatex">\(j\)</span>. The answer will be <span class="arithmatex">\(f[m][n]\)</span>.</p>
+<p>Considering how <span class="arithmatex">\(f[i][j]\)</span> transitions, initially <span class="arithmatex">\(f[i][j] = d[i][j]\)</span>. We enumerate the cutting positions, calculate the maximum amount of money obtained by cutting the wood block into two pieces, and take the maximum value.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times (m + n) + p)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(p\)</span> represents the length of the price array, while <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> represent the height and width of the wood blocks, respectively.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1400-1499/1444.Number%20of%20Ways%20of%20Cutting%20a%20Pizza/README_EN.md">1444. Number of Ways of Cutting a Pizza</a></li>
@@ -86803,11 +86801,9 @@ Notice that we cannot rotate the 1 x 4 piece of wood to obtain a 4 x 1 piece of 
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

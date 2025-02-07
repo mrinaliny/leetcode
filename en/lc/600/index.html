@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86044,27 +86042,27 @@ Among them, only integer 3 disobeys the rule (two consecutive ones) and the othe
 <!-- solution:start -->
 
 <h3 id="solution-1-digit-dp">Solution 1: Digit DP</h3>
-<p>This problem essentially asks for the number of numbers in the given range $[l, ..r]$ whose binary representation does not contain consecutive $1$s. The count is related to the number of digits and the value of each binary digit. We can use the concept of Digit DP to solve this problem. In Digit DP, the size of the number has little impact on the complexity.</p>
-<p>For the range $[l, ..r]$ problem, we generally convert it to the problem of $[0, ..r]$ and then subtract the result of $[0, ..l - 1]$, i.e.:</p>
-<p>$$
+<p>This problem essentially asks for the number of numbers in the given range <span class="arithmatex">\([l, ..r]\)</span> whose binary representation does not contain consecutive <span class="arithmatex">\(1\)</span>s. The count is related to the number of digits and the value of each binary digit. We can use the concept of Digit DP to solve this problem. In Digit DP, the size of the number has little impact on the complexity.</p>
+<p>For the range <span class="arithmatex">\([l, ..r]\)</span> problem, we generally convert it to the problem of <span class="arithmatex">\([0, ..r]\)</span> and then subtract the result of <span class="arithmatex">\([0, ..l - 1]\)</span>, i.e.:</p>
+<div class="arithmatex">\[
 ans = \sum_{i=0}^{r} ans_i -  \sum_{i=0}^{l-1} ans_i
-$$</p>
-<p>However, for this problem, we only need to find the value for the range $[0, ..r]$.</p>
+\]</div>
+<p>However, for this problem, we only need to find the value for the range <span class="arithmatex">\([0, ..r]\)</span>.</p>
 <p>Here, we use memoized search to implement Digit DP. The basic steps are as follows:</p>
-<p>First, we get the binary length of the number $n$, denoted as $m$. Then, based on the problem information, we design a function $\textit{dfs}(i, \textit{pre}, \textit{limit})$, where:</p>
+<p>First, we get the binary length of the number <span class="arithmatex">\(n\)</span>, denoted as <span class="arithmatex">\(m\)</span>. Then, based on the problem information, we design a function <span class="arithmatex">\(\textit{dfs}(i, \textit{pre}, \textit{limit})\)</span>, where:</p>
 <ul>
-<li>The digit $i$ represents the current position being searched, starting from the highest digit, i.e., the first character of the binary string.</li>
-<li>The digit $\textit{pre}$ represents the digit at the previous binary position. For this problem, the initial value of $\textit{pre}$ is $0$.</li>
-<li>The boolean $\textit{limit}$ indicates whether the digits that can be filled are restricted. If there is no restriction, then we can choose $[0,1]$. Otherwise, we can only choose $[0, \textit{up}]$.</li>
+<li>The digit <span class="arithmatex">\(i\)</span> represents the current position being searched, starting from the highest digit, i.e., the first character of the binary string.</li>
+<li>The digit <span class="arithmatex">\(\textit{pre}\)</span> represents the digit at the previous binary position. For this problem, the initial value of <span class="arithmatex">\(\textit{pre}\)</span> is <span class="arithmatex">\(0\)</span>.</li>
+<li>The boolean <span class="arithmatex">\(\textit{limit}\)</span> indicates whether the digits that can be filled are restricted. If there is no restriction, then we can choose <span class="arithmatex">\([0,1]\)</span>. Otherwise, we can only choose <span class="arithmatex">\([0, \textit{up}]\)</span>.</li>
 </ul>
 <p>The function executes as follows:</p>
-<p>If $i$ exceeds the length of the number $n$, i.e., $i &lt; 0$, it means the search is over, directly return $1$. Otherwise, we enumerate the digits $j$ from $0$ to $\textit{up}$ for the position $i$. For each $j$:</p>
+<p>If <span class="arithmatex">\(i\)</span> exceeds the length of the number <span class="arithmatex">\(n\)</span>, i.e., <span class="arithmatex">\(i &lt; 0\)</span>, it means the search is over, directly return <span class="arithmatex">\(1\)</span>. Otherwise, we enumerate the digits <span class="arithmatex">\(j\)</span> from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(\textit{up}\)</span> for the position <span class="arithmatex">\(i\)</span>. For each <span class="arithmatex">\(j\)</span>:</p>
 <ul>
-<li>If both $\textit{pre}$ and $j$ are $1$, it means there are consecutive $1$, so we skip it.</li>
-<li>Otherwise, we recurse to the next level, update $\textit{pre}$ to $j$, and update $\textit{limit}$ to the logical AND of $\textit{limit}$ and whether $j$ equals $\textit{up}$.</li>
+<li>If both <span class="arithmatex">\(\textit{pre}\)</span> and <span class="arithmatex">\(j\)</span> are <span class="arithmatex">\(1\)</span>, it means there are consecutive <span class="arithmatex">\(1\)</span>, so we skip it.</li>
+<li>Otherwise, we recurse to the next level, update <span class="arithmatex">\(\textit{pre}\)</span> to <span class="arithmatex">\(j\)</span>, and update <span class="arithmatex">\(\textit{limit}\)</span> to the logical AND of <span class="arithmatex">\(\textit{limit}\)</span> and whether <span class="arithmatex">\(j\)</span> equals <span class="arithmatex">\(\textit{up}\)</span>.</li>
 </ul>
 <p>Finally, we sum all the results from the recursive calls to the next level, which is the answer.</p>
-<p>The time complexity is $O(\log n)$, and the space complexity is $O(\log n)$. Here, $n$ is the given positive integer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(\log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the given positive integer.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0200-0299/0233.Number%20of%20Digit%20One/README_EN.md">233. Number of Digit One</a></li>
@@ -86583,11 +86581,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

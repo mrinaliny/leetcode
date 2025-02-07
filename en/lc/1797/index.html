@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,14 +86068,14 @@ authenticationManager.countUnexpiredTokens(15); // The token with tokenId &quot;
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table">Solution 1: Hash Table</h3>
-<p>We can simply maintain a hash table $d$, where the key is <code>tokenId</code> and the value is the expiration time.</p>
+<p>We can simply maintain a hash table <span class="arithmatex">\(d\)</span>, where the key is <code>tokenId</code> and the value is the expiration time.</p>
 <ul>
-<li>During the <code>generate</code> operation, we store <code>tokenId</code> as the key and <code>currentTime + timeToLive</code> as the value in the hash table $d$.</li>
-<li>During the <code>renew</code> operation, if <code>tokenId</code> is not in the hash table $d$, or <code>currentTime &gt;= d[tokenId]</code>, we ignore this operation; otherwise, we update <code>d[tokenId]</code> to <code>currentTime + timeToLive</code>.</li>
-<li>During the <code>countUnexpiredTokens</code> operation, we traverse the hash table $d$ and count the number of unexpired <code>tokenId</code>.</li>
+<li>During the <code>generate</code> operation, we store <code>tokenId</code> as the key and <code>currentTime + timeToLive</code> as the value in the hash table <span class="arithmatex">\(d\)</span>.</li>
+<li>During the <code>renew</code> operation, if <code>tokenId</code> is not in the hash table <span class="arithmatex">\(d\)</span>, or <code>currentTime &gt;= d[tokenId]</code>, we ignore this operation; otherwise, we update <code>d[tokenId]</code> to <code>currentTime + timeToLive</code>.</li>
+<li>During the <code>countUnexpiredTokens</code> operation, we traverse the hash table <span class="arithmatex">\(d\)</span> and count the number of unexpired <code>tokenId</code>.</li>
 </ul>
-<p>In terms of time complexity, both <code>generate</code> and <code>renew</code> operations have a time complexity of $O(1)$, and the <code>countUnexpiredTokens</code> operation has a time complexity of $O(n)$, where $n$ is the number of key-value pairs in the hash table $d$.</p>
-<p>The space complexity is $O(n)$, where $n$ is the number of key-value pairs in the hash table $d$.</p>
+<p>In terms of time complexity, both <code>generate</code> and <code>renew</code> operations have a time complexity of <span class="arithmatex">\(O(1)\)</span>, and the <code>countUnexpiredTokens</code> operation has a time complexity of <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of key-value pairs in the hash table <span class="arithmatex">\(d\)</span>.</p>
+<p>The space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of key-value pairs in the hash table <span class="arithmatex">\(d\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86739,11 +86737,9 @@ authenticationManager.countUnexpiredTokens(15); // The token with tokenId &quot;
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

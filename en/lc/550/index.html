@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,7 +86058,7 @@ Only the player with id 1 logged back in after the first day he had logged in so
 <!-- solution:start -->
 
 <h3 id="solution-1-grouping-and-minimum-value-left-join">Solution 1: Grouping and Minimum Value + Left Join</h3>
-<p>We can first find the first login date of each player, and then perform a left join with the original table, with the join condition being that the player ID is the same and the date difference is $-1$, which means the player logged in on the second day. Then, we only need to calculate the ratio of non-null players among the players who logged in on the second day.</p>
+<p>We can first find the first login date of each player, and then perform a left join with the original table, with the join condition being that the player ID is the same and the date difference is <span class="arithmatex">\(-1\)</span>, which means the player logged in on the second day. Then, we only need to calculate the ratio of non-null players among the players who logged in on the second day.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">MySQL</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86118,7 +86116,7 @@ Only the player with id 1 logged back in after the first day he had logged in so
 <!-- solution:start -->
 
 <h3 id="solution-2-window-function">Solution 2: Window Function</h3>
-<p>We can use the <code>LEAD</code> window function to get the next login date of each player. If the next login date is one day after the current login date, it means that the player logged in on the second day, and we use a field $st$ to record this information. Then, we use the <code>RANK</code> window function to rank the player IDs in ascending order by date, and get the login ranking of each player. Finally, we only need to calculate the ratio of non-null $st$ values among the players with a ranking of $1$.</p>
+<p>We can use the <code>LEAD</code> window function to get the next login date of each player. If the next login date is one day after the current login date, it means that the player logged in on the second day, and we use a field <span class="arithmatex">\(st\)</span> to record this information. Then, we use the <code>RANK</code> window function to rank the player IDs in ascending order by date, and get the login ranking of each player. Finally, we only need to calculate the ratio of non-null <span class="arithmatex">\(st\)</span> values among the players with a ranking of <span class="arithmatex">\(1\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">MySQL</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86417,11 +86415,9 @@ Only the player with id 1 logged back in after the first day he had logged in so
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

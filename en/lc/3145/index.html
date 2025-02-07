@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86100,18 +86098,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search-bit-manipulation">Solution 1: Binary Search + Bit Manipulation</h3>
-<p>The continuous positive integer numbers correspond to the strong integer array, forming the array $\textit{bignums}$. The problem requires us to find the result of the product of the subarray $\textit{bignums}[\textit{left}..\textit{right}]$ modulo $\textit{mod}$ for each query $[\textit{left}, \textit{right}, \textit{mod}]$. Since each element of the subarray is a power of 2, this is equivalent to finding the sum of the powers $\textit{power}$ of the subarray, and then calculating $2^{\textit{power}} \bmod \textit{mod}$. For example, for the subarray $[1, 4, 8]$, i.e., $[2^0, 2^2, 2^3]$, the sum of the powers is $0 + 2 + 3 = 5$, so $2^5 \bmod \textit{mod}$ is the result we need.</p>
-<p>Therefore, we can convert $\textit{bignums}$ into an array of powers. For example, for the subarray $[1, 4, 8]$, we convert it to $[0, 2, 3]$. Thus, the problem is transformed into finding the sum of the subarray of powers, i.e., $\textit{power} = \textit{f}(\textit{right} + 1) - \textit{f}(\textit{left})$, where $\textit{f}(i)$ represents the sum of the powers of $\textit{bignums}[0..i)$, which is the prefix sum.</p>
-<p>Next, we calculate the value of $\textit{f}(i)$ based on the index $i$. We can use binary search to find the largest number whose strong array length is less than $i$, and then calculate the sum of the powers of the remaining numbers.</p>
-<p>According to the problem description, we list the strong integers for numbers $0..14$:</p>
+<p>The continuous positive integer numbers correspond to the strong integer array, forming the array <span class="arithmatex">\(\textit{bignums}\)</span>. The problem requires us to find the result of the product of the subarray <span class="arithmatex">\(\textit{bignums}[\textit{left}..\textit{right}]\)</span> modulo <span class="arithmatex">\(\textit{mod}\)</span> for each query <span class="arithmatex">\([\textit{left}, \textit{right}, \textit{mod}]\)</span>. Since each element of the subarray is a power of 2, this is equivalent to finding the sum of the powers <span class="arithmatex">\(\textit{power}\)</span> of the subarray, and then calculating <span class="arithmatex">\(2^{\textit{power}} \bmod \textit{mod}\)</span>. For example, for the subarray <span class="arithmatex">\([1, 4, 8]\)</span>, i.e., <span class="arithmatex">\([2^0, 2^2, 2^3]\)</span>, the sum of the powers is <span class="arithmatex">\(0 + 2 + 3 = 5\)</span>, so <span class="arithmatex">\(2^5 \bmod \textit{mod}\)</span> is the result we need.</p>
+<p>Therefore, we can convert <span class="arithmatex">\(\textit{bignums}\)</span> into an array of powers. For example, for the subarray <span class="arithmatex">\([1, 4, 8]\)</span>, we convert it to <span class="arithmatex">\([0, 2, 3]\)</span>. Thus, the problem is transformed into finding the sum of the subarray of powers, i.e., <span class="arithmatex">\(\textit{power} = \textit{f}(\textit{right} + 1) - \textit{f}(\textit{left})\)</span>, where <span class="arithmatex">\(\textit{f}(i)\)</span> represents the sum of the powers of <span class="arithmatex">\(\textit{bignums}[0..i)\)</span>, which is the prefix sum.</p>
+<p>Next, we calculate the value of <span class="arithmatex">\(\textit{f}(i)\)</span> based on the index <span class="arithmatex">\(i\)</span>. We can use binary search to find the largest number whose strong array length is less than <span class="arithmatex">\(i\)</span>, and then calculate the sum of the powers of the remaining numbers.</p>
+<p>According to the problem description, we list the strong integers for numbers <span class="arithmatex">\(0..14\)</span>:</p>
 <table>
 <thead>
 <tr>
-<th>$\textit{nums}$</th>
-<th>8($2^3$)</th>
-<th>4($2^2$)</th>
-<th>2($2^1$)</th>
-<th>($2^0$)</th>
+<th><span class="arithmatex">\(\textit{nums}\)</span></th>
+<th>8(<span class="arithmatex">\(2^3\)</span>)</th>
+<th>4(<span class="arithmatex">\(2^2\)</span>)</th>
+<th>2(<span class="arithmatex">\(2^1\)</span>)</th>
+<th>(<span class="arithmatex">\(2^0\)</span>)</th>
 </tr>
 </thead>
 <tbody>
@@ -86222,10 +86220,10 @@
 </tr>
 </tbody>
 </table>
-<p>By dividing the numbers into different colors according to the interval $[2^i, 2^{i+1}-1]$, we can see that the numbers in the interval $[2^i, 2^{i+1}-1]$ are equivalent to adding $2^i$ to each number in the interval $[0, 2^i-1]$. Based on this pattern, we can calculate the total number of strong arrays $\textit{cnt}[i]$ and the sum of powers $\textit{s}[i]$ for the first $i$ groups of numbers in $\textit{bignums}$.</p>
-<p>Next, for any number, we consider how to calculate the number of strong arrays and the sum of powers. We can use the binary method, calculating from the highest bit. For example, for the number $13 = 2^3 + 2^2 + 2^0$, the result of the first $2^3$ numbers can be obtained from $\textit{cnt}[3]$ and $\textit{s}[3]$, and the result of the remaining $[2^3, 13]$ is equivalent to adding $3$ to all numbers in $[0, 13-2^3]$, i.e., $[0, 5]$. The problem is transformed into calculating the number of strong arrays and the sum of powers for $[0, 5]$. In this way, we can calculate the number of strong arrays and the sum of powers for any number.</p>
-<p>Finally, based on the value of $\textit{power}$, we use the fast exponentiation method to calculate the result of $2^{\textit{power}} \bmod \textit{mod}$.</p>
-<p>The time complexity is $O(q \times \log M)$, and the space complexity is $O(\log M)$. Here, $q$ is the number of queries, and $M$ is the upper bound of the number, with $M \le 10^{15}$ in this problem.</p>
+<p>By dividing the numbers into different colors according to the interval <span class="arithmatex">\([2^i, 2^{i+1}-1]\)</span>, we can see that the numbers in the interval <span class="arithmatex">\([2^i, 2^{i+1}-1]\)</span> are equivalent to adding <span class="arithmatex">\(2^i\)</span> to each number in the interval <span class="arithmatex">\([0, 2^i-1]\)</span>. Based on this pattern, we can calculate the total number of strong arrays <span class="arithmatex">\(\textit{cnt}[i]\)</span> and the sum of powers <span class="arithmatex">\(\textit{s}[i]\)</span> for the first <span class="arithmatex">\(i\)</span> groups of numbers in <span class="arithmatex">\(\textit{bignums}\)</span>.</p>
+<p>Next, for any number, we consider how to calculate the number of strong arrays and the sum of powers. We can use the binary method, calculating from the highest bit. For example, for the number <span class="arithmatex">\(13 = 2^3 + 2^2 + 2^0\)</span>, the result of the first <span class="arithmatex">\(2^3\)</span> numbers can be obtained from <span class="arithmatex">\(\textit{cnt}[3]\)</span> and <span class="arithmatex">\(\textit{s}[3]\)</span>, and the result of the remaining <span class="arithmatex">\([2^3, 13]\)</span> is equivalent to adding <span class="arithmatex">\(3\)</span> to all numbers in <span class="arithmatex">\([0, 13-2^3]\)</span>, i.e., <span class="arithmatex">\([0, 5]\)</span>. The problem is transformed into calculating the number of strong arrays and the sum of powers for <span class="arithmatex">\([0, 5]\)</span>. In this way, we can calculate the number of strong arrays and the sum of powers for any number.</p>
+<p>Finally, based on the value of <span class="arithmatex">\(\textit{power}\)</span>, we use the fast exponentiation method to calculate the result of <span class="arithmatex">\(2^{\textit{power}} \bmod \textit{mod}\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(q \times \log M)\)</span>, and the space complexity is <span class="arithmatex">\(O(\log M)\)</span>. Here, <span class="arithmatex">\(q\)</span> is the number of queries, and <span class="arithmatex">\(M\)</span> is the upper bound of the number, with <span class="arithmatex">\(M \le 10^{15}\)</span> in this problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87047,11 +87045,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

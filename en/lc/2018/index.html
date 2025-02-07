@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86065,7 +86063,7 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-enumeration">Solution 1: Enumeration</h3>
-<p>We can enumerate each position $(i, j)$ in the matrix, and judge whether we can place the word <code>word</code> from left to right or from right to left, or from top to bottom or from bottom to top, starting from this position.</p>
+<p>We can enumerate each position <span class="arithmatex">\((i, j)\)</span> in the matrix, and judge whether we can place the word <code>word</code> from left to right or from right to left, or from top to bottom or from bottom to top, starting from this position.</p>
 <p>The following conditions must be met for this position to be used as a starting point:</p>
 <ol>
 <li>If the word <code>word</code> is to be placed from left to right, then this position must be the left boundary, or the cell <code>board[i][j - 1]</code> to the left of this position is <code>'#'</code>.</li>
@@ -86073,11 +86071,11 @@
 <li>If the word <code>word</code> is to be placed from top to bottom, then this position must be the upper boundary, or the cell <code>board[i - 1][j]</code> above this position is <code>'#'</code>.</li>
 <li>If the word <code>word</code> is to be placed from bottom to top, then this position must be the lower boundary, or the cell <code>board[i + 1][j]</code> below this position is <code>'#'</code>.</li>
 </ol>
-<p>Under the above conditions, we can start from this position and judge whether the word <code>word</code> can be placed. We design a function $check(i, j, a, b)$, which represents whether it is legal to place the word <code>word</code> from the position $(i, j)$ in the direction $(a, b)$. If it is legal, return <code>true</code>, otherwise return <code>false</code>.</p>
-<p>The implementation of the function $check(i, j, a, b)$ is as follows:</p>
-<p>We first get the other boundary position $(x, y)$ in the current direction, i.e., $(x, y) = (i + a \times k, j + b \times k)$, where $k$ is the length of the word <code>word</code>. If $(x, y)$ is in the matrix and the cell at $(x, y)$ is not <code>'#'</code>, it means that the other boundary position in the current direction is not <code>'#'</code>, so the word <code>word</code> cannot be placed, and <code>false</code> is returned.</p>
-<p>Otherwise, we start from the position $(i, j)$ and traverse the word <code>word</code> in the direction $(a, b)$. If we encounter a cell <code>board[i][j]</code> that is not a space or not the current character of the word <code>word</code>, it means that the word <code>word</code> cannot be placed, and <code>false</code> is returned. If the word <code>word</code> is traversed, it means that the word <code>word</code> can be placed, and <code>true</code> is returned.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(1)$. Here, $m$ and $n$ are the number of rows and columns in the matrix, respectively.</p>
+<p>Under the above conditions, we can start from this position and judge whether the word <code>word</code> can be placed. We design a function <span class="arithmatex">\(check(i, j, a, b)\)</span>, which represents whether it is legal to place the word <code>word</code> from the position <span class="arithmatex">\((i, j)\)</span> in the direction <span class="arithmatex">\((a, b)\)</span>. If it is legal, return <code>true</code>, otherwise return <code>false</code>.</p>
+<p>The implementation of the function <span class="arithmatex">\(check(i, j, a, b)\)</span> is as follows:</p>
+<p>We first get the other boundary position <span class="arithmatex">\((x, y)\)</span> in the current direction, i.e., <span class="arithmatex">\((x, y) = (i + a \times k, j + b \times k)\)</span>, where <span class="arithmatex">\(k\)</span> is the length of the word <code>word</code>. If <span class="arithmatex">\((x, y)\)</span> is in the matrix and the cell at <span class="arithmatex">\((x, y)\)</span> is not <code>'#'</code>, it means that the other boundary position in the current direction is not <code>'#'</code>, so the word <code>word</code> cannot be placed, and <code>false</code> is returned.</p>
+<p>Otherwise, we start from the position <span class="arithmatex">\((i, j)\)</span> and traverse the word <code>word</code> in the direction <span class="arithmatex">\((a, b)\)</span>. If we encounter a cell <code>board[i][j]</code> that is not a space or not the current character of the word <code>word</code>, it means that the word <code>word</code> cannot be placed, and <code>false</code> is returned. If the word <code>word</code> is traversed, it means that the word <code>word</code> can be placed, and <code>true</code> is returned.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns in the matrix, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86595,11 +86593,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

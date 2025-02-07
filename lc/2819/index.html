@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90881,12 +90879,12 @@
 
 <h3 id="_3">方法一：排序 + 二分查找 + 前缀和</h3>
 <p>根据题目描述，我们可以知道：</p>
-<p>如果 $prices[i] \leq k$，那么 Bob 需要支付 $prices[i]$，而 Alice 不需要支付。因此 Bob 的相对损失为 $prices[i]$。在这种情况下，Bob 应该选择价格较低的巧克力，才能最小化相对损失。</p>
-<p>如果 $prices[i] \gt k$，那么 Bob 需要支付 $k$，而 Alice 需要支付 $prices[i] - k$。因此 Bob 的相对损失为 $k - (prices[i] - k) = 2k - prices[i]$。在这种情况下，Bob 应该选择价格较高的巧克力，才能最小化相对损失。</p>
-<p>因此，我们先对价格数组 $prices$ 进行排序，然后预处理出前缀和数组 $s$，其中 $s[i]$ 表示前 $i$ 个巧克力的价格之和。</p>
-<p>接下来，对于每个询问 $[k, m]$，我们先使用二分查找，找到第一个价格大于 $k$ 的巧克力的下标 $r$。然后，再利用二分查找，找到左侧应该选择的巧克力的数量 $l$，那么右侧应该选择的巧克力的数量就是 $m - l$。此时，Bob 的相对损失为 $s[l] + 2k(m - l) - (s[n] - s[n - (m - l)])$。</p>
-<p>上述第二次二分查找的过程中，我们需要判断 $prices[mid] \lt 2k - prices[n - (m - mid)]$，其中 $right$ 表示右侧应该选择的巧克力的数量。如果该不等式成立，那么说明选择 $mid$ 位置的巧克力的相对损失较低，此时更新 $l = mid + 1$。否则，说明 $mid$ 位置的巧克力的相对损失较高，此时更新 $r = mid$。</p>
-<p>时间复杂度 $O((n + m) \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 和 $m$ 分别是数组 $prices$ 和 $queries$ 的长度。</p>
+<p>如果 <span class="arithmatex">\(prices[i] \leq k\)</span>，那么 Bob 需要支付 <span class="arithmatex">\(prices[i]\)</span>，而 Alice 不需要支付。因此 Bob 的相对损失为 <span class="arithmatex">\(prices[i]\)</span>。在这种情况下，Bob 应该选择价格较低的巧克力，才能最小化相对损失。</p>
+<p>如果 <span class="arithmatex">\(prices[i] \gt k\)</span>，那么 Bob 需要支付 <span class="arithmatex">\(k\)</span>，而 Alice 需要支付 <span class="arithmatex">\(prices[i] - k\)</span>。因此 Bob 的相对损失为 <span class="arithmatex">\(k - (prices[i] - k) = 2k - prices[i]\)</span>。在这种情况下，Bob 应该选择价格较高的巧克力，才能最小化相对损失。</p>
+<p>因此，我们先对价格数组 <span class="arithmatex">\(prices\)</span> 进行排序，然后预处理出前缀和数组 <span class="arithmatex">\(s\)</span>，其中 <span class="arithmatex">\(s[i]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个巧克力的价格之和。</p>
+<p>接下来，对于每个询问 <span class="arithmatex">\([k, m]\)</span>，我们先使用二分查找，找到第一个价格大于 <span class="arithmatex">\(k\)</span> 的巧克力的下标 <span class="arithmatex">\(r\)</span>。然后，再利用二分查找，找到左侧应该选择的巧克力的数量 <span class="arithmatex">\(l\)</span>，那么右侧应该选择的巧克力的数量就是 <span class="arithmatex">\(m - l\)</span>。此时，Bob 的相对损失为 <span class="arithmatex">\(s[l] + 2k(m - l) - (s[n] - s[n - (m - l)])\)</span>。</p>
+<p>上述第二次二分查找的过程中，我们需要判断 <span class="arithmatex">\(prices[mid] \lt 2k - prices[n - (m - mid)]\)</span>，其中 <span class="arithmatex">\(right\)</span> 表示右侧应该选择的巧克力的数量。如果该不等式成立，那么说明选择 <span class="arithmatex">\(mid\)</span> 位置的巧克力的相对损失较低，此时更新 <span class="arithmatex">\(l = mid + 1\)</span>。否则，说明 <span class="arithmatex">\(mid\)</span> 位置的巧克力的相对损失较高，此时更新 <span class="arithmatex">\(r = mid\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + m) \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别是数组 <span class="arithmatex">\(prices\)</span> 和 <span class="arithmatex">\(queries\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91487,11 +91485,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

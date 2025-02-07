@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90898,14 +90896,14 @@ lockingTree.lock(0, 1);    // 返回 false ，因为节点 0 已经被上锁了�
 <h3 id="dfs">方法一：DFS</h3>
 <p>我们定义以下几个变量：</p>
 <ul>
-<li>$locked$：记录每个节点的锁定状态，其中 $locked[i]$ 表示节点 $i$ 的锁定状态，如果节点 $i$ 未被上锁，则 $locked[i] = -1$，否则 $locked[i]$ 为锁定节点 $i$ 的用户编号。</li>
-<li>$parent$：记录每个节点的父节点。</li>
-<li>$children$：记录每个节点的子节点。</li>
+<li><span class="arithmatex">\(locked\)</span>：记录每个节点的锁定状态，其中 <span class="arithmatex">\(locked[i]\)</span> 表示节点 <span class="arithmatex">\(i\)</span> 的锁定状态，如果节点 <span class="arithmatex">\(i\)</span> 未被上锁，则 <span class="arithmatex">\(locked[i] = -1\)</span>，否则 <span class="arithmatex">\(locked[i]\)</span> 为锁定节点 <span class="arithmatex">\(i\)</span> 的用户编号。</li>
+<li><span class="arithmatex">\(parent\)</span>：记录每个节点的父节点。</li>
+<li><span class="arithmatex">\(children\)</span>：记录每个节点的子节点。</li>
 </ul>
-<p>调用 $lock$ 函数时，如果节点 $num$ 未被上锁，则将节点 $num$ 上锁，返回 <code>true</code>，否则返回 <code>false</code>。</p>
-<p>调用 $unlock$ 函数时，如果节点 $num$ 被上锁且上锁的用户编号为 $user$，则将节点 $num$ 解锁，返回 <code>true</code>，否则返回 <code>false</code>。</p>
-<p>调用 $upgrade$ 函数时，我们首先判断节点 $num$ 及其祖先节点是否被上锁，如果是，则返回 $false$。否则，我们判断节点 $num$ 的子孙节点是否有被上锁的，如果没有，则返回 <code>false</code>。否则，我们将节点 $num$ 及其子孙节点解锁，然后将节点 $num$ 上锁，返回 <code>true</code>。</p>
-<p>时间复杂度方面，初始化和 $upgrade$ 函数的时间复杂度均为 $O(n)$，而 $lock$ 和 $unlock$ 函数的时间复杂度均为 $O(1)$。空间复杂度 $O(n)$。其中 $n$ 是节点的数量。</p>
+<p>调用 <span class="arithmatex">\(lock\)</span> 函数时，如果节点 <span class="arithmatex">\(num\)</span> 未被上锁，则将节点 <span class="arithmatex">\(num\)</span> 上锁，返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>调用 <span class="arithmatex">\(unlock\)</span> 函数时，如果节点 <span class="arithmatex">\(num\)</span> 被上锁且上锁的用户编号为 <span class="arithmatex">\(user\)</span>，则将节点 <span class="arithmatex">\(num\)</span> 解锁，返回 <code>true</code>，否则返回 <code>false</code>。</p>
+<p>调用 <span class="arithmatex">\(upgrade\)</span> 函数时，我们首先判断节点 <span class="arithmatex">\(num\)</span> 及其祖先节点是否被上锁，如果是，则返回 <span class="arithmatex">\(false\)</span>。否则，我们判断节点 <span class="arithmatex">\(num\)</span> 的子孙节点是否有被上锁的，如果没有，则返回 <code>false</code>。否则，我们将节点 <span class="arithmatex">\(num\)</span> 及其子孙节点解锁，然后将节点 <span class="arithmatex">\(num\)</span> 上锁，返回 <code>true</code>。</p>
+<p>时间复杂度方面，初始化和 <span class="arithmatex">\(upgrade\)</span> 函数的时间复杂度均为 <span class="arithmatex">\(O(n)\)</span>，而 <span class="arithmatex">\(lock\)</span> 和 <span class="arithmatex">\(unlock\)</span> 函数的时间复杂度均为 <span class="arithmatex">\(O(1)\)</span>。空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91785,11 +91783,9 @@ lockingTree.lock(0, 1);    // 返回 false ，因为节点 0 已经被上锁了�
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

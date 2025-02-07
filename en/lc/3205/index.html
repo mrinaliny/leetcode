@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86090,11 +86088,11 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $\textit{dfs}(i)$, which represents the maximum score that can be obtained starting from index $i$. Therefore, the answer is $\textit{dfs}(0)$.</p>
-<p>The execution process of the function $\textit{dfs}(i)$ is as follows:</p>
-<p>We enumerate the next jump position $j$. Thus, the score that can be obtained starting from index $i$ is $(j - i) \times \textit{nums}[j]$, plus the maximum score that can be obtained starting from index $j$, making the total score $(j - i) \times \textit{nums}[j] + \textit{dfs}(j)$. We enumerate all possible $j$ and take the maximum score.</p>
-<p>To avoid redundant calculations, we use memoization search. We save the calculated value of $\textit{dfs}(i)$, so it can be directly returned next time.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array.</p>
+<p>We design a function <span class="arithmatex">\(\textit{dfs}(i)\)</span>, which represents the maximum score that can be obtained starting from index <span class="arithmatex">\(i\)</span>. Therefore, the answer is <span class="arithmatex">\(\textit{dfs}(0)\)</span>.</p>
+<p>The execution process of the function <span class="arithmatex">\(\textit{dfs}(i)\)</span> is as follows:</p>
+<p>We enumerate the next jump position <span class="arithmatex">\(j\)</span>. Thus, the score that can be obtained starting from index <span class="arithmatex">\(i\)</span> is <span class="arithmatex">\((j - i) \times \textit{nums}[j]\)</span>, plus the maximum score that can be obtained starting from index <span class="arithmatex">\(j\)</span>, making the total score <span class="arithmatex">\((j - i) \times \textit{nums}[j] + \textit{dfs}(j)\)</span>. We enumerate all possible <span class="arithmatex">\(j\)</span> and take the maximum score.</p>
+<p>To avoid redundant calculations, we use memoization search. We save the calculated value of <span class="arithmatex">\(\textit{dfs}(i)\)</span>, so it can be directly returned next time.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86271,12 +86269,12 @@
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can transform the memoization search from Solution 1 into dynamic programming.</p>
-<p>Define $f[j]$ as the maximum score that can be obtained starting from index $0$ and ending at index $j$. Therefore, the answer is $f[n - 1]$.</p>
+<p>Define <span class="arithmatex">\(f[j]\)</span> as the maximum score that can be obtained starting from index <span class="arithmatex">\(0\)</span> and ending at index <span class="arithmatex">\(j\)</span>. Therefore, the answer is <span class="arithmatex">\(f[n - 1]\)</span>.</p>
 <p>The state transition equation is:</p>
-<p>$$
-f[j] = \max_{0 \leq i &lt; j} { f[i] + (j - i) \times \textit{nums}[j] }
-$$</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array.</p>
+<div class="arithmatex">\[
+f[j] = \max_{0 \leq i &lt; j} \{ f[i] + (j - i) \times \textit{nums}[j] \}
+\]</div>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86402,11 +86400,11 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-3-monotonic-stack">Solution 3: Monotonic Stack</h3>
-<p>We observe that for the current position $i$, we should jump to the next position $j$ with the maximum value to obtain the maximum score.</p>
-<p>Therefore, we traverse the array $\textit{nums}$, maintaining a stack $\textit{stk}$ that is monotonically decreasing from the bottom to the top of the stack. For the current position $i$ being traversed, if the value corresponding to the top element of the stack is less than or equal to $\textit{nums}[i]$, we continuously pop the top element of the stack until the stack is empty or the value corresponding to the top element of the stack is greater than $\textit{nums}[i]$, and then push $i$ into the stack.</p>
-<p>Next, we initialize the answer $\textit{ans}$ and the current position $i = 0$, traverse the elements in the stack, each time taking out the top element $j$, updating the answer $\textit{ans} += \textit{nums}[j] \times (j - i)$, and then updating $i = j$.</p>
-<p>Finally, return the answer $\textit{ans}$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array.</p>
+<p>We observe that for the current position <span class="arithmatex">\(i\)</span>, we should jump to the next position <span class="arithmatex">\(j\)</span> with the maximum value to obtain the maximum score.</p>
+<p>Therefore, we traverse the array <span class="arithmatex">\(\textit{nums}\)</span>, maintaining a stack <span class="arithmatex">\(\textit{stk}\)</span> that is monotonically decreasing from the bottom to the top of the stack. For the current position <span class="arithmatex">\(i\)</span> being traversed, if the value corresponding to the top element of the stack is less than or equal to <span class="arithmatex">\(\textit{nums}[i]\)</span>, we continuously pop the top element of the stack until the stack is empty or the value corresponding to the top element of the stack is greater than <span class="arithmatex">\(\textit{nums}[i]\)</span>, and then push <span class="arithmatex">\(i\)</span> into the stack.</p>
+<p>Next, we initialize the answer <span class="arithmatex">\(\textit{ans}\)</span> and the current position <span class="arithmatex">\(i = 0\)</span>, traverse the elements in the stack, each time taking out the top element <span class="arithmatex">\(j\)</span>, updating the answer <span class="arithmatex">\(\textit{ans} += \textit{nums}[j] \times (j - i)\)</span>, and then updating <span class="arithmatex">\(i = j\)</span>.</p>
+<p>Finally, return the answer <span class="arithmatex">\(\textit{ans}\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86808,11 +86806,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

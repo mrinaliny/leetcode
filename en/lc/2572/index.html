@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,12 +86066,12 @@ It can be proven that there is no more than 1 square-free subset in the given ar
 <!-- solution:start -->
 
 <h3 id="solution-1-state-compression-dynamic-programming">Solution 1: State Compression Dynamic Programming</h3>
-<p>Note that in the problem, the range of $nums[i]$ is $[1, 30]$. Therefore, we can preprocess all prime numbers less than or equal to $30$, which are $[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]$.</p>
-<p>In the subset without square numbers, the product of all elements can be represented as the product of one or more distinct prime numbers, that is, each prime factor can appear at most once. Therefore, we can use a binary number to represent the prime factors in a subset, where the $i$-th bit of the binary number indicates whether the prime number $primes[i]$ appears in the subset.</p>
-<p>We can use the method of state compression dynamic programming to solve this problem. Let $f[i]$ represent the number of schemes where the product of prime factors in the subset represented by the binary number $i$ is the product of one or more distinct prime numbers. Initially, $f[0]=1$.</p>
-<p>We enumerate a number $x$ in the range $[2,..30]$. If $x$ is not in $nums$, or $x$ is a multiple of $4, 9, 25$, then we can skip it directly. Otherwise, we can represent the prime factors of $x$ with a binary number $mask$. Then we enumerate the current state $state$ from large to small. If the result of $state$ and $mask$ bitwise AND is $mask$, then we can transition from state $f[state \oplus mask]$ to state $f[state]$, the transition equation is $f[state] = f[state] + cnt[x] \times f[state \oplus mask]$, where $cnt[x]$ represents the number of times $x$ appears in $nums$.</p>
-<p>Note that we did not start enumerating from the number $1$, because we can choose any number of number $1$ and add it to the subset without square numbers. Or we can only choose any number of number $1$ and not add it to the subset without square numbers. Both situations are legal. So the answer is $(\sum_{i=0}<sup 10="10">{2</sup> f[i]) - 1$.}-1</p>
-<p>The time complexity is $O(n + C \times M)$, and the space complexity is $O(M)$. Where $n$ is the length of $nums$; and $C$ and $M$ are the range of $nums[i]$ and the number of states in the problem, in this problem, $C=30$, $M=2^{10}$.</p>
+<p>Note that in the problem, the range of <span class="arithmatex">\(nums[i]\)</span> is <span class="arithmatex">\([1, 30]\)</span>. Therefore, we can preprocess all prime numbers less than or equal to <span class="arithmatex">\(30\)</span>, which are <span class="arithmatex">\([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\)</span>.</p>
+<p>In the subset without square numbers, the product of all elements can be represented as the product of one or more distinct prime numbers, that is, each prime factor can appear at most once. Therefore, we can use a binary number to represent the prime factors in a subset, where the <span class="arithmatex">\(i\)</span>-th bit of the binary number indicates whether the prime number <span class="arithmatex">\(primes[i]\)</span> appears in the subset.</p>
+<p>We can use the method of state compression dynamic programming to solve this problem. Let <span class="arithmatex">\(f[i]\)</span> represent the number of schemes where the product of prime factors in the subset represented by the binary number <span class="arithmatex">\(i\)</span> is the product of one or more distinct prime numbers. Initially, <span class="arithmatex">\(f[0]=1\)</span>.</p>
+<p>We enumerate a number <span class="arithmatex">\(x\)</span> in the range <span class="arithmatex">\([2,..30]\)</span>. If <span class="arithmatex">\(x\)</span> is not in <span class="arithmatex">\(nums\)</span>, or <span class="arithmatex">\(x\)</span> is a multiple of <span class="arithmatex">\(4, 9, 25\)</span>, then we can skip it directly. Otherwise, we can represent the prime factors of <span class="arithmatex">\(x\)</span> with a binary number <span class="arithmatex">\(mask\)</span>. Then we enumerate the current state <span class="arithmatex">\(state\)</span> from large to small. If the result of <span class="arithmatex">\(state\)</span> and <span class="arithmatex">\(mask\)</span> bitwise AND is <span class="arithmatex">\(mask\)</span>, then we can transition from state <span class="arithmatex">\(f[state \oplus mask]\)</span> to state <span class="arithmatex">\(f[state]\)</span>, the transition equation is <span class="arithmatex">\(f[state] = f[state] + cnt[x] \times f[state \oplus mask]\)</span>, where <span class="arithmatex">\(cnt[x]\)</span> represents the number of times <span class="arithmatex">\(x\)</span> appears in <span class="arithmatex">\(nums\)</span>.</p>
+<p>Note that we did not start enumerating from the number <span class="arithmatex">\(1\)</span>, because we can choose any number of number <span class="arithmatex">\(1\)</span> and add it to the subset without square numbers. Or we can only choose any number of number <span class="arithmatex">\(1\)</span> and not add it to the subset without square numbers. Both situations are legal. So the answer is <span class="arithmatex">\((\sum_{i=0}^{2^{10}-1} f[i]) - 1\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + C \times M)\)</span>, and the space complexity is <span class="arithmatex">\(O(M)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of <span class="arithmatex">\(nums\)</span>; and <span class="arithmatex">\(C\)</span> and <span class="arithmatex">\(M\)</span> are the range of <span class="arithmatex">\(nums[i]\)</span> and the number of states in the problem, in this problem, <span class="arithmatex">\(C=30\)</span>, <span class="arithmatex">\(M=2^{10}\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/1900-1999/1994.The%20Number%20of%20Good%20Subsets/README_EN.md">1994. The Number of Good Subsets</a></li>
@@ -86653,11 +86651,9 @@ It can be proven that there is no more than 1 square-free subset in the given ar
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

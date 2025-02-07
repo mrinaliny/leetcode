@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86071,18 +86069,18 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-monotonic-queue">Solution 1: Dynamic Programming + Monotonic Queue</h3>
-<p>We define $f[i]$ to represent the maximum sum of the subsequence ending at $\textit{nums}[i]$ that meets the conditions. Initially, $f[i] = 0$, and the answer is $\max_{0 \leq i \lt n} f(i)$.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> to represent the maximum sum of the subsequence ending at <span class="arithmatex">\(\textit{nums}[i]\)</span> that meets the conditions. Initially, <span class="arithmatex">\(f[i] = 0\)</span>, and the answer is <span class="arithmatex">\(\max_{0 \leq i \lt n} f(i)\)</span>.</p>
 <p>We notice that the problem requires us to maintain the maximum value of a sliding window, which is a typical application scenario for a monotonic queue. We can use a monotonic queue to optimize the dynamic programming transition.</p>
-<p>We maintain a monotonic queue $q$ that is decreasing from the front to the back, storing the indices $i$. Initially, we add a sentinel $0$ to the queue.</p>
-<p>We traverse $i$ from $0$ to $n - 1$. For each $i$, we perform the following operations:</p>
+<p>We maintain a monotonic queue <span class="arithmatex">\(q\)</span> that is decreasing from the front to the back, storing the indices <span class="arithmatex">\(i\)</span>. Initially, we add a sentinel <span class="arithmatex">\(0\)</span> to the queue.</p>
+<p>We traverse <span class="arithmatex">\(i\)</span> from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(n - 1\)</span>. For each <span class="arithmatex">\(i\)</span>, we perform the following operations:</p>
 <ul>
-<li>If the front element $q[0]$ satisfies $i - q[0] &gt; k$, it means the front element is no longer within the sliding window, and we need to remove the front element from the queue;</li>
-<li>Then, we calculate $f[i] = \max(0, f[q[0]]) + \textit{nums}[i]$, which means we add $\textit{nums}[i]$ to the sliding window to get the maximum subsequence sum;</li>
-<li>Next, we update the answer $\textit{ans} = \max(\textit{ans}, f[i])$;</li>
-<li>Finally, we add $i$ to the back of the queue and maintain the monotonicity of the queue. If $f[q[\textit{back}]] \leq f[i]$, we need to remove the back element until the queue is empty or $f[q[\textit{back}]] &gt; f[i]$.</li>
+<li>If the front element <span class="arithmatex">\(q[0]\)</span> satisfies <span class="arithmatex">\(i - q[0] &gt; k\)</span>, it means the front element is no longer within the sliding window, and we need to remove the front element from the queue;</li>
+<li>Then, we calculate <span class="arithmatex">\(f[i] = \max(0, f[q[0]]) + \textit{nums}[i]\)</span>, which means we add <span class="arithmatex">\(\textit{nums}[i]\)</span> to the sliding window to get the maximum subsequence sum;</li>
+<li>Next, we update the answer <span class="arithmatex">\(\textit{ans} = \max(\textit{ans}, f[i])\)</span>;</li>
+<li>Finally, we add <span class="arithmatex">\(i\)</span> to the back of the queue and maintain the monotonicity of the queue. If <span class="arithmatex">\(f[q[\textit{back}]] \leq f[i]\)</span>, we need to remove the back element until the queue is empty or <span class="arithmatex">\(f[q[\textit{back}]] &gt; f[i]\)</span>.</li>
 </ul>
-<p>The final answer is $\textit{ans}$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $\textit{nums}$.</p>
+<p>The final answer is <span class="arithmatex">\(\textit{ans}\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(\textit{nums}\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86826,11 +86824,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

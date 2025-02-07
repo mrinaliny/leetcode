@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90890,19 +90888,19 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：分桶</h3>
-<p>题目中字符串 $s$ 的数据规模最高达到 $5 \times 10^4$，如果暴力枚举 $words$ 中的每个字符串 $w$，判断其是否为 $s$ 的子序列，很有可能会超时。</p>
-<p>我们不妨将 $words$ 中的所有单词根据首字母来分桶，即：把所有单词按照首字母分到 $26$ 个桶中，每个桶中存储的是所有以该字母开头的所有单词。</p>
+<p>题目中字符串 <span class="arithmatex">\(s\)</span> 的数据规模最高达到 <span class="arithmatex">\(5 \times 10^4\)</span>，如果暴力枚举 <span class="arithmatex">\(words\)</span> 中的每个字符串 <span class="arithmatex">\(w\)</span>，判断其是否为 <span class="arithmatex">\(s\)</span> 的子序列，很有可能会超时。</p>
+<p>我们不妨将 <span class="arithmatex">\(words\)</span> 中的所有单词根据首字母来分桶，即：把所有单词按照首字母分到 <span class="arithmatex">\(26\)</span> 个桶中，每个桶中存储的是所有以该字母开头的所有单词。</p>
 <p>比如对于 <code>words = ["a", "bb", "acd", "ace"]</code>，我们得到以下的分桶结果：</p>
 <div class="highlight"><pre><span></span><code>a: [&quot;a&quot;, &quot;acd&quot;, &quot;ace&quot;]
 b: [&quot;bb&quot;]
 </code></pre></div>
-<p>然后我们从 $s$ 的第一个字符开始遍历，假设当前字符为 <code>'a'</code>，我们从 <code>'a'</code> 开头的桶中取出所有单词。对于取出的每个单词，如果此时单词长度为 $1$，说明该单词已经匹配完毕，我们将答案加 $1$；否则我们将单词的首字母去掉，然后放入下一个字母开头的桶中，比如对于单词 <code>"acd"</code>，去掉首字母 <code>'a'</code> 后，我们将其放入 <code>'c'</code> 开头的桶中。这一轮结束后，分桶结果变为：</p>
+<p>然后我们从 <span class="arithmatex">\(s\)</span> 的第一个字符开始遍历，假设当前字符为 <code>'a'</code>，我们从 <code>'a'</code> 开头的桶中取出所有单词。对于取出的每个单词，如果此时单词长度为 <span class="arithmatex">\(1\)</span>，说明该单词已经匹配完毕，我们将答案加 <span class="arithmatex">\(1\)</span>；否则我们将单词的首字母去掉，然后放入下一个字母开头的桶中，比如对于单词 <code>"acd"</code>，去掉首字母 <code>'a'</code> 后，我们将其放入 <code>'c'</code> 开头的桶中。这一轮结束后，分桶结果变为：</p>
 <div class="highlight"><pre><span></span><code>c: [&quot;cd&quot;, &quot;ce&quot;]
 b: [&quot;bb&quot;]
 </code></pre></div>
-<p>遍历完 $s$ 后，我们就得到了答案。</p>
-<p>实际上，每个桶可以只存储单词的下标 $i$ 以及该单词当前匹配到的位置 $j$，这样可以节省空间。</p>
-<p>时间复杂度 $O(n + \sum_{i=0}^{m-1} |w_i|)$，空间复杂度 $O(m)$。其中 $n$ 和 $m$ 分别为 $s$ 和 $words$ 的长度，而 $|w_i|$ 为 $words[i]$ 的长度。</p>
+<p>遍历完 <span class="arithmatex">\(s\)</span> 后，我们就得到了答案。</p>
+<p>实际上，每个桶可以只存储单词的下标 <span class="arithmatex">\(i\)</span> 以及该单词当前匹配到的位置 <span class="arithmatex">\(j\)</span>，这样可以节省空间。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n + \sum_{i=0}^{m-1} |w_i|)\)</span>，空间复杂度 <span class="arithmatex">\(O(m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(words\)</span> 的长度，而 <span class="arithmatex">\(|w_i|\)</span> 为 <span class="arithmatex">\(words[i]\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91068,14 +91066,14 @@ b: [&quot;bb&quot;]
 <!-- solution:start -->
 
 <h3 id="_4">方法二：二分查找</h3>
-<p>我们还可以先用数组或哈希表 $d$ 存放字符串 $s$ 每个字符的下标，即 $d[c]$ 为 $s$ 中所有字符 $c$ 的下标组成的数组。</p>
-<p>然后我们遍历 $words$ 中的每个单词 $w$，我们通过二分查找的方法，判断 $w$ 是否为 $s$ 的子序列，是则答案加 $1$。判断逻辑如下：</p>
+<p>我们还可以先用数组或哈希表 <span class="arithmatex">\(d\)</span> 存放字符串 <span class="arithmatex">\(s\)</span> 每个字符的下标，即 <span class="arithmatex">\(d[c]\)</span> 为 <span class="arithmatex">\(s\)</span> 中所有字符 <span class="arithmatex">\(c\)</span> 的下标组成的数组。</p>
+<p>然后我们遍历 <span class="arithmatex">\(words\)</span> 中的每个单词 <span class="arithmatex">\(w\)</span>，我们通过二分查找的方法，判断 <span class="arithmatex">\(w\)</span> 是否为 <span class="arithmatex">\(s\)</span> 的子序列，是则答案加 <span class="arithmatex">\(1\)</span>。判断逻辑如下：</p>
 <ol>
-<li>定义指针 $i$ 表示当前指向字符串 $s$ 的第 $i$ 个字符，初始化为 $-1$。</li>
-<li>遍历字符串 $w$ 中的每个字符 $c$，在 $d[c]$ 中二分查找第一个大于 $i$ 的位置 $j$，如果不存在，则说明 $w$ 不是 $s$ 的子序列，直接跳出循环；否则，将 $i$ 更新为 $d[c][j]$，继续遍历下一个字符。</li>
-<li>如果遍历完 $w$ 中的所有字符，说明 $w$ 是 $s$ 的子序列。</li>
+<li>定义指针 <span class="arithmatex">\(i\)</span> 表示当前指向字符串 <span class="arithmatex">\(s\)</span> 的第 <span class="arithmatex">\(i\)</span> 个字符，初始化为 <span class="arithmatex">\(-1\)</span>。</li>
+<li>遍历字符串 <span class="arithmatex">\(w\)</span> 中的每个字符 <span class="arithmatex">\(c\)</span>，在 <span class="arithmatex">\(d[c]\)</span> 中二分查找第一个大于 <span class="arithmatex">\(i\)</span> 的位置 <span class="arithmatex">\(j\)</span>，如果不存在，则说明 <span class="arithmatex">\(w\)</span> 不是 <span class="arithmatex">\(s\)</span> 的子序列，直接跳出循环；否则，将 <span class="arithmatex">\(i\)</span> 更新为 <span class="arithmatex">\(d[c][j]\)</span>，继续遍历下一个字符。</li>
+<li>如果遍历完 <span class="arithmatex">\(w\)</span> 中的所有字符，说明 <span class="arithmatex">\(w\)</span> 是 <span class="arithmatex">\(s\)</span> 的子序列。</li>
 </ol>
-<p>时间复杂度 $O(\sum_{i=0}^{m-1} |w_i| \times \log n)$，空间复杂度 $O(m)$。其中 $n$ 和 $m$ 分别为 $s$ 和 $words$ 的长度，而 $|w_i|$ 为 $words[i]$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\sum_{i=0}^{m-1} |w_i| \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(words\)</span> 的长度，而 <span class="arithmatex">\(|w_i|\)</span> 为 <span class="arithmatex">\(words[i]\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91694,11 +91692,9 @@ b: [&quot;bb&quot;]
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

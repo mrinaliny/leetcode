@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90866,16 +90864,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：贪心 + 状态压缩 + 记忆化搜索</h3>
-<p>题目实际上要我们找到一种安排顺序，使得前缀和（这里指的是“人数”）与 $batchSize$ 取模后为 $0$ 的组数最多。因此，我们可以将所有顾客按组分成两类：</p>
+<p>题目实际上要我们找到一种安排顺序，使得前缀和（这里指的是“人数”）与 <span class="arithmatex">\(batchSize\)</span> 取模后为 <span class="arithmatex">\(0\)</span> 的组数最多。因此，我们可以将所有顾客按组分成两类：</p>
 <ul>
-<li>人数为 $batchSize$ 的整数倍的顾客，这些顾客不会对下一组顾客的甜甜圈产生影响，我们可以贪心地优先安排这些组的顾客，那么这些组的顾客都会感到开心，“初始答案”为这些组的数量；</li>
-<li>人数不为 $batchSize$ 的整数倍的顾客，这些顾客的安排顺序会影响下一组顾客的甜甜圈。我们可以对这里每一组的人数 $v$ 模 $batchSize$，得到的这些余数构成一个集合，集合中的元素值范围是 $[1,2...,batchSize-1]$。数组 $groups$ 的长度最大为 $30$，因此，每个余数的数量最大不超过 $30$。我们可以用 $5$ 个二进制位来表示一个余数的数量，而 $batchSize$ 最大为 $9$，那么表示这些余数以及对应的数量总共需要的二进制位就是 $5\times (9-1)=40$。我们可以用一个 $64$ 位整数 $state$ 来表示。</li>
+<li>人数为 <span class="arithmatex">\(batchSize\)</span> 的整数倍的顾客，这些顾客不会对下一组顾客的甜甜圈产生影响，我们可以贪心地优先安排这些组的顾客，那么这些组的顾客都会感到开心，“初始答案”为这些组的数量；</li>
+<li>人数不为 <span class="arithmatex">\(batchSize\)</span> 的整数倍的顾客，这些顾客的安排顺序会影响下一组顾客的甜甜圈。我们可以对这里每一组的人数 <span class="arithmatex">\(v\)</span> 模 <span class="arithmatex">\(batchSize\)</span>，得到的这些余数构成一个集合，集合中的元素值范围是 <span class="arithmatex">\([1,2...,batchSize-1]\)</span>。数组 <span class="arithmatex">\(groups\)</span> 的长度最大为 <span class="arithmatex">\(30\)</span>，因此，每个余数的数量最大不超过 <span class="arithmatex">\(30\)</span>。我们可以用 <span class="arithmatex">\(5\)</span> 个二进制位来表示一个余数的数量，而 <span class="arithmatex">\(batchSize\)</span> 最大为 <span class="arithmatex">\(9\)</span>，那么表示这些余数以及对应的数量总共需要的二进制位就是 <span class="arithmatex">\(5\times (9-1)=40\)</span>。我们可以用一个 <span class="arithmatex">\(64\)</span> 位整数 <span class="arithmatex">\(state\)</span> 来表示。</li>
 </ul>
-<p>接下来，我们设计一个函数 $dfs(state, mod)$，表示安排状态为 $state$，且当前前缀余数为 $mod$ 时，能使得多少组感到开心。那么我们在“初始答案”加上 $dfs(state, 0)$，即为最终答案。</p>
-<p>函数 $dfs(state, mod)$ 的实现逻辑如下：</p>
-<p>我们枚举 $1$ 到 $batchSize-1$ 的每一个余数 $i$，如果余数 $i$ 的数量不为 $0$，那么我们可以将余数 $i$ 的数量减去 $1$，将当前前缀余数加上 $i$ 并且对 $batchSize$ 取模，然后递归调用函数 $dfs$，求出子状态的最优解，取最大值即可。最后判断 $mod$ 是否为 $0$，如果为 $0$，我们在最大值上加 $1$ 后返回，否则直接返回最大值。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(state, mod)\)</span>，表示安排状态为 <span class="arithmatex">\(state\)</span>，且当前前缀余数为 <span class="arithmatex">\(mod\)</span> 时，能使得多少组感到开心。那么我们在“初始答案”加上 <span class="arithmatex">\(dfs(state, 0)\)</span>，即为最终答案。</p>
+<p>函数 <span class="arithmatex">\(dfs(state, mod)\)</span> 的实现逻辑如下：</p>
+<p>我们枚举 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(batchSize-1\)</span> 的每一个余数 <span class="arithmatex">\(i\)</span>，如果余数 <span class="arithmatex">\(i\)</span> 的数量不为 <span class="arithmatex">\(0\)</span>，那么我们可以将余数 <span class="arithmatex">\(i\)</span> 的数量减去 <span class="arithmatex">\(1\)</span>，将当前前缀余数加上 <span class="arithmatex">\(i\)</span> 并且对 <span class="arithmatex">\(batchSize\)</span> 取模，然后递归调用函数 <span class="arithmatex">\(dfs\)</span>，求出子状态的最优解，取最大值即可。最后判断 <span class="arithmatex">\(mod\)</span> 是否为 <span class="arithmatex">\(0\)</span>，如果为 <span class="arithmatex">\(0\)</span>，我们在最大值上加 <span class="arithmatex">\(1\)</span> 后返回，否则直接返回最大值。</p>
 <p>过程中，我们可以使用记忆化搜索来避免状态的重复计算。</p>
-<p>时间复杂度不超过 $O(10^7)$，空间复杂度不超过 $O(10^6)$。</p>
+<p>时间复杂度不超过 <span class="arithmatex">\(O(10^7)\)</span>，空间复杂度不超过 <span class="arithmatex">\(O(10^6)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91404,11 +91402,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

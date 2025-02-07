@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90871,12 +90869,12 @@
 
 <h3 id="_3">方法一：排序 + 分治</h3>
 <p>本题相当于找出平面中两个点，使得它们的曼哈顿距离最小，如果有多个点满足条件，则返回下标字典序最小的点。</p>
-<p>我们先处理重复点的情况，找出每个点对应的下标列表，如果某个点的下标列表长度大于 $1$，那么它的前两个下标可作为候选答案，我们找出最小的下标对即可。</p>
-<p>如果没有重复点，我们将所有点按照 $x$ 坐标排序，然后分治求解。</p>
-<p>对于每个区间 $[l, r]$，我们先求出 $x$ 坐标的中位数 $m$，然后递归求解左右两个区间，分别得到 $d_1, (pi_1, pj_1)$ 和 $d_2, (pi_2, pj_2)$，其中 $d_1$ 和 $d_2$ 分别表示左右两个区间的最小曼哈顿距离，而 $(pi_1, pj_1)$ 和 $(pi_2, pj_2)$ 分别表示左右两个区间的最小曼哈顿距离的两个点的下标。我们取 $d_1$ 和 $d_2$ 中较小的一个，如果 $d_1 = d_2$，则取下标字典序较小的一个，将其作为当前区间的最小曼哈顿距离，同时将对应的两个点的下标作为答案。</p>
-<p>以上考虑的是两个点位于同一侧的情况，如果两个点位于不同侧，那么我们以中间点，即下标为 $m = \lfloor (l + r) / 2 \rfloor$ 的点为标准，划分出一个新的区域，区域的范围为中间点向左右两侧分别扩展 $d_1$ 的范围。然后我们将这些范围内的点按照 $y$ 坐标排序，然后遍历排序后的每个点对，如果两个点的 $y$ 坐标之差大于当前的最小曼哈顿距离，那么后面的点对都不用考虑了，因为它们的 $y$ 坐标之差更大，所以曼哈顿距离更大，不会比当前的最小曼哈顿距离更小。否则，我们更新最小曼哈顿距离，同时更新答案。</p>
+<p>我们先处理重复点的情况，找出每个点对应的下标列表，如果某个点的下标列表长度大于 <span class="arithmatex">\(1\)</span>，那么它的前两个下标可作为候选答案，我们找出最小的下标对即可。</p>
+<p>如果没有重复点，我们将所有点按照 <span class="arithmatex">\(x\)</span> 坐标排序，然后分治求解。</p>
+<p>对于每个区间 <span class="arithmatex">\([l, r]\)</span>，我们先求出 <span class="arithmatex">\(x\)</span> 坐标的中位数 <span class="arithmatex">\(m\)</span>，然后递归求解左右两个区间，分别得到 <span class="arithmatex">\(d_1, (pi_1, pj_1)\)</span> 和 <span class="arithmatex">\(d_2, (pi_2, pj_2)\)</span>，其中 <span class="arithmatex">\(d_1\)</span> 和 <span class="arithmatex">\(d_2\)</span> 分别表示左右两个区间的最小曼哈顿距离，而 <span class="arithmatex">\((pi_1, pj_1)\)</span> 和 <span class="arithmatex">\((pi_2, pj_2)\)</span> 分别表示左右两个区间的最小曼哈顿距离的两个点的下标。我们取 <span class="arithmatex">\(d_1\)</span> 和 <span class="arithmatex">\(d_2\)</span> 中较小的一个，如果 <span class="arithmatex">\(d_1 = d_2\)</span>，则取下标字典序较小的一个，将其作为当前区间的最小曼哈顿距离，同时将对应的两个点的下标作为答案。</p>
+<p>以上考虑的是两个点位于同一侧的情况，如果两个点位于不同侧，那么我们以中间点，即下标为 <span class="arithmatex">\(m = \lfloor (l + r) / 2 \rfloor\)</span> 的点为标准，划分出一个新的区域，区域的范围为中间点向左右两侧分别扩展 <span class="arithmatex">\(d_1\)</span> 的范围。然后我们将这些范围内的点按照 <span class="arithmatex">\(y\)</span> 坐标排序，然后遍历排序后的每个点对，如果两个点的 <span class="arithmatex">\(y\)</span> 坐标之差大于当前的最小曼哈顿距离，那么后面的点对都不用考虑了，因为它们的 <span class="arithmatex">\(y\)</span> 坐标之差更大，所以曼哈顿距离更大，不会比当前的最小曼哈顿距离更小。否则，我们更新最小曼哈顿距离，同时更新答案。</p>
 <p>最后，我们返回答案即可。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 为数组的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91723,11 +91721,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90864,15 +90862,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序</h3>
-<p>我们对 $nums$ 进行排序。然后 $l$, $r$ 分别指向 $nums$ 首尾元素，判断两整数之和 $s$ 与 $k$ 的大小关系。</p>
+<p>我们对 <span class="arithmatex">\(nums\)</span> 进行排序。然后 <span class="arithmatex">\(l\)</span>, <span class="arithmatex">\(r\)</span> 分别指向 <span class="arithmatex">\(nums\)</span> 首尾元素，判断两整数之和 <span class="arithmatex">\(s\)</span> 与 <span class="arithmatex">\(k\)</span> 的大小关系。</p>
 <ul>
-<li>若 $s = k$，说明找到了两个整数，满足和为 $k$，答案加一，然后 $l$, $r$ 向中间移动；</li>
-<li>若 $s \gt k$，则 $r$ 指针向左移动；</li>
-<li>若 $s \lt k$，则 $l$ 指针向右移动；</li>
-<li>继续循环判断，直至 $l \geq r$。</li>
+<li>若 <span class="arithmatex">\(s = k\)</span>，说明找到了两个整数，满足和为 <span class="arithmatex">\(k\)</span>，答案加一，然后 <span class="arithmatex">\(l\)</span>, <span class="arithmatex">\(r\)</span> 向中间移动；</li>
+<li>若 <span class="arithmatex">\(s \gt k\)</span>，则 <span class="arithmatex">\(r\)</span> 指针向左移动；</li>
+<li>若 <span class="arithmatex">\(s \lt k\)</span>，则 <span class="arithmatex">\(l\)</span> 指针向右移动；</li>
+<li>继续循环判断，直至 <span class="arithmatex">\(l \geq r\)</span>。</li>
 </ul>
 <p>循环结束，返回答案。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 为 $nums$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91108,10 +91106,10 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：哈希表</h3>
-<p>我们使用哈希表 $cnt$ 记录当前剩余整数及其出现的次数。</p>
-<p>遍历 $nums$，对于当前整数 $x$，判断 $k - x$ 是否在 $cnt$ 中，若存在，则说明找到了两个整数，满足和为 $k$，答案加一，然后将 $k - x$ 的出现次数减一；否则，将 $x$ 的出现次数加一。</p>
+<p>我们使用哈希表 <span class="arithmatex">\(cnt\)</span> 记录当前剩余整数及其出现的次数。</p>
+<p>遍历 <span class="arithmatex">\(nums\)</span>，对于当前整数 <span class="arithmatex">\(x\)</span>，判断 <span class="arithmatex">\(k - x\)</span> 是否在 <span class="arithmatex">\(cnt\)</span> 中，若存在，则说明找到了两个整数，满足和为 <span class="arithmatex">\(k\)</span>，答案加一，然后将 <span class="arithmatex">\(k - x\)</span> 的出现次数减一；否则，将 <span class="arithmatex">\(x\)</span> 的出现次数加一。</p>
 <p>遍历结束，返回答案。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为 $nums$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91530,11 +91528,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

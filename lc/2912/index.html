@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,23 +90866,23 @@
 <h3 id="_3">方法一：动态规划</h3>
 <p>我们定义以下几个状态，其中：</p>
 <ul>
-<li>$f[0]$ 表示从 $source$ 到 $source$ 本身的方法数；</li>
-<li>$f[1]$ 表示从 $source$ 移动到同一列其它行的方法数；</li>
-<li>$f[2]$ 表示从 $source$ 移动到同一行其它列的方法数；</li>
-<li>$f[3]$ 表示从 $source$ 移动到其它行其它列的方法数。</li>
+<li><span class="arithmatex">\(f[0]\)</span> 表示从 <span class="arithmatex">\(source\)</span> 到 <span class="arithmatex">\(source\)</span> 本身的方法数；</li>
+<li><span class="arithmatex">\(f[1]\)</span> 表示从 <span class="arithmatex">\(source\)</span> 移动到同一列其它行的方法数；</li>
+<li><span class="arithmatex">\(f[2]\)</span> 表示从 <span class="arithmatex">\(source\)</span> 移动到同一行其它列的方法数；</li>
+<li><span class="arithmatex">\(f[3]\)</span> 表示从 <span class="arithmatex">\(source\)</span> 移动到其它行其它列的方法数。</li>
 </ul>
-<p>初始时，$f[0] = 1$，其余状态均为 $0$。</p>
+<p>初始时，<span class="arithmatex">\(f[0] = 1\)</span>，其余状态均为 <span class="arithmatex">\(0\)</span>。</p>
 <p>对于每个状态，我们可以根据上一次的状态计算出当前的状态，具体如下：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
-g[0] &amp;= (n - 1) \times f[1] + (m - 1) \times f[2] \
-g[1] &amp;= f[0] + (n - 2) \times f[1] + (m - 1) \times f[3] \
-g[2] &amp;= f[0] + (m - 2) \times f[2] + (n - 1) \times f[3] \
+g[0] &amp;= (n - 1) \times f[1] + (m - 1) \times f[2] \\
+g[1] &amp;= f[0] + (n - 2) \times f[1] + (m - 1) \times f[3] \\
+g[2] &amp;= f[0] + (m - 2) \times f[2] + (n - 1) \times f[3] \\
 g[3] &amp;= f[1] + f[2] + (n - 2) \times f[3] + (m - 2) \times f[3]
 \end{aligned}
-$$</p>
-<p>我们循环 $k$ 次，最后判断 $source$ 和 $dest$ 是否在同一行或同一列，返回对应的状态即可。</p>
-<p>时间复杂度 $O(k)$，其中 $k$ 为移动次数。空间复杂度 $O(1)$。</p>
+\]</div>
+<p>我们循环 <span class="arithmatex">\(k\)</span> 次，最后判断 <span class="arithmatex">\(source\)</span> 和 <span class="arithmatex">\(dest\)</span> 是否在同一行或同一列，返回对应的状态即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(k)\)</span>，其中 <span class="arithmatex">\(k\)</span> 为移动次数。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Python3</label><label for="__tabbed_1_3">Java</label><label for="__tabbed_1_4">C++</label><label for="__tabbed_1_5">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91321,11 +91319,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

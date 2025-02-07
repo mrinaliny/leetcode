@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86060,17 +86058,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming-bit-manipulation">Solution 1: Dynamic Programming + Bit Manipulation</h3>
-<p>We define $f[i][j]$ as whether it is possible to obtain a total reward of $j$ using the first $i$ reward values. Initially, $f[0][0] = \textit{True}$, and all other values are $\textit{False}$.</p>
-<p>We consider the $i$-th reward value $v$. If we do not choose it, then $f[i][j] = f[i - 1][j]$; if we choose it, then $f[i][j] = f[i - 1][j - v]$, where $0 \leq j - v &lt; v$. Thus, the state transition equation is:</p>
-<p>$$
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as whether it is possible to obtain a total reward of <span class="arithmatex">\(j\)</span> using the first <span class="arithmatex">\(i\)</span> reward values. Initially, <span class="arithmatex">\(f[0][0] = \textit{True}\)</span>, and all other values are <span class="arithmatex">\(\textit{False}\)</span>.</p>
+<p>We consider the <span class="arithmatex">\(i\)</span>-th reward value <span class="arithmatex">\(v\)</span>. If we do not choose it, then <span class="arithmatex">\(f[i][j] = f[i - 1][j]\)</span>; if we choose it, then <span class="arithmatex">\(f[i][j] = f[i - 1][j - v]\)</span>, where <span class="arithmatex">\(0 \leq j - v &lt; v\)</span>. Thus, the state transition equation is:</p>
+<div class="arithmatex">\[
 f[i][j] = f[i - 1][j] \vee f[i - 1][j - v]
-$$</p>
-<p>The final answer is $\max{j \mid f[n][j] = \textit{True}}$.</p>
-<p>Since $f[i][j]$ only depends on $f[i - 1][j]$ and $f[i - 1][j - v]$, we can optimize away the first dimension and use only a one-dimensional array for state transitions. Additionally, due to the large data range of this problem, we need to use bit manipulation to optimize the efficiency of state transitions.</p>
-<p>We define a binary number $f$ to save the current state, where the $i$-th bit of $f$ being $1$ indicates that a total reward of $i$ is reachable.</p>
-<p>Observing the state transition equation $f[j] = f[j] \vee f[j - v]$, this is equivalent to taking the lower $v$ bits of $f$, shifting them left by $v$ bits, and then performing an OR operation with the original $f$.</p>
-<p>Thus, the answer is the position of the highest bit in $f$.</p>
-<p>The time complexity is $O(n \times M / w)$, and the space complexity is $O(n + M / w)$. Where $n$ is the length of the <code>rewardValues</code> array, $M$ is twice the maximum value in the <code>rewardValues</code> array, and the integer $w = 32$ or $64$.</p>
+\]</div>
+<p>The final answer is <span class="arithmatex">\(\max\{j \mid f[n][j] = \textit{True}\}\)</span>.</p>
+<p>Since <span class="arithmatex">\(f[i][j]\)</span> only depends on <span class="arithmatex">\(f[i - 1][j]\)</span> and <span class="arithmatex">\(f[i - 1][j - v]\)</span>, we can optimize away the first dimension and use only a one-dimensional array for state transitions. Additionally, due to the large data range of this problem, we need to use bit manipulation to optimize the efficiency of state transitions.</p>
+<p>We define a binary number <span class="arithmatex">\(f\)</span> to save the current state, where the <span class="arithmatex">\(i\)</span>-th bit of <span class="arithmatex">\(f\)</span> being <span class="arithmatex">\(1\)</span> indicates that a total reward of <span class="arithmatex">\(i\)</span> is reachable.</p>
+<p>Observing the state transition equation <span class="arithmatex">\(f[j] = f[j] \vee f[j - v]\)</span>, this is equivalent to taking the lower <span class="arithmatex">\(v\)</span> bits of <span class="arithmatex">\(f\)</span>, shifting them left by <span class="arithmatex">\(v\)</span> bits, and then performing an OR operation with the original <span class="arithmatex">\(f\)</span>.</p>
+<p>Thus, the answer is the position of the highest bit in <span class="arithmatex">\(f\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times M / w)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + M / w)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of the <code>rewardValues</code> array, <span class="arithmatex">\(M\)</span> is twice the maximum value in the <code>rewardValues</code> array, and the integer <span class="arithmatex">\(w = 32\)</span> or <span class="arithmatex">\(64\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86434,11 +86432,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

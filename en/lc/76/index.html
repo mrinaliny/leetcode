@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86059,16 +86057,16 @@ Since the largest window of s only has one &#39;a&#39;, return empty string.
 <!-- solution:start -->
 
 <h3 id="solution-1-counting-two-pointers">Solution 1: Counting + Two Pointers</h3>
-<p>We use a hash table or array $\textit{need}$ to count the occurrences of each character in string $t$, and another hash table or array $\textit{window}$ to count the occurrences of each character in the sliding window. Additionally, we define two pointers $l$ and $r$ to point to the left and right boundaries of the window, a variable $\textit{cnt}$ to represent how many characters from $t$ are already included in the window, and variables $k$ and $\textit{mi}$ to represent the starting position and length of the minimum window substring.</p>
-<p>We traverse the string $s$ from left to right. For the current character $s[r]$:</p>
+<p>We use a hash table or array <span class="arithmatex">\(\textit{need}\)</span> to count the occurrences of each character in string <span class="arithmatex">\(t\)</span>, and another hash table or array <span class="arithmatex">\(\textit{window}\)</span> to count the occurrences of each character in the sliding window. Additionally, we define two pointers <span class="arithmatex">\(l\)</span> and <span class="arithmatex">\(r\)</span> to point to the left and right boundaries of the window, a variable <span class="arithmatex">\(\textit{cnt}\)</span> to represent how many characters from <span class="arithmatex">\(t\)</span> are already included in the window, and variables <span class="arithmatex">\(k\)</span> and <span class="arithmatex">\(\textit{mi}\)</span> to represent the starting position and length of the minimum window substring.</p>
+<p>We traverse the string <span class="arithmatex">\(s\)</span> from left to right. For the current character <span class="arithmatex">\(s[r]\)</span>:</p>
 <ul>
-<li>We add it to the window, i.e., $\textit{window}[s[r]] = \textit{window}[s[r]] + 1$. If $\textit{need}[s[r]] \geq \textit{window}[s[r]]$, it means $s[r]$ is a "necessary character", and we increment $\textit{cnt}$ by one.</li>
-<li>If $\textit{cnt}$ equals the length of $t$, it means the window already contains all characters from $t$, and we can try to update the starting position and length of the minimum window substring. If $r - l + 1 &lt; \textit{mi}$, it means the current window represents a shorter substring, so we update $\textit{mi} = r - l + 1$ and $k = l$.</li>
-<li>Then, we try to move the left boundary $l$. If $\textit{need}[s[l]] \geq \textit{window}[s[l]]$, it means $s[l]$ is a "necessary character", and moving the left boundary will remove $s[l]$ from the window. Therefore, we need to decrement $\textit{cnt}$ by one, update $\textit{window}[s[l]] = \textit{window}[s[l]] - 1$, and move $l$ one position to the right.</li>
-<li>If $\textit{cnt}$ is not equal to the length of $t$, it means the window does not yet contain all characters from $t$, so we do not need to move the left boundary. Instead, we move $r$ one position to the right and continue traversing.</li>
+<li>We add it to the window, i.e., <span class="arithmatex">\(\textit{window}[s[r]] = \textit{window}[s[r]] + 1\)</span>. If <span class="arithmatex">\(\textit{need}[s[r]] \geq \textit{window}[s[r]]\)</span>, it means <span class="arithmatex">\(s[r]\)</span> is a "necessary character", and we increment <span class="arithmatex">\(\textit{cnt}\)</span> by one.</li>
+<li>If <span class="arithmatex">\(\textit{cnt}\)</span> equals the length of <span class="arithmatex">\(t\)</span>, it means the window already contains all characters from <span class="arithmatex">\(t\)</span>, and we can try to update the starting position and length of the minimum window substring. If <span class="arithmatex">\(r - l + 1 &lt; \textit{mi}\)</span>, it means the current window represents a shorter substring, so we update <span class="arithmatex">\(\textit{mi} = r - l + 1\)</span> and <span class="arithmatex">\(k = l\)</span>.</li>
+<li>Then, we try to move the left boundary <span class="arithmatex">\(l\)</span>. If <span class="arithmatex">\(\textit{need}[s[l]] \geq \textit{window}[s[l]]\)</span>, it means <span class="arithmatex">\(s[l]\)</span> is a "necessary character", and moving the left boundary will remove <span class="arithmatex">\(s[l]\)</span> from the window. Therefore, we need to decrement <span class="arithmatex">\(\textit{cnt}\)</span> by one, update <span class="arithmatex">\(\textit{window}[s[l]] = \textit{window}[s[l]] - 1\)</span>, and move <span class="arithmatex">\(l\)</span> one position to the right.</li>
+<li>If <span class="arithmatex">\(\textit{cnt}\)</span> is not equal to the length of <span class="arithmatex">\(t\)</span>, it means the window does not yet contain all characters from <span class="arithmatex">\(t\)</span>, so we do not need to move the left boundary. Instead, we move <span class="arithmatex">\(r\)</span> one position to the right and continue traversing.</li>
 </ul>
-<p>After the traversal, if no minimum window substring is found, return an empty string. Otherwise, return $s[k:k+\textit{mi}]$.</p>
-<p>The time complexity is $O(m + n)$, and the space complexity is $O(|\Sigma|)$. Here, $m$ and $n$ are the lengths of strings $s$ and $t$, respectively; and $|\Sigma|$ is the size of the character set, which is $128$ in this problem.</p>
+<p>After the traversal, if no minimum window substring is found, return an empty string. Otherwise, return <span class="arithmatex">\(s[k:k+\textit{mi}]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m + n)\)</span>, and the space complexity is <span class="arithmatex">\(O(|\Sigma|)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the lengths of strings <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span>, respectively; and <span class="arithmatex">\(|\Sigma|\)</span> is the size of the character set, which is <span class="arithmatex">\(128\)</span> in this problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86791,11 +86789,9 @@ Since the largest window of s only has one &#39;a&#39;, return empty string.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

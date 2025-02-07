@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86072,9 +86070,9 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-sorting-prefix-sum-binary-search">Solution 1: Sorting + Prefix Sum + Binary Search</h3>
-<p>According to the problem description, for each $\textit{queries[i]}$, we need to find a subsequence such that the sum of its elements does not exceed $\textit{queries[i]}$ and the length of the subsequence is maximized. Obviously, we should choose the smallest possible elements to maximize the length of the subsequence.</p>
-<p>Therefore, we can first sort the array $\textit{nums}$ in ascending order, and then for each $\textit{queries[i]}$, we can use binary search to find the smallest index $j$ such that $\textit{nums}[0] + \textit{nums}[1] + \cdots + \textit{nums}[j] &gt; \textit{queries[i]}$. At this point, $\textit{nums}[0] + \textit{nums}[1] + \cdots + \textit{nums}[j - 1]$ is the sum of the elements of the subsequence that meets the condition, and the length of this subsequence is $j$. Therefore, we can add $j$ to the answer array.</p>
-<p>The time complexity is $O((n + m) \times \log n)$, and the space complexity is $O(n)$ or $O(\log n)$. Here, $n$ and $m$ are the lengths of the arrays $\textit{nums}$ and $\textit{queries}$, respectively.</p>
+<p>According to the problem description, for each <span class="arithmatex">\(\textit{queries[i]}\)</span>, we need to find a subsequence such that the sum of its elements does not exceed <span class="arithmatex">\(\textit{queries[i]}\)</span> and the length of the subsequence is maximized. Obviously, we should choose the smallest possible elements to maximize the length of the subsequence.</p>
+<p>Therefore, we can first sort the array <span class="arithmatex">\(\textit{nums}\)</span> in ascending order, and then for each <span class="arithmatex">\(\textit{queries[i]}\)</span>, we can use binary search to find the smallest index <span class="arithmatex">\(j\)</span> such that <span class="arithmatex">\(\textit{nums}[0] + \textit{nums}[1] + \cdots + \textit{nums}[j] &gt; \textit{queries[i]}\)</span>. At this point, <span class="arithmatex">\(\textit{nums}[0] + \textit{nums}[1] + \cdots + \textit{nums}[j - 1]\)</span> is the sum of the elements of the subsequence that meets the condition, and the length of this subsequence is <span class="arithmatex">\(j\)</span>. Therefore, we can add <span class="arithmatex">\(j\)</span> to the answer array.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + m) \times \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span> or <span class="arithmatex">\(O(\log n)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the arrays <span class="arithmatex">\(\textit{nums}\)</span> and <span class="arithmatex">\(\textit{queries}\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86288,12 +86286,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-sorting-offline-query-two-pointers">Solution 2: Sorting + Offline Query + Two Pointers</h3>
-<p>Similar to Solution 1, we can first sort the array $nums$ in ascending order.</p>
-<p>Next, we define an index array $idx$ of the same length as $queries$, where $idx[i] = i$. Then, we sort the array $idx$ in ascending order based on the values in $queries$. This way, we can process the elements in $queries$ in ascending order.</p>
-<p>We use a variable $s$ to record the sum of the currently selected elements and a variable $j$ to record the number of currently selected elements. Initially, $s = j = 0$.</p>
-<p>We traverse the index array $idx$, and for each index $i$ in it, we iteratively add elements from the array $nums$ to the current subsequence until $s + nums[j] \gt queries[i]$. At this point, $j$ is the length of the subsequence that meets the condition. We set the value of $ans[i]$ to $j$ and then continue to process the next index.</p>
-<p>After traversing the index array $idx$, we obtain the answer array $ans$, where $ans[i]$ is the length of the subsequence that satisfies $queries[i]$.</p>
-<p>The time complexity is $O(n \times \log n + m)$, and the space complexity is $O(m)$. Here, $n$ and $m$ are the lengths of the arrays $nums$ and $queries$, respectively.</p>
+<p>Similar to Solution 1, we can first sort the array <span class="arithmatex">\(nums\)</span> in ascending order.</p>
+<p>Next, we define an index array <span class="arithmatex">\(idx\)</span> of the same length as <span class="arithmatex">\(queries\)</span>, where <span class="arithmatex">\(idx[i] = i\)</span>. Then, we sort the array <span class="arithmatex">\(idx\)</span> in ascending order based on the values in <span class="arithmatex">\(queries\)</span>. This way, we can process the elements in <span class="arithmatex">\(queries\)</span> in ascending order.</p>
+<p>We use a variable <span class="arithmatex">\(s\)</span> to record the sum of the currently selected elements and a variable <span class="arithmatex">\(j\)</span> to record the number of currently selected elements. Initially, <span class="arithmatex">\(s = j = 0\)</span>.</p>
+<p>We traverse the index array <span class="arithmatex">\(idx\)</span>, and for each index <span class="arithmatex">\(i\)</span> in it, we iteratively add elements from the array <span class="arithmatex">\(nums\)</span> to the current subsequence until <span class="arithmatex">\(s + nums[j] \gt queries[i]\)</span>. At this point, <span class="arithmatex">\(j\)</span> is the length of the subsequence that meets the condition. We set the value of <span class="arithmatex">\(ans[i]\)</span> to <span class="arithmatex">\(j\)</span> and then continue to process the next index.</p>
+<p>After traversing the index array <span class="arithmatex">\(idx\)</span>, we obtain the answer array <span class="arithmatex">\(ans\)</span>, where <span class="arithmatex">\(ans[i]\)</span> is the length of the subsequence that satisfies <span class="arithmatex">\(queries[i]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n + m)\)</span>, and the space complexity is <span class="arithmatex">\(O(m)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the lengths of the arrays <span class="arithmatex">\(nums\)</span> and <span class="arithmatex">\(queries\)</span>, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86731,11 +86729,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

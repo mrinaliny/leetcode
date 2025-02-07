@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,33 +90866,33 @@ Alice 有两个选择: 擦掉数字 1 或 2。
 <!-- solution:start -->
 
 <h3 id="_3">方法一：位运算</h3>
-<p>根据游戏规则，轮到某个玩家时，如果当前黑板上所有数字按位异或运算结果为 $0$，这个玩家获胜。由于 Alice 先手，因此当 $\textit{nums}$ 中所有数字的异或结果为 $0$ 时，Alice 可以获胜。</p>
-<p>当 $\textit{nums}$ 中所有数字的异或结果不为 $0$ 时，我们不妨考虑从数组 $\textit{nums}$ 的长度奇偶性来分析 Alice 的获胜情况。</p>
-<p>当 $\textit{nums}$ 的长度为偶数时，如果 Alice 必败，那么只有一种情况，就是 Alice 无论擦掉哪个数字，剩余所有数字的异或结果都等于 $0$。我们来分析一下是否存在这种情况。</p>
-<p>假设数组 $\textit{nums}$ 长度为 $n$，并且 $n$ 是偶数，记所有数字异或结尾为 $S$，则有：</p>
-<p>$$
+<p>根据游戏规则，轮到某个玩家时，如果当前黑板上所有数字按位异或运算结果为 <span class="arithmatex">\(0\)</span>，这个玩家获胜。由于 Alice 先手，因此当 <span class="arithmatex">\(\textit{nums}\)</span> 中所有数字的异或结果为 <span class="arithmatex">\(0\)</span> 时，Alice 可以获胜。</p>
+<p>当 <span class="arithmatex">\(\textit{nums}\)</span> 中所有数字的异或结果不为 <span class="arithmatex">\(0\)</span> 时，我们不妨考虑从数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度奇偶性来分析 Alice 的获胜情况。</p>
+<p>当 <span class="arithmatex">\(\textit{nums}\)</span> 的长度为偶数时，如果 Alice 必败，那么只有一种情况，就是 Alice 无论擦掉哪个数字，剩余所有数字的异或结果都等于 <span class="arithmatex">\(0\)</span>。我们来分析一下是否存在这种情况。</p>
+<p>假设数组 <span class="arithmatex">\(\textit{nums}\)</span> 长度为 <span class="arithmatex">\(n\)</span>，并且 <span class="arithmatex">\(n\)</span> 是偶数，记所有数字异或结尾为 <span class="arithmatex">\(S\)</span>，则有：</p>
+<div class="arithmatex">\[
 S = \textit{nums}[0] \oplus \textit{nums}[1] \oplus \cdots \oplus \textit{nums}[n-1] \neq 0
-$$</p>
-<p>我们记 $S_i$ 为数组 $\textit{nums}$ 擦掉第 $i$ 个数字后的异或结果，那么有：</p>
-<p>$$
+\]</div>
+<p>我们记 <span class="arithmatex">\(S_i\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 擦掉第 <span class="arithmatex">\(i\)</span> 个数字后的异或结果，那么有：</p>
+<div class="arithmatex">\[
 S_i \oplus \textit{nums}[i] = S
-$$</p>
-<p>等式两边同时异或 $\textit{nums}[i]$，得到：</p>
-<p>$$
+\]</div>
+<p>等式两边同时异或 <span class="arithmatex">\(\textit{nums}[i]\)</span>，得到：</p>
+<div class="arithmatex">\[
 S_i = S \oplus \textit{nums}[i]
-$$</p>
-<p>如果无论 Alice 擦掉哪个数字，剩余所有数字的异或结果都等于 $0$，那么对所有 $i$，都有 $S_i = 0$，即：</p>
-<p>$$
+\]</div>
+<p>如果无论 Alice 擦掉哪个数字，剩余所有数字的异或结果都等于 <span class="arithmatex">\(0\)</span>，那么对所有 <span class="arithmatex">\(i\)</span>，都有 <span class="arithmatex">\(S_i = 0\)</span>，即：</p>
+<div class="arithmatex">\[
 S_0 \oplus S_1 \oplus \cdots \oplus S_{n-1} = 0
-$$</p>
-<p>我们将 $S_i = S \oplus \textit{nums}[i]$ 代入上式，得到：</p>
-<p>$$
+\]</div>
+<p>我们将 <span class="arithmatex">\(S_i = S \oplus \textit{nums}[i]\)</span> 代入上式，得到：</p>
+<div class="arithmatex">\[
 S \oplus \textit{nums}[0] \oplus S \oplus \textit{nums}[1] \oplus \cdots \oplus S \oplus \textit{nums}[n-1] = 0
-$$</p>
-<p>上式共有 $n$（偶数）个 $S$，而 $\textit{nums}[0] \oplus \textit{nums}[1] \oplus \cdots \oplus \textit{nums}[n-1]$ 也等于 $S$，因此上式等价于 $0 \oplus S = 0$。这与 $S \neq 0$ 矛盾，因此不存在这种情况。因此当 $\textit{nums}$ 的长度为偶数时，Alice 必胜。</p>
+\]</div>
+<p>上式共有 <span class="arithmatex">\(n\)</span>（偶数）个 <span class="arithmatex">\(S\)</span>，而 <span class="arithmatex">\(\textit{nums}[0] \oplus \textit{nums}[1] \oplus \cdots \oplus \textit{nums}[n-1]\)</span> 也等于 <span class="arithmatex">\(S\)</span>，因此上式等价于 <span class="arithmatex">\(0 \oplus S = 0\)</span>。这与 <span class="arithmatex">\(S \neq 0\)</span> 矛盾，因此不存在这种情况。因此当 <span class="arithmatex">\(\textit{nums}\)</span> 的长度为偶数时，Alice 必胜。</p>
 <p>如果长度为奇数，那么 Alice 擦掉一个数字后，剩余数字个数为偶数，也就是将偶数长度的情况留给 Bob，那么 Bob 必胜，也即 Alice 必败。</p>
-<p>综上，当 $\textit{nums}$ 的长度为偶数，或者 $\textit{nums}$ 中所有数字的异或结果为 $0$ 时，Alice 可以获胜。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组 $\textit{nums}$ 的长度。空间复杂度 $O(1)$。</p>
+<p>综上，当 <span class="arithmatex">\(\textit{nums}\)</span> 的长度为偶数，或者 <span class="arithmatex">\(\textit{nums}\)</span> 中所有数字的异或结果为 <span class="arithmatex">\(0\)</span> 时，Alice 可以获胜。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91190,11 +91188,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

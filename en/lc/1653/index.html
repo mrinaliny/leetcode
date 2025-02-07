@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86076,22 +86074,22 @@ Delete the characters at 0-indexed positions 3 and 6 (&quot;aab<u>a</u>bb<u>a</u
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>We define $f[i]$ as the minimum number of characters to be deleted in the first $i$ characters to make the string balanced. Initially, $f[0]=0$. The answer is $f[n]$.</p>
-<p>We traverse the string $s$, maintaining a variable $b$, which represents the number of character 'b' in the characters before the current position.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the minimum number of characters to be deleted in the first <span class="arithmatex">\(i\)</span> characters to make the string balanced. Initially, <span class="arithmatex">\(f[0]=0\)</span>. The answer is <span class="arithmatex">\(f[n]\)</span>.</p>
+<p>We traverse the string <span class="arithmatex">\(s\)</span>, maintaining a variable <span class="arithmatex">\(b\)</span>, which represents the number of character 'b' in the characters before the current position.</p>
 <ul>
-<li>If the current character is 'b', it does not affect the balance of the first $i$ characters, so $f[i]=f[i-1]$, then we update $b \leftarrow b+1$.</li>
-<li>If the current character is 'a', we can choose to delete the current character, so $f[i]=f[i-1]+1$; or we can choose to delete the previous character 'b', so $f[i]=b$. Therefore, we take the minimum of the two, that is, $f[i]=\min(f[i-1]+1,b)$.</li>
+<li>If the current character is 'b', it does not affect the balance of the first <span class="arithmatex">\(i\)</span> characters, so <span class="arithmatex">\(f[i]=f[i-1]\)</span>, then we update <span class="arithmatex">\(b \leftarrow b+1\)</span>.</li>
+<li>If the current character is 'a', we can choose to delete the current character, so <span class="arithmatex">\(f[i]=f[i-1]+1\)</span>; or we can choose to delete the previous character 'b', so <span class="arithmatex">\(f[i]=b\)</span>. Therefore, we take the minimum of the two, that is, <span class="arithmatex">\(f[i]=\min(f[i-1]+1,b)\)</span>.</li>
 </ul>
 <p>In summary, we can get the state transition equation:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i]=\begin{cases}
-f[i-1], &amp; s[i-1]='b'\
+f[i-1], &amp; s[i-1]='b'\\
 \min(f[i-1]+1,b), &amp; s[i-1]='a'
 \end{cases}
-$$</p>
-<p>The final answer is $f[n]$.</p>
-<p>We notice that the state transition equation is only related to the previous state and the variable $b$, so we can just use an answer variable $ans$ to maintain the current $f[i]$, and there is no need to allocate an array $f$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the string $s$. The space complexity is $O(1)$.</p>
+\]</div>
+<p>The final answer is <span class="arithmatex">\(f[n]\)</span>.</p>
+<p>We notice that the state transition equation is only related to the previous state and the variable <span class="arithmatex">\(b\)</span>, so we can just use an answer variable <span class="arithmatex">\(ans\)</span> to maintain the current <span class="arithmatex">\(f[i]\)</span>, and there is no need to allocate an array <span class="arithmatex">\(f\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86299,9 +86297,9 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="solution-2-enumeration-prefix-sum">Solution 2: Enumeration + Prefix Sum</h3>
-<p>We can enumerate each position $i$ in the string $s$, dividing the string $s$ into two parts, namely $s[0,..,i-1]$ and $s[i+1,..n-1]$. To make the string balanced, the number of characters we need to delete at the current position $i$ is the number of character 'b' in $s[0,..,i-1]$ plus the number of character 'a' in $s[i+1,..n-1]$.</p>
-<p>Therefore, we maintain two variables $lb$ and $ra$ to represent the number of character 'b' in $s[0,..,i-1]$ and the number of character 'a' in $s[i+1,..n-1]$ respectively. The number of characters we need to delete is $lb+ra$. During the enumeration process, we update the variables $lb$ and $ra$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is the length of the string $s$.</p>
+<p>We can enumerate each position <span class="arithmatex">\(i\)</span> in the string <span class="arithmatex">\(s\)</span>, dividing the string <span class="arithmatex">\(s\)</span> into two parts, namely <span class="arithmatex">\(s[0,..,i-1]\)</span> and <span class="arithmatex">\(s[i+1,..n-1]\)</span>. To make the string balanced, the number of characters we need to delete at the current position <span class="arithmatex">\(i\)</span> is the number of character 'b' in <span class="arithmatex">\(s[0,..,i-1]\)</span> plus the number of character 'a' in <span class="arithmatex">\(s[i+1,..n-1]\)</span>.</p>
+<p>Therefore, we maintain two variables <span class="arithmatex">\(lb\)</span> and <span class="arithmatex">\(ra\)</span> to represent the number of character 'b' in <span class="arithmatex">\(s[0,..,i-1]\)</span> and the number of character 'a' in <span class="arithmatex">\(s[i+1,..n-1]\)</span> respectively. The number of characters we need to delete is <span class="arithmatex">\(lb+ra\)</span>. During the enumeration process, we update the variables <span class="arithmatex">\(lb\)</span> and <span class="arithmatex">\(ra\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86976,11 +86974,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

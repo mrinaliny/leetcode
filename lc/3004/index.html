@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90870,16 +90868,16 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：DFS</h3>
-<p>我们先根据题目给定的边的信息，构建一个邻接表 $g$，其中 $g[a]$ 表示节点 $a$ 的所有相邻节点。然后我们创建一个长度为 $n$ 的数组 $size$，其中 $size[a]$ 表示以节点 $a$ 为根的子树的节点数。</p>
-<p>接下来，我们设计一个函数 $dfs(a, fa)$，它将返回以节点 $a$ 为根的子树是否满足题目要求。函数 $dfs(a, fa)$ 的执行过程如下：</p>
+<p>我们先根据题目给定的边的信息，构建一个邻接表 <span class="arithmatex">\(g\)</span>，其中 <span class="arithmatex">\(g[a]\)</span> 表示节点 <span class="arithmatex">\(a\)</span> 的所有相邻节点。然后我们创建一个长度为 <span class="arithmatex">\(n\)</span> 的数组 <span class="arithmatex">\(size\)</span>，其中 <span class="arithmatex">\(size[a]\)</span> 表示以节点 <span class="arithmatex">\(a\)</span> 为根的子树的节点数。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(a, fa)\)</span>，它将返回以节点 <span class="arithmatex">\(a\)</span> 为根的子树是否满足题目要求。函数 <span class="arithmatex">\(dfs(a, fa)\)</span> 的执行过程如下：</p>
 <ul>
-<li>首先，我们用一个变量 $ok$ 记录以节点 $a$ 为根的子树是否满足题目要求，初始时 $ok$ 为 $true$。</li>
-<li>接着，我们遍历节点 $a$ 的所有相邻节点 $b$，如果 $b$ 不是 $a$ 的父节点 $fa$，那么我们递归调用 $dfs(b, a)$，并将返回值保存到变量 $t$ 中，并且更新 $ok$ 为 $ok$ 与 $colors[a] = colors[b] \land t$ 的值，其中 $\land$ 表示逻辑与运算。然后，我们更新 $size[a] = size[a] + size[b]$。</li>
-<li>然后，我们判断 $ok$ 的值，如果 $ok$ 为 $true$，那么我们更新答案 $ans = \max(ans, size[a])$。</li>
-<li>最后，我们返回 $ok$ 的值。</li>
+<li>首先，我们用一个变量 <span class="arithmatex">\(ok\)</span> 记录以节点 <span class="arithmatex">\(a\)</span> 为根的子树是否满足题目要求，初始时 <span class="arithmatex">\(ok\)</span> 为 <span class="arithmatex">\(true\)</span>。</li>
+<li>接着，我们遍历节点 <span class="arithmatex">\(a\)</span> 的所有相邻节点 <span class="arithmatex">\(b\)</span>，如果 <span class="arithmatex">\(b\)</span> 不是 <span class="arithmatex">\(a\)</span> 的父节点 <span class="arithmatex">\(fa\)</span>，那么我们递归调用 <span class="arithmatex">\(dfs(b, a)\)</span>，并将返回值保存到变量 <span class="arithmatex">\(t\)</span> 中，并且更新 <span class="arithmatex">\(ok\)</span> 为 <span class="arithmatex">\(ok\)</span> 与 <span class="arithmatex">\(colors[a] = colors[b] \land t\)</span> 的值，其中 <span class="arithmatex">\(\land\)</span> 表示逻辑与运算。然后，我们更新 <span class="arithmatex">\(size[a] = size[a] + size[b]\)</span>。</li>
+<li>然后，我们判断 <span class="arithmatex">\(ok\)</span> 的值，如果 <span class="arithmatex">\(ok\)</span> 为 <span class="arithmatex">\(true\)</span>，那么我们更新答案 <span class="arithmatex">\(ans = \max(ans, size[a])\)</span>。</li>
+<li>最后，我们返回 <span class="arithmatex">\(ok\)</span> 的值。</li>
 </ul>
-<p>我们调用 $dfs(0, -1)$，其中 $0$ 表示根节点的编号，$-1$ 表示根节点没有父节点。最终的答案即为 $ans$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是节点的数量。</p>
+<p>我们调用 <span class="arithmatex">\(dfs(0, -1)\)</span>，其中 <span class="arithmatex">\(0\)</span> 表示根节点的编号，<span class="arithmatex">\(-1\)</span> 表示根节点没有父节点。最终的答案即为 <span class="arithmatex">\(ans\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是节点的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91416,11 +91414,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

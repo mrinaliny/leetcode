@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90857,14 +90855,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找 + 容斥原理</h3>
-<p>我们可以将题目转换为：找到最小的正整数 $x$，使得小于等于 $x$ 的丑数个数恰好为 $n$ 个。</p>
-<p>对于一个正整数 $x$，能被 $a$ 整除的数有 $\left\lfloor \frac{x}{a} \right\rfloor$ 个，能被 $b$ 整除的数有 $\left\lfloor \frac{x}{b} \right\rfloor$ 个，能被 $c$ 整除的数有 $\left\lfloor \frac{x}{c} \right\rfloor$ 个，能被 $a$ 和 $b$ 同时整除的数有 $\left\lfloor \frac{x}{lcm(a, b)} \right\rfloor$ 个，能被 $a$ 和 $c$ 同时整除的数有 $\left\lfloor \frac{x}{lcm(a, c)} \right\rfloor$ 个，能被 $b$ 和 $c$ 同时整除的数有 $\left\lfloor \frac{x}{lcm(b, c)} \right\rfloor$ 个，能被 $a$, $b$ 和 $c$ 同时整除的数有 $\left\lfloor \frac{x}{lcm(a, b, c)} \right\rfloor$ 个。根据容斥原理，小于等于 $x$ 的丑数个数为：</p>
-<p>$$
+<p>我们可以将题目转换为：找到最小的正整数 <span class="arithmatex">\(x\)</span>，使得小于等于 <span class="arithmatex">\(x\)</span> 的丑数个数恰好为 <span class="arithmatex">\(n\)</span> 个。</p>
+<p>对于一个正整数 <span class="arithmatex">\(x\)</span>，能被 <span class="arithmatex">\(a\)</span> 整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{a} \right\rfloor\)</span> 个，能被 <span class="arithmatex">\(b\)</span> 整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{b} \right\rfloor\)</span> 个，能被 <span class="arithmatex">\(c\)</span> 整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{c} \right\rfloor\)</span> 个，能被 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 同时整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{lcm(a, b)} \right\rfloor\)</span> 个，能被 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(c\)</span> 同时整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{lcm(a, c)} \right\rfloor\)</span> 个，能被 <span class="arithmatex">\(b\)</span> 和 <span class="arithmatex">\(c\)</span> 同时整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{lcm(b, c)} \right\rfloor\)</span> 个，能被 <span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(b\)</span> 和 <span class="arithmatex">\(c\)</span> 同时整除的数有 <span class="arithmatex">\(\left\lfloor \frac{x}{lcm(a, b, c)} \right\rfloor\)</span> 个。根据容斥原理，小于等于 <span class="arithmatex">\(x\)</span> 的丑数个数为：</p>
+<div class="arithmatex">\[
 \left\lfloor \frac{x}{a} \right\rfloor + \left\lfloor \frac{x}{b} \right\rfloor + \left\lfloor \frac{x}{c} \right\rfloor - \left\lfloor \frac{x}{lcm(a, b)} \right\rfloor - \left\lfloor \frac{x}{lcm(a, c)} \right\rfloor - \left\lfloor \frac{x}{lcm(b, c)} \right\rfloor + \left\lfloor \frac{x}{lcm(a, b, c)} \right\rfloor
-$$</p>
-<p>我们可以使用二分查找的方法找到最小的正整数 $x$，使得小于等于 $x$ 的丑数个数恰好为 $n$ 个。</p>
-<p>定义二分查找的左边界为 $l=1$，右边界为 $r=2 \times 10^9$，其中 $2 \times 10^9$ 是题目给定的最大值。在二分查找的每一步中，我们找出中间数 $mid$，如果小于等于 $mid$ 的丑数个数大于等于 $n$，那么说明最小的正整数 $x$ 落在 $[l,mid]$ 区间内，否则落在 $[mid+1,r]$ 区间内。在二分查找的过程中，我们需要不断更新小于等于 $mid$ 的丑数个数，直到找到最小的正整数 $x$。</p>
-<p>时间复杂度 $O(\log m)$，其中 $m = 2 \times 10^9$。空间复杂度 $O(1)$。</p>
+\]</div>
+<p>我们可以使用二分查找的方法找到最小的正整数 <span class="arithmatex">\(x\)</span>，使得小于等于 <span class="arithmatex">\(x\)</span> 的丑数个数恰好为 <span class="arithmatex">\(n\)</span> 个。</p>
+<p>定义二分查找的左边界为 <span class="arithmatex">\(l=1\)</span>，右边界为 <span class="arithmatex">\(r=2 \times 10^9\)</span>，其中 <span class="arithmatex">\(2 \times 10^9\)</span> 是题目给定的最大值。在二分查找的每一步中，我们找出中间数 <span class="arithmatex">\(mid\)</span>，如果小于等于 <span class="arithmatex">\(mid\)</span> 的丑数个数大于等于 <span class="arithmatex">\(n\)</span>，那么说明最小的正整数 <span class="arithmatex">\(x\)</span> 落在 <span class="arithmatex">\([l,mid]\)</span> 区间内，否则落在 <span class="arithmatex">\([mid+1,r]\)</span> 区间内。在二分查找的过程中，我们需要不断更新小于等于 <span class="arithmatex">\(mid\)</span> 的丑数个数，直到找到最小的正整数 <span class="arithmatex">\(x\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log m)\)</span>，其中 <span class="arithmatex">\(m = 2 \times 10^9\)</span>。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91381,11 +91379,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,9 +90865,9 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：数学</h3>
-<p>我们用 $s_1$ 表示 $[1,..n]$ 所有数字的和，用 $s_2$ 表示数组 $nums$ 去重后的数字和，用 $s$ 表示数组 $nums$ 的数字和。</p>
-<p>那么 $s - s_2$ 就是重复的数字，而 $s_1 - s_2$ 就是缺失的数字。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$，其中 $n$ 是数组 $nums$ 的长度。需要额外的空间对数组去重。</p>
+<p>我们用 <span class="arithmatex">\(s_1\)</span> 表示 <span class="arithmatex">\([1,..n]\)</span> 所有数字的和，用 <span class="arithmatex">\(s_2\)</span> 表示数组 <span class="arithmatex">\(nums\)</span> 去重后的数字和，用 <span class="arithmatex">\(s\)</span> 表示数组 <span class="arithmatex">\(nums\)</span> 的数字和。</p>
+<p>那么 <span class="arithmatex">\(s - s_2\)</span> 就是重复的数字，而 <span class="arithmatex">\(s_1 - s_2\)</span> 就是缺失的数字。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。需要额外的空间对数组去重。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91037,9 +91035,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：哈希表</h3>
-<p>我们也可以一种更加直观的方法，直接用哈希表 $cnt$ 统计数组 $nums$ 中每个数字出现的次数。</p>
-<p>接下来遍历 $x \in [1, n]$，如果 $cnt[x] = 2$，那么 $x$ 就是重复的数字，如果 $cnt[x] = 0$，那么 $x$ 就是缺失的数字。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$，其中 $n$ 是数组 $nums$ 的长度。</p>
+<p>我们也可以一种更加直观的方法，直接用哈希表 <span class="arithmatex">\(cnt\)</span> 统计数组 <span class="arithmatex">\(nums\)</span> 中每个数字出现的次数。</p>
+<p>接下来遍历 <span class="arithmatex">\(x \in [1, n]\)</span>，如果 <span class="arithmatex">\(cnt[x] = 2\)</span>，那么 <span class="arithmatex">\(x\)</span> 就是重复的数字，如果 <span class="arithmatex">\(cnt[x] = 0\)</span>，那么 <span class="arithmatex">\(x\)</span> 就是缺失的数字。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91275,10 +91273,10 @@
 <!-- solution:start -->
 
 <h3 id="_5">方法三：位运算</h3>
-<p>根据异或运算的性质，对于整数 $x$，有 $x \oplus x = 0$ 以及 $x \oplus 0 = x$，因此我们对数组 $nums$ 中的所有元素以及 $i \in [1, n]$ 的所有数字进行异或运算，可以消除出现两次的数字，最终只留下缺失的数字和重复的数字的异或结果，即 $xs = a \oplus b$。</p>
-<p>由于这两个数字不相等，因此异或结果中至少存在一位为 $1$。我们通过 $lowbit$ 运算找到异或结果中最低位的 $1$，然后将数组 $nums$ 中所有数字以及 $i \in [1, n]$ 的所有数字按照该位是否为 $1$ 分为两组，这样两个数字就被分到了不同的组中。其中一组数字的异或结果为 $a$，另一组数字的异或结果为 $b$。那么这两个数字就是我们要找的答案。</p>
-<p>接下来我们只需要判断 $a$ 和 $b$ 哪个数字是重复的数字，哪个数字是缺失的数字即可。因此，遍历数组 $nums$，对于遍历到的数字 $x$，如果 $x=a$，那么 $a$ 就是重复的数字，返回 $[a, b]$，否则遍历结束，返回 $[b, a]$。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 是数组 $nums$ 的长度。空间复杂度 $O(1)$，仅使用常数大小的额外空间。</p>
+<p>根据异或运算的性质，对于整数 <span class="arithmatex">\(x\)</span>，有 <span class="arithmatex">\(x \oplus x = 0\)</span> 以及 <span class="arithmatex">\(x \oplus 0 = x\)</span>，因此我们对数组 <span class="arithmatex">\(nums\)</span> 中的所有元素以及 <span class="arithmatex">\(i \in [1, n]\)</span> 的所有数字进行异或运算，可以消除出现两次的数字，最终只留下缺失的数字和重复的数字的异或结果，即 <span class="arithmatex">\(xs = a \oplus b\)</span>。</p>
+<p>由于这两个数字不相等，因此异或结果中至少存在一位为 <span class="arithmatex">\(1\)</span>。我们通过 <span class="arithmatex">\(lowbit\)</span> 运算找到异或结果中最低位的 <span class="arithmatex">\(1\)</span>，然后将数组 <span class="arithmatex">\(nums\)</span> 中所有数字以及 <span class="arithmatex">\(i \in [1, n]\)</span> 的所有数字按照该位是否为 <span class="arithmatex">\(1\)</span> 分为两组，这样两个数字就被分到了不同的组中。其中一组数字的异或结果为 <span class="arithmatex">\(a\)</span>，另一组数字的异或结果为 <span class="arithmatex">\(b\)</span>。那么这两个数字就是我们要找的答案。</p>
+<p>接下来我们只需要判断 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 哪个数字是重复的数字，哪个数字是缺失的数字即可。因此，遍历数组 <span class="arithmatex">\(nums\)</span>，对于遍历到的数字 <span class="arithmatex">\(x\)</span>，如果 <span class="arithmatex">\(x=a\)</span>，那么 <span class="arithmatex">\(a\)</span> 就是重复的数字，返回 <span class="arithmatex">\([a, b]\)</span>，否则遍历结束，返回 <span class="arithmatex">\([b, a]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(nums\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>，仅使用常数大小的额外空间。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91761,11 +91759,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

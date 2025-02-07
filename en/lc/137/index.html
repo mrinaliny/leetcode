@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86059,8 +86057,8 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-bitwise-operation">Solution 1: Bitwise Operation</h3>
-<p>We can enumerate each binary bit $i$, and for each binary bit, we calculate the sum of all numbers on that bit. If the sum of the numbers on that bit can be divided by 3, then the number that only appears once on that bit is 0, otherwise it is 1.</p>
-<p>The time complexity is $O(n \times \log M)$, where $n$ and $M$ are the length of the array and the range of elements in the array, respectively. The space complexity is $O(1)$.</p>
+<p>We can enumerate each binary bit <span class="arithmatex">\(i\)</span>, and for each binary bit, we calculate the sum of all numbers on that bit. If the sum of the numbers on that bit can be divided by 3, then the number that only appears once on that bit is 0, otherwise it is 1.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(M\)</span> are the length of the array and the range of elements in the array, respectively. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:9"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">Rust</label><label for="__tabbed_1_8">C</label><label for="__tabbed_1_9">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86295,21 +86293,21 @@
 
 <h3 id="solution-2-digital-circuit">Solution 2: Digital Circuit</h3>
 <p>We can use a more efficient method that uses digital circuits to simulate the above bitwise operation.</p>
-<p>Each binary bit of an integer can only represent 2 states, 0 or 1. However, we need to represent the sum of the $i$-th bit of all integers traversed so far modulo 3. Therefore, we can use two integers $a$ and $b$ to represent it. There are three possible cases:</p>
+<p>Each binary bit of an integer can only represent 2 states, 0 or 1. However, we need to represent the sum of the <span class="arithmatex">\(i\)</span>-th bit of all integers traversed so far modulo 3. Therefore, we can use two integers <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> to represent it. There are three possible cases:</p>
 <ol>
-<li>The $i$-th bit of integer $a$ is 0 and the $i$-th bit of integer $b$ is 0, which means the modulo 3 result is 0;</li>
-<li>The $i$-th bit of integer $a$ is 0 and the $i$-th bit of integer $b$ is 1, which means the modulo 3 result is 1;</li>
-<li>The $i$-th bit of integer $a$ is 1 and the $i$-th bit of integer $b$ is 0, which means the modulo 3 result is 2.</li>
+<li>The <span class="arithmatex">\(i\)</span>-th bit of integer <span class="arithmatex">\(a\)</span> is 0 and the <span class="arithmatex">\(i\)</span>-th bit of integer <span class="arithmatex">\(b\)</span> is 0, which means the modulo 3 result is 0;</li>
+<li>The <span class="arithmatex">\(i\)</span>-th bit of integer <span class="arithmatex">\(a\)</span> is 0 and the <span class="arithmatex">\(i\)</span>-th bit of integer <span class="arithmatex">\(b\)</span> is 1, which means the modulo 3 result is 1;</li>
+<li>The <span class="arithmatex">\(i\)</span>-th bit of integer <span class="arithmatex">\(a\)</span> is 1 and the <span class="arithmatex">\(i\)</span>-th bit of integer <span class="arithmatex">\(b\)</span> is 0, which means the modulo 3 result is 2.</li>
 </ol>
-<p>We use integer $c$ to represent the number to be read in, and the truth table is as follows:</p>
+<p>We use integer <span class="arithmatex">\(c\)</span> to represent the number to be read in, and the truth table is as follows:</p>
 <table>
 <thead>
 <tr>
-<th>$a_i$</th>
-<th>$b_i$</th>
-<th>$c_i$</th>
-<th>New $a_i$</th>
-<th>New $b_i$</th>
+<th><span class="arithmatex">\(a_i\)</span></th>
+<th><span class="arithmatex">\(b_i\)</span></th>
+<th><span class="arithmatex">\(c_i\)</span></th>
+<th>New <span class="arithmatex">\(a_i\)</span></th>
+<th>New <span class="arithmatex">\(b_i\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -86358,15 +86356,15 @@
 </tbody>
 </table>
 <p>Based on the truth table, we can write the logical expression:</p>
-<p>$$
+<div class="arithmatex">\[
 a_i = a_i' b_i c_i + a_i b_i' c_i'
-$$</p>
+\]</div>
 <p>and:</p>
-<p>$$
+<div class="arithmatex">\[
 b_i = a_i' b_i' c_i + a_i' b_i c_i' = a_i' (b_i \oplus c_i)
-$$</p>
-<p>The final result is $b$, because when the binary bit of $b$ is 1, it means that the number appears only once.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array. The space complexity is $O(1)$.</p>
+\]</div>
+<p>The final result is <span class="arithmatex">\(b\)</span>, because when the binary bit of <span class="arithmatex">\(b\)</span> is 1, it means that the number appears only once.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86873,11 +86871,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

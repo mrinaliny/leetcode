@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86069,15 +86067,15 @@ The score difference is 18 - 12 = 6.
 <!-- solution:start -->
 
 <h3 id="solution-1-memorization-search">Solution 1: Memorization Search</h3>
-<p>First, we preprocess to get the prefix sum array $s$, where $s[i]$ represents the total sum of the first $i$ stones.</p>
-<p>Next, we design a function $dfs(i, j)$, which represents the score difference between the first and second players when the remaining stones are $stones[i], stones[i + 1], \dots, stones[j]$. The answer is $dfs(0, n - 1)$.</p>
-<p>The calculation process of the function $dfs(i, j)$ is as follows:</p>
+<p>First, we preprocess to get the prefix sum array <span class="arithmatex">\(s\)</span>, where <span class="arithmatex">\(s[i]\)</span> represents the total sum of the first <span class="arithmatex">\(i\)</span> stones.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents the score difference between the first and second players when the remaining stones are <span class="arithmatex">\(stones[i], stones[i + 1], \dots, stones[j]\)</span>. The answer is <span class="arithmatex">\(dfs(0, n - 1)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $i &gt; j$, it means there are no stones currently, so return $0$;</li>
-<li>Otherwise, the first player has two choices, which are to remove $stones[i]$ or $stones[j]$, and then calculate the score difference, i.e., $a = s[j + 1] - s[i + 1] - dfs(i + 1, j)$ and $b = s[j] - s[i] - dfs(i, j - 1)$. We take the larger of the two as the return value of $dfs(i, j)$.</li>
+<li>If <span class="arithmatex">\(i &gt; j\)</span>, it means there are no stones currently, so return <span class="arithmatex">\(0\)</span>;</li>
+<li>Otherwise, the first player has two choices, which are to remove <span class="arithmatex">\(stones[i]\)</span> or <span class="arithmatex">\(stones[j]\)</span>, and then calculate the score difference, i.e., <span class="arithmatex">\(a = s[j + 1] - s[i + 1] - dfs(i + 1, j)\)</span> and <span class="arithmatex">\(b = s[j] - s[i] - dfs(i, j - 1)\)</span>. We take the larger of the two as the return value of <span class="arithmatex">\(dfs(i, j)\)</span>.</li>
 </ul>
-<p>During the process, we use memorization search, i.e., use an array $f$ to record the return value of the function $dfs(i, j)$, to avoid repeated calculations.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the number of stones.</p>
+<p>During the process, we use memorization search, i.e., use an array <span class="arithmatex">\(f\)</span> to record the return value of the function <span class="arithmatex">\(dfs(i, j)\)</span>, to avoid repeated calculations.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of stones.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86313,14 +86311,14 @@ The score difference is 18 - 12 = 6.
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
-<p>We can convert the memoization search in Solution 1 into dynamic programming. We define $f[i][j]$ as the score difference between the first and second players when the remaining stones are $stones[i], stones[i + 1], \dots, stones[j]$. Therefore, the answer is $f[0][n - 1]$.</p>
+<p>We can convert the memoization search in Solution 1 into dynamic programming. We define <span class="arithmatex">\(f[i][j]\)</span> as the score difference between the first and second players when the remaining stones are <span class="arithmatex">\(stones[i], stones[i + 1], \dots, stones[j]\)</span>. Therefore, the answer is <span class="arithmatex">\(f[0][n - 1]\)</span>.</p>
 <p>The state transition equation is as follows:</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \max(s[j + 1] - s[i + 1] - f[i + 1][j], s[j] - s[i] - f[i][j - 1])
-$$</p>
-<p>When calculating $f[i][j]$, we need to ensure that $f[i + 1][j]$ and $f[i][j - 1]$ have been calculated. Therefore, we need to enumerate $i$ in descending order and $j$ in ascending order.</p>
-<p>Finally, the answer is $f[0][n - 1]$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Here, $n$ is the number of stones.</p>
+\]</div>
+<p>When calculating <span class="arithmatex">\(f[i][j]\)</span>, we need to ensure that <span class="arithmatex">\(f[i + 1][j]\)</span> and <span class="arithmatex">\(f[i][j - 1]\)</span> have been calculated. Therefore, we need to enumerate <span class="arithmatex">\(i\)</span> in descending order and <span class="arithmatex">\(j\)</span> in ascending order.</p>
+<p>Finally, the answer is <span class="arithmatex">\(f[0][n - 1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of stones.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86731,11 +86729,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

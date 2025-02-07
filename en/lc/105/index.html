@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86058,17 +86056,17 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-recursion">Solution 1: Hash Table + Recursion</h3>
-<p>The first node $preorder[0]$ in the pre-order sequence is the root node. We find the position $k$ of the root node in the in-order sequence, which can divide the in-order sequence into the left subtree $inorder[0..k]$ and the right subtree $inorder[k+1..]$.</p>
-<p>Through the intervals of the left and right subtrees, we can calculate the number of nodes in the left and right subtrees, assumed to be $a$ and $b$. Then in the pre-order nodes, the $a$ nodes after the root node are the left subtree, and the $b$ nodes after that are the right subtree.</p>
-<p>Therefore, we design a function $dfs(i, j, n)$, where $i$ and $j$ represent the starting positions of the pre-order sequence and the in-order sequence, respectively, and $n$ represents the number of nodes. The return value of the function is the binary tree constructed with $preorder[i..i+n-1]$ as the pre-order sequence and $inorder[j..j+n-1]$ as the in-order sequence.</p>
-<p>The execution process of the function $dfs(i, j, n)$ is as follows:</p>
+<p>The first node <span class="arithmatex">\(preorder[0]\)</span> in the pre-order sequence is the root node. We find the position <span class="arithmatex">\(k\)</span> of the root node in the in-order sequence, which can divide the in-order sequence into the left subtree <span class="arithmatex">\(inorder[0..k]\)</span> and the right subtree <span class="arithmatex">\(inorder[k+1..]\)</span>.</p>
+<p>Through the intervals of the left and right subtrees, we can calculate the number of nodes in the left and right subtrees, assumed to be <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span>. Then in the pre-order nodes, the <span class="arithmatex">\(a\)</span> nodes after the root node are the left subtree, and the <span class="arithmatex">\(b\)</span> nodes after that are the right subtree.</p>
+<p>Therefore, we design a function <span class="arithmatex">\(dfs(i, j, n)\)</span>, where <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> represent the starting positions of the pre-order sequence and the in-order sequence, respectively, and <span class="arithmatex">\(n\)</span> represents the number of nodes. The return value of the function is the binary tree constructed with <span class="arithmatex">\(preorder[i..i+n-1]\)</span> as the pre-order sequence and <span class="arithmatex">\(inorder[j..j+n-1]\)</span> as the in-order sequence.</p>
+<p>The execution process of the function <span class="arithmatex">\(dfs(i, j, n)\)</span> is as follows:</p>
 <ul>
-<li>If $n \leq 0$, it means there are no nodes, return a null node.</li>
-<li>Take out the first node $v = preorder[i]$ of the pre-order sequence as the root node, and then use the hash table $d$ to find the position $k$ of the root node in the in-order sequence. Then the number of nodes in the left subtree is $k - j$, and the number of nodes in the right subtree is $n - k + j - 1$.</li>
-<li>Recursively construct the left subtree $l = dfs(i + 1, j, k - j)$ and the right subtree $r = dfs(i + 1 + k - j, k + 1, n - k + j - 1)$.</li>
-<li>Finally, return the binary tree with $v$ as the root node and $l$ and $r$ as the left and right subtrees, respectively.</li>
+<li>If <span class="arithmatex">\(n \leq 0\)</span>, it means there are no nodes, return a null node.</li>
+<li>Take out the first node <span class="arithmatex">\(v = preorder[i]\)</span> of the pre-order sequence as the root node, and then use the hash table <span class="arithmatex">\(d\)</span> to find the position <span class="arithmatex">\(k\)</span> of the root node in the in-order sequence. Then the number of nodes in the left subtree is <span class="arithmatex">\(k - j\)</span>, and the number of nodes in the right subtree is <span class="arithmatex">\(n - k + j - 1\)</span>.</li>
+<li>Recursively construct the left subtree <span class="arithmatex">\(l = dfs(i + 1, j, k - j)\)</span> and the right subtree <span class="arithmatex">\(r = dfs(i + 1 + k - j, k + 1, n - k + j - 1)\)</span>.</li>
+<li>Finally, return the binary tree with <span class="arithmatex">\(v\)</span> as the root node and <span class="arithmatex">\(l\)</span> and <span class="arithmatex">\(r\)</span> as the left and right subtrees, respectively.</li>
 </ul>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87049,11 +87047,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

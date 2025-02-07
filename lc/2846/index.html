@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90874,17 +90872,17 @@
 
 <h3 id="lca">方法一：倍增法求 LCA</h3>
 <p>题目求的是任意两点的路径上，将其所有边的权重变成相同值的最小操作次数。实际上就是求这两点之间的路径长度，减去路径上出现次数最多的边的次数。</p>
-<p>而求两点间的路径长度，可以通过倍增法求 LCA 来实现。我们记两点分别为 $u$ 和 $v$，最近公共祖先为 $x$，那么 $u$ 到 $v$ 的路径长度就是 $depth(u) + depth(v) - 2 \times depth(x)$。</p>
-<p>另外，我们可以用一个数组 $cnt[n][26]$ 记录根节点到每个节点上，每个边权重出现的次数。那么 $u$ 到 $v$ 的路径上，出现次数最多的边的次数就是 $\max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]$。其中 $x$ 为 $u$ 和 $v$ 的最近公共祖先。</p>
+<p>而求两点间的路径长度，可以通过倍增法求 LCA 来实现。我们记两点分别为 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(v\)</span>，最近公共祖先为 <span class="arithmatex">\(x\)</span>，那么 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的路径长度就是 <span class="arithmatex">\(depth(u) + depth(v) - 2 \times depth(x)\)</span>。</p>
+<p>另外，我们可以用一个数组 <span class="arithmatex">\(cnt[n][26]\)</span> 记录根节点到每个节点上，每个边权重出现的次数。那么 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的路径上，出现次数最多的边的次数就是 <span class="arithmatex">\(\max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]\)</span>。其中 <span class="arithmatex">\(x\)</span> 为 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(v\)</span> 的最近公共祖先。</p>
 <p>倍增法求 LCA 的过程如下：</p>
-<p>我们记每个节点的深度为 $depth$，父节点为 $p$，而 $f[i][j]$ 表示节点 $i$ 的第 $2^j$ 个祖先。那么，对于任意两点 $x$ 和 $y$，我们可以通过以下方式求出它们的最近公共祖先：</p>
+<p>我们记每个节点的深度为 <span class="arithmatex">\(depth\)</span>，父节点为 <span class="arithmatex">\(p\)</span>，而 <span class="arithmatex">\(f[i][j]\)</span> 表示节点 <span class="arithmatex">\(i\)</span> 的第 <span class="arithmatex">\(2^j\)</span> 个祖先。那么，对于任意两点 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>，我们可以通过以下方式求出它们的最近公共祖先：</p>
 <ol>
-<li>如果 $depth(x) &lt; depth(y)$，那么交换 $x$ 和 $y$，即保证 $x$ 的深度不小于 $y$ 的深度；</li>
-<li>接下来，我们将 $x$ 的深度不断向上提升，直到 $x$ 和 $y$ 的深度相同，此时 $x$ 和 $y$ 的深度都为 $depth(x)$；</li>
-<li>然后，我们将 $x$ 和 $y$ 的深度同时向上提升，直到 $x$ 和 $y$ 的父节点相同，此时 $x$ 和 $y$ 的父节点都为 $f[x][0]$，即为 $x$ 和 $y$ 的最近公共祖先。</li>
+<li>如果 <span class="arithmatex">\(depth(x) &lt; depth(y)\)</span>，那么交换 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>，即保证 <span class="arithmatex">\(x\)</span> 的深度不小于 <span class="arithmatex">\(y\)</span> 的深度；</li>
+<li>接下来，我们将 <span class="arithmatex">\(x\)</span> 的深度不断向上提升，直到 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的深度相同，此时 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的深度都为 <span class="arithmatex">\(depth(x)\)</span>；</li>
+<li>然后，我们将 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的深度同时向上提升，直到 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的父节点相同，此时 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的父节点都为 <span class="arithmatex">\(f[x][0]\)</span>，即为 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的最近公共祖先。</li>
 </ol>
-<p>最后，节点 $u$ 到节点 $v$ 的最小操作次数就是 $depth(u) + depth(v) - 2 \times depth(x) - \max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]$。</p>
-<p>时间复杂度 $O((n + q) \times C \times \log n)$，空间复杂度 $O(n \times C \times \log n)$，其中 $C$ 为边权重的最大值。</p>
+<p>最后，节点 <span class="arithmatex">\(u\)</span> 到节点 <span class="arithmatex">\(v\)</span> 的最小操作次数就是 <span class="arithmatex">\(depth(u) + depth(v) - 2 \times depth(x) - \max_{0 \leq j &lt; 26} cnt[u][j] + cnt[v][j] - 2 \times cnt[x][j]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + q) \times C \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times C \times \log n)\)</span>，其中 <span class="arithmatex">\(C\)</span> 为边权重的最大值。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91612,11 +91610,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

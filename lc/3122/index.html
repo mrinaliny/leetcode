@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90880,14 +90878,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们注意到，矩阵中格子的值只有 $10$ 种可能，题目需要我们求出每一列数字相同，且相邻列数字不同的最小操作次数。那么我们只需要考虑将数字修改为 $0$ 到 $9$ 的情况即可。</p>
-<p>我们定义状态 $f[i][j]$ 表示前 $[0,..i]$ 列数字，且第 $i$ 列数字为 $j$ 的最小操作次数。那么我们可以得到状态转移方程：</p>
-<p>$$
+<p>我们注意到，矩阵中格子的值只有 <span class="arithmatex">\(10\)</span> 种可能，题目需要我们求出每一列数字相同，且相邻列数字不同的最小操作次数。那么我们只需要考虑将数字修改为 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(9\)</span> 的情况即可。</p>
+<p>我们定义状态 <span class="arithmatex">\(f[i][j]\)</span> 表示前 <span class="arithmatex">\([0,..i]\)</span> 列数字，且第 <span class="arithmatex">\(i\)</span> 列数字为 <span class="arithmatex">\(j\)</span> 的最小操作次数。那么我们可以得到状态转移方程：</p>
+<div class="arithmatex">\[
 f[i][j] = \min_{k \neq j} f[i-1][k] + m - \textit{cnt}[j]
-$$</p>
-<p>其中 $\textit{cnt}[j]$ 表示第 $i$ 列数字为 $j$ 的个数。</p>
-<p>最后我们只需要求出 $f[n-1][j]$ 的最小值即可。</p>
-<p>时间复杂度 $O(n \times (m + C^2))$，空间复杂度 $O(n \times C)$。其中 $m$ 和 $n$ 分别表示矩阵的行数和列数；而 $C$ 表示数字的种类数，这里 $C = 10$。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(\textit{cnt}[j]\)</span> 表示第 <span class="arithmatex">\(i\)</span> 列数字为 <span class="arithmatex">\(j\)</span> 的个数。</p>
+<p>最后我们只需要求出 <span class="arithmatex">\(f[n-1][j]\)</span> 的最小值即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times (m + C^2))\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times C)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别表示矩阵的行数和列数；而 <span class="arithmatex">\(C\)</span> 表示数字的种类数，这里 <span class="arithmatex">\(C = 10\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91403,11 +91401,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

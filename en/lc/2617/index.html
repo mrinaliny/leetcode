@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86094,12 +86092,12 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-priority-queue">Solution 1: Priority Queue</h3>
-<p>Let's denote the number of rows of the grid as $m$ and the number of columns as $n$. Define $dist[i][j]$ to be the shortest distance from the coordinate $(0, 0)$ to the coordinate $(i, j)$. Initially, $dist[0][0]=1$ and $dist[i][j]=-1$ for all other $i$ and $j$.</p>
-<p>For each grid $(i, j)$, it can come from the grid above or the grid on the left. If it comes from the grid above $(i', j)$, where $0 \leq i' \lt i$, then $(i', j)$ must satisfy $grid[i'][j] + i' \geq i$. We need to select from these grids the one that is closest.</p>
-<p>Therefore, we maintain a priority queue (min-heap) for each column $j$. Each element of the priority queue is a pair $(dist[i][j], i)$, which represents that the shortest distance from the coordinate $(0, 0)$ to the coordinate $(i, j)$ is $dist[i][j]$. When we consider the coordinate $(i, j)$, we only need to take out the head element $(dist[i'][j], i')$ of the priority queue. If $grid[i'][j] + i' \geq i$, we can move from the coordinate $(i', j)$ to the coordinate $(i, j)$. At this time, we can update the value of $dist[i][j]$, that is, $dist[i][j] = dist[i'][j] + 1$, and add $(dist[i][j], i)$ to the priority queue.</p>
-<p>Similarly, we can maintain a priority queue for each row $i$ and perform a similar operation.</p>
-<p>Finally, we can obtain the shortest distance from the coordinate $(0, 0)$ to the coordinate $(m - 1, n - 1)$, that is, $dist[m - 1][n - 1]$, which is the answer.</p>
-<p>The time complexity is $O(m \times n \times \log (m \times n))$ and the space complexity is $O(m \times n)$. Here, $m$ and $n$ are the number of rows and columns of the grid, respectively.</p>
+<p>Let's denote the number of rows of the grid as <span class="arithmatex">\(m\)</span> and the number of columns as <span class="arithmatex">\(n\)</span>. Define <span class="arithmatex">\(dist[i][j]\)</span> to be the shortest distance from the coordinate <span class="arithmatex">\((0, 0)\)</span> to the coordinate <span class="arithmatex">\((i, j)\)</span>. Initially, <span class="arithmatex">\(dist[0][0]=1\)</span> and <span class="arithmatex">\(dist[i][j]=-1\)</span> for all other <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>.</p>
+<p>For each grid <span class="arithmatex">\((i, j)\)</span>, it can come from the grid above or the grid on the left. If it comes from the grid above <span class="arithmatex">\((i', j)\)</span>, where <span class="arithmatex">\(0 \leq i' \lt i\)</span>, then <span class="arithmatex">\((i', j)\)</span> must satisfy <span class="arithmatex">\(grid[i'][j] + i' \geq i\)</span>. We need to select from these grids the one that is closest.</p>
+<p>Therefore, we maintain a priority queue (min-heap) for each column <span class="arithmatex">\(j\)</span>. Each element of the priority queue is a pair <span class="arithmatex">\((dist[i][j], i)\)</span>, which represents that the shortest distance from the coordinate <span class="arithmatex">\((0, 0)\)</span> to the coordinate <span class="arithmatex">\((i, j)\)</span> is <span class="arithmatex">\(dist[i][j]\)</span>. When we consider the coordinate <span class="arithmatex">\((i, j)\)</span>, we only need to take out the head element <span class="arithmatex">\((dist[i'][j], i')\)</span> of the priority queue. If <span class="arithmatex">\(grid[i'][j] + i' \geq i\)</span>, we can move from the coordinate <span class="arithmatex">\((i', j)\)</span> to the coordinate <span class="arithmatex">\((i, j)\)</span>. At this time, we can update the value of <span class="arithmatex">\(dist[i][j]\)</span>, that is, <span class="arithmatex">\(dist[i][j] = dist[i'][j] + 1\)</span>, and add <span class="arithmatex">\((dist[i][j], i)\)</span> to the priority queue.</p>
+<p>Similarly, we can maintain a priority queue for each row <span class="arithmatex">\(i\)</span> and perform a similar operation.</p>
+<p>Finally, we can obtain the shortest distance from the coordinate <span class="arithmatex">\((0, 0)\)</span> to the coordinate <span class="arithmatex">\((m - 1, n - 1)\)</span>, that is, <span class="arithmatex">\(dist[m - 1][n - 1]\)</span>, which is the answer.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times \log (m \times n))\)</span> and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Here, <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86619,11 +86617,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

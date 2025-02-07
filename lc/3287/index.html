@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,20 +90856,20 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划 + 前后缀分解 + 枚举</h3>
-<p>我们考虑将序列分成两部分，前 $k$ 个元素和后 $k$ 个元素，分别计算前后缀的所有可能的异或值。</p>
-<p>定义 $f[i][j][x]$ 表示前 $i$ 个元素中取 $j$ 个元素，是否存在一个子集的异或值为 $x$，定义 $g[i][j][y]$ 表示从下标 $i$ 开始取 $j$ 个元素，是否存在一个子集的异或值为 $y$。</p>
-<p>考虑 $f[i][j][x]$ 的转移方程，对于第 $i$ 个元素（从 $0$ 开始），我们可以选择不取，也可以选择取，因此有：</p>
-<p>$$
-f[i + 1][j][x] = f[i + 1][j][x] \lor f[i][j][x] \
+<p>我们考虑将序列分成两部分，前 <span class="arithmatex">\(k\)</span> 个元素和后 <span class="arithmatex">\(k\)</span> 个元素，分别计算前后缀的所有可能的异或值。</p>
+<p>定义 <span class="arithmatex">\(f[i][j][x]\)</span> 表示前 <span class="arithmatex">\(i\)</span> 个元素中取 <span class="arithmatex">\(j\)</span> 个元素，是否存在一个子集的异或值为 <span class="arithmatex">\(x\)</span>，定义 <span class="arithmatex">\(g[i][j][y]\)</span> 表示从下标 <span class="arithmatex">\(i\)</span> 开始取 <span class="arithmatex">\(j\)</span> 个元素，是否存在一个子集的异或值为 <span class="arithmatex">\(y\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j][x]\)</span> 的转移方程，对于第 <span class="arithmatex">\(i\)</span> 个元素（从 <span class="arithmatex">\(0\)</span> 开始），我们可以选择不取，也可以选择取，因此有：</p>
+<div class="arithmatex">\[
+f[i + 1][j][x] = f[i + 1][j][x] \lor f[i][j][x] \\
 f[i + 1][j + 1][x \lor \text{nums}[i]] = f[i + 1][j + 1][x \lor \text{nums}[i]] \lor f[i][j][x]
-$$</p>
-<p>对于 $g[i][j][y]$ 的转移方程，同样对于第 $i$ 个元素（从 $n - 1$ 开始），我们可以选择不取，也可以选择取，因此有：</p>
-<p>$$
-g[i - 1][j][y] = g[i - 1][j][y] \lor g[i][j][y] \
+\]</div>
+<p>对于 <span class="arithmatex">\(g[i][j][y]\)</span> 的转移方程，同样对于第 <span class="arithmatex">\(i\)</span> 个元素（从 <span class="arithmatex">\(n - 1\)</span> 开始），我们可以选择不取，也可以选择取，因此有：</p>
+<div class="arithmatex">\[
+g[i - 1][j][y] = g[i - 1][j][y] \lor g[i][j][y] \\
 g[i - 1][j + 1][y \lor \text{nums}[i - 1]] = g[i - 1][j + 1][y \lor \text{nums}[i - 1]] \lor g[i][j][y]
-$$</p>
-<p>最后，我们在 $[k, n - k]$ 的范围内枚举 $i$，对于每一个 $i$，我们枚举 $x$ 和 $y$，其中 $0 \leq x, y &lt; 2^7$，如果 $f[i][k][x]$ 和 $g[i][k][y]$ 均为真，那么我们更新答案 $\text{ans} = \max(\text{ans}, x \oplus y)$。</p>
-<p>时间复杂度 $O(n \times m \times k)$，空间复杂度 $O(n \times m \times k)$，其中 $n$ 为数组长度，而 $m = 2^7$。</p>
+\]</div>
+<p>最后，我们在 <span class="arithmatex">\([k, n - k]\)</span> 的范围内枚举 <span class="arithmatex">\(i\)</span>，对于每一个 <span class="arithmatex">\(i\)</span>，我们枚举 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>，其中 <span class="arithmatex">\(0 \leq x, y &lt; 2^7\)</span>，如果 <span class="arithmatex">\(f[i][k][x]\)</span> 和 <span class="arithmatex">\(g[i][k][y]\)</span> 均为真，那么我们更新答案 <span class="arithmatex">\(\text{ans} = \max(\text{ans}, x \oplus y)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times m \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times m \times k)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组长度，而 <span class="arithmatex">\(m = 2^7\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91595,11 +91593,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

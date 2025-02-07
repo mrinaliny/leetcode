@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90886,10 +90884,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：树状数组</h3>
-<p>我们不妨记 $queries[i] = [l_i, r_i]$，其中 $l_i \le r_i$。如果 $l_i = r_i$ 或者 $heights[l_i] \lt heights[r_i]$，那么答案就是 $r_i$。否则，我们需要在所有满足 $j \gt r_i$，且 $heights[j] \gt heights[l_i]$ 的 $j$ 中找到最小的 $j$。</p>
-<p>我们可以将 $queries$ 按照 $r_i$ 从大到小排序，用一个指针 $j$ 指向当前遍历到的 $heights$ 的下标。</p>
-<p>接下来，我们遍历每个查询 $queries[i] = (l, r)$，对于当前查询，如果 $j \gt r$，那么我们循环将 $heights[j]$ 插入树状数组中。树状数组维护的是后缀高度（离散化后的高度）的下标的最小值。然后，我们判断是否满足 $l = r$ 或者 $heights[l] \lt heights[r]$，如果满足，那么当前查询的答案就是 $r$，否则，我们在树状数组中查询 $heights[l]$ 的下标的最小值，即为当前查询的答案。</p>
-<p>时间复杂度 $O((n + m) \times \log n + m \times \log m)$，空间复杂度 $O(n + m)$。其中 $n$ 和 $m$ 分别为 $heights$ 和 $queries$ 的长度。</p>
+<p>我们不妨记 <span class="arithmatex">\(queries[i] = [l_i, r_i]\)</span>，其中 <span class="arithmatex">\(l_i \le r_i\)</span>。如果 <span class="arithmatex">\(l_i = r_i\)</span> 或者 <span class="arithmatex">\(heights[l_i] \lt heights[r_i]\)</span>，那么答案就是 <span class="arithmatex">\(r_i\)</span>。否则，我们需要在所有满足 <span class="arithmatex">\(j \gt r_i\)</span>，且 <span class="arithmatex">\(heights[j] \gt heights[l_i]\)</span> 的 <span class="arithmatex">\(j\)</span> 中找到最小的 <span class="arithmatex">\(j\)</span>。</p>
+<p>我们可以将 <span class="arithmatex">\(queries\)</span> 按照 <span class="arithmatex">\(r_i\)</span> 从大到小排序，用一个指针 <span class="arithmatex">\(j\)</span> 指向当前遍历到的 <span class="arithmatex">\(heights\)</span> 的下标。</p>
+<p>接下来，我们遍历每个查询 <span class="arithmatex">\(queries[i] = (l, r)\)</span>，对于当前查询，如果 <span class="arithmatex">\(j \gt r\)</span>，那么我们循环将 <span class="arithmatex">\(heights[j]\)</span> 插入树状数组中。树状数组维护的是后缀高度（离散化后的高度）的下标的最小值。然后，我们判断是否满足 <span class="arithmatex">\(l = r\)</span> 或者 <span class="arithmatex">\(heights[l] \lt heights[r]\)</span>，如果满足，那么当前查询的答案就是 <span class="arithmatex">\(r\)</span>，否则，我们在树状数组中查询 <span class="arithmatex">\(heights[l]\)</span> 的下标的最小值，即为当前查询的答案。</p>
+<p>时间复杂度 <span class="arithmatex">\(O((n + m) \times \log n + m \times \log m)\)</span>，空间复杂度 <span class="arithmatex">\(O(n + m)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(m\)</span> 分别为 <span class="arithmatex">\(heights\)</span> 和 <span class="arithmatex">\(queries\)</span> 的长度。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2700-2799/2736.Maximum%20Sum%20Queries/README.md">2736. 最大和查询</a></li>
@@ -91766,11 +91764,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

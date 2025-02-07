@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90880,16 +90878,16 @@ Bob 获胜，因为 9 + 3 + 2 + 9 = 5 + 9 + 2 + 7 。
 
 <h3 id="_3">方法一：分类讨论</h3>
 <p>如果 <code>'?'</code> 的个数为奇数，那么 Alice 一定会获胜，因为她可以选择将最后一个 <code>'?'</code> 替换为任何一个数字，使得前一半的和与后一半的和不相等。</p>
-<p>如果 <code>'?'</code> 的个数为偶数，Alice 为了使得前一半的和与后一半的和不相等，那么会选择在当前和较大的一半数字中放置 $9$，在当前和较小的一半数字中放置 $0$，而 Bob 为了使得前后两半的和相等，那么会选择在 Alice 替换数字的另一半放置一个与 Alice 替换数字相同的数字。</p>
-<p>因此，最终会使得剩下的所有偶数个 <code>'?'</code> 集中在其中一半。假设当前两半的数字差值为 $d$。</p>
-<p>我们先考虑，如果剩下两个 <code>'?'</code>，差值为 $x$，此时：</p>
+<p>如果 <code>'?'</code> 的个数为偶数，Alice 为了使得前一半的和与后一半的和不相等，那么会选择在当前和较大的一半数字中放置 <span class="arithmatex">\(9\)</span>，在当前和较小的一半数字中放置 <span class="arithmatex">\(0\)</span>，而 Bob 为了使得前后两半的和相等，那么会选择在 Alice 替换数字的另一半放置一个与 Alice 替换数字相同的数字。</p>
+<p>因此，最终会使得剩下的所有偶数个 <code>'?'</code> 集中在其中一半。假设当前两半的数字差值为 <span class="arithmatex">\(d\)</span>。</p>
+<p>我们先考虑，如果剩下两个 <code>'?'</code>，差值为 <span class="arithmatex">\(x\)</span>，此时：</p>
 <ul>
-<li>如果 $x \lt 9$，那么 Alice 必胜，因为 Alice 可以将其中一个 <code>'?'</code> 替换为 $9$，使得前一半的和与后一半的和不相等；</li>
-<li>如果 $x \gt 9$，那么 Alice 必胜，因为 Alice 可以将其中一个 <code>'?'</code> 替换为 $0$，使得前一半的和与后一半的和不相等；</li>
-<li>如果 $x = 9$，那么 Bob 必胜，假设 Alice 替换的数字为 $a$，那么 Bob 可以将另一个 <code>'?'</code> 替换为 $9 - a$，使得前后两半的和相等。</li>
+<li>如果 <span class="arithmatex">\(x \lt 9\)</span>，那么 Alice 必胜，因为 Alice 可以将其中一个 <code>'?'</code> 替换为 <span class="arithmatex">\(9\)</span>，使得前一半的和与后一半的和不相等；</li>
+<li>如果 <span class="arithmatex">\(x \gt 9\)</span>，那么 Alice 必胜，因为 Alice 可以将其中一个 <code>'?'</code> 替换为 <span class="arithmatex">\(0\)</span>，使得前一半的和与后一半的和不相等；</li>
+<li>如果 <span class="arithmatex">\(x = 9\)</span>，那么 Bob 必胜，假设 Alice 替换的数字为 <span class="arithmatex">\(a\)</span>，那么 Bob 可以将另一个 <code>'?'</code> 替换为 <span class="arithmatex">\(9 - a\)</span>，使得前后两半的和相等。</li>
 </ul>
-<p>因此，如果两半数字差值为 $d= \frac{9 \times cnt}{2}$，其中 $cnt$ 为剩下的 <code>'?'</code> 的个数，那么 Bob 必胜，否则 Alice 必胜。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为字符串的长度。空间复杂度 $O(1)$。</p>
+<p>因此，如果两半数字差值为 <span class="arithmatex">\(d= \frac{9 \times cnt}{2}\)</span>，其中 <span class="arithmatex">\(cnt\)</span> 为剩下的 <code>'?'</code> 的个数，那么 Bob 必胜，否则 Alice 必胜。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为字符串的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91315,11 +91313,9 @@ Bob 获胜，因为 9 + 3 + 2 + 9 = 5 + 9 + 2 + 7 。
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

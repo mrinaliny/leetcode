@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90850,18 +90848,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i]$ 表示长度为 $i$ 的数组的错位排列的数量。初始时 $f[0] = 1$, $f[1] = 0$。答案即为 $f[n]$。</p>
-<p>对于长度为 $i$ 的数组，我们考虑将数字 $1$ 放在哪个位置，假设放在第 $j$ 个位置，这里有 $i-1$ 种选择，那么接下来数字 $j$ 可以有两种选择：</p>
+<p>我们定义 <span class="arithmatex">\(f[i]\)</span> 表示长度为 <span class="arithmatex">\(i\)</span> 的数组的错位排列的数量。初始时 <span class="arithmatex">\(f[0] = 1\)</span>, <span class="arithmatex">\(f[1] = 0\)</span>。答案即为 <span class="arithmatex">\(f[n]\)</span>。</p>
+<p>对于长度为 <span class="arithmatex">\(i\)</span> 的数组，我们考虑将数字 <span class="arithmatex">\(1\)</span> 放在哪个位置，假设放在第 <span class="arithmatex">\(j\)</span> 个位置，这里有 <span class="arithmatex">\(i-1\)</span> 种选择，那么接下来数字 <span class="arithmatex">\(j\)</span> 可以有两种选择：</p>
 <ul>
-<li>放在第 $1$ 个位置，那么剩下的 $i - 2$ 个位置可以有 $f[i - 2]$ 种错位排列，因此总共有 $(i - 1) \times f[i - 2]$ 种错位排列；</li>
-<li>不放在第 $1$ 个位置，那么相当于转化为了长度为 $i - 1$ 的数组的错位排列，因此总共有 $(i - 1) \times f[i - 1]$ 种错位排列。</li>
+<li>放在第 <span class="arithmatex">\(1\)</span> 个位置，那么剩下的 <span class="arithmatex">\(i - 2\)</span> 个位置可以有 <span class="arithmatex">\(f[i - 2]\)</span> 种错位排列，因此总共有 <span class="arithmatex">\((i - 1) \times f[i - 2]\)</span> 种错位排列；</li>
+<li>不放在第 <span class="arithmatex">\(1\)</span> 个位置，那么相当于转化为了长度为 <span class="arithmatex">\(i - 1\)</span> 的数组的错位排列，因此总共有 <span class="arithmatex">\((i - 1) \times f[i - 1]\)</span> 种错位排列。</li>
 </ul>
 <p>综上，我们有如下状态转移方程：</p>
-<p>$$
+<div class="arithmatex">\[
 f[i] = (i - 1) \times (f[i - 1] + f[i - 2])
-$$</p>
-<p>最终答案即为 $f[n]$。注意答案的取模操作。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组的长度。空间复杂度 $O(1)$。</p>
+\]</div>
+<p>最终答案即为 <span class="arithmatex">\(f[n]\)</span>。注意答案的取模操作。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -90959,7 +90957,7 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划（空间优化）</h3>
-<p>我们发现，状态转移方程中只与 $f[i - 1]$ 和 $f[i - 2]$ 有关，因此我们可以使用两个变量 $a$ 和 $b$ 来分别表示 $f[i - 1]$ 和 $f[i - 2]$，从而将空间复杂度降低到 $O(1)$。</p>
+<p>我们发现，状态转移方程中只与 <span class="arithmatex">\(f[i - 1]\)</span> 和 <span class="arithmatex">\(f[i - 2]\)</span> 有关，因此我们可以使用两个变量 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 来分别表示 <span class="arithmatex">\(f[i - 1]\)</span> 和 <span class="arithmatex">\(f[i - 2]\)</span>，从而将空间复杂度降低到 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91291,11 +91289,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

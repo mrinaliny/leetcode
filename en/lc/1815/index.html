@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86068,16 +86066,16 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-greedy-state-compression-memorized-search">Solution 1: Greedy + State Compression + Memorized Search</h3>
-<p>The problem actually asks us to find an arrangement order that maximizes the number of groups whose prefix sum (referring to "number of people" here) modulo $batchSize$ equals $0$. Therefore, we can divide all customers into two categories:</p>
+<p>The problem actually asks us to find an arrangement order that maximizes the number of groups whose prefix sum (referring to "number of people" here) modulo <span class="arithmatex">\(batchSize\)</span> equals <span class="arithmatex">\(0\)</span>. Therefore, we can divide all customers into two categories:</p>
 <ul>
-<li>Customers whose number is a multiple of $batchSize$. These customers will not affect the donuts of the next group of customers. We can greedily arrange these groups of customers first, so these groups of customers will be happy. The "initial answer" is the number of these groups.</li>
-<li>Customers whose number is not a multiple of $batchSize$. The arrangement order of these customers will affect the donuts of the next group of customers. We can take the modulo $batchSize$ for the number of people $v$ in each group here, and the remainders form a set. The range of element values in the set is $[1,2...,batchSize-1]$. The maximum length of the $groups$ array is $30$, so the maximum number of each remainder does not exceed $30$. We can use $5$ binary bits to represent the quantity of a remainder, and the maximum $batchSize$ is $9$, so the total number of binary bits required to represent these remainders and their quantities is $5\times (9-1)=40$. We can use a $64$-bit integer $state$ to represent it.</li>
+<li>Customers whose number is a multiple of <span class="arithmatex">\(batchSize\)</span>. These customers will not affect the donuts of the next group of customers. We can greedily arrange these groups of customers first, so these groups of customers will be happy. The "initial answer" is the number of these groups.</li>
+<li>Customers whose number is not a multiple of <span class="arithmatex">\(batchSize\)</span>. The arrangement order of these customers will affect the donuts of the next group of customers. We can take the modulo <span class="arithmatex">\(batchSize\)</span> for the number of people <span class="arithmatex">\(v\)</span> in each group here, and the remainders form a set. The range of element values in the set is <span class="arithmatex">\([1,2...,batchSize-1]\)</span>. The maximum length of the <span class="arithmatex">\(groups\)</span> array is <span class="arithmatex">\(30\)</span>, so the maximum number of each remainder does not exceed <span class="arithmatex">\(30\)</span>. We can use <span class="arithmatex">\(5\)</span> binary bits to represent the quantity of a remainder, and the maximum <span class="arithmatex">\(batchSize\)</span> is <span class="arithmatex">\(9\)</span>, so the total number of binary bits required to represent these remainders and their quantities is <span class="arithmatex">\(5\times (9-1)=40\)</span>. We can use a <span class="arithmatex">\(64\)</span>-bit integer <span class="arithmatex">\(state\)</span> to represent it.</li>
 </ul>
-<p>Next, we design a function $dfs(state, mod)$, which represents the number of groups that can be happy when the arrangement state is $state$ and the current prefix remainder is $mod$. Then our "initial answer" plus $dfs(state, 0)$ is the final answer.</p>
-<p>The implementation logic of the function $dfs(state, mod)$ is as follows:</p>
-<p>We enumerate each remainder $i$ from $1$ to $batchSize-1$. If the quantity of the remainder $i$ is not $0$, we can subtract $1$ from the quantity of the remainder $i$, add $i$ to the current prefix remainder and take modulo $batchSize$, then recursively call the function $dfs$ to find the optimal solution of the sub-state, and take the maximum value. Finally, check whether $mod$ is $0$. If it is $0$, we return after adding $1$ to the maximum value, otherwise we directly return the maximum value.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(state, mod)\)</span>, which represents the number of groups that can be happy when the arrangement state is <span class="arithmatex">\(state\)</span> and the current prefix remainder is <span class="arithmatex">\(mod\)</span>. Then our "initial answer" plus <span class="arithmatex">\(dfs(state, 0)\)</span> is the final answer.</p>
+<p>The implementation logic of the function <span class="arithmatex">\(dfs(state, mod)\)</span> is as follows:</p>
+<p>We enumerate each remainder <span class="arithmatex">\(i\)</span> from <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(batchSize-1\)</span>. If the quantity of the remainder <span class="arithmatex">\(i\)</span> is not <span class="arithmatex">\(0\)</span>, we can subtract <span class="arithmatex">\(1\)</span> from the quantity of the remainder <span class="arithmatex">\(i\)</span>, add <span class="arithmatex">\(i\)</span> to the current prefix remainder and take modulo <span class="arithmatex">\(batchSize\)</span>, then recursively call the function <span class="arithmatex">\(dfs\)</span> to find the optimal solution of the sub-state, and take the maximum value. Finally, check whether <span class="arithmatex">\(mod\)</span> is <span class="arithmatex">\(0\)</span>. If it is <span class="arithmatex">\(0\)</span>, we return after adding <span class="arithmatex">\(1\)</span> to the maximum value, otherwise we directly return the maximum value.</p>
 <p>During the process, we can use memorized search to avoid repeated calculation of states.</p>
-<p>The time complexity does not exceed $O(10^7)$, and the space complexity does not exceed $O(10^6)$.</p>
+<p>The time complexity does not exceed <span class="arithmatex">\(O(10^7)\)</span>, and the space complexity does not exceed <span class="arithmatex">\(O(10^6)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86606,11 +86604,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

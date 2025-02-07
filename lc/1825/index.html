@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90892,22 +90890,22 @@ obj.calculateMKAverage(); // 最后 3 个元素为 [5,5,5]
 <h3 id="_3">方法一：有序集合 + 队列</h3>
 <p>我们可以维护以下数据结构或变量：</p>
 <ul>
-<li>一个长度为 $m$ 的队列 $q$，其中队首元素为最早加入的元素，队尾元素为最近加入的元素；</li>
-<li>三个有序集合，分别为 $lo$, $mid$, $hi$，其中 $lo$ 和 $hi$ 分别存储最小的 $k$ 个元素和最大的 $k$ 个元素，而 $mid$ 存储剩余的元素；</li>
-<li>一个变量 $s$，维护 $mid$ 中所有元素的和；</li>
-<li>部分编程语言（如 Java, Go）额外维护两个变量 $size1$ 和 $size3$，分别表示 $lo$ 和 $hi$ 中元素的个数。</li>
+<li>一个长度为 <span class="arithmatex">\(m\)</span> 的队列 <span class="arithmatex">\(q\)</span>，其中队首元素为最早加入的元素，队尾元素为最近加入的元素；</li>
+<li>三个有序集合，分别为 <span class="arithmatex">\(lo\)</span>, <span class="arithmatex">\(mid\)</span>, <span class="arithmatex">\(hi\)</span>，其中 <span class="arithmatex">\(lo\)</span> 和 <span class="arithmatex">\(hi\)</span> 分别存储最小的 <span class="arithmatex">\(k\)</span> 个元素和最大的 <span class="arithmatex">\(k\)</span> 个元素，而 <span class="arithmatex">\(mid\)</span> 存储剩余的元素；</li>
+<li>一个变量 <span class="arithmatex">\(s\)</span>，维护 <span class="arithmatex">\(mid\)</span> 中所有元素的和；</li>
+<li>部分编程语言（如 Java, Go）额外维护两个变量 <span class="arithmatex">\(size1\)</span> 和 <span class="arithmatex">\(size3\)</span>，分别表示 <span class="arithmatex">\(lo\)</span> 和 <span class="arithmatex">\(hi\)</span> 中元素的个数。</li>
 </ul>
-<p>调用 $addElement(num)$ 函数时，顺序执行以下操作：</p>
+<p>调用 <span class="arithmatex">\(addElement(num)\)</span> 函数时，顺序执行以下操作：</p>
 <ol>
-<li>如果 $lo$ 为空，或者 $num \leq max(lo)$，则将 $num$ 加入 $lo$ 中；否则如果 $hi$ 为空，或者 $num \geq min(hi)$，则将 $num$ 加入 $hi$ 中；否则将 $num$ 加入 $mid$ 中，同时将 $num$ 的值加到 $s$ 中。</li>
-<li>接下来将 $num$ 加入队列 $q$ 中，如果此时队列 $q$ 的长度大于 $m$，则将队首元素 $x$ 从队列 $q$ 中移除，接下来从 $lo$, $mid$ 或 $hi$ 中选择其中一个包含 $x$ 的集合，将 $x$ 从该集合中移除，如果该集合为 $mid$，则将 $s$ 减去 $x$ 的值。</li>
-<li>如果 $lo$ 的长度大于 $k$，则循环将 $lo$ 中的最大值 $max(lo)$ 从 $lo$ 中移除，将 $max(lo)$ 加入 $mid$ 中，同时将 $s$ 加上 $max(lo)$ 的值。</li>
-<li>如果 $hi$ 的长度大于 $k$，则循环将 $hi$ 中的最小值 $min(hi)$ 从 $hi$ 中移除，将 $min(hi)$ 加入 $mid$ 中，同时将 $s$ 加上 $min(hi)$ 的值。</li>
-<li>如果 $lo$ 的长度小于 $k$，并且 $mid$ 不为空，则循环将 $mid$ 中的最小值 $min(mid)$ 从 $mid$ 中移除，将 $min(mid)$ 加入 $lo$ 中，同时将 $s$ 减去 $min(mid)$ 的值。</li>
-<li>如果 $hi$ 的长度小于 $k$，并且 $mid$ 不为空，则循环将 $mid$ 中的最大值 $max(mid)$ 从 $mid$ 中移除，将 $max(mid)$ 加入 $hi$ 中，同时将 $s$ 减去 $max(mid)$ 的值。</li>
+<li>如果 <span class="arithmatex">\(lo\)</span> 为空，或者 <span class="arithmatex">\(num \leq max(lo)\)</span>，则将 <span class="arithmatex">\(num\)</span> 加入 <span class="arithmatex">\(lo\)</span> 中；否则如果 <span class="arithmatex">\(hi\)</span> 为空，或者 <span class="arithmatex">\(num \geq min(hi)\)</span>，则将 <span class="arithmatex">\(num\)</span> 加入 <span class="arithmatex">\(hi\)</span> 中；否则将 <span class="arithmatex">\(num\)</span> 加入 <span class="arithmatex">\(mid\)</span> 中，同时将 <span class="arithmatex">\(num\)</span> 的值加到 <span class="arithmatex">\(s\)</span> 中。</li>
+<li>接下来将 <span class="arithmatex">\(num\)</span> 加入队列 <span class="arithmatex">\(q\)</span> 中，如果此时队列 <span class="arithmatex">\(q\)</span> 的长度大于 <span class="arithmatex">\(m\)</span>，则将队首元素 <span class="arithmatex">\(x\)</span> 从队列 <span class="arithmatex">\(q\)</span> 中移除，接下来从 <span class="arithmatex">\(lo\)</span>, <span class="arithmatex">\(mid\)</span> 或 <span class="arithmatex">\(hi\)</span> 中选择其中一个包含 <span class="arithmatex">\(x\)</span> 的集合，将 <span class="arithmatex">\(x\)</span> 从该集合中移除，如果该集合为 <span class="arithmatex">\(mid\)</span>，则将 <span class="arithmatex">\(s\)</span> 减去 <span class="arithmatex">\(x\)</span> 的值。</li>
+<li>如果 <span class="arithmatex">\(lo\)</span> 的长度大于 <span class="arithmatex">\(k\)</span>，则循环将 <span class="arithmatex">\(lo\)</span> 中的最大值 <span class="arithmatex">\(max(lo)\)</span> 从 <span class="arithmatex">\(lo\)</span> 中移除，将 <span class="arithmatex">\(max(lo)\)</span> 加入 <span class="arithmatex">\(mid\)</span> 中，同时将 <span class="arithmatex">\(s\)</span> 加上 <span class="arithmatex">\(max(lo)\)</span> 的值。</li>
+<li>如果 <span class="arithmatex">\(hi\)</span> 的长度大于 <span class="arithmatex">\(k\)</span>，则循环将 <span class="arithmatex">\(hi\)</span> 中的最小值 <span class="arithmatex">\(min(hi)\)</span> 从 <span class="arithmatex">\(hi\)</span> 中移除，将 <span class="arithmatex">\(min(hi)\)</span> 加入 <span class="arithmatex">\(mid\)</span> 中，同时将 <span class="arithmatex">\(s\)</span> 加上 <span class="arithmatex">\(min(hi)\)</span> 的值。</li>
+<li>如果 <span class="arithmatex">\(lo\)</span> 的长度小于 <span class="arithmatex">\(k\)</span>，并且 <span class="arithmatex">\(mid\)</span> 不为空，则循环将 <span class="arithmatex">\(mid\)</span> 中的最小值 <span class="arithmatex">\(min(mid)\)</span> 从 <span class="arithmatex">\(mid\)</span> 中移除，将 <span class="arithmatex">\(min(mid)\)</span> 加入 <span class="arithmatex">\(lo\)</span> 中，同时将 <span class="arithmatex">\(s\)</span> 减去 <span class="arithmatex">\(min(mid)\)</span> 的值。</li>
+<li>如果 <span class="arithmatex">\(hi\)</span> 的长度小于 <span class="arithmatex">\(k\)</span>，并且 <span class="arithmatex">\(mid\)</span> 不为空，则循环将 <span class="arithmatex">\(mid\)</span> 中的最大值 <span class="arithmatex">\(max(mid)\)</span> 从 <span class="arithmatex">\(mid\)</span> 中移除，将 <span class="arithmatex">\(max(mid)\)</span> 加入 <span class="arithmatex">\(hi\)</span> 中，同时将 <span class="arithmatex">\(s\)</span> 减去 <span class="arithmatex">\(max(mid)\)</span> 的值。</li>
 </ol>
-<p>调用 $calculateMKAverage()$ 函数时，如果 $q$ 的长度小于 $m$，则返回 $-1$，否则返回 $\frac{s}{m - 2k}$。</p>
-<p>时间复杂度方面，每次调用 $addElement(num)$ 函数的时间复杂度为 $O(\log m)$，每次调用 $calculateMKAverage()$ 函数的时间复杂度为 $O(1)$。空间复杂度为 $O(m)$。</p>
+<p>调用 <span class="arithmatex">\(calculateMKAverage()\)</span> 函数时，如果 <span class="arithmatex">\(q\)</span> 的长度小于 <span class="arithmatex">\(m\)</span>，则返回 <span class="arithmatex">\(-1\)</span>，否则返回 <span class="arithmatex">\(\frac{s}{m - 2k}\)</span>。</p>
+<p>时间复杂度方面，每次调用 <span class="arithmatex">\(addElement(num)\)</span> 函数的时间复杂度为 <span class="arithmatex">\(O(\log m)\)</span>，每次调用 <span class="arithmatex">\(calculateMKAverage()\)</span> 函数的时间复杂度为 <span class="arithmatex">\(O(1)\)</span>。空间复杂度为 <span class="arithmatex">\(O(m)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91860,11 +91858,9 @@ obj.calculateMKAverage(); // 最后 3 个元素为 [5,5,5]
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

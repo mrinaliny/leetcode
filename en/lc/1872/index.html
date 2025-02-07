@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86131,17 +86129,17 @@ The difference between their scores is (-22) - 0 = -22.
 <!-- solution:start -->
 
 <h3 id="solution-1-prefix-sum-memoization-search">Solution 1: Prefix Sum + Memoization Search</h3>
-<p>According to the problem description, each time we take the leftmost $x$ stones, add their sum to our score, and then put a stone with this sum value on the leftmost side, it is equivalent to merging these $x$ stones into a stone with this sum value, and the prefix sum remains unchanged.</p>
-<p>We can use a prefix sum array $s$ of length $n$ to represent the prefix sum of the array $stones$, where $s[i]$ represents the sum of the elements $stones[0..i]$.</p>
-<p>Next, we design a function $dfs(i)$, which means that we currently take stones from $stones[i:]$, and return the maximum score difference that the current player can get.</p>
-<p>The execution process of the function $dfs(i)$ is as follows:</p>
+<p>According to the problem description, each time we take the leftmost <span class="arithmatex">\(x\)</span> stones, add their sum to our score, and then put a stone with this sum value on the leftmost side, it is equivalent to merging these <span class="arithmatex">\(x\)</span> stones into a stone with this sum value, and the prefix sum remains unchanged.</p>
+<p>We can use a prefix sum array <span class="arithmatex">\(s\)</span> of length <span class="arithmatex">\(n\)</span> to represent the prefix sum of the array <span class="arithmatex">\(stones\)</span>, where <span class="arithmatex">\(s[i]\)</span> represents the sum of the elements <span class="arithmatex">\(stones[0..i]\)</span>.</p>
+<p>Next, we design a function <span class="arithmatex">\(dfs(i)\)</span>, which means that we currently take stones from <span class="arithmatex">\(stones[i:]\)</span>, and return the maximum score difference that the current player can get.</p>
+<p>The execution process of the function <span class="arithmatex">\(dfs(i)\)</span> is as follows:</p>
 <ul>
-<li>If $i \geq n - 1$, it means that we can only take all the stones at present, so we return $s[n - 1]$.</li>
-<li>Otherwise, we can choose to take all the stones from $stones[i + 1:]$, and the score difference obtained is $dfs(i + 1)$; we can also choose to take the stones $stones[:i]$, and the score difference obtained is $s[i] - dfs(i + 1)$. We take the maximum of the two situations, which is the maximum score difference that the current player can get.</li>
+<li>If <span class="arithmatex">\(i \geq n - 1\)</span>, it means that we can only take all the stones at present, so we return <span class="arithmatex">\(s[n - 1]\)</span>.</li>
+<li>Otherwise, we can choose to take all the stones from <span class="arithmatex">\(stones[i + 1:]\)</span>, and the score difference obtained is <span class="arithmatex">\(dfs(i + 1)\)</span>; we can also choose to take the stones <span class="arithmatex">\(stones[:i]\)</span>, and the score difference obtained is <span class="arithmatex">\(s[i] - dfs(i + 1)\)</span>. We take the maximum of the two situations, which is the maximum score difference that the current player can get.</li>
 </ul>
-<p>Finally, we can get the score difference between Alice and Bob as $dfs(1)$, that is, Alice must start the game by taking stones from $stones[1:]$.</p>
+<p>Finally, we can get the score difference between Alice and Bob as <span class="arithmatex">\(dfs(1)\)</span>, that is, Alice must start the game by taking stones from <span class="arithmatex">\(stones[1:]\)</span>.</p>
 <p>To avoid repeated calculations, we can use memoization search.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the array $stones$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(stones\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86350,17 +86348,17 @@ The difference between their scores is (-22) - 0 = -22.
 
 <h3 id="solution-2-prefix-sum-dynamic-programming">Solution 2: Prefix Sum + Dynamic Programming</h3>
 <p>We can also use dynamic programming to solve this problem.</p>
-<p>Similar to Solution 1, we first use a prefix sum array $s$ of length $n$ to represent the prefix sum of the array $stones$, where $s[i]$ represents the sum of the elements $stones[0..i]$.</p>
-<p>We define $f[i]$ to represent the maximum score difference that the current player can get when taking stones from $stones[i:]$.</p>
-<p>If the player chooses to take the stones $stones[:i]$, then the score obtained is $s[i]$. At this time, the other player will take stones from $stones[i+1:]$, and the maximum score difference that the other player can get is $f[i+1]$. Therefore, the maximum score difference that the current player can get is $s[i] - f[i+1]$.</p>
-<p>If the player chooses to take stones from $stones[i+1:]$, then the maximum score difference obtained is $f[i+1]$.</p>
+<p>Similar to Solution 1, we first use a prefix sum array <span class="arithmatex">\(s\)</span> of length <span class="arithmatex">\(n\)</span> to represent the prefix sum of the array <span class="arithmatex">\(stones\)</span>, where <span class="arithmatex">\(s[i]\)</span> represents the sum of the elements <span class="arithmatex">\(stones[0..i]\)</span>.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> to represent the maximum score difference that the current player can get when taking stones from <span class="arithmatex">\(stones[i:]\)</span>.</p>
+<p>If the player chooses to take the stones <span class="arithmatex">\(stones[:i]\)</span>, then the score obtained is <span class="arithmatex">\(s[i]\)</span>. At this time, the other player will take stones from <span class="arithmatex">\(stones[i+1:]\)</span>, and the maximum score difference that the other player can get is <span class="arithmatex">\(f[i+1]\)</span>. Therefore, the maximum score difference that the current player can get is <span class="arithmatex">\(s[i] - f[i+1]\)</span>.</p>
+<p>If the player chooses to take stones from <span class="arithmatex">\(stones[i+1:]\)</span>, then the maximum score difference obtained is <span class="arithmatex">\(f[i+1]\)</span>.</p>
 <p>Therefore, we can get the state transition equation:</p>
-<p>$$
-f[i] = \max{s[i] - f[i+1], f[i+1]}
-$$</p>
-<p>Finally, we can get the score difference between Alice and Bob as $f[1]$, that is, Alice must start the game by taking stones from $stones[1:]$.</p>
-<p>We notice that $f[i]$ is only related to $f[i+1]$, so we only need to use a variable $f$ to represent $f[i]$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(1)$. Here, $n$ is the length of the array $stones$.</p>
+<div class="arithmatex">\[
+f[i] = \max\{s[i] - f[i+1], f[i+1]\}
+\]</div>
+<p>Finally, we can get the score difference between Alice and Bob as <span class="arithmatex">\(f[1]\)</span>, that is, Alice must start the game by taking stones from <span class="arithmatex">\(stones[1:]\)</span>.</p>
+<p>We notice that <span class="arithmatex">\(f[i]\)</span> is only related to <span class="arithmatex">\(f[i+1]\)</span>, so we only need to use a variable <span class="arithmatex">\(f\)</span> to represent <span class="arithmatex">\(f[i]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(1)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(stones\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86692,11 +86690,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

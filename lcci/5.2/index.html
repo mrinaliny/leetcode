@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90803,20 +90801,20 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：十进制小数转二进制小数</h3>
-<p>十进制小数转二进制小数的方法是：小数部分乘以 $2$，取整数部分作为二进制小数的下一位，小数部分作为下一次乘法的被乘数，直到小数部分为 $0$ 或者二进制小数的长度超过 $32$ 位。</p>
-<p>我们不妨举个例子，比如说我们要将 $0.8125$ 转换为二进制小数，过程如下：</p>
-<p>$$
+<p>十进制小数转二进制小数的方法是：小数部分乘以 <span class="arithmatex">\(2\)</span>，取整数部分作为二进制小数的下一位，小数部分作为下一次乘法的被乘数，直到小数部分为 <span class="arithmatex">\(0\)</span> 或者二进制小数的长度超过 <span class="arithmatex">\(32\)</span> 位。</p>
+<p>我们不妨举个例子，比如说我们要将 <span class="arithmatex">\(0.8125\)</span> 转换为二进制小数，过程如下：</p>
+<div class="arithmatex">\[
 \begin{aligned}
-0.8125 \times 2 &amp;= 1.625 \quad \textit{取整数部分} \quad 1 \
-0.625 \times 2 &amp;= 1.25 \quad \textit{取整数部分} \quad 1 \
-0.25 \times 2 &amp;= 0.5 \quad \textit{取整数部分} \quad 0 \
-0.5 \times 2 &amp;= 1 \quad \textit{取整数部分} \quad 1 \
+0.8125 \times 2 &amp;= 1.625 \quad \textit{取整数部分} \quad 1 \\
+0.625 \times 2 &amp;= 1.25 \quad \textit{取整数部分} \quad 1 \\
+0.25 \times 2 &amp;= 0.5 \quad \textit{取整数部分} \quad 0 \\
+0.5 \times 2 &amp;= 1 \quad \textit{取整数部分} \quad 1 \\
 \end{aligned}
-$$</p>
-<p>所以十进制小数 $0.8125$ 的二进制小数表示为 $0.1101_{(2)}$。</p>
-<p>对于本题，由于实数介于 $0$ 和 $1$ 之间，所以其整数部分一定是 $0$，我们只需要将小数部分，按照上述方法转换为二进制小数即可。当小数部分为 $0$ 或者二进制小数的长度不小于 $32$ 位时，停止转换。</p>
-<p>最后，如果小数部分不为 $0$，说明该实数无法用 $32$ 位以内的二进制表示，返回字符串 <code>"ERROR"</code>，否则返回转换后的二进制小数。</p>
-<p>时间复杂度 $O(C)$，空间复杂度 $O(C)$。其中 $C$ 为二进制小数的长度，最大为 $32$。</p>
+\]</div>
+<p>所以十进制小数 <span class="arithmatex">\(0.8125\)</span> 的二进制小数表示为 <span class="arithmatex">\(0.1101_{(2)}\)</span>。</p>
+<p>对于本题，由于实数介于 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 之间，所以其整数部分一定是 <span class="arithmatex">\(0\)</span>，我们只需要将小数部分，按照上述方法转换为二进制小数即可。当小数部分为 <span class="arithmatex">\(0\)</span> 或者二进制小数的长度不小于 <span class="arithmatex">\(32\)</span> 位时，停止转换。</p>
+<p>最后，如果小数部分不为 <span class="arithmatex">\(0\)</span>，说明该实数无法用 <span class="arithmatex">\(32\)</span> 位以内的二进制表示，返回字符串 <code>"ERROR"</code>，否则返回转换后的二进制小数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(C)\)</span>，空间复杂度 <span class="arithmatex">\(O(C)\)</span>。其中 <span class="arithmatex">\(C\)</span> 为二进制小数的长度，最大为 <span class="arithmatex">\(32\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91196,11 +91194,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

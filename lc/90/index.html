@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90854,12 +90852,12 @@
 <!-- solution:start -->
 
 <h3 id="dfs">方法一：排序 + DFS</h3>
-<p>我们可以先对数组 $\textit{nums}$ 进行排序，方便去重。</p>
-<p>然后，我们设计一个函数 $\textit{dfs}(i)$，表示当前从第 $i$ 个元素开始搜索子集。函数 $\textit{dfs}(i)$ 的执行逻辑如下：</p>
-<p>如果 $i \geq n$，说明已经搜索完所有元素，将当前子集加入答案数组中，递归结束。</p>
-<p>如果 $i &lt; n$，将第 $i$ 个元素加入子集，执行 $\textit{dfs}(i + 1)$，然后将第 $i$ 个元素从子集中移除。接下来，我们判断第 $i$ 个元素是否和下一个元素相同，如果相同，则循环跳过该元素，直到找到第一个和第 $i$ 个元素不同的元素，执行 $\textit{dfs}(i + 1)$。</p>
-<p>最后，我们只需要调用 $\textit{dfs}(0)$，返回答案数组即可。</p>
-<p>时间复杂度 $O(n \times 2^n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $\textit{nums}$ 的长度。</p>
+<p>我们可以先对数组 <span class="arithmatex">\(\textit{nums}\)</span> 进行排序，方便去重。</p>
+<p>然后，我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i)\)</span>，表示当前从第 <span class="arithmatex">\(i\)</span> 个元素开始搜索子集。函数 <span class="arithmatex">\(\textit{dfs}(i)\)</span> 的执行逻辑如下：</p>
+<p>如果 <span class="arithmatex">\(i \geq n\)</span>，说明已经搜索完所有元素，将当前子集加入答案数组中，递归结束。</p>
+<p>如果 <span class="arithmatex">\(i &lt; n\)</span>，将第 <span class="arithmatex">\(i\)</span> 个元素加入子集，执行 <span class="arithmatex">\(\textit{dfs}(i + 1)\)</span>，然后将第 <span class="arithmatex">\(i\)</span> 个元素从子集中移除。接下来，我们判断第 <span class="arithmatex">\(i\)</span> 个元素是否和下一个元素相同，如果相同，则循环跳过该元素，直到找到第一个和第 <span class="arithmatex">\(i\)</span> 个元素不同的元素，执行 <span class="arithmatex">\(\textit{dfs}(i + 1)\)</span>。</p>
+<p>最后，我们只需要调用 <span class="arithmatex">\(\textit{dfs}(0)\)</span>，返回答案数组即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times 2^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91259,10 +91257,10 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法二：排序 + 二进制枚举</h3>
-<p>与方法一类似，我们先对数组 $\textit{nums}$ 进行排序，方便去重。</p>
-<p>接下来，我们在 $[0, 2^n)$ 的范围内枚举一个二进制数 $\textit{mask}$，其中 $\textit{mask}$ 的二进制表示是一个 $n$ 位的位串，如果 $\textit{mask}$ 的第 $i$ 位为 $1$，表示选择 $\textit{nums}[i]$，为 $0$ 表示不选择 $\textit{nums}[i]$。注意，如果 $\textit{mask}$ 的 $i - 1$ 位为 $0$，且 $\textit{nums}[i] = \textit{nums}[i - 1]$，则说明在当前枚举到的方案中，第 $i$ 个元素和第 $i - 1$ 个元素相同，为了避免重复，我们跳过这种情况。否则，我们将 $\textit{mask}$ 对应的子集加入答案数组中。</p>
+<p>与方法一类似，我们先对数组 <span class="arithmatex">\(\textit{nums}\)</span> 进行排序，方便去重。</p>
+<p>接下来，我们在 <span class="arithmatex">\([0, 2^n)\)</span> 的范围内枚举一个二进制数 <span class="arithmatex">\(\textit{mask}\)</span>，其中 <span class="arithmatex">\(\textit{mask}\)</span> 的二进制表示是一个 <span class="arithmatex">\(n\)</span> 位的位串，如果 <span class="arithmatex">\(\textit{mask}\)</span> 的第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span>，表示选择 <span class="arithmatex">\(\textit{nums}[i]\)</span>，为 <span class="arithmatex">\(0\)</span> 表示不选择 <span class="arithmatex">\(\textit{nums}[i]\)</span>。注意，如果 <span class="arithmatex">\(\textit{mask}\)</span> 的 <span class="arithmatex">\(i - 1\)</span> 位为 <span class="arithmatex">\(0\)</span>，且 <span class="arithmatex">\(\textit{nums}[i] = \textit{nums}[i - 1]\)</span>，则说明在当前枚举到的方案中，第 <span class="arithmatex">\(i\)</span> 个元素和第 <span class="arithmatex">\(i - 1\)</span> 个元素相同，为了避免重复，我们跳过这种情况。否则，我们将 <span class="arithmatex">\(\textit{mask}\)</span> 对应的子集加入答案数组中。</p>
 <p>枚举结束后，我们返回答案数组即可。</p>
-<p>时间复杂度 $O(n \times 2^n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $\textit{nums}$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times 2^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(\textit{nums}\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:8"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><input id="__tabbed_2_8" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label><label for="__tabbed_2_7">JavaScript</label><label for="__tabbed_2_8">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91885,11 +91883,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

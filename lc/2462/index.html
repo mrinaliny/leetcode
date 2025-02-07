@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90870,12 +90868,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：优先队列（小根堆）</h3>
-<p>我们首先判断 $candidates \times 2$ 是否大于等于 $n$，如果是，我们直接返回前 $k$ 个最小的工人的代价之和。</p>
-<p>否则，我们使用一个小根堆 $pq$ 来维护前 $candidates$ 个工人和后 $candidates$ 个工人的代价。</p>
-<p>我们首先将前 $candidates$ 个工人的代价以及对应的下标加入小根堆 $pq$ 中，然后将后 $candidates$ 个工人的代价以及对应的下标加入小根堆 $pq$ 中。用两个指针 $l$ 和 $r$ 分别指向前后待选工人的下标，初始时 $l = candidates$, $r = n - candidates - 1$。</p>
-<p>然后我们进行 $k$ 次循环，每次从小根堆 $pq$ 中取出代价最小的工人，将其代价加入答案，如果 $l &gt; r$，说明前后待选工人已经全部被选完，直接跳过。否则，如果当前工人的下标小于 $l$，说明是前面的工人，我们将第 $l$ 个工人的代价以及下标加入小根堆 $pq$ 中，然后 $l$ 加一；否则，我们将第 $r$ 个工人的代价以及下标加入小根堆 $pq$ 中，然后 $r$ 减一。</p>
+<p>我们首先判断 <span class="arithmatex">\(candidates \times 2\)</span> 是否大于等于 <span class="arithmatex">\(n\)</span>，如果是，我们直接返回前 <span class="arithmatex">\(k\)</span> 个最小的工人的代价之和。</p>
+<p>否则，我们使用一个小根堆 <span class="arithmatex">\(pq\)</span> 来维护前 <span class="arithmatex">\(candidates\)</span> 个工人和后 <span class="arithmatex">\(candidates\)</span> 个工人的代价。</p>
+<p>我们首先将前 <span class="arithmatex">\(candidates\)</span> 个工人的代价以及对应的下标加入小根堆 <span class="arithmatex">\(pq\)</span> 中，然后将后 <span class="arithmatex">\(candidates\)</span> 个工人的代价以及对应的下标加入小根堆 <span class="arithmatex">\(pq\)</span> 中。用两个指针 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(r\)</span> 分别指向前后待选工人的下标，初始时 <span class="arithmatex">\(l = candidates\)</span>, <span class="arithmatex">\(r = n - candidates - 1\)</span>。</p>
+<p>然后我们进行 <span class="arithmatex">\(k\)</span> 次循环，每次从小根堆 <span class="arithmatex">\(pq\)</span> 中取出代价最小的工人，将其代价加入答案，如果 <span class="arithmatex">\(l &gt; r\)</span>，说明前后待选工人已经全部被选完，直接跳过。否则，如果当前工人的下标小于 <span class="arithmatex">\(l\)</span>，说明是前面的工人，我们将第 <span class="arithmatex">\(l\)</span> 个工人的代价以及下标加入小根堆 <span class="arithmatex">\(pq\)</span> 中，然后 <span class="arithmatex">\(l\)</span> 加一；否则，我们将第 <span class="arithmatex">\(r\)</span> 个工人的代价以及下标加入小根堆 <span class="arithmatex">\(pq\)</span> 中，然后 <span class="arithmatex">\(r\)</span> 减一。</p>
 <p>循环结束后，返回答案即可。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 $costs$ 的长度。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <span class="arithmatex">\(costs\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91441,11 +91439,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

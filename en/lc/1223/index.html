@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86057,14 +86055,14 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We can design a function $dfs(i, j, x)$ to represent the number of schemes starting from the $i$-th dice roll, with the current dice roll being $j$, and the number of consecutive times $j$ is rolled being $x$. The range of $j$ is $[1, 6]$, and the range of $x$ is $[1, rollMax[j - 1]]$. The answer is $dfs(0, 0, 0)$.</p>
-<p>The calculation process of the function $dfs(i, j, x)$ is as follows:</p>
+<p>We can design a function <span class="arithmatex">\(dfs(i, j, x)\)</span> to represent the number of schemes starting from the <span class="arithmatex">\(i\)</span>-th dice roll, with the current dice roll being <span class="arithmatex">\(j\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled being <span class="arithmatex">\(x\)</span>. The range of <span class="arithmatex">\(j\)</span> is <span class="arithmatex">\([1, 6]\)</span>, and the range of <span class="arithmatex">\(x\)</span> is <span class="arithmatex">\([1, rollMax[j - 1]]\)</span>. The answer is <span class="arithmatex">\(dfs(0, 0, 0)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(dfs(i, j, x)\)</span> is as follows:</p>
 <ul>
-<li>If $i \ge n$, it means that $n$ dice have been rolled, return $1$.</li>
-<li>Otherwise, we enumerate the number $k$ rolled next time. If $k \ne j$, we can directly roll $k$, and the number of consecutive times $j$ is rolled will be reset to $1$, so the number of schemes is $dfs(i + 1, k, 1)$. If $k = j$, we need to judge whether $x$ is less than $rollMax[j - 1]$. If it is less, we can continue to roll $j$, and the number of consecutive times $j$ is rolled will increase by $1$, so the number of schemes is $dfs(i + 1, j, x + 1)$. Finally, add all the scheme numbers to get the value of $dfs(i, j, x)$. Note that the answer may be very large, so we need to take the modulus of $10^9 + 7$.</li>
+<li>If <span class="arithmatex">\(i \ge n\)</span>, it means that <span class="arithmatex">\(n\)</span> dice have been rolled, return <span class="arithmatex">\(1\)</span>.</li>
+<li>Otherwise, we enumerate the number <span class="arithmatex">\(k\)</span> rolled next time. If <span class="arithmatex">\(k \ne j\)</span>, we can directly roll <span class="arithmatex">\(k\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled will be reset to <span class="arithmatex">\(1\)</span>, so the number of schemes is <span class="arithmatex">\(dfs(i + 1, k, 1)\)</span>. If <span class="arithmatex">\(k = j\)</span>, we need to judge whether <span class="arithmatex">\(x\)</span> is less than <span class="arithmatex">\(rollMax[j - 1]\)</span>. If it is less, we can continue to roll <span class="arithmatex">\(j\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled will increase by <span class="arithmatex">\(1\)</span>, so the number of schemes is <span class="arithmatex">\(dfs(i + 1, j, x + 1)\)</span>. Finally, add all the scheme numbers to get the value of <span class="arithmatex">\(dfs(i, j, x)\)</span>. Note that the answer may be very large, so we need to take the modulus of <span class="arithmatex">\(10^9 + 7\)</span>.</li>
 </ul>
 <p>During the process, we can use memoization search to avoid repeated calculations.</p>
-<p>The time complexity is $O(n \times k^2 \times M)$, and the space complexity is $O(n \times k \times M)$. Here, $k$ is the range of dice points, and $M$ is the maximum number of times a certain point can be rolled consecutively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k^2 \times M)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k \times M)\)</span>. Here, <span class="arithmatex">\(k\)</span> is the range of dice points, and <span class="arithmatex">\(M\)</span> is the maximum number of times a certain point can be rolled consecutively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86273,17 +86271,17 @@
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
 <p>We can change the memoization search in Solution 1 to dynamic programming.</p>
-<p>Define $f[i][j][x]$ as the number of schemes for the first $i$ dice rolls, with the $i$-th dice roll being $j$, and the number of consecutive times $j$ is rolled being $x$. Initially, $f[1][j][1] = 1$, where $1 \leq j \leq 6$. The answer is:</p>
-<p>$$
+<p>Define <span class="arithmatex">\(f[i][j][x]\)</span> as the number of schemes for the first <span class="arithmatex">\(i\)</span> dice rolls, with the <span class="arithmatex">\(i\)</span>-th dice roll being <span class="arithmatex">\(j\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled being <span class="arithmatex">\(x\)</span>. Initially, <span class="arithmatex">\(f[1][j][1] = 1\)</span>, where <span class="arithmatex">\(1 \leq j \leq 6\)</span>. The answer is:</p>
+<div class="arithmatex">\[
 \sum_{j=1}^6 \sum_{x=1}^{rollMax[j-1]} f[n][j][x]
-$$</p>
-<p>We enumerate the last dice roll as $j$, and the number of consecutive times $j$ is rolled as $x$. The current dice roll can be $1, 2, \cdots, 6$. If the current dice roll is $k$, there are two cases:</p>
+\]</div>
+<p>We enumerate the last dice roll as <span class="arithmatex">\(j\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled as <span class="arithmatex">\(x\)</span>. The current dice roll can be <span class="arithmatex">\(1, 2, \cdots, 6\)</span>. If the current dice roll is <span class="arithmatex">\(k\)</span>, there are two cases:</p>
 <ul>
-<li>If $k \neq j$, we can directly roll $k$, and the number of consecutive times $j$ is rolled will be reset to $1$. Therefore, the number of schemes $f[i][k][1]$ will increase by $f[i-1][j][x]$.</li>
-<li>If $k = j$, we need to judge whether $x+1$ is less than or equal to $rollMax[j-1]$. If it is less than or equal to, we can continue to roll $j$, and the number of consecutive times $j$ is rolled will increase by $1$. Therefore, the number of schemes $f[i][j][x+1]$ will increase by $f[i-1][j][x]$.</li>
+<li>If <span class="arithmatex">\(k \neq j\)</span>, we can directly roll <span class="arithmatex">\(k\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled will be reset to <span class="arithmatex">\(1\)</span>. Therefore, the number of schemes <span class="arithmatex">\(f[i][k][1]\)</span> will increase by <span class="arithmatex">\(f[i-1][j][x]\)</span>.</li>
+<li>If <span class="arithmatex">\(k = j\)</span>, we need to judge whether <span class="arithmatex">\(x+1\)</span> is less than or equal to <span class="arithmatex">\(rollMax[j-1]\)</span>. If it is less than or equal to, we can continue to roll <span class="arithmatex">\(j\)</span>, and the number of consecutive times <span class="arithmatex">\(j\)</span> is rolled will increase by <span class="arithmatex">\(1\)</span>. Therefore, the number of schemes <span class="arithmatex">\(f[i][j][x+1]\)</span> will increase by <span class="arithmatex">\(f[i-1][j][x]\)</span>.</li>
 </ul>
-<p>The final answer is the sum of all $f[n][j][x]$.</p>
-<p>The time complexity is $O(n \times k^2 \times M)$, and the space complexity is $O(n \times k \times M)$. Here, $k$ is the range of dice points, and $M$ is the maximum number of times a certain point can be rolled consecutively.</p>
+<p>The final answer is the sum of all <span class="arithmatex">\(f[n][j][x]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times k^2 \times M)\)</span>, and the space complexity is <span class="arithmatex">\(O(n \times k \times M)\)</span>. Here, <span class="arithmatex">\(k\)</span> is the range of dice points, and <span class="arithmatex">\(M\)</span> is the maximum number of times a certain point can be rolled consecutively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86735,11 +86733,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

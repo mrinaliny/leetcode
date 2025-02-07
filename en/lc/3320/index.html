@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86066,15 +86064,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $\textit{dfs}(i, j, k)$, where $i$ represents starting from the $i$-th character of the string $s$, $j$ represents the current score difference between $\textit{Alice}$ and $\textit{Bob}$, and $k$ represents the last creature summoned by $\textit{Bob}$. The function calculates how many sequences of moves $\textit{Bob}$ can make to defeat $\textit{Alice}$.</p>
-<p>The answer is $\textit{dfs}(0, 0, -1)$, where $-1$ indicates that $\textit{Bob}$ has not summoned any creatures yet. In languages other than Python, since the score difference can be negative, we can add $n$ to the score difference to ensure it is non-negative.</p>
-<p>The calculation process of the function $\textit{dfs}(i, j, k)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span>, where <span class="arithmatex">\(i\)</span> represents starting from the <span class="arithmatex">\(i\)</span>-th character of the string <span class="arithmatex">\(s\)</span>, <span class="arithmatex">\(j\)</span> represents the current score difference between <span class="arithmatex">\(\textit{Alice}\)</span> and <span class="arithmatex">\(\textit{Bob}\)</span>, and <span class="arithmatex">\(k\)</span> represents the last creature summoned by <span class="arithmatex">\(\textit{Bob}\)</span>. The function calculates how many sequences of moves <span class="arithmatex">\(\textit{Bob}\)</span> can make to defeat <span class="arithmatex">\(\textit{Alice}\)</span>.</p>
+<p>The answer is <span class="arithmatex">\(\textit{dfs}(0, 0, -1)\)</span>, where <span class="arithmatex">\(-1\)</span> indicates that <span class="arithmatex">\(\textit{Bob}\)</span> has not summoned any creatures yet. In languages other than Python, since the score difference can be negative, we can add <span class="arithmatex">\(n\)</span> to the score difference to ensure it is non-negative.</p>
+<p>The calculation process of the function <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span> is as follows:</p>
 <ul>
-<li>If $n - i \leq j$, then the remaining rounds are not enough for $\textit{Bob}$ to surpass $\textit{Alice}$'s score, so return $0$.</li>
-<li>If $i \geq n$, then all rounds have ended. If $\textit{Bob}$'s score is less than $0$, return $1$; otherwise, return $0$.</li>
-<li>Otherwise, we enumerate the creatures $\textit{Bob}$ can summon this round. If the creature summoned this round is the same as the one summoned in the previous round, $\textit{Bob}$ cannot win this round, so we skip it. Otherwise, we recursively calculate $\textit{dfs}(i + 1, j + \textit{calc}(d[s[i]], l), l)$, where $\textit{calc}(x, y)$ represents the outcome between $x$ and $y$, and $d$ is a mapping that maps characters to $\textit{012}$. We sum all the results and take the modulo $10^9 + 7$.</li>
+<li>If <span class="arithmatex">\(n - i \leq j\)</span>, then the remaining rounds are not enough for <span class="arithmatex">\(\textit{Bob}\)</span> to surpass <span class="arithmatex">\(\textit{Alice}\)</span>'s score, so return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(i \geq n\)</span>, then all rounds have ended. If <span class="arithmatex">\(\textit{Bob}\)</span>'s score is less than <span class="arithmatex">\(0\)</span>, return <span class="arithmatex">\(1\)</span>; otherwise, return <span class="arithmatex">\(0\)</span>.</li>
+<li>Otherwise, we enumerate the creatures <span class="arithmatex">\(\textit{Bob}\)</span> can summon this round. If the creature summoned this round is the same as the one summoned in the previous round, <span class="arithmatex">\(\textit{Bob}\)</span> cannot win this round, so we skip it. Otherwise, we recursively calculate <span class="arithmatex">\(\textit{dfs}(i + 1, j + \textit{calc}(d[s[i]], l), l)\)</span>, where <span class="arithmatex">\(\textit{calc}(x, y)\)</span> represents the outcome between <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(d\)</span> is a mapping that maps characters to <span class="arithmatex">\(\textit{012}\)</span>. We sum all the results and take the modulo <span class="arithmatex">\(10^9 + 7\)</span>.</li>
 </ul>
-<p>The time complexity is $O(n^2 \times k^2)$, where $n$ is the length of the string $s$, and $k$ represents the size of the character set. The space complexity is $O(n^2 \times k)$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2 \times k^2)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the string <span class="arithmatex">\(s\)</span>, and <span class="arithmatex">\(k\)</span> represents the size of the character set. The space complexity is <span class="arithmatex">\(O(n^2 \times k)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86658,11 +86656,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

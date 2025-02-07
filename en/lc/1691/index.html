@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86067,17 +86065,17 @@ The maximum height of stacked cuboids is 6 * 17 = 102.
 <!-- solution:start -->
 
 <h3 id="solution-1-sorting-dynamic-programming">Solution 1: Sorting + Dynamic Programming</h3>
-<p>According to the problem description, box $j$ can be placed on box $i$ if and only if the "length, width, and height" of box $j$ are less than or equal to the "length, width, and height" of box $i$.</p>
+<p>According to the problem description, box <span class="arithmatex">\(j\)</span> can be placed on box <span class="arithmatex">\(i\)</span> if and only if the "length, width, and height" of box <span class="arithmatex">\(j\)</span> are less than or equal to the "length, width, and height" of box <span class="arithmatex">\(i\)</span>.</p>
 <p>This problem allows us to rotate the boxes, which means we can choose any side of the box as the "height". For any legal stacking, if we rotate each box in it to "length &lt;= width &lt;= height", the stacking is still legal and can ensure the maximum height of the stacking.</p>
 <p>Therefore, we can sort all the sides of the boxes so that each box satisfies "length &lt;= width &lt;= height". Then we sort each box in ascending order.</p>
 <p>Next, we can use dynamic programming to solve this problem.</p>
-<p>We define $f[i]$ as the maximum height when box $i$ is at the bottom. We can enumerate each box $j$ above box $i$, where $0 \leq j &lt; i$. If $j$ can be placed on top of $i$, then we can get the state transition equation:</p>
-<p>$$
-f[i] = \max_{0 \leq j &lt; i} {f[j] + h[i]}
-$$</p>
-<p>where $h[i]$ represents the height of box $i$.</p>
-<p>The final answer is the maximum value of $f[i]$.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n)$. Here, $n$ is the number of boxes.</p>
+<p>We define <span class="arithmatex">\(f[i]\)</span> as the maximum height when box <span class="arithmatex">\(i\)</span> is at the bottom. We can enumerate each box <span class="arithmatex">\(j\)</span> above box <span class="arithmatex">\(i\)</span>, where <span class="arithmatex">\(0 \leq j &lt; i\)</span>. If <span class="arithmatex">\(j\)</span> can be placed on top of <span class="arithmatex">\(i\)</span>, then we can get the state transition equation:</p>
+<div class="arithmatex">\[
+f[i] = \max_{0 \leq j &lt; i} \{f[j] + h[i]\}
+\]</div>
+<p>where <span class="arithmatex">\(h[i]\)</span> represents the height of box <span class="arithmatex">\(i\)</span>.</p>
+<p>The final answer is the maximum value of <span class="arithmatex">\(f[i]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of boxes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86578,11 +86576,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

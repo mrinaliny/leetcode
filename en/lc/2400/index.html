@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86051,20 +86049,20 @@ It can be proven that no other way is possible, so we return 3.</pre>
 <!-- solution:start -->
 
 <h3 id="solution-1-memorization-search">Solution 1: Memorization Search</h3>
-<p>We design a function $dfs(i, j)$, which represents the number of ways to reach the target position when the current position is $i$ distance from the target position and there are $j$ steps left. The answer is $dfs(abs(startPos - endPos), k)$.</p>
-<p>The calculation method of the function $dfs(i, j)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents the number of ways to reach the target position when the current position is <span class="arithmatex">\(i\)</span> distance from the target position and there are <span class="arithmatex">\(j\)</span> steps left. The answer is <span class="arithmatex">\(dfs(abs(startPos - endPos), k)\)</span>.</p>
+<p>The calculation method of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $i \gt j$ or $j \lt 0$, it means that the current distance from the target position is greater than the remaining steps, or the remaining steps are negative. In this case, it is impossible to reach the target position, so return $0$;</li>
-<li>If $j = 0$, it means that there are no steps left. At this time, only when the current distance from the target position is $0$ can the target position be reached, otherwise it is impossible to reach the target position. Return $1$ or $0$;</li>
-<li>Otherwise, the current distance from the target position is $i$, and there are $j$ steps left. There are two ways to reach the target position:<ul>
-<li>Move one step to the left, the current distance from the target position is $i + 1$, and there are $j - 1$ steps left. The number of methods is $dfs(i + 1, j - 1)$;</li>
-<li>Move one step to the right, the current distance from the target position is $abs(i - 1)$, and there are $j - 1$ steps left. The number of methods is $dfs(abs(i - 1), j - 1)$;</li>
+<li>If <span class="arithmatex">\(i \gt j\)</span> or <span class="arithmatex">\(j \lt 0\)</span>, it means that the current distance from the target position is greater than the remaining steps, or the remaining steps are negative. In this case, it is impossible to reach the target position, so return <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(j = 0\)</span>, it means that there are no steps left. At this time, only when the current distance from the target position is <span class="arithmatex">\(0\)</span> can the target position be reached, otherwise it is impossible to reach the target position. Return <span class="arithmatex">\(1\)</span> or <span class="arithmatex">\(0\)</span>;</li>
+<li>Otherwise, the current distance from the target position is <span class="arithmatex">\(i\)</span>, and there are <span class="arithmatex">\(j\)</span> steps left. There are two ways to reach the target position:<ul>
+<li>Move one step to the left, the current distance from the target position is <span class="arithmatex">\(i + 1\)</span>, and there are <span class="arithmatex">\(j - 1\)</span> steps left. The number of methods is <span class="arithmatex">\(dfs(i + 1, j - 1)\)</span>;</li>
+<li>Move one step to the right, the current distance from the target position is <span class="arithmatex">\(abs(i - 1)\)</span>, and there are <span class="arithmatex">\(j - 1\)</span> steps left. The number of methods is <span class="arithmatex">\(dfs(abs(i - 1), j - 1)\)</span>;</li>
 </ul>
 </li>
-<li>Finally, return the result of the sum of the two methods modulo $10^9 + 7$.</li>
+<li>Finally, return the result of the sum of the two methods modulo <span class="arithmatex">\(10^9 + 7\)</span>.</li>
 </ul>
-<p>To avoid repeated calculations, we use memorization search, that is, we use a two-dimensional array $f$ to record the result of the function $dfs(i, j)$. When the function $dfs(i, j)$ is called, if $f[i][j]$ is not $-1$, return $f[i][j]$ directly, otherwise calculate the value of $f[i][j]$, and return $f[i][j]$.</p>
-<p>The time complexity is $O(k^2)$, and the space complexity is $O(k^2)$. Here, $k$ is the number of steps given in the problem.</p>
+<p>To avoid repeated calculations, we use memorization search, that is, we use a two-dimensional array <span class="arithmatex">\(f\)</span> to record the result of the function <span class="arithmatex">\(dfs(i, j)\)</span>. When the function <span class="arithmatex">\(dfs(i, j)\)</span> is called, if <span class="arithmatex">\(f[i][j]\)</span> is not <span class="arithmatex">\(-1\)</span>, return <span class="arithmatex">\(f[i][j]\)</span> directly, otherwise calculate the value of <span class="arithmatex">\(f[i][j]\)</span>, and return <span class="arithmatex">\(f[i][j]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(k^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(k^2)\)</span>. Here, <span class="arithmatex">\(k\)</span> is the number of steps given in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86532,11 +86530,9 @@ It can be proven that no other way is possible, so we return 3.</pre>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

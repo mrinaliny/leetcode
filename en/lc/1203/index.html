@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86064,10 +86062,10 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-topological-sorting">Solution 1: Topological Sorting</h3>
-<p>First, we traverse the array $group$. For each project, if it does not belong to any group, we create a new group for it with the ID $m$, and increment $m$. This ensures that all projects belong to some group. Then, we use an array $groupItems$ to record the projects contained in each group. The array index is the group ID, and the array value is the list of projects in the group.</p>
-<p>Next, we need to build the graph. For each project, we need to build two types of graphs: one for the projects and one for the groups. We traverse the array $group$. For the current project $i$, its group is $group[i]$. We traverse $beforeItems[i]$, and for each project $j$ in it, if $group[i] = group[j]$, it means that $i$ and $j$ belong to the same group. We add an edge $j \to i$ in the project graph. Otherwise, it means that $i$ and $j$ belong to different groups. We add an edge $group[j] \to group[i]$ in the group graph, and update the corresponding in-degree array.</p>
-<p>Next, we perform topological sorting on the group graph to get the sorted group list $groupOrder$. If the length of the sorted list is not equal to the total number of groups, it means that the sorting cannot be completed, so we return an empty list. Otherwise, we traverse $groupOrder$, and for each group $gi$, we perform topological sorting on the project list $groupItems[gi]$ to get the sorted project list $itemOrder$. If the length of the sorted list is not equal to the total number of projects in the group, it means that the sorting cannot be completed, so we return an empty list. Otherwise, we add the projects in $itemOrder$ to the answer array, and finally return this answer array.</p>
-<p>The time complexity is $O(n + m)$, and the space complexity is $O(n + m)$. Here, $n$ and $m$ are the total number of projects and groups, respectively.</p>
+<p>First, we traverse the array <span class="arithmatex">\(group\)</span>. For each project, if it does not belong to any group, we create a new group for it with the ID <span class="arithmatex">\(m\)</span>, and increment <span class="arithmatex">\(m\)</span>. This ensures that all projects belong to some group. Then, we use an array <span class="arithmatex">\(groupItems\)</span> to record the projects contained in each group. The array index is the group ID, and the array value is the list of projects in the group.</p>
+<p>Next, we need to build the graph. For each project, we need to build two types of graphs: one for the projects and one for the groups. We traverse the array <span class="arithmatex">\(group\)</span>. For the current project <span class="arithmatex">\(i\)</span>, its group is <span class="arithmatex">\(group[i]\)</span>. We traverse <span class="arithmatex">\(beforeItems[i]\)</span>, and for each project <span class="arithmatex">\(j\)</span> in it, if <span class="arithmatex">\(group[i] = group[j]\)</span>, it means that <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> belong to the same group. We add an edge <span class="arithmatex">\(j \to i\)</span> in the project graph. Otherwise, it means that <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> belong to different groups. We add an edge <span class="arithmatex">\(group[j] \to group[i]\)</span> in the group graph, and update the corresponding in-degree array.</p>
+<p>Next, we perform topological sorting on the group graph to get the sorted group list <span class="arithmatex">\(groupOrder\)</span>. If the length of the sorted list is not equal to the total number of groups, it means that the sorting cannot be completed, so we return an empty list. Otherwise, we traverse <span class="arithmatex">\(groupOrder\)</span>, and for each group <span class="arithmatex">\(gi\)</span>, we perform topological sorting on the project list <span class="arithmatex">\(groupItems[gi]\)</span> to get the sorted project list <span class="arithmatex">\(itemOrder\)</span>. If the length of the sorted list is not equal to the total number of projects in the group, it means that the sorting cannot be completed, so we return an empty list. Otherwise, we add the projects in <span class="arithmatex">\(itemOrder\)</span> to the answer array, and finally return this answer array.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n + m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + m)\)</span>. Here, <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> are the total number of projects and groups, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86928,11 +86926,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

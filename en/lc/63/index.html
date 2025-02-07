@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86062,15 +86060,15 @@ There are two ways to reach the bottom-right corner:
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $dfs(i, j)$ to represent the number of paths from the grid $(i, j)$ to the grid $(m - 1, n - 1)$, where $m$ and $n$ are the number of rows and columns of the grid, respectively.</p>
-<p>The execution process of the function $dfs(i, j)$ is as follows:</p>
+<p>We design a function <span class="arithmatex">\(dfs(i, j)\)</span> to represent the number of paths from the grid <span class="arithmatex">\((i, j)\)</span> to the grid <span class="arithmatex">\((m - 1, n - 1)\)</span>, where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively.</p>
+<p>The execution process of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ul>
-<li>If $i \ge m$ or $j \ge n$, or $obstacleGrid[i][j] = 1$, then the number of paths is $0$;</li>
-<li>If $i = m - 1$ and $j = n - 1$, then the number of paths is $1$;</li>
-<li>Otherwise, the number of paths is $dfs(i + 1, j) + dfs(i, j + 1)$.</li>
+<li>If <span class="arithmatex">\(i \ge m\)</span> or <span class="arithmatex">\(j \ge n\)</span>, or <span class="arithmatex">\(obstacleGrid[i][j] = 1\)</span>, then the number of paths is <span class="arithmatex">\(0\)</span>;</li>
+<li>If <span class="arithmatex">\(i = m - 1\)</span> and <span class="arithmatex">\(j = n - 1\)</span>, then the number of paths is <span class="arithmatex">\(1\)</span>;</li>
+<li>Otherwise, the number of paths is <span class="arithmatex">\(dfs(i + 1, j) + dfs(i, j + 1)\)</span>.</li>
 </ul>
 <p>To avoid repeated calculations, we can use the method of memoization search.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the number of rows and columns of the grid, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86294,14 +86292,14 @@ There are two ways to reach the bottom-right corner:
 <!-- solution:start -->
 
 <h3 id="solution-2-dynamic-programming">Solution 2: Dynamic Programming</h3>
-<p>We define $f[i][j]$ as the number of paths to reach the grid $(i,j)$.</p>
-<p>First, initialize all values in the first column and first row of $f$. Then, traverse other rows and columns, there are two cases:</p>
+<p>We define <span class="arithmatex">\(f[i][j]\)</span> as the number of paths to reach the grid <span class="arithmatex">\((i,j)\)</span>.</p>
+<p>First, initialize all values in the first column and first row of <span class="arithmatex">\(f\)</span>. Then, traverse other rows and columns, there are two cases:</p>
 <ul>
-<li>If $obstacleGrid[i][j] = 1$, it means the number of paths is $0$, so $f[i][j] = 0$;</li>
-<li>If $obstacleGrid[i][j] = 0$, then $f[i][j] = f[i - 1][j] + f[i][j - 1]$.</li>
+<li>If <span class="arithmatex">\(obstacleGrid[i][j] = 1\)</span>, it means the number of paths is <span class="arithmatex">\(0\)</span>, so <span class="arithmatex">\(f[i][j] = 0\)</span>;</li>
+<li>If <span class="arithmatex">\(obstacleGrid[i][j] = 0\)</span>, then <span class="arithmatex">\(f[i][j] = f[i - 1][j] + f[i][j - 1]\)</span>.</li>
 </ul>
-<p>Finally, return $f[m - 1][n - 1]$.</p>
-<p>The time complexity is $O(m \times n)$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the number of rows and columns of the grid, respectively.</p>
+<p>Finally, return <span class="arithmatex">\(f[m - 1][n - 1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n)\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86823,11 +86821,9 @@ There are two ways to reach the bottom-right corner:
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

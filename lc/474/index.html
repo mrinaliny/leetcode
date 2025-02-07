@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90859,16 +90857,16 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j][k]$ 表示在前 $i$ 个字符串中，使用 $j$ 个 0 和 $k$ 个 1 的情况下最多可以得到的字符串数量。初始时 $f[i][j][k]=0$，答案为 $f[sz][m][n]$，其中 $sz$ 是数组 $strs$ 的长度。</p>
-<p>对于 $f[i][j][k]$，我们有两种决策：</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示在前 <span class="arithmatex">\(i\)</span> 个字符串中，使用 <span class="arithmatex">\(j\)</span> 个 0 和 <span class="arithmatex">\(k\)</span> 个 1 的情况下最多可以得到的字符串数量。初始时 <span class="arithmatex">\(f[i][j][k]=0\)</span>，答案为 <span class="arithmatex">\(f[sz][m][n]\)</span>，其中 <span class="arithmatex">\(sz\)</span> 是数组 <span class="arithmatex">\(strs\)</span> 的长度。</p>
+<p>对于 <span class="arithmatex">\(f[i][j][k]\)</span>，我们有两种决策：</p>
 <ul>
-<li>不选第 $i$ 个字符串，此时 $f[i][j][k]=f[i-1][j][k]$；</li>
-<li>选第 $i$ 个字符串，此时 $f[i][j][k]=f[i-1][j-a][k-b]+1$，其中 $a$ 和 $b$ 分别是第 $i$ 个字符串中 $0$ 和 $1$ 的数量。</li>
+<li>不选第 <span class="arithmatex">\(i\)</span> 个字符串，此时 <span class="arithmatex">\(f[i][j][k]=f[i-1][j][k]\)</span>；</li>
+<li>选第 <span class="arithmatex">\(i\)</span> 个字符串，此时 <span class="arithmatex">\(f[i][j][k]=f[i-1][j-a][k-b]+1\)</span>，其中 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 分别是第 <span class="arithmatex">\(i\)</span> 个字符串中 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的数量。</li>
 </ul>
-<p>我们取两种决策中的最大值，即可得到 $f[i][j][k]$ 的值。</p>
-<p>最终的答案即为 $f[sz][m][n]$。</p>
-<p>时间复杂度 $O(sz \times m \times n)$，空间复杂度 $O(sz \times m \times n)$。其中 $sz$ 是数组 $strs$ 的长度；而 $m$ 和 $n$ 分别是字符串中 $0$ 和 $1$ 的数量上限。</p>
-<p>我们注意到 $f[i][j][k]$ 的计算只和 $f[i-1][j][k]$ 以及 $f[i-1][j-a][k-b]$ 有关，因此我们可以去掉第一维，将空间复杂度优化到 $O(m \times n)$。</p>
+<p>我们取两种决策中的最大值，即可得到 <span class="arithmatex">\(f[i][j][k]\)</span> 的值。</p>
+<p>最终的答案即为 <span class="arithmatex">\(f[sz][m][n]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(sz \times m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(sz \times m \times n)\)</span>。其中 <span class="arithmatex">\(sz\)</span> 是数组 <span class="arithmatex">\(strs\)</span> 的长度；而 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是字符串中 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的数量上限。</p>
+<p>我们注意到 <span class="arithmatex">\(f[i][j][k]\)</span> 的计算只和 <span class="arithmatex">\(f[i-1][j][k]\)</span> 以及 <span class="arithmatex">\(f[i-1][j-a][k-b]\)</span> 有关，因此我们可以去掉第一维，将空间复杂度优化到 <span class="arithmatex">\(O(m \times n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91543,11 +91541,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

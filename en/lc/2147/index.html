@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86070,17 +86068,17 @@ Installing any would create some section that does not have exactly two seats.
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We design a function $\textit{dfs}(i, k)$, which represents the number of ways to partition the corridor at the $i$-th position, having already placed $k$ screens. Then the answer is $\textit{dfs}(0, 0)$.</p>
-<p>The calculation process of the function $\textit{dfs}(i, k)$ is as follows:</p>
-<p>If $i \geq \textit{len}(\textit{corridor})$, it means the corridor has been fully traversed. At this point, if $k = 2$, it indicates that a valid partitioning scheme has been found, so return $1$. Otherwise, return $0$.</p>
-<p>Otherwise, we need to consider the situation at the current position $i$:</p>
+<p>We design a function <span class="arithmatex">\(\textit{dfs}(i, k)\)</span>, which represents the number of ways to partition the corridor at the <span class="arithmatex">\(i\)</span>-th position, having already placed <span class="arithmatex">\(k\)</span> screens. Then the answer is <span class="arithmatex">\(\textit{dfs}(0, 0)\)</span>.</p>
+<p>The calculation process of the function <span class="arithmatex">\(\textit{dfs}(i, k)\)</span> is as follows:</p>
+<p>If <span class="arithmatex">\(i \geq \textit{len}(\textit{corridor})\)</span>, it means the corridor has been fully traversed. At this point, if <span class="arithmatex">\(k = 2\)</span>, it indicates that a valid partitioning scheme has been found, so return <span class="arithmatex">\(1\)</span>. Otherwise, return <span class="arithmatex">\(0\)</span>.</p>
+<p>Otherwise, we need to consider the situation at the current position <span class="arithmatex">\(i\)</span>:</p>
 <ul>
-<li>If $\textit{corridor}[i] = \text{'S'}$, it means the current position is a seat, and we increment $k$ by $1$.</li>
-<li>If $k &gt; 2$, it means the number of screens placed at the current position exceeds $2$, so return $0$.</li>
-<li>Otherwise, we can choose not to place a screen, i.e., $\textit{dfs}(i + 1, k)$. If $k = 2$, we can also choose to place a screen, i.e., $\textit{dfs}(i + 1, 0)$. We add the results of these two cases and take the result modulo $10^9 + 7$, i.e., $\textit{ans} = (\textit{ans} + \textit{dfs}(i + 1, k)) \bmod \text{mod}$.</li>
+<li>If <span class="arithmatex">\(\textit{corridor}[i] = \text{'S'}\)</span>, it means the current position is a seat, and we increment <span class="arithmatex">\(k\)</span> by <span class="arithmatex">\(1\)</span>.</li>
+<li>If <span class="arithmatex">\(k &gt; 2\)</span>, it means the number of screens placed at the current position exceeds <span class="arithmatex">\(2\)</span>, so return <span class="arithmatex">\(0\)</span>.</li>
+<li>Otherwise, we can choose not to place a screen, i.e., <span class="arithmatex">\(\textit{dfs}(i + 1, k)\)</span>. If <span class="arithmatex">\(k = 2\)</span>, we can also choose to place a screen, i.e., <span class="arithmatex">\(\textit{dfs}(i + 1, 0)\)</span>. We add the results of these two cases and take the result modulo <span class="arithmatex">\(10^9 + 7\)</span>, i.e., <span class="arithmatex">\(\textit{ans} = (\textit{ans} + \textit{dfs}(i + 1, k)) \bmod \text{mod}\)</span>.</li>
 </ul>
-<p>Finally, we return $\textit{dfs}(0, 0)$.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the length of the corridor.</p>
+<p>Finally, we return <span class="arithmatex">\(\textit{dfs}(0, 0)\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the corridor.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86366,11 +86364,11 @@ Installing any would create some section that does not have exactly two seats.
 <!-- solution:start -->
 
 <h3 id="solution-2-mathematics">Solution 2: Mathematics</h3>
-<p>We can divide every two seats into a group. Between two adjacent groups of seats, if the distance between the last seat of the previous group and the first seat of the next group is $x$, then there are $x$ ways to place the screen.</p>
-<p>We traverse the corridor, using a variable $\textit{cnt}$ to record the current number of seats, and a variable $\textit{last}$ to record the position of the last seat.</p>
-<p>When we encounter a seat, we increment $\textit{cnt}$ by $1$. If $\textit{cnt}$ is greater than $2$ and $\textit{cnt}$ is odd, then we need to place a screen between $\textit{last}$ and the current seat. The number of ways to do this is $\textit{ans} \times (i - \textit{last})$, where $\textit{ans}$ is the previous number of ways. Then, we update $\textit{last}$ to the current seat's position $i$.</p>
-<p>Finally, if $\textit{cnt}$ is greater than $0$ and $\textit{cnt}$ is even, return $\textit{ans}$; otherwise, return $0$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the corridor. The space complexity is $O(1)$.</p>
+<p>We can divide every two seats into a group. Between two adjacent groups of seats, if the distance between the last seat of the previous group and the first seat of the next group is <span class="arithmatex">\(x\)</span>, then there are <span class="arithmatex">\(x\)</span> ways to place the screen.</p>
+<p>We traverse the corridor, using a variable <span class="arithmatex">\(\textit{cnt}\)</span> to record the current number of seats, and a variable <span class="arithmatex">\(\textit{last}\)</span> to record the position of the last seat.</p>
+<p>When we encounter a seat, we increment <span class="arithmatex">\(\textit{cnt}\)</span> by <span class="arithmatex">\(1\)</span>. If <span class="arithmatex">\(\textit{cnt}\)</span> is greater than <span class="arithmatex">\(2\)</span> and <span class="arithmatex">\(\textit{cnt}\)</span> is odd, then we need to place a screen between <span class="arithmatex">\(\textit{last}\)</span> and the current seat. The number of ways to do this is <span class="arithmatex">\(\textit{ans} \times (i - \textit{last})\)</span>, where <span class="arithmatex">\(\textit{ans}\)</span> is the previous number of ways. Then, we update <span class="arithmatex">\(\textit{last}\)</span> to the current seat's position <span class="arithmatex">\(i\)</span>.</p>
+<p>Finally, if <span class="arithmatex">\(\textit{cnt}\)</span> is greater than <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(\textit{cnt}\)</span> is even, return <span class="arithmatex">\(\textit{ans}\)</span>; otherwise, return <span class="arithmatex">\(0\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the corridor. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86767,11 +86765,9 @@ Installing any would create some section that does not have exactly two seats.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

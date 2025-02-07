@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90862,14 +90860,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>根据题目描述，玩家从 $(0, 0)$ 出发，到达 $(n-1, n-1)$ 后，又重新返回到起始点 $(0, 0)$，我们可以视为玩家两次从 $(0, 0)$ 出发，到达 $(n-1, n-1)$。</p>
-<p>因此，我们定义 $f[k][i_1][i_2]$ 表示两次都走了 $k$ 步，分别到达 $(i_1, k-i_1)$ 和 $(i_2, k-i_2)$ 时，能够摘到的最多樱桃数。初始时 $f[0][0][0] = grid[0][0]$。其余 $f[k][i_1][i_2]$ 的初始值为负无穷。答案为 $\max(0, f[2n-2][n-1][n-1])$。</p>
+<p>根据题目描述，玩家从 <span class="arithmatex">\((0, 0)\)</span> 出发，到达 <span class="arithmatex">\((n-1, n-1)\)</span> 后，又重新返回到起始点 <span class="arithmatex">\((0, 0)\)</span>，我们可以视为玩家两次从 <span class="arithmatex">\((0, 0)\)</span> 出发，到达 <span class="arithmatex">\((n-1, n-1)\)</span>。</p>
+<p>因此，我们定义 <span class="arithmatex">\(f[k][i_1][i_2]\)</span> 表示两次都走了 <span class="arithmatex">\(k\)</span> 步，分别到达 <span class="arithmatex">\((i_1, k-i_1)\)</span> 和 <span class="arithmatex">\((i_2, k-i_2)\)</span> 时，能够摘到的最多樱桃数。初始时 <span class="arithmatex">\(f[0][0][0] = grid[0][0]\)</span>。其余 <span class="arithmatex">\(f[k][i_1][i_2]\)</span> 的初始值为负无穷。答案为 <span class="arithmatex">\(\max(0, f[2n-2][n-1][n-1])\)</span>。</p>
 <p>我们可以根据题目描述，得到状态转移方程：</p>
-<p>$$
+<div class="arithmatex">\[
 f[k][i_1][i_2] = \max(f[k-1][x_1][x_2] + t, f[k][i_1][i_2])
-$$</p>
-<p>其中 $t$ 表示 $(i_1, k-i_1)$ 和 $(i_2, k-i_2)$ 位置上的樱桃数，而 $x_1, x_2$ 分别表示 $(i_1, k-i_1)$ 和 $(i_2, k-i_2)$ 的前一步位置。</p>
-<p>时间复杂度 $O(n^3)$，空间复杂度 $O(n^3)$。其中 $n$ 表示网格的边长。</p>
+\]</div>
+<p>其中 <span class="arithmatex">\(t\)</span> 表示 <span class="arithmatex">\((i_1, k-i_1)\)</span> 和 <span class="arithmatex">\((i_2, k-i_2)\)</span> 位置上的樱桃数，而 <span class="arithmatex">\(x_1, x_2\)</span> 分别表示 <span class="arithmatex">\((i_1, k-i_1)\)</span> 和 <span class="arithmatex">\((i_2, k-i_2)\)</span> 的前一步位置。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^3)\)</span>，空间复杂度 <span class="arithmatex">\(O(n^3)\)</span>。其中 <span class="arithmatex">\(n\)</span> 表示网格的边长。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91498,11 +91496,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

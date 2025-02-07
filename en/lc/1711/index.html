@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86052,14 +86050,14 @@ Their respective sums are 4, 8, 8, and 16, all of which are powers of 2.
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-enumeration-of-powers-of-two">Solution 1: Hash Table + Enumeration of Powers of Two</h3>
-<p>According to the problem, we need to count the number of combinations in the array where the sum of two numbers is a power of $2$. Directly enumerating all combinations has a time complexity of $O(n^2)$, which will definitely time out.</p>
-<p>We can traverse the array and use a hash table $cnt$ to maintain the number of occurrences of each element $d$ in the array.</p>
-<p>For each element, we enumerate the powers of two $s$ as the sum of two numbers from small to large, and add the number of occurrences of $s - d$ in the hash table to the answer. Then increase the number of occurrences of the current element $d$ by one.</p>
+<p>According to the problem, we need to count the number of combinations in the array where the sum of two numbers is a power of <span class="arithmatex">\(2\)</span>. Directly enumerating all combinations has a time complexity of <span class="arithmatex">\(O(n^2)\)</span>, which will definitely time out.</p>
+<p>We can traverse the array and use a hash table <span class="arithmatex">\(cnt\)</span> to maintain the number of occurrences of each element <span class="arithmatex">\(d\)</span> in the array.</p>
+<p>For each element, we enumerate the powers of two <span class="arithmatex">\(s\)</span> as the sum of two numbers from small to large, and add the number of occurrences of <span class="arithmatex">\(s - d\)</span> in the hash table to the answer. Then increase the number of occurrences of the current element <span class="arithmatex">\(d\)</span> by one.</p>
 <p>After the traversal ends, return the answer.</p>
-<p>The time complexity is $O(n \times \log M)$, where $n$ is the length of the array <code>deliciousness</code>, and $M$ is the upper limit of the elements. For this problem, the upper limit $M=2^{20}$.</p>
-<p>We can also use a hash table $cnt$ to count the number of occurrences of each element in the array first.</p>
-<p>Then enumerate the powers of two $s$ as the sum of two numbers from small to large. For each $s$, traverse each key-value pair $(a, m)$ in the hash table. If $s - a$ is also in the hash table, and $s - a \neq a$, then add $m \times cnt[s - a]$ to the answer; if $s - a = a$, then add $m \times (m - 1)$ to the answer.</p>
-<p>Finally, divide the answer by $2$, modulo $10^9 + 7$, and return.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log M)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <code>deliciousness</code>, and <span class="arithmatex">\(M\)</span> is the upper limit of the elements. For this problem, the upper limit <span class="arithmatex">\(M=2^{20}\)</span>.</p>
+<p>We can also use a hash table <span class="arithmatex">\(cnt\)</span> to count the number of occurrences of each element in the array first.</p>
+<p>Then enumerate the powers of two <span class="arithmatex">\(s\)</span> as the sum of two numbers from small to large. For each <span class="arithmatex">\(s\)</span>, traverse each key-value pair <span class="arithmatex">\((a, m)\)</span> in the hash table. If <span class="arithmatex">\(s - a\)</span> is also in the hash table, and <span class="arithmatex">\(s - a \neq a\)</span>, then add <span class="arithmatex">\(m \times cnt[s - a]\)</span> to the answer; if <span class="arithmatex">\(s - a = a\)</span>, then add <span class="arithmatex">\(m \times (m - 1)\)</span> to the answer.</p>
+<p>Finally, divide the answer by <span class="arithmatex">\(2\)</span>, modulo <span class="arithmatex">\(10^9 + 7\)</span>, and return.</p>
 <p>The time complexity is the same as the method above.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
@@ -86599,11 +86597,9 @@ Their respective sums are 4, 8, 8, and 16, all of which are powers of 2.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,11 +90866,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示青蛙到达第 $i$ 个点，且处于第 $j$ 条跑道（下标从 $0$ 开始）的最小侧跳次数。</p>
-<p>注意到青蛙起始位置处于第 $2$ 条跑道（题目这里下标从 $1$ 开始），因此 $f[0][1]$ 的值为 $0$，而 $f[0][0]$ 和 $f[0][2]$ 的值均为 $1$。答案为 $min(f[n][0], f[n][1], f[n][2])$</p>
-<p>对于 $i$ 从 $1$ 到 $n$ 的每个位置，我们可以枚举青蛙当前所处的跑道 $j$，如果 $obstacles[i] = j + 1$，说明第 $j$ 条跑道上有障碍，此时 $f[i][j]$ 的值为正无穷；否则，青蛙可以选择不跳跃，此时 $f[i][j]$ 的值为 $f[i - 1][j]$，或者青蛙可以从其它跑道侧跳过来，此时 $f[i][j] = min(f[i][j], min(f[i][0], f[i][1], f[i][2]) + 1)$。</p>
-<p>在代码实现上，我们可以将第一维空间优化掉，只用一个长度为 $3$ 的数组 $f$ 来维护。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为数组 $obstacles$ 的长度。空间复杂度 $O(1)$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示青蛙到达第 <span class="arithmatex">\(i\)</span> 个点，且处于第 <span class="arithmatex">\(j\)</span> 条跑道（下标从 <span class="arithmatex">\(0\)</span> 开始）的最小侧跳次数。</p>
+<p>注意到青蛙起始位置处于第 <span class="arithmatex">\(2\)</span> 条跑道（题目这里下标从 <span class="arithmatex">\(1\)</span> 开始），因此 <span class="arithmatex">\(f[0][1]\)</span> 的值为 <span class="arithmatex">\(0\)</span>，而 <span class="arithmatex">\(f[0][0]\)</span> 和 <span class="arithmatex">\(f[0][2]\)</span> 的值均为 <span class="arithmatex">\(1\)</span>。答案为 <span class="arithmatex">\(min(f[n][0], f[n][1], f[n][2])\)</span></p>
+<p>对于 <span class="arithmatex">\(i\)</span> 从 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(n\)</span> 的每个位置，我们可以枚举青蛙当前所处的跑道 <span class="arithmatex">\(j\)</span>，如果 <span class="arithmatex">\(obstacles[i] = j + 1\)</span>，说明第 <span class="arithmatex">\(j\)</span> 条跑道上有障碍，此时 <span class="arithmatex">\(f[i][j]\)</span> 的值为正无穷；否则，青蛙可以选择不跳跃，此时 <span class="arithmatex">\(f[i][j]\)</span> 的值为 <span class="arithmatex">\(f[i - 1][j]\)</span>，或者青蛙可以从其它跑道侧跳过来，此时 <span class="arithmatex">\(f[i][j] = min(f[i][j], min(f[i][0], f[i][1], f[i][2]) + 1)\)</span>。</p>
+<p>在代码实现上，我们可以将第一维空间优化掉，只用一个长度为 <span class="arithmatex">\(3\)</span> 的数组 <span class="arithmatex">\(f\)</span> 来维护。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为数组 <span class="arithmatex">\(obstacles\)</span> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91304,11 +91302,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86032,19 +86030,19 @@ Given the following tree and &nbsp;<code>sum = 22,</code></p>
 <!-- solution:start -->
 
 <h3 id="solution-1-hash-table-prefix-sum-recursion">Solution 1: Hash Table + Prefix Sum + Recursion</h3>
-<p>We can use the idea of prefix sum to recursively traverse the binary tree, and use a hash table $cnt$ to count the occurrence of each prefix sum on the path from the root node to the current node.</p>
-<p>We design a recursive function $dfs(node, s)$, where the current node being traversed is $node$, and the prefix sum on the path from the root node to the current node is $s$. The return value of the function is the number of paths with the path sum equal to $sum$ and the path ends at the $node$ node or its subtree nodes. Therefore, the answer is $dfs(root, 0)$.</p>
-<p>The recursive process of the function $dfs(node, s)$ is as follows:</p>
+<p>We can use the idea of prefix sum to recursively traverse the binary tree, and use a hash table <span class="arithmatex">\(cnt\)</span> to count the occurrence of each prefix sum on the path from the root node to the current node.</p>
+<p>We design a recursive function <span class="arithmatex">\(dfs(node, s)\)</span>, where the current node being traversed is <span class="arithmatex">\(node\)</span>, and the prefix sum on the path from the root node to the current node is <span class="arithmatex">\(s\)</span>. The return value of the function is the number of paths with the path sum equal to <span class="arithmatex">\(sum\)</span> and the path ends at the <span class="arithmatex">\(node\)</span> node or its subtree nodes. Therefore, the answer is <span class="arithmatex">\(dfs(root, 0)\)</span>.</p>
+<p>The recursive process of the function <span class="arithmatex">\(dfs(node, s)\)</span> is as follows:</p>
 <ul>
-<li>If the current node $node$ is null, return $0$.</li>
-<li>Calculate the prefix sum $s$ on the path from the root node to the current node.</li>
-<li>Use $cnt[s - sum]$ to represent the number of paths with the path sum equal to $sum$ and the path ends at the current node, where $cnt[s - sum]$ is the count of the prefix sum equal to $s - sum$ in $cnt$.</li>
-<li>Add the count of the prefix sum $s$ by $1$, i.e., $cnt[s] = cnt[s] + 1$.</li>
-<li>Recursively traverse the left and right child nodes of the current node, i.e., call the functions $dfs(node.left, s)$ and $dfs(node.right, s)$, and add their return values.</li>
-<li>After the return value is calculated, subtract the count of the prefix sum $s$ of the current node by $1$, i.e., execute $cnt[s] = cnt[s] - 1$.</li>
+<li>If the current node <span class="arithmatex">\(node\)</span> is null, return <span class="arithmatex">\(0\)</span>.</li>
+<li>Calculate the prefix sum <span class="arithmatex">\(s\)</span> on the path from the root node to the current node.</li>
+<li>Use <span class="arithmatex">\(cnt[s - sum]\)</span> to represent the number of paths with the path sum equal to <span class="arithmatex">\(sum\)</span> and the path ends at the current node, where <span class="arithmatex">\(cnt[s - sum]\)</span> is the count of the prefix sum equal to <span class="arithmatex">\(s - sum\)</span> in <span class="arithmatex">\(cnt\)</span>.</li>
+<li>Add the count of the prefix sum <span class="arithmatex">\(s\)</span> by <span class="arithmatex">\(1\)</span>, i.e., <span class="arithmatex">\(cnt[s] = cnt[s] + 1\)</span>.</li>
+<li>Recursively traverse the left and right child nodes of the current node, i.e., call the functions <span class="arithmatex">\(dfs(node.left, s)\)</span> and <span class="arithmatex">\(dfs(node.right, s)\)</span>, and add their return values.</li>
+<li>After the return value is calculated, subtract the count of the prefix sum <span class="arithmatex">\(s\)</span> of the current node by <span class="arithmatex">\(1\)</span>, i.e., execute <span class="arithmatex">\(cnt[s] = cnt[s] - 1\)</span>.</li>
 <li>Finally, return the answer.</li>
 </ul>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes in the binary tree.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes in the binary tree.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86752,11 +86750,9 @@ Given the following tree and &nbsp;<code>sum = 22,</code></p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

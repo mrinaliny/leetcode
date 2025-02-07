@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86088,10 +86086,10 @@ loc.freeMemory(7); // Free all memory units with mID 7. The memory array remains
 
 <h3 id="solution-1-brute-force-simulation">Solution 1: Brute Force Simulation</h3>
 <p>The data range of the problem is not large, so we can directly use an array to simulate the memory space.</p>
-<p>During initialization, set each element in the array to $0$, indicating it's free.</p>
+<p>During initialization, set each element in the array to <span class="arithmatex">\(0\)</span>, indicating it's free.</p>
 <p>When the <code>allocate</code> method is called, traverse the array, find <code>size</code> consecutive free memory units, set them to <code>mID</code>, and return the first index.</p>
-<p>When the <code>free</code> method is called, traverse the array, set all memory units equal to <code>mID</code> to $0$, indicating they are free.</p>
-<p>The time complexity is $O(n \times q)$, and the space complexity is $O(n)$, where $n$ and $q$ are the size of the memory space and the number of method calls, respectively.</p>
+<p>When the <code>free</code> method is called, traverse the array, set all memory units equal to <code>mID</code> to <span class="arithmatex">\(0\)</span>, indicating they are free.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times q)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(q\)</span> are the size of the memory space and the number of method calls, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86422,7 +86420,7 @@ loc.freeMemory(7); // Free all memory units with mID 7. The memory array remains
 <p>We can use an ordered set to maintain the start and end indices of all allocated memory units, where the start index is the key and the end index is the value. Additionally, we use a hash table to maintain the <code>mID</code> and its corresponding start index of the memory unit.</p>
 <p>When the <code>allocate</code> method is called, we traverse the ordered set, find the first free interval with a length greater than or equal to <code>size</code>, allocate it to <code>mID</code>, and update the ordered set. Then we add the <code>mID</code> and its corresponding start index of the memory unit to the hash table.</p>
 <p>When the <code>free</code> method is called, we find the start index of the memory unit corresponding to <code>mID</code> from the hash table, then delete it from the ordered set, and then delete <code>mID</code> from the hash table.</p>
-<p>The time complexity is $O(q \log n)$, and the space complexity is $O(n)$, where $n$ and $q$ are the size of the memory space and the number of method calls, respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(q \log n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(q\)</span> are the size of the memory space and the number of method calls, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86990,11 +86988,9 @@ loc.freeMemory(7); // Free all memory units with mID 7. The memory array remains
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

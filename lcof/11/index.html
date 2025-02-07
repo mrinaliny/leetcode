@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90820,14 +90818,14 @@
 
 <h3 id="_3">方法一：二分查找</h3>
 <p>二分查找的变种，需要考虑重复元素的情况。</p>
-<p>我们定义两个指针 $l$ 和 $r$ 分别指向数组的左右两端，每次取中间元素 <code>numbers[mid]</code> 与右端元素 <code>numbers[r]</code> 比较，有以下三种情况：</p>
+<p>我们定义两个指针 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(r\)</span> 分别指向数组的左右两端，每次取中间元素 <code>numbers[mid]</code> 与右端元素 <code>numbers[r]</code> 比较，有以下三种情况：</p>
 <ul>
-<li><code>numbers[mid] &gt; numbers[r]</code>：中间元素一定不是最小值，因此 $l = mid + 1$；</li>
-<li><code>numbers[mid] &lt; numbers[r]</code>：中间元素可能是最小值，因此 $r = mid$；</li>
-<li><code>numbers[mid] == numbers[r]</code>：无法确定最小值的位置，但可以简单地缩小搜索范围，因此 $r = r - 1$。</li>
+<li><code>numbers[mid] &gt; numbers[r]</code>：中间元素一定不是最小值，因此 <span class="arithmatex">\(l = mid + 1\)</span>；</li>
+<li><code>numbers[mid] &lt; numbers[r]</code>：中间元素可能是最小值，因此 <span class="arithmatex">\(r = mid\)</span>；</li>
+<li><code>numbers[mid] == numbers[r]</code>：无法确定最小值的位置，但可以简单地缩小搜索范围，因此 <span class="arithmatex">\(r = r - 1\)</span>。</li>
 </ul>
-<p>循环结束时，指针 $l$ 和 $r$ 指向同一个元素，即为最小值。</p>
-<p>时间复杂度 $(\log n)$，空间复杂度 $O(1)$。其中 $n$ 为数组长度。</p>
+<p>循环结束时，指针 <span class="arithmatex">\(l\)</span> 和 <span class="arithmatex">\(r\)</span> 指向同一个元素，即为最小值。</p>
+<p>时间复杂度 <span class="arithmatex">\((\log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">Rust</label><label for="__tabbed_1_6">JavaScript</label><label for="__tabbed_1_7">C#</label><label for="__tabbed_1_8">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91117,7 +91115,7 @@
 <!-- solution:start-->
 
 <h3 id="_4">方法二：二分查找（写法二）</h3>
-<p>注意，我们也可以每次取中间元素 <code>numbers[mid]</code> 与左端元素 <code>numbers[l]</code> 比较，但需要考虑当前 $[l,..r]$ 区间内的元素是否已经有序，即是否满足 <code>numbers[l] &lt; numbers[r]</code>，如果满足，直接返回 <code>numbers[l]</code> 即可。其它情况与方法一类似。</p>
+<p>注意，我们也可以每次取中间元素 <code>numbers[mid]</code> 与左端元素 <code>numbers[l]</code> 比较，但需要考虑当前 <span class="arithmatex">\([l,..r]\)</span> 区间内的元素是否已经有序，即是否满足 <code>numbers[l] &lt; numbers[r]</code>，如果满足，直接返回 <code>numbers[l]</code> 即可。其它情况与方法一类似。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">Rust</label><label for="__tabbed_2_6">JavaScript</label><label for="__tabbed_2_7">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91656,11 +91654,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

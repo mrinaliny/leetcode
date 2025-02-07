@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86073,23 +86071,23 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-shortest-path-dijkstras-algorithm">Solution 1: Shortest Path (Dijkstra's Algorithm)</h3>
-<p>First, we ignore the edges with a weight of $-1$ and use Dijkstra's algorithm to find the shortest distance $d$ from $source$ to $destination$.</p>
+<p>First, we ignore the edges with a weight of <span class="arithmatex">\(-1\)</span> and use Dijkstra's algorithm to find the shortest distance <span class="arithmatex">\(d\)</span> from <span class="arithmatex">\(source\)</span> to <span class="arithmatex">\(destination\)</span>.</p>
 <ul>
 <li>
-<p>If $d &lt; target$, it means there is a shortest path composed entirely of positive weight edges. No matter how we modify the edges with a weight of $-1$, we cannot make the shortest distance from $source$ to $destination$ equal to $target$. Therefore, there is no modification scheme that satisfies the problem, and we can return an empty array.</p>
+<p>If <span class="arithmatex">\(d &lt; target\)</span>, it means there is a shortest path composed entirely of positive weight edges. No matter how we modify the edges with a weight of <span class="arithmatex">\(-1\)</span>, we cannot make the shortest distance from <span class="arithmatex">\(source\)</span> to <span class="arithmatex">\(destination\)</span> equal to <span class="arithmatex">\(target\)</span>. Therefore, there is no modification scheme that satisfies the problem, and we can return an empty array.</p>
 </li>
 <li>
-<p>If $d = target$, it means there is a shortest path composed entirely of positive weight edges, and its length is $target$. In this case, we can modify all edges with a weight of $-1$ to the maximum value $2 \times 10^9$.</p>
+<p>If <span class="arithmatex">\(d = target\)</span>, it means there is a shortest path composed entirely of positive weight edges, and its length is <span class="arithmatex">\(target\)</span>. In this case, we can modify all edges with a weight of <span class="arithmatex">\(-1\)</span> to the maximum value <span class="arithmatex">\(2 \times 10^9\)</span>.</p>
 </li>
 <li>
-<p>If $d &gt; target$, we can try to add an edge with a weight of $-1$ to the graph, set the weight of the edge to $1$, and then use Dijkstra's algorithm again to find the shortest distance $d$ from $source$ to $destination$.</p>
+<p>If <span class="arithmatex">\(d &gt; target\)</span>, we can try to add an edge with a weight of <span class="arithmatex">\(-1\)</span> to the graph, set the weight of the edge to <span class="arithmatex">\(1\)</span>, and then use Dijkstra's algorithm again to find the shortest distance <span class="arithmatex">\(d\)</span> from <span class="arithmatex">\(source\)</span> to <span class="arithmatex">\(destination\)</span>.</p>
 <ul>
-<li>If the shortest distance $d \leq target$, it means that after adding this edge, the shortest path can be shortened, and the shortest path must pass through this edge. Then we only need to change the weight of this edge to $target-d+1$ to make the shortest path equal to $target$. Then we can modify the remaining edges with a weight of $-1$ to the maximum value $2 \times 10^9$.</li>
-<li>If the shortest distance $d &gt; target$, it means that after adding this edge, the shortest path will not be shortened. Then we greedily keep the weight of this edge as $-1$ and continue to try to add the remaining edges with a weight of $-1$.</li>
+<li>If the shortest distance <span class="arithmatex">\(d \leq target\)</span>, it means that after adding this edge, the shortest path can be shortened, and the shortest path must pass through this edge. Then we only need to change the weight of this edge to <span class="arithmatex">\(target-d+1\)</span> to make the shortest path equal to <span class="arithmatex">\(target\)</span>. Then we can modify the remaining edges with a weight of <span class="arithmatex">\(-1\)</span> to the maximum value <span class="arithmatex">\(2 \times 10^9\)</span>.</li>
+<li>If the shortest distance <span class="arithmatex">\(d &gt; target\)</span>, it means that after adding this edge, the shortest path will not be shortened. Then we greedily keep the weight of this edge as <span class="arithmatex">\(-1\)</span> and continue to try to add the remaining edges with a weight of <span class="arithmatex">\(-1\)</span>.</li>
 </ul>
 </li>
 </ul>
-<p>The time complexity is $O(n^3)$, and the space complexity is $O(n^2)$, where $n$ is the number of points in the graph.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>, where <span class="arithmatex">\(n\)</span> is the number of points in the graph.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86893,11 +86891,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

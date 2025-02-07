@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86073,17 +86071,17 @@
 <p>Therefore, the root node of the binary tree must be the first node of the pre-order traversal and the last node of the post-order traversal.</p>
 <p>Next, we need to determine the range of the left and right subtrees of the binary tree.</p>
 <p>If the binary tree has a left subtree, then the root node of the left subtree must be the second node of the pre-order traversal; if the binary tree does not have a left subtree, then the second node of the pre-order traversal must be the root node of the right subtree. Since the results of post-order traversal in these two cases are the same, we can take the second node of the pre-order traversal as the root node of the left subtree, and then find its position in the post-order traversal, so as to determine the range of the left subtree.</p>
-<p>Specifically, we design a recursive function $dfs(a, b, c, d)$, where $[a, b]$ represents the range of pre-order traversal, and $[c, d]$ represents the range of post-order traversal. The function of this function is to construct the root node of the binary tree based on the pre-order traversal $[a, b]$ and the post-order traversal $[c, d]$. The answer is $dfs(0, n - 1, 0, n - 1)$, where $n$ is the length of the pre-order traversal.</p>
-<p>The execution steps of the function $dfs(a, b, c, d)$ are as follows:</p>
+<p>Specifically, we design a recursive function <span class="arithmatex">\(dfs(a, b, c, d)\)</span>, where <span class="arithmatex">\([a, b]\)</span> represents the range of pre-order traversal, and <span class="arithmatex">\([c, d]\)</span> represents the range of post-order traversal. The function of this function is to construct the root node of the binary tree based on the pre-order traversal <span class="arithmatex">\([a, b]\)</span> and the post-order traversal <span class="arithmatex">\([c, d]\)</span>. The answer is <span class="arithmatex">\(dfs(0, n - 1, 0, n - 1)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the pre-order traversal.</p>
+<p>The execution steps of the function <span class="arithmatex">\(dfs(a, b, c, d)\)</span> are as follows:</p>
 <ol>
-<li>If $a &gt; b$, the range is empty, return a null node directly.</li>
-<li>Otherwise, we construct a new node $root$, its value is the value of the first node in the pre-order traversal, which is $preorder[a]$.</li>
-<li>If $a$ equals $b$, it means that $root$ has neither a left subtree nor a right subtree, return $root$ directly.</li>
-<li>Otherwise, the value of the root node of the left subtree is $preorder[a + 1]$, we find the position of $preorder[a + 1]$ in the post-order traversal, denoted as $i$. The number of nodes in the left subtree $m = i - c + 1$, from this we know that the range of the left subtree in the pre-order traversal is $[a + 1, a + m]$, the range in the post-order traversal is $[c, i]$, the range of the right subtree in the pre-order traversal is $[a + m + 1, b]$, and the range in the post-order traversal is $[i + 1, d - 1]$.</li>
-<li>Knowing the range of the left and right subtrees, we can recursively rebuild the left and right subtrees, and then make the root nodes of the left and right subtrees as the left and right child nodes of $root$ respectively. Finally return $root$.</li>
+<li>If <span class="arithmatex">\(a &gt; b\)</span>, the range is empty, return a null node directly.</li>
+<li>Otherwise, we construct a new node <span class="arithmatex">\(root\)</span>, its value is the value of the first node in the pre-order traversal, which is <span class="arithmatex">\(preorder[a]\)</span>.</li>
+<li>If <span class="arithmatex">\(a\)</span> equals <span class="arithmatex">\(b\)</span>, it means that <span class="arithmatex">\(root\)</span> has neither a left subtree nor a right subtree, return <span class="arithmatex">\(root\)</span> directly.</li>
+<li>Otherwise, the value of the root node of the left subtree is <span class="arithmatex">\(preorder[a + 1]\)</span>, we find the position of <span class="arithmatex">\(preorder[a + 1]\)</span> in the post-order traversal, denoted as <span class="arithmatex">\(i\)</span>. The number of nodes in the left subtree <span class="arithmatex">\(m = i - c + 1\)</span>, from this we know that the range of the left subtree in the pre-order traversal is <span class="arithmatex">\([a + 1, a + m]\)</span>, the range in the post-order traversal is <span class="arithmatex">\([c, i]\)</span>, the range of the right subtree in the pre-order traversal is <span class="arithmatex">\([a + m + 1, b]\)</span>, and the range in the post-order traversal is <span class="arithmatex">\([i + 1, d - 1]\)</span>.</li>
+<li>Knowing the range of the left and right subtrees, we can recursively rebuild the left and right subtrees, and then make the root nodes of the left and right subtrees as the left and right child nodes of <span class="arithmatex">\(root\)</span> respectively. Finally return <span class="arithmatex">\(root\)</span>.</li>
 </ol>
-<p>In the function $dfs(a, b, c, d)$, we need to use a hash table $pos$, which stores the position of each node in the post-order traversal. At the beginning of the function, we can calculate this hash table first, so that we can find the position of any node in the post-order traversal in $O(1)$ time.</p>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes.</p>
+<p>In the function <span class="arithmatex">\(dfs(a, b, c, d)\)</span>, we need to use a hash table <span class="arithmatex">\(pos\)</span>, which stores the position of each node in the post-order traversal. At the beginning of the function, we can calculate this hash table first, so that we can find the position of any node in the post-order traversal in <span class="arithmatex">\(O(1)\)</span> time.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86439,15 +86437,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-2-another-recursive-approach">Solution 2: Another Recursive Approach</h3>
-<p>We can design a recursive function $dfs(i, j, n)$, where $i$ and $j$ represent the starting points of the pre-order and post-order traversals, respectively, and $n$ represents the number of nodes. This function constructs the root node of the binary tree based on the pre-order traversal $[i, i + n - 1]$ and post-order traversal $[j, j + n - 1]$. The answer is $dfs(0, 0, n)$, where $n$ is the length of the pre-order traversal.</p>
-<p>The execution steps of the function $dfs(i, j, n)$ are as follows:</p>
+<p>We can design a recursive function <span class="arithmatex">\(dfs(i, j, n)\)</span>, where <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> represent the starting points of the pre-order and post-order traversals, respectively, and <span class="arithmatex">\(n\)</span> represents the number of nodes. This function constructs the root node of the binary tree based on the pre-order traversal <span class="arithmatex">\([i, i + n - 1]\)</span> and post-order traversal <span class="arithmatex">\([j, j + n - 1]\)</span>. The answer is <span class="arithmatex">\(dfs(0, 0, n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the pre-order traversal.</p>
+<p>The execution steps of the function <span class="arithmatex">\(dfs(i, j, n)\)</span> are as follows:</p>
 <ol>
-<li>If $n = 0$, the range is empty, so return a null node directly.</li>
-<li>Otherwise, we construct a new node $root$, whose value is the value of the first node in the pre-order traversal, which is $preorder[i]$.</li>
-<li>If $n = 1$, it means that $root$ has neither a left subtree nor a right subtree, so return $root$ directly.</li>
-<li>Otherwise, the value of the root node of the left subtree is $preorder[i + 1]$. We find the position of $preorder[i + 1]$ in the post-order traversal, denoted as $k$. Then the number of nodes in the left subtree is $m = k - j + 1$, and the number of nodes in the right subtree is $n - m - 1$. We recursively rebuild the left and right subtrees, and then make the root nodes of the left and right subtrees the left and right child nodes of $root$, respectively. Finally, return $root$.</li>
+<li>If <span class="arithmatex">\(n = 0\)</span>, the range is empty, so return a null node directly.</li>
+<li>Otherwise, we construct a new node <span class="arithmatex">\(root\)</span>, whose value is the value of the first node in the pre-order traversal, which is <span class="arithmatex">\(preorder[i]\)</span>.</li>
+<li>If <span class="arithmatex">\(n = 1\)</span>, it means that <span class="arithmatex">\(root\)</span> has neither a left subtree nor a right subtree, so return <span class="arithmatex">\(root\)</span> directly.</li>
+<li>Otherwise, the value of the root node of the left subtree is <span class="arithmatex">\(preorder[i + 1]\)</span>. We find the position of <span class="arithmatex">\(preorder[i + 1]\)</span> in the post-order traversal, denoted as <span class="arithmatex">\(k\)</span>. Then the number of nodes in the left subtree is <span class="arithmatex">\(m = k - j + 1\)</span>, and the number of nodes in the right subtree is <span class="arithmatex">\(n - m - 1\)</span>. We recursively rebuild the left and right subtrees, and then make the root nodes of the left and right subtrees the left and right child nodes of <span class="arithmatex">\(root\)</span>, respectively. Finally, return <span class="arithmatex">\(root\)</span>.</li>
 </ol>
-<p>The time complexity is $O(n)$, and the space complexity is $O(n)$. Here, $n$ is the number of nodes.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, and the space complexity is <span class="arithmatex">\(O(n)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the number of nodes.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -87032,11 +87030,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

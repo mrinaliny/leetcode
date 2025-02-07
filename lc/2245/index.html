@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90867,25 +90865,25 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：前缀和 + 枚举拐点</h3>
-<p>首先我们要明确，对于一个乘积，尾随零的个数取决于因子中 $2$ 和 $5$ 的个数的较小值。另外，每一条转角路径应该覆盖尽可能多的数，因此，它一定是从某个边界出发，到达某个拐点，再到达另一个边界。</p>
-<p>因此，我们可以创建四个二维数组 $r2$, $c2$, $r5$, $c5$ 来记录每一行和每一列中 $2$ 和 $5$ 的个数。其中：</p>
+<p>首先我们要明确，对于一个乘积，尾随零的个数取决于因子中 <span class="arithmatex">\(2\)</span> 和 <span class="arithmatex">\(5\)</span> 的个数的较小值。另外，每一条转角路径应该覆盖尽可能多的数，因此，它一定是从某个边界出发，到达某个拐点，再到达另一个边界。</p>
+<p>因此，我们可以创建四个二维数组 <span class="arithmatex">\(r2\)</span>, <span class="arithmatex">\(c2\)</span>, <span class="arithmatex">\(r5\)</span>, <span class="arithmatex">\(c5\)</span> 来记录每一行和每一列中 <span class="arithmatex">\(2\)</span> 和 <span class="arithmatex">\(5\)</span> 的个数。其中：</p>
 <ul>
-<li><code>r2[i][j]</code> 表示第 $i$ 行中从第 $1$ 列到第 $j$ 列的 $2$ 的个数；</li>
-<li><code>c2[i][j]</code> 表示第 $j$ 列中从第 $1$ 行到第 $i$ 行的 $2$ 的个数；</li>
-<li><code>r5[i][j]</code> 表示第 $i$ 行中从第 $1$ 列到第 $j$ 列的 $5$ 的个数；</li>
-<li><code>c5[i][j]</code> 表示第 $j$ 列中从第 $1$ 行到第 $i$ 行的 $5$ 的个数。</li>
+<li><code>r2[i][j]</code> 表示第 <span class="arithmatex">\(i\)</span> 行中从第 <span class="arithmatex">\(1\)</span> 列到第 <span class="arithmatex">\(j\)</span> 列的 <span class="arithmatex">\(2\)</span> 的个数；</li>
+<li><code>c2[i][j]</code> 表示第 <span class="arithmatex">\(j\)</span> 列中从第 <span class="arithmatex">\(1\)</span> 行到第 <span class="arithmatex">\(i\)</span> 行的 <span class="arithmatex">\(2\)</span> 的个数；</li>
+<li><code>r5[i][j]</code> 表示第 <span class="arithmatex">\(i\)</span> 行中从第 <span class="arithmatex">\(1\)</span> 列到第 <span class="arithmatex">\(j\)</span> 列的 <span class="arithmatex">\(5\)</span> 的个数；</li>
+<li><code>c5[i][j]</code> 表示第 <span class="arithmatex">\(j\)</span> 列中从第 <span class="arithmatex">\(1\)</span> 行到第 <span class="arithmatex">\(i\)</span> 行的 <span class="arithmatex">\(5\)</span> 的个数。</li>
 </ul>
-<p>接下来，我们遍历二维数组 <code>grid</code>，对于每个数，我们计算它的 $2$ 和 $5$ 的个数，然后更新四个二维数组。</p>
-<p>然后，我们枚举拐点 $(i, j)$，对于每个拐点，我们计算四个值，其中：</p>
+<p>接下来，我们遍历二维数组 <code>grid</code>，对于每个数，我们计算它的 <span class="arithmatex">\(2\)</span> 和 <span class="arithmatex">\(5\)</span> 的个数，然后更新四个二维数组。</p>
+<p>然后，我们枚举拐点 <span class="arithmatex">\((i, j)\)</span>，对于每个拐点，我们计算四个值，其中：</p>
 <ul>
-<li><code>a</code> 表示从 $(i, 1)$ 右移到 $(i, j)$，再从 $(i, j)$ 拐头向上移动到 $(1, j)$ 的路径中 $2$ 的个数和 $5$ 的个数的较小值；</li>
-<li><code>b</code> 表示从 $(i, 1)$ 右移到 $(i, j)$，再从 $(i, j)$ 拐头向下移动到 $(m, j)$ 的路径中 $2$ 的个数和 $5$ 的个数的较小值；</li>
-<li><code>c</code> 表示从 $(i, n)$ 左移到 $(i, j)$，再从 $(i, j)$ 拐头向上移动到 $(1, j)$ 的路径中 $2$ 的个数和 $5$ 的个数的较小值；</li>
-<li><code>d</code> 表示从 $(i, n)$ 左移到 $(i, j)$，再从 $(i, j)$ 拐头向下移动到 $(m, j)$ 的路径中 $2$ 的个数和 $5$ 的个数的较小值。</li>
+<li><code>a</code> 表示从 <span class="arithmatex">\((i, 1)\)</span> 右移到 <span class="arithmatex">\((i, j)\)</span>，再从 <span class="arithmatex">\((i, j)\)</span> 拐头向上移动到 <span class="arithmatex">\((1, j)\)</span> 的路径中 <span class="arithmatex">\(2\)</span> 的个数和 <span class="arithmatex">\(5\)</span> 的个数的较小值；</li>
+<li><code>b</code> 表示从 <span class="arithmatex">\((i, 1)\)</span> 右移到 <span class="arithmatex">\((i, j)\)</span>，再从 <span class="arithmatex">\((i, j)\)</span> 拐头向下移动到 <span class="arithmatex">\((m, j)\)</span> 的路径中 <span class="arithmatex">\(2\)</span> 的个数和 <span class="arithmatex">\(5\)</span> 的个数的较小值；</li>
+<li><code>c</code> 表示从 <span class="arithmatex">\((i, n)\)</span> 左移到 <span class="arithmatex">\((i, j)\)</span>，再从 <span class="arithmatex">\((i, j)\)</span> 拐头向上移动到 <span class="arithmatex">\((1, j)\)</span> 的路径中 <span class="arithmatex">\(2\)</span> 的个数和 <span class="arithmatex">\(5\)</span> 的个数的较小值；</li>
+<li><code>d</code> 表示从 <span class="arithmatex">\((i, n)\)</span> 左移到 <span class="arithmatex">\((i, j)\)</span>，再从 <span class="arithmatex">\((i, j)\)</span> 拐头向下移动到 <span class="arithmatex">\((m, j)\)</span> 的路径中 <span class="arithmatex">\(2\)</span> 的个数和 <span class="arithmatex">\(5\)</span> 的个数的较小值。</li>
 </ul>
 <p>每一次枚举，我们取这四个值的最大值，然后更新答案。</p>
 <p>最后，我们返回答案即可。</p>
-<p>时间复杂度 $O(m \times n)$，空间复杂度 $O(m \times n)$。其中 $m$ 和 $n$ 分别是二维数组 <code>grid</code> 的行数和列数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(m \times n)\)</span>。其中 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span> 分别是二维数组 <code>grid</code> 的行数和列数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91511,11 +91509,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

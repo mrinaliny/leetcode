@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86107,15 +86105,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-combination-counting-recursion">Solution 1: Combination Counting + Recursion</h3>
-<p>We design a function $dfs(nums)$, which is used to calculate the number of solutions of the binary search tree with $nums$ as nodes. Then the answer is $dfs(nums)-1$, because $dfs(nums)$ calculates the number of solutions of the binary search tree with $nums$ as nodes, while the problem requires the number of solutions of the binary search tree with $nums$ as nodes after reordering, so the answer needs to be subtracted by one.</p>
-<p>Next, let's take a look at how $dfs(nums)$ is calculated.</p>
-<p>For an array $nums$, its first element is the root node, so its left subtree elements are smaller than it, and its right subtree elements are larger than it. So we can divide the array into three parts, the first part is the root node, the second part is the elements of the left subtree, denoted as $left$, and the third part is the elements of the right subtree, denoted as $right$. Then, the number of elements in the left subtree is $m$, and the number of elements in the right subtree is $n$, so the number of solutions for $left$ and $right$ are $dfs(left)$ and $dfs(right)$ respectively. We can choose $m$ positions from $m + n$ positions in array $nums$ to place the elements of the left subtree, and the remaining $n$ positions to place the elements of the right subtree, so that we can ensure that the reordered binary search tree is the same as the original array $nums$. Therefore, the calculation method of $dfs(nums)$ is:</p>
-<p>$$
+<p>We design a function <span class="arithmatex">\(dfs(nums)\)</span>, which is used to calculate the number of solutions of the binary search tree with <span class="arithmatex">\(nums\)</span> as nodes. Then the answer is <span class="arithmatex">\(dfs(nums)-1\)</span>, because <span class="arithmatex">\(dfs(nums)\)</span> calculates the number of solutions of the binary search tree with <span class="arithmatex">\(nums\)</span> as nodes, while the problem requires the number of solutions of the binary search tree with <span class="arithmatex">\(nums\)</span> as nodes after reordering, so the answer needs to be subtracted by one.</p>
+<p>Next, let's take a look at how <span class="arithmatex">\(dfs(nums)\)</span> is calculated.</p>
+<p>For an array <span class="arithmatex">\(nums\)</span>, its first element is the root node, so its left subtree elements are smaller than it, and its right subtree elements are larger than it. So we can divide the array into three parts, the first part is the root node, the second part is the elements of the left subtree, denoted as <span class="arithmatex">\(left\)</span>, and the third part is the elements of the right subtree, denoted as <span class="arithmatex">\(right\)</span>. Then, the number of elements in the left subtree is <span class="arithmatex">\(m\)</span>, and the number of elements in the right subtree is <span class="arithmatex">\(n\)</span>, so the number of solutions for <span class="arithmatex">\(left\)</span> and <span class="arithmatex">\(right\)</span> are <span class="arithmatex">\(dfs(left)\)</span> and <span class="arithmatex">\(dfs(right)\)</span> respectively. We can choose <span class="arithmatex">\(m\)</span> positions from <span class="arithmatex">\(m + n\)</span> positions in array <span class="arithmatex">\(nums\)</span> to place the elements of the left subtree, and the remaining <span class="arithmatex">\(n\)</span> positions to place the elements of the right subtree, so that we can ensure that the reordered binary search tree is the same as the original array <span class="arithmatex">\(nums\)</span>. Therefore, the calculation method of <span class="arithmatex">\(dfs(nums)\)</span> is:</p>
+<div class="arithmatex">\[
 dfs(nums) = C_{m+n}^m \times dfs(left) \times dfs(right)
-$$</p>
-<p>where $C_{m+n}^m$ represents the number of schemes to select $m$ positions from $m + n$ positions, which we can get through preprocessing.</p>
-<p>Note the modulo operation of the answer, because the value of $dfs(nums)$ may be very large, so we need to take the modulo of each step in the calculation process, and finally take the modulo of the entire result.</p>
-<p>The time complexity is $O(n^2)$, and the space complexity is $O(n^2)$. Where $n$ is the length of array $nums$.</p>
+\]</div>
+<p>where <span class="arithmatex">\(C_{m+n}^m\)</span> represents the number of schemes to select <span class="arithmatex">\(m\)</span> positions from <span class="arithmatex">\(m + n\)</span> positions, which we can get through preprocessing.</p>
+<p>Note the modulo operation of the answer, because the value of <span class="arithmatex">\(dfs(nums)\)</span> may be very large, so we need to take the modulo of each step in the calculation process, and finally take the modulo of the entire result.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^2)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^2)\)</span>. Where <span class="arithmatex">\(n\)</span> is the length of array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86683,11 +86681,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90885,15 +90883,15 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>由于有 $[1, m]$ 个数，那么偶数有 $\textit{cnt0} = \lfloor \frac{m}{2} \rfloor$ 个，奇数有 $\textit{cnt1} = m - \textit{cnt0}$ 个。</p>
-<p>我们设计一个函数 $\textit{dfs}(i, j, k)$，表示当前已经填到第 $i$ 个位置，剩余 $j$ 个位置需要满足条件，且上一个位置的奇偶性为 $k$ 的方案数，其中 $k = 0$ 表示上一个位置为偶数，而 $k = 1$ 表示上一个位置为奇数。那么答案就是 $\textit{dfs}(0, k, 1)$。</p>
-<p>函数 $\textit{dfs}(i, j, k)$ 的执行逻辑如下：</p>
+<p>由于有 <span class="arithmatex">\([1, m]\)</span> 个数，那么偶数有 <span class="arithmatex">\(\textit{cnt0} = \lfloor \frac{m}{2} \rfloor\)</span> 个，奇数有 <span class="arithmatex">\(\textit{cnt1} = m - \textit{cnt0}\)</span> 个。</p>
+<p>我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span>，表示当前已经填到第 <span class="arithmatex">\(i\)</span> 个位置，剩余 <span class="arithmatex">\(j\)</span> 个位置需要满足条件，且上一个位置的奇偶性为 <span class="arithmatex">\(k\)</span> 的方案数，其中 <span class="arithmatex">\(k = 0\)</span> 表示上一个位置为偶数，而 <span class="arithmatex">\(k = 1\)</span> 表示上一个位置为奇数。那么答案就是 <span class="arithmatex">\(\textit{dfs}(0, k, 1)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(\textit{dfs}(i, j, k)\)</span> 的执行逻辑如下：</p>
 <ul>
-<li>如果 $j &lt; 0$，表示剩余位置数小于 $0$，直接返回 $0$；</li>
-<li>如果 $i \ge n$，表示已经填完了，如果此时 $j = 0$，表示满足条件，返回 $1$，否则返回 $0$；</li>
+<li>如果 <span class="arithmatex">\(j &lt; 0\)</span>，表示剩余位置数小于 <span class="arithmatex">\(0\)</span>，直接返回 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(i \ge n\)</span>，表示已经填完了，如果此时 <span class="arithmatex">\(j = 0\)</span>，表示满足条件，返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>；</li>
 <li>否则，我们可以选择填奇数或者偶数，分别计算填奇数和填偶数的方案数，最后返回两者之和。</li>
 </ul>
-<p>时间复杂度 $O(n \times k)$，空间复杂度 $O(n \times k)$。其中 $n$ 和 $k$ 为题目给定的参数。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(k\)</span> 为题目给定的参数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91164,16 +91162,16 @@
 
 <h3 id="_4">方法二：动态规划</h3>
 <p>我们可以将方法一的记忆化搜索转换为动态规划。</p>
-<p>定义 $f[i][j][k]$ 表示当前已经填完第 $i$ 个位置，且有 $j$ 个位置满足条件，且上一个位置的奇偶性为 $k$ 的方案数。那么答案就是 $\sum_{k = 0}^{1} f[n][k]$。</p>
-<p>初始时，我们将 $f[0][0][1]$ 置为 $1$，表示填完第 $0$ 个位置，且有 $0$ 个位置满足条件，且上一个位置的奇偶性为奇数的方案数为 $1$。其余 $f[i][j][k] = 0$。</p>
+<p>定义 <span class="arithmatex">\(f[i][j][k]\)</span> 表示当前已经填完第 <span class="arithmatex">\(i\)</span> 个位置，且有 <span class="arithmatex">\(j\)</span> 个位置满足条件，且上一个位置的奇偶性为 <span class="arithmatex">\(k\)</span> 的方案数。那么答案就是 <span class="arithmatex">\(\sum_{k = 0}^{1} f[n][k]\)</span>。</p>
+<p>初始时，我们将 <span class="arithmatex">\(f[0][0][1]\)</span> 置为 <span class="arithmatex">\(1\)</span>，表示填完第 <span class="arithmatex">\(0\)</span> 个位置，且有 <span class="arithmatex">\(0\)</span> 个位置满足条件，且上一个位置的奇偶性为奇数的方案数为 <span class="arithmatex">\(1\)</span>。其余 <span class="arithmatex">\(f[i][j][k] = 0\)</span>。</p>
 <p>状态转移方程如下：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{aligned}
-f[i][j][0] &amp;= \left( f[i - 1][j][1] + \left( f[i - 1][j - 1][0] \text{ if } j &gt; 0 \right) \right) \times \textit{cnt0} \bmod \textit{mod}, \
+f[i][j][0] &amp;= \left( f[i - 1][j][1] + \left( f[i - 1][j - 1][0] \text{ if } j &gt; 0 \right) \right) \times \textit{cnt0} \bmod \textit{mod}, \\
 f[i][j][1] &amp;= \left( f[i - 1][j][0] + f[i - 1][j][1] \right) \times \textit{cnt1} \bmod \textit{mod}.
 \end{aligned}
-$$</p>
-<p>时间复杂度 $O(n \times k)$，空间复杂度 $O(n \times k)$。其中 $n$ 和 $k$ 为题目给定的参数。</p>
+\]</div>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(k\)</span> 为题目给定的参数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91363,8 +91361,8 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="_5">方法三：动态规划（空间优化）</h3>
-<p>我们注意到，对于 $f[i]$ 的计算只与 $f[i - 1]$ 有关，因此我们可以使用滚动数组优化空间。</p>
-<p>时间复杂度 $O(n \times k)$，空间复杂度 $O(k)$。其中 $n$ 和 $k$ 为题目给定的参数。</p>
+<p>我们注意到，对于 <span class="arithmatex">\(f[i]\)</span> 的计算只与 <span class="arithmatex">\(f[i - 1]\)</span> 有关，因此我们可以使用滚动数组优化空间。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times k)\)</span>，空间复杂度 <span class="arithmatex">\(O(k)\)</span>。其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(k\)</span> 为题目给定的参数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91790,11 +91788,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

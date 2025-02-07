@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90851,18 +90849,18 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：状态压缩动态规划</h3>
-<p>我们注意到题目中数组的长度最大不超过 $14$，因此，我们可以用一个二进制整数来表示当前的状态，其中第 $i$ 位为 $1$ 表示数组中的第 $i$ 个数已经被选取，为 $0$ 表示数组中的第 $i$ 个数还未被选取。</p>
-<p>我们定义 $f[i][j]$ 表示当前选取的整数状态为 $i$，且最后一个选取的整数下标为 $j$ 的方案数。初始时 $f[0][0]=0$，答案为 $\sum_{j=0}<sup>{n-1}f[2</sup>n-1][j]$。</p>
-<p>考虑 $f[i][j]$，如果当前只有一个数被选取，那么 $f[i][j]=1$。否则，我们可以枚举上一个选择的数的下标 $k$，如果 $k$ 与 $j$ 对应的数满足题目要求，那么 $f[i][j]$ 可以从 $f[i \oplus 2^j][k]$ 转移而来。即：</p>
-<p>$$
+<p>我们注意到题目中数组的长度最大不超过 <span class="arithmatex">\(14\)</span>，因此，我们可以用一个二进制整数来表示当前的状态，其中第 <span class="arithmatex">\(i\)</span> 位为 <span class="arithmatex">\(1\)</span> 表示数组中的第 <span class="arithmatex">\(i\)</span> 个数已经被选取，为 <span class="arithmatex">\(0\)</span> 表示数组中的第 <span class="arithmatex">\(i\)</span> 个数还未被选取。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示当前选取的整数状态为 <span class="arithmatex">\(i\)</span>，且最后一个选取的整数下标为 <span class="arithmatex">\(j\)</span> 的方案数。初始时 <span class="arithmatex">\(f[0][0]=0\)</span>，答案为 <span class="arithmatex">\(\sum_{j=0}^{n-1}f[2^n-1][j]\)</span>。</p>
+<p>考虑 <span class="arithmatex">\(f[i][j]\)</span>，如果当前只有一个数被选取，那么 <span class="arithmatex">\(f[i][j]=1\)</span>。否则，我们可以枚举上一个选择的数的下标 <span class="arithmatex">\(k\)</span>，如果 <span class="arithmatex">\(k\)</span> 与 <span class="arithmatex">\(j\)</span> 对应的数满足题目要求，那么 <span class="arithmatex">\(f[i][j]\)</span> 可以从 <span class="arithmatex">\(f[i \oplus 2^j][k]\)</span> 转移而来。即：</p>
+<div class="arithmatex">\[
 f[i][j]=
 \begin{cases}
-1, &amp; i=2^j\
-\sum_{k=0}^{n-1}f[i \oplus 2^j][k], &amp; i \neq 2^j \textit{且} \textit{nums}[j] \textit{与} \textit{nums}[k] \textit{满足题目要求}\
+1, &amp; i=2^j\\
+\sum_{k=0}^{n-1}f[i \oplus 2^j][k], &amp; i \neq 2^j \textit{且} \textit{nums}[j] \textit{与} \textit{nums}[k] \textit{满足题目要求}\\
 \end{cases}
-$$</p>
-<p>最终答案即为 $\sum_{j=0}<sup>{n-1}f[2</sup>n-1][j]$。注意答案可能很大，需要对 $10^9+7$ 取模。</p>
-<p>时间复杂度 $O(n^2 \times 2^n)$，空间复杂度 $O(n \times 2^n)$。其中 $n$ 为数组的长度。</p>
+\]</div>
+<p>最终答案即为 <span class="arithmatex">\(\sum_{j=0}^{n-1}f[2^n-1][j]\)</span>。注意答案可能很大，需要对 <span class="arithmatex">\(10^9+7\)</span> 取模。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2 \times 2^n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n \times 2^n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91434,11 +91432,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90857,13 +90855,13 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：质因数分解 + 组合数学</h3>
-<p>我们可以对 $k$ 进行质因数分解，即 $k = p_1^{x_1} \times p_2^{x_2} \times \cdots \times p_m^{x_m}$，其中 $p_i$ 为质数，而 $x_i$ 为 $p_i$ 的指数。那么题目实际上等价于：把 $x_1$ 个 $p_1$, $x_2$ 个 $p_2$, $\cdots$, $x_m$ 个 $p_m$ 分别放到 $n$ 个位置上，单个位置可以为空，问有多少种方案。</p>
-<p>根据组合数学的知识，我们把 $x$ 个球放入 $n$ 个盒子中，有两种情况：</p>
-<p>如果盒子不能为空，那么方案数为 $C_{x-1}^{n-1}$，这里是利用隔板法，即一共 $x$ 个球，我们在其中 $x-1$ 个位置插入 $n-1$ 个隔板，从而将 $x$ 个球分成 $n$ 组。</p>
-<p>如果盒子可以为空，那么我们可以再增加 $n$ 个虚拟球，然后再利用隔板法，即一共 $x+n$ 个球，我们在其中 $x+n-1$ 个位置插入 $n-1$ 个隔板，从而将实际的 $x$ 个球分成 $n$ 组，并且允许盒子为空，因此方案数为 $C_{x+n-1}^{n-1}$。</p>
-<p>因此，对于每个查询 $queries[i]$，我们可以先对 $k$ 进行质因数分解，得到指数 $x_1, x_2, \cdots, x_m$，然后计算 $C_{x_1+n-1}^{n-1}, C_{x_2+n-1}^{n-1}, \cdots, C_{x_m+n-1}^{n-1}$，最后将所有的方案数相乘即可。</p>
-<p>所以，问题转化为如何快速计算 $C_m^n$，根据公式 $C_m^n = \frac{m!}{n!(m-n)!}$，我们可以先预处理出 $m!$，然后利用逆元快速计算 $C_m^n$。</p>
-<p>时间复杂度 $O(K \times \log \log K + N + m \times \log K)$，空间复杂度 $O(N)$。</p>
+<p>我们可以对 <span class="arithmatex">\(k\)</span> 进行质因数分解，即 <span class="arithmatex">\(k = p_1^{x_1} \times p_2^{x_2} \times \cdots \times p_m^{x_m}\)</span>，其中 <span class="arithmatex">\(p_i\)</span> 为质数，而 <span class="arithmatex">\(x_i\)</span> 为 <span class="arithmatex">\(p_i\)</span> 的指数。那么题目实际上等价于：把 <span class="arithmatex">\(x_1\)</span> 个 <span class="arithmatex">\(p_1\)</span>, <span class="arithmatex">\(x_2\)</span> 个 <span class="arithmatex">\(p_2\)</span>, <span class="arithmatex">\(\cdots\)</span>, <span class="arithmatex">\(x_m\)</span> 个 <span class="arithmatex">\(p_m\)</span> 分别放到 <span class="arithmatex">\(n\)</span> 个位置上，单个位置可以为空，问有多少种方案。</p>
+<p>根据组合数学的知识，我们把 <span class="arithmatex">\(x\)</span> 个球放入 <span class="arithmatex">\(n\)</span> 个盒子中，有两种情况：</p>
+<p>如果盒子不能为空，那么方案数为 <span class="arithmatex">\(C_{x-1}^{n-1}\)</span>，这里是利用隔板法，即一共 <span class="arithmatex">\(x\)</span> 个球，我们在其中 <span class="arithmatex">\(x-1\)</span> 个位置插入 <span class="arithmatex">\(n-1\)</span> 个隔板，从而将 <span class="arithmatex">\(x\)</span> 个球分成 <span class="arithmatex">\(n\)</span> 组。</p>
+<p>如果盒子可以为空，那么我们可以再增加 <span class="arithmatex">\(n\)</span> 个虚拟球，然后再利用隔板法，即一共 <span class="arithmatex">\(x+n\)</span> 个球，我们在其中 <span class="arithmatex">\(x+n-1\)</span> 个位置插入 <span class="arithmatex">\(n-1\)</span> 个隔板，从而将实际的 <span class="arithmatex">\(x\)</span> 个球分成 <span class="arithmatex">\(n\)</span> 组，并且允许盒子为空，因此方案数为 <span class="arithmatex">\(C_{x+n-1}^{n-1}\)</span>。</p>
+<p>因此，对于每个查询 <span class="arithmatex">\(queries[i]\)</span>，我们可以先对 <span class="arithmatex">\(k\)</span> 进行质因数分解，得到指数 <span class="arithmatex">\(x_1, x_2, \cdots, x_m\)</span>，然后计算 <span class="arithmatex">\(C_{x_1+n-1}^{n-1}, C_{x_2+n-1}^{n-1}, \cdots, C_{x_m+n-1}^{n-1}\)</span>，最后将所有的方案数相乘即可。</p>
+<p>所以，问题转化为如何快速计算 <span class="arithmatex">\(C_m^n\)</span>，根据公式 <span class="arithmatex">\(C_m^n = \frac{m!}{n!(m-n)!}\)</span>，我们可以先预处理出 <span class="arithmatex">\(m!\)</span>，然后利用逆元快速计算 <span class="arithmatex">\(C_m^n\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(K \times \log \log K + N + m \times \log K)\)</span>，空间复杂度 <span class="arithmatex">\(O(N)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91536,11 +91534,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,17 +90856,17 @@
 <li><code>b</code>：当前节点无摄像头，但被子节点监控</li>
 <li><code>c</code>：当前节点无摄像头，也没被子节点监控</li>
 </ul>
-<p>接下来，我们设计一个函数 $dfs(root)$，它将返回一个长度为 3 的数组，表示以 <code>root</code> 为根的子树中，三种状态下的最小摄像头数量。那么答案就是 $\min(dfs(root)[0], dfs(root)[1])$。</p>
-<p>函数 $dfs(root)$ 的计算过程如下：</p>
-<p>如果 <code>root</code> 为空，则返回 $[inf, 0, 0]$，其中 <code>inf</code> 表示一个很大的数，它用于表示不可能的情况。</p>
-<p>否则，我们递归计算 <code>root</code> 的左右子树，分别得到 $[la, lb, lc]$ 和 $[ra, rb, rc]$。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(root)\)</span>，它将返回一个长度为 3 的数组，表示以 <code>root</code> 为根的子树中，三种状态下的最小摄像头数量。那么答案就是 <span class="arithmatex">\(\min(dfs(root)[0], dfs(root)[1])\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(root)\)</span> 的计算过程如下：</p>
+<p>如果 <code>root</code> 为空，则返回 <span class="arithmatex">\([inf, 0, 0]\)</span>，其中 <code>inf</code> 表示一个很大的数，它用于表示不可能的情况。</p>
+<p>否则，我们递归计算 <code>root</code> 的左右子树，分别得到 <span class="arithmatex">\([la, lb, lc]\)</span> 和 <span class="arithmatex">\([ra, rb, rc]\)</span>。</p>
 <ul>
-<li>如果当前节点有摄像头，那么它的左右节点必须都是被监控的状态，即 $a = \min(la, lb, lc) + \min(ra, rb, rc) + 1$。</li>
-<li>如果当前节点无摄像头，但被子节点监控，那么子节点可以是其中之一或者两个都有摄像头，即 $b = \min(la + rb, lb + ra, la + ra)$。</li>
-<li>如果当前节点无摄像头，也没被子节点监控，那么子节点必须被其子节点监控，即 $c = lb + rb$。</li>
+<li>如果当前节点有摄像头，那么它的左右节点必须都是被监控的状态，即 <span class="arithmatex">\(a = \min(la, lb, lc) + \min(ra, rb, rc) + 1\)</span>。</li>
+<li>如果当前节点无摄像头，但被子节点监控，那么子节点可以是其中之一或者两个都有摄像头，即 <span class="arithmatex">\(b = \min(la + rb, lb + ra, la + ra)\)</span>。</li>
+<li>如果当前节点无摄像头，也没被子节点监控，那么子节点必须被其子节点监控，即 <span class="arithmatex">\(c = lb + rb\)</span>。</li>
 </ul>
-<p>最后，我们返回 $[a, b, c]$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是二叉树的节点数。</p>
+<p>最后，我们返回 <span class="arithmatex">\([a, b, c]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是二叉树的节点数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91397,11 +91395,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

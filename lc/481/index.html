@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90841,25 +90839,25 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：模拟构造过程</h3>
-<p>根据题目，我们得知，字符串 $s$ 的每一组数字都可以由字符串 $s$ 自身的数字得到。</p>
-<p>字符串 $s$ 前两组数字为 $1$ 和 $22$，是由字符串 $s$ 的第一个数字 $1$ 和第二个数字 $2$ 得到的，并且第一组数字只包含 $1$，第二组数字只包含 $2$，第三组数字只包含 $1$，以此类推。</p>
-<p>由于前两组数字已知，我们初始化字符串 $s$ 为 $122$，然后从第三组开始构造，第三组数字是由字符串 $s$ 的第三个数字（下标 $i=2$）得到，因此我们此时将指针 $i$ 指向字符串 $s$ 的第三个数字 $2$。</p>
+<p>根据题目，我们得知，字符串 <span class="arithmatex">\(s\)</span> 的每一组数字都可以由字符串 <span class="arithmatex">\(s\)</span> 自身的数字得到。</p>
+<p>字符串 <span class="arithmatex">\(s\)</span> 前两组数字为 <span class="arithmatex">\(1\)</span> 和 <span class="arithmatex">\(22\)</span>，是由字符串 <span class="arithmatex">\(s\)</span> 的第一个数字 <span class="arithmatex">\(1\)</span> 和第二个数字 <span class="arithmatex">\(2\)</span> 得到的，并且第一组数字只包含 <span class="arithmatex">\(1\)</span>，第二组数字只包含 <span class="arithmatex">\(2\)</span>，第三组数字只包含 <span class="arithmatex">\(1\)</span>，以此类推。</p>
+<p>由于前两组数字已知，我们初始化字符串 <span class="arithmatex">\(s\)</span> 为 <span class="arithmatex">\(122\)</span>，然后从第三组开始构造，第三组数字是由字符串 <span class="arithmatex">\(s\)</span> 的第三个数字（下标 <span class="arithmatex">\(i=2\)</span>）得到，因此我们此时将指针 <span class="arithmatex">\(i\)</span> 指向字符串 <span class="arithmatex">\(s\)</span> 的第三个数字 <span class="arithmatex">\(2\)</span>。</p>
 <div class="highlight"><pre><span></span><code>1 2 2
     ^
     i
 </code></pre></div>
-<p>指针 $i$ 指向的数字为 $2$，表示第三组的数字会出现两次，并且，由于前一组数字为 $2$，组之间数字交替出现，因此第三组数字为两个 $1$，即 $11$。构造后，指针 $i$ 移动到下一个位置，即指向字符串 $s$ 的第四个数字 $1$。</p>
+<p>指针 <span class="arithmatex">\(i\)</span> 指向的数字为 <span class="arithmatex">\(2\)</span>，表示第三组的数字会出现两次，并且，由于前一组数字为 <span class="arithmatex">\(2\)</span>，组之间数字交替出现，因此第三组数字为两个 <span class="arithmatex">\(1\)</span>，即 <span class="arithmatex">\(11\)</span>。构造后，指针 <span class="arithmatex">\(i\)</span> 移动到下一个位置，即指向字符串 <span class="arithmatex">\(s\)</span> 的第四个数字 <span class="arithmatex">\(1\)</span>。</p>
 <div class="highlight"><pre><span></span><code>1 2 2 1 1
       ^
       i
 </code></pre></div>
-<p>这时候指针 $i$ 指向的数字为 $1$，表示第四组的数字会出现一次，并且，由于前一组数字为 $1$，组之间数字交替出现，因此第四组数字为一个 $2$，即 $2$。构造后，指针 $i$ 移动到下一个位置，即指向字符串 $s$ 的第五个数字 $1$。</p>
+<p>这时候指针 <span class="arithmatex">\(i\)</span> 指向的数字为 <span class="arithmatex">\(1\)</span>，表示第四组的数字会出现一次，并且，由于前一组数字为 <span class="arithmatex">\(1\)</span>，组之间数字交替出现，因此第四组数字为一个 <span class="arithmatex">\(2\)</span>，即 <span class="arithmatex">\(2\)</span>。构造后，指针 <span class="arithmatex">\(i\)</span> 移动到下一个位置，即指向字符串 <span class="arithmatex">\(s\)</span> 的第五个数字 <span class="arithmatex">\(1\)</span>。</p>
 <div class="highlight"><pre><span></span><code>1 2 2 1 1 2
         ^
         i
 </code></pre></div>
-<p>我们按照这个规则，依次模拟构造过程，直到字符串 $s$ 的长度大于等于 $n$。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。</p>
+<p>我们按照这个规则，依次模拟构造过程，直到字符串 <span class="arithmatex">\(s\)</span> 的长度大于等于 <span class="arithmatex">\(n\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91286,11 +91284,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86093,18 +86091,18 @@ The subsequence has a length of 1, so we return 1.
 <!-- solution:start -->
 
 <h3 id="solution-1-segment-tree">Solution 1: Segment Tree</h3>
-<p>We assume that $f[v]$ represents the length of the longest increasing subsequence ending with the number $v$.</p>
-<p>We traverse each element $v$ in the array $nums$, with the state transition equation: $f[v] = \max(f[v], f[x])$, where the range of $x$ is $[v-k, v-1]$.</p>
+<p>We assume that <span class="arithmatex">\(f[v]\)</span> represents the length of the longest increasing subsequence ending with the number <span class="arithmatex">\(v\)</span>.</p>
+<p>We traverse each element <span class="arithmatex">\(v\)</span> in the array <span class="arithmatex">\(nums\)</span>, with the state transition equation: <span class="arithmatex">\(f[v] = \max(f[v], f[x])\)</span>, where the range of <span class="arithmatex">\(x\)</span> is <span class="arithmatex">\([v-k, v-1]\)</span>.</p>
 <p>Therefore, we need a data structure to maintain the maximum value of the interval. It is not difficult to think of using a segment tree.</p>
-<p>The segment tree divides the entire interval into multiple discontinuous subintervals, and the number of subintervals does not exceed $log(width)$. To update the value of an element, only $log(width)$ intervals need to be updated, and these intervals are all contained in a large interval that contains the element.</p>
+<p>The segment tree divides the entire interval into multiple discontinuous subintervals, and the number of subintervals does not exceed <span class="arithmatex">\(log(width)\)</span>. To update the value of an element, only <span class="arithmatex">\(log(width)\)</span> intervals need to be updated, and these intervals are all contained in a large interval that contains the element.</p>
 <ul>
 <li>Each node of the segment tree represents an interval;</li>
-<li>The segment tree has a unique root node, which represents the entire statistical range, such as $[1,N]$;</li>
-<li>Each leaf node of the segment tree represents an elementary interval of length $1$, $[x, x]$;</li>
-<li>For each internal node $[l,r]$, its left child is $[l,mid]$, and the right child is $[mid+1,r]$, where $mid = \left \lfloor \frac{l+r}{2} \right \rfloor$.</li>
+<li>The segment tree has a unique root node, which represents the entire statistical range, such as <span class="arithmatex">\([1,N]\)</span>;</li>
+<li>Each leaf node of the segment tree represents an elementary interval of length <span class="arithmatex">\(1\)</span>, <span class="arithmatex">\([x, x]\)</span>;</li>
+<li>For each internal node <span class="arithmatex">\([l,r]\)</span>, its left child is <span class="arithmatex">\([l,mid]\)</span>, and the right child is <span class="arithmatex">\([mid+1,r]\)</span>, where <span class="arithmatex">\(mid = \left \lfloor \frac{l+r}{2} \right \rfloor\)</span>.</li>
 </ul>
 <p>For this problem, the information maintained by the segment tree node is the maximum value within the interval range.</p>
-<p>The time complexity is $O(n \times \log n)$, where $n$ is the length of the array $nums$.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n \times \log n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86896,11 +86894,9 @@ The subsequence has a length of 1, so we return 1.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

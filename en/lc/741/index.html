@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86064,14 +86062,14 @@ The total number of cherries picked up is 5, and this is the maximum possible.
 <!-- solution:start -->
 
 <h3 id="solution-1-dynamic-programming">Solution 1: Dynamic Programming</h3>
-<p>According to the problem description, the player starts from $(0, 0)$, reaches $(n-1, n-1)$, and then returns to the starting point $(0, 0)$. We can consider the player as starting from $(0, 0)$ to $(n-1, n-1)$ twice.</p>
-<p>Therefore, we define $f[k][i_1][i_2]$ as the maximum number of cherries that can be picked when both have walked $k$ steps and reached $(i_1, k-i_1)$ and $(i_2, k-i_2)$ respectively. Initially, $f[0][0][0] = grid[0][0]$. The initial values of other $f[k][i_1][i_2]$ are negative infinity. The answer is $\max(0, f[2n-2][n-1][n-1])$.</p>
+<p>According to the problem description, the player starts from <span class="arithmatex">\((0, 0)\)</span>, reaches <span class="arithmatex">\((n-1, n-1)\)</span>, and then returns to the starting point <span class="arithmatex">\((0, 0)\)</span>. We can consider the player as starting from <span class="arithmatex">\((0, 0)\)</span> to <span class="arithmatex">\((n-1, n-1)\)</span> twice.</p>
+<p>Therefore, we define <span class="arithmatex">\(f[k][i_1][i_2]\)</span> as the maximum number of cherries that can be picked when both have walked <span class="arithmatex">\(k\)</span> steps and reached <span class="arithmatex">\((i_1, k-i_1)\)</span> and <span class="arithmatex">\((i_2, k-i_2)\)</span> respectively. Initially, <span class="arithmatex">\(f[0][0][0] = grid[0][0]\)</span>. The initial values of other <span class="arithmatex">\(f[k][i_1][i_2]\)</span> are negative infinity. The answer is <span class="arithmatex">\(\max(0, f[2n-2][n-1][n-1])\)</span>.</p>
 <p>According to the problem description, we can get the state transition equation:</p>
-<p>$$
+<div class="arithmatex">\[
 f[k][i_1][i_2] = \max(f[k-1][x_1][x_2] + t, f[k][i_1][i_2])
-$$</p>
-<p>Where $t$ represents the number of cherries at positions $(i_1, k-i_1)$ and $(i_2, k-i_2)$, and $x_1, x_2$ represent the previous step positions of $(i_1, k-i_1)$ and $(i_2, k-i_2)$ respectively.</p>
-<p>The time complexity is $O(n^3)$, and the space complexity is $O(n^3)$. Where $n$ is the side length of the grid.</p>
+\]</div>
+<p>Where <span class="arithmatex">\(t\)</span> represents the number of cherries at positions <span class="arithmatex">\((i_1, k-i_1)\)</span> and <span class="arithmatex">\((i_2, k-i_2)\)</span>, and <span class="arithmatex">\(x_1, x_2\)</span> represent the previous step positions of <span class="arithmatex">\((i_1, k-i_1)\)</span> and <span class="arithmatex">\((i_2, k-i_2)\)</span> respectively.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n^3)\)</span>, and the space complexity is <span class="arithmatex">\(O(n^3)\)</span>. Where <span class="arithmatex">\(n\)</span> is the side length of the grid.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86700,11 +86698,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

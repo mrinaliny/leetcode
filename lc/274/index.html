@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90861,8 +90859,8 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：排序</h3>
-<p>我们可以先对数组 <code>citations</code> 按照元素值从大到小进行排序。然后我们从大到小枚举 $h$ 值，如果某个 $h$ 值满足 $citations[h-1] \geq h$，则说明有至少 $h$ 篇论文分别被引用了至少 $h$ 次，直接返回 $h$ 即可。如果没有找到这样的 $h$ 值，说明所有的论文都没有被引用，返回 $0$。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(\log n)$。其中 $n$ 是数组 <code>citations</code> 的长度。</p>
+<p>我们可以先对数组 <code>citations</code> 按照元素值从大到小进行排序。然后我们从大到小枚举 <span class="arithmatex">\(h\)</span> 值，如果某个 <span class="arithmatex">\(h\)</span> 值满足 <span class="arithmatex">\(citations[h-1] \geq h\)</span>，则说明有至少 <span class="arithmatex">\(h\)</span> 篇论文分别被引用了至少 <span class="arithmatex">\(h\)</span> 次，直接返回 <span class="arithmatex">\(h\)</span> 即可。如果没有找到这样的 <span class="arithmatex">\(h\)</span> 值，说明所有的论文都没有被引用，返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(\log n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <code>citations</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91018,9 +91016,9 @@
 <!-- solution:start -->
 
 <h3 id="_4">方法二：计数 + 求和</h3>
-<p>我们可以使用一个长度为 $n+1$ 的数组 $cnt$，其中 $cnt[i]$ 表示引用次数为 $i$ 的论文的篇数。我们遍历数组 <code>citations</code>，将引用次数大于 $n$ 的论文都当作引用次数为 $n$ 的论文，然后将每篇论文的引用次数作为下标，将 $cnt$ 中对应的元素值加 $1$。这样我们就统计出了每个引用次数对应的论文篇数。</p>
-<p>接下来，我们从大到小枚举 $h$ 值，将 $cnt$ 中下标为 $h$ 的元素值加到变量 $s$ 中，其中 $s$ 表示引用次数大于等于 $h$ 的论文篇数。如果 $s \geq h$，说明至少有 $h$ 篇论文分别被引用了至少 $h$ 次，直接返回 $h$ 即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 是数组 <code>citations</code> 的长度。</p>
+<p>我们可以使用一个长度为 <span class="arithmatex">\(n+1\)</span> 的数组 <span class="arithmatex">\(cnt\)</span>，其中 <span class="arithmatex">\(cnt[i]\)</span> 表示引用次数为 <span class="arithmatex">\(i\)</span> 的论文的篇数。我们遍历数组 <code>citations</code>，将引用次数大于 <span class="arithmatex">\(n\)</span> 的论文都当作引用次数为 <span class="arithmatex">\(n\)</span> 的论文，然后将每篇论文的引用次数作为下标，将 <span class="arithmatex">\(cnt\)</span> 中对应的元素值加 <span class="arithmatex">\(1\)</span>。这样我们就统计出了每个引用次数对应的论文篇数。</p>
+<p>接下来，我们从大到小枚举 <span class="arithmatex">\(h\)</span> 值，将 <span class="arithmatex">\(cnt\)</span> 中下标为 <span class="arithmatex">\(h\)</span> 的元素值加到变量 <span class="arithmatex">\(s\)</span> 中，其中 <span class="arithmatex">\(s\)</span> 表示引用次数大于等于 <span class="arithmatex">\(h\)</span> 的论文篇数。如果 <span class="arithmatex">\(s \geq h\)</span>，说明至少有 <span class="arithmatex">\(h\)</span> 篇论文分别被引用了至少 <span class="arithmatex">\(h\)</span> 次，直接返回 <span class="arithmatex">\(h\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是数组 <code>citations</code> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91178,9 +91176,9 @@
 <!-- solution:start -->
 
 <h3 id="_5">方法三：二分查找</h3>
-<p>我们注意到，如果存在一个 $h$ 值满足至少有 $h$ 篇论文至少被引用 $h$ 次，那么对于任意一个 $h' \lt h$，都有至少 $h'$ 篇论文至少被引用 $h'$ 次。因此我们可以使用二分查找的方法，找到最大的 $h$ 值，使得至少有 $h$ 篇论文至少被引用 $h$ 次。</p>
-<p>我们定义二分查找的左边界 $l=0$，右边界 $r=n$。每次我们取 $mid = \lfloor \frac{l + r + 1}{2} \rfloor$，其中 $\lfloor x \rfloor$ 表示对 $x$ 向下取整。然后我们统计数组 <code>citations</code> 中大于等于 $mid$ 的元素的个数，记为 $s$。如果 $s \geq mid$，说明至少有 $mid$ 篇论文至少被引用 $mid$ 次，此时我们将左边界 $l$ 变为 $mid$，否则我们将右边界 $r$ 变为 $mid-1$。当左边界 $l$ 等于右边界 $r$ 时，我们找到了最大的 $h$ 值，即为 $l$ 或 $r$。</p>
-<p>时间复杂度 $O(n \times \log n)$，其中 $n$ 是数组 <code>citations</code> 的长度。空间复杂度 $O(1)$。</p>
+<p>我们注意到，如果存在一个 <span class="arithmatex">\(h\)</span> 值满足至少有 <span class="arithmatex">\(h\)</span> 篇论文至少被引用 <span class="arithmatex">\(h\)</span> 次，那么对于任意一个 <span class="arithmatex">\(h' \lt h\)</span>，都有至少 <span class="arithmatex">\(h'\)</span> 篇论文至少被引用 <span class="arithmatex">\(h'\)</span> 次。因此我们可以使用二分查找的方法，找到最大的 <span class="arithmatex">\(h\)</span> 值，使得至少有 <span class="arithmatex">\(h\)</span> 篇论文至少被引用 <span class="arithmatex">\(h\)</span> 次。</p>
+<p>我们定义二分查找的左边界 <span class="arithmatex">\(l=0\)</span>，右边界 <span class="arithmatex">\(r=n\)</span>。每次我们取 <span class="arithmatex">\(mid = \lfloor \frac{l + r + 1}{2} \rfloor\)</span>，其中 <span class="arithmatex">\(\lfloor x \rfloor\)</span> 表示对 <span class="arithmatex">\(x\)</span> 向下取整。然后我们统计数组 <code>citations</code> 中大于等于 <span class="arithmatex">\(mid\)</span> 的元素的个数，记为 <span class="arithmatex">\(s\)</span>。如果 <span class="arithmatex">\(s \geq mid\)</span>，说明至少有 <span class="arithmatex">\(mid\)</span> 篇论文至少被引用 <span class="arithmatex">\(mid\)</span> 次，此时我们将左边界 <span class="arithmatex">\(l\)</span> 变为 <span class="arithmatex">\(mid\)</span>，否则我们将右边界 <span class="arithmatex">\(r\)</span> 变为 <span class="arithmatex">\(mid-1\)</span>。当左边界 <span class="arithmatex">\(l\)</span> 等于右边界 <span class="arithmatex">\(r\)</span> 时，我们找到了最大的 <span class="arithmatex">\(h\)</span> 值，即为 <span class="arithmatex">\(l\)</span> 或 <span class="arithmatex">\(r\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 是数组 <code>citations</code> 的长度。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Python3</label><label for="__tabbed_3_2">Java</label><label for="__tabbed_3_3">C++</label><label for="__tabbed_3_4">Go</label><label for="__tabbed_3_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91621,11 +91619,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

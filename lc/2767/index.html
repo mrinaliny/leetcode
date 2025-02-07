@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90868,17 +90866,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：记忆化搜索</h3>
-<p>题目中需要判断一个字符串是否是 $5$ 的幂的二进制表示，因此，我们不妨先预处理出所有 $5$ 的幂的数字，记录在哈希表 $ss$ 中。</p>
-<p>接下来，我们设计一个函数 $dfs(i)$，表示从字符串 $s$ 的第 $i$ 个字符开始，到字符串末尾的最少分割次数。那么答案就是 $dfs(0)$。</p>
-<p>函数 $dfs(i)$ 的计算方法如下：</p>
+<p>题目中需要判断一个字符串是否是 <span class="arithmatex">\(5\)</span> 的幂的二进制表示，因此，我们不妨先预处理出所有 <span class="arithmatex">\(5\)</span> 的幂的数字，记录在哈希表 <span class="arithmatex">\(ss\)</span> 中。</p>
+<p>接下来，我们设计一个函数 <span class="arithmatex">\(dfs(i)\)</span>，表示从字符串 <span class="arithmatex">\(s\)</span> 的第 <span class="arithmatex">\(i\)</span> 个字符开始，到字符串末尾的最少分割次数。那么答案就是 <span class="arithmatex">\(dfs(0)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(dfs(i)\)</span> 的计算方法如下：</p>
 <ul>
-<li>如果 $i \geq n$，表示已经处理完了所有字符，那么答案就是 $0$；</li>
-<li>如果 $s[i] = 0$，表示当前字符串包含前导 $0$，不符合美丽字符串的定义，因此答案是无穷大；</li>
-<li>否则，我们从 $i$ 开始枚举子字符串的结束位置 $j$，用 $x$ 表示子字符串 $s[i..j]$ 的十进制值，如果 $x$ 在哈希表 $ss$ 中，那么我们就可以将 $s[i..j]$ 作为一个美丽子字符串，此时答案就是 $1 + dfs(j + 1)$。我们需要枚举所有可能的 $j$，并取所有答案中的最小值。</li>
+<li>如果 <span class="arithmatex">\(i \geq n\)</span>，表示已经处理完了所有字符，那么答案就是 <span class="arithmatex">\(0\)</span>；</li>
+<li>如果 <span class="arithmatex">\(s[i] = 0\)</span>，表示当前字符串包含前导 <span class="arithmatex">\(0\)</span>，不符合美丽字符串的定义，因此答案是无穷大；</li>
+<li>否则，我们从 <span class="arithmatex">\(i\)</span> 开始枚举子字符串的结束位置 <span class="arithmatex">\(j\)</span>，用 <span class="arithmatex">\(x\)</span> 表示子字符串 <span class="arithmatex">\(s[i..j]\)</span> 的十进制值，如果 <span class="arithmatex">\(x\)</span> 在哈希表 <span class="arithmatex">\(ss\)</span> 中，那么我们就可以将 <span class="arithmatex">\(s[i..j]\)</span> 作为一个美丽子字符串，此时答案就是 <span class="arithmatex">\(1 + dfs(j + 1)\)</span>。我们需要枚举所有可能的 <span class="arithmatex">\(j\)</span>，并取所有答案中的最小值。</li>
 </ul>
 <p>为了避免重复计算，我们可以使用记忆化搜索的方法。</p>
-<p>在主函数中，我们首先预处理出所有 $5$ 的幂的数字，然后调用 $dfs(0)$，如果返回值为无穷大，那么说明无法将字符串 $s$ 分割成美丽子字符串，答案返回 $-1$，否则返回 $dfs(0)$ 的值。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 是字符串 $s$ 的长度。</p>
+<p>在主函数中，我们首先预处理出所有 <span class="arithmatex">\(5\)</span> 的幂的数字，然后调用 <span class="arithmatex">\(dfs(0)\)</span>，如果返回值为无穷大，那么说明无法将字符串 <span class="arithmatex">\(s\)</span> 分割成美丽子字符串，答案返回 <span class="arithmatex">\(-1\)</span>，否则返回 <span class="arithmatex">\(dfs(0)\)</span> 的值。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 是字符串 <span class="arithmatex">\(s\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91456,11 +91454,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

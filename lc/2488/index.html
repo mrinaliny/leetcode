@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90858,14 +90856,14 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：遍历 + 计数</h3>
-<p>我们先找到中位数 $k$ 在数组中的位置 $i$，然后从 $i$ 开始向两边遍历，统计中位数为 $k$ 的子数组的数目。</p>
-<p>定义一个答案变量 $ans$，表示中位数为 $k$ 的子数组的数目。初始时 $ans = 1$，表示当前有一个长度为 $1$ 的子数组，其中位数为 $k$。另外，定义一个计数器 $cnt$，用于统计当前遍历过的数组中，「比 $k$ 大的元素的个数」与「比 $k$ 小的元素的个数」的差值的个数。</p>
-<p>接下来，从 $i + 1$ 开始向右遍历，我们维护一个变量 $x$，表示当前右侧子数组中「比 $k$ 大的元素的个数」与「比 $k$ 小的元素的个数」的差值。如果 $x \in [0, 1]$，则当前右侧子数组的中位数为 $k$，答案变量 $ans$ 自增 $1$。然后，我们将 $x$ 的值加入计数器 $cnt$ 中。</p>
-<p>同理，从 $i - 1$ 开始向左遍历，同样维护一个变量 $x$，表示当前左侧子数组中「比 $k$ 大的元素的个数」与「比 $k$ 小的元素的个数」的差值。如果 $x \in [0, 1]$，则当前左侧子数组的中位数为 $k$，答案变量 $ans$ 自增 $1$。如果 $-x$ 或 $-x + 1$ 也在计数器中，说明当前存在跨越 $i$ 左右两侧的子数组，其中位数为 $k$，答案变量 $ans$ 增加计数器中对应的值，即 $ans += cnt[-x] + cnt[-x + 1]$。</p>
-<p>最后，返回答案变量 $ans$ 即可。</p>
-<p>时间复杂度 $O(n)$，空间复杂度 $O(n)$。其中 $n$ 为数组的长度。</p>
+<p>我们先找到中位数 <span class="arithmatex">\(k\)</span> 在数组中的位置 <span class="arithmatex">\(i\)</span>，然后从 <span class="arithmatex">\(i\)</span> 开始向两边遍历，统计中位数为 <span class="arithmatex">\(k\)</span> 的子数组的数目。</p>
+<p>定义一个答案变量 <span class="arithmatex">\(ans\)</span>，表示中位数为 <span class="arithmatex">\(k\)</span> 的子数组的数目。初始时 <span class="arithmatex">\(ans = 1\)</span>，表示当前有一个长度为 <span class="arithmatex">\(1\)</span> 的子数组，其中位数为 <span class="arithmatex">\(k\)</span>。另外，定义一个计数器 <span class="arithmatex">\(cnt\)</span>，用于统计当前遍历过的数组中，「比 <span class="arithmatex">\(k\)</span> 大的元素的个数」与「比 <span class="arithmatex">\(k\)</span> 小的元素的个数」的差值的个数。</p>
+<p>接下来，从 <span class="arithmatex">\(i + 1\)</span> 开始向右遍历，我们维护一个变量 <span class="arithmatex">\(x\)</span>，表示当前右侧子数组中「比 <span class="arithmatex">\(k\)</span> 大的元素的个数」与「比 <span class="arithmatex">\(k\)</span> 小的元素的个数」的差值。如果 <span class="arithmatex">\(x \in [0, 1]\)</span>，则当前右侧子数组的中位数为 <span class="arithmatex">\(k\)</span>，答案变量 <span class="arithmatex">\(ans\)</span> 自增 <span class="arithmatex">\(1\)</span>。然后，我们将 <span class="arithmatex">\(x\)</span> 的值加入计数器 <span class="arithmatex">\(cnt\)</span> 中。</p>
+<p>同理，从 <span class="arithmatex">\(i - 1\)</span> 开始向左遍历，同样维护一个变量 <span class="arithmatex">\(x\)</span>，表示当前左侧子数组中「比 <span class="arithmatex">\(k\)</span> 大的元素的个数」与「比 <span class="arithmatex">\(k\)</span> 小的元素的个数」的差值。如果 <span class="arithmatex">\(x \in [0, 1]\)</span>，则当前左侧子数组的中位数为 <span class="arithmatex">\(k\)</span>，答案变量 <span class="arithmatex">\(ans\)</span> 自增 <span class="arithmatex">\(1\)</span>。如果 <span class="arithmatex">\(-x\)</span> 或 <span class="arithmatex">\(-x + 1\)</span> 也在计数器中，说明当前存在跨越 <span class="arithmatex">\(i\)</span> 左右两侧的子数组，其中位数为 <span class="arithmatex">\(k\)</span>，答案变量 <span class="arithmatex">\(ans\)</span> 增加计数器中对应的值，即 <span class="arithmatex">\(ans += cnt[-x] + cnt[-x + 1]\)</span>。</p>
+<p>最后，返回答案变量 <span class="arithmatex">\(ans\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为数组的长度。</p>
 <blockquote>
-<p>在编码上，我们可以直接开一个长度为 $2 \times n + 1$ 的数组，用于统计当前数组中，比 $k$ 大的元素的个数与比 $k$ 小的元素的个数的差值，每一次我们将差值加上 $n$，即可将差值的范围从 $[-n, n]$ 转换为 $[0, 2n]$。</p>
+<p>在编码上，我们可以直接开一个长度为 <span class="arithmatex">\(2 \times n + 1\)</span> 的数组，用于统计当前数组中，比 <span class="arithmatex">\(k\)</span> 大的元素的个数与比 <span class="arithmatex">\(k\)</span> 小的元素的个数的差值，每一次我们将差值加上 <span class="arithmatex">\(n\)</span>，即可将差值的范围从 <span class="arithmatex">\([-n, n]\)</span> 转换为 <span class="arithmatex">\([0, 2n]\)</span>。</p>
 </blockquote>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
@@ -91354,11 +91352,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

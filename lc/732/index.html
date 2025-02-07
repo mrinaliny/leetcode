@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90865,20 +90863,20 @@ myCalendarThree.book(25, 55); // 返回 3
 <!-- solution:start -->
 
 <h3 id="_3">方法一：线段树</h3>
-<p>线段树将整个区间分割为多个不连续的子区间，子区间的数量不超过 $log(\text{width})$。更新某个元素的值，只需要更新 $log(\text{width})$ 个区间，并且这些区间都包含在一个包含该元素的大区间内。区间修改时，需要使用<strong>懒标记</strong>保证效率。</p>
+<p>线段树将整个区间分割为多个不连续的子区间，子区间的数量不超过 <span class="arithmatex">\(log(\text{width})\)</span>。更新某个元素的值，只需要更新 <span class="arithmatex">\(log(\text{width})\)</span> 个区间，并且这些区间都包含在一个包含该元素的大区间内。区间修改时，需要使用<strong>懒标记</strong>保证效率。</p>
 <ul>
 <li>线段树的每个节点代表一个区间；</li>
-<li>线段树具有唯一的根节点，代表的区间是整个统计范围，如 $[1,N]$；</li>
-<li>线段树的每个叶子节点代表一个长度为 $1$ 的元区间 $[x, x]$；</li>
-<li>对于每个内部节点 $[l,r]$，它的左儿子是 $[l,\text{mid}]$，右儿子是 $[\text{mid}+1,r]$, 其中 $\text{mid} = ⌊(l+r)/2⌋$ (即向下取整)。</li>
+<li>线段树具有唯一的根节点，代表的区间是整个统计范围，如 <span class="arithmatex">\([1,N]\)</span>；</li>
+<li>线段树的每个叶子节点代表一个长度为 <span class="arithmatex">\(1\)</span> 的元区间 <span class="arithmatex">\([x, x]\)</span>；</li>
+<li>对于每个内部节点 <span class="arithmatex">\([l,r]\)</span>，它的左儿子是 <span class="arithmatex">\([l,\text{mid}]\)</span>，右儿子是 <span class="arithmatex">\([\text{mid}+1,r]\)</span>, 其中 <span class="arithmatex">\(\text{mid} = ⌊(l+r)/2⌋\)</span> (即向下取整)。</li>
 </ul>
 <p>对于本题，线段树节点维护的信息有：</p>
 <ol>
-<li>区间范围内被预定的次数的最大值 $v$</li>
-<li>懒标记 $\text{add}$</li>
+<li>区间范围内被预定的次数的最大值 <span class="arithmatex">\(v\)</span></li>
+<li>懒标记 <span class="arithmatex">\(\text{add}\)</span></li>
 </ol>
-<p>由于时间范围为 $10^9$，非常大，因此我们采用动态开点。</p>
-<p>时间复杂度 $O(n \times \log n)$，空间复杂度 $O(n)$，其中 $n$ 表示日程安排的数量。</p>
+<p>由于时间范围为 <span class="arithmatex">\(10^9\)</span>，非常大，因此我们采用动态开点。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 表示日程安排的数量。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -92104,11 +92102,9 @@ myCalendarThree.book(25, 55); // 返回 3
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

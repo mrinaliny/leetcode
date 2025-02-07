@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90838,28 +90836,28 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：数位 DP</h3>
-<p>这道题实际上是求在给定区间 $[l,..r]$ 中，数字中出现 $1$ 个数。个数与数的位数以及每一位上的数字有关。我们可以用数位 DP 的思路来解决这道题。数位 DP 中，数的大小对复杂度的影响很小。</p>
-<p>对于区间 $[l,..r]$ 问题，我们一般会将其转化为 $[1,..r]$ 然后再减去 $[1,..l - 1]$ 的问题，即：</p>
-<p>$$
+<p>这道题实际上是求在给定区间 <span class="arithmatex">\([l,..r]\)</span> 中，数字中出现 <span class="arithmatex">\(1\)</span> 个数。个数与数的位数以及每一位上的数字有关。我们可以用数位 DP 的思路来解决这道题。数位 DP 中，数的大小对复杂度的影响很小。</p>
+<p>对于区间 <span class="arithmatex">\([l,..r]\)</span> 问题，我们一般会将其转化为 <span class="arithmatex">\([1,..r]\)</span> 然后再减去 <span class="arithmatex">\([1,..l - 1]\)</span> 的问题，即：</p>
+<div class="arithmatex">\[
 ans = \sum_{i=1}^{r} ans_i -  \sum_{i=1}^{l-1} ans_i
-$$</p>
-<p>不过对于本题而言，我们只需要求出区间 $[1,..r]$ 的值即可。</p>
+\]</div>
+<p>不过对于本题而言，我们只需要求出区间 <span class="arithmatex">\([1,..r]\)</span> 的值即可。</p>
 <p>这里我们用记忆化搜索来实现数位 DP。从起点向下搜索，到最底层得到方案数，一层层向上返回答案并累加，最后从搜索起点得到最终的答案。</p>
 <p>基本步骤如下：</p>
-<p>我们首先将数字 $n$ 转化为字符串 $s$。然后我们设计一个函数 $\textit{dfs}(i, \textit{cnt}, \textit{limit})$，其中：</p>
+<p>我们首先将数字 <span class="arithmatex">\(n\)</span> 转化为字符串 <span class="arithmatex">\(s\)</span>。然后我们设计一个函数 <span class="arithmatex">\(\textit{dfs}(i, \textit{cnt}, \textit{limit})\)</span>，其中：</p>
 <ul>
-<li>数字 $i$ 表示当前搜索到的位置，我们从高位开始搜索，即 $i = 0$ 表示最高位。</li>
-<li>数字 $\textit{cnt}$ 表示当前数字中 $1$ 出现的次数。</li>
-<li>布尔值 $\textit{limit}$ 表示当前是否受到上界的限制。</li>
+<li>数字 <span class="arithmatex">\(i\)</span> 表示当前搜索到的位置，我们从高位开始搜索，即 <span class="arithmatex">\(i = 0\)</span> 表示最高位。</li>
+<li>数字 <span class="arithmatex">\(\textit{cnt}\)</span> 表示当前数字中 <span class="arithmatex">\(1\)</span> 出现的次数。</li>
+<li>布尔值 <span class="arithmatex">\(\textit{limit}\)</span> 表示当前是否受到上界的限制。</li>
 </ul>
 <p>函数的执行过程如下：</p>
-<p>如果 $i$ 超过了数字 $n$ 的长度，说明搜索结束，直接返回 $cnt$。如果 $\textit{limit}$ 为真，那么 $up$ 为当前数字的第 $i$ 位，否则 $up = 9$。接下来，我们遍历 $j$ 从 $0$ 到 $up$，对于每一个 $j$：</p>
+<p>如果 <span class="arithmatex">\(i\)</span> 超过了数字 <span class="arithmatex">\(n\)</span> 的长度，说明搜索结束，直接返回 <span class="arithmatex">\(cnt\)</span>。如果 <span class="arithmatex">\(\textit{limit}\)</span> 为真，那么 <span class="arithmatex">\(up\)</span> 为当前数字的第 <span class="arithmatex">\(i\)</span> 位，否则 <span class="arithmatex">\(up = 9\)</span>。接下来，我们遍历 <span class="arithmatex">\(j\)</span> 从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(up\)</span>，对于每一个 <span class="arithmatex">\(j\)</span>：</p>
 <ul>
-<li>如果 $j$ 等于 $1$，我们将 $cnt$ 加一。</li>
-<li>递归调用 $\textit{dfs}(i + 1, \textit{cnt}, \textit{limit} \land j = up)$。</li>
+<li>如果 <span class="arithmatex">\(j\)</span> 等于 <span class="arithmatex">\(1\)</span>，我们将 <span class="arithmatex">\(cnt\)</span> 加一。</li>
+<li>递归调用 <span class="arithmatex">\(\textit{dfs}(i + 1, \textit{cnt}, \textit{limit} \land j = up)\)</span>。</li>
 </ul>
-<p>答案为 $\textit{dfs}(0, 0, \text{True})$。</p>
-<p>时间复杂度 $O(m^2 \times D)$，空间复杂度 $O(m^2)$。其中 $m$ 为数字 $n$ 的长度，而 $D = 10$。</p>
+<p>答案为 <span class="arithmatex">\(\textit{dfs}(0, 0, \text{True})\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(m^2 \times D)\)</span>，空间复杂度 <span class="arithmatex">\(O(m^2)\)</span>。其中 <span class="arithmatex">\(m\)</span> 为数字 <span class="arithmatex">\(n\)</span> 的长度，而 <span class="arithmatex">\(D = 10\)</span>。</p>
 <p>相似题目：</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/0300-0399/0357.Count%20Numbers%20with%20Unique%20Digits/README.md">357. 统计各位数字都不同的数字个数</a></li>
@@ -91441,11 +91439,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

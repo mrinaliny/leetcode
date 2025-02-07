@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90860,11 +90858,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：并查集</h3>
-<p>我们可以给每一对情侣编号，编号 $0$ 和 $1$ 的人对应情侣 $0$，编号 $2$ 和 $3$ 的人对应情侣 $1$...即编号为 $row[i]$ 对应的情侣编号为 $\lfloor \frac{row[i]}{2} \rfloor$。</p>
-<p>如果有 $k$ 对情侣相互之间坐错了位置，也即是说，有 $k$ 对情侣处于一个置换环中，那么他们之间需要经过 $k-1$ 次交换才能都坐到正确的位置上。</p>
-<p>为什么？不妨这样考虑，我们先调整一对情侣的位置，使其坐到正确的位置上，那么问题就从 $k$ 对情侣的问题，转换成了 $k-1$ 对情侣的问题。依此类推，最终 $k=1$ 时，交换次数为 $0$。所以，如果 $k$ 对情侣相互之间坐错了位置，那么需要 $k-1$ 次交换。</p>
-<p>因此，我们只需要遍历一遍数组，利用并查集找出有多少个置换环，假设有 $x$ 个，每个环的大小（情侣的对数）为 $y_1, y_2, \cdots, y_x$，那么需要交换的次数为 $y_1-1 + y_2-1 + \cdots + y_x-1 = y_1 + y_2 + \cdots + y_x - x = n - x$。</p>
-<p>时间复杂度 $O(n \times \alpha(n))$，空间复杂度 $O(n)$。其中 $\alpha(n)$ 为阿克曼函数的反函数，可以认为是一个很小的常数。</p>
+<p>我们可以给每一对情侣编号，编号 <span class="arithmatex">\(0\)</span> 和 <span class="arithmatex">\(1\)</span> 的人对应情侣 <span class="arithmatex">\(0\)</span>，编号 <span class="arithmatex">\(2\)</span> 和 <span class="arithmatex">\(3\)</span> 的人对应情侣 <span class="arithmatex">\(1\)</span>...即编号为 <span class="arithmatex">\(row[i]\)</span> 对应的情侣编号为 <span class="arithmatex">\(\lfloor \frac{row[i]}{2} \rfloor\)</span>。</p>
+<p>如果有 <span class="arithmatex">\(k\)</span> 对情侣相互之间坐错了位置，也即是说，有 <span class="arithmatex">\(k\)</span> 对情侣处于一个置换环中，那么他们之间需要经过 <span class="arithmatex">\(k-1\)</span> 次交换才能都坐到正确的位置上。</p>
+<p>为什么？不妨这样考虑，我们先调整一对情侣的位置，使其坐到正确的位置上，那么问题就从 <span class="arithmatex">\(k\)</span> 对情侣的问题，转换成了 <span class="arithmatex">\(k-1\)</span> 对情侣的问题。依此类推，最终 <span class="arithmatex">\(k=1\)</span> 时，交换次数为 <span class="arithmatex">\(0\)</span>。所以，如果 <span class="arithmatex">\(k\)</span> 对情侣相互之间坐错了位置，那么需要 <span class="arithmatex">\(k-1\)</span> 次交换。</p>
+<p>因此，我们只需要遍历一遍数组，利用并查集找出有多少个置换环，假设有 <span class="arithmatex">\(x\)</span> 个，每个环的大小（情侣的对数）为 <span class="arithmatex">\(y_1, y_2, \cdots, y_x\)</span>，那么需要交换的次数为 <span class="arithmatex">\(y_1-1 + y_2-1 + \cdots + y_x-1 = y_1 + y_2 + \cdots + y_x - x = n - x\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \alpha(n))\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(\alpha(n)\)</span> 为阿克曼函数的反函数，可以认为是一个很小的常数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91398,11 +91396,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86091,11 +86089,11 @@ The final time is 7. It can be shown that it is the minimum time possible.
 <!-- solution:start -->
 
 <h3 id="solution-1-shortest-path-priority-queue-min-heap">Solution 1: Shortest Path + Priority Queue (Min Heap)</h3>
-<p>We observe that if we cannot move at the cell $(0, 0)$, i.e., $grid[0][1] &gt; 1$ and $grid[1][0] &gt; 1$, then we cannot move at the cell $(0, 0)$ anymore, and we should return $-1$. For other cases, we can move.</p>
-<p>Next, we define $dist[i][j]$ to represent the earliest arrival time at $(i, j)$. Initially, $dist[0][0] = 0$, and the $dist$ of other positions are all initialized to $\infty$.</p>
-<p>We use a priority queue (min heap) to maintain the cells that can currently move. The elements in the priority queue are $(dist[i][j], i, j)$, i.e., $(dist[i][j], i, j)$ represents the earliest arrival time at $(i, j)$.</p>
-<p>Each time we take out the cell $(t, i, j)$ that can arrive the earliest from the priority queue. If $(i, j)$ is $(m - 1, n - 1)$, then we directly return $t$. Otherwise, we traverse the four adjacent cells $(x, y)$ of $(i, j)$, which are up, down, left, and right. If $t + 1 &lt; grid[x][y]$, then the time $nt = grid[x][y] + (grid[x][y] - (t + 1)) \bmod 2$ to move to $(x, y)$. At this time, we can repeatedly move to extend the time to no less than $grid[x][y]$, depending on the parity of the distance between $t + 1$ and $grid[x][y]$. Otherwise, the time $nt = t + 1$ to move to $(x, y)$. If $nt &lt; dist[x][y]$, then we update $dist[x][y] = nt$, and add $(nt, x, y)$ to the priority queue.</p>
-<p>The time complexity is $O(m \times n \times \log (m \times n))$, and the space complexity is $O(m \times n)$. Where $m$ and $n$ are the number of rows and columns of the grid, respectively.</p>
+<p>We observe that if we cannot move at the cell <span class="arithmatex">\((0, 0)\)</span>, i.e., <span class="arithmatex">\(grid[0][1] &gt; 1\)</span> and <span class="arithmatex">\(grid[1][0] &gt; 1\)</span>, then we cannot move at the cell <span class="arithmatex">\((0, 0)\)</span> anymore, and we should return <span class="arithmatex">\(-1\)</span>. For other cases, we can move.</p>
+<p>Next, we define <span class="arithmatex">\(dist[i][j]\)</span> to represent the earliest arrival time at <span class="arithmatex">\((i, j)\)</span>. Initially, <span class="arithmatex">\(dist[0][0] = 0\)</span>, and the <span class="arithmatex">\(dist\)</span> of other positions are all initialized to <span class="arithmatex">\(\infty\)</span>.</p>
+<p>We use a priority queue (min heap) to maintain the cells that can currently move. The elements in the priority queue are <span class="arithmatex">\((dist[i][j], i, j)\)</span>, i.e., <span class="arithmatex">\((dist[i][j], i, j)\)</span> represents the earliest arrival time at <span class="arithmatex">\((i, j)\)</span>.</p>
+<p>Each time we take out the cell <span class="arithmatex">\((t, i, j)\)</span> that can arrive the earliest from the priority queue. If <span class="arithmatex">\((i, j)\)</span> is <span class="arithmatex">\((m - 1, n - 1)\)</span>, then we directly return <span class="arithmatex">\(t\)</span>. Otherwise, we traverse the four adjacent cells <span class="arithmatex">\((x, y)\)</span> of <span class="arithmatex">\((i, j)\)</span>, which are up, down, left, and right. If <span class="arithmatex">\(t + 1 &lt; grid[x][y]\)</span>, then the time <span class="arithmatex">\(nt = grid[x][y] + (grid[x][y] - (t + 1)) \bmod 2\)</span> to move to <span class="arithmatex">\((x, y)\)</span>. At this time, we can repeatedly move to extend the time to no less than <span class="arithmatex">\(grid[x][y]\)</span>, depending on the parity of the distance between <span class="arithmatex">\(t + 1\)</span> and <span class="arithmatex">\(grid[x][y]\)</span>. Otherwise, the time <span class="arithmatex">\(nt = t + 1\)</span> to move to <span class="arithmatex">\((x, y)\)</span>. If <span class="arithmatex">\(nt &lt; dist[x][y]\)</span>, then we update <span class="arithmatex">\(dist[x][y] = nt\)</span>, and add <span class="arithmatex">\((nt, x, y)\)</span> to the priority queue.</p>
+<p>The time complexity is <span class="arithmatex">\(O(m \times n \times \log (m \times n))\)</span>, and the space complexity is <span class="arithmatex">\(O(m \times n)\)</span>. Where <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span> are the number of rows and columns of the grid, respectively.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86746,11 +86744,9 @@ The final time is 7. It can be shown that it is the minimum time possible.
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

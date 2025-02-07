@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90855,18 +90853,18 @@
 <!-- solution:start -->
 
 <h3 id="dp">方法一：数位 DP</h3>
-<p>我们先将数字 $n$ 转成字符串 $s$。</p>
-<p>接下来，我们定义一个函数 $check(x)$，用来判断 $x$ 在旋转 $180^\circ$ 之后是否变成了一个不同的数。如果 $x$ 在旋转 $180^\circ$ 之后变成了一个不同的数，那么我们就称 $x$ 是一个易混淆数。</p>
-<p>然后，我们定义另一个函数 $dfs(pos, limit, x)$，用于搜索从高位到低位的每一位。其中：</p>
+<p>我们先将数字 <span class="arithmatex">\(n\)</span> 转成字符串 <span class="arithmatex">\(s\)</span>。</p>
+<p>接下来，我们定义一个函数 <span class="arithmatex">\(check(x)\)</span>，用来判断 <span class="arithmatex">\(x\)</span> 在旋转 <span class="arithmatex">\(180^\circ\)</span> 之后是否变成了一个不同的数。如果 <span class="arithmatex">\(x\)</span> 在旋转 <span class="arithmatex">\(180^\circ\)</span> 之后变成了一个不同的数，那么我们就称 <span class="arithmatex">\(x\)</span> 是一个易混淆数。</p>
+<p>然后，我们定义另一个函数 <span class="arithmatex">\(dfs(pos, limit, x)\)</span>，用于搜索从高位到低位的每一位。其中：</p>
 <ul>
-<li>参数 $pos$ 表示当前搜索到的位置，初始时为 $0$；</li>
-<li>参数 $limit$ 表示当前搜索的数是否受到上界的限制，初始时为 $true$；</li>
-<li>参数 $x$ 表示当前搜索的数，初始时为 $0$。</li>
+<li>参数 <span class="arithmatex">\(pos\)</span> 表示当前搜索到的位置，初始时为 <span class="arithmatex">\(0\)</span>；</li>
+<li>参数 <span class="arithmatex">\(limit\)</span> 表示当前搜索的数是否受到上界的限制，初始时为 <span class="arithmatex">\(true\)</span>；</li>
+<li>参数 <span class="arithmatex">\(x\)</span> 表示当前搜索的数，初始时为 <span class="arithmatex">\(0\)</span>。</li>
 </ul>
-<p>在 $dfs(pos, limit, x)$ 中，如果 $pos \geq len(s)$，那么我们就判断 $x$ 是否是一个易混淆数，如果是则返回 $1$，否则返回 $0$。</p>
-<p>否则，我们计算出当前位置上的数字的上界 $up$，然后枚举当前位置上的数字 $i$，如果 $i$ 在旋转 $180^\circ$ 之后不是一个数字，那么我们就直接跳过这个数字。否则，我们将 $x$ 更新为 $x \times 10 + i$，并根据 $limit$ 的值决定下一步搜索的时候是否受到上界的限制，最后将答案返回。</p>
-<p>最终的答案即为 $dfs(0, true, 0)$。</p>
-<p>时间复杂度 $O(5^{\log_{10}n})$，空间复杂度 $O(\log_{10}n)$。其中 $5^{\log_{10}n}$ 表示 $n$ 的位数。</p>
+<p>在 <span class="arithmatex">\(dfs(pos, limit, x)\)</span> 中，如果 <span class="arithmatex">\(pos \geq len(s)\)</span>，那么我们就判断 <span class="arithmatex">\(x\)</span> 是否是一个易混淆数，如果是则返回 <span class="arithmatex">\(1\)</span>，否则返回 <span class="arithmatex">\(0\)</span>。</p>
+<p>否则，我们计算出当前位置上的数字的上界 <span class="arithmatex">\(up\)</span>，然后枚举当前位置上的数字 <span class="arithmatex">\(i\)</span>，如果 <span class="arithmatex">\(i\)</span> 在旋转 <span class="arithmatex">\(180^\circ\)</span> 之后不是一个数字，那么我们就直接跳过这个数字。否则，我们将 <span class="arithmatex">\(x\)</span> 更新为 <span class="arithmatex">\(x \times 10 + i\)</span>，并根据 <span class="arithmatex">\(limit\)</span> 的值决定下一步搜索的时候是否受到上界的限制，最后将答案返回。</p>
+<p>最终的答案即为 <span class="arithmatex">\(dfs(0, true, 0)\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(5^{\log_{10}n})\)</span>，空间复杂度 <span class="arithmatex">\(O(\log_{10}n)\)</span>。其中 <span class="arithmatex">\(5^{\log_{10}n}\)</span> 表示 <span class="arithmatex">\(n\)</span> 的位数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91397,11 +91395,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

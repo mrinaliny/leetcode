@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86036,14 +86034,14 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-two-pointers">Solution 1: Two pointers</h3>
-<p>We notice that if a substring starts from position $i$, then the largest substring with the largest dictionary order must be $s[i,..n-1]$, which is the longest suffix starting from position $i$. Therefore, we only need to find the largest suffix substring.</p>
-<p>We use two pointers $i$ and $j$, where pointer $i$ points to the starting position of the current largest substring with the largest dictionary order, and pointer $j$ points to the starting position of the current substring being considered. In addition, we use a variable $k$ to record the current position being compared. Initially, $i = 0$, $j=1$, $k=0$.</p>
-<p>Each time, we compare $s[i+k]$ and $s[j+k]$:</p>
-<p>If $s[i + k] = s[j + k]$, it means that $s[i,..i+k]$ and $s[j,..j+k]$ are the same, and we add $k$ by $1$ and continue to compare $s[i+k]$ and $s[j+k]$;</p>
-<p>If $s[i + k] \lt s[j + k]$, it means that the dictionary order of $s[j,..j+k]$ is larger. At this time, we update $i = i + k + 1$, and reset $k$ to $0$. If $i \geq j$ at this time, we update pointer $j$ to $i + 1$, that is, $j = i + 1$. Here we skip all suffix substrings with $s[i,..,i+k]$ as the starting position, because their dictionary orders are smaller than the suffix substrings with $s[j,..,j+k]$ as the starting position.</p>
-<p>Similarly, if $s[i + k] \gt s[j + k]$, it means that the dictionary order of $s[i,..,i+k]$ is larger. At this time, we update $j = j + k + 1$ and reset $k$ to $0$. Here we skip all suffix substrings with $s[j,..,j+k]$ as the starting position, because their dictionary orders are smaller than the suffix substrings with $s[i,..,i+k]$ as the starting position.</p>
-<p>Finally, we return the suffix substring starting from $i$, that is, $s[i,..,n-1]$.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of string $s$. The space complexity is $O(1)$.</p>
+<p>We notice that if a substring starts from position <span class="arithmatex">\(i\)</span>, then the largest substring with the largest dictionary order must be <span class="arithmatex">\(s[i,..n-1]\)</span>, which is the longest suffix starting from position <span class="arithmatex">\(i\)</span>. Therefore, we only need to find the largest suffix substring.</p>
+<p>We use two pointers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>, where pointer <span class="arithmatex">\(i\)</span> points to the starting position of the current largest substring with the largest dictionary order, and pointer <span class="arithmatex">\(j\)</span> points to the starting position of the current substring being considered. In addition, we use a variable <span class="arithmatex">\(k\)</span> to record the current position being compared. Initially, <span class="arithmatex">\(i = 0\)</span>, <span class="arithmatex">\(j=1\)</span>, <span class="arithmatex">\(k=0\)</span>.</p>
+<p>Each time, we compare <span class="arithmatex">\(s[i+k]\)</span> and <span class="arithmatex">\(s[j+k]\)</span>:</p>
+<p>If <span class="arithmatex">\(s[i + k] = s[j + k]\)</span>, it means that <span class="arithmatex">\(s[i,..i+k]\)</span> and <span class="arithmatex">\(s[j,..j+k]\)</span> are the same, and we add <span class="arithmatex">\(k\)</span> by <span class="arithmatex">\(1\)</span> and continue to compare <span class="arithmatex">\(s[i+k]\)</span> and <span class="arithmatex">\(s[j+k]\)</span>;</p>
+<p>If <span class="arithmatex">\(s[i + k] \lt s[j + k]\)</span>, it means that the dictionary order of <span class="arithmatex">\(s[j,..j+k]\)</span> is larger. At this time, we update <span class="arithmatex">\(i = i + k + 1\)</span>, and reset <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(0\)</span>. If <span class="arithmatex">\(i \geq j\)</span> at this time, we update pointer <span class="arithmatex">\(j\)</span> to <span class="arithmatex">\(i + 1\)</span>, that is, <span class="arithmatex">\(j = i + 1\)</span>. Here we skip all suffix substrings with <span class="arithmatex">\(s[i,..,i+k]\)</span> as the starting position, because their dictionary orders are smaller than the suffix substrings with <span class="arithmatex">\(s[j,..,j+k]\)</span> as the starting position.</p>
+<p>Similarly, if <span class="arithmatex">\(s[i + k] \gt s[j + k]\)</span>, it means that the dictionary order of <span class="arithmatex">\(s[i,..,i+k]\)</span> is larger. At this time, we update <span class="arithmatex">\(j = j + k + 1\)</span> and reset <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(0\)</span>. Here we skip all suffix substrings with <span class="arithmatex">\(s[j,..,j+k]\)</span> as the starting position, because their dictionary orders are smaller than the suffix substrings with <span class="arithmatex">\(s[i,..,i+k]\)</span> as the starting position.</p>
+<p>Finally, we return the suffix substring starting from <span class="arithmatex">\(i\)</span>, that is, <span class="arithmatex">\(s[i,..,n-1]\)</span>.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of string <span class="arithmatex">\(s\)</span>. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86479,11 +86477,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

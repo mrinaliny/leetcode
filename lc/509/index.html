@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90870,10 +90868,10 @@ F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1
 <!-- solution:start -->
 
 <h3 id="_3">方法一：递推</h3>
-<p>我们定义两个变量 $a$ 和 $b$，初始时 $a = 0$, $b = 1$。</p>
-<p>接下来，我们进行 $n$ 次循环，每次循环中，我们将 $a$ 和 $b$ 的值分别更新为 $b$ 和 $a + b$。</p>
-<p>最后，返回 $a$ 即可。</p>
-<p>时间复杂度 $O(n)$，其中 $n$ 为题目给定的整数 $n$。空间复杂度 $O(1)$。</p>
+<p>我们定义两个变量 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span>，初始时 <span class="arithmatex">\(a = 0\)</span>, <span class="arithmatex">\(b = 1\)</span>。</p>
+<p>接下来，我们进行 <span class="arithmatex">\(n\)</span> 次循环，每次循环中，我们将 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 的值分别更新为 <span class="arithmatex">\(b\)</span> 和 <span class="arithmatex">\(a + b\)</span>。</p>
+<p>最后，返回 <span class="arithmatex">\(a\)</span> 即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n)\)</span>，其中 <span class="arithmatex">\(n\)</span> 为题目给定的整数 <span class="arithmatex">\(n\)</span>。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">PHP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91063,33 +91061,33 @@ F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1
 <!-- solution:start -->
 
 <h3 id="_4">方法二：矩阵快速幂加速递推</h3>
-<p>我们设 $\textit{Fib}(n)$ 表示一个 $1 \times 2$ 的矩阵 $\begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}$，其中 $F_n$ 和 $F_{n - 1}$ 分别是第 $n$ 个和第 $n - 1$ 个斐波那契数。</p>
-<p>我们希望根据 $\textit{Fib}(n - 1) = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix}$ 推出 $\textit{Fib}(n)$。也即是说，我们需要一个矩阵 $\textit{base}$，使得 $\textit{Fib}(n - 1) \times \textit{base} = \textit{Fib}(n)$，即：</p>
-<p>$$
+<p>我们设 <span class="arithmatex">\(\textit{Fib}(n)\)</span> 表示一个 <span class="arithmatex">\(1 \times 2\)</span> 的矩阵 <span class="arithmatex">\(\begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}\)</span>，其中 <span class="arithmatex">\(F_n\)</span> 和 <span class="arithmatex">\(F_{n - 1}\)</span> 分别是第 <span class="arithmatex">\(n\)</span> 个和第 <span class="arithmatex">\(n - 1\)</span> 个斐波那契数。</p>
+<p>我们希望根据 <span class="arithmatex">\(\textit{Fib}(n - 1) = \begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix}\)</span> 推出 <span class="arithmatex">\(\textit{Fib}(n)\)</span>。也即是说，我们需要一个矩阵 <span class="arithmatex">\(\textit{base}\)</span>，使得 <span class="arithmatex">\(\textit{Fib}(n - 1) \times \textit{base} = \textit{Fib}(n)\)</span>，即：</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
 F_{n - 1} &amp; F_{n - 2}
 \end{bmatrix} \times \textit{base} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
-$$</p>
-<p>由于 $F_n = F_{n - 1} + F_{n - 2}$，所以矩阵 $\textit{base}$ 的第一列为：</p>
-<p>$$
+\]</div>
+<p>由于 <span class="arithmatex">\(F_n = F_{n - 1} + F_{n - 2}\)</span>，所以矩阵 <span class="arithmatex">\(\textit{base}\)</span> 的第一列为：</p>
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 \
+1 \\
 1
 \end{bmatrix}
-$$</p>
+\]</div>
 <p>第二列为：</p>
-<p>$$
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 \
+1 \\
 0
 \end{bmatrix}
-$$</p>
+\]</div>
 <p>因此有：</p>
-<p>$$
-\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix} \times \begin{bmatrix}1 &amp; 1 \ 1 &amp; 0\end{bmatrix} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
-$$</p>
-<p>我们定义初始矩阵 $res = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}$，那么 $F_n$ 等于 $res$ 乘以 $\textit{base}^{n}$ 的结果矩阵中第一行的第二个元素。使用矩阵快速幂求解即可。</p>
-<p>时间复杂度 $O(\log n)$，空间复杂度 $O(1)$。</p>
+<div class="arithmatex">\[
+\begin{bmatrix} F_{n - 1} &amp; F_{n - 2} \end{bmatrix} \times \begin{bmatrix}1 &amp; 1 \\ 1 &amp; 0\end{bmatrix} = \begin{bmatrix} F_n &amp; F_{n - 1} \end{bmatrix}
+\]</div>
+<p>我们定义初始矩阵 <span class="arithmatex">\(res = \begin{bmatrix} 1 &amp; 0 \end{bmatrix}\)</span>，那么 <span class="arithmatex">\(F_n\)</span> 等于 <span class="arithmatex">\(res\)</span> 乘以 <span class="arithmatex">\(\textit{base}^{n}\)</span> 的结果矩阵中第一行的第二个元素。使用矩阵快速幂求解即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(\log n)\)</span>，空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:7"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label><label for="__tabbed_2_6">Rust</label><label for="__tabbed_2_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91775,11 +91773,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

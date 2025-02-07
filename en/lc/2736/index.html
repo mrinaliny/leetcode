@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86094,14 +86092,14 @@ Therefore, we return&nbsp;<code node="[object Object]">[6,10,7].
 
 <h3 id="solution-1-binary-indexed-tree">Solution 1: Binary Indexed Tree</h3>
 <p>This problem belongs to the category of two-dimensional partial order problems.</p>
-<p>A two-dimensional partial order problem is defined as follows: given several pairs of points $(a_1, b_1)$, $(a_2, b_2)$, ..., $(a_n, b_n)$, and a defined partial order relation, now given a point $(a_i, b_i)$, we need to find the number/maximum value of point pairs $(a_j, b_j)$ that satisfy the partial order relation. That is:</p>
-<p>$$
+<p>A two-dimensional partial order problem is defined as follows: given several pairs of points <span class="arithmatex">\((a_1, b_1)\)</span>, <span class="arithmatex">\((a_2, b_2)\)</span>, ..., <span class="arithmatex">\((a_n, b_n)\)</span>, and a defined partial order relation, now given a point <span class="arithmatex">\((a_i, b_i)\)</span>, we need to find the number/maximum value of point pairs <span class="arithmatex">\((a_j, b_j)\)</span> that satisfy the partial order relation. That is:</p>
+<div class="arithmatex">\[
 \left(a_{j}, b_{j}\right) \prec\left(a_{i}, b_{i}\right) \stackrel{\text { def }}{=} a_{j} \lesseqgtr a_{i} \text { and } b_{j} \lesseqgtr b_{i}
-$$</p>
+\]</div>
 <p>The general solution to two-dimensional partial order problems is to sort one dimension and use a data structure to handle the second dimension (this data structure is generally a binary indexed tree).</p>
-<p>For this problem, we can create an array $nums$, where $nums[i]=(nums_1[i], nums_2[i])$, and then sort $nums$ in descending order according to $nums_1$. We also sort the queries $queries$ in descending order according to $x$.</p>
-<p>Next, we iterate through each query $queries[i] = (x, y)$. For the current query, we loop to insert the value of $nums_2$ for all elements in $nums$ that are greater than or equal to $x$ into the binary indexed tree. The binary indexed tree maintains the maximum value of $nums_1 + nums_2$ in the discretized $nums_2$ interval. Therefore, we only need to query the maximum value corresponding to the interval greater than or equal to the discretized $y$ in the binary indexed tree. Note that since the binary indexed tree maintains the prefix maximum value, we can insert $nums_2$ in reverse order into the binary indexed tree in the implementation.</p>
-<p>The time complexity is $O((n + m) \times \log n + m \times \log m)$, and the space complexity is $O(n + m)$. Here, $n$ is the length of the array $nums$, and $m$ is the length of the array $queries$.</p>
+<p>For this problem, we can create an array <span class="arithmatex">\(nums\)</span>, where <span class="arithmatex">\(nums[i]=(nums_1[i], nums_2[i])\)</span>, and then sort <span class="arithmatex">\(nums\)</span> in descending order according to <span class="arithmatex">\(nums_1\)</span>. We also sort the queries <span class="arithmatex">\(queries\)</span> in descending order according to <span class="arithmatex">\(x\)</span>.</p>
+<p>Next, we iterate through each query <span class="arithmatex">\(queries[i] = (x, y)\)</span>. For the current query, we loop to insert the value of <span class="arithmatex">\(nums_2\)</span> for all elements in <span class="arithmatex">\(nums\)</span> that are greater than or equal to <span class="arithmatex">\(x\)</span> into the binary indexed tree. The binary indexed tree maintains the maximum value of <span class="arithmatex">\(nums_1 + nums_2\)</span> in the discretized <span class="arithmatex">\(nums_2\)</span> interval. Therefore, we only need to query the maximum value corresponding to the interval greater than or equal to the discretized <span class="arithmatex">\(y\)</span> in the binary indexed tree. Note that since the binary indexed tree maintains the prefix maximum value, we can insert <span class="arithmatex">\(nums_2\)</span> in reverse order into the binary indexed tree in the implementation.</p>
+<p>The time complexity is <span class="arithmatex">\(O((n + m) \times \log n + m \times \log m)\)</span>, and the space complexity is <span class="arithmatex">\(O(n + m)\)</span>. Here, <span class="arithmatex">\(n\)</span> is the length of the array <span class="arithmatex">\(nums\)</span>, and <span class="arithmatex">\(m\)</span> is the length of the array <span class="arithmatex">\(queries\)</span>.</p>
 <p>Similar problems:</p>
 <ul>
 <li><a href="https://github.com/doocs/leetcode/blob/main/solution/2900-2999/2940.Find%20Building%20Where%20Alice%20and%20Bob%20Can%20Meet/README_EN.md">2940. Find Building Where Alice and Bob Can Meet</a></li>
@@ -86897,11 +86895,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86040,15 +86038,15 @@
 <!-- solution:start -->
 
 <h3 id="solution-1-binary-search">Solution 1: Binary Search</h3>
-<p>We define the left boundary of the binary search as $l = 0$ and the right boundary as $r = n - 1$, where $n$ is the length of the array.</p>
-<p>Each time during the binary search, we get the current midpoint $\textit{mid} = (l + r) / 2$.</p>
+<p>We define the left boundary of the binary search as <span class="arithmatex">\(l = 0\)</span> and the right boundary as <span class="arithmatex">\(r = n - 1\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array.</p>
+<p>Each time during the binary search, we get the current midpoint <span class="arithmatex">\(\textit{mid} = (l + r) / 2\)</span>.</p>
 <ul>
-<li>If $\textit{nums}[\textit{mid}] &gt; \textit{nums}[r]$, it means $[l, \textit{mid}]$ is ordered. If $\textit{nums}[l] \le \textit{target} \le \textit{nums}[\textit{mid}]$, it means $\textit{target}$ is in $[l, \textit{mid}]$. Otherwise, $\textit{target}$ is in $[\textit{mid} + 1, r]$.</li>
-<li>If $\textit{nums}[\textit{mid}] &lt; \textit{nums}[r]$, it means $[\textit{mid} + 1, r]$ is ordered. If $\textit{nums}[\textit{mid}] &lt; \textit{target} \le \textit{nums}[r]$, it means $\textit{target}$ is in $[\textit{mid} + 1, r]$. Otherwise, $\textit{target}$ is in $[l, \textit{mid}]$.</li>
-<li>If $\textit{nums}[\textit{mid}] = \textit{nums}[r]$, it means the elements $\textit{nums}[\textit{mid}]$ and $\textit{nums}[r]$ are equal. In this case, we cannot determine which interval $\textit{target}$ is in, so we can only decrease $r$ by $1$.</li>
+<li>If <span class="arithmatex">\(\textit{nums}[\textit{mid}] &gt; \textit{nums}[r]\)</span>, it means <span class="arithmatex">\([l, \textit{mid}]\)</span> is ordered. If <span class="arithmatex">\(\textit{nums}[l] \le \textit{target} \le \textit{nums}[\textit{mid}]\)</span>, it means <span class="arithmatex">\(\textit{target}\)</span> is in <span class="arithmatex">\([l, \textit{mid}]\)</span>. Otherwise, <span class="arithmatex">\(\textit{target}\)</span> is in <span class="arithmatex">\([\textit{mid} + 1, r]\)</span>.</li>
+<li>If <span class="arithmatex">\(\textit{nums}[\textit{mid}] &lt; \textit{nums}[r]\)</span>, it means <span class="arithmatex">\([\textit{mid} + 1, r]\)</span> is ordered. If <span class="arithmatex">\(\textit{nums}[\textit{mid}] &lt; \textit{target} \le \textit{nums}[r]\)</span>, it means <span class="arithmatex">\(\textit{target}\)</span> is in <span class="arithmatex">\([\textit{mid} + 1, r]\)</span>. Otherwise, <span class="arithmatex">\(\textit{target}\)</span> is in <span class="arithmatex">\([l, \textit{mid}]\)</span>.</li>
+<li>If <span class="arithmatex">\(\textit{nums}[\textit{mid}] = \textit{nums}[r]\)</span>, it means the elements <span class="arithmatex">\(\textit{nums}[\textit{mid}]\)</span> and <span class="arithmatex">\(\textit{nums}[r]\)</span> are equal. In this case, we cannot determine which interval <span class="arithmatex">\(\textit{target}\)</span> is in, so we can only decrease <span class="arithmatex">\(r\)</span> by <span class="arithmatex">\(1\)</span>.</li>
 </ul>
-<p>After the binary search, if $\textit{nums}[l] = \textit{target}$, it means the target value $\textit{target}$ exists in the array. Otherwise, it does not exist.</p>
-<p>The time complexity is $O(n)$, where $n$ is the length of the array. The space complexity is $O(1)$.</p>
+<p>After the binary search, if <span class="arithmatex">\(\textit{nums}[l] = \textit{target}\)</span>, it means the target value <span class="arithmatex">\(\textit{target}\)</span> exists in the array. Otherwise, it does not exist.</p>
+<p>The time complexity is <span class="arithmatex">\(O(n)\)</span>, where <span class="arithmatex">\(n\)</span> is the length of the array. The space complexity is <span class="arithmatex">\(O(1)\)</span>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86627,11 +86625,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

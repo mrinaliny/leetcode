@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90815,11 +90813,11 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：枚举</h3>
-<p>我们先统计出模式串 $pattern$ 中 <code>'a'</code> 和 <code>'b'</code> 的个数，分别为 $cnt[0]$ 和 $cnt[1]$。记字符串 $value$ 的长度为 $n$。</p>
-<p>如果 $cnt[0]=0$，说明模式串中只包含字符 <code>'b'</code>，那么我们需要判断 $n$ 是否是 $cnt[1]$ 的倍数，以及 $value$ 是否可以分割成 $cnt[1]$ 个长度为 $n/cnt[1]$ 的子串，且这些子串都相同。如果不满足，直接返回 $false$ 即可。</p>
-<p>如果 $cnt[1]=0$，说明模式串中只包含字符 <code>'a'</code>，那么我们需要判断 $n$ 是否是 $cnt[0]$ 的倍数，以及 $value$ 是否可以分割成 $cnt[0]$ 个长度为 $n/cnt[0]$ 的子串，且这些子串都相同。如果不满足，直接返回 $false$ 即可。</p>
-<p>接下来，我们记字符 <code>'a'</code> 所匹配的字符串的长度 $la$，字符 <code>'b'</code> 所匹配的字符串的长度 $lb$。那么有 $la \times cnt[0] + lb \times cnt[1] = n$。如果我们枚举 $la$，就可以知道 $lb$ 的值了。因此我们可以枚举 $la$，只需要判断是否存在一个整数 $lb$，满足上述等式即可。</p>
-<p>时间复杂度 $O(n^2)$，空间复杂度 $O(n)$。其中 $n$ 为字符串 $value$ 的长度。</p>
+<p>我们先统计出模式串 <span class="arithmatex">\(pattern\)</span> 中 <code>'a'</code> 和 <code>'b'</code> 的个数，分别为 <span class="arithmatex">\(cnt[0]\)</span> 和 <span class="arithmatex">\(cnt[1]\)</span>。记字符串 <span class="arithmatex">\(value\)</span> 的长度为 <span class="arithmatex">\(n\)</span>。</p>
+<p>如果 <span class="arithmatex">\(cnt[0]=0\)</span>，说明模式串中只包含字符 <code>'b'</code>，那么我们需要判断 <span class="arithmatex">\(n\)</span> 是否是 <span class="arithmatex">\(cnt[1]\)</span> 的倍数，以及 <span class="arithmatex">\(value\)</span> 是否可以分割成 <span class="arithmatex">\(cnt[1]\)</span> 个长度为 <span class="arithmatex">\(n/cnt[1]\)</span> 的子串，且这些子串都相同。如果不满足，直接返回 <span class="arithmatex">\(false\)</span> 即可。</p>
+<p>如果 <span class="arithmatex">\(cnt[1]=0\)</span>，说明模式串中只包含字符 <code>'a'</code>，那么我们需要判断 <span class="arithmatex">\(n\)</span> 是否是 <span class="arithmatex">\(cnt[0]\)</span> 的倍数，以及 <span class="arithmatex">\(value\)</span> 是否可以分割成 <span class="arithmatex">\(cnt[0]\)</span> 个长度为 <span class="arithmatex">\(n/cnt[0]\)</span> 的子串，且这些子串都相同。如果不满足，直接返回 <span class="arithmatex">\(false\)</span> 即可。</p>
+<p>接下来，我们记字符 <code>'a'</code> 所匹配的字符串的长度 <span class="arithmatex">\(la\)</span>，字符 <code>'b'</code> 所匹配的字符串的长度 <span class="arithmatex">\(lb\)</span>。那么有 <span class="arithmatex">\(la \times cnt[0] + lb \times cnt[1] = n\)</span>。如果我们枚举 <span class="arithmatex">\(la\)</span>，就可以知道 <span class="arithmatex">\(lb\)</span> 的值了。因此我们可以枚举 <span class="arithmatex">\(la\)</span>，只需要判断是否存在一个整数 <span class="arithmatex">\(lb\)</span>，满足上述等式即可。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n^2)\)</span>，空间复杂度 <span class="arithmatex">\(O(n)\)</span>。其中 <span class="arithmatex">\(n\)</span> 为字符串 <span class="arithmatex">\(value\)</span> 的长度。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Swift</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91656,11 +91654,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

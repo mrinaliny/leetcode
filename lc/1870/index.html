@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90862,12 +90860,12 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：二分查找</h3>
-<p>我们注意到，如果一个速度值 $v$ 能够使得我们在规定时间内到达，那么对于任意 $v' &gt; v$，我们也一定能在规定时间内到达。这存在着单调性，因此我们可以使用二分查找，找到最小的满足条件的速度值。</p>
-<p>在二分查找之前，我们需要先判断是否有可能在规定时间内到达。如果列车数量大于向上取整的规定时间，那么一定无法在规定时间内到达，直接返回 $-1$。</p>
-<p>接下来，我们定义二分的左右边界为 $l = 1$, $r = 10^7 + 1$，然后我们每次取中间值 $\textit{mid} = \frac{l + r}{2}$，判断是否满足条件。如果满足条件，我们将右边界移动到 $\textit{mid}$，否则将左边界移动到 $\textit{mid} + 1$。</p>
-<p>问题转化为判断一个速度值 $v$ 是否能够在规定时间内到达。我们可以遍历每一趟列车，计算每一趟列车的运行时间 $t = \frac{d}{v}$，如果是最后一趟列车，我们直接加上 $t$，否则我们向上取整加上 $t$。最后判断总时间是否小于等于规定时间，如果是则说明满足条件。</p>
-<p>二分结束后，如果左边界超过了 $10^7$，说明无法在规定时间内到达，返回 $-1$，否则返回左边界。</p>
-<p>时间复杂度 $O(n \times \log M)$，其中 $n$ 和 $M$ 分别为列车数量和速度的上界。空间复杂度 $O(1)$。</p>
+<p>我们注意到，如果一个速度值 <span class="arithmatex">\(v\)</span> 能够使得我们在规定时间内到达，那么对于任意 <span class="arithmatex">\(v' &gt; v\)</span>，我们也一定能在规定时间内到达。这存在着单调性，因此我们可以使用二分查找，找到最小的满足条件的速度值。</p>
+<p>在二分查找之前，我们需要先判断是否有可能在规定时间内到达。如果列车数量大于向上取整的规定时间，那么一定无法在规定时间内到达，直接返回 <span class="arithmatex">\(-1\)</span>。</p>
+<p>接下来，我们定义二分的左右边界为 <span class="arithmatex">\(l = 1\)</span>, <span class="arithmatex">\(r = 10^7 + 1\)</span>，然后我们每次取中间值 <span class="arithmatex">\(\textit{mid} = \frac{l + r}{2}\)</span>，判断是否满足条件。如果满足条件，我们将右边界移动到 <span class="arithmatex">\(\textit{mid}\)</span>，否则将左边界移动到 <span class="arithmatex">\(\textit{mid} + 1\)</span>。</p>
+<p>问题转化为判断一个速度值 <span class="arithmatex">\(v\)</span> 是否能够在规定时间内到达。我们可以遍历每一趟列车，计算每一趟列车的运行时间 <span class="arithmatex">\(t = \frac{d}{v}\)</span>，如果是最后一趟列车，我们直接加上 <span class="arithmatex">\(t\)</span>，否则我们向上取整加上 <span class="arithmatex">\(t\)</span>。最后判断总时间是否小于等于规定时间，如果是则说明满足条件。</p>
+<p>二分结束后，如果左边界超过了 <span class="arithmatex">\(10^7\)</span>，说明无法在规定时间内到达，返回 <span class="arithmatex">\(-1\)</span>，否则返回左边界。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(n \times \log M)\)</span>，其中 <span class="arithmatex">\(n\)</span> 和 <span class="arithmatex">\(M\)</span> 分别为列车数量和速度的上界。空间复杂度 <span class="arithmatex">\(O(1)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label><label for="__tabbed_1_7">JavaScript</label><label for="__tabbed_1_8">Kotlin</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91548,11 +91546,9 @@
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

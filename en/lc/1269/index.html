@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -86046,16 +86044,16 @@ Stay, Stay
 <!-- solution:start -->
 
 <h3 id="solution-1-memoization-search">Solution 1: Memoization Search</h3>
-<p>We observe the data range of the problem and find that $steps$ does not exceed $500$, which means that we can only go to the right for up to $500$ steps.</p>
-<p>We can design a function $dfs(i, j)$, which represents the number of schemes when we are currently at position $i$ and the remaining steps are $j$. So the answer is $dfs(0, steps)$.</p>
-<p>The execution process of the function $dfs(i, j)$ is as follows:</p>
+<p>We observe the data range of the problem and find that <span class="arithmatex">\(steps\)</span> does not exceed <span class="arithmatex">\(500\)</span>, which means that we can only go to the right for up to <span class="arithmatex">\(500\)</span> steps.</p>
+<p>We can design a function <span class="arithmatex">\(dfs(i, j)\)</span>, which represents the number of schemes when we are currently at position <span class="arithmatex">\(i\)</span> and the remaining steps are <span class="arithmatex">\(j\)</span>. So the answer is <span class="arithmatex">\(dfs(0, steps)\)</span>.</p>
+<p>The execution process of the function <span class="arithmatex">\(dfs(i, j)\)</span> is as follows:</p>
 <ol>
-<li>If $i \gt j$ or $i \geq arrLen$ or $i \lt 0$ or $j \lt 0$, then return $0$.</li>
-<li>If $i = 0$ and $j = 0$, then the pointer has stopped in place and there are no remaining steps, so return $1$.</li>
-<li>Otherwise, we can choose to move one step to the left, one step to the right, or stay still, so return $dfs(i - 1, j - 1) + dfs(i + 1, j - 1) + dfs(i, j - 1)$. Note the modulo operation of the answer.</li>
+<li>If <span class="arithmatex">\(i \gt j\)</span> or <span class="arithmatex">\(i \geq arrLen\)</span> or <span class="arithmatex">\(i \lt 0\)</span> or <span class="arithmatex">\(j \lt 0\)</span>, then return <span class="arithmatex">\(0\)</span>.</li>
+<li>If <span class="arithmatex">\(i = 0\)</span> and <span class="arithmatex">\(j = 0\)</span>, then the pointer has stopped in place and there are no remaining steps, so return <span class="arithmatex">\(1\)</span>.</li>
+<li>Otherwise, we can choose to move one step to the left, one step to the right, or stay still, so return <span class="arithmatex">\(dfs(i - 1, j - 1) + dfs(i + 1, j - 1) + dfs(i, j - 1)\)</span>. Note the modulo operation of the answer.</li>
 </ol>
 <p>During the process, we can use memoization search to avoid repeated calculations.</p>
-<p>The time complexity is $O(steps \times steps)$, and the space complexity is $O(steps \times steps)$. Where $steps$ is the number of steps given in the problem.</p>
+<p>The time complexity is <span class="arithmatex">\(O(steps \times steps)\)</span>, and the space complexity is <span class="arithmatex">\(O(steps \times steps)\)</span>. Where <span class="arithmatex">\(steps\)</span> is the number of steps given in the problem.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -86537,11 +86535,9 @@ Stay, Stay
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>

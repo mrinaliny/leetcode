@@ -54,8 +54,6 @@
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
-    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -90862,17 +90860,17 @@
 <!-- solution:start -->
 
 <h3 id="_3">方法一：动态规划</h3>
-<p>我们定义 $f[i][j]$ 表示听 $i$ 首歌，且这 $i$ 首歌中有 $j$ 首不同歌曲的播放列表的数量。初始时 $f[0][0]=1$。答案为 $f[goal][n]$。</p>
-<p>对于 $f[i][j]$，我们可以选择没听过的歌，那么上一个状态为 $f[i - 1][j - 1]$，这样的选择有 $n - (j - 1) = n - j + 1$ 种，因此 $f[i][j] += f[i - 1][j - 1] \times (n - j + 1)$。我们也可以选择听过的歌，那么上一个状态为 $f[i - 1][j]$，这样的选择有 $j - k$ 种，因此 $f[i][j] += f[i - 1][j] \times (j - k)$，其中 $j \geq k$。</p>
+<p>我们定义 <span class="arithmatex">\(f[i][j]\)</span> 表示听 <span class="arithmatex">\(i\)</span> 首歌，且这 <span class="arithmatex">\(i\)</span> 首歌中有 <span class="arithmatex">\(j\)</span> 首不同歌曲的播放列表的数量。初始时 <span class="arithmatex">\(f[0][0]=1\)</span>。答案为 <span class="arithmatex">\(f[goal][n]\)</span>。</p>
+<p>对于 <span class="arithmatex">\(f[i][j]\)</span>，我们可以选择没听过的歌，那么上一个状态为 <span class="arithmatex">\(f[i - 1][j - 1]\)</span>，这样的选择有 <span class="arithmatex">\(n - (j - 1) = n - j + 1\)</span> 种，因此 <span class="arithmatex">\(f[i][j] += f[i - 1][j - 1] \times (n - j + 1)\)</span>。我们也可以选择听过的歌，那么上一个状态为 <span class="arithmatex">\(f[i - 1][j]\)</span>，这样的选择有 <span class="arithmatex">\(j - k\)</span> 种，因此 <span class="arithmatex">\(f[i][j] += f[i - 1][j] \times (j - k)\)</span>，其中 <span class="arithmatex">\(j \geq k\)</span>。</p>
 <p>综上，我们可以得到状态转移方程：</p>
-<p>$$
+<div class="arithmatex">\[
 f[i][j] = \begin{cases}
-1 &amp; i = 0, j = 0 \
+1 &amp; i = 0, j = 0 \\
 f[i - 1][j - 1] \times (n - j + 1) + f[i - 1][j] \times (j - k) &amp; i \geq 1, j \geq 1
 \end{cases}
-$$</p>
-<p>最终的答案为 $f[goal][n]$。</p>
-<p>时间复杂度 $O(goal \times n)$，空间复杂度 $O(goal \times n)$。其中 $goal$ 和 $n$ 为题目中给定的参数。</p>
+\]</div>
+<p>最终的答案为 <span class="arithmatex">\(f[goal][n]\)</span>。</p>
+<p>时间复杂度 <span class="arithmatex">\(O(goal \times n)\)</span>，空间复杂度 <span class="arithmatex">\(O(goal \times n)\)</span>。其中 <span class="arithmatex">\(goal\)</span> 和 <span class="arithmatex">\(n\)</span> 为题目中给定的参数。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python3</label><label for="__tabbed_1_2">Java</label><label for="__tabbed_1_3">C++</label><label for="__tabbed_1_4">Go</label><label for="__tabbed_1_5">TypeScript</label><label for="__tabbed_1_6">Rust</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91114,7 +91112,7 @@ $$</p>
 <!-- solution:start -->
 
 <h3 id="_4">方法二：动态规划（空间优化）</h3>
-<p>我们注意到 $f[i][j]$ 只与 $f[i - 1][j - 1]$ 和 $f[i - 1][j]$ 有关，因此我们可以使用滚动数组优化空间复杂度，将空间复杂度优化至 $O(n)$。</p>
+<p>我们注意到 <span class="arithmatex">\(f[i][j]\)</span> 只与 <span class="arithmatex">\(f[i - 1][j - 1]\)</span> 和 <span class="arithmatex">\(f[i - 1][j]\)</span> 有关，因此我们可以使用滚动数组优化空间复杂度，将空间复杂度优化至 <span class="arithmatex">\(O(n)\)</span>。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Python3</label><label for="__tabbed_2_2">Java</label><label for="__tabbed_2_3">C++</label><label for="__tabbed_2_4">Go</label><label for="__tabbed_2_5">TypeScript</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -91537,11 +91535,9 @@ $$</p>
     
       <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+        <script src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
